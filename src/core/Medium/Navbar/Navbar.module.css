@@ -1,0 +1,68 @@
+.navbar {
+  display: grid;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #595959;
+  padding: 1rem;
+  width: 100%;
+  height: 6rem;
+  grid-auto-flow: column;
+  list-style: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.navbar-brand {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.5rem;
+}
+
+.navbarNav {
+  list-style: none;
+  display: grid;
+  align-items: center;
+  grid-auto-flow: column;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  grid-gap: 1rem;
+  justify-content: space-between;
+}
+
+
+.userIcon,
+.helpButton,
+.logoutButton {
+  background: none;
+  border: none;
+  color: #FDFDFD;
+  cursor: pointer;
+  font-size: 1.8rem;
+}
+
+.userIcon:hover,
+.helpButton:hover,
+.logoutButton:hover {
+  background-color: #777;
+}
+
+.navbarActions {
+  display: grid;
+  align-items: center;
+  grid-gap: 2rem;
+  grid-auto-flow: column;
+}
+
+.userName {
+  color: #FDFDFD;
+  font-size: 1.4rem;
+}
+
+.userNameContainer {
+  display: grid;
+  grid-gap: .5rem;
+  grid-auto-flow: column;
+  align-items: center;
+}

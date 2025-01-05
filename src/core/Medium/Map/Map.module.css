@@ -1,0 +1,11 @@
+.map {
+  height: 100%;
+  width: 100%;
+  border: 1px solid #ccc;
+  padding: 1rem;
+}
+
+
+.map__h2 {
+  margin: 0 0 1rem 0;
+}

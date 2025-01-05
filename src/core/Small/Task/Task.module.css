@@ -1,0 +1,81 @@
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  background-color: #e6ffe6;
+}
+
+.task.completed {
+  background-color: #e6ffe6;
+}
+
+.taskInfo {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  width: 100%;
+}
+
+.taskTitle {
+  margin: 0 0 1rem 0;
+}
+
+.taskDueDate,
+.taskPriority {
+  margin: 0.2rem 0;
+}
+
+.taskActions {
+  display: flex;
+  align-items: center;
+}
+
+.completeButton {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.taskCategory {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  color: white;
+  display: inline-block;
+  margin-top: 1rem; 
+  width: max-content
+}
+
+.work {
+  background-color: #4caf50; /* Green for work */
+}
+
+.personal {
+  background-color: #FC9E4F; /* Blue for personal */
+}
+
+.other {
+  background-color: #FC9E4F; /* Orange for other */
+}
+
+.taskDetails {
+  grid-column: 1/2;
+  width: 100%;
+}
+
+
+.taskDueDate,
+.taskPriority,
+.taskDescription {
+  margin: 0.5rem 0;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.taskDescription {
+  color: #666;
+}

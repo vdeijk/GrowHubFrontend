@@ -1,0 +1,35 @@
+.weather {
+    padding: 2rem;
+    background-color: #FDFDFD;
+    border-radius: 4px;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    grid-column: 1/-1;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    grid-area: 1 / 1 / 2 / 5;
+}
+
+.weather__h6 {
+    margin: 0 0 1rem 0;
+    color: #666;
+    font-weight: normal;
+    text-transform: uppercase;
+}
+
+.weather__icon {
+    margin-bottom: 1rem;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.weather__h3 {
+}
+
+.weather__main {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: center;
+}
