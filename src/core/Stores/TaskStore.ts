@@ -3,7 +3,7 @@ import { makeAutoObservable } from "mobx";
 interface Task {
   id: number;
   title: string;
-  dueDate: string;
+  dueDate: Date; 
   priority: "low" | "medium" | "high";
   category: "work" | "personal" | "other";
   completed: boolean;
@@ -15,7 +15,7 @@ class TaskStore {
     {
       id: 1,
       title: "Task 1",
-      dueDate: "2023-12-01",
+      dueDate: new Date("2023-12-01"),
       priority: "high",
       completed: false,
       category: "work",
@@ -24,7 +24,7 @@ class TaskStore {
     {
       id: 2,
       title: "Task 2",
-      dueDate: "2023-12-05",
+      dueDate: new Date("2023-12-05"),
       priority: "medium",
       completed: false,
       category: "work",
@@ -33,7 +33,7 @@ class TaskStore {
     {
       id: 3,
       title: "Task 3",
-      dueDate: "2023-12-10",
+      dueDate: new Date("2023-12-10"),
       priority: "low",
       completed: true,
       category: "work",

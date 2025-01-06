@@ -5,7 +5,7 @@ interface TaskProps {
   task: {
     id: number;
     title: string;
-    dueDate: string;
+    dueDate: Date;
     priority: "low" | "medium" | "high";
     category: "work" | "personal" | "other";
     completed: boolean;
@@ -21,7 +21,7 @@ const Task: React.FC<TaskProps> = ({ task, onToggleComplete }) => {
         <h4 className={styles.taskTitle}>{task.title}</h4>
         <div className={styles.taskDetails}>
           <p className={styles.taskDueDate}>
-            Due: <span className={styles.bold}>{task.dueDate}</span>
+            Due: <span className={styles.bold}>{task.dueDate.toLocaleDateString()}</span>
           </p>
           <p className={styles.taskPriority}>
             Priority: <span className={styles.bold}>{task.priority}</span>

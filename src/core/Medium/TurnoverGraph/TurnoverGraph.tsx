@@ -1,10 +1,9 @@
 import React, { useRef, useEffect } from "react";
 import * as d3 from "d3";
 import { GraphProps } from "../../../auxiliary/interfaces/GraphProps";
-import "./Graph.module.css";
-import styles from "./Graph.module.css";
+import styles from "./TurnoverGraph.module.css";
 
-const Graph: React.FC<GraphProps> = ({ data, width, height }) => {
+const TurnoverGraph: React.FC<GraphProps> = ({ data, width, height }) => {
   const svgRef = useRef<SVGSVGElement | null>(null);
 
   useEffect(() => {
@@ -50,12 +49,10 @@ const Graph: React.FC<GraphProps> = ({ data, width, height }) => {
 
   return (
     <div className={styles.graph}>
-      <h3>
-        Turnover
-      </h3>
+      <h6 className={styles.h6}>Turnover</h6>
       <svg ref={svgRef} width={width} height={height}></svg>
     </div>
   );
 };
 
-export default Graph;
+export default TurnoverGraph;

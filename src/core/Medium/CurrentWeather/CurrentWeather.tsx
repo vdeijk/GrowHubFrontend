@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import styles from "./Weather.module.css";
+import styles from "./CurrentWeather.module.css";
 import { observer } from "mobx-react-lite";
 import weatherStore from "../../Stores/WeatherStore";
 
-const Weather: React.FC = observer(() => {
+const CurrentWeather: React.FC = observer(() => {
   const weather = weatherStore.weather;
 
   useEffect(() => {
@@ -14,7 +14,7 @@ const Weather: React.FC = observer(() => {
     if (weather) {
       return (
         <>
-          <div className={styles.weather__main}>
+          <div className={styles.main}>
             <img
               src={weather.current.condition.icon}
               alt={weather.current.condition.text}
@@ -22,12 +22,12 @@ const Weather: React.FC = observer(() => {
             />
             <h2>{weather?.current.temp_c}°C</h2>
           </div>
-          <div className={styles.weather__details}>
-            <p className={styles.taskDueDate}>
+          <div >
+            <p >
               Humidity:{" "}
               <span className={styles.bold}>{weather?.current.humidity}%</span>
             </p>
-            <p className={styles.taskDueDate}>
+            <p>
               Wind Speed:{" "}
               <span className={styles.bold}>
                 {weather?.current.wind_kph} kph
@@ -42,11 +42,11 @@ const Weather: React.FC = observer(() => {
 
   return (
     <div className={styles.weather}>
-      <h6 className={styles.weather__h6}>Current Weather</h6>
-      <h3 className={styles.weather__h3}>The Hague, South Holland</h3>
+      <h6 className={styles.h6}>Current Weather</h6>
+      <h4 className={styles.h4}>The Hague, South Holland</h4>
       {displayWeather()}
     </div>
   );
 });
 
-export default Weather;
+export default CurrentWeather;

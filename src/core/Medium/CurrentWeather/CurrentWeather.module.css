@@ -3,21 +3,19 @@
     background-color: #FDFDFD;
     border-radius: 4px;
     width: 100%;
-    height: 100%;
-    margin: 0 auto;
     grid-column: 1/-1;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     grid-area: 1 / 1 / 2 / 5;
 }
 
-.weather__h6 {
+.h6 {
     margin: 0 0 1rem 0;
     color: #666;
     font-weight: normal;
     text-transform: uppercase;
 }
 
-.weather__icon {
+.icon {
     margin-bottom: 1rem;
 }
 
@@ -25,11 +23,20 @@
   font-weight: bold;
 }
 
-.weather__h3 {
-}
-
-.weather__main {
+.main {
     display: grid;
     grid-template-columns: 1fr 2fr;
     align-items: center;
+}
+
+.h4 {
+    margin: 0 0 1rem 0;    .dashboard {
+      padding: 9rem 4rem 4rem 24rem;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-gap: 2rem;
+      width: 100%;
+      height: 100%;
+      background: #f0f0f0; /* More subtle shade of grey */
+    }
 }

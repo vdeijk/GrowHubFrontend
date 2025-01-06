@@ -5,11 +5,11 @@
   padding: 1rem;
   margin-bottom: 1rem;
   border-radius: 4px;
-  background-color: #e6ffe6;
+  background-color: #f0f0f0;
 }
 
 .task.completed {
-  background-color: #e6ffe6;
+  background-color: #f0f0f0;
 }
 
 .taskInfo {
