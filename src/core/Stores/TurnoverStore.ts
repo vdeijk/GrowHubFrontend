@@ -14,6 +14,11 @@ class TurnoverStore {
     { date: '08-02', amount: 2600 },
     { date: '15-02', amount: 2500 },
     { date: '22-02', amount: 2800 },
+    { date: '1-03', amount: 2600 },
+    { date: '08-03', amount: 3200 },
+    { date: '15-03', amount: 4000 },
+    { date: '22-03', amount: 4400 },
+    { date: '29-03', amount: 4400 },
   ];
 
   constructor() {

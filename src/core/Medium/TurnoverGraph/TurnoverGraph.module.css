@@ -2,17 +2,16 @@
   height: 100%;
   width: 100%;
   border: none;
-  background: #FDFDFD;
+  background: #fdfdfd;
   padding: 1rem;
   grid-area: 3 / 1 / 4 / -1;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-
 .axis path,
 .axis line {
   fill: none;
-  stroke: #000;
+  stroke: #222;
   shape-rendering: crispEdges;
 }
 
@@ -30,8 +29,8 @@
 }
 
 .axis text {
-  font-family: "Arial", sans-serif;
-  font-size: 12px;
+  font-size: 16px;
+  font-family: "Poppins", sans-serif;
 }
 
 .h6 {
@@ -39,4 +38,8 @@
   color: #666;
   font-weight: normal;
   text-transform: uppercase;
+}
+
+svg text {
+  font-family: 'Poppins', sans-serif; 
 }

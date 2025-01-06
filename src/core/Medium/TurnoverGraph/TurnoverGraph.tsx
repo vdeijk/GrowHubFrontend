@@ -10,8 +10,9 @@ const TurnoverGraph: React.FC<GraphProps> = ({ data, width, height }) => {
     const svg = d3.select(svgRef.current);
     svg.selectAll("*").remove(); // Clear previous content
 
-    const margin = { top: 20, right: 30, bottom: 30, left: 40 };
-    const innerWidth = width - margin.left - margin.right;
+    const margin = { top: 20, right: 30, bottom: 30, left: 60 };
+    const containerWidth = svg.node()?.parentElement?.clientWidth || width;
+    const innerWidth = containerWidth - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
 
     const xScale = d3
@@ -29,11 +30,16 @@ const TurnoverGraph: React.FC<GraphProps> = ({ data, width, height }) => {
       .append("g")
       .attr("transform", `translate(${margin.left},${margin.top})`);
 
-    g.append("g").call(d3.axisLeft(yScale));
+    g.append("g")
+      .call(d3.axisLeft(yScale))
+      .selectAll("text")
+      .style("font-size", "16px");
 
     g.append("g")
       .attr("transform", `translate(0,${innerHeight})`)
-      .call(d3.axisBottom(xScale));
+      .call(d3.axisBottom(xScale))
+      .selectAll("text")
+      .style("font-size", "16px");
 
     g.selectAll(".bar")
       .data(data)
@@ -44,13 +50,13 @@ const TurnoverGraph: React.FC<GraphProps> = ({ data, width, height }) => {
       .attr("y", (d) => yScale(d.amount))
       .attr("width", xScale.bandwidth())
       .attr("height", (d) => innerHeight - yScale(d.amount))
-      .attr("fill", "blue");
+      .attr("fill", "#4caf50");
   }, [data, width, height]);
 
   return (
     <div className={styles.graph}>
       <h6 className={styles.h6}>Turnover</h6>
-      <svg ref={svgRef} width={width} height={height}></svg>
+      <svg ref={svgRef} width="100%" height={height}></svg>
     </div>
   );
 };

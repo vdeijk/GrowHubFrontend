@@ -1,12 +1,12 @@
 .plant {
   padding: 1rem;
-  border-bottom: 1px solid #ccc;
+  border-bottom: none;
   display: flex;
   flex-direction: column;
   background-color: #f9f9f9;
   border-radius: 4px;
   margin-bottom: 1rem;
-  overflow: hidden; /* Prevent content overflow */
+  overflow: hidden;
 }
 
 .name {
