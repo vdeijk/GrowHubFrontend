@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import styles from "./CurrentWeather.module.css";
 import { observer } from "mobx-react-lite";
 import weatherStore from "../../../stores/WeatherStore";
+import TextWithBoldSpan from "../../small/TextWithBoldSpan/TextWithBoldSpan";
 
 const CurrentWeather: React.FC = observer(() => {
   const weather = weatherStore.weather;
@@ -22,17 +23,15 @@ const CurrentWeather: React.FC = observer(() => {
             />
             <h2>{weather?.current.temp_c}°C</h2>
           </div>
-          <div >
-            <p >
-              Humidity:{" "}
-              <span className={styles.bold}>{weather?.current.humidity}%</span>
-            </p>
-            <p>
-              Wind Speed:{" "}
-              <span className={styles.bold}>
-                {weather?.current.wind_kph} kph
-              </span>
-            </p>
+          <div>
+            <TextWithBoldSpan
+              label="Humidity"
+              boldSpan={`${weather?.current.humidity}%`}
+            />
+            <TextWithBoldSpan
+              label="Wind Speed"
+              boldSpan={`${weather?.current.wind_kph} kph`}
+            />
           </div>
         </>
       );

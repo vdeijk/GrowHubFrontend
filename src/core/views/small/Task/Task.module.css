@@ -22,23 +22,6 @@
   margin: 0 0 1rem 0;
 }
 
-.taskDueDate,
-.taskPriority {
-  margin: 0.2rem 0;
-}
-
-.taskActions {
-  display: flex;
-  align-items: center;
-}
-
-.completeButton {
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-
 .taskCategory {
   padding: 0.5rem 1rem;
   border-radius: 4px;
@@ -49,31 +32,20 @@
 }
 
 .work {
-  background-color: #4caf50; /* Green for work */
+  background-color: #4caf50;
 }
 
 .personal {
-  background-color: #FC9E4F; /* Blue for personal */
+  background-color: #FC9E4F;
 }
 
 .other {
-  background-color: #FC9E4F; /* Orange for other */
+  background-color: #FC9E4F;
 }
 
 .taskDetails {
   grid-column: 1/2;
   width: 100%;
-}
-
-
-.taskDueDate,
-.taskPriority,
-.taskDescription {
-  margin: 0.5rem 0;
-}
-
-.bold {
-  font-weight: bold;
 }
 
 .taskDescription {

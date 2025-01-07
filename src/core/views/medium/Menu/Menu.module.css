@@ -15,24 +15,6 @@
   margin: 0;
 }
 
-.menuItem {
-  margin-bottom: 1rem;
-}
-
-.menuLink {
-  color: #fdfdfd;
-  text-decoration: none;
-  font-size: 1.5rem;
-  text-transform: uppercase;
-  display: block;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  transition: background-color 0.3s;
-}
-
-.menuLink:hover {
-  background-color: #575757;
-}
 
 .profile {
   width: 100%;
