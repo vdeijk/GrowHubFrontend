@@ -1,9 +1,9 @@
 import React from "react";
 import "./App.css";
-import Navbar from "./core/Medium/Navbar/Navbar";
-import Menu from "./core/Medium/Menu/Menu";
-import Dashboard from "./core/Large/Dashboard/Dashboard";
-import Footer from "./core/Medium/Footer/Footer";
+import Navbar from "./core/views/medium/Navbar/Navbar";
+import Menu from "./core/views/medium/Menu/Menu";
+import Dashboard from "./core/views/large/Dashboard/Dashboard";
+import Footer from "./core/views/medium/Footer/Footer";
 import profilePicture from "./auxiliary/assets/profile.jpeg";
 
 const App: React.FC = () => {

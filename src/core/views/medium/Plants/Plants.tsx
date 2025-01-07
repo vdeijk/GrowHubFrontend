@@ -1,6 +1,7 @@
 import React from "react";
-import Plant from "../../Small/Plant/Plant";
 import styles from "./Plants.module.css";
+import TableRow from "../../small/TableRow/TableRow";
+import Button from "../../small/Button/Button";
 
 const plantsData = [
   {
@@ -31,16 +32,35 @@ const plantsData = [
     bloomTime: "N/A",
     fertilizerNeeds: "Monthly during growing season",
   },
-  // Add more plants as needed
 ];
 
 const Plants: React.FC = () => {
+  const clickHandler = () => {};
   return (
     <div className={styles.plants}>
       <h6 className={styles.h6}>Plant Information</h6>
-      {plantsData.map((plant, index) => (
-        <Plant key={index} plant={plant} />
-      ))}
+      <table className={styles.table}>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Sun Preference</th>
+            <th>Water Needs</th>
+            <th>Soil Type</th>
+            <th>Soil PH</th>
+            <th>Mature Size</th>
+            <th>Bloom Time</th>
+            <th>Fertilizer Needs</th>
+          </tr>
+        </thead>
+        <tbody>
+          {plantsData.map((plant, index) => (
+            <TableRow key={index} plant={plant} index={index} />
+          ))}
+        </tbody>
+      </table>
+      <div className={styles.buttonContainer}>
+        <Button onClick={clickHandler}>Go To PLant Database</Button>
+      </div>
     </div>
   );
 };

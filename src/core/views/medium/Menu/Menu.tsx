@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./Menu.module.css";
+import MenuLink from "../../small/MenuLink/MenuLink";
 
 interface MenuProps {
   userName: string;
@@ -19,26 +20,13 @@ const Menu: React.FC<MenuProps> = ({ userName, profilePicture }) => {
         <span className={styles.userName}>{userName}</span>
       </div>
       <ul className={styles.menuList}>
-        <li className={styles.menuItem}>
-          <a href="/home" className={styles.menuLink}>
-            Home
-          </a>
-        </li>
-        <li className={styles.menuItem}>
-          <a href="/about" className={styles.menuLink}>
-            About
-          </a>
-        </li>
-        <li className={styles.menuItem}>
-          <a href="/services" className={styles.menuLink}>
-            Services
-          </a>
-        </li>
-        <li className={styles.menuItem}>
-          <a href="/contact" className={styles.menuLink}>
-            Contact
-          </a>
-        </li>
+      <MenuLink href="/home">Home</MenuLink>
+        <MenuLink href="/about">Calendar</MenuLink>
+        <MenuLink href="/services">Task Manager</MenuLink>
+        <MenuLink href="/services">Weather Report</MenuLink>
+        <MenuLink href="/services">Statistics</MenuLink>
+        <MenuLink href="/services">Finance</MenuLink>
+        <MenuLink href="/contact">Plant Database</MenuLink>
       </ul>
     </div>
   );

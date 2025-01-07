@@ -1,9 +1,9 @@
 import React from "react";
-import Task from "../../Small/Task/Task";
-import taskStore from "../../Stores/TaskStore";
+import Task from "../../small/Task/Task";
+import taskStore from "../../../stores/TaskStore";
 import styles from "./Tasks.module.css";
 import { observer } from "mobx-react-lite";
-import Button from "../../Small/Button/Button";
+import ButtonContainer from "../../small/ButtonContainer/ButtonContainer";
 
 const Tasks: React.FC = observer(() => {
   const clickHandler = () => {};
@@ -18,9 +18,7 @@ const Tasks: React.FC = observer(() => {
           onToggleComplete={() => taskStore.toggleComplete(task.id)}
         />
       ))}
-      <div className={styles.buttonContainer}>
-        <Button onClick={clickHandler}>Go To TaskManager</Button>
-      </div>
+      <ButtonContainer clickHandler={clickHandler} />
     </div>
   );
 });

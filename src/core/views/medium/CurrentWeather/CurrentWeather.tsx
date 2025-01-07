@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import styles from "./CurrentWeather.module.css";
 import { observer } from "mobx-react-lite";
-import weatherStore from "../../Stores/WeatherStore";
+import weatherStore from "../../../stores/WeatherStore";
 
 const CurrentWeather: React.FC = observer(() => {
   const weather = weatherStore.weather;

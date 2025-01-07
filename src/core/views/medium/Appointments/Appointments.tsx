@@ -1,9 +1,9 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
-import Appointment from "../../Small/Appointment/Appointment";
-import appointmentStore from "../../Stores/AppointmentStore";
+import Appointment from "../../small/Appointment/Appointment";
+import appointmentStore from "../../../stores/AppointmentStore";
 import styles from "./Appointments.module.css";
-import Button from "../../Small/Button/Button";
+import ButtonContainer from "../../small/ButtonContainer/ButtonContainer";
 
 const Appointments: React.FC = observer(() => {
   const clickHandler = () => {};
@@ -16,9 +16,7 @@ const Appointments: React.FC = observer(() => {
           <Appointment key={index} appointment={appointment} />
         ))}
       </div>
-      <div className={styles.buttonContainer}>
-        <Button onClick={clickHandler}>Go To Calendar</Button>
-      </div>
+      <ButtonContainer clickHandler={clickHandler} />
     </div>
   );
 });

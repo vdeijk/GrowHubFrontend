@@ -1,0 +1,12 @@
+.tableRow {
+  font-size: 1.5rem;
+}
+
+.tableRow td {
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+.evenRow {
+    background-color: #f0f0f0; /* Light grey background for even rows */
+  }
