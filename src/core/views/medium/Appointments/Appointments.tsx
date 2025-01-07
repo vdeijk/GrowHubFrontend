@@ -8,6 +8,11 @@ import ButtonContainer from "../../small/ButtonContainer/ButtonContainer";
 const Appointments: React.FC = observer(() => {
   const clickHandler = () => {};
 
+  const buttonContainerProps = {
+    clickHandler,
+    label: "Go To Calendar",
+  };
+
   return (
     <div className={styles.appointmentList}>
       <div>
@@ -16,7 +21,7 @@ const Appointments: React.FC = observer(() => {
           <Appointment key={index} appointment={appointment} />
         ))}
       </div>
-      <ButtonContainer clickHandler={clickHandler} />
+      <ButtonContainer buttonContainerProps={buttonContainerProps} />
     </div>
   );
 });

@@ -1,10 +1,5 @@
 import { makeAutoObservable } from "mobx";
-
-interface Appointment {
-  time: string;
-  title: string;
-  description: string;
-}
+import { Appointment } from "../../auxiliary/interfaces/Appointment";
 
 class AppointmentStore {
   appointments: Appointment[] = [

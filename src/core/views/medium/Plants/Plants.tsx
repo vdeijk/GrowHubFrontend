@@ -1,41 +1,17 @@
 import React from "react";
 import styles from "./Plants.module.css";
 import TableRow from "../../small/TableRow/TableRow";
-import Button from "../../small/Button/Button";
-
-const plantsData = [
-  {
-    name: "Rose",
-    sunPreference: "Full Sun" as const,
-    waterNeeds: "Moderate",
-    soilType: "Loamy",
-    soilPH: "6.0 - 7.0",
-    pruning: "Spring",
-    temperatureRange: "15°C - 25°C",
-    plantType: "Perennial",
-    growthRate: "Moderate",
-    matureSize: "3-8 feet tall, 2-3 feet wide",
-    bloomTime: "Spring to Fall",
-    fertilizerNeeds: "Monthly during growing season",
-  },
-  {
-    name: "Fern",
-    sunPreference: "Shade" as const,
-    waterNeeds: "High",
-    soilType: "Rich, well-drained",
-    soilPH: "5.0 - 6.5",
-    pruning: "Remove dead fronds",
-    temperatureRange: "18°C - 24°C",
-    plantType: "Perennial",
-    growthRate: "Slow to Moderate",
-    matureSize: "1-3 feet tall, 1-2 feet wide",
-    bloomTime: "N/A",
-    fertilizerNeeds: "Monthly during growing season",
-  },
-];
+import ButtonContainer from "../../small/ButtonContainer/ButtonContainer";
+import plantsStore from "../../../stores/PlantsStore";
 
 const Plants: React.FC = () => {
   const clickHandler = () => {};
+
+  const buttonContainerProps = {
+    clickHandler,
+    label: "Go To Plant Database",
+  };
+
   return (
     <div className={styles.plants}>
       <h6 className={styles.h6}>Plant Information</h6>
@@ -53,14 +29,12 @@ const Plants: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {plantsData.map((plant, index) => (
+          {plantsStore.plants.map((plant, index) => (
             <TableRow key={index} plant={plant} index={index} />
           ))}
         </tbody>
       </table>
-      <div className={styles.buttonContainer}>
-        <Button onClick={clickHandler}>Go To PLant Database</Button>
-      </div>
+      <ButtonContainer buttonContainerProps={buttonContainerProps} />
     </div>
   );
 };

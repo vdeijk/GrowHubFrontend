@@ -1,14 +1,5 @@
 import { makeAutoObservable } from "mobx";
-
-interface Task {
-  id: number;
-  title: string;
-  dueDate: Date; 
-  priority: "low" | "medium" | "high";
-  category: "work" | "personal" | "other";
-  completed: boolean;
-  description: string;
-}
+import { Task } from "../../auxiliary/interfaces/Task";
 
 class TaskStore {
   tasks: Task[] = [

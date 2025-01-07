@@ -8,6 +8,11 @@ import ButtonContainer from "../../small/ButtonContainer/ButtonContainer";
 const Tasks: React.FC = observer(() => {
   const clickHandler = () => {};
 
+  const buttonContainerProps = {
+    clickHandler,
+    label: "Go To TaskManager",
+  };
+
   return (
     <div className={styles.taskList}>
       <h6 className={styles.h6}>Upcoming Tasks</h6>
@@ -18,7 +23,7 @@ const Tasks: React.FC = observer(() => {
           onToggleComplete={() => taskStore.toggleComplete(task.id)}
         />
       ))}
-      <ButtonContainer clickHandler={clickHandler} />
+      <ButtonContainer buttonContainerProps={buttonContainerProps} />
     </div>
   );
 });
