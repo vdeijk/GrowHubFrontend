@@ -1,16 +1,20 @@
-import React from 'react';
-import styles from './Button.module.css';
+import React from "react";
+import styles from "./Button.module.css";
 
 interface ButtonProps {
-  onClick: () => void;
-  children: React.ReactNode;
-  className?: string;
+  buttonData: {
+    onClick: () => void;
+    label: string;
+    className?: string;
+  };
 }
 
-const Button: React.FC<ButtonProps> = ({ onClick, children, className }) => {
+const Button: React.FC<ButtonProps> = ({ buttonData }) => {
+  const { onClick, label, className } = buttonData;
+
   return (
     <button className={`${styles.button} ${className}`} onClick={onClick}>
-      {children}
+      {label}
     </button>
   );
 };

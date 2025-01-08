@@ -1,16 +1,18 @@
-import React from 'react';
-import styles from './MenuLink.module.css';
+import React from "react";
+import styles from "./MenuLink.module.css";
+import { MenuLinkData } from "../../../../auxiliary/interfaces/MenuLinkData";
 
 interface MenuLinkProps {
-  href: string;
-  children: React.ReactNode;
+  menuLinkData: MenuLinkData;
 }
 
-const MenuLink: React.FC<MenuLinkProps> = ({ href, children }) => {
+const MenuLink: React.FC<MenuLinkProps> = ({ menuLinkData }) => {
+  const { href, label } = menuLinkData;
+
   return (
     <li className={styles.menuItem}>
       <a href={href} className={styles.menuLink}>
-        {children}
+        {label}
       </a>
     </li>
   );

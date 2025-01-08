@@ -12,7 +12,6 @@ export const getWeatherData = async (city: string) => {
         q: city,
       },
     });
-    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error("Error fetching weather data:", error);

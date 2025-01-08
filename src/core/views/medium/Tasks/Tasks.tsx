@@ -8,7 +8,7 @@ import ButtonContainer from "../../small/ButtonContainer/ButtonContainer";
 const Tasks: React.FC = observer(() => {
   const clickHandler = () => {};
 
-  const buttonContainerProps = {
+  const buttonContainerData = {
     clickHandler,
     label: "Go To TaskManager",
   };
@@ -19,11 +19,10 @@ const Tasks: React.FC = observer(() => {
       {taskStore.tasks.map((task) => (
         <Task
           key={task.id}
-          task={task}
-          onToggleComplete={() => taskStore.toggleComplete(task.id)}
+          taskData={task}
         />
       ))}
-      <ButtonContainer buttonContainerProps={buttonContainerProps} />
+      <ButtonContainer buttonContainerData={buttonContainerData} />
     </div>
   );
 });

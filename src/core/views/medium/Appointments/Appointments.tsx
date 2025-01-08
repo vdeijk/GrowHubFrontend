@@ -8,7 +8,7 @@ import ButtonContainer from "../../small/ButtonContainer/ButtonContainer";
 const Appointments: React.FC = observer(() => {
   const clickHandler = () => {};
 
-  const buttonContainerProps = {
+  const buttonContainerData = {
     clickHandler,
     label: "Go To Calendar",
   };
@@ -18,10 +18,10 @@ const Appointments: React.FC = observer(() => {
       <div>
         <h6 className={styles.h6}>Today's Appointments</h6>
         {appointmentStore.appointments.map((appointment, index) => (
-          <Appointment key={index} appointment={appointment} />
+          <Appointment key={index} appointmentData={appointment} />
         ))}
       </div>
-      <ButtonContainer buttonContainerProps={buttonContainerProps} />
+      <ButtonContainer buttonContainerData={buttonContainerData} />
     </div>
   );
 });

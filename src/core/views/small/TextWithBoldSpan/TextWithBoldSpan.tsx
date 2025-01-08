@@ -1,13 +1,15 @@
 import React from "react";
 import styles from "./TextWithBoldSpan.module.css";
+import { TextWithBoldSpanData } from "../../../../auxiliary/interfaces/TextWithBoldSpanData";
 
 interface TextWithBoldSpanProps {
-  label: string;
-  boldSpan: string;
+  textWithBoldSpanData: TextWithBoldSpanData;
 }
 
-const TextWithBoldSpan: React.FC<TextWithBoldSpanProps> = (props) => {
-  const { label, boldSpan } = props;
+const TextWithBoldSpan: React.FC<TextWithBoldSpanProps> = ({
+  textWithBoldSpanData = { label: "", boldSpan: "" },
+}) => {
+  const { label, boldSpan } = textWithBoldSpanData;
 
   return (
     <p>

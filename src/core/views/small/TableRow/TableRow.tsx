@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./TableRow.module.css";
 
 interface TableRowProps {
-  plant: {
+  tableRowData: {
     name: string;
     sunPreference: string;
     waterNeeds: string;
@@ -11,23 +11,35 @@ interface TableRowProps {
     matureSize: string;
     bloomTime: string;
     fertilizerNeeds: string;
+    index: number;
   };
-  index: number; 
 }
 
-const TableRow: React.FC<TableRowProps> = ({ plant, index }) => {
+const TableRow: React.FC<TableRowProps> = ({ tableRowData }) => {
+  const {
+    name,
+    sunPreference,
+    waterNeeds,
+    soilType,
+    soilPH,
+    matureSize,
+    bloomTime,
+    fertilizerNeeds,
+    index,
+  } = tableRowData;
+
   const rowClass = index % 2 === 0 ? styles.evenRow : "";
 
   return (
     <tr className={`${styles.tableRow} ${rowClass}`}>
-      <td>{plant.name}</td>
-      <td>{plant.sunPreference}</td>
-      <td>{plant.waterNeeds}</td>
-      <td>{plant.soilType}</td>
-      <td>{plant.soilPH}</td>
-      <td>{plant.matureSize}</td>
-      <td>{plant.bloomTime}</td>
-      <td>{plant.fertilizerNeeds}</td>
+      <td>{name}</td>
+      <td>{sunPreference}</td>
+      <td>{waterNeeds}</td>
+      <td>{soilType}</td>
+      <td>{soilPH}</td>
+      <td>{matureSize}</td>
+      <td>{bloomTime}</td>
+      <td>{fertilizerNeeds}</td>
     </tr>
   );
 };

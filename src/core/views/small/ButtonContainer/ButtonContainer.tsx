@@ -3,20 +3,26 @@ import styles from "./ButtonContainer.module.css";
 import Button from "../../small/Button/Button";
 
 interface ButtonContainerProps {
-  buttonContainerProps: {
+  buttonContainerData: {
     clickHandler: () => void;
     label: string;
   };
 }
 
 const ButtonContainer: React.FC<ButtonContainerProps> = ({
-  buttonContainerProps,
+  buttonContainerData,
 }) => {
-  const { clickHandler, label } = buttonContainerProps;
+  const { clickHandler, label } = buttonContainerData;
 
+  const buttonData = {
+    onClick: clickHandler,
+    label,
+  }
+
+  
   return (
     <div className={styles.buttonContainer}>
-      <Button onClick={clickHandler}>{label}</Button>
+      <Button buttonData={buttonData}/>
     </div>
   );
 };

@@ -7,7 +7,7 @@ import plantsStore from "../../../stores/PlantsStore";
 const Plants: React.FC = () => {
   const clickHandler = () => {};
 
-  const buttonContainerProps = {
+  const buttonContainerData = {
     clickHandler,
     label: "Go To Plant Database",
   };
@@ -30,11 +30,11 @@ const Plants: React.FC = () => {
         </thead>
         <tbody>
           {plantsStore.plants.map((plant, index) => (
-            <TableRow key={index} plant={plant} index={index} />
+            <TableRow key={index} tableRowData={{ ...plant, index }} />
           ))}
         </tbody>
       </table>
-      <ButtonContainer buttonContainerProps={buttonContainerProps} />
+      <ButtonContainer buttonContainerData={buttonContainerData} />
     </div>
   );
 };

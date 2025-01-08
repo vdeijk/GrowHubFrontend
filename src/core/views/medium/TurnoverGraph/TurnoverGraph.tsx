@@ -14,7 +14,7 @@ const TurnoverGraph: React.FC<GraphProps> = ({ data, width, height }) => {
 
   const clickHandler = () => {};
   
-  const buttonContainerProps = {
+  const buttonContainerData = {
     clickHandler,
     label: "Go To Statistics",
   };
@@ -70,7 +70,7 @@ const TurnoverGraph: React.FC<GraphProps> = ({ data, width, height }) => {
     <div className={styles.graph}>
       <h6 className={styles.h6}>Turnover</h6>
       <svg ref={svgRef} width="100%" height={height}></svg>
-      <ButtonContainer buttonContainerProps={buttonContainerProps} />
+      <ButtonContainer buttonContainerData={buttonContainerData} />
     </div>
   );
 };
