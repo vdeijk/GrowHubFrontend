@@ -1,7 +1,7 @@
-import React from "react";
-import styles from "./Menu.module.css";
-import MenuLink from "../../small/MenuLink/MenuLink";
-import { MenuLinkData } from "../../../../auxiliary/interfaces/MenuLinkData";
+import React from 'react';
+import styles from './Menu.module.css';
+import MenuLink from '../../small/MenuLink/MenuLink';
+import { MenuLinkData } from '../../../../auxiliary/interfaces/MenuLinkData';
 
 interface MenuProps {
   userName: string;
@@ -10,12 +10,12 @@ interface MenuProps {
 
 const Menu: React.FC<MenuProps> = ({ userName, profilePicture }) => {
   const menuLinks: MenuLinkData[] = [
-    { href: "/about", label: "Calendar" },
-    { href: "/services", label: "Task Manager" },
-    { href: "/services", label: "Weather Report" },
-    { href: "/services", label: "Statistics" },
-    { href: "/services", label: "Finance" },
-    { href: "/contact", label: "Plant Database" },
+    { href: '/about', label: 'Calendar' },
+    { href: '/services', label: 'Task Manager' },
+    { href: '/services', label: 'Weather Report' },
+    { href: '/services', label: 'Statistics' },
+    { href: '/services', label: 'Finance' },
+    { href: '/contact', label: 'Plant Database' },
   ];
 
   return (

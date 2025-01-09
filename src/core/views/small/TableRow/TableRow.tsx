@@ -1,5 +1,5 @@
-import React from "react";
-import styles from "./TableRow.module.css";
+import React from 'react';
+import styles from './TableRow.module.css';
 
 interface TableRowProps {
   tableRowData: {
@@ -28,7 +28,7 @@ const TableRow: React.FC<TableRowProps> = ({ tableRowData }) => {
     index,
   } = tableRowData;
 
-  const rowClass = index % 2 === 0 ? styles.evenRow : "";
+  const rowClass = index % 2 === 0 ? styles.evenRow : '';
 
   return (
     <tr className={`${styles.tableRow} ${rowClass}`}>

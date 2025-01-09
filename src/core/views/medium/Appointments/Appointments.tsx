@@ -1,16 +1,16 @@
-import React from "react";
-import { observer } from "mobx-react-lite";
-import Appointment from "../../small/Appointment/Appointment";
-import appointmentStore from "../../../stores/AppointmentStore";
-import styles from "./Appointments.module.css";
-import ButtonContainer from "../../small/ButtonContainer/ButtonContainer";
+import React from 'react';
+import { observer } from 'mobx-react-lite';
+import Appointment from '../../small/Appointment/Appointment';
+import appointmentStore from '../../../stores/AppointmentStore';
+import styles from './Appointments.module.css';
+import ButtonContainer from '../../small/ButtonContainer/ButtonContainer';
 
 const Appointments: React.FC = observer(() => {
   const clickHandler = () => {};
 
   const buttonContainerData = {
     clickHandler,
-    label: "Go To Calendar",
+    label: 'Go To Calendar',
   };
 
   return (

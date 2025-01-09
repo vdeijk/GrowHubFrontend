@@ -1,24 +1,24 @@
 .appointment {
-    display: flex;
-    padding: 1rem;
-    border-bottom: 1px solid #4caf50;
-  }
-  
-  .time {
-    width: 100px;
-    font-weight: bold;
-    font-size: 1.6rem;
-  }
-  
-  .details {
-    flex-grow: 1;
-  }
-  
-  .title {
-    margin: 0;
-  }
-  
-  .description {
-    margin: 0.5rem 0 0 0;
-    color: #666;
-  }
+  display: flex;
+  padding: 1rem;
+  border-bottom: 1px solid #4caf50;
+}
+
+.time {
+  width: 100px;
+  font-weight: bold;
+  font-size: 1.6rem;
+}
+
+.details {
+  flex-grow: 1;
+}
+
+.title {
+  margin: 0;
+}
+
+.description {
+  margin: 0.5rem 0 0 0;
+  color: #666;
+}

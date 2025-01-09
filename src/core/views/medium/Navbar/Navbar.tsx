@@ -1,11 +1,11 @@
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faUser,
   faQuestionCircle,
   faSignOutAlt,
-} from "@fortawesome/free-solid-svg-icons";
-import styles from "./Navbar.module.css";
+} from '@fortawesome/free-solid-svg-icons';
+import styles from './Navbar.module.css';
 
 interface NavbarProps {
   userName: string;

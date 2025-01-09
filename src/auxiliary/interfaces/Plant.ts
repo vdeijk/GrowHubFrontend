@@ -1,6 +1,6 @@
 export interface Plant {
   name: string;
-  sunPreference: "Full Sun" | "Partial Sun" | "Shade";
+  sunPreference: 'Full Sun' | 'Partial Sun' | 'Shade';
   waterNeeds: string;
   soilType: string;
   soilPH: string;

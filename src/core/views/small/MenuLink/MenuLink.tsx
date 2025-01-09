@@ -1,6 +1,6 @@
-import React from "react";
-import styles from "./MenuLink.module.css";
-import { MenuLinkData } from "../../../../auxiliary/interfaces/MenuLinkData";
+import React from 'react';
+import styles from './MenuLink.module.css';
+import { MenuLinkData } from '../../../../auxiliary/interfaces/MenuLinkData';
 
 interface MenuLinkProps {
   menuLinkData: MenuLinkData;

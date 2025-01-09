@@ -1,15 +1,15 @@
-import React from "react";
-import styles from "./Plants.module.css";
-import TableRow from "../../small/TableRow/TableRow";
-import ButtonContainer from "../../small/ButtonContainer/ButtonContainer";
-import plantsStore from "../../../stores/PlantsStore";
+import React from 'react';
+import styles from './Plants.module.css';
+import TableRow from '../../small/TableRow/TableRow';
+import ButtonContainer from '../../small/ButtonContainer/ButtonContainer';
+import plantsStore from '../../../stores/PlantsStore';
 
 const Plants: React.FC = () => {
   const clickHandler = () => {};
 
   const buttonContainerData = {
     clickHandler,
-    label: "Go To Plant Database",
+    label: 'Go To Plant Database',
   };
 
   return (

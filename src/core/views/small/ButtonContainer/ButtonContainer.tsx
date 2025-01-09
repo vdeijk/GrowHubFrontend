@@ -1,6 +1,6 @@
-import React from "react";
-import styles from "./ButtonContainer.module.css";
-import Button from "../../small/Button/Button";
+import React from 'react';
+import styles from './ButtonContainer.module.css';
+import Button from '../../small/Button/Button';
 
 interface ButtonContainerProps {
   buttonContainerData: {
@@ -17,12 +17,11 @@ const ButtonContainer: React.FC<ButtonContainerProps> = ({
   const buttonData = {
     onClick: clickHandler,
     label,
-  }
+  };
 
-  
   return (
     <div className={styles.buttonContainer}>
-      <Button buttonData={buttonData}/>
+      <Button buttonData={buttonData} />
     </div>
   );
 };

@@ -1,5 +1,5 @@
-import React from "react";
-import styles from "./NavbarLink.module.css";
+import React from 'react';
+import styles from './NavbarLink.module.css';
 
 const NavbarLink: React.FC = () => {
   return (

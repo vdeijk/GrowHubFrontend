@@ -1,8 +1,8 @@
 // src/services/weatherService.ts
-import axios from "axios";
+import axios from 'axios';
 
-const API_KEY = "9176d191118d4ac68c3153418240312";
-const BASE_URL = "https://api.weatherapi.com/v1";
+const API_KEY = '9176d191118d4ac68c3153418240312';
+const BASE_URL = 'https://api.weatherapi.com/v1';
 
 export const getWeatherData = async (city: string) => {
   try {
@@ -14,7 +14,7 @@ export const getWeatherData = async (city: string) => {
     });
     return response.data;
   } catch (error) {
-    console.error("Error fetching weather data:", error);
+    console.error('Error fetching weather data:', error);
     throw error;
   }
 };

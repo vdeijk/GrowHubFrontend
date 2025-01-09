@@ -1,6 +1,6 @@
-import React from "react";
-import styles from "./UpcomingWeather.module.css";
-import { observer } from "mobx-react-lite";
+import React from 'react';
+import styles from './UpcomingWeather.module.css';
+import { observer } from 'mobx-react-lite';
 
 const UpcomingWeather: React.FC = observer(() => {
   return (

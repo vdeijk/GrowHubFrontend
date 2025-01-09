@@ -1,13 +1,13 @@
-import React from "react";
-import styles from "./TextWithBoldSpan.module.css";
-import { TextWithBoldSpanData } from "../../../../auxiliary/interfaces/TextWithBoldSpanData";
+import React from 'react';
+import styles from './TextWithBoldSpan.module.css';
+import { TextWithBoldSpanData } from '../../../../auxiliary/interfaces/TextWithBoldSpanData';
 
 interface TextWithBoldSpanProps {
   textWithBoldSpanData: TextWithBoldSpanData;
 }
 
 const TextWithBoldSpan: React.FC<TextWithBoldSpanProps> = ({
-  textWithBoldSpanData = { label: "", boldSpan: "" },
+  textWithBoldSpanData = { label: '', boldSpan: '' },
 }) => {
   const { label, boldSpan } = textWithBoldSpanData;
 
