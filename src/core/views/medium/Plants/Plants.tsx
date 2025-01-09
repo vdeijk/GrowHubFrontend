@@ -13,7 +13,7 @@ const Plants: React.FC = () => {
   };
 
   return (
-    <div className={styles.plants}>
+    <section className={styles.plants}>
       <h6 className={styles.h6}>Plant Information</h6>
       <table className={styles.table}>
         <thead>
@@ -35,7 +35,7 @@ const Plants: React.FC = () => {
         </tbody>
       </table>
       <ButtonContainer buttonContainerData={buttonContainerData} />
-    </div>
+    </section>
   );
 };
 

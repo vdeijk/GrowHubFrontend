@@ -30,14 +30,14 @@ const Map: React.FC = () => {
   }, []);
 
   return (
-    <div className={styles.map}>
+    <section className={styles.map}>
       <h2 className={styles.map__h2}>Farm locations</h2>
       <div
         ref={mapRef}
         className={styles.mapContainer}
         style={{ width: '100%', height: '90%' }}
       ></div>
-    </div>
+    </section>
   );
 };
 

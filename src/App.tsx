@@ -8,12 +8,12 @@ import profilePicture from './auxiliary/assets/profile.jpeg';
 
 const App: React.FC = () => {
   return (
-    <div className="appContainer">
+    <main className="appContainer">
       <Navbar userName="YourUserName" />
       <Menu userName="YourUserName" profilePicture={profilePicture} />
       <Dashboard />
       <Footer />
-    </div>
+    </main>
   );
 };
 

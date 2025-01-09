@@ -14,7 +14,7 @@ const Appointments: React.FC = observer(() => {
   };
 
   return (
-    <div className={styles.appointmentList}>
+    <section className={styles.appointmentList}>
       <div>
         <h6 className={styles.h6}>Today's Appointments</h6>
         {appointmentStore.appointments.map((appointment, index) => (
@@ -22,7 +22,7 @@ const Appointments: React.FC = observer(() => {
         ))}
       </div>
       <ButtonContainer buttonContainerData={buttonContainerData} />
-    </div>
+    </section>
   );
 });
 

@@ -67,11 +67,11 @@ const TurnoverGraph: React.FC<GraphProps> = ({ data, width, height }) => {
   }, [data, width, height]);
 
   return (
-    <div className={styles.graph}>
+    <section className={styles.graph}>
       <h6 className={styles.h6}>Turnover</h6>
       <svg ref={svgRef} width="100%" height={height}></svg>
       <ButtonContainer buttonContainerData={buttonContainerData} />
-    </div>
+    </section>
   );
 };
 

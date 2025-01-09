@@ -18,7 +18,7 @@ const CurrentWeather: React.FC = observer(() => {
   ];
 
   return (
-    <div className={styles.weather}>
+    <section className={styles.weather}>
       <h6 className={styles.h6}>Current Weather</h6>
       <h4 className={styles.h4}>The Hague, South Holland</h4>
       <div className={styles.main}>
@@ -37,7 +37,7 @@ const CurrentWeather: React.FC = observer(() => {
           />
         ))}
       </div>
-    </div>
+    </section>
   );
 });
 

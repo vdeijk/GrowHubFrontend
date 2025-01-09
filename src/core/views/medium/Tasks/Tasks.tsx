@@ -14,13 +14,13 @@ const Tasks: React.FC = observer(() => {
   };
 
   return (
-    <div className={styles.taskList}>
+    <section className={styles.taskList}>
       <h6 className={styles.h6}>Upcoming Tasks</h6>
       {taskStore.tasks.map((task) => (
         <Task key={task.id} taskData={task} />
       ))}
       <ButtonContainer buttonContainerData={buttonContainerData} />
-    </div>
+    </section>
   );
 });
 
