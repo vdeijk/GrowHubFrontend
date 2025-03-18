@@ -1,0 +1,19 @@
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .table th,
+  .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .table th {
+    background-color: #4caf50;
+    color: #fdfdfd;
+    font-size: 1.5rem;
+  }

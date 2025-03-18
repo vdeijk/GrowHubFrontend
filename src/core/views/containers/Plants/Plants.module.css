@@ -1,0 +1,15 @@
+.plants {
+  padding: 2rem;
+  background-color: #fdfdfd;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: grid;
+  grid-area: 5 / 1 / 6 / -1;
+}
+
+.buttonContainer {
+  width: 100%;
+  display: grid;
+  align-items: end;
+  margin-top: 2rem;
+}

@@ -1,0 +1,38 @@
+.graph {
+  height: 100%;
+  width: 100%;
+  border: none;
+  background: #fdfdfd;
+  padding: 1rem;
+  grid-area: 3 / 1 / 4 / -1;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #222;
+  shape-rendering: crispEdges;
+}
+
+.axis--x path {
+  display: none;
+}
+
+.dot {
+  fill-opacity: 0.7;
+  transition: fill-opacity 0.3s;
+}
+
+.dot:hover {
+  fill-opacity: 1;
+}
+
+.axis text {
+  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+}
+
+svg text {
+  font-family: 'Poppins', sans-serif;
+}
