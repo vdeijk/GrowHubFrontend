@@ -3,6 +3,7 @@
     width: 100%;
     border-collapse: collapse;
     font-family: 'Poppins', sans-serif;
+    background: #fdfdfd;
   }
   
   .table th,

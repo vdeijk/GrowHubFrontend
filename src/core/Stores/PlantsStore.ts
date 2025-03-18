@@ -1,41 +1,57 @@
 import { makeAutoObservable } from 'mobx';
 import { Plant } from '../../auxiliary/interfaces/Plant';
+import plants from '../../auxiliary/data/plantsMock';
+import { debounce } from '../../auxiliary/utils/debounce';
 
 class PlantsStore {
-  plants: Plant[] = [
-    {
-      name: 'Rose',
-      sunPreference: 'Full Sun',
-      waterNeeds: 'Moderate',
-      soilType: 'Loamy',
-      soilPH: '6.0 - 7.0',
-      pruning: 'Spring',
-      temperatureRange: '15°C - 25°C',
-      plantType: 'Perennial',
-      growthRate: 'Moderate',
-      matureSize: '3-8 feet tall, 2-3 feet wide',
-      bloomTime: 'Spring to Fall',
-      fertilizerNeeds: 'Monthly during growing season',
-    },
-    {
-      name: 'Fern',
-      sunPreference: 'Shade',
-      waterNeeds: 'High',
-      soilType: 'Rich, well-drained',
-      soilPH: '5.0 - 6.5',
-      pruning: 'Remove dead fronds',
-      temperatureRange: '18°C - 24°C',
-      plantType: 'Perennial',
-      growthRate: 'Slow to Moderate',
-      matureSize: '1-3 feet tall, 1-2 feet wide',
-      bloomTime: 'N/A',
-      fertilizerNeeds: 'Monthly during growing season',
-    },
+  plants: Plant[] = plants;
+  searchQuery: string = '';
+  filterCriteria: string = '';
+  filteredPlants: Plant[] = this.plants;
+  debouncedFilterPlants: () => void;
+  tableHeaders = [
+    'Name',
+    'Sun Preference',
+    'Water Needs',
+    'Soil Type',
+    'Soil PH',
+    'Mature Size',
+    'Bloom Time',
+    'Fertilizer Needs',
+  ];
+  sunPreferenceOptions = [
+    { value: '', label: 'All Sun Preferences' },
+    { value: 'Full Sun', label: 'Full Sun' },
+    { value: 'Partial Sun', label: 'Partial Sun' },
+    { value: 'Shade', label: 'Shade' },
   ];
 
   constructor() {
     makeAutoObservable(this);
+    this.filteredPlants = this.plants;
+
+    this.debouncedFilterPlants = debounce(this.filterPlants.bind(this), 500);
   }
+
+  setSearchQuery = (query: string) => {
+    this.searchQuery = query;
+    this.debouncedFilterPlants();
+  };
+
+  setFilterCriteria = (criteria: string) => {
+    this.filterCriteria = criteria;
+    this.filterPlants();
+  };
+
+  filterPlants = () => {
+    this.filteredPlants = this.plants.filter((plant) => {
+      return (
+        plant.name.toLowerCase().includes(this.searchQuery.toLowerCase()) &&
+        (this.filterCriteria === '' ||
+          plant.sunPreference === this.filterCriteria)
+      );
+    });
+  };
 }
 
 const plantsStore = new PlantsStore();
