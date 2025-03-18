@@ -1,19 +1,22 @@
 import React from 'react';
 import styles from './Button.module.css';
 
-interface ButtonProps {
-  buttonData: {
-    onClick: () => void;
-    label: string;
-    className?: string;
-  };
+export interface ButtonProps {
+  onClick?: () => void;
+  label: string;
+  className?: string;
+  type?: 'button' | 'submit' | 'reset';
 }
 
-const Button: React.FC<ButtonProps> = ({ buttonData }) => {
-  const { onClick, label, className } = buttonData;
+const Button: React.FC<ButtonProps> = (props) => {
+  const { onClick, label, className, type = 'button' } = props;
 
   return (
-    <button className={`${styles.button} ${className}`} onClick={onClick}>
+    <button
+      type={type}
+      className={`${styles.button} ${className}`}
+      onClick={type === 'submit' ? undefined: onClick}
+    >
       {label}
     </button>
   );

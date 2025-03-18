@@ -12,6 +12,7 @@ class RouterStore {
     { href: '/services', label: 'Statistics' },
     { href: '/services', label: 'Finance' },
     { href: '/plantDatabase', label: 'Plant Database' },
+    { href: '/add-plant', label: 'Add Plant' },
   ];
 
   constructor() {

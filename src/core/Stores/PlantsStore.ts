@@ -52,6 +52,12 @@ class PlantsStore {
       );
     });
   };
+
+  
+  addPlant(newPlant: Plant) {
+    this.plants.push(newPlant);
+    this.filterPlants();
+  }
 }
 
 const plantsStore = new PlantsStore();
