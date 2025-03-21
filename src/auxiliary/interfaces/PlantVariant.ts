@@ -1,4 +1,4 @@
-export interface Plant {
+/*export interface Plant {
   name: string;
   sunPreference: 'Full Sun' | 'Partial Sun' | 'Shade';
   waterNeeds: string;
@@ -11,4 +11,4 @@ export interface Plant {
   matureSize: string;
   bloomTime: string;
   fertilizerNeeds: string;
-}
+}*/

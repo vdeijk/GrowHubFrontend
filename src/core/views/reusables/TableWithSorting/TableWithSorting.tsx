@@ -2,21 +2,25 @@ import React from 'react';
 import styles from './TableWithSorting.module.css';
 import TableRow from '../TableRow/TableRow';
 
-export interface TableProps {
+export interface TableProps<
+  T extends Record<string, string | number | boolean | null | undefined>,
+> {
   headers: { id: string; label: string }[];
-  data: any[];
+  data: T[];
   onSort: (field: string) => void;
   sortField: string;
   sortOrder: 'asc' | 'desc';
 }
 
-const TableWithSorting: React.FC<TableProps> = ({
+const TableWithSorting = <
+  T extends Record<string, string | number | boolean | null | undefined>,
+>({
   headers,
   data,
   onSort,
   sortField,
   sortOrder,
-}) => {
+}: TableProps<T>) => {
   const getSortIndicator = (field: string) => {
     if (sortField === field) {
       return sortOrder === 'asc' ? '▲' : '▼';

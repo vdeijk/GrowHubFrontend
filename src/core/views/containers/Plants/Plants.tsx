@@ -5,6 +5,7 @@ import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import plantsStore from '../../../stores/PlantsStore';
 import Heading from '../../reusables/Heading/Heading';
 import { useNavigate } from 'react-router-dom';
+import { PlantWithIndex } from '../../../../auxiliary/interfaces/PlantWithIndex';
 
 const Plants: React.FC = () => {
   const navigate = useNavigate();
@@ -21,9 +22,9 @@ const Plants: React.FC = () => {
   return (
     <section className={styles.plants}>
       <Heading level={6} text="Plant Information"></Heading>
-      <TableWithoutSorting
+      <TableWithoutSorting<PlantWithIndex>
         headers={plantsStore.tableHeaders}
-        data={plantsStore.plants}
+        data={plantsStore.plants.map((plant, index) => ({ ...plant, index }))}
       />
       <ButtonContainer {...buttonContainerData} />
     </section>

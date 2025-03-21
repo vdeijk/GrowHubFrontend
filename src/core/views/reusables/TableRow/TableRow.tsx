@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface TableRowProps {
-  tableRowData: Record<string, any>;
+  tableRowData: Record<string, string | number | boolean | null | undefined>;
   headers: { id: string; label: string }[];
 }
 
