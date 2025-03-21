@@ -1,62 +1,120 @@
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, runInAction } from 'mobx';
 import { Plant } from '../../auxiliary/interfaces/Plant';
-import plants from '../../auxiliary/data/plantsMock';
 import { debounce } from '../../auxiliary/utils/debounce';
+//import { getPlantData } from '../apis/plants';
+import plants from '../../auxiliary/data/plantsMock';
 
 class PlantsStore {
-  plants: Plant[] = plants;
+  plants: Plant[] = [];
   searchQuery: string = '';
   filterCriteria: string = '';
-  filteredPlants: Plant[] = this.plants;
+  filteredPlants: Plant[] = [];
+  isLoading: boolean = false;
   debouncedFilterPlants: () => void;
+  genusOptions: { value: string; label: string }[] = [];
   tableHeaders = [
-    'Name',
-    'Sun Preference',
-    'Water Needs',
-    'Soil Type',
-    'Soil PH',
-    'Mature Size',
-    'Bloom Time',
-    'Fertilizer Needs',
+    { id: 'commonName', label: 'Common Name' },
+    { id: 'genus', label: 'Genus' },
+    { id: 'defaultImage', label: 'Image' },
+    { id: 'scientificName', label: 'Scientific Name' },
   ];
-  sunPreferenceOptions = [
-    { value: '', label: 'All Sun Preferences' },
-    { value: 'Full Sun', label: 'Full Sun' },
-    { value: 'Partial Sun', label: 'Partial Sun' },
-    { value: 'Shade', label: 'Shade' },
-  ];
+  sortField: string = '';
+  sortOrder: 'asc' | 'desc' = 'asc';
 
   constructor() {
     makeAutoObservable(this);
-    this.filteredPlants = this.plants;
+
+    this.retrieveData();
 
     this.debouncedFilterPlants = debounce(this.filterPlants.bind(this), 500);
   }
 
+  async retrieveData() {
+    runInAction(() => {
+      this.isLoading = true;
+    });
+
+    //const data = await getPlantData();
+    runInAction(() => {
+      //this.plants = data;
+      this.plants = plants;
+      this.filteredPlants = this.plants;
+      this.genusOptions = this.extractGenera();
+      this.isLoading = false;
+    });
+  }
+
+  extractGenera() {
+    const genera = new Set<string>();
+    this.plants.forEach((plant) => {
+      genera.add(plant.genus);
+    });
+
+    const genusOptions = Array.from(genera).map((genus) => ({
+      value: genus,
+      label: genus,
+    }));
+    genusOptions.unshift({ value: '', label: 'All Genera' });
+    
+    return genusOptions;
+  }
+
   setSearchQuery = (query: string) => {
-    this.searchQuery = query;
-    this.debouncedFilterPlants();
+    runInAction(() => {
+      this.searchQuery = query;
+      this.debouncedFilterPlants();
+    });
   };
 
   setFilterCriteria = (criteria: string) => {
-    this.filterCriteria = criteria;
-    this.filterPlants();
+    runInAction(() => {
+      this.filterCriteria = criteria;
+      this.filterPlants();
+    });
   };
 
   filterPlants = () => {
     this.filteredPlants = this.plants.filter((plant) => {
       return (
-        plant.name.toLowerCase().includes(this.searchQuery.toLowerCase()) &&
-        (this.filterCriteria === '' ||
-          plant.sunPreference === this.filterCriteria)
+        plant.commonName
+          .toLowerCase()
+          .includes(this.searchQuery.toLowerCase()) &&
+        (this.filterCriteria === '' || plant.genus === this.filterCriteria)
       );
+    });
+    this.sortPlants();
+  };
+
+  setSortField = (field: string) => {
+    runInAction(() => {
+      if (this.sortField === field) {
+        this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
+      } else {
+        this.sortField = field;
+        this.sortOrder = 'asc';
+      }
+      this.sortPlants();
     });
   };
 
-  
+  sortPlants = () => {
+    this.filteredPlants = this.filteredPlants.slice().sort((a, b) => {
+      const fieldA = (a as Plant)[this.sortField as keyof Plant];
+      const fieldB = (b as Plant)[this.sortField as keyof Plant];
+      if (fieldA < fieldB) {
+        return this.sortOrder === 'asc' ? -1 : 1;
+      }
+      if (fieldA > fieldB) {
+        return this.sortOrder === 'asc' ? 1 : -1;
+      }
+      return 0;
+    });
+  };
+
   addPlant(newPlant: Plant) {
     this.plants.push(newPlant);
     this.filterPlants();
+    this.genusOptions = this.extractGenera();
   }
 }
 

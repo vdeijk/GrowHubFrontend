@@ -1,45 +1,16 @@
 import React from 'react';
-import styles from './TableRow.module.css';
 
 interface TableRowProps {
-  tableRowData: {
-    name: string;
-    sunPreference: string;
-    waterNeeds: string;
-    soilType: string;
-    soilPH: string;
-    matureSize: string;
-    bloomTime: string;
-    fertilizerNeeds: string;
-    index: number;
-  };
+  tableRowData: Record<string, any>;
+  headers: { id: string; label: string }[];
 }
 
-const TableRow: React.FC<TableRowProps> = ({ tableRowData }) => {
-  const {
-    name,
-    sunPreference,
-    waterNeeds,
-    soilType,
-    soilPH,
-    matureSize,
-    bloomTime,
-    fertilizerNeeds,
-    index,
-  } = tableRowData;
-
-  const rowClass = index % 2 === 0 ? styles.evenRow : '';
-
+const TableRow: React.FC<TableRowProps> = ({ tableRowData, headers }) => {
   return (
-    <tr className={`${styles.tableRow} ${rowClass}`}>
-      <td>{name}</td>
-      <td>{sunPreference}</td>
-      <td>{waterNeeds}</td>
-      <td>{soilType}</td>
-      <td>{soilPH}</td>
-      <td>{matureSize}</td>
-      <td>{bloomTime}</td>
-      <td>{fertilizerNeeds}</td>
+    <tr>
+      {headers.map((header, index) => (
+        <td key={index}>{tableRowData[header.id]}</td>
+      ))}
     </tr>
   );
 };

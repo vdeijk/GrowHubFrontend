@@ -4,12 +4,12 @@ import TextInput from '../../reusables/TextInput/TextInput';
 import Dropdown from '../../reusables/Dropdown/Dropdown';
 import { DropdownOption } from '../../../../auxiliary/interfaces/DropdownOptions';
 
-interface SearchBarProps {
+export interface SearchBarProps {
   searchQuery: string;
   setSearchQuery: (query: string) => void;
   filterCriteria: string;
   setFilterCriteria: (criteria: string) => void;
-  sunPreferenceOptions: DropdownOption[];
+  genusOptions: DropdownOption[];
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({
@@ -17,7 +17,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   setSearchQuery,
   filterCriteria,
   setFilterCriteria,
-  sunPreferenceOptions,
+  genusOptions,
 }) => {
 
   return (
@@ -30,7 +30,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
       <Dropdown
         value={filterCriteria}
         onChange={setFilterCriteria}
-        options={sunPreferenceOptions}
+        options={genusOptions}
       />
     </div>
   );

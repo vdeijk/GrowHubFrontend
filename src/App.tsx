@@ -9,7 +9,7 @@ import { Routes, Route } from 'react-router-dom';
 import PlantDatabase from './core/views/pages/PlantDatabase/PlantDatabase';
 import routerStore from './core/stores/RouterStore';
 import PageLayout from './core/views/reusables/PageLayout/PageLayout';
-import AddPlant from './core/views/pages/AddPlant/AddPlant';
+//import AddPlant from './core/views/pages/AddPlant/AddPlant';
 
 const App: React.FC = () => {
   return (
@@ -25,7 +25,7 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/plantDatabase" element={<PlantDatabase />} />
-          <Route path="/add-plant" element={<AddPlant />} />
+          {/* <Route path="/add-plant" element={<AddPlant />} /> */}
         </Routes>
       </PageLayout>
       <Footer />

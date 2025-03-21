@@ -1,19 +1,19 @@
 import React from 'react';
-import plantsStore from '../../../stores/PlantsStore';
+//import plantsStore from '../../../stores/PlantsStore';
 import TextInput, { TextInputProps } from '../../reusables/TextInput/TextInput';
 import Heading from '../../reusables/Heading/Heading';
-import { useNavigate } from 'react-router-dom';
+//import { useNavigate } from 'react-router-dom';
 import addPlantStore from '../../../stores/AddPlantStore';
 import Button, { ButtonProps } from '../../reusables/Button/Button';
 import styles from './AddPlant.module.css';
 import { observer } from 'mobx-react-lite';
 
 const AddPlant: React.FC = observer(() => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const newPlant = {
+    /*  const newPlant = {
       name: addPlantStore.name,
       sunPreference: addPlantStore.sunPreference as
         | 'Full Sun'
@@ -30,9 +30,9 @@ const AddPlant: React.FC = observer(() => {
       plantType: addPlantStore.plantType,
       growthRate: addPlantStore.growthRate,
     };
-    plantsStore.addPlant(newPlant);
+    //plantsStore.addPlant(newPlant);
     addPlantStore.resetForm();
-    navigate('/');
+    navigate('/');*/
   };
 
   const nameProps: TextInputProps = {

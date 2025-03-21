@@ -1,25 +1,38 @@
-import React from 'react';
+import * as React from 'react';
+import SearchBar from '../../containers/SearchBar/SearchBar';
+import Table from '../../reusables/Table/Table';
 import styles from './PlantDatabase.module.css';
 import Heading from '../../reusables/Heading/Heading';
-import Table from '../../reusables/Table/Table';
-import SearchBar from '../../containers/SearchBar/SearchBar';
 import plantsStore from '../../../stores/PlantsStore';
 import { observer } from 'mobx-react-lite';
+import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
+import { SearchBarProps } from '../../containers/SearchBar/SearchBar';
+import { TableProps } from '../../reusables/Table/Table';
 
 const PlantDatabase: React.FC = observer(() => {
-  const searchBarProps = {
+  const searchBarProps: SearchBarProps = {
     searchQuery: plantsStore.searchQuery,
     setSearchQuery: plantsStore.setSearchQuery,
     filterCriteria: plantsStore.filterCriteria,
     setFilterCriteria: plantsStore.setFilterCriteria,
-    sunPreferenceOptions: plantsStore.sunPreferenceOptions
+    genusOptions: plantsStore.genusOptions,
+  };
+
+  const tableProps: TableProps = {
+    headers: plantsStore.tableHeaders,
+    data: plantsStore.filteredPlants,
+    onSort: (field) => plantsStore.setSortField(field),
+    sortField: plantsStore.sortField,
+    sortOrder: plantsStore.sortOrder,
   };
 
   return (
     <section className={styles.section}>
       <Heading level={1} text="Plant Database" />
-      <SearchBar {...searchBarProps} />
-      <Table headers={plantsStore.tableHeaders} data={plantsStore.filteredPlants} />
+      <LoadingWrapper isLoading={plantsStore.isLoading}>
+        <SearchBar {...searchBarProps} />
+        <Table {...tableProps} />
+      </LoadingWrapper>
     </section>
   );
 });

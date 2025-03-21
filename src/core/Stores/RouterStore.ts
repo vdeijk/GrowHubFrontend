@@ -6,13 +6,13 @@ class RouterStore {
   currentLabel: string = '';
   menuLinks: MenuLinkData[] = [
     { href: '/', label: 'Dashboard' },
-    { href: '/about', label: 'Calendar' },
-    { href: '/services', label: 'Task Manager' },
-    { href: '/services', label: 'Weather Report' },
-    { href: '/services', label: 'Statistics' },
-    { href: '/services', label: 'Finance' },
+    // { href: '/about', label: 'Calendar' },
+    // { href: '/', label: 'Task Manager' },
+    // { href: '/', label: 'Weather Report' },
+    // { href: '/', label: 'Statistics' },
+    // { href: '/', label: 'Finance' },
     { href: '/plantDatabase', label: 'Plant Database' },
-    { href: '/add-plant', label: 'Add Plant' },
+    // { href: '/add-plant', label: 'Add Plant' },
   ];
 
   constructor() {
