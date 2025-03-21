@@ -17,6 +17,13 @@ const TableWithSorting: React.FC<TableProps> = ({
   sortField,
   sortOrder,
 }) => {
+  const getSortIndicator = (field: string) => {
+    if (sortField === field) {
+      return sortOrder === 'asc' ? '▲' : '▼';
+    }
+    return '⇅';
+  };
+
   return (
     <table className={styles.table}>
       <thead>
@@ -24,7 +31,9 @@ const TableWithSorting: React.FC<TableProps> = ({
           {headers.map((header) => (
             <th key={header.id} onClick={() => onSort(header.id)}>
               {header.label}
-              {sortField === header.id && (sortOrder === 'asc' ? ' ▲' : ' ▼')}
+              <span className={styles.sortIndicator}>
+                {getSortIndicator(header.id)}
+              </span>
             </th>
           ))}
         </tr>

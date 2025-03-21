@@ -15,7 +15,7 @@ const Navbar: React.FC<NavbarProps> = ({ userName }) => {
   return (
     <nav className={styles.navbar}>
       <div className={styles.navbarBrand}>
-        <a href="/">Brand</a>
+        <a href="/" className={styles.logo}>Brand</a>
       </div>
       <div className={styles.navbarActions}>
         <div className={styles.userNameContainer}>

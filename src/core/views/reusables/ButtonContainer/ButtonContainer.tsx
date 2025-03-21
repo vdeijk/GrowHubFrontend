@@ -3,18 +3,17 @@ import styles from './ButtonContainer.module.css';
 import Button from '../Button/Button';
 
 interface ButtonContainerProps {
-  buttonContainerData: {
-    clickHandler: () => void;
-    label: string;
-  };
+  clickHandler: () => void;
+  label: string;
 }
 
 const ButtonContainer: React.FC<ButtonContainerProps> = ({
-  buttonContainerData,
+  clickHandler,
+  label,
 }) => {
   return (
     <div className={styles.buttonContainer}>
-      <Button {...buttonContainerData} />
+      <Button onClick={clickHandler} label={label} />
     </div>
   );
 };

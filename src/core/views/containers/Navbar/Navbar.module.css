@@ -13,6 +13,10 @@
   left: 0;
 }
 
+.logo {
+  color: #FDFDFD;
+}
+
 .navbar-brand {
   color: #fff;
   text-decoration: none;

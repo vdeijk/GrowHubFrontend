@@ -4,9 +4,14 @@ import TableWithoutSorting from '../../reusables/TableWithoutSorting/TableWithou
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import plantsStore from '../../../stores/PlantsStore';
 import Heading from '../../reusables/Heading/Heading';
+import { useNavigate } from 'react-router-dom';
 
 const Plants: React.FC = () => {
-  const clickHandler = () => {};
+  const navigate = useNavigate();
+
+  const clickHandler = () => {
+    navigate('/plantDatabase');
+  };
 
   const buttonContainerData = {
     clickHandler,
@@ -20,7 +25,7 @@ const Plants: React.FC = () => {
         headers={plantsStore.tableHeaders}
         data={plantsStore.plants}
       />
-      <ButtonContainer buttonContainerData={buttonContainerData} />
+      <ButtonContainer {...buttonContainerData} />
     </section>
   );
 };
