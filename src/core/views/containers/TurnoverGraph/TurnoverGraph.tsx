@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import * as d3 from 'd3';
 import styles from './TurnoverGraph.module.css';
-import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
+//import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import Heading from '../../reusables/Heading/Heading';
 
 interface GraphProps {
@@ -13,12 +13,12 @@ interface GraphProps {
 const TurnoverGraph: React.FC<GraphProps> = ({ data, width, height }) => {
   const svgRef = useRef<SVGSVGElement | null>(null);
 
-  const clickHandler = () => {};
+  //const clickHandler = () => {};
 
-  const buttonContainerData = {
-    clickHandler,
-    label: 'Go To Statistics',
-  };
+  // const buttonContainerData = {
+  //   clickHandler,
+  //   label: 'Go To Statistics',
+  // };
 
   useEffect(() => {
     const svg = d3.select(svgRef.current);
@@ -71,7 +71,7 @@ const TurnoverGraph: React.FC<GraphProps> = ({ data, width, height }) => {
     <section className={styles.graph}>
       <Heading level={6} text="Turnover"></Heading>
       <svg ref={svgRef} width="100%" height={height}></svg>
-      <ButtonContainer buttonContainerData={buttonContainerData} />
+      {/* <ButtonContainer buttonContainerData={buttonContainerData} /> */}
     </section>
   );
 };

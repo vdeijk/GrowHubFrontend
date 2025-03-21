@@ -11,10 +11,10 @@
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
+    font-size: 1.5rem;
   }
   
   .table th {
     background-color: #4caf50;
     color: #fdfdfd;
-    font-size: 1.5rem;
   }

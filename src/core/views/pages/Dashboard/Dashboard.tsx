@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import turnoverStore from '../../../stores/TurnoverStore';
 import UpcomingWeather from '../../containers/UpcomingWeather/UpcomingWeather';
 import CurrentWeather from '../../containers/CurrentWeather/CurrentWeather';
@@ -8,6 +8,7 @@ import Plants from '../../containers/Plants/Plants';
 import TurnoverGraph from '../../containers/TurnoverGraph/TurnoverGraph';
 import weatherStore from '../../../stores/WeatherStore';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
+import plantsStore from '../../../stores/PlantsStore';
 
 const Dashboard: React.FC = () => {
   return (
@@ -19,9 +20,9 @@ const Dashboard: React.FC = () => {
       <Tasks />
       <Appointments />
       <TurnoverGraph data={turnoverStore.turnovers} width={500} height={300} />
-      <Suspense fallback={<div>Loading plant database data...</div>}>
+      <LoadingWrapper isLoading={plantsStore.isLoading}>
         <Plants />
-      </Suspense>
+      </LoadingWrapper>
     </>
   );
 };

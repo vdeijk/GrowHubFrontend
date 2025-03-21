@@ -3,16 +3,16 @@ import { observer } from 'mobx-react-lite';
 import Appointment from '../../reusables/Appointment/Appointment';
 import appointmentStore from '../../../stores/AppointmentStore';
 import styles from './Appointments.module.css';
-import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
+//import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import Heading from '../../reusables/Heading/Heading';
 
 const Appointments: React.FC = observer(() => {
-  const clickHandler = () => {};
+  // const clickHandler = () => {};
 
-  const buttonContainerData = {
-    clickHandler,
-    label: 'Go To Calendar',
-  };
+  // const buttonContainerData = {
+  //   clickHandler,
+  //   label: 'Go To Calendar',
+  // };
 
   return (
     <section className={styles.appointmentList}>
@@ -22,7 +22,7 @@ const Appointments: React.FC = observer(() => {
           <Appointment key={index} appointmentData={appointment} />
         ))}
       </div>
-      <ButtonContainer buttonContainerData={buttonContainerData} />
+      {/* <ButtonContainer buttonContainerData={buttonContainerData} />*/}
     </section>
   );
 });

@@ -1,13 +1,13 @@
 import * as React from 'react';
 import SearchBar from '../../containers/SearchBar/SearchBar';
-import Table from '../../reusables/Table/Table';
+import Table from '../../reusables/TableWithSorting/TableWithSorting';
 import styles from './PlantDatabase.module.css';
 import Heading from '../../reusables/Heading/Heading';
 import plantsStore from '../../../stores/PlantsStore';
 import { observer } from 'mobx-react-lite';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import { SearchBarProps } from '../../containers/SearchBar/SearchBar';
-import { TableProps } from '../../reusables/Table/Table';
+import { TableProps } from '../../reusables/TableWithSorting/TableWithSorting';
 
 const PlantDatabase: React.FC = observer(() => {
   const searchBarProps: SearchBarProps = {

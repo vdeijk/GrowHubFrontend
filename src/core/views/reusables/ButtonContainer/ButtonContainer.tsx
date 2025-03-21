@@ -12,16 +12,9 @@ interface ButtonContainerProps {
 const ButtonContainer: React.FC<ButtonContainerProps> = ({
   buttonContainerData,
 }) => {
-  const { clickHandler, label } = buttonContainerData;
-
-  const buttonData = {
-    onClick: clickHandler,
-    label,
-  };
-
   return (
     <div className={styles.buttonContainer}>
-      <Button buttonData={buttonData} />
+      <Button {...buttonContainerData} />
     </div>
   );
 };

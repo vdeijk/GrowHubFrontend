@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Table.module.css';
+import styles from './TableWithSorting.module.css';
 import TableRow from '../TableRow/TableRow';
 
 export interface TableProps {
@@ -10,7 +10,7 @@ export interface TableProps {
   sortOrder: 'asc' | 'desc';
 }
 
-const Table: React.FC<TableProps> = ({
+const TableWithSorting: React.FC<TableProps> = ({
   headers,
   data,
   onSort,
@@ -38,4 +38,4 @@ const Table: React.FC<TableProps> = ({
   );
 };
 
-export default Table;
+export default TableWithSorting;
