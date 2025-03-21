@@ -10,10 +10,13 @@ import PlantDatabase from './core/views/pages/PlantDatabase/PlantDatabase';
 import routerStore from './core/stores/RouterStore';
 import PageLayout from './core/views/reusables/PageLayout/PageLayout';
 //import AddPlant from './core/views/pages/AddPlant/AddPlant';
+import { ToastContainer } from 'react-toastify';
 
 const App: React.FC = () => {
   return (
     <main className="appContainer">
+      {' '}
+      <ToastContainer />
       <Navbar userName="YourUserName" />
       <Menu
         userName="YourUserName"

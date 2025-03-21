@@ -1,7 +1,7 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import { Plant } from '../../auxiliary/interfaces/Plant';
 import { debounce } from '../../auxiliary/utils/debounce';
-//import { getPlantData } from '../apis/plants';
+import { getPlantData } from '../apis/plants';
 import plants from '../../auxiliary/data/plantsMock';
 
 class PlantsStore {
@@ -25,8 +25,15 @@ class PlantsStore {
     makeAutoObservable(this);
 
     this.retrieveData();
+    //this.retrieveMockData();
 
     this.debouncedFilterPlants = debounce(this.filterPlants.bind(this), 500);
+  }
+
+  retrieveMockData() {
+    this.plants = plants;
+    this.filteredPlants = this.plants;
+    this.genusOptions = this.extractGenera();
   }
 
   async retrieveData() {
@@ -34,12 +41,14 @@ class PlantsStore {
       this.isLoading = true;
     });
 
-    //const data = await getPlantData();
+    const result = await getPlantData();
     runInAction(() => {
-      //this.plants = data;
-      this.plants = plants;
-      this.filteredPlants = this.plants;
-      this.genusOptions = this.extractGenera();
+      if (result.success && result.data) {
+        this.plants = result.data;
+        this.filteredPlants = this.plants;
+        this.genusOptions = this.extractGenera();
+      }
+
       this.isLoading = false;
     });
   }
@@ -55,7 +64,7 @@ class PlantsStore {
       label: genus,
     }));
     genusOptions.unshift({ value: '', label: 'All Genera' });
-    
+
     return genusOptions;
   }
 

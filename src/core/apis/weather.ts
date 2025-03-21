@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const BASE_URL = 'https://api.weatherapi.com/v1';
 
@@ -13,7 +14,7 @@ export const getWeatherData = async (city: string) => {
     
     return response.data;
   } catch (error) {
-    console.error('Error fetching weather data:', error);
+    toast.error('Error fetching weather data');
     throw error;
   }
 };
