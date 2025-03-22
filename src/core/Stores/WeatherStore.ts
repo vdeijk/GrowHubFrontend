@@ -10,6 +10,8 @@ class WeatherStore {
 
   constructor() {
     makeAutoObservable(this);
+
+    this.fetchWeather();
   }
 
   async fetchWeather() {

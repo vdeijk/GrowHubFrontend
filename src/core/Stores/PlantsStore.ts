@@ -24,8 +24,8 @@ class PlantsStore {
   constructor() {
     makeAutoObservable(this);
 
-    this.retrieveData();
-    //this.retrieveMockData();
+    //this.retrieveData();
+    this.retrieveMockData();
 
     this.debouncedFilterPlants = debounce(this.filterPlants.bind(this), 500);
   }
