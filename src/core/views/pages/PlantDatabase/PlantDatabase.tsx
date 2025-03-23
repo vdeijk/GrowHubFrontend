@@ -12,7 +12,8 @@ import { Plant } from '../../../../auxiliary/interfaces/Plant';
 
 const PlantDatabase: React.FC = observer(() => {
   const searchBarProps: SearchBarProps = {
-    searchQuery: plantsStore.searchQuery,
+    searchQuery: plantsStore.searchQuery.value,
+    error: plantsStore.searchQuery.error,
     setSearchQuery: plantsStore.setSearchQuery,
     filterCriteria: plantsStore.filterCriteria,
     setFilterCriteria: plantsStore.setFilterCriteria,

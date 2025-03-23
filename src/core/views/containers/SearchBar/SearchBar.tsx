@@ -6,6 +6,7 @@ import { DropdownOption } from '../../../../auxiliary/interfaces/DropdownOptions
 
 export interface SearchBarProps {
   searchQuery: string;
+  error: string | null | undefined;
   setSearchQuery: (query: string) => void;
   filterCriteria: string;
   setFilterCriteria: (criteria: string) => void;
@@ -18,14 +19,15 @@ const SearchBar: React.FC<SearchBarProps> = ({
   filterCriteria,
   setFilterCriteria,
   genusOptions,
+  error,
 }) => {
-
   return (
     <div className={styles.searchBar}>
       <TextInput
         value={searchQuery}
         onChange={setSearchQuery}
         placeholder="Search plants..."
+        error={error}
       />
       <Dropdown
         value={filterCriteria}

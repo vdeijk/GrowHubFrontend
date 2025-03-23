@@ -10,6 +10,7 @@ describe('SearchBar', () => {
 
     const { getByRole } = render(
       <SearchBar
+        error=""
         searchQuery=""
         filterCriteria=""
         setFilterCriteria={vi.fn()}

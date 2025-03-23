@@ -4,10 +4,12 @@ import { debounce } from '../../../auxiliary/utils/debounce';
 import { getPlantData } from '../../apis/plants';
 import plants from '../../../auxiliary/data/plantsMock';
 import testStore from '../TestStore/TestStore';
+import { validate } from '../../../auxiliary/utils/validationMaxLength';
+import { TextInputState } from '../../../auxiliary/interfaces/TextInputState';
 
 class PlantsStore {
   plants: Plant[] = [];
-  searchQuery: string = '';
+  searchQuery: TextInputState = { value: '', error: '', maxLength: 10 };
   filterCriteria: string = '';
   filteredPlants: Plant[] = [];
   isLoading: boolean = false;
@@ -53,7 +55,14 @@ class PlantsStore {
 
   public setSearchQuery = (query: string) => {
     runInAction(() => {
-      this.searchQuery = query;
+      this.searchQuery.error = validate(query, this.searchQuery.maxLength);
+
+      if (this.searchQuery.error) {
+        return;
+      }
+
+      this.searchQuery.value = query;
+
       this.debouncedFilterPlants();
     });
   };
@@ -70,7 +79,7 @@ class PlantsStore {
       return (
         plant.commonName
           .toLowerCase()
-          .includes(this.searchQuery.toLowerCase()) &&
+          .includes(this.searchQuery.value.toLowerCase()) &&
         (this.filterCriteria === '' || plant.genus === this.filterCriteria)
       );
     });

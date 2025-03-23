@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './TextInput.module.css';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
 export interface TextInputProps {
   value: string;
@@ -7,6 +8,7 @@ export interface TextInputProps {
   placeholder?: string;
   required?: boolean;
   label?: string;
+  error?: string | null | undefined;
 }
 
 const TextInput: React.FC<TextInputProps> = ({
@@ -15,6 +17,7 @@ const TextInput: React.FC<TextInputProps> = ({
   placeholder,
   required = false,
   label,
+  error,
 }) => {
   return (
     <div className={label ? styles.container : ''}>
@@ -27,6 +30,7 @@ const TextInput: React.FC<TextInputProps> = ({
         placeholder={placeholder}
         className={styles.textInput}
       />
+      {error && <ErrorMessage message={error} />}
     </div>
   );
 };
