@@ -10,7 +10,7 @@ const TestPage: React.FC = observer(() => {
       <Heading level={1} text="Test Page"></Heading>
       <div>
         <CheckboxInput
-          label="Use Real Data"
+          label="Use Real Data (or mock data if unchecked)"
           checked={testStore.useRealData}
           onChange={testStore.setUseRealData}
         />
