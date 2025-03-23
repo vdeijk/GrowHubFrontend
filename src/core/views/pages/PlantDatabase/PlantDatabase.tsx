@@ -3,7 +3,7 @@ import SearchBar from '../../containers/SearchBar/SearchBar';
 import Table from '../../reusables/TableWithSorting/TableWithSorting';
 import styles from './PlantDatabase.module.css';
 import Heading from '../../reusables/Heading/Heading';
-import plantsStore from '../../../stores/PlantsStore';
+import plantsStore from '../../../stores/PlantsStore/PlantsStore';
 import { observer } from 'mobx-react-lite';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import { SearchBarProps } from '../../containers/SearchBar/SearchBar';

@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './CurrentWeather.module.css';
 import { observer } from 'mobx-react-lite';
-import weatherStore from '../../../stores/WeatherStore';
+import weatherStore from '../../../stores/WeatherStore/WeatherStore';
 import TextWithBoldSpan from '../../reusables/TextWithBoldSpan/TextWithBoldSpan';
 import { TextWithBoldSpanData } from '../../../../auxiliary/interfaces/TextWithBoldSpanData';
 import Heading from '../../reusables/Heading/Heading';

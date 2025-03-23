@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 import { runInAction } from 'mobx';
-import { WeatherData } from '../../auxiliary/interfaces/WeatherData';
-import { getWeatherData } from '../apis/weather';
+import { WeatherData } from '../../../auxiliary/interfaces/WeatherData';
+import { getWeatherData } from '../../apis/weather';
 
 class WeatherStore {
   weather: WeatherData | null = null;

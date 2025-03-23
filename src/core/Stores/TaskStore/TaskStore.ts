@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx';
-import { Task } from '../../auxiliary/interfaces/Task';
+import { Task } from '../../../auxiliary/interfaces/Task';
 
 class TaskStore {
   tasks: Task[] = [

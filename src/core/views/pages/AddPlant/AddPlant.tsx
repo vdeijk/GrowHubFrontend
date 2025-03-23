@@ -3,7 +3,7 @@ import React from 'react';
 import TextInput, { TextInputProps } from '../../reusables/TextInput/TextInput';
 import Heading from '../../reusables/Heading/Heading';
 //import { useNavigate } from 'react-router-dom';
-import addPlantStore from '../../../stores/AddPlantStore';
+import addPlantStore from '../../../stores/AddPlantStore/AddPlantStore';
 import Button, { ButtonProps } from '../../reusables/Button/Button';
 import styles from './AddPlant.module.css';
 import { observer } from 'mobx-react-lite';

@@ -1,9 +1,9 @@
 import { makeAutoObservable, runInAction } from 'mobx';
-import { Plant } from '../../auxiliary/interfaces/Plant';
-import { debounce } from '../../auxiliary/utils/debounce';
-import { getPlantData } from '../apis/plants';
-import plants from '../../auxiliary/data/plantsMock';
-import testStore from './TestStore';
+import { Plant } from '../../../auxiliary/interfaces/Plant';
+import { debounce } from '../../../auxiliary/utils/debounce';
+import { getPlantData } from '../../apis/plants';
+import plants from '../../../auxiliary/data/plantsMock';
+import testStore from '../TestStore/TestStore';
 
 class PlantsStore {
   plants: Plant[] = [];

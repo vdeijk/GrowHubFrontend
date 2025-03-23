@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Plants.module.css';
 import TableWithoutSorting from '../../reusables/TableWithoutSorting/TableWithoutSorting';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
-import plantsStore from '../../../stores/PlantsStore';
+import plantsStore from '../../../stores/PlantsStore/PlantsStore';
 import Heading from '../../reusables/Heading/Heading';
 import { useNavigate } from 'react-router-dom';
 import { PlantWithIndex } from '../../../../auxiliary/interfaces/PlantWithIndex';

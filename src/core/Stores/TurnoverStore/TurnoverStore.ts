@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx';
-import { Turnover } from '../../auxiliary/interfaces/Turnover';
+import { Turnover } from '../../../auxiliary/interfaces/Turnover';
 
 class TurnoverStore {
   turnovers: Turnover[] = [

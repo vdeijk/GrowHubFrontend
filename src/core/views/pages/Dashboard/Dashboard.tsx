@@ -1,5 +1,5 @@
 import React from 'react';
-import turnoverStore from '../../../stores/TurnoverStore';
+import turnoverStore from '../../../stores/TurnoverStore/TurnoverStore';
 //import UpcomingWeather from '../../containers/UpcomingWeather/UpcomingWeather';
 import CurrentWeather from '../../containers/CurrentWeather/CurrentWeather';
 import Tasks from '../../containers/Tasks/Tasks';

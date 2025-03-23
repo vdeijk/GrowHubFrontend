@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx';
-import { MenuLinkData } from '../../auxiliary/interfaces/MenuLinkData';
+import { MenuLinkData } from '../../../auxiliary/interfaces/MenuLinkData';
 
 class RouterStore {
   currentPath: string = '';

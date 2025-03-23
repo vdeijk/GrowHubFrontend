@@ -7,7 +7,7 @@ import Footer from './core/views/containers/Footer/Footer';
 import profilePicture from './auxiliary/assets/profile.jpeg';
 import { Routes, Route } from 'react-router-dom';
 import PlantDatabase from './core/views/pages/PlantDatabase/PlantDatabase';
-import routerStore from './core/stores/RouterStore';
+import routerStore from './core/stores/RouterStore/RouterStore';
 import PageLayout from './core/views/reusables/PageLayout/PageLayout';
 //import AddPlant from './core/views/pages/AddPlant/AddPlant';
 import { ToastContainer } from 'react-toastify';

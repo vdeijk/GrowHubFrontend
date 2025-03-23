@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx';
-import { Appointment } from '../../auxiliary/interfaces/Appointment';
+import { Appointment } from '../../../auxiliary/interfaces/Appointment';
 
 class AppointmentStore {
   appointments: Appointment[] = [

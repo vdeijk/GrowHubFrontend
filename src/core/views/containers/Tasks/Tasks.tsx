@@ -1,6 +1,6 @@
 import React from 'react';
 import Task from '../../reusables/Task/Task';
-import taskStore from '../../../stores/TaskStore';
+import taskStore from '../../../stores/TaskStore/TaskStore';
 import styles from './Tasks.module.css';
 import { observer } from 'mobx-react-lite';
 //import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
