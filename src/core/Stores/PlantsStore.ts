@@ -12,13 +12,13 @@ class PlantsStore {
   isLoading: boolean = false;
   debouncedFilterPlants: () => void;
   genusOptions: { value: string; label: string }[] = [];
-  tableHeaders = [
+  tableHeaders: { id: keyof Plant; label: string }[] = [
     { id: 'commonName', label: 'Common Name' },
     { id: 'genus', label: 'Genus' },
     { id: 'defaultImage', label: 'Image' },
     { id: 'scientificName', label: 'Scientific Name' },
   ];
-  sortField: string = '';
+  sortField: keyof Plant | null = null;
   sortOrder: 'asc' | 'desc' = 'asc';
 
   constructor() {
@@ -94,7 +94,7 @@ class PlantsStore {
     this.sortPlants();
   };
 
-  setSortField = (field: string) => {
+  setSortField = (field: keyof Plant) => {
     runInAction(() => {
       if (this.sortField === field) {
         this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';

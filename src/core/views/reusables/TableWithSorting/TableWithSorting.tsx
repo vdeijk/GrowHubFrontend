@@ -2,26 +2,22 @@ import React from 'react';
 import styles from './TableWithSorting.module.css';
 import TableRow from '../TableRow/TableRow';
 
-export interface TableProps<
-  T extends Record<string, string | number | boolean | null | undefined>,
-> {
-  headers: { id: string; label: string }[];
-  data: T[];
-  onSort: (field: string) => void;
-  sortField: string;
+export interface TableProps<T> {
+  headers: { id: keyof T; label: string }[];
+  onSort: (field: keyof T) => void;
+  sortField: keyof T | null;
   sortOrder: 'asc' | 'desc';
+  data: T[];
 }
 
-const TableWithSorting = <
-  T extends Record<string, string | number | boolean | null | undefined>,
->({
+const TableWithSorting = <T,>({
   headers,
   data,
   onSort,
   sortField,
   sortOrder,
 }: TableProps<T>) => {
-  const getSortIndicator = (field: string) => {
+  const getSortIndicator = (field: keyof T) => {
     if (sortField === field) {
       return sortOrder === 'asc' ? '▲' : '▼';
     }
@@ -33,7 +29,7 @@ const TableWithSorting = <
       <thead>
         <tr>
           {headers.map((header) => (
-            <th key={header.id} onClick={() => onSort(header.id)}>
+            <th key={String(header.id)} onClick={() => onSort(header.id)}>
               {header.label}
               <span className={styles.sortIndicator}>
                 {getSortIndicator(header.id)}
@@ -44,7 +40,7 @@ const TableWithSorting = <
       </thead>
       <tbody>
         {data.map((item, index) => (
-          <TableRow key={index} tableRowData={{ ...item }} headers={headers} />
+          <TableRow key={index} tableRowData={item} headers={headers} />
         ))}
       </tbody>
     </table>

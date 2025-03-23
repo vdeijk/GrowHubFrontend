@@ -1,15 +1,15 @@
-import React from 'react';
+import React from "react";
 
-interface TableRowProps {
-  tableRowData: Record<string, string | number | boolean | null | undefined>;
-  headers: { id: string; label: string }[];
+interface TableRowProps<T> {
+  tableRowData: T;
+  headers: { id: keyof T; label: string }[];
 }
 
-const TableRow: React.FC<TableRowProps> = ({ tableRowData, headers }) => {
+const TableRow = <T,>({ tableRowData, headers }: TableRowProps<T>) => {
   return (
     <tr>
       {headers.map((header, index) => (
-        <td key={index}>{tableRowData[header.id]}</td>
+        <td key={index}>{String(tableRowData[header.id])}</td>
       ))}
     </tr>
   );
