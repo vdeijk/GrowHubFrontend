@@ -119,7 +119,6 @@ class PlantsStore {
   };
 
   private retrieveMockData = () => {
-    console.log('mock');
     this.plants = plants;
     this.filteredPlants = this.plants;
     this.genusOptions = this.extractGenera();
