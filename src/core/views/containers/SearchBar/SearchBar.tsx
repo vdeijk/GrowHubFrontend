@@ -22,7 +22,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   error,
 }) => {
   return (
-    <div className={styles.searchBar}>
+    <div className={styles.container}>
       <TextInput
         value={searchQuery}
         onChange={setSearchQuery}
@@ -33,6 +33,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
         value={filterCriteria}
         onChange={setFilterCriteria}
         options={genusOptions}
+        aria-label="Filter by genus"
       />
     </div>
   );

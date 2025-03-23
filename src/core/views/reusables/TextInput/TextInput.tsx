@@ -21,18 +21,25 @@ const TextInput: React.FC<TextInputProps> = ({
 }) => {
   return (
     <div className={label ? styles.container : ''}>
-      {label && <label className={styles.label}>{label}</label>}
+      {label && (
+        <label className={styles.label} htmlFor="textInput">
+          {label}
+        </label>
+      )}
       <input
+        id="textInput"
         required={required}
         type="text"
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         className={styles.textInput}
+        aria-invalid={!!error}
+        aria-describedby={error ? 'error-message' : undefined}
       />
-      {error && <ErrorMessage message={error} />}
+      {error && <ErrorMessage id="error-message" message={error} />}
     </div>
   );
 };
 
-export default TextInput;
+export default React.memo(TextInput);

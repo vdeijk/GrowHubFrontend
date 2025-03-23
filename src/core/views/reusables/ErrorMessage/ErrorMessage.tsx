@@ -3,11 +3,12 @@ import styles from './ErrorMessage.module.css';
 
 interface ErrorMessageProps {
   message: string;
+  id?: string;
 }
 
-const ErrorMessage: React.FC<ErrorMessageProps> = ({ message }) => {
+const ErrorMessage: React.FC<ErrorMessageProps> = ({ message, id }) => {
   return (
-    <div role="alert" className={styles.error}>
+    <div id={id} role="alert" className={styles.error}>
       {message}
     </div>
   );
