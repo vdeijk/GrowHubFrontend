@@ -18,7 +18,6 @@ class PlantsStore {
   tableHeaders: { id: keyof Plant; label: string }[] = [
     { id: 'commonName', label: 'Common Name' },
     { id: 'genus', label: 'Genus' },
-    { id: 'defaultImage', label: 'Image' },
     { id: 'scientificName', label: 'Scientific Name' },
   ];
   sortField: keyof Plant | null = null;
@@ -102,6 +101,9 @@ class PlantsStore {
     this.filteredPlants = this.filteredPlants.slice().sort((a, b) => {
       const fieldA = (a as Plant)[this.sortField as keyof Plant];
       const fieldB = (b as Plant)[this.sortField as keyof Plant];
+      if (fieldA === undefined || fieldB === undefined) {
+        return 0;
+      }
       if (fieldA < fieldB) {
         return this.sortOrder === 'asc' ? -1 : 1;
       }
