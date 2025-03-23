@@ -184,4 +184,3 @@ const plants: Plant[] = [
 ];
 
 export default plants;
-

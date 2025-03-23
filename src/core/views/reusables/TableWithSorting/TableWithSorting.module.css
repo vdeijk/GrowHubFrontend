@@ -1,36 +1,35 @@
-
 .table {
-    width: 100%;
-    border-collapse: collapse;
-    font-family: 'Poppins', sans-serif;
-    background: #fdfdfd;
-    table-layout: fixed;
-  }
-  
-  .table th,
-  .table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-    font-size: 1.5rem;
-  }
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Poppins', sans-serif;
+  background: #fdfdfd;
+  table-layout: fixed;
+}
 
-  .table th {
-    position: relative; 
-    &:hover {
-      cursor: pointer;
-    }
-  }
-  
-  .table th {
-    background-color: #4caf50;
-    color: #fdfdfd;
-  }
+.table th,
+.table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  font-size: 1.5rem;
+}
 
-  .sortIndicator {
-    position: absolute;
-    right: 8px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 1.5rem;
+.table th {
+  position: relative;
+  &:hover {
+    cursor: pointer;
   }
+}
+
+.table th {
+  background-color: #4caf50;
+  color: #fdfdfd;
+}
+
+.sortIndicator {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.5rem;
+}

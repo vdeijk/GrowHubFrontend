@@ -2,7 +2,6 @@ export interface Plant {
   commonName: string;
   genus: string;
   id: number;
-  defaultImage: any;
   scientificName: string;
   sunPreference?: string;
   waterNeeds?: string;

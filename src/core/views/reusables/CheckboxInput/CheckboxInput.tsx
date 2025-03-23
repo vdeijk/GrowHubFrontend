@@ -30,4 +30,3 @@ const CheckboxInput: React.FC<CheckboxProps> = ({
 };
 
 export default CheckboxInput;
-

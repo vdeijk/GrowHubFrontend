@@ -11,7 +11,7 @@ export const getWeatherData = async (city: string) => {
         q: city,
       },
     });
-    
+
     return response.data;
   } catch (error) {
     toast.error('Error fetching weather data');

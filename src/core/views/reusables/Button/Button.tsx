@@ -15,7 +15,7 @@ const Button: React.FC<ButtonProps> = (props) => {
     <button
       type={type}
       className={`${styles.button} ${className}`}
-      onClick={type === 'submit' ? undefined: onClick}
+      onClick={type === 'submit' ? undefined : onClick}
     >
       {label}
     </button>

@@ -1,8 +1,8 @@
 import { mockLocalStorage } from '../../../auxiliary/utils/mockLocalStorage';
-import { vi } from 'vitest';
 import testStore from './TestStore';
+import { vi, describe, it, expect, beforeEach } from 'vitest';
 
-Object.defineProperty(global, 'localStorage', {
+Object.defineProperty(globalThis, 'localStorage', {
   value: mockLocalStorage,
   writable: true,
 });

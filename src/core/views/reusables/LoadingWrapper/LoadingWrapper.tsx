@@ -12,7 +12,6 @@ const LoadingWrapper: React.FC<LoadingWrapperProps> = ({
   children,
   className,
 }) => {
-
   if (isLoading) {
     return (
       <div className={`${styles.loadingWrapper} ${className}`}>
