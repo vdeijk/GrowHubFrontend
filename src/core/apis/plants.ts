@@ -25,7 +25,6 @@ export const getPlantData = async (): Promise<{
 
     return { success: true, data: transformedData };
   } catch (error) {
-    console.log('err');
     toast.error('Error fetching plant data');
     console.error('Error fetching plant data:', error);
 
