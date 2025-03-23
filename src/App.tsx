@@ -11,7 +11,8 @@ import routerStore from './core/stores/RouterStore/RouterStore';
 import PageLayout from './core/views/reusables/PageLayout/PageLayout';
 //import AddPlant from './core/views/pages/AddPlant/AddPlant';
 import { ToastContainer } from 'react-toastify';
-import TestPage from './core/views/pages/TestPage/TestPage';
+import SettingsPage from './core/views/pages/TestPage/SettingsPage';
+import FarmLocations from './core/views/pages/FarmLocations/FarmLocations';
 
 const App: React.FC = () => {
   return (
@@ -28,7 +29,8 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/plantDatabase" element={<PlantDatabase />} />
-          <Route path="/test" element={<TestPage />} />
+          <Route path="/settings" element={<SettingsPage />} />
+          <Route path="/farmLocations" element={<FarmLocations />} />
         </Routes>
       </PageLayout>
       <Footer />

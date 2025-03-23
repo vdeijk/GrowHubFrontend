@@ -27,6 +27,7 @@ body {
   font-family: 'Poppins', sans-serif;
   --color-primary: #4caf50;
   --color-secondary: #595959;
+  --color-text: #666;
   --color-tertiary: #197278;
   --color-red: #d8000c;
   --color-white: #fdfdfd;

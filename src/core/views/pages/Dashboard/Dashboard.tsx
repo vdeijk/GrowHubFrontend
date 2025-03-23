@@ -6,6 +6,7 @@ import Tasks from '../../containers/Tasks/Tasks';
 import Appointments from '../../containers/Appointments/Appointments';
 import Plants from '../../containers/Plants/Plants';
 import TurnoverGraph from '../../containers/TurnoverGraph/TurnoverGraph';
+
 const Dashboard: React.FC = () => {
   return (
     <>

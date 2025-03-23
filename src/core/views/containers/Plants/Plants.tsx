@@ -22,7 +22,7 @@ const Plants: React.FC = () => {
 
   const children = (
     <>
-      <Heading level={6} text="Plant Information"></Heading>
+      <Heading level={6} text="Plant Information" />
       <TableWithoutSorting<PlantWithIndex>
         headers={plantsStore.tableHeaders}
         data={plantsStore.plants.map((plant, index) => ({ ...plant, index }))}

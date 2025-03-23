@@ -9,7 +9,7 @@ const Map: React.FC = () => {
 
   useEffect(() => {
     if (mapRef.current && !mapInstanceRef.current) {
-      const map = L.map(mapRef.current).setView([52.0705, 4.3007], 13); // Set view to The Hague
+      const map = L.map(mapRef.current).setView([52.0705, 4.3007], 13);
       mapInstanceRef.current = map;
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -17,12 +17,13 @@ const Map: React.FC = () => {
           '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       }).addTo(map);
 
-      L.marker([52.0705, 4.3007]) // Marker at The Hague
+      L.marker([52.0705, 4.3007])
         .addTo(map)
-        .bindPopup('My farm')
+        .bindPopup(
+          L.popup().setContent('<div class="custom-popup">My farm</div>'),
+        )
         .openPopup();
 
-      // Force Leaflet to resize
       setTimeout(() => {
         map.invalidateSize();
       }, 0);
@@ -31,12 +32,7 @@ const Map: React.FC = () => {
 
   return (
     <section className={styles.map}>
-      <h2 className={styles.map__h2}>Farm locations</h2>
-      <div
-        ref={mapRef}
-        className={styles.mapContainer}
-        style={{ width: '100%', height: '90%' }}
-      ></div>
+      <div ref={mapRef} className={styles.mapContainer}></div>
     </section>
   );
 };

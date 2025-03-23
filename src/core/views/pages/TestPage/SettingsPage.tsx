@@ -4,10 +4,10 @@ import CheckboxInput from '../../reusables/CheckboxInput/CheckboxInput';
 import testStore from '../../../stores/TestStore/TestStore';
 import Heading from '../../reusables/Heading/Heading';
 
-const TestPage: React.FC = observer(() => {
+const SettingsPage: React.FC = observer(() => {
   return (
     <div>
-      <Heading level={1} text="Test Page"></Heading>
+      <Heading level={1} text="Settings Page"></Heading>
       <div>
         <CheckboxInput
           label="Use Real Data (or mock data if unchecked)"
@@ -19,4 +19,4 @@ const TestPage: React.FC = observer(() => {
   );
 });
 
-export default TestPage;
+export default SettingsPage;
