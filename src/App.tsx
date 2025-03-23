@@ -11,11 +11,11 @@ import routerStore from './core/stores/RouterStore';
 import PageLayout from './core/views/reusables/PageLayout/PageLayout';
 //import AddPlant from './core/views/pages/AddPlant/AddPlant';
 import { ToastContainer } from 'react-toastify';
+import TestPage from './core/views/pages/TestPage/TestPage';
 
 const App: React.FC = () => {
   return (
     <main className="appContainer">
-      {' '}
       <ToastContainer />
       <Navbar userName="YourUserName" />
       <Menu
@@ -28,7 +28,7 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/plantDatabase" element={<PlantDatabase />} />
-          {/* <Route path="/add-plant" element={<AddPlant />} /> */}
+          <Route path="/test" element={<TestPage />} />
         </Routes>
       </PageLayout>
       <Footer />

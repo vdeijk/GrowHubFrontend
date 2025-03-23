@@ -12,6 +12,7 @@ class RouterStore {
     // { href: '/', label: 'Statistics' },
     // { href: '/', label: 'Finance' },
     { href: '/plantDatabase', label: 'Plant Database' },
+    { href: '/test', label: 'Test' },
     // { href: '/add-plant', label: 'Add Plant' },
   ];
 

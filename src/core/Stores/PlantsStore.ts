@@ -3,6 +3,7 @@ import { Plant } from '../../auxiliary/interfaces/Plant';
 import { debounce } from '../../auxiliary/utils/debounce';
 import { getPlantData } from '../apis/plants';
 import plants from '../../auxiliary/data/plantsMock';
+import testStore from './TestStore';
 
 class PlantsStore {
   plants: Plant[] = [];
@@ -24,19 +25,98 @@ class PlantsStore {
   constructor() {
     makeAutoObservable(this);
 
-    //this.retrieveData();
-    this.retrieveMockData();
-
     this.debouncedFilterPlants = debounce(this.filterPlants.bind(this), 500);
   }
 
-  retrieveMockData() {
+  public fetchData() {
+    if (testStore.useRealData) {
+      this.retrieveData();
+    } else {
+      this.retrieveMockData();
+    }
+  }
+
+  public extractGenera = () => {
+    const genera = new Set<string>();
+    this.plants.forEach((plant) => {
+      genera.add(plant.genus);
+    });
+
+    const genusOptions = Array.from(genera).map((genus) => ({
+      value: genus,
+      label: genus,
+    }));
+    genusOptions.unshift({ value: '', label: 'All Genera' });
+
+    return genusOptions;
+  };
+
+  public setSearchQuery = (query: string) => {
+    runInAction(() => {
+      this.searchQuery = query;
+      this.debouncedFilterPlants();
+    });
+  };
+
+  public setFilterCriteria = (criteria: string) => {
+    runInAction(() => {
+      this.filterCriteria = criteria;
+      this.filterPlants();
+    });
+  };
+
+  public filterPlants = () => {
+    this.filteredPlants = this.plants.filter((plant) => {
+      return (
+        plant.commonName
+          .toLowerCase()
+          .includes(this.searchQuery.toLowerCase()) &&
+        (this.filterCriteria === '' || plant.genus === this.filterCriteria)
+      );
+    });
+    this.sortPlants();
+  };
+
+  public setSortField = (field: keyof Plant) => {
+    runInAction(() => {
+      if (this.sortField === field) {
+        this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
+      } else {
+        this.sortField = field;
+        this.sortOrder = 'asc';
+      }
+      this.sortPlants();
+    });
+  };
+
+  public sortPlants = () => {
+    this.filteredPlants = this.filteredPlants.slice().sort((a, b) => {
+      const fieldA = (a as Plant)[this.sortField as keyof Plant];
+      const fieldB = (b as Plant)[this.sortField as keyof Plant];
+      if (fieldA < fieldB) {
+        return this.sortOrder === 'asc' ? -1 : 1;
+      }
+      if (fieldA > fieldB) {
+        return this.sortOrder === 'asc' ? 1 : -1;
+      }
+      return 0;
+    });
+  };
+
+  public addPlant = (newPlant: Plant) => {
+    this.plants.push(newPlant);
+    this.filterPlants();
+    this.genusOptions = this.extractGenera();
+  };
+
+  private retrieveMockData = () => {
+    console.log('mock');
     this.plants = plants;
     this.filteredPlants = this.plants;
     this.genusOptions = this.extractGenera();
-  }
+  };
 
-  async retrieveData() {
+  private retrieveData = async () => {
     runInAction(() => {
       this.isLoading = true;
     });
@@ -51,80 +131,7 @@ class PlantsStore {
 
       this.isLoading = false;
     });
-  }
-
-  extractGenera() {
-    const genera = new Set<string>();
-    this.plants.forEach((plant) => {
-      genera.add(plant.genus);
-    });
-
-    const genusOptions = Array.from(genera).map((genus) => ({
-      value: genus,
-      label: genus,
-    }));
-    genusOptions.unshift({ value: '', label: 'All Genera' });
-
-    return genusOptions;
-  }
-
-  setSearchQuery = (query: string) => {
-    runInAction(() => {
-      this.searchQuery = query;
-      this.debouncedFilterPlants();
-    });
   };
-
-  setFilterCriteria = (criteria: string) => {
-    runInAction(() => {
-      this.filterCriteria = criteria;
-      this.filterPlants();
-    });
-  };
-
-  filterPlants = () => {
-    this.filteredPlants = this.plants.filter((plant) => {
-      return (
-        plant.commonName
-          .toLowerCase()
-          .includes(this.searchQuery.toLowerCase()) &&
-        (this.filterCriteria === '' || plant.genus === this.filterCriteria)
-      );
-    });
-    this.sortPlants();
-  };
-
-  setSortField = (field: keyof Plant) => {
-    runInAction(() => {
-      if (this.sortField === field) {
-        this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
-      } else {
-        this.sortField = field;
-        this.sortOrder = 'asc';
-      }
-      this.sortPlants();
-    });
-  };
-
-  sortPlants = () => {
-    this.filteredPlants = this.filteredPlants.slice().sort((a, b) => {
-      const fieldA = (a as Plant)[this.sortField as keyof Plant];
-      const fieldB = (b as Plant)[this.sortField as keyof Plant];
-      if (fieldA < fieldB) {
-        return this.sortOrder === 'asc' ? -1 : 1;
-      }
-      if (fieldA > fieldB) {
-        return this.sortOrder === 'asc' ? 1 : -1;
-      }
-      return 0;
-    });
-  };
-
-  addPlant(newPlant: Plant) {
-    this.plants.push(newPlant);
-    this.filterPlants();
-    this.genusOptions = this.extractGenera();
-  }
 }
 
 const plantsStore = new PlantsStore();
