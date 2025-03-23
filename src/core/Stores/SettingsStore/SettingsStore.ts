@@ -1,7 +1,7 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import plantsStore from '../PlantsStore/PlantsStore';
 
-class TestStore {
+class SettingsStore {
   useRealData: boolean = false;
 
   constructor() {
@@ -32,5 +32,5 @@ class TestStore {
   };
 }
 
-const testStore = new TestStore();
-export default testStore;
+const settingsStore = new SettingsStore();
+export default settingsStore;

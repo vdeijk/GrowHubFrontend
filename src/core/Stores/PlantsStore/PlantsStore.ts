@@ -3,7 +3,7 @@ import { Plant } from '../../../auxiliary/interfaces/Plant';
 import { debounce } from '../../../auxiliary/utils/debounce';
 import { getPlantData } from '../../apis/plants';
 import plants from '../../../auxiliary/data/plantsMock';
-import testStore from '../TestStore/TestStore';
+import settingsStore from '../SettingsStore/SettingsStore';
 import { validate } from '../../../auxiliary/utils/validationMaxLength';
 import { TextInputState } from '../../../auxiliary/interfaces/TextInputState';
 
@@ -30,7 +30,7 @@ class PlantsStore {
   }
 
   public fetchData() {
-    if (testStore.useRealData) {
+    if (settingsStore.useRealData) {
       this.retrieveData();
     } else {
       this.retrieveMockData();

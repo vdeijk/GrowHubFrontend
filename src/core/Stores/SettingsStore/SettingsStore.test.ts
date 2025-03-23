@@ -1,5 +1,5 @@
 import { mockLocalStorage } from '../../../auxiliary/utils/mockLocalStorage';
-import testStore from './TestStore';
+import settingsStore from './SettingsStore';
 import { vi, describe, it, expect, beforeEach } from 'vitest';
 
 Object.defineProperty(globalThis, 'localStorage', {
@@ -7,7 +7,7 @@ Object.defineProperty(globalThis, 'localStorage', {
   writable: true,
 });
 
-describe('TestStore', () => {
+describe('SettingsStore', () => {
   beforeEach(() => {
     localStorage.clear();
     vi.spyOn(localStorage, 'setItem');
@@ -15,18 +15,18 @@ describe('TestStore', () => {
   });
 
   it('should initialize with useRealData set to false', () => {
-    expect(testStore.useRealData).toBe(false);
+    expect(settingsStore.useRealData).toBe(false);
   });
 
   it('should set useRealData and store it in localStorage', () => {
-    testStore.setUseRealData(true);
-    expect(testStore.useRealData).toBe(true);
+    settingsStore.setUseRealData(true);
+    expect(settingsStore.useRealData).toBe(true);
     expect(localStorage.setItem).toHaveBeenCalledWith('useRealData', 'true');
   });
 
   it('should load useRealData from localStorage', () => {
     vi.spyOn(localStorage, 'getItem').mockReturnValue('true');
-    testStore.loadFromLocalStorage();
-    expect(testStore.useRealData).toBe(true);
+    settingsStore.loadFromLocalStorage();
+    expect(settingsStore.useRealData).toBe(true);
   });
 });

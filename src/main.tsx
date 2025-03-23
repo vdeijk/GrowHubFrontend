@@ -1,12 +1,12 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
-import App from './App.tsx';
+import App from './App';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import testStore from './core/stores/TestStore/TestStore.ts';
+import settingsStore from './core/stores/SettingsStore/SettingsStore';
 
-testStore.initialize();
+settingsStore.initialize();
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

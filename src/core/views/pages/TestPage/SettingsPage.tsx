@@ -1,7 +1,7 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 import CheckboxInput from '../../reusables/CheckboxInput/CheckboxInput';
-import testStore from '../../../stores/TestStore/TestStore';
+import settingsStore from '../../../stores/SettingsStore/SettingsStore';
 import Heading from '../../reusables/Heading/Heading';
 
 const SettingsPage: React.FC = observer(() => {
@@ -11,8 +11,8 @@ const SettingsPage: React.FC = observer(() => {
       <div>
         <CheckboxInput
           label="Use Real Data (or mock data if unchecked)"
-          checked={testStore.useRealData}
-          onChange={testStore.setUseRealData}
+          checked={settingsStore.useRealData}
+          onChange={settingsStore.setUseRealData}
         />
       </div>
     </div>
