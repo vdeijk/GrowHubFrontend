@@ -1,28 +1,36 @@
 import { makeAutoObservable } from 'mobx';
 import { Turnover } from '../../../auxiliary/interfaces/Turnover';
+import { getData } from '../../apis/getData';
+import { runInAction } from 'mobx';
 
 class TurnoverStore {
-  turnovers: Turnover[] = [
-    { date: '10-01', amount: 1500 },
-    { date: '18-01', amount: 2000 },
-    { date: '25-01', amount: 2200 },
-    { date: '01-02', amount: 2000 },
-    { date: '08-02', amount: 2600 },
-    { date: '15-02', amount: 2500 },
-    { date: '22-02', amount: 2800 },
-    { date: '1-03', amount: 2600 },
-    { date: '08-03', amount: 3200 },
-    { date: '15-03', amount: 4000 },
-    { date: '22-03', amount: 4400 },
-    { date: '29-03', amount: 4400 },
-  ];
+  turnovers: Turnover[] = [];
+  isLoading: boolean = false;
 
   constructor() {
     makeAutoObservable(this);
+
+    this.fetchData();
   }
 
-  addTurnover(turnover: Turnover) {
+  public addTurnover(turnover: Turnover) {
     this.turnovers.push(turnover);
+  }
+
+  private async fetchData() {
+    try {
+      runInAction(() => {
+        this.isLoading = true;
+      });
+      const turnovers = await getData('/Turnover');
+
+      runInAction(() => {
+        this.turnovers = turnovers;
+        this.isLoading = false;
+      });
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
   }
 }
 

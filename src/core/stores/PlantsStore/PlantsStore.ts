@@ -3,7 +3,7 @@ import { Plant } from '../../../auxiliary/interfaces/Plant';
 import { debounce } from '../../../auxiliary/utils/debounce';
 import { getPlantData } from '../../apis/plants';
 import plants from '../../../auxiliary/data/plantsMock';
-import settingsStore from '../SettingsStore/SettingsStore';
+import { getData } from '../../apis/getData';
 import { validate } from '../../../auxiliary/utils/validationMaxLength';
 import { TextInputState } from '../../../auxiliary/interfaces/TextInputState';
 
@@ -29,11 +29,20 @@ class PlantsStore {
     this.debouncedFilterPlants = debounce(this.filterPlants.bind(this), 500);
   }
 
-  public fetchData() {
-    if (settingsStore.useRealData) {
-      this.retrieveData();
-    } else {
-      this.retrieveMockData();
+  
+  public async fetchData() {
+    try {
+      runInAction(() => {
+        this.isLoading = true;
+      });
+      const plants = await getData('/Plant');
+
+      runInAction(() => {
+        this.plants = plants;
+        this.isLoading = false;
+      });
+    } catch (error) {
+      console.error('Error fetching data:', error);
     }
   }
 

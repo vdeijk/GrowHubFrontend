@@ -24,3 +24,15 @@
   font-weight: normal;
   text-transform: uppercase;
 }
+
+.Stellar {
+  font-family: 'Stellar', sans-serif;
+}
+
+.Nebula {
+  font-family: 'Nebula', sans-serif;
+}
+
+.default {
+  font-family: 'Arial', sans-serif;
+}

@@ -1,45 +1,38 @@
 import { makeAutoObservable } from 'mobx';
 import { Task } from '../../../auxiliary/interfaces/Task';
+import { runInAction } from 'mobx';
+import { getData } from '../../apis/getData';
 
 class TaskStore {
-  tasks: Task[] = [
-    {
-      id: 1,
-      title: 'Task 1',
-      dueDate: new Date('2023-12-01'),
-      priority: 'high',
-      completed: false,
-      category: 'work',
-      description: 'This is a description for task 1',
-    },
-    {
-      id: 2,
-      title: 'Task 2',
-      dueDate: new Date('2023-12-05'),
-      priority: 'medium',
-      completed: false,
-      category: 'work',
-      description: 'This is a description for task 2',
-    },
-    {
-      id: 3,
-      title: 'Task 3',
-      dueDate: new Date('2023-12-10'),
-      priority: 'low',
-      completed: true,
-      category: 'work',
-      description: 'This is a description for task 3',
-    },
-  ];
+  tasks: Task[] = [];
+  isLoading = false;
 
   constructor() {
     makeAutoObservable(this);
+
+    this.fetchData();
   }
 
-  toggleComplete(id: number) {
+  public toggleComplete(id: number) {
     const task = this.tasks.find((task) => task.id === id);
     if (task) {
       task.completed = !task.completed;
+    }
+  }
+
+  private async fetchData() {
+    try {
+      runInAction(() => {
+        this.isLoading = true;
+      });
+      const tasks = await getData('/Todo');
+
+      runInAction(() => {
+        this.tasks = tasks;
+        this.isLoading = false;
+      });
+    } catch (error) {
+      console.error('Error fetching data:', error);
     }
   }
 }

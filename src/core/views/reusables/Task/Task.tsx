@@ -19,8 +19,11 @@ const Task: React.FC<TaskProps> = ({ taskData }) => {
   const { title, dueDate, priority, category, completed, description } =
     taskData;
 
+    const formattedDueDate =
+    typeof dueDate === 'string' ? new Date(dueDate) : dueDate;
+
   const textsWithBoldSpan: TextWithBoldSpanData[] = [
-    { label: 'Due', boldSpan: dueDate.toLocaleDateString() },
+    { label: 'Due', boldSpan: formattedDueDate.toLocaleDateString() },
     { label: 'Priority', boldSpan: priority },
   ];
 

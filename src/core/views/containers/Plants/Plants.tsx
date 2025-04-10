@@ -7,8 +7,9 @@ import Heading from '../../reusables/Heading/Heading';
 import { useNavigate } from 'react-router-dom';
 import { PlantWithIndex } from '../../../../auxiliary/interfaces/PlantWithIndex';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
+import { observer } from 'mobx-react-lite';
 
-const Plants: React.FC = () => {
+const Plants: React.FC = observer(() => {
   const navigate = useNavigate();
 
   const clickHandler = () => {
@@ -38,6 +39,6 @@ const Plants: React.FC = () => {
       </LoadingWrapper>
     </section>
   );
-};
+});
 
 export default Plants;
