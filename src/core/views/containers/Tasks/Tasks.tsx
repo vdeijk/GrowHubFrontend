@@ -4,8 +4,15 @@ import taskStore from '../../../stores/TaskStore/TaskStore';
 import styles from './Tasks.module.css';
 import { observer } from 'mobx-react-lite';
 import Heading from '../../reusables/Heading/Heading';
+import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 
 const Tasks: React.FC = observer(() => {
+  const clickHandler = () => {};
+
+  const buttonContainerData = {
+    clickHandler,
+    label: 'View All Tasks',
+  };
 
   return (
     <section className={styles.taskList}>
@@ -13,6 +20,7 @@ const Tasks: React.FC = observer(() => {
       {taskStore.tasks.map((task) => (
         <Task key={task.id} taskData={task} />
       ))}
+      <ButtonContainer {...buttonContainerData} />
     </section>
   );
 });
@@ -21,10 +29,10 @@ export default Tasks;
 
 /*
       {/* <ButtonContainer buttonContainerData={buttonContainerData} /> */
-  //const clickHandler = () => {};
+//const clickHandler = () => {};
 
-  // const buttonContainerData = {
-  //   clickHandler,
-  //   label: 'Go To TaskManager',
-  // };
+// const buttonContainerData = {
+//   clickHandler,
+//   label: 'Go To TaskManager',
+// };
 //import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';*/

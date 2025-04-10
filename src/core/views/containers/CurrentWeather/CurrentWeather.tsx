@@ -6,6 +6,7 @@ import TextWithBoldSpan from '../../reusables/TextWithBoldSpan/TextWithBoldSpan'
 import { TextWithBoldSpanData } from '../../../../auxiliary/interfaces/TextWithBoldSpanData';
 import Heading from '../../reusables/Heading/Heading';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
+import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 
 const CurrentWeather: React.FC = observer(() => {
   const weather = weatherStore.weather;
@@ -14,6 +15,13 @@ const CurrentWeather: React.FC = observer(() => {
     { label: 'Humidity', boldSpan: `${weather?.current.humidity}%` },
     { label: 'Wind Speed', boldSpan: `${weather?.current.wind_kph} kph` },
   ];
+
+  const clickHandler = () => {};
+
+  const buttonContainerData = {
+    clickHandler,
+    label: 'View Full Report',
+  };
 
   const children = (
     <>
@@ -35,6 +43,7 @@ const CurrentWeather: React.FC = observer(() => {
           />
         ))}
       </div>
+      <ButtonContainer {...buttonContainerData} />
     </>
   );
 

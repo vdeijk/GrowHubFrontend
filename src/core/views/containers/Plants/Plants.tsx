@@ -18,12 +18,12 @@ const Plants: React.FC = observer(() => {
 
   const buttonContainerData = {
     clickHandler,
-    label: 'Go To Plant Database',
+    label: 'View all plants',
   };
 
   const children = (
     <>
-      <Heading level={6} text="Plant Information" />
+      <Heading level={6} text="Your plants" />
       <TableWithoutSorting<PlantWithIndex>
         headers={plantsStore.tableHeaders}
         data={plantsStore.plants.map((plant, index) => ({ ...plant, index }))}
