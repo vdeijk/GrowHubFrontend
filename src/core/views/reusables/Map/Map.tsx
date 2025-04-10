@@ -2,21 +2,16 @@ import React, { useEffect, useRef } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import styles from './Map.module.css';
-import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 
-const Map: React.FC = () => {
+interface MapProps {
+  enableScroll?: boolean;
+}
+
+const Map: React.FC<MapProps> = ({ enableScroll = false }) => {
   const mapRef = useRef<HTMLDivElement | null>(null);
   const mapInstanceRef = useRef<L.Map | null>(null);
 
-  const clickHandler = () => {};
-
-  const buttonContainerData = {
-    clickHandler,
-    label: 'View All Locations',
-  };
-
-
-  useEffect(() => {
+  const initMap = () => {
     if (mapRef.current && !mapInstanceRef.current) {
       const map = L.map(mapRef.current).setView([52.0705, 4.3007], 13);
       mapInstanceRef.current = map;
@@ -37,12 +32,21 @@ const Map: React.FC = () => {
         map.invalidateSize();
       }, 0);
     }
-  }, []);
+  };
+
+  useEffect(() => {
+    initMap();
+
+    if (mapInstanceRef.current) {
+      mapInstanceRef.current.scrollWheelZoom[
+        enableScroll ? 'enable' : 'disable'
+      ]();
+    }
+  }, [enableScroll]);
 
   return (
     <section className={styles.map}>
       <div ref={mapRef} className={styles.mapContainer}></div>
-      <ButtonContainer {...buttonContainerData} />
     </section>
   );
 };

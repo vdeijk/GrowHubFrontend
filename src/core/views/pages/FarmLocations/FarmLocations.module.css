@@ -1,9 +1,23 @@
 .container {
-  height: 100%;
-  width: 100%;
-  border: 1px solid #ccc;
+  display: grid;
+  background: var(--color-white);
   padding: 2rem;
-  min-height: 600px;
-  background-color: #fdfdfd;
-  grid-area: 3 / 6 / -1 / -1;
+  width: 100%;
+  height: 100%;
+  column-gap: 2rem;
+  grid-column: 1/-1;
 }
+
+.top {
+  grid-column: 1/-1;
+  grid-row: 1/2;
+}
+
+.left {
+  grid-row: 2/3;
+}
+
+.right {
+  grid-row: 2/3;
+}
+

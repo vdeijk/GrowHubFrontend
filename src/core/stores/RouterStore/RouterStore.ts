@@ -9,7 +9,6 @@ class RouterStore {
     { href: '/add-plant', label: 'Weather' },
     { href: '/farmLocations', label: 'Locations' },
     { href: '/farmLocations', label: 'Tasks' },
-    { href: '/farmLocations', label: 'Turnover' },
     { href: '/plantDatabase', label: 'Plants' },
   ];
 

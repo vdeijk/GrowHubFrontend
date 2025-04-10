@@ -1,0 +1,32 @@
+.locationItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.locationItem:last-child {
+  border-bottom: none;
+}
+
+.locationName {
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.icon {
+  cursor: pointer;
+  font-size: 2rem;
+  color: #4caf50;
+  transition: all .2s;
+}
+
+.icon:hover {
+  color: #ef767a;
+}
