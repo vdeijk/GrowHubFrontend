@@ -7,8 +7,11 @@ import { TextWithBoldSpanData } from '../../../../auxiliary/interfaces/TextWithB
 import Heading from '../../reusables/Heading/Heading';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
+import { useNavigate } from 'react-router-dom';
 
 const CurrentWeather: React.FC = observer(() => {
+  const navigate = useNavigate();
+
   const weather = weatherStore.weather;
 
   const textsWithBoldSpan: TextWithBoldSpanData[] = [
@@ -16,10 +19,8 @@ const CurrentWeather: React.FC = observer(() => {
     { label: 'Wind Speed', boldSpan: `${weather?.current.wind_kph} kph` },
   ];
 
-  const clickHandler = () => {};
-
   const buttonContainerData = {
-    clickHandler,
+    clickHandler: () => navigate('/weatherReport'),
     label: 'View Full Report',
   };
 

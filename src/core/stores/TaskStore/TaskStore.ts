@@ -20,6 +20,22 @@ class TaskStore {
     }
   }
 
+  public addTask(task: Task) {
+    task.id = this.tasks.length ? this.tasks[this.tasks.length - 1].id + 1 : 1;
+    this.tasks.push(task);
+  }
+
+  public updateTask(id: number, updatedTask: Task) {
+    const index = this.tasks.findIndex((task) => task.id === id);
+    if (index !== -1) {
+      this.tasks[index] = { ...updatedTask, id };
+    }
+  }
+
+  public deleteTask(id: number) {
+    this.tasks = this.tasks.filter((task) => task.id !== id);
+  }
+
   private async fetchData() {
     try {
       runInAction(() => {

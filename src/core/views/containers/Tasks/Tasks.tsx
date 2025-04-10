@@ -5,12 +5,13 @@ import styles from './Tasks.module.css';
 import { observer } from 'mobx-react-lite';
 import Heading from '../../reusables/Heading/Heading';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
+import { useNavigate } from 'react-router-dom';
 
 const Tasks: React.FC = observer(() => {
-  const clickHandler = () => {};
+  const navigate = useNavigate();
 
   const buttonContainerData = {
-    clickHandler,
+    clickHandler: () => navigate('/taskPage'),
     label: 'View All Tasks',
   };
 
@@ -26,13 +27,3 @@ const Tasks: React.FC = observer(() => {
 });
 
 export default Tasks;
-
-/*
-      {/* <ButtonContainer buttonContainerData={buttonContainerData} /> */
-//const clickHandler = () => {};
-
-// const buttonContainerData = {
-//   clickHandler,
-//   label: 'Go To TaskManager',
-// };
-//import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';*/
