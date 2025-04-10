@@ -6,9 +6,10 @@ class RouterStore {
   currentLabel: string = '';
   menuLinks: MenuLinkData[] = [
     { href: '/', label: 'Dashboard' },
-    { href: '/plantDatabase', label: 'Plant Database' },
+    { href: '/plantDatabase', label: 'Plants' },
     { href: '/farmLocations', label: 'Farm Locations' },
-    { href: '/settings', label: 'Settings' },
+    { href: '/farmLocations', label: 'Tasks' },
+    { href: '/farmLocations', label: 'Turnover' },
     // { href: '/add-plant', label: 'Add Plant' },
   ];
 
