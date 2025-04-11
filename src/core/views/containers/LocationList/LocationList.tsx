@@ -17,7 +17,12 @@ const LocationList: React.FC<LocationListProps> = ({
   return (
     <div className={styles.locationList}>
       {locations.map((location) => (
-        <FarmLocation location={location} onDelete={onDelete} onEdit={onEdit} />
+        <FarmLocation
+          location={location}
+          onDelete={onDelete}
+          onEdit={onEdit}
+          key={location.id}
+        />
       ))}
     </div>
   );

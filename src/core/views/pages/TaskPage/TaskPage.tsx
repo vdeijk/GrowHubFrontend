@@ -30,8 +30,3 @@ const TaskPage: React.FC = observer(() => {
 });
 
 export default TaskPage;
-
-/*<div className={styles.taskActions}>
-            <button onClick={() => handleEdit(task.id)}>Edit</button>
-            <button onClick={() => handleDelete(task.id)}>Delete</button>
-          </div>*/

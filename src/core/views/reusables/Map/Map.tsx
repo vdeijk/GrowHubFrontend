@@ -5,15 +5,18 @@ import styles from './Map.module.css';
 
 interface MapProps {
   enableScroll?: boolean;
+  markers?: { lat: number; lng: number; popupContent: string }[];
 }
 
-const Map: React.FC<MapProps> = ({ enableScroll = false }) => {
+const Map: React.FC<MapProps> = ({ enableScroll = false, markers = [] }) => {
   const mapRef = useRef<HTMLDivElement | null>(null);
   const mapInstanceRef = useRef<L.Map | null>(null);
 
   const initMap = () => {
     if (mapRef.current && !mapInstanceRef.current) {
-      const map = L.map(mapRef.current).setView([52.0705, 4.3007], 13);
+      const map = L.map(mapRef.current, {
+        scrollWheelZoom: enableScroll,
+      });
       mapInstanceRef.current = map;
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -21,16 +24,25 @@ const Map: React.FC<MapProps> = ({ enableScroll = false }) => {
           '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       }).addTo(map);
 
-      L.marker([52.0705, 4.3007])
-        .addTo(map)
-        .bindPopup(
-          L.popup().setContent('<div class="custom-popup">My farm</div>'),
-        )
-        .openPopup();
+      addMarkers(map);
+      fitMapToMarkers(map);
+    }
+  };
 
-      setTimeout(() => {
-        map.invalidateSize();
-      }, 0);
+  const addMarkers = (map: L.Map) => {
+    markers.forEach((marker) => {
+      L.marker([marker.lat, marker.lng])
+        .addTo(map)
+        .bindPopup(L.popup().setContent(marker.popupContent));
+    });
+  };
+
+  const fitMapToMarkers = (map: L.Map) => {
+    if (markers.length > 0) {
+      const bounds = L.latLngBounds(
+        markers.map((marker) => [marker.lat, marker.lng] as [number, number]),
+      );
+      map.fitBounds(bounds, { padding: [20, 20] });
     }
   };
 
@@ -52,3 +64,8 @@ const Map: React.FC<MapProps> = ({ enableScroll = false }) => {
 };
 
 export default Map;
+
+/*
+      setTimeout(() => {
+        map.invalidateSize();
+      }, 0);*/

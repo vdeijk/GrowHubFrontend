@@ -1,10 +1,15 @@
-import { makeAutoObservable } from 'mobx';
-import { Task } from '../../../auxiliary/interfaces/Task';
-import { runInAction } from 'mobx';
+import { makeAutoObservable, runInAction } from 'mobx';
 import { getData } from '../../apis/getData';
 
-class TaskStore {
-  tasks: Task[] = [];
+interface Location {
+  id: number;
+  name: string;
+  latitude: number;
+  longitude: number;
+}
+
+class LocationStore {
+  locations: Location[] = [];
   isLoading = false;
 
   constructor() {
@@ -13,29 +18,41 @@ class TaskStore {
     this.fetchData();
   }
 
-  public toggleComplete(id: number) {
-    const task = this.tasks.find((task) => task.id === id);
-    if (task) {
-      task.completed = !task.completed;
-    }
-  }
-
   private async fetchData() {
     try {
       runInAction(() => {
         this.isLoading = true;
       });
-      const tasks = await getData('/Todo');
+
+      const locations = await getData('/Location');
 
       runInAction(() => {
-        this.tasks = tasks;
+        this.locations = locations;
         this.isLoading = false;
       });
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.error('Error fetching locations:', error);
+      runInAction(() => {
+        this.isLoading = false;
+      });
     }
+  }
+
+  public addLocation(location: Location) {
+    this.locations.push(location);
+  }
+
+  public updateLocation(id: number, updatedLocation: Partial<Location>) {
+    const location = this.locations.find((loc) => loc.id === id);
+    if (location) {
+      Object.assign(location, updatedLocation);
+    }
+  }
+
+  public deleteLocation(id: number) {
+    this.locations = this.locations.filter((loc) => loc.id !== id);
   }
 }
 
-const taskStore = new TaskStore();
-export default taskStore;
+const locationStore = new LocationStore();
+export default locationStore;

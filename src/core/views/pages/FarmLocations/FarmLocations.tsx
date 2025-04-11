@@ -4,37 +4,39 @@ import Map from '../../reusables/Map/Map';
 import Heading from '../../reusables/Heading/Heading';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import LocationList from '../../containers/LocationList/LocationList';
+import locationStore from '../../../stores/LocationStore/LocationStore';
+import { observer } from 'mobx-react-lite';
 
-const FarmLocations: React.FC = () => {
+const FarmLocations: React.FC = observer(() => {
   const buttonContainerData = {
     clickHandler: () => {},
     label: 'Add location',
   };
-
-  const mockLocations = [
-    { id: 1, name: 'North Field' },
-    { id: 2, name: 'South Orchard' },
-    { id: 3, name: 'East Greenhouse' },
-    { id: 4, name: 'West Pasture' },
-    { id: 5, name: 'Central Barn' },
-  ];
 
   const handleEdit = (id: number) => {
     console.log(`Edit location with id: ${id}`);
   };
 
   const handleDelete = (id: number) => {
-    <LocationList
-      locations={mockLocations}
-      onEdit={handleEdit}
-      onDelete={handleDelete}
-    />;
+    console.log(`Delete location with id: ${id}`);
+    locationStore.deleteLocation(id);
   };
 
-  const data = {
-    locations: mockLocations,
+  const listData = {
+    locations: locationStore.locations,
     onEdit: handleEdit,
     onDelete: handleDelete,
+  };
+
+  const markers = locationStore.locations.map((location) => ({
+    lat: location.latitude,
+    lng: location.longitude,
+    popupContent: location.name,
+  }));
+
+  const mapData = {
+    enableScroll: true,
+    markers,
   };
 
   return (
@@ -43,14 +45,14 @@ const FarmLocations: React.FC = () => {
         <Heading level={6} text="Farm Locations" />
       </div>
       <div className={styles.left}>
-        <Map enableScroll={true}/>
+        <Map {...mapData} />
       </div>
       <div className={styles.right}>
-        <LocationList {...data} />
+        <LocationList {...listData} />
         <ButtonContainer {...buttonContainerData} />
       </div>
     </div>
   );
-};
+});
 
 export default FarmLocations;
