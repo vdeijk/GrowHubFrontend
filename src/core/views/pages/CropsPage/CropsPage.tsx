@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import SearchBarContainer from '../../containers/SearchBarContainer/SearchBarContainer';
 import Table from '../../reusables/TableWithSorting/TableWithSorting';
 import styles from './CropsPage.module.css';
@@ -66,8 +66,10 @@ const CropsPage: React.FC = observer(() => {
     <section className={styles.section}>
       <LoadingWrapper isLoading={plantsStore.isLoading}>
         <SearchBarContainer {...searchBarProps} />
-        <Table {...tableProps} />
-        <ButtonContainer {...buttonContainerData} />
+        <div className={styles.buttonContainer}>
+          <Table {...tableProps} />
+          <ButtonContainer {...buttonContainerData} />
+        </div>
       </LoadingWrapper>
     </section>
   );

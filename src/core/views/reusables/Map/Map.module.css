@@ -8,11 +8,11 @@
   position: relative;
 }
 .customTooltip {
-  font-size: 1rem; /* Adjust font size */
-  font-weight: bold; /* Optional: Make the text bold */
-  background-color: white; /* Optional: Ensure background is white */
-  border: 1px solid #ccc; /* Optional: Add a border */
-  border-radius: 4px; /* Optional: Add rounded corners */
-  padding: 4px 8px; /* Optional: Adjust padding */
-  color: #333; /* Optional: Change text color */
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 4px 8px;
+  color: #333;
 }

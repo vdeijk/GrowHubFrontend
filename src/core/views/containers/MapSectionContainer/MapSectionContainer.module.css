@@ -1,10 +1,10 @@
 .container {
-    height: 100%;
-    width: 100%;
-    border: 1px solid #ccc;
-    padding: 2rem;
-    min-height: 600px;
-    background-color: #fdfdfd;
-    grid-area: 3 / 6 / -1 / -1;
-  }
-  
+  height: 100%;
+  width: 100%;
+  min-height: 600px;
+  border-radius: 8px;
+  padding: 2rem;
+  background-color: #fdfdfd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  grid-area: 3 / 6 / -1 / -1;
+}
