@@ -20,27 +20,32 @@ A modern farming management application built with **React**, **TypeScript**, an
 Follow these steps to set up the project locally:
 
 1. **Clone the repository**:
+
    ```bash
    git clone https://github.com/yourusername/farming.git
    cd farming
    ```
 
 2. **Install dependencies**:
+
    ```bash
    npm install
    ```
 
 3. **Run the development server**:
+
    ```bash
    npm run dev
    ```
 
 4. **Run tests**:
+
    ```bash
    npm run test
    ```
 
 5. **Build for production**:
+
    ```bash
    npm run build
    ```
@@ -77,11 +82,13 @@ farming/
 This project uses **Jest** and **React Testing Library** for unit and integration tests.
 
 - **Run all tests**:
+
   ```bash
   npm run test
   ```
 
 - **Run tests in watch mode**:
+
   ```bash
   npm run test:watch
   ```
@@ -98,6 +105,7 @@ This project uses **Jest** and **React Testing Library** for unit and integratio
 This project can be deployed to platforms like **Vercel**, **Netlify**, or **AWS Amplify**.
 
 1. **Build the project**:
+
    ```bash
    npm run build
    ```

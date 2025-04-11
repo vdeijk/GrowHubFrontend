@@ -21,11 +21,7 @@ const MenuContainer: React.FC<MenuProps> = ({
     <div className={styles.container}>
       <div className={styles.profile}>
         <Heading level={4} text={curPageTitle}></Heading>
-        <img
-          src={profilePicture}
-          alt="Profile"
-          className={styles.image}
-        />
+        <img src={profilePicture} alt="Profile" className={styles.image} />
         <span className={styles.userName}>{userName}</span>
       </div>
       <ul className={styles.unorderedList}>

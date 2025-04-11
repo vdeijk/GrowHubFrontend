@@ -19,7 +19,7 @@ const Task: React.FC<TaskProps> = ({ taskData }) => {
   const { title, dueDate, priority, category, completed, description } =
     taskData;
 
-    const formattedDueDate =
+  const formattedDueDate =
     typeof dueDate === 'string' ? new Date(dueDate) : dueDate;
 
   const textsWithBoldSpan: TextWithBoldSpanData[] = [

@@ -1,219 +1,39 @@
 {
-    "openapi": "3.0.4",
-    "info": {
-      "title": "Entry Point",
-      "version": "1.0"
-    },
-    "paths": {
-      "/api/Appointment": {
-        "get": {
-          "tags": [
-            "Appointment"
-          ],
-          "operationId": "GetAppointments",
-          "responses": {
-            "200": {
-              "description": "OK",
-              "content": {
-                "text/plain": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/AppointmentItem"
-                    }
-                  }
-                },
-                "application/json": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/AppointmentItem"
-                    }
-                  }
-                },
-                "text/json": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/AppointmentItem"
-                    }
+  "openapi": "3.0.4",
+  "info": {
+    "title": "Entry Point",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/Appointment": {
+      "get": {
+        "tags": ["Appointment"],
+        "operationId": "GetAppointments",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AppointmentItem"
                   }
                 }
-              }
-            }
-          }
-        }
-      },
-      "/api/Plant": {
-        "get": {
-          "tags": [
-            "Plant"
-          ],
-          "operationId": "GetPlants",
-          "responses": {
-            "200": {
-              "description": "OK",
-              "content": {
-                "text/plain": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/Plant"
-                    }
-                  }
-                },
-                "application/json": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/Plant"
-                    }
-                  }
-                },
-                "text/json": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/Plant"
-                    }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AppointmentItem"
                   }
                 }
-              }
-            }
-          }
-        }
-      },
-      "/api/Todo": {
-        "get": {
-          "tags": [
-            "Todo"
-          ],
-          "operationId": "GetTodoItems",
-          "responses": {
-            "200": {
-              "description": "OK",
-              "content": {
-                "text/plain": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/TodoItem"
-                    }
-                  }
-                },
-                "application/json": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/TodoItem"
-                    }
-                  }
-                },
-                "text/json": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/TodoItem"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/api/Turnover": {
-        "get": {
-          "tags": [
-            "Turnover"
-          ],
-          "operationId": "GetTurnovers",
-          "responses": {
-            "200": {
-              "description": "OK",
-              "content": {
-                "text/plain": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/TurnoverItem"
-                    }
-                  }
-                },
-                "application/json": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/TurnoverItem"
-                    }
-                  }
-                },
-                "text/json": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/TurnoverItem"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/api/Weather/current": {
-        "get": {
-          "tags": [
-            "Weather"
-          ],
-          "parameters": [
-            {
-              "name": "city",
-              "in": "query",
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK"
-            }
-          }
-        }
-      },
-      "/api/WeatherForecast": {
-        "get": {
-          "tags": [
-            "WeatherForecast"
-          ],
-          "operationId": "GetWeatherForecast",
-          "responses": {
-            "200": {
-              "description": "OK",
-              "content": {
-                "text/plain": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/WeatherForecastItem"
-                    }
-                  }
-                },
-                "application/json": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/WeatherForecastItem"
-                    }
-                  }
-                },
-                "text/json": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/WeatherForecastItem"
-                    }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AppointmentItem"
                   }
                 }
               }
@@ -222,162 +42,330 @@
         }
       }
     },
-    "components": {
-      "schemas": {
-        "AppointmentItem": {
-          "type": "object",
-          "properties": {
-            "time": {
-              "type": "string",
-              "nullable": true
-            },
-            "title": {
-              "type": "string",
-              "nullable": true
-            },
-            "description": {
-              "type": "string",
-              "nullable": true
+    "/api/Plant": {
+      "get": {
+        "tags": ["Plant"],
+        "operationId": "GetPlants",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Plant"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Plant"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Plant"
+                  }
+                }
+              }
             }
-          },
-          "additionalProperties": false
-        },
-        "Plant": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "commonName": {
-              "type": "string",
-              "nullable": true
-            },
-            "scientificName": {
-              "type": "string",
-              "nullable": true
-            },
-            "genus": {
-              "type": "string",
-              "nullable": true
-            },
-            "sunPreference": {
-              "type": "string",
-              "nullable": true
-            },
-            "waterNeeds": {
-              "type": "string",
-              "nullable": true
-            },
-            "soilType": {
-              "type": "string",
-              "nullable": true
-            },
-            "soilPH": {
-              "type": "string",
-              "nullable": true
-            },
-            "pruning": {
-              "type": "string",
-              "nullable": true
-            },
-            "temperatureRange": {
-              "type": "string",
-              "nullable": true
-            },
-            "plantType": {
-              "type": "string",
-              "nullable": true
-            },
-            "growthRate": {
-              "type": "string",
-              "nullable": true
-            },
-            "matureSize": {
-              "type": "string",
-              "nullable": true
-            },
-            "bloomTime": {
-              "type": "string",
-              "nullable": true
-            },
-            "fertilizerNeeds": {
-              "type": "string",
-              "nullable": true
+          }
+        }
+      }
+    },
+    "/api/Todo": {
+      "get": {
+        "tags": ["Todo"],
+        "operationId": "GetTodoItems",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TodoItem"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TodoItem"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TodoItem"
+                  }
+                }
+              }
             }
-          },
-          "additionalProperties": false
-        },
-        "TodoItem": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "title": {
-              "type": "string",
-              "nullable": true
-            },
-            "isCompleted": {
-              "type": "boolean"
-            },
-            "dueDate": {
-              "type": "string",
-              "format": "date-time"
-            },
-            "priority": {
-              "type": "string",
-              "nullable": true
-            },
-            "category": {
-              "type": "string",
-              "nullable": true
-            },
-            "description": {
-              "type": "string",
-              "nullable": true
+          }
+        }
+      }
+    },
+    "/api/Turnover": {
+      "get": {
+        "tags": ["Turnover"],
+        "operationId": "GetTurnovers",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TurnoverItem"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TurnoverItem"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TurnoverItem"
+                  }
+                }
+              }
             }
-          },
-          "additionalProperties": false
-        },
-        "TurnoverItem": {
-          "type": "object",
-          "properties": {
-            "date": {
-              "type": "string",
-              "nullable": true
-            },
-            "amount": {
-              "type": "number",
-              "format": "double"
+          }
+        }
+      }
+    },
+    "/api/Weather/current": {
+      "get": {
+        "tags": ["Weather"],
+        "parameters": [
+          {
+            "name": "city",
+            "in": "query",
+            "schema": {
+              "type": "string"
             }
-          },
-          "additionalProperties": false
-        },
-        "WeatherForecastItem": {
-          "type": "object",
-          "properties": {
-            "date": {
-              "type": "string",
-              "format": "date"
-            },
-            "temperatureC": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "temperatureF": {
-              "type": "integer",
-              "format": "int32",
-              "readOnly": true
-            },
-            "summary": {
-              "type": "string",
-              "nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/WeatherForecast": {
+      "get": {
+        "tags": ["WeatherForecast"],
+        "operationId": "GetWeatherForecast",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecastItem"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecastItem"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecastItem"
+                  }
+                }
+              }
             }
-          },
-          "additionalProperties": false
+          }
         }
       }
     }
+  },
+  "components": {
+    "schemas": {
+      "AppointmentItem": {
+        "type": "object",
+        "properties": {
+          "time": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Plant": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "commonName": {
+            "type": "string",
+            "nullable": true
+          },
+          "scientificName": {
+            "type": "string",
+            "nullable": true
+          },
+          "genus": {
+            "type": "string",
+            "nullable": true
+          },
+          "sunPreference": {
+            "type": "string",
+            "nullable": true
+          },
+          "waterNeeds": {
+            "type": "string",
+            "nullable": true
+          },
+          "soilType": {
+            "type": "string",
+            "nullable": true
+          },
+          "soilPH": {
+            "type": "string",
+            "nullable": true
+          },
+          "pruning": {
+            "type": "string",
+            "nullable": true
+          },
+          "temperatureRange": {
+            "type": "string",
+            "nullable": true
+          },
+          "plantType": {
+            "type": "string",
+            "nullable": true
+          },
+          "growthRate": {
+            "type": "string",
+            "nullable": true
+          },
+          "matureSize": {
+            "type": "string",
+            "nullable": true
+          },
+          "bloomTime": {
+            "type": "string",
+            "nullable": true
+          },
+          "fertilizerNeeds": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TodoItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "isCompleted": {
+            "type": "boolean"
+          },
+          "dueDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "priority": {
+            "type": "string",
+            "nullable": true
+          },
+          "category": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TurnoverItem": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "nullable": true
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "WeatherForecastItem": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "temperatureC": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "temperatureF": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "summary": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
   }
+}

@@ -20,7 +20,7 @@
   display: grid;
   gap: var(--spacing-small);
   align-items: center;
-  width: max-content
+  width: max-content;
 }
 
 .editIcon {
