@@ -3,7 +3,7 @@ import styles from './TableWithSorting.module.css';
 import TableRow from '../TableRow/TableRow';
 
 export interface TableProps<T> {
-  headers: { id: keyof T; label: string }[];
+  headers: { id: keyof T; label: string; sortable: boolean }[];
   onSort: (field: keyof T) => void;
   sortField: keyof T | null;
   sortOrder: 'asc' | 'desc';

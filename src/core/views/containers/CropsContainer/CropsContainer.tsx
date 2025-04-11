@@ -21,12 +21,25 @@ const Plants: React.FC = observer(() => {
     label: 'View All Crops',
   };
 
+  const headersWithoutActions = plantsStore.tableHeaders.filter(
+    (header) => header.id !== 'actions',
+  );
+
+  const omit = <T, K extends keyof T>(obj: T, key: K): Omit<T, K> => {
+    const rest = { ...obj };
+    delete rest[key];
+    return rest;
+  };
+
   const children = (
     <>
       <Heading level={6} text="Your Crops" />
       <TableWithoutSorting<PlantWithIndex>
-        headers={plantsStore.tableHeaders}
-        data={plantsStore.plants.map((plant, index) => ({ ...plant, index }))}
+        headers={headersWithoutActions}
+        data={plantsStore.plants.map((plant, index) => ({
+          ...omit(plant, 'actions'),
+          index,
+        }))}
       />
       <ButtonContainer {...buttonContainerData} />
     </>
