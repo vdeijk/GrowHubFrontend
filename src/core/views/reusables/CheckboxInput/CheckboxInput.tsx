@@ -18,7 +18,11 @@ const CheckboxInput: React.FC<CheckboxProps> = ({
 
   return (
     <div className={label ? styles.container : ''}>
-      {label && <label className={styles.label}>{label}</label>}
+      {label && (
+        <label className={styles.label} htmlFor={label}>
+          {label}
+        </label>
+      )}
       <input
         type="checkbox"
         checked={checked}

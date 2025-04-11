@@ -22,7 +22,7 @@ const TextInput: React.FC<TextInputProps> = ({
   return (
     <div className={label ? styles.container : ''}>
       {label && (
-        <label className={styles.label} htmlFor="textInput">
+        <label className={styles.label} htmlFor={label}>
           {label}
         </label>
       )}

@@ -13,6 +13,7 @@ const Button: React.FC<ButtonProps> = (props) => {
 
   return (
     <button
+      aria-label={label}
       type={type}
       className={`${styles.button} ${className}`}
       onClick={type === 'submit' ? undefined : onClick}
