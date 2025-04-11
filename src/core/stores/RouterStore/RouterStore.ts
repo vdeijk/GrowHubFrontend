@@ -31,8 +31,19 @@ class RouterStore {
     },
   ];
 
+  private routeMap: Map<string, MenuLinkData> = new Map();
+  private dynamicRoutes: MenuLinkData[] = [];
+
   constructor() {
     makeAutoObservable(this);
+
+    this.menuLinks.forEach((link) => {
+      if (link.isDynamic) {
+        this.dynamicRoutes.push(link);
+      } else {
+        this.routeMap.set(link.path, link);
+      }
+    });
 
     window.addEventListener('popstate', this.handlePopState);
   }
@@ -50,11 +61,11 @@ class RouterStore {
     try {
       this.currentLabel = this.getLabel(path);
       if (this.currentLabel === 'Unknown Page') {
-        //  window.location.href = '/404';
+        window.location.href = '/404';
       }
     } catch {
       toast.error('An unexpected error occurred. Redirecting to 404...');
-      //window.location.href = '/404';
+      window.location.href = '/404';
     }
   };
 
@@ -63,17 +74,15 @@ class RouterStore {
   }
 
   private getLabel(path: string): string {
-    const staticRoute = this.menuLinks.find((route) => route.path === path);
+    const staticRoute = this.routeMap.get(path);
     if (staticRoute) {
       return staticRoute.label;
     }
 
-    const dynamicRoute = this.menuLinks.find((route) => {
-      if (!route.isDynamic) return false;
+    const dynamicRoute = this.dynamicRoutes.find((route) => {
       const dynamicPattern = new RegExp(
-        `^${route.path.replace(':id', '/\\d+')}$`,
+        `^${route.path.replace(':id', '\\d+')}$`,
       );
-
       return dynamicPattern.test(path);
     });
 

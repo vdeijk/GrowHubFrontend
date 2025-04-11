@@ -21,7 +21,7 @@ import NotFoundPage from './core/views/pages/NotFoundPage/NotFoundPage';
 const App: React.FC = observer(() => {
   return (
     <main className="appContainer">
-      <ToastContainer />
+      <ToastContainer  style={{ zIndex: 9999 }}/>
       <NavbarContainer userName="YourUserName" />
       <MenuContainer
         userName="YourUserName"

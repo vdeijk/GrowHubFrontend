@@ -3,3 +3,7 @@
   min-height: 100vh;
   grid-template-rows: auto 1fr auto;
 }
+
+.Toastify__toast-container {
+  z-index: 9999 !important;
+}
