@@ -2,12 +2,12 @@ import React from 'react';
 import TextInput, { TextInputProps } from '../../reusables/TextInput/TextInput';
 import Heading from '../../reusables/Heading/Heading';
 import { useNavigate } from 'react-router-dom';
-import addLocationStore from '../../../stores/AddLocationStore/AddLocationStore';
+import addLocationStore from '../../../stores/AddFieldStore/AddFieldStore';
 import Button, { ButtonProps } from '../../reusables/Button/Button';
-import styles from './AddLocationPage.module.css';
+import styles from './AddFieldPage.module.css';
 import { observer } from 'mobx-react-lite';
 
-const AddLocationPage: React.FC = observer(() => {
+const AddFieldPage: React.FC = observer(() => {
   const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -60,4 +60,4 @@ const AddLocationPage: React.FC = observer(() => {
   );
 });
 
-export default AddLocationPage;
+export default AddFieldPage;

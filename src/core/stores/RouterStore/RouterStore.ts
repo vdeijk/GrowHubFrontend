@@ -6,10 +6,10 @@ class RouterStore {
   currentLabel: string = '';
   menuLinks: MenuLinkData[] = [
     { href: '/', label: 'Dashboard' },
-    { href: '/weatherReport', label: 'Weather' },
-    { href: '/farmLocations', label: 'Fields' },
-    { href: '/taskPage', label: 'AgriTasks' },
-    { href: '/plantDatabase', label: 'Crops' },
+    { href: '/weatherReportPage', label: 'Weather' },
+    { href: '/fieldsPage', label: 'Fields' },
+    { href: '/tasksPage', label: 'AgriTasks' },
+    { href: '/cropsPage', label: 'Crops' },
   ];
 
   constructor() {

@@ -11,7 +11,7 @@ const Tasks: React.FC = observer(() => {
   const navigate = useNavigate();
 
   const buttonContainerData = {
-    clickHandler: () => navigate('/taskPage'),
+    clickHandler: () => navigate('/tasksPage'),
     label: 'View All AgriTasks',
   };
 

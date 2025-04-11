@@ -1,12 +1,12 @@
 import React from 'react';
 import Task from '../../reusables/Task/Task';
 import taskStore from '../../../stores/TaskStore/TaskStore';
-import styles from './TaskPage.module.css';
+import styles from './TasksPage.module.css';
 import { observer } from 'mobx-react-lite';
 import Heading from '../../reusables/Heading/Heading';
 //import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 
-const TaskPage: React.FC = observer(() => {
+const TasksPage: React.FC = observer(() => {
   // const buttonContainerData = {
   //   clickHandler: () => {},
   //   label: 'Add New Task',
@@ -29,4 +29,4 @@ const TaskPage: React.FC = observer(() => {
   );
 });
 
-export default TaskPage;
+export default TasksPage;

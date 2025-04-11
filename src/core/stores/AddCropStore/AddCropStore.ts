@@ -1,6 +1,6 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 
-class AddPlantStore {
+class AddCropStore {
   commonName: string = '';
   genus: string = '';
   scientificName: string = '';
@@ -9,7 +9,7 @@ class AddPlantStore {
     makeAutoObservable(this);
   }
 
-  public updateField(field: keyof AddPlantStore, value: string) {
+  public updateField(field: keyof AddCropStore, value: string) {
     runInAction(() => {
       (this[field] as string) = value;
     });
@@ -26,5 +26,5 @@ class AddPlantStore {
   }
 }
 
-const addPlantStore = new AddPlantStore();
-export default addPlantStore;
+const addCropStore = new AddCropStore();
+export default addCropStore;

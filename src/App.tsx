@@ -9,12 +9,12 @@ import { Routes, Route } from 'react-router-dom';
 import CropsPage from './core/views/pages/CropsPage/CropsPage';
 import routerStore from './core/stores/RouterStore/RouterStore';
 import PageLayout from './core/views/reusables/PageLayout/PageLayout';
-import AddPlant from './core/views/pages/AddPlantPage/AddPlantPage';
+import AddCropPage from './core/views/pages/AddCropPage/AddCropPage';
 import { ToastContainer } from 'react-toastify';
 import WeatherReportPage from './core/views/pages/WeatherReportPage/WeatherReportPage';
-import FarmLocationsPage from './core/views/pages/FarmLocationsPage/FarmLocationsPage';
-import TaskPage from './core/views/pages/TaskPage/TaskPage';
-import AddLocationPage from './core/views/pages/AddLocationPage/AddLocationPage';
+import FieldsPage from './core/views/pages/FieldsPage/FieldsPage';
+import TasksPage from './core/views/pages/TasksPage/TaskPage';
+import AddFieldPage from './core/views/pages/AddFieldPage/AddFieldPage';
 
 const App: React.FC = () => {
   return (
@@ -30,13 +30,12 @@ const App: React.FC = () => {
       <PageLayout>
         <Routes>
           <Route path="/" element={<DashboardPage />} />
-          <Route path="/weatherReport" element={<WeatherReportPage />} />
-          <Route path="/plantDatabase" element={<CropsPage />} />
-          <Route path="/taskPage" element={<TaskPage />} />
-          {/* <Route path="/settings" element={<SettingsPage />} /> */}
-          <Route path="/farmLocations" element={<FarmLocationsPage />} />
-          <Route path="/addPlant" element={<AddPlant />} />
-          <Route path="/addLocation" element={<AddLocationPage />} />
+          <Route path="/weatherReportPage" element={<WeatherReportPage />} />
+          <Route path="/cropsPage" element={<CropsPage />} />
+          <Route path="/tasksPage" element={<TasksPage />} />
+          <Route path="/fieldsPage" element={<FieldsPage />} />
+          <Route path="/addCropPage" element={<AddCropPage />} />
+          <Route path="/addFieldPage" element={<AddFieldPage />} />
         </Routes>
       </PageLayout>
       <FooterContainer />

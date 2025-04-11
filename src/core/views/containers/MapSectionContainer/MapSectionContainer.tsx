@@ -11,7 +11,7 @@ const MapSection: React.FC = observer(() => {
   const navigate = useNavigate();
 
   const buttonContainerData = {
-    clickHandler: () => navigate('/farmLocations'),
+    clickHandler: () => navigate('/fieldsPage'),
     label: 'View All Fields',
   };
 

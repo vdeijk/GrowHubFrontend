@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './FarmLocationsPage.module.css';
+import styles from './FieldsPage.module.css';
 import Map from '../../reusables/Map/Map';
 import Heading from '../../reusables/Heading/Heading';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
@@ -8,11 +8,11 @@ import locationStore from '../../../stores/LocationStore/LocationStore';
 import { observer } from 'mobx-react-lite';
 import { useNavigate } from 'react-router-dom';
 
-const FarmLocations: React.FC = observer(() => {
+const FieldsPage: React.FC = observer(() => {
   const navigate = useNavigate();
 
   const buttonContainerData = {
-    clickHandler: () => navigate('/addLocation'),
+    clickHandler: () => navigate('/addFieldPage'),
     label: 'Add Field',
   };
 
@@ -58,4 +58,4 @@ const FarmLocations: React.FC = observer(() => {
   );
 });
 
-export default FarmLocations;
+export default FieldsPage;

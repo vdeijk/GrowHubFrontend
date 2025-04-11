@@ -2,41 +2,41 @@ import React from 'react';
 import TextInput, { TextInputProps } from '../../reusables/TextInput/TextInput';
 import Heading from '../../reusables/Heading/Heading';
 import { useNavigate } from 'react-router-dom';
-import addPlantStore from '../../../stores/AddPlantStore/AddPlantStore';
+import addCropStore from '../../../stores/AddCropStore/AddCropStore';
 import Button, { ButtonProps } from '../../reusables/Button/Button';
-import styles from './AddPlantPage.module.css';
+import styles from './AddCropPage.module.css';
 import { observer } from 'mobx-react-lite';
 
-const AddPlantPage: React.FC = observer(() => {
+const AddCropPage: React.FC = observer(() => {
   const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    addPlantStore.addPlant();
-    addPlantStore.resetForm();
+    addCropStore.addPlant();
+    addCropStore.resetForm();
     navigate('/');
   };
 
   const nameProps: TextInputProps = {
-    value: addPlantStore.commonName,
-    onChange: (value: string) => addPlantStore.updateField('commonName', value),
+    value: addCropStore.commonName,
+    onChange: (value: string) => addCropStore.updateField('commonName', value),
     placeholder: 'Common Name',
     label: 'Common Name',
     required: true,
   };
 
   const sunPreferenceProps: TextInputProps = {
-    value: addPlantStore.genus,
-    onChange: (value: string) => addPlantStore.updateField('genus', value),
+    value: addCropStore.genus,
+    onChange: (value: string) => addCropStore.updateField('genus', value),
     placeholder: 'Genus',
     label: 'Genus',
     required: true,
   };
 
   const waterNeedsProps: TextInputProps = {
-    value: addPlantStore.scientificName,
+    value: addCropStore.scientificName,
     onChange: (value: string) =>
-      addPlantStore.updateField('scientificName', value),
+      addCropStore.updateField('scientificName', value),
     placeholder: 'Scientific Name',
     label: 'Scientific Name',
     required: true,
@@ -60,4 +60,4 @@ const AddPlantPage: React.FC = observer(() => {
   );
 });
 
-export default AddPlantPage;
+export default AddCropPage;

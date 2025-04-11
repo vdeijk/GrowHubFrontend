@@ -1,6 +1,6 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 
-class AddLocationStore {
+class AddFieldStore {
   locationName: string = '';
   latitude: number = 0;
   longitude: number = 0;
@@ -9,7 +9,7 @@ class AddLocationStore {
     makeAutoObservable(this);
   }
 
-  public updateField(field: keyof AddLocationStore, value: string) {
+  public updateField(field: keyof AddFieldStore, value: string) {
     runInAction(() => {
       (this[field] as string) = value;
     });
@@ -26,5 +26,5 @@ class AddLocationStore {
   }
 }
 
-const addLocationStore = new AddLocationStore();
-export default addLocationStore;
+const addFieldStore = new AddFieldStore();
+export default addFieldStore;

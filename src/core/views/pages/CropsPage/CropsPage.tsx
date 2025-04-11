@@ -51,7 +51,7 @@ const CropsPage: React.FC = observer(() => {
   };
 
   const buttonContainerData = {
-    clickHandler: () => navigate('/addPlant'),
+    clickHandler: () => navigate('/addCropPage'),
     label: 'Add Crop',
   };
 

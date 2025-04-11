@@ -12,12 +12,8 @@ import { observer } from 'mobx-react-lite';
 const Plants: React.FC = observer(() => {
   const navigate = useNavigate();
 
-  const clickHandler = () => {
-    navigate('/plantDatabase');
-  };
-
   const buttonContainerData = {
-    clickHandler,
+    clickHandler: () => navigate('/cropsPage'),
     label: 'View All Crops',
   };
 

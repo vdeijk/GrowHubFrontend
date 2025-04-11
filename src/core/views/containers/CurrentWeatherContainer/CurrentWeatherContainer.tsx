@@ -20,7 +20,7 @@ const CurrentWeatherContainer: React.FC = observer(() => {
   ];
 
   const buttonContainerData = {
-    clickHandler: () => navigate('/weatherReport'),
+    clickHandler: () => navigate('/weatherReportPage'),
     label: 'View Full Report',
   };
 
