@@ -16,7 +16,7 @@ const Navbar: React.FC<NavbarProps> = ({ userName }) => {
     <nav className={styles.navbar}>
       <div className={styles.navbarBrand}>
         <a href="/" className={styles.logo}>
-          Brand
+          GrowHub
         </a>
       </div>
       <div className={styles.navbarActions}>

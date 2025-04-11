@@ -13,7 +13,7 @@ const FarmLocations: React.FC = observer(() => {
 
   const buttonContainerData = {
     clickHandler: () => navigate('/addLocation'),
-    label: 'Add location',
+    label: 'Add Field',
   };
 
   const handleEdit = (id: number) => {
@@ -45,7 +45,7 @@ const FarmLocations: React.FC = observer(() => {
   return (
     <div className={styles.container}>
       <div className={styles.top}>
-        <Heading level={1} text="Farm Locations" />
+        <Heading level={1} text="Farm Fields" />
       </div>
       <div className={styles.left}>
         <Map {...mapData} />

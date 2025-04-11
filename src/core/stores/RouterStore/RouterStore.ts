@@ -7,9 +7,9 @@ class RouterStore {
   menuLinks: MenuLinkData[] = [
     { href: '/', label: 'Dashboard' },
     { href: '/weatherReport', label: 'Weather' },
-    { href: '/farmLocations', label: 'Locations' },
+    { href: '/farmLocations', label: 'Fields' },
     { href: '/taskPage', label: 'Tasks' },
-    { href: '/plantDatabase', label: 'Plants' },
+    { href: '/plantDatabase', label: 'Crops' },
   ];
 
   constructor() {

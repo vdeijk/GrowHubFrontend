@@ -44,12 +44,12 @@ const AddLocation: React.FC = observer(() => {
 
   const buttonProps: ButtonProps = {
     type: 'submit',
-    label: 'Add Location',
+    label: 'Add Field',
   };
 
   return (
     <section className={styles.section}>
-      <Heading level={1} text="Add New Location" />
+      <Heading level={1} text="Add New Field" />
       <form onSubmit={handleSubmit} className={styles.form}>
         <TextInput {...nameProps} />
         <TextInput {...sunPreferenceProps} />

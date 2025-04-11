@@ -44,12 +44,12 @@ const AddPlant: React.FC = observer(() => {
 
   const buttonProps: ButtonProps = {
     type: 'submit',
-    label: 'Add Plant',
+    label: 'Add Crop',
   };
 
   return (
     <section className={styles.section}>
-      <Heading level={1} text="Add New Plant" />
+      <Heading level={1} text="Add New Crop" />
       <form onSubmit={handleSubmit} className={styles.form}>
         <TextInput {...nameProps} />
         <TextInput {...sunPreferenceProps} />

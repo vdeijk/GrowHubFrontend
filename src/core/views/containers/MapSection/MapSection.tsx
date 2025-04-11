@@ -12,7 +12,7 @@ const MapSection: React.FC = observer(() => {
 
   const buttonContainerData = {
     clickHandler: () => navigate('/farmLocations'),
-    label: 'View All Locations',
+    label: 'View All Fields',
   };
 
   const markers = locationStore.locations.map((location) => ({
@@ -28,7 +28,7 @@ const MapSection: React.FC = observer(() => {
 
   return (
     <div className={styles.container}>
-      <Heading level={6} text="Farm Locations" />
+      <Heading level={6} text="Your Fields" />
       <Map {...mapData} />
       <ButtonContainer {...buttonContainerData} />
     </div>

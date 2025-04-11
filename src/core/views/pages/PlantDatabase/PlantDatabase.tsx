@@ -52,7 +52,7 @@ const PlantDatabase: React.FC = observer(() => {
 
   const buttonContainerData = {
     clickHandler: () => navigate('/addPlant'),
-    label: 'Add plant',
+    label: 'Add Crop',
   };
 
   const handleEdit = (id: number) => {
@@ -67,7 +67,7 @@ const PlantDatabase: React.FC = observer(() => {
 
   return (
     <section className={styles.section}>
-      <Heading level={1} text="Plant Database" />
+      <Heading level={1} text="Crop Database" />
       <LoadingWrapper isLoading={plantsStore.isLoading}>
         <SearchBar {...searchBarProps} />
         <Table {...tableProps} />
