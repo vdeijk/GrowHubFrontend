@@ -17,6 +17,7 @@ const Map: React.FC<MapProps> = ({ enableScroll = false, markers = [] }) => {
       const map = L.map(mapRef.current, {
         scrollWheelZoom: enableScroll,
       });
+      map.setView([52.0705, 4.3007], 13);
       mapInstanceRef.current = map;
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -30,10 +31,20 @@ const Map: React.FC<MapProps> = ({ enableScroll = false, markers = [] }) => {
   };
 
   const addMarkers = (map: L.Map) => {
+    map.eachLayer((layer) => {
+      if (layer instanceof L.Marker) {
+        map.removeLayer(layer);
+      }
+    });
+
     markers.forEach((marker) => {
       L.marker([marker.lat, marker.lng])
         .addTo(map)
-        .bindPopup(L.popup().setContent(marker.popupContent));
+        .bindTooltip(marker.popupContent, {
+          permanent: true,
+          direction: 'top',
+          className: styles.customTooltip,
+        });
     });
   };
 

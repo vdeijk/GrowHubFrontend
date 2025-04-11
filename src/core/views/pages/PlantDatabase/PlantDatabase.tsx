@@ -9,6 +9,7 @@ import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import { SearchBarProps } from '../../containers/SearchBar/SearchBar';
 import { TableProps } from '../../reusables/TableWithSorting/TableWithSorting';
 import { Plant } from '../../../../auxiliary/interfaces/Plant';
+import { toJS } from 'mobx';
 
 const PlantDatabase: React.FC = observer(() => {
   const searchBarProps: SearchBarProps = {

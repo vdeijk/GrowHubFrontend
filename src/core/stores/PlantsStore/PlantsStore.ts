@@ -29,7 +29,6 @@ class PlantsStore {
     this.debouncedFilterPlants = debounce(this.filterPlants.bind(this), 500);
   }
 
-  
   public async fetchData() {
     try {
       runInAction(() => {
@@ -39,6 +38,8 @@ class PlantsStore {
 
       runInAction(() => {
         this.plants = plants;
+        this.filteredPlants = this.plants;
+        this.genusOptions = this.extractGenera();
         this.isLoading = false;
       });
     } catch (error) {
