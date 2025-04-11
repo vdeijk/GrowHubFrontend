@@ -1,0 +1,20 @@
+:root {
+  --color-primary: #4caf50;
+  --color-secondary: #595959;
+  --color-text: #666;
+  --color-tertiary: #197278;
+  --color-red: #d8000c;
+  --color-white: #fdfdfd;
+  --color-white-opacity: rgba(253, 253, 253, 0.93);
+  --color-grey-dark-2: #343434;
+  --color-black: #222;
+
+  --font-primary: 'Poppins', sans-serif;
+
+  --spacing-small: 1rem;
+  --spacing-medium: 2rem;
+
+  --border-radius-small: 4px;
+  --border-radius-large: 8px;
+  --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

@@ -8,11 +8,11 @@ interface MenuLinkProps {
 }
 
 const MenuLink: React.FC<MenuLinkProps> = ({ menuLinkData }) => {
-  const { href, label } = menuLinkData;
+  const { path, label } = menuLinkData;
   const navigate = useRouterNavigation();
 
   const clickHandler = () => {
-    navigate(href);
+    navigate(path);
   };
 
   return (

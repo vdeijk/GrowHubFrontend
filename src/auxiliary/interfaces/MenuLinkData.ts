@@ -1,5 +1,6 @@
 export interface MenuLinkData {
-  href: string;
+  path: string;
   label: string;
   hidden: boolean;
+  isDynamic: boolean;
 }
