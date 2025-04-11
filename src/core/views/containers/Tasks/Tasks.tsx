@@ -12,7 +12,7 @@ const Tasks: React.FC = observer(() => {
 
   const buttonContainerData = {
     clickHandler: () => navigate('/taskPage'),
-    label: 'View All Tasks',
+    label: 'View All AgriTasks',
   };
 
   return (

@@ -2,19 +2,19 @@ import React from 'react';
 import './App.css';
 import Navbar from './core/views/containers/Navbar/Navbar';
 import Menu from './core/views/containers/Menu/Menu';
-import Dashboard from './core/views/pages/Dashboard/Dashboard';
+import DashboardPage from './core/views/pages/DashboardPage/DashboardPage';
 import Footer from './core/views/containers/Footer/Footer';
 import profilePicture from './auxiliary/assets/profile.jpeg';
 import { Routes, Route } from 'react-router-dom';
-import PlantDatabase from './core/views/pages/PlantDatabase/PlantDatabase';
+import CropsPage from './core/views/pages/CropsPage/CropsPage';
 import routerStore from './core/stores/RouterStore/RouterStore';
 import PageLayout from './core/views/reusables/PageLayout/PageLayout';
-import AddPlant from './core/views/pages/AddPlant/AddPlant';
+import AddPlant from './core/views/pages/AddPlantPage/AddPlantPage';
 import { ToastContainer } from 'react-toastify';
-import WeatherReport from './core/views/pages/WeatherReport/WeatherReport';
-import FarmLocations from './core/views/pages/FarmLocations/FarmLocations';
+import WeatherReportPage from './core/views/pages/WeatherReportPage/WeatherReportPage';
+import FarmLocationsPage from './core/views/pages/FarmLocationsPage/FarmLocationsPage';
 import TaskPage from './core/views/pages/TaskPage/TaskPage';
-import AddLocation from './core/views/pages/AddLocation/AddLocation';
+import AddLocationPage from './core/views/pages/AddLocationPage/AddLocationPage';
 
 const App: React.FC = () => {
   return (
@@ -29,14 +29,14 @@ const App: React.FC = () => {
       />
       <PageLayout>
         <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/weatherReport" element={<WeatherReport />} />
-          <Route path="/plantDatabase" element={<PlantDatabase />} />
+          <Route path="/" element={<DashboardPage />} />
+          <Route path="/weatherReport" element={<WeatherReportPage />} />
+          <Route path="/plantDatabase" element={<CropsPage />} />
           <Route path="/taskPage" element={<TaskPage />} />
           {/* <Route path="/settings" element={<SettingsPage />} /> */}
-          <Route path="/farmLocations" element={<FarmLocations />} />
+          <Route path="/farmLocations" element={<FarmLocationsPage />} />
           <Route path="/addPlant" element={<AddPlant />} />
-          <Route path="/addLocation" element={<AddLocation />} />
+          <Route path="/addLocation" element={<AddLocationPage />} />
         </Routes>
       </PageLayout>
       <Footer />

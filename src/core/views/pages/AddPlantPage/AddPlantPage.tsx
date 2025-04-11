@@ -2,54 +2,54 @@ import React from 'react';
 import TextInput, { TextInputProps } from '../../reusables/TextInput/TextInput';
 import Heading from '../../reusables/Heading/Heading';
 import { useNavigate } from 'react-router-dom';
-import addLocationStore from '../../../stores/AddLocationStore/AddLocationStore';
+import addPlantStore from '../../../stores/AddPlantStore/AddPlantStore';
 import Button, { ButtonProps } from '../../reusables/Button/Button';
-import styles from './AddLocation.module.css';
+import styles from './AddPlantPage.module.css';
 import { observer } from 'mobx-react-lite';
 
-const AddLocation: React.FC = observer(() => {
+const AddPlantPage: React.FC = observer(() => {
   const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    addLocationStore.addLocation();
-    addLocationStore.resetForm();
+    addPlantStore.addPlant();
+    addPlantStore.resetForm();
     navigate('/');
   };
 
   const nameProps: TextInputProps = {
-    value: addLocationStore.locationName,
-    onChange: (value: string) => addLocationStore.updateField('locationName', value),
-    placeholder: 'Location Name',
-    label: 'Location Name',
+    value: addPlantStore.commonName,
+    onChange: (value: string) => addPlantStore.updateField('commonName', value),
+    placeholder: 'Common Name',
+    label: 'Common Name',
     required: true,
   };
 
   const sunPreferenceProps: TextInputProps = {
-    value: addLocationStore.longitude.toString(),
-    onChange: (value: string) => addLocationStore.updateField('longitude', value),
-    placeholder: 'Longitude',
-    label: 'Longitude',
+    value: addPlantStore.genus,
+    onChange: (value: string) => addPlantStore.updateField('genus', value),
+    placeholder: 'Genus',
+    label: 'Genus',
     required: true,
   };
 
   const waterNeedsProps: TextInputProps = {
-    value: addLocationStore.latitude.toString(),
+    value: addPlantStore.scientificName,
     onChange: (value: string) =>
-      addLocationStore.updateField('latitude', value),
-    placeholder: 'Latitude',
-    label: 'Latitude',
+      addPlantStore.updateField('scientificName', value),
+    placeholder: 'Scientific Name',
+    label: 'Scientific Name',
     required: true,
   };
 
   const buttonProps: ButtonProps = {
     type: 'submit',
-    label: 'Add Field',
+    label: 'Add Crop',
   };
 
   return (
     <section className={styles.section}>
-      <Heading level={1} text="Add New Field" />
+      <Heading level={1} text="Add New Crop" />
       <form onSubmit={handleSubmit} className={styles.form}>
         <TextInput {...nameProps} />
         <TextInput {...sunPreferenceProps} />
@@ -60,4 +60,4 @@ const AddLocation: React.FC = observer(() => {
   );
 });
 
-export default AddLocation;
+export default AddPlantPage;

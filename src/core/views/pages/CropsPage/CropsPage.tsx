@@ -1,7 +1,7 @@
 import * as React from 'react';
 import SearchBar from '../../containers/SearchBar/SearchBar';
 import Table from '../../reusables/TableWithSorting/TableWithSorting';
-import styles from './PlantDatabase.module.css';
+import styles from './CropsPage.module.css';
 import Heading from '../../reusables/Heading/Heading';
 import plantsStore from '../../../stores/PlantsStore/PlantsStore';
 import { observer } from 'mobx-react-lite';
@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import { FaEdit } from 'react-icons/fa';
 import { FaTrash } from 'react-icons/fa';
 
-const PlantDatabase: React.FC = observer(() => {
+const CropsPage: React.FC = observer(() => {
   const navigate = useNavigate();
 
   const searchBarProps: SearchBarProps = {
@@ -77,4 +77,4 @@ const PlantDatabase: React.FC = observer(() => {
   );
 });
 
-export default PlantDatabase;
+export default CropsPage;

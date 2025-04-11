@@ -1,12 +1,12 @@
 import React from 'react';
-import styles from './WeatherReport.module.css';
+import styles from './WeatherReportPage.module.css';
 import { observer } from 'mobx-react-lite';
 import weatherStore from '../../../stores/WeatherStore/WeatherStore';
 import TextWithBoldSpan from '../../reusables/TextWithBoldSpan/TextWithBoldSpan';
 import Heading from '../../reusables/Heading/Heading';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 
-const WeatherReport: React.FC = observer(() => {
+const WeatherReportPage: React.FC = observer(() => {
   const forecast = weatherStore.weatherForecast?.forecastday || [];
 
   const children = (
@@ -58,4 +58,4 @@ const WeatherReport: React.FC = observer(() => {
   );
 });
 
-export default WeatherReport;
+export default WeatherReportPage;

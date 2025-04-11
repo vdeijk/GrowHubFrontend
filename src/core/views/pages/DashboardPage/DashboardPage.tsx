@@ -4,7 +4,7 @@ import CurrentWeather from '../../containers/CurrentWeather/CurrentWeather';
 import Tasks from '../../containers/Tasks/Tasks';
 import Plants from '../../containers/Plants/Plants';
 
-const Dashboard: React.FC = () => {
+const DashboardPage: React.FC = () => {
   return (
     <>
       <CurrentWeather />
@@ -15,4 +15,4 @@ const Dashboard: React.FC = () => {
   );
 };
 
-export default Dashboard;
+export default DashboardPage;
