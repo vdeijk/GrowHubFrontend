@@ -17,7 +17,7 @@ const Tasks: React.FC = observer(() => {
 
   return (
     <section className={styles.taskList}>
-      <Heading level={6} text="Upcoming Tasks"></Heading>
+      <Heading level={6} text="AgriTasks"></Heading>
       {taskStore.tasks.map((task) => (
         <Task key={task.id} taskData={task} />
       ))}

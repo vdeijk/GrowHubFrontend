@@ -8,7 +8,7 @@ class RouterStore {
     { href: '/', label: 'Dashboard' },
     { href: '/weatherReport', label: 'Weather' },
     { href: '/farmLocations', label: 'Fields' },
-    { href: '/taskPage', label: 'Tasks' },
+    { href: '/taskPage', label: 'AgriTasks' },
     { href: '/plantDatabase', label: 'Crops' },
   ];
 

@@ -19,7 +19,7 @@ const TaskPage: React.FC = observer(() => {
 
   return (
     <section className={styles.taskPage}>
-      <Heading level={1} text="Manage Tasks"></Heading>
+      <Heading level={1} text="AgriTasks"></Heading>
 
       {taskStore.tasks.map((task) => (
         <Task taskData={task} key={task.id} />
