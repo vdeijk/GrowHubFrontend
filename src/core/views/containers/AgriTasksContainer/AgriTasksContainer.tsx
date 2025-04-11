@@ -6,6 +6,7 @@ import { observer } from 'mobx-react-lite';
 import Heading from '../../reusables/Heading/Heading';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
+import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 
 const Tasks: React.FC = observer(() => {
   const navigate = useRouterNavigation();
@@ -17,11 +18,13 @@ const Tasks: React.FC = observer(() => {
 
   return (
     <section className={styles.taskList}>
-      <Heading level={6} text="AgriTasks"></Heading>
-      {taskStore.tasks.map((task) => (
-        <Task key={task.id} taskData={task} />
-      ))}
-      <ButtonContainer {...buttonContainerData} />
+      <LoadingWrapper isLoading={taskStore.isLoading}>
+        <Heading level={6} text="AgriTasks"></Heading>
+        {taskStore.tasks.map((task) => (
+          <Task key={task.id} taskData={task} />
+        ))}
+        <ButtonContainer {...buttonContainerData} />
+      </LoadingWrapper>
     </section>
   );
 });

@@ -6,6 +6,7 @@ import FieldListContainer from '../../containers/FieldListContainer/FieldListCon
 import fieldsStore from '../../../stores/FieldsStore/FieldsStore';
 import { observer } from 'mobx-react-lite';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
+import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 
 const FieldsPage: React.FC = observer(() => {
   const navigate = useRouterNavigation();
@@ -41,16 +42,18 @@ const FieldsPage: React.FC = observer(() => {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.top}></div>
-      <div className={styles.left}>
-        <Map {...mapData} />
-      </div>
-      <div className={styles.right}>
-        <FieldListContainer {...listData} />
-        <ButtonContainer {...buttonContainerData} />
-      </div>
-    </div>
+    <section className={styles.container}>
+      <LoadingWrapper isLoading={fieldsStore.isLoading}>
+        <div className={styles.top}></div>
+        <div className={styles.left}>
+          <Map {...mapData} />
+        </div>
+        <div className={styles.right}>
+          <FieldListContainer {...listData} />
+          <ButtonContainer {...buttonContainerData} />
+        </div>
+      </LoadingWrapper>
+    </section>
   );
 });
 

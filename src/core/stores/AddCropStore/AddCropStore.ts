@@ -7,6 +7,7 @@ class AddCropStore {
   commonName: string = '';
   genus: string = '';
   scientificName: string = '';
+  isLoading: boolean = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -25,26 +26,56 @@ class AddCropStore {
   }
 
   public async addCrop() {
-    await postData('/plants', {
-      commonName: this.commonName,
-      genus: this.genus,
-      scientificName: this.scientificName,
+    runInAction(() => {
+      this.isLoading = true;
     });
+
+    try {
+      await postData('/plants', {
+        commonName: this.commonName,
+        genus: this.genus,
+        scientificName: this.scientificName,
+      });
+    } finally {
+      runInAction(() => {
+        this.isLoading = false;
+      });
+    }
   }
 
   public async loadCrop(id: string) {
-    const plant = await getData(`/plants/${id}`);
-    this.commonName = plant.commonName;
-    this.genus = plant.genus;
-    this.scientificName = plant.scientificName;
+    runInAction(() => {
+      this.isLoading = true;
+    });
+
+    try {
+      const plant = await getData(`/plants/${id}`);
+      this.commonName = plant.commonName;
+      this.genus = plant.genus;
+      this.scientificName = plant.scientificName;
+    } finally {
+      runInAction(() => {
+        this.isLoading = false;
+      });
+    }
   }
 
   public async updateCrop(id: string) {
-    await putData(`/plants/${id}`, {
-      commonName: this.commonName,
-      genus: this.genus,
-      scientificName: this.scientificName,
+    runInAction(() => {
+      this.isLoading = true;
     });
+
+    try {
+      await putData(`/plants/${id}`, {
+        commonName: this.commonName,
+        genus: this.genus,
+        scientificName: this.scientificName,
+      });
+    } finally {
+      runInAction(() => {
+        this.isLoading = false;
+      });
+    }
   }
 }
 

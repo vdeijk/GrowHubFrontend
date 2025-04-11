@@ -6,6 +6,7 @@ import Button, { ButtonProps } from '../../reusables/Button/Button';
 import styles from './AddCropPage.module.css';
 import { observer } from 'mobx-react-lite';
 import { useParams } from 'react-router-dom';
+import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 
 interface AddCropPageProps {
   isEditing?: boolean;
@@ -64,12 +65,14 @@ const AddCropPage: React.FC<AddCropPageProps> = observer(
 
     return (
       <section className={styles.section}>
-        <form onSubmit={handleSubmit} className={styles.form}>
-          <TextInput {...nameProps} />
-          <TextInput {...sunPreferenceProps} />
-          <TextInput {...waterNeedsProps} />
-          <Button {...buttonProps} />
-        </form>
+        <LoadingWrapper isLoading={addCropStore.isLoading}>
+          <form onSubmit={handleSubmit} className={styles.form}>
+            <TextInput {...nameProps} />
+            <TextInput {...sunPreferenceProps} />
+            <TextInput {...waterNeedsProps} />
+            <Button {...buttonProps} />
+          </form>
+        </LoadingWrapper>
       </section>
     );
   },
