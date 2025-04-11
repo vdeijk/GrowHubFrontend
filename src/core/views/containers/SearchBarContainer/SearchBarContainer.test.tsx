@@ -2,7 +2,7 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import '@testing-library/jest-dom';
-import SearchBar from './SearchBar';
+import SearchBar from './SearchBarContainer';
 
 describe('SearchBar', () => {
   it('should update the query state on input change', () => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Menu.module.css';
+import styles from './MenuContainer.module.css';
 import MenuLink from '../../reusables/MenuLink/MenuLink';
 import { MenuLinkData } from '../../../../auxiliary/interfaces/MenuLinkData';
 import Heading from '../../reusables/Heading/Heading';
@@ -11,7 +11,7 @@ interface MenuProps {
   curPageTitle: string;
 }
 
-const Menu: React.FC<MenuProps> = ({
+const MenuContainer: React.FC<MenuProps> = ({
   userName,
   profilePicture,
   menuLinks,
@@ -37,4 +37,4 @@ const Menu: React.FC<MenuProps> = ({
   );
 };
 
-export default Menu;
+export default MenuContainer;

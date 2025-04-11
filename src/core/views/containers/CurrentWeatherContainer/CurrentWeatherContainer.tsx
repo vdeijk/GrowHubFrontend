@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './CurrentWeather.module.css';
+import styles from './CurrentWeatherContainer.module.css';
 import { observer } from 'mobx-react-lite';
 import weatherStore from '../../../stores/WeatherStore/WeatherStore';
 import TextWithBoldSpan from '../../reusables/TextWithBoldSpan/TextWithBoldSpan';
@@ -9,7 +9,7 @@ import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import { useNavigate } from 'react-router-dom';
 
-const CurrentWeather: React.FC = observer(() => {
+const CurrentWeatherContainer: React.FC = observer(() => {
   const navigate = useNavigate();
 
   const weather = weatherStore.weather;
@@ -57,4 +57,4 @@ const CurrentWeather: React.FC = observer(() => {
   );
 });
 
-export default CurrentWeather;
+export default CurrentWeatherContainer;

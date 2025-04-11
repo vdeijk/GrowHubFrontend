@@ -1,12 +1,12 @@
 import * as React from 'react';
-import SearchBar from '../../containers/SearchBar/SearchBar';
+import SearchBarContainer from '../../containers/SearchBarContainer/SearchBarContainer';
 import Table from '../../reusables/TableWithSorting/TableWithSorting';
 import styles from './CropsPage.module.css';
 import Heading from '../../reusables/Heading/Heading';
 import plantsStore from '../../../stores/PlantsStore/PlantsStore';
 import { observer } from 'mobx-react-lite';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
-import { SearchBarProps } from '../../containers/SearchBar/SearchBar';
+import { SearchBarProps } from '../../containers/SearchBarContainer/SearchBarContainer';
 import { TableProps } from '../../reusables/TableWithSorting/TableWithSorting';
 import { Plant } from '../../../../auxiliary/interfaces/Plant';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
@@ -69,7 +69,7 @@ const CropsPage: React.FC = observer(() => {
     <section className={styles.section}>
       <Heading level={1} text="Crop Database" />
       <LoadingWrapper isLoading={plantsStore.isLoading}>
-        <SearchBar {...searchBarProps} />
+        <SearchBarContainer {...searchBarProps} />
         <Table {...tableProps} />
         <ButtonContainer {...buttonContainerData} />
       </LoadingWrapper>

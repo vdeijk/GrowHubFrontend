@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './SearchBar.module.css';
+import styles from './SearchBarContainer.module.css';
 import TextInput from '../../reusables/TextInput/TextInput';
 import Dropdown from '../../reusables/Dropdown/Dropdown';
 import { DropdownOption } from '../../../../auxiliary/interfaces/DropdownOptions';

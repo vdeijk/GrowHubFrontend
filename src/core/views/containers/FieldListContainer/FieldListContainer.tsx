@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './LocationList.module.css';
+import styles from './FieldListContainer.module.css';
 import { FarmLocationData } from '../../../../auxiliary/interfaces/FarmLocation';
 import FarmLocation from '../../reusables/FarmLocation/FarmLocation';
 
@@ -9,7 +9,7 @@ interface LocationListProps {
   onDelete: (id: number) => void;
 }
 
-const LocationList: React.FC<LocationListProps> = ({
+const FieldListContainer: React.FC<LocationListProps> = ({
   locations,
   onEdit,
   onDelete,
@@ -28,4 +28,4 @@ const LocationList: React.FC<LocationListProps> = ({
   );
 };
 
-export default LocationList;
+export default FieldListContainer;

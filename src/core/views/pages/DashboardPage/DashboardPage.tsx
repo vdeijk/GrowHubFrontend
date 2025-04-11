@@ -1,16 +1,16 @@
 import React from 'react';
-import MapSection from '../../containers/MapSection/MapSection';
-import CurrentWeather from '../../containers/CurrentWeather/CurrentWeather';
-import Tasks from '../../containers/Tasks/Tasks';
-import Plants from '../../containers/Plants/Plants';
+import MapSectionContainer from '../../containers/MapSectionContainer/MapSectionContainer';
+import CurrentWeatherContainer from '../../containers/CurrentWeatherContainer/CurrentWeatherContainer';
+import AgriTasksContainer from '../../containers/AgriTasksContainer/AgriTasksContainer';
+import CropsContainer from '../../containers/CropsContainer/CropsContainer';
 
 const DashboardPage: React.FC = () => {
   return (
     <>
-      <CurrentWeather />
-      <MapSection />
-      <Tasks />
-      <Plants />
+      <CurrentWeatherContainer />
+      <MapSectionContainer />
+      <AgriTasksContainer />
+      <CropsContainer />
     </>
   );
 };

@@ -3,7 +3,7 @@ import styles from './FarmLocationsPage.module.css';
 import Map from '../../reusables/Map/Map';
 import Heading from '../../reusables/Heading/Heading';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
-import LocationList from '../../containers/LocationList/LocationList';
+import FieldListContainer from '../../containers/FieldListContainer/FieldListContainer';
 import locationStore from '../../../stores/LocationStore/LocationStore';
 import { observer } from 'mobx-react-lite';
 import { useNavigate } from 'react-router-dom';
@@ -51,7 +51,7 @@ const FarmLocations: React.FC = observer(() => {
         <Map {...mapData} />
       </div>
       <div className={styles.right}>
-        <LocationList {...listData} />
+        <FieldListContainer {...listData} />
         <ButtonContainer {...buttonContainerData} />
       </div>
     </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './MapSection.module.css';
+import styles from './MapSectionContainer.module.css';
 import Map from '../../reusables/Map/Map';
 import Heading from '../../reusables/Heading/Heading';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';

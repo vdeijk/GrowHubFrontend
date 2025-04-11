@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Plants.module.css';
+import styles from './CropsContainer.module.css';
 import TableWithoutSorting from '../../reusables/TableWithoutSorting/TableWithoutSorting';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import plantsStore from '../../../stores/PlantsStore/PlantsStore';

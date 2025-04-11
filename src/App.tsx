@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
-import Navbar from './core/views/containers/Navbar/Navbar';
-import Menu from './core/views/containers/Menu/Menu';
+import NavbarContainer from './core/views/containers/NavbarContainer/NavbarContainer';
+import MenuContainer from './core/views/containers/MenuContainer/MenuContainer';
 import DashboardPage from './core/views/pages/DashboardPage/DashboardPage';
-import Footer from './core/views/containers/Footer/Footer';
+import FooterContainer from './core/views/containers/FooterContainer/FooterContainer';
 import profilePicture from './auxiliary/assets/profile.jpeg';
 import { Routes, Route } from 'react-router-dom';
 import CropsPage from './core/views/pages/CropsPage/CropsPage';
@@ -20,8 +20,8 @@ const App: React.FC = () => {
   return (
     <main className="appContainer">
       <ToastContainer />
-      <Navbar userName="YourUserName" />
-      <Menu
+      <NavbarContainer userName="YourUserName" />
+      <MenuContainer
         userName="YourUserName"
         profilePicture={profilePicture}
         menuLinks={routerStore.menuLinks}
@@ -39,7 +39,7 @@ const App: React.FC = () => {
           <Route path="/addLocation" element={<AddLocationPage />} />
         </Routes>
       </PageLayout>
-      <Footer />
+      <FooterContainer />
     </main>
   );
 };

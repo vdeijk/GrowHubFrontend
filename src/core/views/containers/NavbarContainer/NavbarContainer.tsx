@@ -5,13 +5,13 @@ import {
   faQuestionCircle,
   faSignOutAlt,
 } from '@fortawesome/free-solid-svg-icons';
-import styles from './Navbar.module.css';
+import styles from './NavbarContainer.module.css';
 
 interface NavbarProps {
   userName: string;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ userName }) => {
+const NavbarContainer: React.FC<NavbarProps> = ({ userName }) => {
   return (
     <nav className={styles.navbar}>
       <div className={styles.navbarBrand}>
@@ -37,4 +37,4 @@ const Navbar: React.FC<NavbarProps> = ({ userName }) => {
   );
 };
 
-export default Navbar;
+export default NavbarContainer;

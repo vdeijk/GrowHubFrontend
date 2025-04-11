@@ -2,7 +2,7 @@ import React from 'react';
 import { observer } from 'mobx-react-lite';
 import Appointment from '../../reusables/Appointment/Appointment';
 import appointmentStore from '../../../stores/AppointmentsStore/AppointmentStore';
-import styles from './Appointments.module.css';
+import styles from './AppointmentsContainer.module.css';
 //import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import Heading from '../../reusables/Heading/Heading';
 
