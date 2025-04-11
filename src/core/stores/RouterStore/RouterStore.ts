@@ -11,13 +11,26 @@ class RouterStore {
     { href: '/cropsPage', label: 'Crops', hidden: false },
     { href: '/addCropPage', label: 'Add Crop', hidden: true },
     { href: '/addFieldPage', label: 'Add Field', hidden: true },
+    { href: '/editCrop', label: 'Edit Crop', hidden: true },
+    { href: '/editField', label: 'Edit Field', hidden: true },
   ];
 
   constructor() {
     makeAutoObservable(this);
+
+    window.addEventListener('popstate', this.handlePopState);
   }
 
-  public handleRouteChange = (path: string ) => {
+  destroy() {
+    window.removeEventListener('popstate', this.handlePopState);
+  }
+
+  private handlePopState = () => {
+    const path = window.location.pathname;
+    this.currentLabel = this.getLabel(path);
+  };
+
+  public handleRouteChange = (path: string) => {
     this.currentLabel = this.getLabel(path);
     console.log(this.currentLabel);
   };
@@ -28,7 +41,17 @@ class RouterStore {
 
   private getLabel(path: string): string {
     const currentLink = this.menuLinks.find((link) => link.href === path);
-    return currentLink ? currentLink.label : 'Unknown Page';
+    if (currentLink) {
+      return currentLink.label;
+    }
+    if (path.startsWith('/editCrop/')) {
+      return 'Edit Crop';
+    }
+    if (path.startsWith('/editField/')) {
+      return 'Edit Field';
+    }
+
+    return 'Unknown Page';
   }
 }
 
