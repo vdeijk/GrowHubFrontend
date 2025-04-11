@@ -1,5 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 import { MenuLinkData } from '../../../auxiliary/interfaces/MenuLinkData';
+import { toast } from 'react-toastify';
 
 class RouterStore {
   currentLabel: string = '';
@@ -21,8 +22,13 @@ class RouterStore {
       hidden: true,
       isDynamic: false,
     },
-    { path: '/editCrop', label: 'Edit Crop', hidden: true, isDynamic: true },
-    { path: '/editField', label: 'Edit Field', hidden: true, isDynamic: true },
+    { path: '/editCrop:id', label: 'Edit Crop', hidden: true, isDynamic: true },
+    {
+      path: '/editField:id',
+      label: 'Edit Field',
+      hidden: true,
+      isDynamic: true,
+    },
   ];
 
   constructor() {
@@ -41,9 +47,14 @@ class RouterStore {
   };
 
   public handleRouteChange = (path: string) => {
-    this.currentLabel = this.getLabel(path);
-    if (this.currentLabel === 'Unknown Page') {
-      window.location.href = '/404'; 
+    try {
+      this.currentLabel = this.getLabel(path);
+      if (this.currentLabel === 'Unknown Page') {
+        //  window.location.href = '/404';
+      }
+    } catch {
+      toast.error('An unexpected error occurred. Redirecting to 404...');
+      //window.location.href = '/404';
     }
   };
 
@@ -60,12 +71,18 @@ class RouterStore {
     const dynamicRoute = this.menuLinks.find((route) => {
       if (!route.isDynamic) return false;
       const dynamicPattern = new RegExp(
-        `^${route.path.replace(':id', '\\d+')}$`,
+        `^${route.path.replace(':id', '/\\d+')}$`,
       );
+
       return dynamicPattern.test(path);
     });
 
-    return dynamicRoute ? dynamicRoute.label : 'Unknown Page';
+    if (dynamicRoute) {
+      return dynamicRoute.label;
+    }
+
+    console.warn(`No route matched for path: ${path}`);
+    return 'Unknown Page';
   }
 }
 
