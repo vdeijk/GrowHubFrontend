@@ -9,9 +9,12 @@ import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import { SearchBarProps } from '../../containers/SearchBar/SearchBar';
 import { TableProps } from '../../reusables/TableWithSorting/TableWithSorting';
 import { Plant } from '../../../../auxiliary/interfaces/Plant';
-import { toJS } from 'mobx';
+import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
+import { useNavigate } from 'react-router-dom';
 
 const PlantDatabase: React.FC = observer(() => {
+  const navigate = useNavigate();
+
   const searchBarProps: SearchBarProps = {
     searchQuery: plantsStore.searchQuery.value,
     error: plantsStore.searchQuery.error,
@@ -29,12 +32,18 @@ const PlantDatabase: React.FC = observer(() => {
     sortOrder: plantsStore.sortOrder,
   };
 
+  const buttonContainerData = {
+    clickHandler: () => navigate('/addPlant'),
+    label: 'Add plant',
+  };
+
   return (
     <section className={styles.section}>
       <Heading level={1} text="Plant Database" />
       <LoadingWrapper isLoading={plantsStore.isLoading}>
         <SearchBar {...searchBarProps} />
         <Table {...tableProps} />
+        <ButtonContainer {...buttonContainerData} />
       </LoadingWrapper>
     </section>
   );

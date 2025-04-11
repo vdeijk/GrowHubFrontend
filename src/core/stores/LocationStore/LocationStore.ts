@@ -1,7 +1,7 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import { getData } from '../../apis/getData';
 
-interface Location {
+export interface Location {
   id: number;
   name: string;
   latitude: number;

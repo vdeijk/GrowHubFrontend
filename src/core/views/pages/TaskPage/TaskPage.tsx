@@ -4,13 +4,13 @@ import taskStore from '../../../stores/TaskStore/TaskStore';
 import styles from './TaskPage.module.css';
 import { observer } from 'mobx-react-lite';
 import Heading from '../../reusables/Heading/Heading';
-import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
+//import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 
 const TaskPage: React.FC = observer(() => {
-  const buttonContainerData = {
-    clickHandler: () => {},
-    label: 'Add New Task',
-  };
+  // const buttonContainerData = {
+  //   clickHandler: () => {},
+  //   label: 'Add New Task',
+  // };
   const handleEdit = (id: number) => {};
 
   const handleDelete = (id: number) => {
@@ -19,12 +19,12 @@ const TaskPage: React.FC = observer(() => {
 
   return (
     <section className={styles.taskPage}>
-      <Heading level={6} text="Manage Tasks"></Heading>
+      <Heading level={1} text="Manage Tasks"></Heading>
 
       {taskStore.tasks.map((task) => (
         <Task taskData={task} key={task.id} />
       ))}
-      <ButtonContainer {...buttonContainerData} />
+      {/* <ButtonContainer {...buttonContainerData} /> */}
     </section>
   );
 });

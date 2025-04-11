@@ -9,11 +9,12 @@ import { Routes, Route } from 'react-router-dom';
 import PlantDatabase from './core/views/pages/PlantDatabase/PlantDatabase';
 import routerStore from './core/stores/RouterStore/RouterStore';
 import PageLayout from './core/views/reusables/PageLayout/PageLayout';
-//import AddPlant from './core/views/pages/AddPlant/AddPlant';
+import AddPlant from './core/views/pages/AddPlant/AddPlant';
 import { ToastContainer } from 'react-toastify';
 import WeatherReport from './core/views/pages/WeatherReport/WeatherReport';
 import FarmLocations from './core/views/pages/FarmLocations/FarmLocations';
 import TaskPage from './core/views/pages/TaskPage/TaskPage';
+import AddLocation from './core/views/pages/AddLocation/AddLocation';
 
 const App: React.FC = () => {
   return (
@@ -34,6 +35,8 @@ const App: React.FC = () => {
           <Route path="/taskPage" element={<TaskPage />} />
           {/* <Route path="/settings" element={<SettingsPage />} /> */}
           <Route path="/farmLocations" element={<FarmLocations />} />
+          <Route path="/addPlant" element={<AddPlant />} />
+          <Route path="/addLocation" element={<AddLocation />} />
         </Routes>
       </PageLayout>
       <Footer />

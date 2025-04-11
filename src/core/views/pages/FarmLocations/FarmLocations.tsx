@@ -6,10 +6,13 @@ import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import LocationList from '../../containers/LocationList/LocationList';
 import locationStore from '../../../stores/LocationStore/LocationStore';
 import { observer } from 'mobx-react-lite';
+import { useNavigate } from 'react-router-dom';
 
 const FarmLocations: React.FC = observer(() => {
+  const navigate = useNavigate();
+
   const buttonContainerData = {
-    clickHandler: () => {},
+    clickHandler: () => navigate('/addLocation'),
     label: 'Add location',
   };
 
@@ -42,7 +45,7 @@ const FarmLocations: React.FC = observer(() => {
   return (
     <div className={styles.container}>
       <div className={styles.top}>
-        <Heading level={6} text="Farm Locations" />
+        <Heading level={1} text="Farm Locations" />
       </div>
       <div className={styles.left}>
         <Map {...mapData} />
