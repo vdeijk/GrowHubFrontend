@@ -7,10 +7,10 @@ import { TextWithBoldSpanData } from '../../../../auxiliary/interfaces/TextWithB
 import Heading from '../../reusables/Heading/Heading';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
-import { useNavigate } from 'react-router-dom';
+import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 
 const CurrentWeatherContainer: React.FC = observer(() => {
-  const navigate = useNavigate();
+  const navigate = useRouterNavigation();
 
   const weather = weatherStore.weather;
 

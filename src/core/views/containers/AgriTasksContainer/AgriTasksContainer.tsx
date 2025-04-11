@@ -5,10 +5,10 @@ import styles from './AgriTasksContainer.module.css';
 import { observer } from 'mobx-react-lite';
 import Heading from '../../reusables/Heading/Heading';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
-import { useNavigate } from 'react-router-dom';
+import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 
 const Tasks: React.FC = observer(() => {
-  const navigate = useNavigate();
+  const navigate = useRouterNavigation();
 
   const buttonContainerData = {
     clickHandler: () => navigate('/tasksPage'),

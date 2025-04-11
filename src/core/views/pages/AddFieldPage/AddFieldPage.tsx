@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import TextInput, { TextInputProps } from '../../reusables/TextInput/TextInput';
-import Heading from '../../reusables/Heading/Heading';
-import { useNavigate } from 'react-router-dom';
+import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import addFieldStore from '../../../stores/AddFieldStore/AddFieldStore';
 import Button, { ButtonProps } from '../../reusables/Button/Button';
 import styles from './AddFieldPage.module.css';
@@ -14,7 +13,7 @@ interface AddFieldPageProps {
 
 const AddFieldPage: React.FC<AddFieldPageProps> = observer(
   ({ isEditing = false }) => {
-    const navigate = useNavigate();
+    const navigate = useRouterNavigation();
     const { id } = useParams<{ id: string }>();
 
     useEffect(() => {
@@ -24,8 +23,6 @@ const AddFieldPage: React.FC<AddFieldPageProps> = observer(
         addFieldStore.resetForm();
       }
     }, [isEditing, id]);
-
-    const title = isEditing ? 'Edit Field' : 'Add New Field';
 
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
@@ -68,7 +65,6 @@ const AddFieldPage: React.FC<AddFieldPageProps> = observer(
 
     return (
       <section className={styles.section}>
-        <Heading level={1} text={title} />
         <form onSubmit={handleSubmit} className={styles.form}>
           <TextInput {...nameProps} />
           <TextInput {...longitudeProps} />

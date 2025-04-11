@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import TextInput, { TextInputProps } from '../../reusables/TextInput/TextInput';
-import Heading from '../../reusables/Heading/Heading';
-import { useNavigate } from 'react-router-dom';
+import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import addCropStore from '../../../stores/AddCropStore/AddCropStore';
 import Button, { ButtonProps } from '../../reusables/Button/Button';
 import styles from './AddCropPage.module.css';
@@ -14,7 +13,7 @@ interface AddCropPageProps {
 
 const AddCropPage: React.FC<AddCropPageProps> = observer(
   ({ isEditing = false }) => {
-    const navigate = useNavigate();
+    const navigate = useRouterNavigation();
     const { id } = useParams<{ id: string }>();
 
     useEffect(() => {
@@ -31,8 +30,6 @@ const AddCropPage: React.FC<AddCropPageProps> = observer(
       addCropStore.resetForm();
       navigate('/');
     };
-
-    const title = isEditing ? 'Edit Crop' : 'Add New Crop';
 
     const nameProps: TextInputProps = {
       value: addCropStore.commonName,
@@ -67,7 +64,6 @@ const AddCropPage: React.FC<AddCropPageProps> = observer(
 
     return (
       <section className={styles.section}>
-        <Heading level={1} text={title} />
         <form onSubmit={handleSubmit} className={styles.form}>
           <TextInput {...nameProps} />
           <TextInput {...sunPreferenceProps} />

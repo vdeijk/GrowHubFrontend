@@ -15,8 +15,9 @@ import WeatherReportPage from './core/views/pages/WeatherReportPage/WeatherRepor
 import FieldsPage from './core/views/pages/FieldsPage/FieldsPage';
 import TasksPage from './core/views/pages/TasksPage/TaskPage';
 import AddFieldPage from './core/views/pages/AddFieldPage/AddFieldPage';
+import { observer } from 'mobx-react-lite';
 
-const App: React.FC = () => {
+const App: React.FC = observer(() => {
   return (
     <main className="appContainer">
       <ToastContainer />
@@ -24,7 +25,7 @@ const App: React.FC = () => {
       <MenuContainer
         userName="YourUserName"
         profilePicture={profilePicture}
-        menuLinks={routerStore.menuLinks}
+        menuLinks={routerStore.getVisibleLinks()}
         curPageTitle={routerStore.currentLabel}
       />
       <PageLayout>
@@ -34,7 +35,7 @@ const App: React.FC = () => {
           <Route path="/tasksPage" element={<TasksPage />} />
           <Route path="/fieldsPage" element={<FieldsPage />} />
           <Route path="/addFieldPage" element={<AddFieldPage />} />
-          <Route path="/editField/:id" element={<AddFieldPage isEditing />} /> 
+          <Route path="/editField/:id" element={<AddFieldPage isEditing />} />
           <Route path="/cropsPage" element={<CropsPage />} />
           <Route path="/addCropPage" element={<AddCropPage />} />
           <Route path="/editCrop/:id" element={<AddCropPage isEditing />} />
@@ -43,6 +44,6 @@ const App: React.FC = () => {
       <FooterContainer />
     </main>
   );
-};
+});
 
 export default App;

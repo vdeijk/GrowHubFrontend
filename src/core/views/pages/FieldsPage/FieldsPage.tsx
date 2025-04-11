@@ -1,15 +1,14 @@
 import React from 'react';
 import styles from './FieldsPage.module.css';
 import Map from '../../reusables/Map/Map';
-import Heading from '../../reusables/Heading/Heading';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import FieldListContainer from '../../containers/FieldListContainer/FieldListContainer';
 import fieldsStore from '../../../stores/FieldsStore/FieldsStore';
 import { observer } from 'mobx-react-lite';
-import { useNavigate } from 'react-router-dom';
+import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 
 const FieldsPage: React.FC = observer(() => {
-  const navigate = useNavigate();
+  const navigate = useRouterNavigation();
 
   const buttonContainerData = {
     clickHandler: () => navigate('/addFieldPage'),
@@ -43,9 +42,7 @@ const FieldsPage: React.FC = observer(() => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.top}>
-        <Heading level={1} text="Farm Fields" />
-      </div>
+      <div className={styles.top}></div>
       <div className={styles.left}>
         <Map {...mapData} />
       </div>

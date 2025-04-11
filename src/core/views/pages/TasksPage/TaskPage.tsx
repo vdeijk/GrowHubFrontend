@@ -3,8 +3,6 @@ import Task from '../../reusables/Task/Task';
 import taskStore from '../../../stores/TaskStore/TaskStore';
 import styles from './TasksPage.module.css';
 import { observer } from 'mobx-react-lite';
-import Heading from '../../reusables/Heading/Heading';
-//import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 
 const TasksPage: React.FC = observer(() => {
   // const buttonContainerData = {
@@ -19,8 +17,6 @@ const TasksPage: React.FC = observer(() => {
 
   return (
     <section className={styles.taskPage}>
-      <Heading level={1} text="AgriTasks"></Heading>
-
       {taskStore.tasks.map((task) => (
         <Task taskData={task} key={task.id} />
       ))}

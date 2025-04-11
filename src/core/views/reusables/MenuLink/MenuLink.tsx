@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './MenuLink.module.css';
 import { MenuLinkData } from '../../../../auxiliary/interfaces/MenuLinkData';
+import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 
 interface MenuLinkProps {
   menuLinkData: MenuLinkData;
@@ -8,10 +9,15 @@ interface MenuLinkProps {
 
 const MenuLink: React.FC<MenuLinkProps> = ({ menuLinkData }) => {
   const { href, label } = menuLinkData;
+  const navigate = useRouterNavigation();
+
+  const clickHandler = () => {
+    navigate(href);
+  };
 
   return (
     <li className={styles.menuItem}>
-      <a href={href} className={styles.menuLink}>
+      <a onClick={clickHandler} className={styles.menuLink}>
         {label}
       </a>
     </li>

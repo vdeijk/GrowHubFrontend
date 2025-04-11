@@ -2,7 +2,6 @@ import * as React from 'react';
 import SearchBarContainer from '../../containers/SearchBarContainer/SearchBarContainer';
 import Table from '../../reusables/TableWithSorting/TableWithSorting';
 import styles from './CropsPage.module.css';
-import Heading from '../../reusables/Heading/Heading';
 import plantsStore from '../../../stores/CropsStore/CropsStore';
 import { observer } from 'mobx-react-lite';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
@@ -10,12 +9,12 @@ import { SearchBarProps } from '../../containers/SearchBarContainer/SearchBarCon
 import { TableProps } from '../../reusables/TableWithSorting/TableWithSorting';
 import { Plant } from '../../../../auxiliary/interfaces/Plant';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
-import { useNavigate } from 'react-router-dom';
+import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import { FaEdit } from 'react-icons/fa';
 import { FaTrash } from 'react-icons/fa';
 
 const CropsPage: React.FC = observer(() => {
-  const navigate = useNavigate();
+  const navigate = useRouterNavigation();
 
   const searchBarProps: SearchBarProps = {
     searchQuery: plantsStore.searchQuery.value,
@@ -65,7 +64,6 @@ const CropsPage: React.FC = observer(() => {
 
   return (
     <section className={styles.section}>
-      <Heading level={1} text="Crop Database" />
       <LoadingWrapper isLoading={plantsStore.isLoading}>
         <SearchBarContainer {...searchBarProps} />
         <Table {...tableProps} />

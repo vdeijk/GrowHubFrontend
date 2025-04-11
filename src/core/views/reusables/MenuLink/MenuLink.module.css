@@ -15,4 +15,5 @@
 
 .menuLink:hover {
   background-color: #575757;
+  cursor: pointer;
 }

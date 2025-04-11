@@ -3,12 +3,12 @@ import styles from './MapSectionContainer.module.css';
 import Map from '../../reusables/Map/Map';
 import Heading from '../../reusables/Heading/Heading';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
-import { useNavigate } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import locationStore from '../../../stores/FieldsStore/FieldsStore';
+import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 
 const MapSection: React.FC = observer(() => {
-  const navigate = useNavigate();
+  const navigate = useRouterNavigation();
 
   const buttonContainerData = {
     clickHandler: () => navigate('/fieldsPage'),
