@@ -17,14 +17,14 @@ const FarmLocation: React.FC<LocationProps> = ({
   return (
     <div key={location.id} className={styles.locationItem}>
       <span className={styles.locationName}>{location.name}</span>
-      <div className={styles.actions}>
+      <div className={styles.actionIcons}>
         <FaEdit
-          className={styles.icon}
+          className={styles.editIcon}
           onClick={() => onEdit(location.id)}
           title="Edit"
         />
         <FaTrash
-          className={styles.icon}
+          className={styles.deleteIcon}
           onClick={() => onDelete(location.id)}
           title="Delete"
         />

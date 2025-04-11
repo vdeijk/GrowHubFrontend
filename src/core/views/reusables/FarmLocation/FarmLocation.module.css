@@ -11,22 +11,36 @@
 }
 
 .locationName {
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: 500;
 }
 
-.actions {
-  display: flex;
-  gap: 0.5rem;
+.actionIcons {
+  grid-auto-flow: column;
+  display: grid;
+  gap: 1rem;
+  align-items: center;
+  width: max-content
 }
 
-.icon {
-  cursor: pointer;
-  font-size: 2rem;
+.editIcon {
   color: #4caf50;
-  transition: all .2s;
+  cursor: pointer;
+  font-size: 1.8rem;
+  transition: color 0.2s ease;
 }
 
-.icon:hover {
-  color: #ef767a;
+.editIcon:hover {
+  color: #4caf50;
+}
+
+.deleteIcon {
+  color: #d9534f;
+  cursor: pointer;
+  font-size: 1.8rem;
+  transition: color 0.2s ease;
+}
+
+.deleteIcon:hover {
+  color: #c9302c;
 }

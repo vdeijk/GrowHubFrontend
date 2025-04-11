@@ -1,3 +1,5 @@
+import { JSX } from 'react';
+
 export interface Plant {
   commonName: string;
   genus: string;
@@ -14,4 +16,5 @@ export interface Plant {
   matureSize?: string;
   bloomTime?: string;
   fertilizerNeeds?: string;
+  actions?: JSX.Element;
 }

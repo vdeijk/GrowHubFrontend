@@ -11,6 +11,8 @@ import { TableProps } from '../../reusables/TableWithSorting/TableWithSorting';
 import { Plant } from '../../../../auxiliary/interfaces/Plant';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import { useNavigate } from 'react-router-dom';
+import { FaEdit } from 'react-icons/fa';
+import { FaTrash } from 'react-icons/fa';
 
 const PlantDatabase: React.FC = observer(() => {
   const navigate = useNavigate();
@@ -26,7 +28,23 @@ const PlantDatabase: React.FC = observer(() => {
 
   const tableProps: TableProps<Plant> = {
     headers: plantsStore.tableHeaders,
-    data: plantsStore.filteredPlants,
+    data: plantsStore.filteredPlants.map((plant) => ({
+      ...plant,
+      actions: (
+        <div className={styles.actionIcons}>
+          <FaEdit
+            className={styles.editIcon}
+            onClick={() => handleEdit(plant.id)}
+            title="Edit Plant"
+          />
+          <FaTrash
+            className={styles.deleteIcon}
+            onClick={() => handleDelete(plant.id)}
+            title="Delete Plant"
+          />
+        </div>
+      ),
+    })),
     onSort: (field) => plantsStore.setSortField(field),
     sortField: plantsStore.sortField,
     sortOrder: plantsStore.sortOrder,
@@ -35,6 +53,16 @@ const PlantDatabase: React.FC = observer(() => {
   const buttonContainerData = {
     clickHandler: () => navigate('/addPlant'),
     label: 'Add plant',
+  };
+
+  const handleEdit = (id: number) => {
+    console.log(`Edit plant with id: ${id}`);
+    navigate(`/editPlant/${id}`);
+  };
+
+  const handleDelete = (id: number) => {
+    console.log(`Delete plant with id: ${id}`);
+    plantsStore.deletePlant(id);
   };
 
   return (

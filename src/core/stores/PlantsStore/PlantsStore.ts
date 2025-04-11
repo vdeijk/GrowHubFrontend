@@ -1,8 +1,6 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import { Plant } from '../../../auxiliary/interfaces/Plant';
 import { debounce } from '../../../auxiliary/utils/debounce';
-import { getPlantData } from '../../apis/plants';
-import plants from '../../../auxiliary/data/plantsMock';
 import { getData } from '../../apis/getData';
 import { validate } from '../../../auxiliary/utils/validationMaxLength';
 import { TextInputState } from '../../../auxiliary/interfaces/TextInputState';
@@ -15,16 +13,19 @@ class PlantsStore {
   isLoading: boolean = false;
   debouncedFilterPlants: () => void;
   genusOptions: { value: string; label: string }[] = [];
-  tableHeaders: { id: keyof Plant; label: string }[] = [
-    { id: 'commonName', label: 'Common Name' },
-    { id: 'genus', label: 'Genus' },
-    { id: 'scientificName', label: 'Scientific Name' },
+  tableHeaders: { id: keyof Plant; label: string; sortable: boolean }[] = [
+    { id: 'commonName', label: 'Common Name', sortable: true },
+    { id: 'genus', label: 'Genus', sortable: true },
+    { id: 'scientificName', label: 'Scientific Name', sortable: true },
+    { id: 'actions', label: 'Actions', sortable: false },
   ];
   sortField: keyof Plant | null = null;
   sortOrder: 'asc' | 'desc' = 'asc';
 
   constructor() {
-    makeAutoObservable(this);
+    makeAutoObservable(this, {
+      debouncedFilterPlants: false, // Exclude functions or complex properties
+    });
 
     this.debouncedFilterPlants = debounce(this.filterPlants.bind(this), 500);
   }
@@ -130,28 +131,9 @@ class PlantsStore {
     this.genusOptions = this.extractGenera();
   };
 
-  private retrieveMockData = () => {
-    this.plants = plants;
-    this.filteredPlants = this.plants;
-    this.genusOptions = this.extractGenera();
-  };
-
-  private retrieveData = async () => {
-    runInAction(() => {
-      this.isLoading = true;
-    });
-
-    const result = await getPlantData();
-    runInAction(() => {
-      if (result.success && result.data) {
-        this.plants = result.data;
-        this.filteredPlants = this.plants;
-        this.genusOptions = this.extractGenera();
-      }
-
-      this.isLoading = false;
-    });
-  };
+  public deletePlant(id: number) {
+    this.plants = this.plants.filter((plant) => plant.id !== id);
+  }
 }
 
 const plantsStore = new PlantsStore();
