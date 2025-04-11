@@ -1,6 +1,6 @@
 .appointment {
   display: flex;
-  padding: 1rem;
+  padding: var(--spacing-small);
   border-bottom: 1px solid #4caf50;
 }
 

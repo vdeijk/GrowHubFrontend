@@ -2,9 +2,9 @@
   height: 100%;
   width: 100%;
   min-height: 600px;
-  border-radius: 8px;
-  padding: 2rem;
+  border-radius: var(--border-radius-large);
+  padding: var(--spacing-medium);
   background-color: #fdfdfd;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--box-shadow);
   grid-area: 3 / 6 / -1 / -1;
 }

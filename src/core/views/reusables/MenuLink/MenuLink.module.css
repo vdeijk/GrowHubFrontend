@@ -1,5 +1,5 @@
 .menuItem {
-  margin-bottom: 1rem;
+  margin-bottom: var(--spacing-small);
 }
 
 .menuLink {
@@ -8,8 +8,8 @@
   font-size: 1.5rem;
   text-transform: uppercase;
   display: block;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
+  padding: 0.5rem var(--spacing-small);
+  border-radius: var(--border-radius-small);
   transition: background-color 0.3s;
 }
 

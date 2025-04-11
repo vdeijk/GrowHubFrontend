@@ -2,7 +2,7 @@
   background-color: #595959;
   color: #fff;
   text-align: center;
-  padding: 1rem;
+  padding: var(--spacing-small);
   width: 100%;
   position: fixed;
   bottom: 0;

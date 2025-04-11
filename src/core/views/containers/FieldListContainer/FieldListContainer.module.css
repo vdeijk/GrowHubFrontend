@@ -1,7 +1,7 @@
 .locationList {
-    margin-bottom: 1rem;
+    margin-bottom: var(--spacing-small);
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: var(--border-radius-small);
     padding: 0.5rem;
     background-color: #f9f9f9;
   }
@@ -19,7 +19,7 @@
   }
   
   .locationName {
-    font-size: 1rem;
+    font-size: var(--spacing-small);
     font-weight: 500;
   }
   

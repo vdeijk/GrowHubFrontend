@@ -1,24 +1,24 @@
 .section {
-  padding: 2rem;
+  padding: var(--spacing-medium);
   width: 100%;
   height: 100%;
   grid-column: 1/-1;
 }
 
 header {
-  margin-bottom: 2rem;
+  margin-bottom: var(--spacing-medium);
 }
 
 h1 {
   font-family: 'Poppins', sans-serif;
-  font-size: 2rem;
+  font-size: var(--spacing-medium);
   color: #333;
 }
 
 .actionIcons {
   grid-auto-flow: column;
   display: grid;
-  gap: 1rem;
+  gap: var(--spacing-small);
   align-items: center;
   width: max-content
 }
@@ -47,8 +47,8 @@ h1 {
 
 .buttonContainer {
   background-color: var(--color-white);
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: var(--spacing-medium);
+  border-radius: var(--border-radius-large);
+  box-shadow: var(--box-shadow);
   grid-column: 1/-1;
 }

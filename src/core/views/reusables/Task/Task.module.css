@@ -2,9 +2,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  border-radius: 4px;
+  padding: var(--spacing-small);
+  margin-bottom: var(--spacing-small);
+  border-radius: var(--border-radius-small);
   background-color: #f0f0f0;
 }
 
@@ -19,15 +19,15 @@
 }
 
 .taskTitle {
-  margin: 0 0 1rem 0;
+  margin: 0 0 var(--spacing-small) 0;
 }
 
 .taskCategory {
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
+  padding: 0.5rem var(--spacing-small);
+  border-radius: var(--border-radius-small);
   color: white;
   display: inline-block;
-  margin-top: 1rem;
+  margin-top: var(--spacing-small);
   width: max-content;
 }
 

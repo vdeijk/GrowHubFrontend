@@ -1,8 +1,8 @@
 .plants {
-  padding: 2rem;
+  padding: var(--spacing-medium);
   background-color: #fdfdfd;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: var(--border-radius-large);
+  box-shadow: var(--box-shadow);
   display: grid;
   grid-area: 4 / 1 / 5 / -1;
 }
@@ -11,5 +11,5 @@
   width: 100%;
   display: grid;
   align-items: end;
-  margin-top: 2rem;
+  margin-top: var(--spacing-medium);
 }
