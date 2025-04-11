@@ -15,7 +15,7 @@ const Appointments: React.FC = observer(() => {
   // };
 
   return (
-    <section className={styles.appointmentList}>
+    <section className={styles.section}>
       <div>
         <Heading level={6} text="Today's Appointments"></Heading>
         {appointmentStore.appointments.map((appointment, index) => (

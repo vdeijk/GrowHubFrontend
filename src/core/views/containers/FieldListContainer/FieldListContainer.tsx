@@ -15,7 +15,7 @@ const FieldListContainer: React.FC<LocationListProps> = ({
   onDelete,
 }) => {
   return (
-    <div className={styles.locationList}>
+    <div className={styles.container}>
       {locations.map((location) => (
         <FarmLocation
           location={location}

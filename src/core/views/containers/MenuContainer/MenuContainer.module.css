@@ -1,4 +1,4 @@
-.menu {
+.container {
   position: fixed;
   top: 6rem;
   left: 0;
@@ -10,7 +10,7 @@
   z-index: 100;
 }
 
-.menuList {
+.unorderedList {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -26,15 +26,11 @@
   color: #fdfdfd;
 }
 
-.profilePicture {
+.image {
   width: 160px;
   height: 160px;
   border-radius: 50%;
   margin-right: var(--spacing-small);
   object-fit: cover;
   margin-bottom: var(--spacing-small);
-}
-
-.h4 {
-  margin-bottom: 4rem;
 }

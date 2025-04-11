@@ -68,7 +68,7 @@ const TurnoverGraph: React.FC<GraphProps> = ({ data, width, height }) => {
   }, [data, width, height]);
 
   return (
-    <section className={styles.graph}>
+    <section className={styles.container}>
       <Heading level={6} text="Weekly Turnover"></Heading>
       <svg ref={svgRef} width="100%" height={height}></svg>
       <ButtonContainer {...buttonContainerData} />

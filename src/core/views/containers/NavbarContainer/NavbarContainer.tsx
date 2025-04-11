@@ -13,8 +13,8 @@ interface NavbarProps {
 
 const NavbarContainer: React.FC<NavbarProps> = ({ userName }) => {
   return (
-    <nav className={styles.navbar}>
-      <div className={styles.navbarBrand}>
+    <nav className={styles.container}>
+      <div>
         <a href="/" className={styles.logo}>
           GrowHub
         </a>

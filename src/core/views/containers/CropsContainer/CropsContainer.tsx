@@ -42,7 +42,7 @@ const Plants: React.FC = observer(() => {
   );
 
   return (
-    <section className={styles.plants}>
+    <section className={styles.section}>
       <LoadingWrapper isLoading={plantsStore.isLoading}>
         {children}
       </LoadingWrapper>

@@ -28,7 +28,7 @@ const CurrentWeatherContainer: React.FC = observer(() => {
     <>
       <Heading level={6} text="Current Weather"></Heading>
       <h4 className={styles.h4}>The Hague, South Holland</h4>
-      <div className={styles.main}>
+      <div className={styles.container}>
         <img
           src={weather?.current.condition.icon}
           alt={weather?.current.condition.text}
