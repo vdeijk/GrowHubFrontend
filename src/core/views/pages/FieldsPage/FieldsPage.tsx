@@ -17,11 +17,10 @@ const FieldsPage: React.FC = observer(() => {
   };
 
   const handleEdit = (id: number) => {
-    console.log(`Edit location with id: ${id}`);
+    navigate(`/editField/${id}`);
   };
 
   const handleDelete = (id: number) => {
-    console.log(`Delete location with id: ${id}`);
     fieldsStore.deleteField(id);
   };
 

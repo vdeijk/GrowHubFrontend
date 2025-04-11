@@ -132,7 +132,7 @@ class CropsStore {
   };
 
   public deletePlant(id: number) {
-    this.plants = this.plants.filter((plant) => plant.id !== id);
+    this.filteredPlants = this.filteredPlants.filter((plant) => plant.id !== id);
   }
 }
 

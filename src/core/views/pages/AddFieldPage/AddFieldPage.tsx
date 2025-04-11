@@ -25,6 +25,8 @@ const AddFieldPage: React.FC<AddFieldPageProps> = observer(
       }
     }, [isEditing, id]);
 
+    const title = isEditing ? 'Edit Field' : 'Add New Field';
+
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
       addFieldStore.addField();
@@ -66,7 +68,7 @@ const AddFieldPage: React.FC<AddFieldPageProps> = observer(
 
     return (
       <section className={styles.section}>
-        <Heading level={1} text="Add New Field" />
+        <Heading level={1} text={title} />
         <form onSubmit={handleSubmit} className={styles.form}>
           <TextInput {...nameProps} />
           <TextInput {...longitudeProps} />

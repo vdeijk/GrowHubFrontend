@@ -32,6 +32,8 @@ const AddCropPage: React.FC<AddCropPageProps> = observer(
       navigate('/');
     };
 
+    const title = isEditing ? 'Edit Crop' : 'Add New Crop';
+
     const nameProps: TextInputProps = {
       value: addCropStore.commonName,
       onChange: (value: string) =>
@@ -65,7 +67,7 @@ const AddCropPage: React.FC<AddCropPageProps> = observer(
 
     return (
       <section className={styles.section}>
-        <Heading level={1} text="Add New Crop" />
+        <Heading level={1} text={title} />
         <form onSubmit={handleSubmit} className={styles.form}>
           <TextInput {...nameProps} />
           <TextInput {...sunPreferenceProps} />

@@ -34,7 +34,7 @@ const App: React.FC = () => {
           <Route path="/tasksPage" element={<TasksPage />} />
           <Route path="/fieldsPage" element={<FieldsPage />} />
           <Route path="/addFieldPage" element={<AddFieldPage />} />
-          <Route path="/editCrop/:id" element={<AddFieldPage isEditing />} /> 
+          <Route path="/editField/:id" element={<AddFieldPage isEditing />} /> 
           <Route path="/cropsPage" element={<CropsPage />} />
           <Route path="/addCropPage" element={<AddCropPage />} />
           <Route path="/editCrop/:id" element={<AddCropPage isEditing />} />

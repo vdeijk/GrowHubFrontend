@@ -56,12 +56,10 @@ const CropsPage: React.FC = observer(() => {
   };
 
   const handleEdit = (id: number) => {
-    console.log(`Edit plant with id: ${id}`);
-    navigate(`/editPlant/${id}`);
+    navigate(`/editCrop/${id}`);
   };
 
   const handleDelete = (id: number) => {
-    console.log(`Delete plant with id: ${id}`);
     plantsStore.deletePlant(id);
   };
 
