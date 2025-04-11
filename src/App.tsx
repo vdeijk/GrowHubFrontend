@@ -31,11 +31,13 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<DashboardPage />} />
           <Route path="/weatherReportPage" element={<WeatherReportPage />} />
-          <Route path="/cropsPage" element={<CropsPage />} />
           <Route path="/tasksPage" element={<TasksPage />} />
           <Route path="/fieldsPage" element={<FieldsPage />} />
-          <Route path="/addCropPage" element={<AddCropPage />} />
           <Route path="/addFieldPage" element={<AddFieldPage />} />
+          <Route path="/editCrop/:id" element={<AddFieldPage isEditing />} /> 
+          <Route path="/cropsPage" element={<CropsPage />} />
+          <Route path="/addCropPage" element={<AddCropPage />} />
+          <Route path="/editCrop/:id" element={<AddCropPage isEditing />} />
         </Routes>
       </PageLayout>
       <FooterContainer />

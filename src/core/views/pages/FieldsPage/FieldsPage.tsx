@@ -4,7 +4,7 @@ import Map from '../../reusables/Map/Map';
 import Heading from '../../reusables/Heading/Heading';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import FieldListContainer from '../../containers/FieldListContainer/FieldListContainer';
-import locationStore from '../../../stores/LocationStore/LocationStore';
+import fieldsStore from '../../../stores/FieldsStore/FieldsStore';
 import { observer } from 'mobx-react-lite';
 import { useNavigate } from 'react-router-dom';
 
@@ -22,16 +22,16 @@ const FieldsPage: React.FC = observer(() => {
 
   const handleDelete = (id: number) => {
     console.log(`Delete location with id: ${id}`);
-    locationStore.deleteLocation(id);
+    fieldsStore.deleteField(id);
   };
 
   const listData = {
-    locations: locationStore.locations,
+    locations: fieldsStore.locations,
     onEdit: handleEdit,
     onDelete: handleDelete,
   };
 
-  const markers = locationStore.locations.map((location) => ({
+  const markers = fieldsStore.locations.map((location) => ({
     lat: location.latitude,
     lng: location.longitude,
     popupContent: location.name,

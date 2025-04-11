@@ -1,63 +1,81 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import TextInput, { TextInputProps } from '../../reusables/TextInput/TextInput';
 import Heading from '../../reusables/Heading/Heading';
 import { useNavigate } from 'react-router-dom';
-import addLocationStore from '../../../stores/AddFieldStore/AddFieldStore';
+import addFieldStore from '../../../stores/AddFieldStore/AddFieldStore';
 import Button, { ButtonProps } from '../../reusables/Button/Button';
 import styles from './AddFieldPage.module.css';
 import { observer } from 'mobx-react-lite';
+import { useParams } from 'react-router-dom';
 
-const AddFieldPage: React.FC = observer(() => {
-  const navigate = useNavigate();
+interface AddFieldPageProps {
+  isEditing?: boolean;
+}
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    addLocationStore.addLocation();
-    addLocationStore.resetForm();
-    navigate('/');
-  };
+const AddFieldPage: React.FC<AddFieldPageProps> = observer(
+  ({ isEditing = false }) => {
+    const navigate = useNavigate();
+    const { id } = useParams<{ id: string }>();
 
-  const nameProps: TextInputProps = {
-    value: addLocationStore.locationName,
-    onChange: (value: string) => addLocationStore.updateField('locationName', value),
-    placeholder: 'Location Name',
-    label: 'Location Name',
-    required: true,
-  };
+    useEffect(() => {
+      if (isEditing && id) {
+        addFieldStore.loadField(id);
+      } else {
+        addFieldStore.resetForm();
+      }
+    }, [isEditing, id]);
 
-  const sunPreferenceProps: TextInputProps = {
-    value: addLocationStore.longitude.toString(),
-    onChange: (value: string) => addLocationStore.updateField('longitude', value),
-    placeholder: 'Longitude',
-    label: 'Longitude',
-    required: true,
-  };
+    const handleSubmit = (e: React.FormEvent) => {
+      e.preventDefault();
+      addFieldStore.addField();
+      addFieldStore.resetForm();
+      navigate('/');
+    };
 
-  const waterNeedsProps: TextInputProps = {
-    value: addLocationStore.latitude.toString(),
-    onChange: (value: string) =>
-      addLocationStore.updateField('latitude', value),
-    placeholder: 'Latitude',
-    label: 'Latitude',
-    required: true,
-  };
+    const nameProps: TextInputProps = {
+      value: addFieldStore.locationName,
+      onChange: (value: string) =>
+        addFieldStore.updateFormField('locationName', value),
+      placeholder: 'Location Name',
+      label: 'Location Name',
+      required: true,
+    };
 
-  const buttonProps: ButtonProps = {
-    type: 'submit',
-    label: 'Add Field',
-  };
+    const longitudeProps: TextInputProps = {
+      value: addFieldStore.longitude.toString(),
+      onChange: (value: string) =>
+        addFieldStore.updateFormField('longitude', value),
+      placeholder: 'Longitude',
+      label: 'Longitude',
+      required: true,
+    };
 
-  return (
-    <section className={styles.section}>
-      <Heading level={1} text="Add New Field" />
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <TextInput {...nameProps} />
-        <TextInput {...sunPreferenceProps} />
-        <TextInput {...waterNeedsProps} />
-        <Button {...buttonProps} />
-      </form>
-    </section>
-  );
-});
+    const latitudeProps: TextInputProps = {
+      value: addFieldStore.latitude.toString(),
+      onChange: (value: string) =>
+        addFieldStore.updateFormField('latitude', value),
+      placeholder: 'Latitude',
+      label: 'Latitude',
+      required: true,
+    };
+
+    const buttonProps: ButtonProps = {
+      type: 'submit',
+      label: 'Add Field',
+    };
+
+    return (
+      <section className={styles.section}>
+        <Heading level={1} text="Add New Field" />
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <TextInput {...nameProps} />
+          <TextInput {...longitudeProps} />
+          <TextInput {...latitudeProps} />
+          <Button {...buttonProps} />
+        </form>
+      </section>
+    );
+  },
+);
 
 export default AddFieldPage;

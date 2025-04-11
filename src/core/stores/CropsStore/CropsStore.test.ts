@@ -1,4 +1,4 @@
-import plantsStore from './PlantsStore';
+import plantsStore from './CropsStore';
 import { vi, describe, it, expect, beforeEach } from 'vitest';
 
 vi.mock('../../apis/plants', () => ({

@@ -5,7 +5,7 @@ import { getData } from '../../apis/getData';
 import { validate } from '../../../auxiliary/utils/validationMaxLength';
 import { TextInputState } from '../../../auxiliary/interfaces/TextInputState';
 
-class PlantsStore {
+class CropsStore {
   plants: Plant[] = [];
   searchQuery: TextInputState = { value: '', error: '', maxLength: 10 };
   filterCriteria: string = '';
@@ -136,5 +136,5 @@ class PlantsStore {
   }
 }
 
-const plantsStore = new PlantsStore();
-export default plantsStore;
+const cropsStore = new CropsStore();
+export default cropsStore;

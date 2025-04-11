@@ -8,7 +8,7 @@ export interface Location {
   longitude: number;
 }
 
-class LocationStore {
+class FieldsStore {
   locations: Location[] = [];
   isLoading = false;
 
@@ -38,21 +38,21 @@ class LocationStore {
     }
   }
 
-  public addLocation(location: Location) {
+  public addField(location: Location) {
     this.locations.push(location);
   }
 
-  public updateLocation(id: number, updatedLocation: Partial<Location>) {
+  public updateField(id: number, updatedLocation: Partial<Location>) {
     const location = this.locations.find((loc) => loc.id === id);
     if (location) {
       Object.assign(location, updatedLocation);
     }
   }
 
-  public deleteLocation(id: number) {
+  public deleteField(id: number) {
     this.locations = this.locations.filter((loc) => loc.id !== id);
   }
 }
 
-const locationStore = new LocationStore();
-export default locationStore;
+const fieldsStore = new FieldsStore();
+export default fieldsStore;

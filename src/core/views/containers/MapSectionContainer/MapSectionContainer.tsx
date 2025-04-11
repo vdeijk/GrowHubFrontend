@@ -5,7 +5,7 @@ import Heading from '../../reusables/Heading/Heading';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import { useNavigate } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
-import locationStore from '../../../stores/LocationStore/LocationStore';
+import locationStore from '../../../stores/FieldsStore/FieldsStore';
 
 const MapSection: React.FC = observer(() => {
   const navigate = useNavigate();

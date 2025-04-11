@@ -3,7 +3,7 @@ import SearchBarContainer from '../../containers/SearchBarContainer/SearchBarCon
 import Table from '../../reusables/TableWithSorting/TableWithSorting';
 import styles from './CropsPage.module.css';
 import Heading from '../../reusables/Heading/Heading';
-import plantsStore from '../../../stores/PlantsStore/PlantsStore';
+import plantsStore from '../../../stores/CropsStore/CropsStore';
 import { observer } from 'mobx-react-lite';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import { SearchBarProps } from '../../containers/SearchBarContainer/SearchBarContainer';
