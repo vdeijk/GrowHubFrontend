@@ -18,7 +18,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 20
 
       # Step 3: Install dependencies
       - name: Install dependencies
@@ -26,6 +26,9 @@ jobs:
 
       # Step 4: Build the app
       - name: Build the app
+        env:
+          VITE_WEATHER_API_KEY: ${{ secrets.VITE_WEATHER_API_KEY }}
+          VITE_PLANT_API_KEY: ${{ secrets.VITE_PLANT_API_KEY }}
         run: npm run build
 
       # Step 5: Deploy to GitHub Pages
@@ -33,4 +36,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
+          publish_dir: ./dist
