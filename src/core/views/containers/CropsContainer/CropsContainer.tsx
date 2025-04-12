@@ -5,9 +5,9 @@ import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import plantsStore from '../../../stores/CropsStore/CropsStore';
 import Heading from '../../reusables/Heading/Heading';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
-import { PlantWithIndex } from '../../../../auxiliary/interfaces/PlantWithIndex';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import { observer } from 'mobx-react-lite';
+import { Plant } from '../../../../auxiliary/interfaces/Plant';
 
 const Plants: React.FC = observer(() => {
   const navigate = useRouterNavigation();
@@ -30,7 +30,7 @@ const Plants: React.FC = observer(() => {
   const children = (
     <>
       <Heading level={6} text="Your Crops" />
-      <TableWithoutSorting<PlantWithIndex>
+      <TableWithoutSorting<Plant>
         headers={headersWithoutActions}
         data={plantsStore.plants.map((plant, index) => ({
           ...omit(plant, 'actions'),

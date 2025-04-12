@@ -11,7 +11,7 @@ const TableRow = <T,>({ tableRowData, headers }: TableRowProps<T>) => {
       {headers.map((header) => (
         <td key={String(header.id)}>
           {React.isValidElement(tableRowData[header.id])
-            ? tableRowData[header.id]
+            ? (tableRowData[header.id] as React.ReactNode)
             : String(tableRowData[header.id] ?? '')}
         </td>
       ))}

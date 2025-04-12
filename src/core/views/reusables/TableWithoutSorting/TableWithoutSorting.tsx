@@ -2,25 +2,18 @@ import React from 'react';
 import styles from './TableWithoutSorting.module.css';
 import TableRow from '../TableRow/TableRow';
 
-export interface TableProps<
-  T extends Record<string, string | number | boolean | null | undefined>,
-> {
-  headers: { id: string; label: string }[];
+export interface TableProps<T> {
+  headers: { id: keyof T; label: string; sortable: boolean }[];
   data: T[];
 }
 
-const TableWithoutSorting = <
-  T extends Record<string, string | number | boolean | null | undefined>,
->({
-  headers,
-  data,
-}: TableProps<T>) => {
+const TableWithoutSorting = <T,>({ headers, data }: TableProps<T>) => {
   return (
     <table className={styles.table}>
       <thead>
         <tr>
           {headers.map((header) => (
-            <th key={header.id}>{header.label}</th>
+            <th key={String(header.id)}>{header.label}</th>
           ))}
         </tr>
       </thead>
