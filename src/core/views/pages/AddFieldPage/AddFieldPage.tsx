@@ -26,9 +26,16 @@ const AddFieldPage: React.FC<AddFieldPageProps> = observer(
 
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
-      addFieldStore.addField();
+
+      if (isEditing && id) {
+        addFieldStore.updateField(id);
+      } else {
+        addFieldStore.addField();
+      }
+
       addFieldStore.resetForm();
-      navigate('/');
+
+      navigate('/fieldsPage');
     };
 
     const nameProps: TextInputProps = {
@@ -60,7 +67,7 @@ const AddFieldPage: React.FC<AddFieldPageProps> = observer(
 
     const buttonProps: ButtonProps = {
       type: 'submit',
-      label: 'Add Field',
+      label: isEditing ? 'Edit Field' : 'Add Field',
     };
 
     return (

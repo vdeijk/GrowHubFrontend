@@ -27,11 +27,17 @@ const AddCropPage: React.FC<AddCropPageProps> = observer(
 
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
-      addCropStore.addCrop();
-      addCropStore.resetForm();
-      navigate('/');
-    };
 
+      if (isEditing && id) {
+        addCropStore.updateCrop(id);
+      } else {
+        addCropStore.addCrop();
+      }
+
+      addCropStore.resetForm();
+
+      navigate('/cropsPage');
+    };
     const nameProps: TextInputProps = {
       value: addCropStore.commonName,
       onChange: (value: string) =>
@@ -60,7 +66,7 @@ const AddCropPage: React.FC<AddCropPageProps> = observer(
 
     const buttonProps: ButtonProps = {
       type: 'submit',
-      label: 'Add Crop',
+      label: isEditing ? 'Edit Crop' : 'Add Crop',
     };
 
     return (

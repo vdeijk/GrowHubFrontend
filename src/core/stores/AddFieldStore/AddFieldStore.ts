@@ -72,6 +72,10 @@ class AddFieldStore {
   }
 
   public async updateField(id: string) {
+    const numberId = Number(id);
+
+    if (Number.isNaN(numberId))  return;
+
     runInAction(() => {
       this.isLoading = true;
     });
@@ -80,6 +84,7 @@ class AddFieldStore {
         name: this.locationName,
         latitude: this.latitude,
         longitude: this.longitude,
+        id: numberId,
       };
 
       // @ts-ignore

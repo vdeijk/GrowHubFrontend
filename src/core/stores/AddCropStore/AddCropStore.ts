@@ -70,6 +70,10 @@ class AddCropStore {
   }
 
   public async updateCrop(id: string) {
+    const numberId = Number(id);
+
+    if (Number.isNaN(numberId))  return;
+
     runInAction(() => {
       this.isLoading = true;
     });
@@ -79,6 +83,7 @@ class AddCropStore {
         commonName: this.commonName,
         genus: this.genus,
         scientificName: this.scientificName,
+        id: numberId,
       };
 
       // @ts-ignore
