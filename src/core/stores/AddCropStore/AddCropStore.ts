@@ -56,10 +56,12 @@ class AddCropStore {
     });
 
     try {
-      const plant = await getData(`/plant/${id}`);
-      this.commonName = plant.commonName;
-      this.genus = plant.genus;
-      this.scientificName = plant.scientificName;
+      const plant: Plant = await getData(`/plant/${id}`);
+      runInAction(() => {
+        this.commonName = plant.commonName;
+        this.genus = plant.genus;
+        this.scientificName = plant.scientificName;
+      });
     } finally {
       runInAction(() => {
         this.isLoading = false;
