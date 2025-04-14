@@ -17,9 +17,9 @@ const MenuLink: React.FC<MenuLinkProps> = ({ menuLinkData }) => {
 
   return (
     <li className={styles.menuItem}>
-      <a onClick={clickHandler} className={styles.menuLink}>
+      <button onClick={clickHandler} className={styles.menuLink}>
         {label}
-      </a>
+      </button>
     </li>
   );
 };

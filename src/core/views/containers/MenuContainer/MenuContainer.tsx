@@ -23,7 +23,7 @@ const MenuContainer: React.FC<MenuProps> = ({
         <Heading level={4} text={curPageTitle}></Heading>
         <img
           src={profilePicture}
-          alt="Profile Picture"
+          alt="Profile"
           className={styles.image}
         />
         <span className={styles.userName}>{userName}</span>

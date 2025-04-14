@@ -1,15 +1,9 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import { getData } from '../../apis/getData';
-
-export interface Location {
-  id: number;
-  name: string;
-  latitude: number;
-  longitude: number;
-}
+import { LocationItem } from '../../../auxiliary/interfaces/LocationItem';
 
 class FieldsStore {
-  locations: Location[] = [];
+  locations: LocationItem[] = [];
   isLoading = false;
 
   constructor() {
@@ -38,11 +32,7 @@ class FieldsStore {
     }
   }
 
-  public addField(location: Location) {
-    this.locations.push(location);
-  }
-
-  public updateField(id: number, updatedLocation: Partial<Location>) {
+  public updateField(id: number, updatedLocation: Partial<LocationItem>) {
     const location = this.locations.find((loc) => loc.id === id);
     if (location) {
       Object.assign(location, updatedLocation);

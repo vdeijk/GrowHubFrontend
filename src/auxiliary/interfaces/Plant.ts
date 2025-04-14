@@ -3,8 +3,8 @@ import { JSX } from 'react';
 export interface Plant {
   commonName: string;
   genus: string;
-  id: number;
   scientificName: string;
+  id?: number;
   sunPreference?: string;
   waterNeeds?: string;
   soilType?: string;

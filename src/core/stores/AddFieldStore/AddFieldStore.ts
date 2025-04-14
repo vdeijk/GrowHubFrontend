@@ -2,6 +2,7 @@ import { makeAutoObservable, runInAction } from 'mobx';
 import { postData } from '../../apis/postData';
 import { putData } from '../../apis/putData';
 import { getData } from '../../apis/getData';
+import { LocationItem } from '../../../auxiliary/interfaces/LocationItem';
 
 class AddFieldStore {
   locationName: string = '';
@@ -31,11 +32,14 @@ class AddFieldStore {
     });
 
     try {
-      await postData('/plants', {
-        locationName: this.locationName,
+      const locationItem: LocationItem = {
+        name: this.locationName,
         latitude: this.latitude,
         longitude: this.longitude,
-      });
+      };
+
+      // @ts-ignore
+      await postData('/location', locationItem);
     } finally {
       runInAction(() => {
         this.isLoading = false;

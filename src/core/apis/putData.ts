@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 
 const BASE_URL = 'https://localhost:7075/api';
 
-export const putData = async (endpoint: string, data: Record<string, any>) => {
+export const putData = async (endpoint: string, data: Record<string, unknown>) => {
   try {
     const response = await axios.put(`${BASE_URL}${endpoint}`, data);
     return response.data;

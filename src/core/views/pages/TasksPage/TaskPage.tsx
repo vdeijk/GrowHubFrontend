@@ -6,11 +6,11 @@ import { observer } from 'mobx-react-lite';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 
 const TasksPage: React.FC = observer(() => {
-  const handleEdit = (id: number) => {};
+  /*const handleEdit = (id: number) => {};
 
   const handleDelete = (id: number) => {
     taskStore.deleteTask(id);
-  };
+  };*/
 
   return (
     <section className={styles.taskPage}>

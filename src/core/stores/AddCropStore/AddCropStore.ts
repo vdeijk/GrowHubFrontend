@@ -2,6 +2,7 @@ import { makeAutoObservable, runInAction } from 'mobx';
 import { getData } from '../../apis/getData';
 import { putData } from '../../apis/putData';
 import { postData } from '../../apis/postData';
+import { Plant } from '../../../auxiliary/interfaces/Plant';
 
 class AddCropStore {
   commonName: string = '';
@@ -30,12 +31,15 @@ class AddCropStore {
       this.isLoading = true;
     });
 
+    const data: Plant = {
+      commonName: this.commonName,
+      genus: this.genus,
+      scientificName: this.scientificName,
+    };
+
     try {
-      await postData('/plants', {
-        commonName: this.commonName,
-        genus: this.genus,
-        scientificName: this.scientificName,
-      });
+      // @ts-ignore
+      await postData('/plant', data);
     } finally {
       runInAction(() => {
         this.isLoading = false;
@@ -49,7 +53,7 @@ class AddCropStore {
     });
 
     try {
-      const plant = await getData(`/plants/${id}`);
+      const plant = await getData(`/plant/${id}`);
       this.commonName = plant.commonName;
       this.genus = plant.genus;
       this.scientificName = plant.scientificName;
@@ -65,12 +69,15 @@ class AddCropStore {
       this.isLoading = true;
     });
 
+    const data: Plant = {
+      commonName: this.commonName,
+      genus: this.genus,
+      scientificName: this.scientificName,
+    };
+
     try {
-      await putData(`/plants/${id}`, {
-        commonName: this.commonName,
-        genus: this.genus,
-        scientificName: this.scientificName,
-      });
+      // @ts-ignore
+      await putData(`/plant/${id}`, data);
     } finally {
       runInAction(() => {
         this.isLoading = false;

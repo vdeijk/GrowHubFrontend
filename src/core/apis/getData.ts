@@ -5,7 +5,7 @@ const BASE_URL = 'https://localhost:7075/api';
 
 export const getData = async (
   endpoint: string,
-  params?: Record<string, any>,
+  params?: Record<string, unknown>,
 ) => {
   try {
     const response = await axios.get(`${BASE_URL}${endpoint}`, { params });

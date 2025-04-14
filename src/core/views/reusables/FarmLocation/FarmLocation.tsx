@@ -1,10 +1,10 @@
 import React from 'react';
 import styles from './FarmLocation.module.css';
 import { FaEdit, FaTrash } from 'react-icons/fa';
-import { FarmLocationData } from '../../../../auxiliary/interfaces/FarmLocation';
+import { LocationItem } from '../../../../auxiliary/interfaces/LocationItem';
 
 interface LocationProps {
-  location: FarmLocationData;
+  location: LocationItem;
   onEdit: (id: number) => void;
   onDelete: (id: number) => void;
 }

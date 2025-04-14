@@ -65,7 +65,7 @@ const Map: React.FC<MapProps> = ({ enableScroll = false, markers = [] }) => {
         enableScroll ? 'enable' : 'disable'
       ]();
     }
-  }, [enableScroll]);
+  }, [enableScroll, initMap]);
 
   return (
     <section className={styles.map}>
@@ -75,8 +75,3 @@ const Map: React.FC<MapProps> = ({ enableScroll = false, markers = [] }) => {
 };
 
 export default Map;
-
-/*
-      setTimeout(() => {
-        map.invalidateSize();
-      }, 0);*/
