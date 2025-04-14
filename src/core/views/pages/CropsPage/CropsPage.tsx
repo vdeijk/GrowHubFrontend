@@ -55,6 +55,7 @@ const CropsPage: React.FC = observer(() => {
   };
 
   const handleEdit = (id: number) => {
+    console.log('Edit plant with ID:', id);
     navigate(`/editCrop/${id}`);
   };
 

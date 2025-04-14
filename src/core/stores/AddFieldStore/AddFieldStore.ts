@@ -22,9 +22,11 @@ class AddFieldStore {
   }
 
   public resetForm() {
-    this.locationName = '';
-    this.latitude = 0;
-    this.longitude = 0;
+    runInAction(() => {
+      this.locationName = '';
+      this.latitude = 0;
+      this.longitude = 0;
+    });
   }
 
   public async addField() {

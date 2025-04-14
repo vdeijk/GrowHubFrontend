@@ -45,7 +45,9 @@ class CropsStore {
         this.genusOptions = this.extractGenera();
       });
     } finally {
-      this.isLoading = false;
+      runInAction(() => {
+        this.isLoading = false;
+      });
     }
   }
 
