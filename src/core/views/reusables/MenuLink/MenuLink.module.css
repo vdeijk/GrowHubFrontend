@@ -3,11 +3,12 @@
 }
 
 .menuLink {
+  background-color: transparent;
+  border: none;
   color: #fdfdfd;
   text-decoration: none;
   font-size: 1.5rem;
   text-transform: uppercase;
-  display: block;
   padding: 0.5rem var(--spacing-small);
   border-radius: var(--border-radius-small);
   transition: background-color 0.3s;
