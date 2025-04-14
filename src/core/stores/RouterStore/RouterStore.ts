@@ -1,6 +1,8 @@
 import { makeAutoObservable } from 'mobx';
 import { MenuLinkData } from '../../../auxiliary/interfaces/MenuLinkData';
 import { toast } from 'react-toastify';
+import { matchRoutes, NavigateFunction } from 'react-router-dom';
+import { RouteObject } from 'react-router-dom';
 
 class RouterStore {
   currentLabel: string = '';
@@ -22,28 +24,29 @@ class RouterStore {
       hidden: true,
       isDynamic: false,
     },
-    { path: '/editCrop:id', label: 'Edit Crop', hidden: true, isDynamic: true },
     {
-      path: '/editField:id',
+      path: '/addCropPage/:id',
+      label: 'Edit Crop',
+      hidden: true,
+      isDynamic: true,
+    },
+    {
+      path: '/addFieldPage/:id',
       label: 'Edit Field',
       hidden: true,
       isDynamic: true,
     },
   ];
 
-  private routeMap: Map<string, MenuLinkData> = new Map();
-  private dynamicRoutes: MenuLinkData[] = [];
+  private routeDefs: RouteObject[] = [];
 
   constructor() {
     makeAutoObservable(this);
 
-    this.menuLinks.forEach((link) => {
-      if (link.isDynamic) {
-        this.dynamicRoutes.push(link);
-      } else {
-        this.routeMap.set(link.path, link);
-      }
-    });
+    this.routeDefs = this.menuLinks.map((link) => ({
+      path: link.path,
+      handle: { label: link.label },
+    }));
 
     window.addEventListener('popstate', this.handlePopState);
   }
@@ -57,15 +60,15 @@ class RouterStore {
     this.currentLabel = this.getLabel(path);
   };
 
-  public handleRouteChange = (path: string) => {
+  public handleRouteChange = (path: string, navigate?: NavigateFunction) => {
     try {
       this.currentLabel = this.getLabel(path);
-      if (this.currentLabel === 'Unknown Page') {
-        window.location.href = '/404';
+      if (this.currentLabel === 'Unknown Page' && navigate) {
+        navigate('/404');
       }
     } catch {
       toast.error('An unexpected error occurred. Redirecting to 404...');
-      window.location.href = '/404';
+      if (navigate) navigate('/404');
     }
   };
 
@@ -74,24 +77,16 @@ class RouterStore {
   }
 
   private getLabel(path: string): string {
-    const staticRoute = this.routeMap.get(path);
-    if (staticRoute) {
-      return staticRoute.label;
+    const matches = matchRoutes(this.routeDefs, path);
+    if (!matches || matches.length === 0) {
+      console.warn(`No route matched for path: ${path}`);
+      return 'Unknown Page';
     }
 
-    const dynamicRoute = this.dynamicRoutes.find((route) => {
-      const dynamicPattern = new RegExp(
-        `^${route.path.replace(':id', '\\d+')}$`,
-      );
-      return dynamicPattern.test(path);
-    });
+    const match = matches[matches.length - 1];
+    const label = match.route.handle?.label;
 
-    if (dynamicRoute) {
-      return dynamicRoute.label;
-    }
-
-    console.warn(`No route matched for path: ${path}`);
-    return 'Unknown Page';
+    return typeof label === 'string' ? label : 'Unknown Page';
   }
 }
 

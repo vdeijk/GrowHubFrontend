@@ -55,6 +55,7 @@ class AddCropStore {
       this.isLoading = true;
     });
 
+    console.log("get crop");
     try {
       const plant = await getData(`/plant/${id}`);
       this.commonName = plant.commonName;

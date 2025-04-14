@@ -39,6 +39,7 @@ class CropsStore {
     try {
       const plants = await getData('/Plant');
 
+      console.log("get crops");
       runInAction(() => {
         this.plants = plants;
         this.filteredPlants = this.plants;

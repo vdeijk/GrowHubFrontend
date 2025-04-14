@@ -58,10 +58,12 @@ class AddFieldStore {
     });
 
     try {
-      const field = await getData(`/location/${id}`);
-      this.locationName = field.locationName;
-      this.latitude = field.latitude;
-      this.longitude = field.longitude;
+      const field: LocationItem = await getData(`/location/${id}`);
+      runInAction(() => {
+        this.locationName = field.name;
+        this.latitude = field.latitude;
+        this.longitude = field.longitude;
+      });
     } finally {
       runInAction(() => {
         this.isLoading = false;

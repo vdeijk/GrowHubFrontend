@@ -17,7 +17,7 @@ const FieldsPage: React.FC = observer(() => {
   };
 
   const handleEdit = (id: number) => {
-    navigate(`/editField/${id}`);
+    navigate(`/addFieldPage/${id}`);
   };
 
   const handleDelete = (id: number) => {

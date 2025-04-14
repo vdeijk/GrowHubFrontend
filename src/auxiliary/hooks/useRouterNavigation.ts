@@ -6,7 +6,7 @@ const useRouterNavigation = () => {
 
   const navigateWithStoreUpdate = (path: string) => {
     navigate(path);
-    routerStore.handleRouteChange(path);
+    Promise.resolve().then(() => routerStore.handleRouteChange(path));
   };
 
   return navigateWithStoreUpdate;

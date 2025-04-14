@@ -33,12 +33,12 @@ const CropsPage: React.FC = observer(() => {
         <div className={styles.actionIcons}>
           <FaEdit
             className={styles.editIcon}
-            onClick={() => plant.id && handleEdit(plant.id)}
+            onClick={() => plant.id !== undefined && handleEdit(plant.id)}
             title="Edit Plant"
           />
           <FaTrash
             className={styles.deleteIcon}
-            onClick={() => plant.id && handleDelete(plant.id)}
+            onClick={() => plant.id !== undefined && handleDelete(plant.id)}
             title="Delete Plant"
           />
         </div>
@@ -55,8 +55,7 @@ const CropsPage: React.FC = observer(() => {
   };
 
   const handleEdit = (id: number) => {
-    console.log('Edit plant with ID:', id);
-    navigate(`/editCrop/${id}`);
+    navigate(`/addCropPage/${id}`);
   };
 
   const handleDelete = (id: number) => {

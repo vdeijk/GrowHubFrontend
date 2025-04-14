@@ -35,11 +35,11 @@ const App: React.FC = observer(() => {
           <Route path="/weatherReportPage" element={<WeatherReportPage />} />
           <Route path="/tasksPage" element={<TasksPage />} />
           <Route path="/fieldsPage" element={<FieldsPage />} />
+          <Route path="/addFieldPage/:id" element={<AddFieldPage isEditing={true} />} />
           <Route path="/addFieldPage" element={<AddFieldPage />} />
-          <Route path="/editField/:id" element={<AddFieldPage isEditing />} />
           <Route path="/cropsPage" element={<CropsPage />} />
+          <Route path="/addCropPage/:id" element={<AddCropPage isEditing={true} />} />
           <Route path="/addCropPage" element={<AddCropPage />} />
-          <Route path="/editCrop/:id" element={<AddCropPage isEditing />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </PageLayout>
