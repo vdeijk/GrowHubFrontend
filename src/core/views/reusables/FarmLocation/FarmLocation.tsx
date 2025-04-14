@@ -20,12 +20,12 @@ const FarmLocation: React.FC<LocationProps> = ({
       <div className={styles.actionIcons}>
         <FaEdit
           className={styles.editIcon}
-          onClick={() => onEdit(location.id)}
+          onClick={() => location.id && onEdit(location.id)}
           title="Edit"
         />
         <FaTrash
           className={styles.deleteIcon}
-          onClick={() => onDelete(location.id)}
+          onClick={() => location.id && onDelete(location.id)}
           title="Delete"
         />
       </div>

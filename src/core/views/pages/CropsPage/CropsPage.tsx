@@ -33,12 +33,12 @@ const CropsPage: React.FC = observer(() => {
         <div className={styles.actionIcons}>
           <FaEdit
             className={styles.editIcon}
-            onClick={() => handleEdit(plant.id)}
+            onClick={() => plant.id && handleEdit(plant.id)}
             title="Edit Plant"
           />
           <FaTrash
             className={styles.deleteIcon}
-            onClick={() => handleDelete(plant.id)}
+            onClick={() => plant.id && handleDelete(plant.id)}
             title="Delete Plant"
           />
         </div>
