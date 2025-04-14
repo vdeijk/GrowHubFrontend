@@ -3,6 +3,7 @@ import { postData } from '../../apis/postData';
 import { putData } from '../../apis/putData';
 import { getData } from '../../apis/getData';
 import { LocationItem } from '../../../auxiliary/interfaces/LocationItem';
+import fieldsStore from '../FieldsStore/FieldsStore';
 
 class AddFieldStore {
   locationName: string = '';
@@ -40,6 +41,8 @@ class AddFieldStore {
 
       // @ts-ignore
       await postData('/location', locationItem);
+
+      fieldsStore.fetchData();
     } finally {
       runInAction(() => {
         this.isLoading = false;
@@ -53,7 +56,7 @@ class AddFieldStore {
     });
 
     try {
-      const field = await getData(`/plants/${id}`);
+      const field = await getData(`/location/${id}`);
       this.locationName = field.locationName;
       this.latitude = field.latitude;
       this.longitude = field.longitude;
@@ -69,11 +72,16 @@ class AddFieldStore {
       this.isLoading = true;
     });
     try {
-      await putData(`/plants/${id}`, {
-        locationName: this.locationName,
+      const locationItem: LocationItem = {
+        name: this.locationName,
         latitude: this.latitude,
         longitude: this.longitude,
-      });
+      };
+
+      // @ts-ignore
+      await putData(`/location/${id}`, locationItem);
+
+      fieldsStore.fetchData();
     } finally {
       runInAction(() => {
         this.isLoading = false;

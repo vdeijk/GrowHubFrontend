@@ -4,6 +4,7 @@ import { debounce } from '../../../auxiliary/utils/debounce';
 import { getData } from '../../apis/getData';
 import { validate } from '../../../auxiliary/utils/validationMaxLength';
 import { TextInputState } from '../../../auxiliary/interfaces/TextInputState';
+import { deleteData } from '../../apis/deleteData';
 
 class CropsStore {
   plants: Plant[] = [];
@@ -31,20 +32,20 @@ class CropsStore {
   }
 
   public async fetchData() {
+    runInAction(() => {
+      this.isLoading = true;
+    });
+
     try {
-      runInAction(() => {
-        this.isLoading = true;
-      });
       const plants = await getData('/Plant');
 
       runInAction(() => {
         this.plants = plants;
         this.filteredPlants = this.plants;
         this.genusOptions = this.extractGenera();
-        this.isLoading = false;
       });
-    } catch (error) {
-      console.error('Error fetching data:', error);
+    } finally {
+      this.isLoading = false;
     }
   }
 
@@ -125,17 +126,11 @@ class CropsStore {
     });
   };
 
-  public addPlant = (newPlant: Plant) => {
-    this.plants.push(newPlant);
-    this.filterPlants();
-    this.genusOptions = this.extractGenera();
-  };
+  public deletePlant = async (id: number) => {
+    await deleteData(`/plant/${id}`, id);
 
-  public deletePlant(id: number) {
-    this.filteredPlants = this.filteredPlants.filter(
-      (plant) => plant.id !== id,
-    );
-  }
+    this.fetchData();
+  };
 }
 
 const cropsStore = new CropsStore();

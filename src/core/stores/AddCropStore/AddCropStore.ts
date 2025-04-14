@@ -3,6 +3,7 @@ import { getData } from '../../apis/getData';
 import { putData } from '../../apis/putData';
 import { postData } from '../../apis/postData';
 import { Plant } from '../../../auxiliary/interfaces/Plant';
+import cropsStore from '../CropsStore/CropsStore';
 
 class AddCropStore {
   commonName: string = '';
@@ -31,15 +32,17 @@ class AddCropStore {
       this.isLoading = true;
     });
 
-    const data: Plant = {
-      commonName: this.commonName,
-      genus: this.genus,
-      scientificName: this.scientificName,
-    };
-
     try {
+      const data: Plant = {
+        commonName: this.commonName,
+        genus: this.genus,
+        scientificName: this.scientificName,
+      };
+
       // @ts-ignore
       await postData('/plant', data);
+
+      cropsStore.fetchData();
     } finally {
       runInAction(() => {
         this.isLoading = false;
@@ -69,15 +72,17 @@ class AddCropStore {
       this.isLoading = true;
     });
 
-    const data: Plant = {
-      commonName: this.commonName,
-      genus: this.genus,
-      scientificName: this.scientificName,
-    };
-
     try {
+      const data: Plant = {
+        commonName: this.commonName,
+        genus: this.genus,
+        scientificName: this.scientificName,
+      };
+
       // @ts-ignore
       await putData(`/plant/${id}`, data);
+
+      cropsStore.fetchData();
     } finally {
       runInAction(() => {
         this.isLoading = false;

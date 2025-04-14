@@ -9,7 +9,9 @@ export const postData = async (
 ) => {
   try {
     const response = await axios.post(`${BASE_URL}${endpoint}`, data);
-    toast.success('Location added successfully!');
+
+    toast.success('Data addded successfully!');
+
     return response.data;
   } catch (error) {
     console.error(`Error posting data to ${endpoint}:`, error);

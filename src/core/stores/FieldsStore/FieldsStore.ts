@@ -1,6 +1,7 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import { getData } from '../../apis/getData';
 import { LocationItem } from '../../../auxiliary/interfaces/LocationItem';
+import { deleteData } from '../../apis/deleteData';
 
 class FieldsStore {
   locations: LocationItem[] = [];
@@ -12,36 +13,28 @@ class FieldsStore {
     this.fetchData();
   }
 
-  private async fetchData() {
+  public async fetchData() {
+    runInAction(() => {
+      this.isLoading = true;
+    });
+
     try {
-      runInAction(() => {
-        this.isLoading = true;
-      });
-
       const locations = await getData('/Location');
-
       runInAction(() => {
         this.locations = locations;
-        this.isLoading = false;
       });
-    } catch (error) {
-      console.error('Error fetching locations:', error);
+    } finally {
       runInAction(() => {
         this.isLoading = false;
       });
     }
   }
 
-  public updateField(id: number, updatedLocation: Partial<LocationItem>) {
-    const location = this.locations.find((loc) => loc.id === id);
-    if (location) {
-      Object.assign(location, updatedLocation);
-    }
-  }
+  public deleteField = async (id: number) => {
+    await deleteData(`/location/${id}`, id);
 
-  public deleteField(id: number) {
-    this.locations = this.locations.filter((loc) => loc.id !== id);
-  }
+    this.fetchData();
+  };
 }
 
 const fieldsStore = new FieldsStore();
