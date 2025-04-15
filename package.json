@@ -15,6 +15,7 @@
     "generate-api": "openapi-generator-cli generate -i ./api/swagger.json -g typescript-axios -o ./src/api"
   },
   "dependencies": {
+    "@auth0/auth0-react": "^2.3.0",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@testing-library/jest-dom": "^6.6.3",

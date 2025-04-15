@@ -25,7 +25,7 @@ class CropsStore {
 
   constructor() {
     makeAutoObservable(this, {
-      debouncedFilterPlants: false, // Exclude functions or complex properties
+      debouncedFilterPlants: false,
     });
 
     this.debouncedFilterPlants = debounce(this.filterPlants.bind(this), 500);
