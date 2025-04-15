@@ -6,10 +6,11 @@ export interface ButtonProps {
   label: string;
   className?: string;
   type?: 'button' | 'submit' | 'reset';
+  customStyles?: React.CSSProperties;
 }
 
 const Button: React.FC<ButtonProps> = (props) => {
-  const { onClick, label, className, type = 'button' } = props;
+  const { onClick, label, className, type = 'button', customStyles } = props;
 
   return (
     <button
@@ -17,6 +18,7 @@ const Button: React.FC<ButtonProps> = (props) => {
       type={type}
       className={`${styles.button} ${className}`}
       onClick={type === 'submit' ? undefined : onClick}
+      style={customStyles}
     >
       {label}
     </button>

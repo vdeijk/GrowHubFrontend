@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './App.css';
 import NavbarContainer from './core/views/containers/NavbarContainer/NavbarContainer';
 import MenuContainer from './core/views/containers/MenuContainer/MenuContainer';
@@ -19,15 +19,14 @@ import { observer } from 'mobx-react-lite';
 import NotFoundPage from './core/views/pages/NotFoundPage/NotFoundPage';
 import { useAuth0 } from '@auth0/auth0-react';
 import LoadingWrapper from './core/views/reusables/LoadingWrapper/LoadingWrapper';
+import LandingPage from './core/views/pages/LandingPage/LandingPage';
 
 const App: React.FC = observer(() => {
-  const { isAuthenticated, loginWithRedirect, isLoading } = useAuth0();
+  const { isAuthenticated, isLoading } = useAuth0();
 
-  useEffect(() => {
-    if (!isLoading && !isAuthenticated) {
-      loginWithRedirect();
-    }
-  }, [isLoading, isAuthenticated, loginWithRedirect]);
+  if (!isAuthenticated) {
+    return <LandingPage />;
+  }
 
   return (
     <main className="appContainer">

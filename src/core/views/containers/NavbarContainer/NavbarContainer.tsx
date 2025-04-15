@@ -1,10 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faUser,
-  faQuestionCircle,
-  faSignOutAlt,
-} from '@fortawesome/free-solid-svg-icons';
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import styles from './NavbarContainer.module.css';
 import { useAuth0 } from '@auth0/auth0-react';
 
@@ -25,13 +21,13 @@ const NavbarContainer: React.FC<NavbarProps> = ({ userName }) => {
       <div className={styles.navbarActions}>
         <div className={styles.userNameContainer}>
           <span className={styles.userName}>{userName}</span>
-          <button className={styles.userIcon}>
+          {/* <button className={styles.userIcon}>
             <FontAwesomeIcon icon={faUser} />
-          </button>
+          </button> */}
         </div>
-        <button className={styles.helpButton}>
+        {/* <button className={styles.helpButton}>
           <FontAwesomeIcon icon={faQuestionCircle} />
-        </button>
+        </button> */}
         <button
           className={styles.logoutButton}
           onClick={() =>
