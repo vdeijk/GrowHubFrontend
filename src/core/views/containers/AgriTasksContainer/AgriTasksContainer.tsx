@@ -19,7 +19,11 @@ const Tasks: React.FC = observer(() => {
   return (
     <section className={styles.section}>
       <LoadingWrapper isLoading={taskStore.isLoading}>
-        <Heading level={6} text="AgriTasks"></Heading>
+        <Heading
+          level={6}
+          text="AgriTasks"
+          customStyles={{ marginBottom: '2rem' }}
+        ></Heading>
         {taskStore.tasks.map((task) => (
           <Task key={task.id} taskData={task} />
         ))}

@@ -30,7 +30,11 @@ const MapSection: React.FC = observer(() => {
   return (
     <section className={styles.container}>
       <LoadingWrapper isLoading={locationStore.isLoading}>
-        <Heading level={6} text="Your Fields" />
+        <Heading
+          level={6}
+          text="Your Fields"
+          customStyles={{ marginBottom: '2rem' }}
+        />
         <Map {...mapData} />
         <ButtonContainer {...buttonContainerData} />
       </LoadingWrapper>

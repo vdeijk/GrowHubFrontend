@@ -13,7 +13,6 @@
   justify-content: center;
   justify-items: center;
   align-content: center;
-  grid-gap: 2rem;
   background-color: var(--color-white);
   padding: 2rem;
   border-radius: var(--border-radius-large);
@@ -30,4 +29,5 @@
   display: grid;
   justify-content: center;
   justify-items: center;
+  margin-bottom: 2rem;
 }

@@ -12,11 +12,23 @@ const LandingPage: React.FC = () => {
     <div className={styles.page}>
       <div className={styles.container}>
         <div className={styles.headers}>
-          <Heading level={1} text="🌱 GrowHub" />
-          <Heading level={2} text="Your Smart Farming Companion" />
+          <Heading
+            level={1}
+            text="🌱 GrowHub"
+            customStyles={{ marginBottom: '2rem' }}
+          />
+          <Heading
+            level={2}
+            text="Your Smart Farming Companion"
+            customStyles={{ marginBottom: '3rem' }}
+          />
         </div>
         <div className={styles.content}>
-          <Heading level={6} text="Demo Credentials:" />
+          <Heading
+            level={6}
+            text="Demo Credentials:"
+            customStyles={{ marginBottom: '1rem' }}
+          />
           <p>📧 Email: demo@example.com</p>
           <p>🔑 Password: DemoPassword123!</p>
         </div>

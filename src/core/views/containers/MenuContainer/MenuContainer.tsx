@@ -20,12 +20,12 @@ const MenuContainer: React.FC<MenuProps> = ({
   return (
     <div className={styles.container}>
       <div className={styles.profile}>
-        <Heading level={4} text={curPageTitle}></Heading>
-        <img
-          src={profilePicture}
-          alt="Profile"
-          className={styles.image}
+        <Heading
+          level={4}
+          text={curPageTitle}
+          customStyles={{ marginBottom: '2rem', color: '#FDFDFD' }}
         />
+        <img src={profilePicture} alt="Profile" className={styles.image} />
         <span className={styles.userName}>{userName}</span>
       </div>
       <ul className={styles.unorderedList}>

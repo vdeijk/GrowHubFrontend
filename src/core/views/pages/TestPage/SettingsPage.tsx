@@ -7,7 +7,11 @@ import Heading from '../../reusables/Heading/Heading';
 const SettingsPage: React.FC = observer(() => {
   return (
     <div>
-      <Heading level={1} text="Settings Page"></Heading>
+      <Heading
+        level={1}
+        text="Settings Page"
+        customStyles={{ marginBottom: '2rem' }}
+      ></Heading>
       <div>
         <CheckboxInput
           label="Use Real Data (or mock data if unchecked)"

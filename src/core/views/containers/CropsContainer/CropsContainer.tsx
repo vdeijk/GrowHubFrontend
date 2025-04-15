@@ -29,7 +29,11 @@ const Plants: React.FC = observer(() => {
 
   const children = (
     <>
-      <Heading level={6} text="Your Crops" />
+      <Heading
+        level={6}
+        text="Your Crops"
+        customStyles={{ marginBottom: '2rem' }}
+      />
       <TableWithoutSorting<Plant>
         headers={headersWithoutActions}
         data={plantsStore.plants.map((plant, index) => ({

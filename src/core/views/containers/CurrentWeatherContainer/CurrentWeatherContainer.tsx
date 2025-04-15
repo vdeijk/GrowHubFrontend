@@ -26,7 +26,11 @@ const CurrentWeatherContainer: React.FC = observer(() => {
 
   const children = (
     <>
-      <Heading level={6} text="Current Weather"></Heading>
+      <Heading
+        level={6}
+        text="Current Weather"
+        customStyles={{ marginBottom: '2rem' }}
+      ></Heading>
       <h4 className={styles.h4}>The Hague, South Holland</h4>
       <div className={styles.container}>
         <img

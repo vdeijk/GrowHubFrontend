@@ -69,7 +69,11 @@ const TurnoverGraph: React.FC<GraphProps> = ({ data, width, height }) => {
 
   return (
     <section className={styles.container}>
-      <Heading level={6} text="Weekly Turnover"></Heading>
+      <Heading
+        level={6}
+        text="Weekly Turnover"
+        customStyles={{ marginBottom: '2rem' }}
+      />
       <svg ref={svgRef} width="100%" height={height}></svg>
       <ButtonContainer {...buttonContainerData} />
     </section>

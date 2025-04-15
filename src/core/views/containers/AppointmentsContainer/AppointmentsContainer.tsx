@@ -17,7 +17,11 @@ const Appointments: React.FC = observer(() => {
   return (
     <section className={styles.section}>
       <div>
-        <Heading level={6} text="Today's Appointments"></Heading>
+        <Heading
+          level={6}
+          text="Today's Appointments"
+          customStyles={{ marginBottom: '2rem' }}
+        ></Heading>
         {appointmentStore.appointments.map((appointment, index) => (
           <Appointment key={index} appointmentData={appointment} />
         ))}

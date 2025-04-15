@@ -11,7 +11,11 @@ const WeatherReportPage: React.FC = observer(() => {
 
   const children = (
     <>
-      <Heading level={6} text="7-Day Weather Forecast"></Heading>
+      <Heading
+        level={6}
+        text="7-Day Weather Forecast"
+        customStyles={{ marginBottom: '2rem' }}
+      />
       <h4 className={styles.h4}>The Hague, South Holland</h4>
       <div className={styles.forecast}>
         {forecast.map((day, index) => (
