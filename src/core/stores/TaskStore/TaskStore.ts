@@ -36,7 +36,7 @@ class TaskStore {
     this.tasks = this.tasks.filter((task) => task.id !== id);
   }
 
-  private async fetchData() {
+  public async fetchData() {
     try {
       runInAction(() => {
         this.isLoading = true;

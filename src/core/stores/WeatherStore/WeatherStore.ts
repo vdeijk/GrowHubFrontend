@@ -22,7 +22,7 @@ class WeatherStore {
     this.weatherForecast = weatherMock;
   }
 
-  private async fetchData() {
+  public async fetchData() {
     try {
       runInAction(() => {
         this.isLoading = true;

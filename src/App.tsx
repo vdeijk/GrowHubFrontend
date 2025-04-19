@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import NavbarContainer from './core/views/containers/NavbarContainer/NavbarContainer';
 import MenuContainer from './core/views/containers/MenuContainer/MenuContainer';
@@ -20,9 +20,38 @@ import NotFoundPage from './core/views/pages/NotFoundPage/NotFoundPage';
 import { useAuth0 } from '@auth0/auth0-react';
 import LoadingWrapper from './core/views/reusables/LoadingWrapper/LoadingWrapper';
 import LandingPage from './core/views/pages/LandingPage/LandingPage';
+import fieldsStore from './core/stores/FieldsStore/FieldsStore';
+import appointmentStore from './core/stores/AppointmentsStore/AppointmentStore';
+import cropsStore from './core/stores/CropsStore/CropsStore';
+import taskStore from './core/stores/TaskStore/TaskStore';
+import weatherStore from './core/stores/WeatherStore/WeatherStore';
 
 const App: React.FC = observer(() => {
   const { isAuthenticated, isLoading } = useAuth0();
+  const [isFetched, setIsFetched] = useState(false);
+
+  useEffect(() => {
+    if (!isFetched && isAuthenticated) {
+      console.log('fetching');
+      setIsFetched(true);
+
+      fetchAllData();
+    }
+  }, [isAuthenticated, isFetched]);
+
+  const fetchAllData = async () => {
+    try {
+      await Promise.all([
+        fieldsStore.fetchData(),
+        appointmentStore.fetchData(),
+        cropsStore.fetchData(),
+        taskStore.fetchData(),
+        weatherStore.fetchData(),
+      ]);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
 
   if (!isAuthenticated) {
     return <LandingPage />;
