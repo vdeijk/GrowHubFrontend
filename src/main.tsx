@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import './index.css';
 import './variables.css';
 import App from './App';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import settingsStore from './core/stores/SettingsStore/SettingsStore';
 import { Auth0Provider } from '@auth0/auth0-react';
 
@@ -18,9 +18,9 @@ createRoot(document.getElementById('root')!).render(
         redirect_uri: window.location.origin,
       }}
     >
-      <BrowserRouter>
+      <HashRouter>
         <App />
-      </BrowserRouter>
+      </HashRouter>
     </Auth0Provider>
   </StrictMode>,
 );
