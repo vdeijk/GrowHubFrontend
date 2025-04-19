@@ -6,6 +6,7 @@
   height: 100%;
   column-gap: var(--spacing-medium);
   grid-column: 1/-1;
+  grid-gap: 2rem;
 }
 
 .top {
@@ -19,4 +20,16 @@
 
 .right {
   grid-row: 2/3;
+}
+
+@media (max-width: 1024px) {
+  .left {
+    grid-area: 1 / 1 / 2 / -1;
+  }
+}
+
+@media (max-width: 1024px) {
+  .right {
+    grid-area: 2 / 1 / 3 / -1;
+  }
 }

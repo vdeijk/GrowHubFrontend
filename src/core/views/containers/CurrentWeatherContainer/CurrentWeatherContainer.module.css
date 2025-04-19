@@ -9,7 +9,14 @@
 }
 
 .container {
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr 2fr;
   align-items: center;
+}
+
+@media (max-width: 1024px) {
+  .weather {
+    grid-area: 1 / 1 / 2 / -1;
+  }
 }
