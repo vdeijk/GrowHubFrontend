@@ -32,7 +32,6 @@ const App: React.FC = observer(() => {
 
   useEffect(() => {
     if (!isFetched && isAuthenticated) {
-      console.log('fetching');
       setIsFetched(true);
 
       fetchAllData();
