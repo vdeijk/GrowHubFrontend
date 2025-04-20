@@ -22,7 +22,9 @@ const TasksPage: React.FC = observer(() => {
     label: 'Add AgriTask',
   };
 
-  const handleEdit = (id: number) => {};
+  const handleEdit = (id: number) => {
+    navigate(`/addTaskPage/${id}`);
+  };
 
   const handleDelete = (id: number) => {
     taskStore.deleteTask(id);

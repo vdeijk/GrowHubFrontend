@@ -7,6 +7,7 @@ import { debounce } from '../../../auxiliary/utils/debounce';
 import { validate } from '../../../auxiliary/utils/validationMaxLength';
 import { Priority } from '../../../auxiliary/enums/Priority';
 import { Category } from '../../../auxiliary/enums/Category';
+import { deleteData } from '../../apis/deleteData';
 
 class TaskStore {
   tasks: Task[] = [];
@@ -71,8 +72,10 @@ class TaskStore {
     }
   }
 
-  public deleteTask(id: number) {
-    this.tasks = this.tasks.filter((task) => task.id !== id);
+  public async deleteTask(id: number) {
+    await deleteData(`/todo/${id}`, id);
+
+    this.fetchData();
   }
 
   public async fetchData() {
