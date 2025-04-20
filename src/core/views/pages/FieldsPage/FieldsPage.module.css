@@ -1,5 +1,6 @@
 .container {
   display: grid;
+  grid-auto-flow: column;
   background: var(--color-white);
   padding: var(--spacing-medium);
   width: 100%;
@@ -7,19 +8,6 @@
   column-gap: var(--spacing-medium);
   grid-column: 1/-1;
   grid-gap: 2rem;
-}
-
-.top {
-  grid-column: 1/-1;
-  grid-row: 1/2;
-}
-
-.left {
-  grid-row: 2/3;
-}
-
-.right {
-  grid-row: 2/3;
 }
 
 @media (max-width: 1024px) {

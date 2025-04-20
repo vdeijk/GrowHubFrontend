@@ -44,7 +44,6 @@ const FieldsPage: React.FC = observer(() => {
   return (
     <section className={styles.container}>
       <LoadingWrapper isLoading={fieldsStore.isLoading}>
-        <div className={styles.top}></div>
         <div className={styles.left}>
           <Map {...mapData} />
         </div>
