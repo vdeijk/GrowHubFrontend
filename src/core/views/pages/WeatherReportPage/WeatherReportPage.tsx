@@ -20,10 +20,11 @@ const WeatherReportPage: React.FC = observer(() => {
     <>
       <div className={styles.searchBar}>
         <Dropdown
+          label="Choose Field"
           value={weatherStore.selectedLocation?.id?.toString() || ''}
           onChange={(id) => weatherStore.setLocation(id)}
           options={options}
-          aria-label="Choose location"
+          aria-label="Choose Field"
         />
       </div>
       <div className={styles.content}>

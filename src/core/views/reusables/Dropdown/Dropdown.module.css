@@ -1,6 +1,19 @@
 .dropdown {
   padding: 10px;
+  margin-right: 10px;
   border: 1px solid #ccc;
   border-radius: var(--border-radius-small);
+  width: 100%;
   font-size: 1.5rem;
+}
+
+.container {
+  display: grid;
+  grid-gap: .5rem;
+  align-items: center;
+}
+
+.label {
+  font-size: 1.4rem;
+  font-weight: bold;
 }

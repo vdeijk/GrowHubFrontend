@@ -7,6 +7,7 @@ interface DropdownProps {
   onChange: (value: string) => void;
   options: DropdownOption[];
   ariaLabel?: string;
+  label?: string;
 }
 
 const Dropdown: React.FC<DropdownProps> = ({
@@ -14,20 +15,28 @@ const Dropdown: React.FC<DropdownProps> = ({
   onChange,
   options,
   ariaLabel,
+  label,
 }) => {
   return (
-    <select
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-      className={styles.dropdown}
-      aria-label={ariaLabel}
-    >
-      {options.map((option) => (
-        <option key={option.value} value={option.value}>
-          {option.label}
-        </option>
-      ))}
-    </select>
+    <div className={label ? styles.container : ''}>
+      {label && (
+        <label className={styles.label} htmlFor={label}>
+          {label}
+        </label>
+      )}
+      <select
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className={styles.dropdown}
+        aria-label={ariaLabel}
+      >
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+    </div>
   );
 };
 

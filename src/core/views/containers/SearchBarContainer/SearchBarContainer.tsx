@@ -24,16 +24,19 @@ const SearchBar: React.FC<SearchBarProps> = ({
   return (
     <div className={styles.container}>
       <TextInput
+        label="Search by Name"
         value={searchQuery}
         onChange={setSearchQuery}
         placeholder="Search plants..."
+        aria-label="Search by Name"
         error={error}
       />
       <Dropdown
         value={filterCriteria}
         onChange={setFilterCriteria}
         options={genusOptions}
-        aria-label="Filter by genus"
+        label="Filter by Genus"
+        aria-label="Filter by Genus"
       />
     </div>
   );

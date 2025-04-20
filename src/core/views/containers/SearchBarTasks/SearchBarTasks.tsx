@@ -38,7 +38,8 @@ const SearchBarTasks: React.FC<SearchBarTasksProps> = ({
         value={searchQuery}
         onChange={setSearchQuery}
         placeholder="Search tasks..."
-        label="Title"
+        label="Search by Title"
+        aria-label="Search by Title"
         error={error}
       />
       <Dropdown
@@ -48,6 +49,7 @@ const SearchBarTasks: React.FC<SearchBarTasksProps> = ({
         }
         options={priorityOptions}
         aria-label="Filter by Priority"
+        label="Filter by Priority"
       />
       <Dropdown
         value={filterCriteria.category || ''}
@@ -56,6 +58,7 @@ const SearchBarTasks: React.FC<SearchBarTasksProps> = ({
         }
         options={categoryOptions}
         aria-label="Filter by Category"
+        label="Filter by Category"
       />
       {/* <DateInput
         value={filterCriteria}
