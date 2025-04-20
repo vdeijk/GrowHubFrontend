@@ -2,11 +2,11 @@ import React, { useEffect } from 'react';
 import TextInput, { TextInputProps } from '../../reusables/TextInput/TextInput';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import addCropStore from '../../../stores/AddCropStore/AddCropStore';
-import Button, { ButtonProps } from '../../reusables/Button/Button';
 import styles from './AddTaskPage.module.css';
 import { observer } from 'mobx-react-lite';
 import { useParams } from 'react-router-dom';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
+import Button, { ButtonProps } from '../../reusables/Button/Button';
 
 interface AddTaskPageProps {
   isEditing?: boolean;
@@ -66,7 +66,9 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
 
     const buttonProps: ButtonProps = {
       type: 'submit',
+      onClick: () => navigate('/tasksPage'),
       label: isEditing ? 'Edit Crop' : 'Add Crop',
+      customStyles: { marginTop: '1rem' },
     };
 
     return (

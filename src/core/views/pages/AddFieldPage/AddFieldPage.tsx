@@ -67,7 +67,9 @@ const AddFieldPage: React.FC<AddFieldPageProps> = observer(
 
     const buttonProps: ButtonProps = {
       type: 'submit',
+      onClick: () => navigate('/tasksPage'),
       label: isEditing ? 'Edit Field' : 'Add Field',
+      customStyles: { marginTop: '1rem' },
     };
 
     return (

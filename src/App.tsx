@@ -27,6 +27,7 @@ import taskStore from './core/stores/TaskStore/TaskStore';
 import weatherStore from './core/stores/CurrentWeatherStore/WeatherStore';
 import UpgradePage from './core/views/pages/UpgradePage/UpgradePage';
 import CropsDatabasePage from './core/views/pages/CropsDatabasePage/CropsDatabasePage';
+import AddTaskPage from './core/views/pages/AddTaskPage/AddTaskPage';
 
 const App: React.FC = observer(() => {
   const { isAuthenticated, isLoading } = useAuth0();
@@ -88,6 +89,11 @@ const App: React.FC = observer(() => {
               element={<AddCropPage isEditing={true} />}
             />
             <Route path="/addCropPage" element={<AddCropPage />} />
+            <Route
+              path="/addTaskPage/:id"
+              element={<AddTaskPage isEditing={true} />}
+            />
+            <Route path="/addTaskPage" element={<AddTaskPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </LoadingWrapper>
