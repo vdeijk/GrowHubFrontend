@@ -2,7 +2,11 @@
     display: grid;
     grid-auto-flow: column;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 2rem;
     grid-gap: var(--spacing-small);
+    background-color: var(--color-white);
+    border-radius: var(--border-radius-small);
+    box-shadow: var(--box-shadow);
+    padding: 2rem;
   }
   

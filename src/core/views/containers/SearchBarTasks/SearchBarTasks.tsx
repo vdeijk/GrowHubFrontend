@@ -38,6 +38,7 @@ const SearchBarTasks: React.FC<SearchBarTasksProps> = ({
         value={searchQuery}
         onChange={setSearchQuery}
         placeholder="Search tasks..."
+        label="Title"
         error={error}
       />
       <Dropdown

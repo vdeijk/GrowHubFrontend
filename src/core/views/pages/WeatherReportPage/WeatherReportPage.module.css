@@ -7,6 +7,7 @@
   display: grid;
   grid-auto-flow: column;
   align-items: center;
+  margin-bottom: 2rem;
 }
 
 .content {
@@ -18,7 +19,6 @@
 }
 
 .weather {
-  padding: var(--spacing-medium);
   grid-column: 1/-1;
 }
 
@@ -43,6 +43,3 @@
   margin: 0.5rem 0;
 }
 
-.searchBar {
-  margin-bottom: 2rem;
-}

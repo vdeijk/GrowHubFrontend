@@ -1,52 +1,12 @@
 .taskPage {
-  padding: 2rem;
-  background-color: var(--color-white);
-  border-radius: 8px;
-  box-shadow: var(--box-shadow);
   grid-column: 1/-1;
 }
 
-.taskForm {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-bottom: var(--spacing-small);
-}
-
-.taskForm input,
-.taskForm select,
-.taskForm textarea {
-  padding: 0.5rem;
-  border: 1px solid #ddd;
+.buttonContainer {
+  margin-bottom: 2rem;
+  grid-gap: var(--spacing-small);
+  background-color: var(--color-white);
   border-radius: var(--border-radius-small);
-}
-
-.formActions {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.taskItem {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: var(--spacing-small);
-  padding: 0.5rem;
-  border: 1px solid #ddd;
-  border-radius: var(--border-radius-small);
-  background-color: #fff;
-}
-
-.taskActions button {
-  margin-left: 0.5rem;
-  padding: 0.3rem 0.5rem;
-  border: none;
-  border-radius: var(--border-radius-small);
-  background-color: #0078d4;
-  color: #fff;
-  cursor: pointer;
-}
-
-.taskActions button:hover {
-  background-color: #005a9e;
+  box-shadow: var(--box-shadow);
+  padding: 2rem;
 }
