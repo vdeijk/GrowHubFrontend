@@ -38,6 +38,16 @@ class RouterStore {
       label: 'Edit Field',
       hidden: true,
       isDynamic: true,
+    }, {
+      path: '/addTaskPage',
+      label: 'Add Task',
+      hidden: true,
+      isDynamic: false,
+    }, {
+      path: '/addTaskPage/:id',
+      label: 'Edit Task',
+      hidden: true,
+      isDynamic: false,
     },
   ];
 

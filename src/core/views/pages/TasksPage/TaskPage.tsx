@@ -11,8 +11,17 @@ import SearchBarTasks from '../../containers/SearchBarTasks/SearchBarTasks';
 import { SearchBarTasksProps } from '../../containers/SearchBarTasks/SearchBarTasks';
 import { Category } from '../../../../auxiliary/enums/Category';
 import { Priority } from '../../../../auxiliary/enums/Priority';
+import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
+import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 
 const TasksPage: React.FC = observer(() => {
+  const navigate = useRouterNavigation();
+
+  const buttonContainerData = {
+    clickHandler: () => navigate('/addTaskPage'),
+    label: 'Add Task',
+  };
+
   const handleEdit = (id: number) => {};
 
   const handleDelete = (id: number) => {
@@ -28,11 +37,11 @@ const TasksPage: React.FC = observer(() => {
       priority: taskStore.filterCriteria.priority as Priority | null,
     },
     setFilterCriteria: taskStore.setFilterCriteria,
-    categoryOptions: taskStore.categoryOptions.map(option => ({
+    categoryOptions: taskStore.categoryOptions.map((option) => ({
       ...option,
       value: option.value === null ? '' : option.value,
     })),
-    priorityOptions: taskStore.priorityOptions.map(option => ({
+    priorityOptions: taskStore.priorityOptions.map((option) => ({
       ...option,
       value: option.value === null ? '' : option.value,
     })),
@@ -66,7 +75,10 @@ const TasksPage: React.FC = observer(() => {
     <section className={styles.taskPage}>
       <LoadingWrapper isLoading={taskStore.isLoading}>
         <SearchBarTasks {...searchBarProps} />
-        <TableWithSorting {...tableProps} />
+        <div className={styles.buttonContainer}>
+          <TableWithSorting {...tableProps} />
+          <ButtonContainer {...buttonContainerData} />
+        </div>
       </LoadingWrapper>
     </section>
   );
