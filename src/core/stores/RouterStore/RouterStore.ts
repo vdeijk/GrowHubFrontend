@@ -40,12 +40,12 @@ class RouterStore {
       isDynamic: true,
     }, {
       path: '/addTaskPage',
-      label: 'Add Task',
+      label: 'Add AgriTask',
       hidden: true,
       isDynamic: false,
     }, {
       path: '/addTaskPage/:id',
-      label: 'Edit Task',
+      label: 'Edit AgriTask',
       hidden: true,
       isDynamic: false,
     },
