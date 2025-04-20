@@ -1,12 +1,15 @@
 import React, { useEffect } from 'react';
 import TextInput, { TextInputProps } from '../../reusables/TextInput/TextInput';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
-import addCropStore from '../../../stores/AddCropStore/AddCropStore';
+import addTaskStore from '../../../stores/AddTaskStore/AddTaskStore';
 import styles from './AddTaskPage.module.css';
 import { observer } from 'mobx-react-lite';
 import { useParams } from 'react-router-dom';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import Button, { ButtonProps } from '../../reusables/Button/Button';
+import Dropdown from '../../reusables/Dropdown/Dropdown';
+//import DateInput from '../../reusables/DateInput/DateInput';
+import { DropdownProps } from '../../reusables/Dropdown/Dropdown';
 
 interface AddTaskPageProps {
   isEditing?: boolean;
@@ -19,9 +22,9 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
 
     useEffect(() => {
       if (isEditing && id) {
-        addCropStore.loadCrop(id);
+        addTaskStore.loadTask(id);
       } else {
-        addCropStore.resetForm();
+        addTaskStore.resetForm();
       }
     }, [isEditing, id]);
 
@@ -29,38 +32,45 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
       e.preventDefault();
 
       if (isEditing && id) {
-        addCropStore.updateCrop(id);
+        addTaskStore.updateCrop(id);
       } else {
-        addCropStore.addCrop();
+        addTaskStore.addCrop();
       }
 
-      addCropStore.resetForm();
+      addTaskStore.resetForm();
 
       navigate('/cropsPage');
     };
-    const nameProps: TextInputProps = {
-      value: addCropStore.commonName,
+    const titleProps: TextInputProps = {
+      value: addTaskStore.title,
       onChange: (value: string) =>
-        addCropStore.updateFormField('commonName', value),
-      placeholder: 'Common Name',
-      label: 'Common Name',
+        addTaskStore.updateFormField('title', value),
+      placeholder: 'Title',
+      label: 'Title',
       required: true,
     };
 
-    const sunPreferenceProps: TextInputProps = {
-      value: addCropStore.genus,
-      onChange: (value: string) => addCropStore.updateFormField('genus', value),
-      placeholder: 'Genus',
-      label: 'Genus',
+    const priorityProps: DropdownProps = {
+      value: addTaskStore.priority,
+      onChange: (value: string) => addTaskStore.updateFormField('priority', value),
+      label: 'Priority',
       required: true,
     };
 
-    const waterNeedsProps: TextInputProps = {
-      value: addCropStore.scientificName,
+    const descriptionProps: TextInputProps = {
+      value: addTaskStore.description,
       onChange: (value: string) =>
-        addCropStore.updateFormField('scientificName', value),
-      placeholder: 'Scientific Name',
-      label: 'Scientific Name',
+        addTaskStore.updateFormField('description', value),
+      placeholder: 'Enter description',
+      label: 'Description',
+      required: true,
+    };
+
+    const categoryProps: DropdownProps = {
+      value: addTaskStore.category,
+      onChange: (value: string) =>
+        addTaskStore.updateFormField('category', value),
+      label: 'Category',
       required: true,
     };
 
@@ -73,11 +83,13 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
 
     return (
       <section className={styles.section}>
-        <LoadingWrapper isLoading={addCropStore.isLoading}>
+        <LoadingWrapper isLoading={addTaskStore.isLoading}>
           <form onSubmit={handleSubmit} className={styles.form}>
-            <TextInput {...nameProps} />
-            <TextInput {...sunPreferenceProps} />
-            <TextInput {...waterNeedsProps} />
+            <TextInput {...titleProps} />
+            <Dropdown {...priorityProps} />
+            {/* <DateInput {...waterNeedsProps} /> */}
+            <TextInput {...descriptionProps} />
+            <Dropdown {...categoryProps} />
             <Button {...buttonProps} />
           </form>
         </LoadingWrapper>

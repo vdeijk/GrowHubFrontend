@@ -1,5 +1,5 @@
 export enum Category {
-    High = 'Work',
-    Medium = 'Personal',
-    Low = 'Other',
+  Work = 'Work',
+  Personal = 'Personal',
+  Other = 'Other',
   }

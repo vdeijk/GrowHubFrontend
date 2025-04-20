@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Dropdown.module.css';
 import { DropdownOption } from '../../../../auxiliary/interfaces/DropdownOptions';
 
-interface DropdownProps {
+export interface DropdownProps {
   value: string;
   onChange: (value: string) => void;
   options: DropdownOption[];
