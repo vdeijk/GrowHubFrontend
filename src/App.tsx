@@ -24,7 +24,9 @@ import fieldsStore from './core/stores/FieldsStore/FieldsStore';
 import appointmentStore from './core/stores/AppointmentsStore/AppointmentStore';
 import cropsStore from './core/stores/CropsStore/CropsStore';
 import taskStore from './core/stores/TaskStore/TaskStore';
-import weatherStore from './core/stores/WeatherStore/WeatherStore';
+import weatherStore from './core/stores/CurrentWeatherStore/WeatherStore';
+import UpgradePage from './core/views/pages/UpgradePage/UpgradePage';
+import CropsDatabasePage from './core/views/pages/CropsDatabasePage/CropsDatabasePage';
 
 const App: React.FC = observer(() => {
   const { isAuthenticated, isLoading } = useAuth0();
@@ -79,6 +81,8 @@ const App: React.FC = observer(() => {
             />
             <Route path="/addFieldPage" element={<AddFieldPage />} />
             <Route path="/cropsPage" element={<CropsPage />} />
+            <Route path="/upgrade" element={<UpgradePage />} />
+            <Route path="/cropsDatabase" element={<CropsDatabasePage />} />
             <Route
               path="/addCropPage/:id"
               element={<AddCropPage isEditing={true} />}

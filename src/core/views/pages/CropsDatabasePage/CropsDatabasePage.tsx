@@ -1,7 +1,7 @@
 import React from 'react';
 import SearchBarContainer from '../../containers/SearchBarContainer/SearchBarContainer';
-import TableWithSorting from '../../reusables/TableWithSorting/TableWithSorting';
-import styles from './CropsPage.module.css';
+import Table from '../../reusables/TableWithSorting/TableWithSorting';
+import styles from './CropsDatabasePage.module.css';
 import plantsStore from '../../../stores/CropsStore/CropsStore';
 import { observer } from 'mobx-react-lite';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
@@ -13,7 +13,7 @@ import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation
 import { FaEdit } from 'react-icons/fa';
 import { FaTrash } from 'react-icons/fa';
 
-const CropsPage: React.FC = observer(() => {
+const CropsDatabasePage: React.FC = observer(() => {
   const navigate = useRouterNavigation();
 
   const searchBarProps: SearchBarProps = {
@@ -67,7 +67,7 @@ const CropsPage: React.FC = observer(() => {
       <LoadingWrapper isLoading={plantsStore.isLoading}>
         <SearchBarContainer {...searchBarProps} />
         <div className={styles.buttonContainer}>
-          <TableWithSorting {...tableProps} />
+          <Table {...tableProps} />
           <ButtonContainer {...buttonContainerData} />
         </div>
       </LoadingWrapper>
@@ -75,4 +75,4 @@ const CropsPage: React.FC = observer(() => {
   );
 });
 
-export default CropsPage;
+export default CropsDatabasePage;

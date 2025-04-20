@@ -2,6 +2,7 @@ import { makeAutoObservable, runInAction } from 'mobx';
 import { getData } from '../../apis/getData';
 import { LocationItem } from '../../../auxiliary/interfaces/LocationItem';
 import { deleteData } from '../../apis/deleteData';
+import weatherStore from '../CurrentWeatherStore/WeatherStore';
 
 class FieldsStore {
   locations: LocationItem[] = [];
@@ -22,6 +23,9 @@ class FieldsStore {
       const locations = await getData('/Location');
       runInAction(() => {
         this.locations = locations;
+
+        weatherStore.setLocation(this.locations[0]?.id?.toString() || '');
+        weatherStore.fetchData();
       });
     } finally {
       runInAction(() => {
@@ -34,6 +38,8 @@ class FieldsStore {
     await deleteData(`/location/${id}`, id);
 
     this.fetchData();
+
+    weatherStore.fetchData();
   };
 }
 
