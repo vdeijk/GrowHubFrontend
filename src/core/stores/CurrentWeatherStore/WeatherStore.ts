@@ -1,6 +1,5 @@
-import { makeAutoObservable, toJS } from 'mobx';
+import { makeAutoObservable } from 'mobx';
 import { runInAction } from 'mobx';
-import { WeatherData } from '../../../auxiliary/interfaces/WeatherData';
 import { getData } from '../../apis/getData';
 //import { WeatherForecast } from '../../../auxiliary/interfaces/WeatherForecast';
 import fieldsStore from '../FieldsStore/FieldsStore';
@@ -8,9 +7,8 @@ import { LocationItem } from '../../../auxiliary/interfaces/LocationItem';
 import { formatCoordinate } from '../../../auxiliary/utils/formatCoordinates';
 
 class WeatherStore {
-  currentWeather: WeatherData | null = null;
+  weatherData: any | null = null; 
   isLoading = false;
-  weatherForecast: any[] | null = null;
   selectedLocation: LocationItem | null | undefined = null;
   locationFullName: string = '';
 
@@ -34,8 +32,7 @@ class WeatherStore {
       });
 
       runInAction(() => {
-        this.currentWeather = weather.current;
-        this.weatherForecast = weather.forecast.forecastday;
+        this.weatherData = weather;
         this.locationFullName = `${weather.location.name}, ${weather.location.region}, ${weather.location.country}`;
       });
     } catch (error) {

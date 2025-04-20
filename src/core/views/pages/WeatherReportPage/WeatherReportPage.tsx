@@ -14,6 +14,8 @@ const WeatherReportPage: React.FC = observer(() => {
     label: location.name,
   }));
 
+  const weatherForecast = weatherStore.weatherData.forecast.forecastday;
+
   const children = (
     <>
       <div className={styles.searchBar}>
@@ -27,7 +29,7 @@ const WeatherReportPage: React.FC = observer(() => {
       <div className={styles.content}>
         <Heading
           level={6}
-          text={`${weatherStore.weatherForecast?.length}-day Weather Forecast`}
+          text={`${weatherForecast?.length}-day Weather Forecast`}
           customStyles={{ marginBottom: '2rem' }}
         />
         <Heading
@@ -36,7 +38,7 @@ const WeatherReportPage: React.FC = observer(() => {
           customStyles={{ marginBottom: '2rem' }}
         />
         <div className={styles.forecast}>
-          {weatherStore.weatherForecast?.map((day, index) => (
+          {weatherForecast?.map((day, index) => (
             <div key={index} className={styles.forecast__day}>
               <h5>{new Date(day.date).toLocaleDateString()}</h5>
               <img

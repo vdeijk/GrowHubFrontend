@@ -12,11 +12,11 @@ import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation
 const CurrentWeatherContainer: React.FC = observer(() => {
   const navigate = useRouterNavigation();
 
-  const weather = weatherStore.weather;
+  const weather = weatherStore?.weatherData;
 
   const textsWithBoldSpan: TextWithBoldSpanData[] = [
-    { label: 'Humidity', boldSpan: `${weather?.current.humidity}%` },
-    { label: 'Wind Speed', boldSpan: `${weather?.current.wind_kph} kph` },
+    { label: 'Humidity', boldSpan: `${weather?.current?.humidity}%` },
+    { label: 'Wind Speed', boldSpan: `${weather?.current?.wind_kph} kph` },
   ];
 
   const buttonContainerData = {
@@ -34,11 +34,11 @@ const CurrentWeatherContainer: React.FC = observer(() => {
       <h4 className={styles.h4}>The Hague, South Holland</h4>
       <div className={styles.container}>
         <img
-          src={weather?.current.condition.icon}
-          alt={weather?.current.condition.text}
+          src={weather?.current?.condition.icon}
+          alt={weather?.current?.condition.text}
           className={styles.weather__icon}
         />
-        <h2>{weather?.current.temp_c}°C</h2>
+        <h2>{weather?.current?.temp_c}°C</h2>
       </div>
       <div>
         {textsWithBoldSpan?.map((textWithBoldSpan, index) => (
