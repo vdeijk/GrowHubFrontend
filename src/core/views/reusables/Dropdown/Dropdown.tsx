@@ -8,6 +8,7 @@ export interface DropdownProps {
   options: DropdownOption[];
   ariaLabel?: string;
   label?: string;
+  required?: boolean;
 }
 
 const Dropdown: React.FC<DropdownProps> = ({

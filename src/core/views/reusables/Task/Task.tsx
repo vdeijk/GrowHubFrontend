@@ -2,14 +2,16 @@ import React from 'react';
 import styles from './Task.module.css';
 import TextWithBoldSpan from '../TextWithBoldSpan/TextWithBoldSpan';
 import { TextWithBoldSpanData } from '../../../../auxiliary/interfaces/TextWithBoldSpanData';
+import { Priority } from '../../../../auxiliary/enums/Priority';
+import { Category } from '../../../../auxiliary/enums/Category';
 
 interface TaskProps {
   taskData: {
-    id: number;
+    id?: number | undefined;
     title: string;
     dueDate: Date;
-    priority: 'low' | 'medium' | 'high';
-    category: 'work' | 'personal' | 'other';
+    priority: Priority;
+    category: Category;
     completed: boolean;
     description: string;
   };

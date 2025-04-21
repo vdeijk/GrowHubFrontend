@@ -10,6 +10,7 @@ import Button, { ButtonProps } from '../../reusables/Button/Button';
 import Dropdown from '../../reusables/Dropdown/Dropdown';
 //import DateInput from '../../reusables/DateInput/DateInput';
 import { DropdownProps } from '../../reusables/Dropdown/Dropdown';
+import taskStore from '../../../stores/TaskStore/TaskStore';
 
 interface AddTaskPageProps {
   isEditing?: boolean;
@@ -55,6 +56,10 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
         addTaskStore.updateFormField('priority', value),
       label: 'Priority',
       required: true,
+      options: taskStore.priorityOptions.map(option => ({
+        ...option,
+        value: option.value === null ? '' : option.value,
+      }))
     };
 
     const descriptionProps: TextInputProps = {
@@ -72,6 +77,10 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
         addTaskStore.updateFormField('category', value),
       label: 'Category',
       required: true,
+      options: taskStore.categoryOptions.map(option => ({
+        ...option,
+        value: option.value === null ? '' : option.value,
+      }))
     };
 
     const buttonProps: ButtonProps = {

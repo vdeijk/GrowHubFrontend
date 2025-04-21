@@ -39,6 +39,7 @@ const WeatherReportPage: React.FC = observer(() => {
           customStyles={{ marginBottom: '2rem' }}
         />
         <div className={styles.forecast}>
+          {/* @ts-ignore */}
           {weatherForecast?.map((day, index) => (
             <div key={index} className={styles.forecast__day}>
               <h5>{new Date(day.date).toLocaleDateString()}</h5>

@@ -18,7 +18,7 @@ class TaskStore {
     priority: null,
   };
   filteredTasks: Task[] = [];
-  tableHeaders: { id: any; label: string; sortable: boolean }[] = [
+  tableHeaders: { id: string; label: string; sortable: boolean }[] = [
     { id: 'title', label: 'Title', sortable: true },
     { id: 'priority', label: 'Priority', sortable: true },
     { id: 'field', label: 'Field', sortable: true },
@@ -61,7 +61,7 @@ class TaskStore {
   }
 
   public addTask(task: Task) {
-    task.id = this.tasks.length ? this.tasks[this.tasks.length - 1].id + 1 : 1;
+    task.id = this.tasks.length ? (this.tasks[this.tasks.length - 1]?.id ?? 0) + 1 : 1;
     this.tasks.push(task);
   }
 
