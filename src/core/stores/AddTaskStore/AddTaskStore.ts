@@ -42,6 +42,7 @@ class AddTaskStore {
 
     try {
       const data: Task = {
+        field: this.field,
         title: this.title,
         priority: this.priority,
         dueDate: this.dueDate,
@@ -94,6 +95,7 @@ class AddTaskStore {
 
     try {
       const data: Task = {
+        field: this.field,
         title: this.title,
         priority: this.priority,
         dueDate: this.dueDate,
