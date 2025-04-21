@@ -43,8 +43,7 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
     };
     const titleProps: TextInputProps = {
       value: addTaskStore.title,
-      onChange: (value: string) =>
-        addTaskStore.updateFormField('title', value),
+      onChange: (value: string) => addTaskStore.updateFormField('title', value),
       placeholder: 'Title',
       label: 'Title',
       required: true,
@@ -52,7 +51,8 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
 
     const priorityProps: DropdownProps = {
       value: addTaskStore.priority,
-      onChange: (value: string) => addTaskStore.updateFormField('priority', value),
+      onChange: (value: string) =>
+        addTaskStore.updateFormField('priority', value),
       label: 'Priority',
       required: true,
     };

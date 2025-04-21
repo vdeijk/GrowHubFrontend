@@ -7,7 +7,7 @@ import { LocationItem } from '../../../auxiliary/interfaces/LocationItem';
 import { formatCoordinate } from '../../../auxiliary/utils/formatCoordinates';
 
 class WeatherStore {
-  weatherData: any | null = null; 
+  weatherData: any | null = null;
   isLoading = false;
   selectedLocation: LocationItem | null | undefined = null;
   locationFullName: string = '';

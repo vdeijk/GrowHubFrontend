@@ -34,11 +34,13 @@ const LandingPage: React.FC = () => {
         </div>
 
         <Button
-          onClick={() => loginWithRedirect({
-            authorizationParams: {
-              redirect_uri: import.meta.env.VITE_AUTH0_REDIRECT_URI,
-            },
-          })}
+          onClick={() =>
+            loginWithRedirect({
+              authorizationParams: {
+                redirect_uri: import.meta.env.VITE_AUTH0_REDIRECT_URI,
+              },
+            })
+          }
           label=" Log in to Demo"
           type="button"
         />

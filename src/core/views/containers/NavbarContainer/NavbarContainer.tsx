@@ -31,7 +31,11 @@ const NavbarContainer: React.FC<NavbarProps> = ({ userName }) => {
         <button
           className={styles.logoutButton}
           onClick={() =>
-            logout({ logoutParams: { returnTo: import.meta.env.VITE_AUTH0_REDIRECT_URI } })
+            logout({
+              logoutParams: {
+                returnTo: import.meta.env.VITE_AUTH0_REDIRECT_URI,
+              },
+            })
           }
         >
           <FontAwesomeIcon icon={faSignOutAlt} />

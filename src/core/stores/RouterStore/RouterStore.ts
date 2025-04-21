@@ -8,7 +8,7 @@ class RouterStore {
   currentLabel: string = '';
   menuLinks: MenuLinkData[] = [
     { path: '/', label: 'Dashboard', hidden: false, isDynamic: false },
-    
+
     {
       path: '/weatherReportPage',
       label: 'Weather',
@@ -18,7 +18,12 @@ class RouterStore {
     { path: '/fieldsPage', label: 'Fields', hidden: false, isDynamic: false },
     { path: '/tasksPage', label: 'AgriTasks', hidden: false, isDynamic: false },
     // { path: '/cropsPage', label: 'Crops', hidden: false, isDynamic: false },
-    { path: '/cropsDatabase', label: 'Crops dababase', hidden: false, isDynamic: false },
+    {
+      path: '/cropsDatabase',
+      label: 'Crops dababase',
+      hidden: false,
+      isDynamic: false,
+    },
     { path: '/upgrade', label: 'Upgrade', hidden: false, isDynamic: false },
     { path: '/addCropPage', label: 'Add Crop', hidden: true, isDynamic: false },
     {
@@ -38,12 +43,14 @@ class RouterStore {
       label: 'Edit Field',
       hidden: true,
       isDynamic: true,
-    }, {
+    },
+    {
       path: '/addTaskPage',
       label: 'Add AgriTask',
       hidden: true,
       isDynamic: false,
-    }, {
+    },
+    {
       path: '/addTaskPage/:id',
       label: 'Edit AgriTask',
       hidden: true,

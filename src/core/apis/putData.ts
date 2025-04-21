@@ -3,7 +3,10 @@ import { toast } from 'react-toastify';
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-export const putData = async (endpoint: string, data: Record<string, unknown>) => {
+export const putData = async (
+  endpoint: string,
+  data: Record<string, unknown>,
+) => {
   try {
     const response = await axios.put(`${BASE_URL}${endpoint}`, data);
 

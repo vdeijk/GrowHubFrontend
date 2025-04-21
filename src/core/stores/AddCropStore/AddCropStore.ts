@@ -39,7 +39,7 @@ class AddCropStore {
         scientificName: this.scientificName,
       };
 
-      // @ts-ignore
+       // @ts-expect-error
       await postData('/plant', data);
 
       cropsStore.fetchData();
@@ -72,7 +72,7 @@ class AddCropStore {
   public async updateCrop(id: string) {
     const numberId = Number(id);
 
-    if (Number.isNaN(numberId))  return;
+    if (Number.isNaN(numberId)) return;
 
     runInAction(() => {
       this.isLoading = true;
@@ -86,7 +86,7 @@ class AddCropStore {
         id: numberId,
       };
 
-      // @ts-ignore
+      // @ts-expect-error
       await putData(`/plant/${id}`, data);
 
       cropsStore.fetchData();

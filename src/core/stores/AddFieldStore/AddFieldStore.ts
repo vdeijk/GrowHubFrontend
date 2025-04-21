@@ -41,7 +41,7 @@ class AddFieldStore {
         longitude: this.longitude,
       };
 
-      // @ts-ignore
+      // @ts-expect-error
       await postData('/location', locationItem);
 
       fieldsStore.fetchData();
@@ -74,7 +74,7 @@ class AddFieldStore {
   public async updateField(id: string) {
     const numberId = Number(id);
 
-    if (Number.isNaN(numberId))  return;
+    if (Number.isNaN(numberId)) return;
 
     runInAction(() => {
       this.isLoading = true;
@@ -87,7 +87,7 @@ class AddFieldStore {
         id: numberId,
       };
 
-      // @ts-ignore
+      // @ts-expect-error
       await putData(`/location/${id}`, locationItem);
 
       fieldsStore.fetchData();

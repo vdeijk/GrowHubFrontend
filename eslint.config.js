@@ -8,7 +8,6 @@ import prettierConfig from 'eslint-config-prettier';
 import react from 'eslint-plugin-react';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 
-
 export default [
   {
     ignores: ['dist', '.vite'],
@@ -38,7 +37,7 @@ export default [
       ...reactHooks.configs.recommended.rules,
       ...prettierConfig.rules,
       ...react.configs.recommended.rules,
-      ...jsxA11y.configs.recommended.rules, 
+      ...jsxA11y.configs.recommended.rules,
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },
