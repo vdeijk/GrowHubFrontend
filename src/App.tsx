@@ -21,7 +21,6 @@ import { useAuth0 } from '@auth0/auth0-react';
 import LoadingWrapper from './core/views/reusables/LoadingWrapper/LoadingWrapper';
 import LandingPage from './core/views/pages/LandingPage/LandingPage';
 import fieldsStore from './core/stores/FieldsStore/FieldsStore';
-import appointmentStore from './core/stores/AppointmentsStore/AppointmentStore';
 import cropsStore from './core/stores/CropsStore/CropsStore';
 import taskStore from './core/stores/TaskStore/TaskStore';
 import weatherStore from './core/stores/CurrentWeatherStore/WeatherStore';
@@ -45,7 +44,6 @@ const App: React.FC = observer(() => {
     try {
       await Promise.all([
         fieldsStore.fetchData(),
-        appointmentStore.fetchData(),
         cropsStore.fetchData(),
         taskStore.fetchData(),
         weatherStore.fetchData(),
