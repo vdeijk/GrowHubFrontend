@@ -56,10 +56,10 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
         addTaskStore.updateFormField('priority', value),
       label: 'Priority',
       required: true,
-      options: taskStore.priorityOptions.map(option => ({
+      options: taskStore.priorityOptions.map((option) => ({
         ...option,
         value: option.value === null ? '' : option.value,
-      }))
+      })),
     };
 
     const descriptionProps: TextInputProps = {
@@ -77,10 +77,10 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
         addTaskStore.updateFormField('category', value),
       label: 'Category',
       required: true,
-      options: taskStore.categoryOptions.map(option => ({
+      options: taskStore.categoryOptions.map((option) => ({
         ...option,
         value: option.value === null ? '' : option.value,
-      }))
+      })),
     };
 
     const buttonProps: ButtonProps = {

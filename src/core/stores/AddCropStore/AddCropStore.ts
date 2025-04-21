@@ -39,7 +39,7 @@ class AddCropStore {
         scientificName: this.scientificName,
       };
 
-       // @ts-expect-error
+      // @ts-expect-error
       await postData('/plant', data);
 
       cropsStore.fetchData();
