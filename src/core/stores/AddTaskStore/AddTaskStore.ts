@@ -16,8 +16,13 @@ class AddTaskStore extends BaseFormStore<Task> {
         'Priority',
         true,
       ),
-      fieldField: new InputField<string>('', 'Field', false, 'Enter field name'),
-      dueDateField: new InputField<Date>(new Date(), 'Due Date', false),
+      fieldField: new InputField<string>(
+        '',
+        'Field',
+        false,
+        'Enter field name',
+      ),
+      //dueDateField: new InputField<Date>(new Date(), 'Due Date', false),
       descriptionField: new InputField<string>(
         '',
         'Description',
@@ -34,7 +39,7 @@ class AddTaskStore extends BaseFormStore<Task> {
       title: this.fields.titleField.value as string,
       priority: this.fields.priorityField.value as Priority,
       field: this.fields.fieldField.value as string,
-      dueDate: this.fields.dueDateField.value as string,
+      //dueDate: this.fields.dueDateField.value as string,
       description: this.fields.descriptionField.value as string,
       category: this.fields.categoryField.value as Category,
       completed: this.fields.completedField.value as boolean,
@@ -49,7 +54,7 @@ class AddTaskStore extends BaseFormStore<Task> {
       this.fields.titleField.setValue(task.title);
       this.fields.priorityField.setValue(task.priority);
       this.fields.fieldField.setValue(task.field);
-      this.fields.dueDateField.setValue(new Date(task.dueDate));
+      //this.fields.dueDateField.setValue(new Date(task.dueDate));
       this.fields.descriptionField.setValue(task.description);
       this.fields.categoryField.setValue(task.category);
       this.fields.completedField.setValue(task.completed);
@@ -64,7 +69,7 @@ class AddTaskStore extends BaseFormStore<Task> {
       title: this.fields.titleField.value as string,
       priority: this.fields.priorityField.value as Priority,
       field: this.fields.fieldField.value as string,
-      dueDate: this.fields.dueDateField.value as string,
+      //dueDate: this.fields.dueDateField.value as string,
       description: this.fields.descriptionField.value as string,
       category: this.fields.categoryField.value as Category,
       completed: this.fields.completedField.value as boolean,

@@ -54,7 +54,7 @@ class CropsDatabaseStore {
   public extractGenera = () => {
     const genera = new Set<string>();
     this.plants.forEach((plant) => {
-      genera.add(plant.genus);
+      genera.add(String(plant.genus));
     });
 
     const genusOptions = Array.from(genera).map((genus) => ({
@@ -90,6 +90,7 @@ class CropsDatabaseStore {
   public filterPlants = () => {
     this.filteredPlants = this.plants.filter((plant) => {
       return (
+        typeof plant.commonName === 'string' &&
         plant.commonName
           .toLowerCase()
           .includes(this.searchQuery.value.toLowerCase()) &&

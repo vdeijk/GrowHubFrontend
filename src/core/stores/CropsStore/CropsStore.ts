@@ -5,7 +5,6 @@ import { getData } from '../../apis/getData';
 import { validate } from '../../../auxiliary/utils/validationMaxLength';
 import { TextInputState } from '../../../auxiliary/interfaces/TextInputState';
 import { deleteData } from '../../apis/deleteData';
-import { toJS } from 'mobx';
 
 class CropsStore {
   plants: Plant[] = [];
@@ -55,7 +54,7 @@ class CropsStore {
   public extractGenera = () => {
     const genera = new Set<string>();
     this.plants.forEach((plant) => {
-      genera.add(plant.genus);
+      genera.add(String(plant.genus));
     });
 
     const genusOptions = Array.from(genera).map((genus) => ({
@@ -93,6 +92,7 @@ class CropsStore {
   public filterPlants = () => {
     this.filteredPlants = this.plants.filter((plant) => {
       return (
+        typeof plant.commonName === 'string' &&
         plant.commonName
           .toLowerCase()
           .includes(this.searchQuery.value.toLowerCase()) &&

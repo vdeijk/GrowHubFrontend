@@ -74,14 +74,13 @@ export abstract class BaseFormStore<T> {
 
     try {
       await postData(endpoint, data as Record<string, unknown>);
-
     } finally {
       runInAction(() => {
         this.isLoading = false;
       });
     }
   }
-  
+
   public async editData(endpoint: string, data: T) {
     if (!this.validateForm()) return;
 
@@ -91,7 +90,6 @@ export abstract class BaseFormStore<T> {
 
     try {
       await putData(endpoint, data as Record<string, unknown>);
-
     } finally {
       runInAction(() => {
         this.isLoading = false;
