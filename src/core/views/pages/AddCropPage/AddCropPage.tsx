@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import TextInput, { TextInputProps } from '../../reusables/TextInput/TextInput';
+import TextInput from '../../reusables/TextInput/TextInput';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import addCropStore from '../../../stores/AddCropStore/AddCropStore';
 import Button, { ButtonProps } from '../../reusables/Button/Button';
@@ -38,31 +38,6 @@ const AddCropPage: React.FC<AddCropPageProps> = observer(
 
       navigate('/cropsPage');
     };
-    const nameProps: TextInputProps = {
-      value: addCropStore.commonName,
-      onChange: (value: string) =>
-        addCropStore.updateFormField('commonName', value),
-      placeholder: 'Common Name',
-      label: 'Common Name',
-      required: true,
-    };
-
-    const sunPreferenceProps: TextInputProps = {
-      value: addCropStore.genus,
-      onChange: (value: string) => addCropStore.updateFormField('genus', value),
-      placeholder: 'Genus',
-      label: 'Genus',
-      required: true,
-    };
-
-    const waterNeedsProps: TextInputProps = {
-      value: addCropStore.scientificName,
-      onChange: (value: string) =>
-        addCropStore.updateFormField('scientificName', value),
-      placeholder: 'Scientific Name',
-      label: 'Scientific Name',
-      required: true,
-    };
 
     const buttonProps: ButtonProps = {
       type: 'submit',
@@ -71,13 +46,34 @@ const AddCropPage: React.FC<AddCropPageProps> = observer(
       customStyles: { marginTop: '1rem' },
     };
 
+    const nameFieldModel = {
+      ...addCropStore.fields.nameField,
+      value: String(addCropStore.fields.nameField.value),
+      onChange: (value: string) =>
+        addCropStore.fields.nameField.setValue(value),
+    };
+
+    const genusFieldModel = {
+      ...addCropStore.fields.genusField,
+      value: String(addCropStore.fields.genusField.value),
+      onChange: (value: string) =>
+        addCropStore.fields.genusField.setValue(value),
+    };
+
+    const scientificNameFieldModel = {
+      ...addCropStore.fields.scientificNameField,
+      value: String(addCropStore.fields.scientificNameField.value),
+      onChange: (value: string) =>
+        addCropStore.fields.scientificNameField.setValue(value),
+    };
+
     return (
       <section className={styles.section}>
         <LoadingWrapper isLoading={addCropStore.isLoading}>
           <form onSubmit={handleSubmit} className={styles.form}>
-            <TextInput {...nameProps} />
-            <TextInput {...sunPreferenceProps} />
-            <TextInput {...waterNeedsProps} />
+            <TextInput {...nameFieldModel} />
+            <TextInput {...genusFieldModel} />
+            <TextInput {...scientificNameFieldModel} />
             <Button {...buttonProps} />
           </form>
         </LoadingWrapper>

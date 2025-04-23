@@ -1,118 +1,77 @@
-import { makeAutoObservable, runInAction } from 'mobx';
-import { getData } from '../../apis/getData';
-import { putData } from '../../apis/putData';
-import { postData } from '../../apis/postData';
-import cropsStore from '../CropsStore/CropsStore';
 import { Category } from '../../../auxiliary/enums/Category';
 import { Priority } from '../../../auxiliary/enums/Priority';
 import { Task } from '../../../auxiliary/interfaces/Task';
+import { BaseFormStore } from '../BaseFormStore/BaseFormStore';
+import { InputField } from '../../../auxiliary/classes/InputField';
+import taskStore from '../TaskStore/TaskStore';
 
-class AddTaskStore {
-  title: string = '';
-  priority = Priority.Medium;
-  field: string = '';
-  dueDate: Date = new Date();
-  description: string = '';
-  category = Category.Work;
-  completed: boolean = false;
-  isLoading: boolean = false;
-
+class AddTaskStore extends BaseFormStore<Task> {
   constructor() {
-    makeAutoObservable(this);
+    super();
+
+    this.fields = {
+      titleField: new InputField<string>('', 'Title', true, 'Enter task title'),
+      priorityField: new InputField<Priority>(
+        Priority.Medium,
+        'Priority',
+        true,
+      ),
+      fieldField: new InputField<string>('', 'Field', false, 'Enter field name'),
+      dueDateField: new InputField<Date>(new Date(), 'Due Date', false),
+      descriptionField: new InputField<string>(
+        '',
+        'Description',
+        false,
+        'Enter task description',
+      ),
+      categoryField: new InputField<Category>(Category.Work, 'Category', true),
+      completedField: new InputField<boolean>(false, 'Completed', false),
+    };
   }
 
-  public updateFormField(field: keyof AddTaskStore, value: string) {
-    runInAction(() => {
-      (this[field] as string) = value;
-    });
-  }
+  public async addTask() {
+    const data: Task = {
+      title: this.fields.titleField.value as string,
+      priority: this.fields.priorityField.value as Priority,
+      field: this.fields.fieldField.value as string,
+      dueDate: this.fields.dueDateField.value as string,
+      description: this.fields.descriptionField.value as string,
+      category: this.fields.categoryField.value as Category,
+      completed: this.fields.completedField.value as boolean,
+    };
 
-  public resetForm() {
-    this.title = '';
-    this.priority = Priority.Medium;
-    this.field = '';
-    this.description = '';
-    this.category = Category.Work;
-  }
-
-  public async addCrop() {
-    runInAction(() => {
-      this.isLoading = true;
-    });
-
-    try {
-      const data: Task = {
-        field: this.field,
-        title: this.title,
-        priority: this.priority,
-        dueDate: this.dueDate,
-        description: this.description,
-        category: this.category,
-        completed: false,
-      };
-
-      // @ts-ignore
-      await postData('/todo', data);
-
-      cropsStore.fetchData();
-    } finally {
-      runInAction(() => {
-        this.isLoading = false;
-      });
-    }
+    await this.addData('/todo', data);
+    taskStore.fetchData();
   }
 
   public async loadTask(id: string) {
-    runInAction(() => {
-      this.isLoading = true;
+    await this.loadData(`/todo/${id}`, (task) => {
+      this.fields.titleField.setValue(task.title);
+      this.fields.priorityField.setValue(task.priority);
+      this.fields.fieldField.setValue(task.field);
+      this.fields.dueDateField.setValue(new Date(task.dueDate));
+      this.fields.descriptionField.setValue(task.description);
+      this.fields.categoryField.setValue(task.category);
+      this.fields.completedField.setValue(task.completed);
     });
-
-    try {
-      const task: Task = await getData(`/todo/${id}`);
-      runInAction(() => {
-        this.title = task.title;
-        this.priority = task.priority;
-        this.dueDate = task.dueDate;
-        this.description = task.description;
-        this.category = task.category;
-        this.completed = task.completed;
-      });
-    } finally {
-      runInAction(() => {
-        this.isLoading = false;
-      });
-    }
   }
 
-  public async updateCrop(id: string) {
+  public async updateTask(id: string) {
     const numberId = Number(id);
-
     if (Number.isNaN(numberId)) return;
 
-    runInAction(() => {
-      this.isLoading = true;
-    });
+    const data: Task = {
+      title: this.fields.titleField.value as string,
+      priority: this.fields.priorityField.value as Priority,
+      field: this.fields.fieldField.value as string,
+      dueDate: this.fields.dueDateField.value as string,
+      description: this.fields.descriptionField.value as string,
+      category: this.fields.categoryField.value as Category,
+      completed: this.fields.completedField.value as boolean,
+    };
 
-    try {
-      const data: Task = {
-        field: this.field,
-        title: this.title,
-        priority: this.priority,
-        dueDate: this.dueDate,
-        description: this.description,
-        category: this.category,
-        completed: this.completed,
-      };
-
-      // @ts-ignore
-      await putData(`/todo/${id}`, data);
-
-      cropsStore.fetchData();
-    } finally {
-      runInAction(() => {
-        this.isLoading = false;
-      });
-    }
+    await this.editData(`/todo/${id}`, data);
+    taskStore.fetchData();
   }
 }
 

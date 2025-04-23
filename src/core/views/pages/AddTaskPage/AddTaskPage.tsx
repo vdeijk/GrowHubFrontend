@@ -33,9 +33,9 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
       e.preventDefault();
 
       if (isEditing && id) {
-        addTaskStore.updateCrop(id);
+        addTaskStore.updateTask(id);
       } else {
-        addTaskStore.addCrop();
+        addTaskStore.addTask();
       }
 
       addTaskStore.resetForm();
@@ -43,17 +43,18 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
       navigate('/tasksPage');
     };
     const titleProps: TextInputProps = {
-      value: addTaskStore.title,
-      onChange: (value: string) => addTaskStore.updateFormField('title', value),
+      value: String(addTaskStore.fields.titleField.value),
+      onChange: (value: string) =>
+        addTaskStore.fields.titleField.setValue(value),
       placeholder: 'Title',
       label: 'Title',
       required: true,
     };
 
     const priorityProps: DropdownProps = {
-      value: addTaskStore.priority,
+      value: String(addTaskStore.fields.priorityField.value),
       onChange: (value: string) =>
-        addTaskStore.updateFormField('priority', value),
+        addTaskStore.fields.priorityField.setValue(value),
       label: 'Priority',
       required: true,
       options: taskStore.priorityOptions.map((option) => ({
@@ -63,18 +64,18 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
     };
 
     const descriptionProps: TextInputProps = {
-      value: addTaskStore.description,
+      value: String(addTaskStore.fields.descriptionField.value),
       onChange: (value: string) =>
-        addTaskStore.updateFormField('description', value),
+        addTaskStore.fields.descriptionField.setValue(value),
       placeholder: 'Enter description',
       label: 'Description',
       required: true,
     };
 
     const categoryProps: DropdownProps = {
-      value: addTaskStore.category,
+      value: String(addTaskStore.fields.categoryField.value),
       onChange: (value: string) =>
-        addTaskStore.updateFormField('category', value),
+        addTaskStore.fields.categoryField.setValue(value),
       label: 'Category',
       required: true,
       options: taskStore.categoryOptions.map((option) => ({

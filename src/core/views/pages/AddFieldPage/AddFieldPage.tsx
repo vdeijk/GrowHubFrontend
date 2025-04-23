@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import TextInput, { TextInputProps } from '../../reusables/TextInput/TextInput';
+import TextInput from '../../reusables/TextInput/TextInput';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import addFieldStore from '../../../stores/AddFieldStore/AddFieldStore';
 import Button, { ButtonProps } from '../../reusables/Button/Button';
@@ -38,33 +38,6 @@ const AddFieldPage: React.FC<AddFieldPageProps> = observer(
       navigate('/fieldsPage');
     };
 
-    const nameProps: TextInputProps = {
-      value: addFieldStore.locationName,
-      onChange: (value: string) =>
-        addFieldStore.updateFormField('locationName', value),
-      placeholder: 'Location Name',
-      label: 'Location Name',
-      required: true,
-    };
-
-    const longitudeProps: TextInputProps = {
-      value: addFieldStore.longitude.toString(),
-      onChange: (value: string) =>
-        addFieldStore.updateFormField('longitude', value),
-      placeholder: 'Longitude',
-      label: 'Longitude',
-      required: true,
-    };
-
-    const latitudeProps: TextInputProps = {
-      value: addFieldStore.latitude.toString(),
-      onChange: (value: string) =>
-        addFieldStore.updateFormField('latitude', value),
-      placeholder: 'Latitude',
-      label: 'Latitude',
-      required: true,
-    };
-
     const buttonProps: ButtonProps = {
       type: 'submit',
       onClick: () => navigate('/tasksPage'),
@@ -72,12 +45,33 @@ const AddFieldPage: React.FC<AddFieldPageProps> = observer(
       customStyles: { marginTop: '1rem' },
     };
 
+    const locationNameFieldModel = {
+      ...addFieldStore.fields.locationNameField,
+      value: String(addFieldStore.fields.locationNameField.value),
+      onChange: (value: string) =>
+        addFieldStore.fields.locationNameField.setValue(value),
+    };
+
+    const latitudeFieldModel = {
+      ...addFieldStore.fields.latitudeField,
+      value: String(addFieldStore.fields.latitudeField.value),
+      onChange: (value: string) =>
+        addFieldStore.fields.latitudeField.setValue(Number(value)),
+    };
+
+    const longitudeFieldModel = {
+      ...addFieldStore.fields.longitudeField,
+      value: String(addFieldStore.fields.longitudeField.value),
+      onChange: (value: string) =>
+        addFieldStore.fields.longitudeField.setValue(Number(value)),
+    };
+
     return (
       <section className={styles.section}>
         <form onSubmit={handleSubmit} className={styles.form}>
-          <TextInput {...nameProps} />
-          <TextInput {...longitudeProps} />
-          <TextInput {...latitudeProps} />
+          <TextInput {...locationNameFieldModel} />
+          <TextInput {...latitudeFieldModel} />
+          <TextInput {...longitudeFieldModel} />
           <Button {...buttonProps} />
         </form>
       </section>

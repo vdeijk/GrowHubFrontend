@@ -1,20 +1,20 @@
 import { JSX } from 'react';
 
 export interface Plant {
-  commonName: string;
-  genus: string;
-  scientificName: string;
+  commonName: string | boolean | string;
+  genus: string | boolean | string;
+  scientificName: string | boolean | string;
   id?: number;
-  sunPreference?: string;
-  waterNeeds?: string;
-  soilType?: string;
-  soilPH?: string;
-  pruning?: string;
-  temperatureRange?: string;
-  plantType?: string;
-  growthRate?: string;
-  matureSize?: string;
-  bloomTime?: string;
-  fertilizerNeeds?: string;
+  sunPreference?: string | boolean | string;
+  waterNeeds?: string | boolean | string;
+  soilType?: string | boolean | string;
+  soilPH?: string | boolean | string;
+  pruning?: string | boolean | string;
+  temperatureRange?: string | boolean | string;
+  plantType?: string | boolean | string;
+  growthRate?: string | boolean | string;
+  matureSize?: string | boolean | string;
+  bloomTime?: string | boolean | string;
+  fertilizerNeeds?: string | boolean | string;
   actions?: JSX.Element;
 }

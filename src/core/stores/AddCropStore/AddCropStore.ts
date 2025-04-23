@@ -1,72 +1,38 @@
-import { makeAutoObservable, runInAction } from 'mobx';
-import { getData } from '../../apis/getData';
-import { putData } from '../../apis/putData';
-import { postData } from '../../apis/postData';
 import { Plant } from '../../../auxiliary/interfaces/Plant';
 import cropsStore from '../CropsStore/CropsStore';
+import { InputField } from '../../../auxiliary/classes/InputField';
+import { BaseFormStore } from '../BaseFormStore/BaseFormStore';
 
-class AddCropStore {
-  commonName: string = '';
-  genus: string = '';
-  scientificName: string = '';
-  isLoading: boolean = false;
-
+class AddCropStore extends BaseFormStore<Plant> {
   constructor() {
-    makeAutoObservable(this);
-  }
+    super();
 
-  public updateFormField(field: keyof AddCropStore, value: string) {
-    runInAction(() => {
-      (this[field] as string) = value;
-    });
-  }
-
-  public resetForm() {
-    this.commonName = '';
-    this.genus = '';
-    this.scientificName = '';
+    this.fields = {
+      nameField: new InputField<string>(
+        '',
+        'Common Name',
+        true,
+        'Enter common name',
+      ),
+      genusField: new InputField<string>('', 'Genus', true, 'Enter genus'),
+      scientificNameField: new InputField<string>(
+        '',
+        'Scientific Name',
+        true,
+        'Enter scientific name',
+      ),
+    };
   }
 
   public async addCrop() {
-    runInAction(() => {
-      this.isLoading = true;
-    });
+    const data: Plant = {
+      commonName: this.fields.nameField.value as string,
+      genus: this.fields.genusField.value as string,
+      scientificName: this.fields.scientificNameField.value as string,
+    };
 
-    try {
-      const data: Plant = {
-        commonName: this.commonName,
-        genus: this.genus,
-        scientificName: this.scientificName,
-      };
-
-      // @ts-expect-error
-      await postData('/plant', data);
-
-      cropsStore.fetchData();
-    } finally {
-      runInAction(() => {
-        this.isLoading = false;
-      });
-    }
-  }
-
-  public async loadCrop(id: string) {
-    runInAction(() => {
-      this.isLoading = true;
-    });
-
-    try {
-      const plant: Plant = await getData(`/plant/${id}`);
-      runInAction(() => {
-        this.commonName = plant.commonName;
-        this.genus = plant.genus;
-        this.scientificName = plant.scientificName;
-      });
-    } finally {
-      runInAction(() => {
-        this.isLoading = false;
-      });
-    }
+    await this.addData('/plant', data);
+    cropsStore.fetchData();
   }
 
   public async updateCrop(id: string) {
@@ -74,27 +40,23 @@ class AddCropStore {
 
     if (Number.isNaN(numberId)) return;
 
-    runInAction(() => {
-      this.isLoading = true;
+    const data: Plant = {
+      commonName: this.fields.nameField.value as string,
+      genus: this.fields.genusField.value as string,
+      scientificName: this.fields.scientificNameField.value as string,
+      id: numberId as number,
+    };
+
+    await this.editData(`/plant/${id}`, data);
+    cropsStore.fetchData();
+  }
+
+  public async loadCrop(id: string) {
+    await this.loadData(`/plant/${id}`, (data) => {
+      this.fields.nameField.setValue(data.commonName);
+      this.fields.genusField.setValue(data.genus);
+      this.fields.scientificNameField.setValue(data.scientificName);
     });
-
-    try {
-      const data: Plant = {
-        commonName: this.commonName,
-        genus: this.genus,
-        scientificName: this.scientificName,
-        id: numberId,
-      };
-
-      // @ts-expect-error
-      await putData(`/plant/${id}`, data);
-
-      cropsStore.fetchData();
-    } finally {
-      runInAction(() => {
-        this.isLoading = false;
-      });
-    }
   }
 }
 
