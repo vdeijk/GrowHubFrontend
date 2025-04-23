@@ -18,24 +18,24 @@ export abstract class BaseFormStore<T> {
     });
   }
 
-  public updateFormField(
+  public updateFormField = (
     field: keyof typeof this.fields,
     value: string | boolean | number,
-  ) {
+  ) => {
     runInAction(() => {
       if (this.fields[field] instanceof InputField) {
         this.fields[field].setValue(value);
       }
     });
-  }
+  };
 
-  public resetForm() {
+  public resetForm = () => {
     runInAction(() => {
       Object.values(this.fields).forEach((field) => field.reset());
     });
-  }
+  };
 
-  public validateForm(): boolean {
+  public validateForm = (): boolean => {
     const errors = Object.values(this.fields)
       .map((field) => field.validateRequired())
       .filter((error) => error !== null);
@@ -46,9 +46,12 @@ export abstract class BaseFormStore<T> {
     }
 
     return true;
-  }
+  };
 
-  public async loadData(endpoint: string, mapDataToFields: (data: T) => void) {
+  public loadData = async (
+    endpoint: string,
+    mapDataToFields: (data: T) => void,
+  ) => {
     runInAction(() => {
       this.isLoading = true;
     });
@@ -63,9 +66,9 @@ export abstract class BaseFormStore<T> {
         this.isLoading = false;
       });
     }
-  }
+  };
 
-  public async addData(endpoint: string, data: T) {
+  public addData = async (endpoint: string, data: T) => {
     if (!this.validateForm()) return;
 
     runInAction(() => {
@@ -79,9 +82,9 @@ export abstract class BaseFormStore<T> {
         this.isLoading = false;
       });
     }
-  }
+  };
 
-  public async editData(endpoint: string, data: T) {
+  public editData = async (endpoint: string, data: T) => {
     if (!this.validateForm()) return;
 
     runInAction(() => {
@@ -95,5 +98,5 @@ export abstract class BaseFormStore<T> {
         this.isLoading = false;
       });
     }
-  }
+  };
 }

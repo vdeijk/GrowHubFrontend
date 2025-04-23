@@ -34,7 +34,7 @@ class AddTaskStore extends BaseFormStore<Task> {
     };
   }
 
-  public async addTask() {
+  public addTask = async () => {
     const data: Task = {
       title: this.fields.titleField.value as string,
       priority: this.fields.priorityField.value as Priority,
@@ -47,9 +47,9 @@ class AddTaskStore extends BaseFormStore<Task> {
 
     await this.addData('/todo', data);
     taskStore.fetchData();
-  }
+  };
 
-  public async loadTask(id: string) {
+  public loadTask = async (id: string) => {
     await this.loadData(`/todo/${id}`, (task) => {
       this.fields.titleField.setValue(task.title);
       this.fields.priorityField.setValue(task.priority);
@@ -59,9 +59,9 @@ class AddTaskStore extends BaseFormStore<Task> {
       this.fields.categoryField.setValue(task.category);
       this.fields.completedField.setValue(task.completed);
     });
-  }
+  };
 
-  public async updateTask(id: string) {
+  public updateTask = async (id: string) => {
     const numberId = Number(id);
     if (Number.isNaN(numberId)) return;
 
@@ -77,7 +77,7 @@ class AddTaskStore extends BaseFormStore<Task> {
 
     await this.editData(`/todo/${id}`, data);
     taskStore.fetchData();
-  }
+  };
 }
 
 const addTaskStore = new AddTaskStore();

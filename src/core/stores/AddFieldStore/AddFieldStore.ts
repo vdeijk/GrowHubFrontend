@@ -29,7 +29,7 @@ class AddFieldStore extends BaseFormStore<LocationItem> {
     };
   }
 
-  public async addField() {
+  public addField = async () => {
     const locationItem: LocationItem = {
       name: this.fields.locationNameField.value as string,
       latitude: this.fields.latitudeField.value as number,
@@ -38,9 +38,9 @@ class AddFieldStore extends BaseFormStore<LocationItem> {
 
     await this.addData('/location', locationItem);
     fieldsStore.fetchData();
-  }
+  };
 
-  public async updateField(id: string) {
+  public updateField = async (id: string) => {
     const numberId = Number(id);
     if (Number.isNaN(numberId)) return;
 
@@ -53,15 +53,15 @@ class AddFieldStore extends BaseFormStore<LocationItem> {
 
     await this.editData(`/location/${id}`, locationItem);
     fieldsStore.fetchData();
-  }
+  };
 
-  public async loadField(id: string) {
+  public loadField = async (id: string) => {
     await this.loadData(`/location/${id}`, (data) => {
       this.fields.locationNameField.setValue(data.name);
       this.fields.latitudeField.setValue(data.latitude);
       this.fields.longitudeField.setValue(data.longitude);
     });
-  }
+  };
 }
 
 const addFieldStore = new AddFieldStore();

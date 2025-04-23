@@ -24,7 +24,7 @@ class AddCropStore extends BaseFormStore<Plant> {
     };
   }
 
-  public async addCrop() {
+  public addCrop = async () => {
     const data: Plant = {
       commonName: this.fields.nameField.value as string,
       genus: this.fields.genusField.value as string,
@@ -33,9 +33,9 @@ class AddCropStore extends BaseFormStore<Plant> {
 
     await this.addData('/plant', data);
     cropsStore.fetchData();
-  }
+  };
 
-  public async updateCrop(id: string) {
+  public updateCrop = async (id: string) => {
     const numberId = Number(id);
 
     if (Number.isNaN(numberId)) return;
@@ -49,15 +49,15 @@ class AddCropStore extends BaseFormStore<Plant> {
 
     await this.editData(`/plant/${id}`, data);
     cropsStore.fetchData();
-  }
+  };
 
-  public async loadCrop(id: string) {
+  public loadCrop = async (id: string) => {
     await this.loadData(`/plant/${id}`, (data) => {
       this.fields.nameField.setValue(data.commonName);
       this.fields.genusField.setValue(data.genus);
       this.fields.scientificNameField.setValue(data.scientificName);
     });
-  }
+  };
 }
 
 const addCropStore = new AddCropStore();

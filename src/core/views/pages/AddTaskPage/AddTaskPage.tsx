@@ -57,10 +57,7 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
         addTaskStore.fields.priorityField.setValue(value),
       label: 'Priority',
       required: true,
-      options: taskStore.priorityOptions.map((option) => ({
-        ...option,
-        value: option.value === null ? '' : option.value,
-      })),
+      options: taskStore.filterCriteria['priority'].options,
     };
 
     const descriptionProps: TextInputProps = {
@@ -78,10 +75,7 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
         addTaskStore.fields.categoryField.setValue(value),
       label: 'Category',
       required: true,
-      options: taskStore.categoryOptions.map((option) => ({
-        ...option,
-        value: option.value === null ? '' : option.value,
-      })),
+      options: taskStore.filterCriteria['category'].options,
     };
 
     const buttonProps: ButtonProps = {
