@@ -36,7 +36,7 @@ const Plants: React.FC = observer(() => {
       />
       <TableWithoutSorting<Plant>
         headers={headersWithoutActions}
-        data={plantsStore.plants.map((plant, index) => ({
+        data={plantsStore.plants.slice(0, 9).map((plant, index) => ({
           ...omit(plant, 'actions'),
           index,
         }))}

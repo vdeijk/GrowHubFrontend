@@ -21,7 +21,6 @@ class TaskStore {
   tableHeaders: { id: keyof Task; label: string; sortable: boolean }[] = [
     { id: 'title', label: 'Title', sortable: true },
     { id: 'priority', label: 'Priority', sortable: true },
-    { id: 'field', label: 'Field', sortable: true },
     { id: 'dueDate', label: 'Due Date', sortable: true },
     { id: 'description', label: 'Description', sortable: false },
     { id: 'category', label: 'Category', sortable: false },

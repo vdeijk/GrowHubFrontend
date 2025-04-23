@@ -20,7 +20,7 @@ class RouterStore {
     // { path: '/cropsPage', label: 'Crops', hidden: false, isDynamic: false },
     {
       path: '/cropsDatabase',
-      label: 'Crops dababase',
+      label: 'Crops database',
       hidden: false,
       isDynamic: false,
     },
