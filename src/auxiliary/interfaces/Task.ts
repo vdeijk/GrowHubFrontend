@@ -5,7 +5,7 @@ import { JSX } from 'react';
 export interface Task {
   id?: number;
   title: string;
-  // dueDate: Date;
+   dueDate: Date;
   field: string;
   priority: Priority;
   category: Category;
