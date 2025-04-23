@@ -9,7 +9,7 @@ interface TaskProps {
   taskData: {
     id?: number | undefined;
     title: string;
-    dueDate: Date;
+    // dueDate: Date;
     priority: Priority;
     category: Category;
     completed: boolean;
@@ -18,11 +18,12 @@ interface TaskProps {
 }
 
 const Task: React.FC<TaskProps> = ({ taskData }) => {
-  const { title, dueDate, priority, category, completed, description } =
-    taskData;
+  const { title, priority, category, completed, description } = taskData;
 
-  const formattedDueDate =
-    typeof dueDate === 'string' ? new Date(dueDate) : dueDate;
+  /*const formattedDueDate =
+    typeof dueDate === 'string' ? new Date(dueDate) : dueDate;*/
+
+  const formattedDueDate = new Date('2025-12-31');
 
   const textsWithBoldSpan: TextWithBoldSpanData[] = [
     { label: 'Due', boldSpan: formattedDueDate.toLocaleDateString() },
