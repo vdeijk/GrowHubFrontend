@@ -40,7 +40,7 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
 
       addTaskStore.resetForm();
 
-      navigate('/cropsPage');
+      navigate('/tasksPage');
     };
     const titleProps: TextInputProps = {
       value: addTaskStore.title,

@@ -5,6 +5,7 @@ import { getData } from '../../apis/getData';
 import { validate } from '../../../auxiliary/utils/validationMaxLength';
 import { TextInputState } from '../../../auxiliary/interfaces/TextInputState';
 import { deleteData } from '../../apis/deleteData';
+import { toJS } from 'mobx';
 
 class CropsStore {
   plants: Plant[] = [];
@@ -61,7 +62,9 @@ class CropsStore {
       value: genus,
       label: genus,
     }));
-    genusOptions.unshift({ value: '', label: 'All Genera' });
+    if (!genusOptions.some((option) => option.value === '')) {
+      genusOptions.unshift({ value: '', label: 'All Genera' });
+    }
 
     return genusOptions;
   };

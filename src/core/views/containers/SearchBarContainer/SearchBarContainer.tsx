@@ -3,7 +3,6 @@ import styles from './SearchBarContainer.module.css';
 import TextInput from '../../reusables/TextInput/TextInput';
 import Dropdown from '../../reusables/Dropdown/Dropdown';
 import { DropdownOption } from '../../../../auxiliary/interfaces/DropdownOptions';
-
 export interface SearchBarProps {
   searchQuery: string;
   error: string | null | undefined;

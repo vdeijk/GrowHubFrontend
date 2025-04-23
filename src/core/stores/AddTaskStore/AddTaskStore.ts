@@ -52,7 +52,7 @@ class AddTaskStore {
       };
 
       // @ts-ignore
-      await postData('/task', data);
+      await postData('/todo', data);
 
       cropsStore.fetchData();
     } finally {
@@ -68,7 +68,7 @@ class AddTaskStore {
     });
 
     try {
-      const task: Task = await getData(`/task/${id}`);
+      const task: Task = await getData(`/todo/${id}`);
       runInAction(() => {
         this.title = task.title;
         this.priority = task.priority;
@@ -105,7 +105,7 @@ class AddTaskStore {
       };
 
       // @ts-ignore
-      await putData(`/plant/${id}`, data);
+      await putData(`/todo/${id}`, data);
 
       cropsStore.fetchData();
     } finally {
