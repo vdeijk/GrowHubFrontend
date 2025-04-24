@@ -2,8 +2,11 @@ import { Plant } from '../../../auxiliary/interfaces/Plant';
 import cropsStore from '../CropsStore/CropsStore';
 import { InputField } from '../../../auxiliary/classes/InputField';
 import { BaseFormStore } from '../BaseFormStore/BaseFormStore';
+import { EndpointService } from '../../apis/EndpointService';
 
 class AddCropStore extends BaseFormStore<Plant> {
+  public endpointService = new EndpointService('/plant');
+
   constructor() {
     super();
 
@@ -31,7 +34,8 @@ class AddCropStore extends BaseFormStore<Plant> {
       scientificName: this.fields.scientificNameField.value as string,
     };
 
-    await this.addData('/plant', data);
+    await this.endpointService.postData(data);
+
     cropsStore.fetchData();
   };
 
@@ -47,16 +51,21 @@ class AddCropStore extends BaseFormStore<Plant> {
       id: numberId as number,
     };
 
-    await this.editData(`/plant/${id}`, data);
+    await this.endpointService.putData(`${id}`, data);
+
     cropsStore.fetchData();
   };
 
   public loadCrop = async (id: string) => {
-    await this.loadData(`/plant/${id}`, (data) => {
-      this.fields.nameField.setValue(data.commonName);
-      this.fields.genusField.setValue(data.genus);
-      this.fields.scientificNameField.setValue(data.scientificName);
-    });
+    const data: Plant | undefined = await this.endpointService.getData<Plant>(
+      `${id}`,
+    );
+
+    if (!data) return;
+
+    this.fields.nameField.setValue(data.commonName);
+    this.fields.genusField.setValue(data.genus);
+    this.fields.scientificNameField.setValue(data.scientificName);
   };
 }
 

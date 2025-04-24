@@ -2,8 +2,11 @@ import { BaseFormStore } from '../BaseFormStore/BaseFormStore';
 import { InputField } from '../../../auxiliary/classes/InputField';
 import { LocationItem } from '../../../auxiliary/interfaces/LocationItem';
 import fieldsStore from '../FieldsStore/FieldsStore';
+import { EndpointService } from '../../apis/EndpointService';
 
 class AddFieldStore extends BaseFormStore<LocationItem> {
+  public endpointService = new EndpointService('/location/');
+
   constructor() {
     super();
 
@@ -30,13 +33,14 @@ class AddFieldStore extends BaseFormStore<LocationItem> {
   }
 
   public addField = async () => {
-    const locationItem: LocationItem = {
+    const data: LocationItem = {
       name: this.fields.locationNameField.value as string,
       latitude: this.fields.latitudeField.value as number,
       longitude: this.fields.longitudeField.value as number,
     };
 
-    await this.addData('/location', locationItem);
+    await this.endpointService.postData(data);
+
     fieldsStore.fetchData();
   };
 
@@ -44,23 +48,27 @@ class AddFieldStore extends BaseFormStore<LocationItem> {
     const numberId = Number(id);
     if (Number.isNaN(numberId)) return;
 
-    const locationItem: LocationItem = {
+    const data: LocationItem = {
       id: numberId,
       name: this.fields.locationNameField.value as string,
       latitude: this.fields.latitudeField.value as number,
       longitude: this.fields.longitudeField.value as number,
     };
 
-    await this.editData(`/location/${id}`, locationItem);
+    await this.endpointService.putData(`${id}`, data);
+
     fieldsStore.fetchData();
   };
 
   public loadField = async (id: string) => {
-    await this.loadData(`/location/${id}`, (data) => {
-      this.fields.locationNameField.setValue(data.name);
-      this.fields.latitudeField.setValue(data.latitude);
-      this.fields.longitudeField.setValue(data.longitude);
-    });
+    const data: LocationItem | undefined =
+      await this.endpointService.getData<LocationItem>(`${id}`);
+
+    if (!data) return;
+
+    this.fields.locationNameField.setValue(data.name);
+    this.fields.latitudeField.setValue(data.latitude);
+    this.fields.longitudeField.setValue(data.longitude);
   };
 }
 

@@ -1,10 +1,8 @@
 import { Task } from '../../../auxiliary/interfaces/Task';
 import { runInAction } from 'mobx';
-import { getData } from '../../apis/getData';
 import { debounce } from '../../../auxiliary/utils/debounce';
 import { Priority } from '../../../auxiliary/enums/Priority';
 import { Category } from '../../../auxiliary/enums/Category';
-import { deleteData } from '../../apis/deleteData';
 import { SearchableStore } from '../BaseSearchableStore/BaseSearchableStore';
 import { DropdownOption } from '../../../auxiliary/interfaces/DropdownOptions';
 

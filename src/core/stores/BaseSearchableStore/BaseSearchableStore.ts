@@ -135,13 +135,3 @@ export abstract class SearchableStore<T> {
   };
 }
 
-/*
-  public setSearchQuery = (query: string) => {
-    runInAction(() => {
-      if (this.searchQuery.validateMaxLength()) return;
-
-      this.searchQuery.setValue(query);
-
-      this.debouncedFilterItems();
-    });
-  };*/

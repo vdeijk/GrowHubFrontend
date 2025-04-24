@@ -1,8 +1,5 @@
 import { makeObservable, observable, action, runInAction } from 'mobx';
 import { InputField } from '../../../auxiliary/classes/InputField';
-import { getData } from '../../apis/getData';
-import { postData } from '../../apis/postData';
-import { putData } from '../../apis/putData';
 
 export abstract class BaseFormStore<T> {
   fields: Record<string, InputField<string | boolean | number>> = {};
@@ -46,57 +43,5 @@ export abstract class BaseFormStore<T> {
     }
 
     return true;
-  };
-
-  public loadData = async (
-    endpoint: string,
-    mapDataToFields: (data: T) => void,
-  ) => {
-    runInAction(() => {
-      this.isLoading = true;
-    });
-
-    try {
-      const data: T = await getData(endpoint);
-      runInAction(() => {
-        mapDataToFields(data);
-      });
-    } finally {
-      runInAction(() => {
-        this.isLoading = false;
-      });
-    }
-  };
-
-  public addData = async (endpoint: string, data: T) => {
-    if (!this.validateForm()) return;
-
-    runInAction(() => {
-      this.isLoading = true;
-    });
-
-    try {
-      await postData(endpoint, data as Record<string, unknown>);
-    } finally {
-      runInAction(() => {
-        this.isLoading = false;
-      });
-    }
-  };
-
-  public editData = async (endpoint: string, data: T) => {
-    if (!this.validateForm()) return;
-
-    runInAction(() => {
-      this.isLoading = true;
-    });
-
-    try {
-      await putData(endpoint, data as Record<string, unknown>);
-    } finally {
-      runInAction(() => {
-        this.isLoading = false;
-      });
-    }
   };
 }

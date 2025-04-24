@@ -4,8 +4,11 @@ import { Task } from '../../../auxiliary/interfaces/Task';
 import { BaseFormStore } from '../BaseFormStore/BaseFormStore';
 import { InputField } from '../../../auxiliary/classes/InputField';
 import taskStore from '../TaskStore/TaskStore';
+import { EndpointService } from '../../apis/EndpointService';
 
 class AddTaskStore extends BaseFormStore<Task> {
+  public endpointService = new EndpointService('/plant');
+
   constructor() {
     super();
 
@@ -45,20 +48,25 @@ class AddTaskStore extends BaseFormStore<Task> {
       completed: this.fields.completedField.value as boolean,
     };
 
-    await this.addData('/todo', data);
+    await this.endpointService.postData(data);
+
     taskStore.fetchData();
   };
 
   public loadTask = async (id: string) => {
-    await this.loadData(`/todo/${id}`, (task) => {
-      this.fields.titleField.setValue(task.title);
-      this.fields.priorityField.setValue(task.priority);
-      this.fields.fieldField.setValue(task.field);
-      //this.fields.dueDateField.setValue(new Date('2025-12-31'));
-      this.fields.descriptionField.setValue(task.description);
-      this.fields.categoryField.setValue(task.category);
-      this.fields.completedField.setValue(task.completed);
-    });
+    const data: Task | undefined = await this.endpointService.getData<Task>(
+      `${id}`,
+    );
+
+    if (!data) return;
+
+    this.fields.titleField.setValue(data.title);
+    this.fields.priorityField.setValue(data.priority);
+    this.fields.fieldField.setValue(data.field);
+    //this.fields.dueDateField.setValue(new Date('2025-12-31'));
+    this.fields.descriptionField.setValue(data.description);
+    this.fields.categoryField.setValue(data.category);
+    this.fields.completedField.setValue(data.completed);
   };
 
   public updateTask = async (id: string) => {
@@ -75,7 +83,8 @@ class AddTaskStore extends BaseFormStore<Task> {
       completed: this.fields.completedField.value as boolean,
     };
 
-    await this.editData(`/todo/${id}`, data);
+    await this.endpointService.putData(`${id}`, data);
+
     taskStore.fetchData();
   };
 }
