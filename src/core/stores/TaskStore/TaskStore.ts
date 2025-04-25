@@ -35,7 +35,6 @@ class TaskStore extends SearchableStore<Task> {
     { id: 'title', label: 'Title', sortable: true },
     { id: 'priority', label: 'Priority', sortable: true },
     { id: 'dueDate', label: 'Due Date', sortable: true },
-    { id: 'description', label: 'Description', sortable: false },
     { id: 'category', label: 'Category', sortable: false },
     { id: 'actions', label: 'Actions', sortable: false },
   ];

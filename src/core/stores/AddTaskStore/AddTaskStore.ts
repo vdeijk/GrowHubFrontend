@@ -6,6 +6,7 @@ import { InputField } from '../../../auxiliary/classes/InputField';
 import taskStore from '../TaskStore/TaskStore';
 import { EndpointService } from '../../apis/EndpointService';
 import { runInAction } from 'mobx';
+import { DateField } from '../../../auxiliary/classes/DateField';
 
 class AddTaskStore extends BaseFormStore<Task> {
   public endpointService = new EndpointService('Todo');
@@ -26,7 +27,7 @@ class AddTaskStore extends BaseFormStore<Task> {
         false,
         'Enter field name',
       ),
-      //dueDateField: new InputField<Date>(new Date(), 'Due Date', false),
+      dueDateField: new DateField<string>("", 'Due Date', false),
       descriptionField: new InputField<string>(
         '',
         'Description',
@@ -43,7 +44,7 @@ class AddTaskStore extends BaseFormStore<Task> {
       title: this.fields.titleField.value as string,
       priority: this.fields.priorityField.value as Priority,
       field: this.fields.fieldField.value as string,
-      dueDate: new Date('2025-12-31'),
+      dueDate: this.fields.dueDateField.value as string,
       description: this.fields.descriptionField.value as string,
       category: this.fields.categoryField.value as Category,
       completed: this.fields.completedField.value as boolean,
@@ -65,7 +66,7 @@ class AddTaskStore extends BaseFormStore<Task> {
       this.fields.titleField.setValue(data.title);
       this.fields.priorityField.setValue(data.priority);
       this.fields.fieldField.setValue(data.field);
-      //this.fields.dueDateField.setValue(new Date('2025-12-31'));
+      this.fields.dueDateField.setValue(data.dueDate);
       this.fields.descriptionField.setValue(data.description);
       this.fields.categoryField.setValue(data.category);
       this.fields.completedField.setValue(data.completed);
@@ -80,7 +81,7 @@ class AddTaskStore extends BaseFormStore<Task> {
       title: this.fields.titleField.value as string,
       priority: this.fields.priorityField.value as Priority,
       field: this.fields.fieldField.value as string,
-      dueDate: new Date('2025-12-31'),
+      dueDate:  this.fields.dueDate.value as string,
       description: this.fields.descriptionField.value as string,
       category: this.fields.categoryField.value as Category,
       completed: this.fields.completedField.value as boolean,

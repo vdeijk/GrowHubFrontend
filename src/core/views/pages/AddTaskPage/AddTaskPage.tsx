@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import Button, { ButtonProps } from '../../reusables/Button/Button';
 import Dropdown from '../../reusables/Dropdown/Dropdown';
-//import DateInput from '../../reusables/DateInput/DateInput';
+import DateInput, { DateInputProps } from '../../reusables/DateInput/DateInput';
 import { DropdownProps } from '../../reusables/Dropdown/Dropdown';
 import taskStore from '../../../stores/TaskStore/TaskStore';
 
@@ -42,12 +42,13 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
 
       navigate('/tasksPage');
     };
+
     const titleProps: TextInputProps = {
       value: String(addTaskStore.fields.titleField.value),
       onChange: (value: string) =>
         addTaskStore.fields.titleField.setValue(value),
       placeholder: 'Title',
-      label: 'Title',
+      label: addTaskStore.fields.titleField.label,
       required: true,
     };
 
@@ -55,9 +56,18 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
       value: String(addTaskStore.fields.priorityField.value),
       onChange: (value: string) =>
         addTaskStore.fields.priorityField.setValue(value),
-      label: 'Priority',
+      label: addTaskStore.fields.priorityField.label,
       required: true,
-      options: taskStore.filterCriteria['priority'].options,
+      options: taskStore.dropdownFilters['priority'].options,
+    };
+
+    const dueDateProps: DateInputProps = {
+        value: String(addTaskStore.fields.dueDateField.value || ''),
+      onChange: (value) =>
+        addTaskStore.fields.dueDateField.setValue(value || ''),
+      placeholder: 'Enter Due Date',
+      label: addTaskStore.fields.dueDateField.label,
+      required: true,
     };
 
     const descriptionProps: TextInputProps = {
@@ -65,7 +75,7 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
       onChange: (value: string) =>
         addTaskStore.fields.descriptionField.setValue(value),
       placeholder: 'Enter description',
-      label: 'Description',
+      label: addTaskStore.fields.descriptionField.label,
       required: true,
     };
 
@@ -73,9 +83,9 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
       value: String(addTaskStore.fields.categoryField.value),
       onChange: (value: string) =>
         addTaskStore.fields.categoryField.setValue(value),
-      label: 'Category',
+      label: addTaskStore.fields.categoryField.label,
       required: true,
-      options: taskStore.filterCriteria['category'].options,
+      options: taskStore.dropdownFilters['category'].options,
     };
 
     const buttonProps: ButtonProps = {
@@ -91,7 +101,7 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
           <form onSubmit={handleSubmit} className={styles.form}>
             <TextInput {...titleProps} />
             <Dropdown {...priorityProps} />
-            {/* <DateInput {...waterNeedsProps} /> */}
+            <DateInput {...dueDateProps} />
             <TextInput {...descriptionProps} />
             <Dropdown {...categoryProps} />
             <Button {...buttonProps} />

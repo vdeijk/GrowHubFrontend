@@ -18,7 +18,7 @@ interface TaskProps {
 }
 
 const Task: React.FC<TaskProps> = ({ taskData }) => {
-  const { title, priority, category, completed, description, dueDate } =
+  const { title, priority, category, completed, dueDate } =
     taskData;
 
   const formatDate = (dateString: string) => {
@@ -33,6 +33,7 @@ const Task: React.FC<TaskProps> = ({ taskData }) => {
   const textsWithBoldSpan: TextWithBoldSpanData[] = [
     { label: 'Due', boldSpan: formatDate(dueDate) },
     { label: 'Priority', boldSpan: priority },
+    { label: 'Category', boldSpan: category },
   ];
 
   return (
@@ -47,10 +48,6 @@ const Task: React.FC<TaskProps> = ({ taskData }) => {
             />
           ))}
         </div>
-        <p className={styles.taskDescription}>{description}</p>
-        <p className={`${styles.taskCategory} ${styles[category]}`}>
-          {category}
-        </p>
       </div>
     </div>
   );
