@@ -5,8 +5,11 @@ import { Priority } from '../../../auxiliary/enums/Priority';
 import { Category } from '../../../auxiliary/enums/Category';
 import { SearchableStore } from '../BaseSearchableStore/BaseSearchableStore';
 import { DropdownOption } from '../../../auxiliary/interfaces/DropdownOptions';
+import { EndpointService } from '../../apis/EndpointService';
 
 class TaskStore extends SearchableStore<Task> {
+  private endpointService = new EndpointService('/Todo');
+
   constructor() {
     super(['title']);
 
@@ -43,14 +46,18 @@ class TaskStore extends SearchableStore<Task> {
   }
 
   public async fetchData() {
+    runInAction(() => {
+      this.isLoading = true;
+    });
+
     try {
-      runInAction(() => {
-        this.isLoading = true;
-      });
-      const tasks = await getData('/Todo');
+      const data: Task[] | undefined =
+        await this.endpointService.getData<Task[]>();
+
+      if (!data) return;
 
       runInAction(() => {
-        this.items = tasks;
+        this.items = data;
         this.filteredItems = this.items;
       });
     } finally {
@@ -77,7 +84,7 @@ class TaskStore extends SearchableStore<Task> {
   }
 
   public async deleteTask(id: number) {
-    await deleteData(`/todo/${id}`, id);
+    await this.endpointService.deleteData(id);
 
     this.fetchData();
   }

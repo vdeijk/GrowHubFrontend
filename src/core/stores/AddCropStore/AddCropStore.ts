@@ -3,9 +3,10 @@ import cropsStore from '../CropsStore/CropsStore';
 import { InputField } from '../../../auxiliary/classes/InputField';
 import { BaseFormStore } from '../BaseFormStore/BaseFormStore';
 import { EndpointService } from '../../apis/EndpointService';
+import { runInAction } from 'mobx';
 
 class AddCropStore extends BaseFormStore<Plant> {
-  public endpointService = new EndpointService('/plant');
+  private endpointService = new EndpointService('/plant');
 
   constructor() {
     super();
@@ -63,9 +64,11 @@ class AddCropStore extends BaseFormStore<Plant> {
 
     if (!data) return;
 
-    this.fields.nameField.setValue(data.commonName);
-    this.fields.genusField.setValue(data.genus);
-    this.fields.scientificNameField.setValue(data.scientificName);
+    runInAction(() => {
+      this.fields.nameField.setValue(data.commonName);
+      this.fields.genusField.setValue(data.genus);
+      this.fields.scientificNameField.setValue(data.scientificName);
+    });
   };
 }
 

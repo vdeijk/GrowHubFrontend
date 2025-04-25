@@ -3,6 +3,7 @@ import { InputField } from '../../../auxiliary/classes/InputField';
 import { LocationItem } from '../../../auxiliary/interfaces/LocationItem';
 import fieldsStore from '../FieldsStore/FieldsStore';
 import { EndpointService } from '../../apis/EndpointService';
+import { runInAction } from 'mobx';
 
 class AddFieldStore extends BaseFormStore<LocationItem> {
   public endpointService = new EndpointService('/location/');
@@ -65,10 +66,11 @@ class AddFieldStore extends BaseFormStore<LocationItem> {
       await this.endpointService.getData<LocationItem>(`${id}`);
 
     if (!data) return;
-
-    this.fields.locationNameField.setValue(data.name);
-    this.fields.latitudeField.setValue(data.latitude);
-    this.fields.longitudeField.setValue(data.longitude);
+    runInAction(() => {
+      this.fields.locationNameField.setValue(data.name);
+      this.fields.latitudeField.setValue(data.latitude);
+      this.fields.longitudeField.setValue(data.longitude);
+    });
   };
 }
 

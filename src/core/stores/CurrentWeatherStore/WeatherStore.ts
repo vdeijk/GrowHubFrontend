@@ -1,13 +1,14 @@
 import { makeAutoObservable } from 'mobx';
 import { runInAction } from 'mobx';
-import { getData } from '../../apis/getData';
-//import { WeatherForecast } from '../../../auxiliary/interfaces/WeatherForecast';
 import fieldsStore from '../FieldsStore/FieldsStore';
 import { LocationItem } from '../../../auxiliary/interfaces/LocationItem';
 import { formatCoordinate } from '../../../auxiliary/utils/formatCoordinates';
+import { EndpointService } from '../../apis/EndpointService';
+import { Weather } from '../../../auxiliary/interfaces/Weather';
 
 class WeatherStore {
-  weatherData: any | null = null;
+  private endpointService = new EndpointService('/Weather/forecast');
+  weatherData: Weather | null = null;
   isLoading = false;
   selectedLocation: LocationItem | null | undefined = null;
   locationFullName: string = '';
@@ -21,19 +22,24 @@ class WeatherStore {
 
     if (!coordinates) return;
 
+    runInAction(() => {
+      this.isLoading = true;
+    });
+
     try {
-      runInAction(() => {
-        this.isLoading = true;
-      });
+      const data: Weather | undefined = await this.endpointService.getData(
+        undefined,
+        {
+          city: coordinates,
+          days: 3,
+        },
+      );
 
-      const weather = await getData('/Weather/forecast', {
-        city: coordinates,
-        days: 3,
-      });
+      if (!data) return;
 
       runInAction(() => {
-        this.weatherData = weather;
-        this.locationFullName = `${weather.location.name}, ${weather.location.region}, ${weather.location.country}`;
+        this.weatherData = data;
+        this.locationFullName = `${data.location.name}, ${data.location.region}, ${data.location.country}`;
       });
     } catch (error) {
       console.error('Error fetching data:', error);

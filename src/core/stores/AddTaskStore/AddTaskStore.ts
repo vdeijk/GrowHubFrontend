@@ -5,6 +5,7 @@ import { BaseFormStore } from '../BaseFormStore/BaseFormStore';
 import { InputField } from '../../../auxiliary/classes/InputField';
 import taskStore from '../TaskStore/TaskStore';
 import { EndpointService } from '../../apis/EndpointService';
+import { runInAction } from 'mobx';
 
 class AddTaskStore extends BaseFormStore<Task> {
   public endpointService = new EndpointService('/plant');
@@ -60,13 +61,15 @@ class AddTaskStore extends BaseFormStore<Task> {
 
     if (!data) return;
 
-    this.fields.titleField.setValue(data.title);
-    this.fields.priorityField.setValue(data.priority);
-    this.fields.fieldField.setValue(data.field);
-    //this.fields.dueDateField.setValue(new Date('2025-12-31'));
-    this.fields.descriptionField.setValue(data.description);
-    this.fields.categoryField.setValue(data.category);
-    this.fields.completedField.setValue(data.completed);
+    runInAction(() => {
+      this.fields.titleField.setValue(data.title);
+      this.fields.priorityField.setValue(data.priority);
+      this.fields.fieldField.setValue(data.field);
+      //this.fields.dueDateField.setValue(new Date('2025-12-31'));
+      this.fields.descriptionField.setValue(data.description);
+      this.fields.categoryField.setValue(data.category);
+      this.fields.completedField.setValue(data.completed);
+    });
   };
 
   public updateTask = async (id: string) => {

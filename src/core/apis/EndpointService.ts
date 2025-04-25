@@ -64,17 +64,15 @@ export class EndpointService {
     }
   };
 
-  public deleteData = async <T>(id: number) => {
+  public deleteData = async (id: number) => {
     this.setIsLoading(true);
 
     try {
-      const response = await axios.delete(this.url, {
+      await axios.delete(this.url, {
         params: { id },
       });
 
       toast.success('Data deleted successfully!');
-
-      return response.data as T;
     } catch (error) {
       this.handleError('delete', error);
     } finally {

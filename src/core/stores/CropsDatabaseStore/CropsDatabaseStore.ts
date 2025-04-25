@@ -1,13 +1,14 @@
 import { SearchableStore } from '../BaseSearchableStore/BaseSearchableStore';
 import { Plant } from '../../../auxiliary/interfaces/Plant';
-import { getData } from '../../apis/getData';
-import { deleteData } from '../../apis/deleteData';
 import { debounce } from '../../../auxiliary/utils/debounce';
 import { runInAction } from 'mobx';
+import { EndpointService } from '../../apis/EndpointService';
 
 class CropsDatabaseStore extends SearchableStore<Plant> {
+  private endpointService = new EndpointService('/plant');
+
   constructor() {
-    super();
+    super(['commonName']);
 
     this.setFilterCriteria('genus', '');
 
@@ -29,10 +30,13 @@ class CropsDatabaseStore extends SearchableStore<Plant> {
     });
 
     try {
-      const plants = await getData('/Plant');
+      const data: Plant[] | undefined =
+        await this.endpointService.getData<Plant[]>();
+
+      if (!data) return;
 
       runInAction(() => {
-        this.items = plants;
+        this.items = data;
         this.filteredItems = this.items;
         this.filterCriteria['genus'].options = this.extractGenera();
       });
@@ -66,7 +70,7 @@ class CropsDatabaseStore extends SearchableStore<Plant> {
   }
 
   public deletePlant = async (id: number) => {
-    await deleteData(`/plant/${id}`, id);
+    await this.endpointService.deleteData(id);
 
     this.fetchData();
   };
