@@ -38,7 +38,7 @@ const AddCropPage: React.FC<AddCropPageProps> = observer(
 
       addCropStore.resetForm();
 
-      navigate('/cropsPage');
+      navigate('/cropsDatabase');
     };
 
     const buttonProps: ButtonProps = {
