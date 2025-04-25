@@ -4,7 +4,7 @@ import TextInput from '../../reusables/TextInput/TextInput';
 import Dropdown from '../../reusables/Dropdown/Dropdown';
 import { Dropdown as DropdownClass } from '../../../../auxiliary/classes/Dropdown';
 import { observer } from 'mobx-react-lite';
-import { InputField } from '../../../../auxiliary/classes/InputField';
+import { InputField } from '../../../../auxiliary/classes/InputFieldString';
 import { DateField } from '../../../../auxiliary/classes/DateField';
 import DateInput from '../../reusables/DateInput/DateInput';
 

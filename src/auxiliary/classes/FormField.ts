@@ -26,6 +26,7 @@ export class FormField<T> {
   };
 
   public validateRequired = (): string | null => {
+    console.log(this.required, this.value);
     if (this.required && !this.value) {
       return `${this.label} is required.`;
     }

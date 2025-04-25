@@ -31,6 +31,7 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
 
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
+      console.log('Task added successfully');
 
       if (isEditing && id) {
         addTaskStore.updateTask(id);
@@ -39,58 +40,48 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
       }
 
       addTaskStore.resetForm();
-
       navigate('/tasksPage');
     };
 
     const titleProps: TextInputProps = {
+      ...addTaskStore.fields.titleField,
       value: String(addTaskStore.fields.titleField.value),
       onChange: (value: string) =>
         addTaskStore.fields.titleField.setValue(value),
-      placeholder: 'Title',
-      label: addTaskStore.fields.titleField.label,
-      required: true,
     };
 
     const priorityProps: DropdownProps = {
+      ...addTaskStore.fields.priorityField,
       value: String(addTaskStore.fields.priorityField.value),
       onChange: (value: string) =>
         addTaskStore.fields.priorityField.setValue(value),
-      label: addTaskStore.fields.priorityField.label,
-      required: true,
       options: taskStore.dropdownFilters['priority'].options,
     };
 
     const dueDateProps: DateInputProps = {
-        value: String(addTaskStore.fields.dueDateField.value || ''),
+      ...addTaskStore.fields.dueDateField,
+      value: String(addTaskStore.fields.dueDateField.value || ''),
       onChange: (value) =>
         addTaskStore.fields.dueDateField.setValue(value || ''),
-      placeholder: 'Enter Due Date',
-      label: addTaskStore.fields.dueDateField.label,
-      required: true,
     };
 
     const descriptionProps: TextInputProps = {
+      ...addTaskStore.fields.descriptionField,
       value: String(addTaskStore.fields.descriptionField.value),
       onChange: (value: string) =>
         addTaskStore.fields.descriptionField.setValue(value),
-      placeholder: 'Enter description',
-      label: addTaskStore.fields.descriptionField.label,
-      required: true,
     };
 
     const categoryProps: DropdownProps = {
+      ...addTaskStore.fields.categoryField,
       value: String(addTaskStore.fields.categoryField.value),
       onChange: (value: string) =>
         addTaskStore.fields.categoryField.setValue(value),
-      label: addTaskStore.fields.categoryField.label,
-      required: true,
       options: taskStore.dropdownFilters['category'].options,
     };
 
     const buttonProps: ButtonProps = {
       type: 'submit',
-      onClick: () => navigate('/tasksPage'),
       label: isEditing ? 'Edit AgriTask' : 'Add AgriTask',
       customStyles: { marginTop: '1rem' },
     };

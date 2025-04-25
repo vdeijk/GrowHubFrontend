@@ -5,32 +5,36 @@ import fieldsStore from '../FieldsStore/FieldsStore';
 import { EndpointService } from '../../apis/EndpointService';
 import { runInAction } from 'mobx';
 
-class AddFieldStore extends BaseFormStore<LocationItem> {
+class AddFieldStore extends BaseFormStore {
   public endpointService = new EndpointService('Location');
 
   constructor() {
     super();
 
+    //@ts-ignore
     this.fields = {
       locationNameField: new InputField<string>(
         '',
         'Location Name',
         true,
         'Enter location name',
+        30,
       ),
       latitudeField: new InputField<number>(
         0,
         'Latitude',
         true,
         'Enter latitude',
+        10,
       ),
       longitudeField: new InputField<number>(
         0,
         'Longitude',
         true,
         'Enter longitude',
+        10,
       ),
-    };
+    } as Record<string, InputField<string | number | boolean>>;
   }
 
   public addField = async () => {

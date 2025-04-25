@@ -5,12 +5,13 @@ import { BaseFormStore } from '../BaseFormStore/BaseFormStore';
 import { EndpointService } from '../../apis/EndpointService';
 import { runInAction } from 'mobx';
 
-class AddCropStore extends BaseFormStore<Plant> {
+class AddCropStore extends BaseFormStore {
   private endpointService = new EndpointService('Plant');
 
   constructor() {
     super();
 
+    //@ts-ignore
     this.fields = {
       nameField: new InputField<string>(
         '',
@@ -25,7 +26,7 @@ class AddCropStore extends BaseFormStore<Plant> {
         true,
         'Enter scientific name',
       ),
-    };
+    } as Record<string, InputField<string | number | boolean>>;
   }
 
   public addCrop = async () => {
