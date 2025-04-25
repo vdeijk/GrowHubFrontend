@@ -4,6 +4,7 @@ import { InputField } from '../../../auxiliary/classes/InputField';
 import { BaseFormStore } from '../BaseFormStore/BaseFormStore';
 import { EndpointService } from '../../apis/EndpointService';
 import { runInAction } from 'mobx';
+import { Dropdown } from '../../../auxiliary/classes/Dropdown';
 
 class AddCropStore extends BaseFormStore {
   private endpointService = new EndpointService('Plant');
@@ -20,12 +21,7 @@ class AddCropStore extends BaseFormStore {
         'Enter common name',
       ),
       genusField: new InputField<string>('', 'Genus', true, 'Enter genus'),
-      scientificNameField: new InputField<string>(
-        '',
-        'Scientific Name',
-        true,
-        'Enter scientific name',
-      ),
+      scientificNameField: new Dropdown<string>('', 'Scientific Name', true),
     } as Record<string, InputField<string | number | boolean>>;
   }
 
@@ -66,9 +62,9 @@ class AddCropStore extends BaseFormStore {
     if (!data) return;
 
     runInAction(() => {
-      this.fields.nameField.setValue(data.commonName);
-      this.fields.genusField.setValue(data.genus);
-      this.fields.scientificNameField.setValue(data.scientificName);
+      this.fields.nameField.setValue(String(data.commonName));
+      this.fields.genusField.setValue(String(data.genus));
+      this.fields.scientificNameField.setValue(String(data.scientificName));
     });
   };
 }

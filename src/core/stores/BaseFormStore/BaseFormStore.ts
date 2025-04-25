@@ -5,7 +5,7 @@ import { DateField } from '../../../auxiliary/classes/DateField';
 export abstract class BaseFormStore {
   fields: Record<
     string,
-    InputField<string | boolean | number | DateField<string>>
+    InputField<string | boolean | number> | DateField<string>
   > = {};
 
   isLoading: boolean = false;

@@ -81,7 +81,6 @@ class AddTaskStore extends BaseFormStore {
       this.fields.dueDateField.setValue(data.dueDate);
       this.fields.descriptionField.setValue(data.description);
       this.fields.categoryField.setValue(data.category);
-      this.fields.completedField.setValue(data.completed);
     });
   };
 

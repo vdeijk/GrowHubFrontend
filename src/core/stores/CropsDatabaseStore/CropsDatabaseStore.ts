@@ -10,7 +10,7 @@ class CropsDatabaseStore extends SearchableStore<Plant> {
   constructor() {
     super(['commonName']);
 
-    this.setDropdownFilters('genus', '');
+    this.setDropdownFilters('genus', '', 'Genus');
 
     this.debouncedFilterPlants = debounce(this.filterItems.bind(this), 500);
   }
