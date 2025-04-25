@@ -13,7 +13,7 @@ const Plants: React.FC = observer(() => {
   const navigate = useRouterNavigation();
 
   const buttonContainerData = {
-    clickHandler: () => navigate('/cropsPage'),
+    clickHandler: () => navigate('/cropsDatabase'),
     label: 'View All Crops',
   };
 

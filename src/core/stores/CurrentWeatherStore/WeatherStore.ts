@@ -7,7 +7,7 @@ import { EndpointService } from '../../apis/EndpointService';
 import { Weather } from '../../../auxiliary/interfaces/Weather';
 
 class WeatherStore {
-  private endpointService = new EndpointService('/Weather/forecast');
+  private endpointService = new EndpointService('Weather/forecast');
   weatherData: Weather | null = null;
   isLoading = false;
   selectedLocation: LocationItem | null | undefined = null;

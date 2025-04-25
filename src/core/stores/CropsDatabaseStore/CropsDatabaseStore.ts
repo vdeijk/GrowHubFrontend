@@ -5,7 +5,7 @@ import { runInAction } from 'mobx';
 import { EndpointService } from '../../apis/EndpointService';
 
 class CropsDatabaseStore extends SearchableStore<Plant> {
-  private endpointService = new EndpointService('/plant');
+  private endpointService = new EndpointService('Plant');
 
   constructor() {
     super(['commonName']);

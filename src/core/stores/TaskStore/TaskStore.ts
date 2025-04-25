@@ -8,7 +8,7 @@ import { DropdownOption } from '../../../auxiliary/interfaces/DropdownOptions';
 import { EndpointService } from '../../apis/EndpointService';
 
 class TaskStore extends SearchableStore<Task> {
-  private endpointService = new EndpointService('/Todo');
+  private endpointService = new EndpointService('Todo');
 
   constructor() {
     super(['title']);

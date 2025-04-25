@@ -6,7 +6,7 @@ import { EndpointService } from '../../apis/EndpointService';
 import { runInAction } from 'mobx';
 
 class AddFieldStore extends BaseFormStore<LocationItem> {
-  public endpointService = new EndpointService('/location/');
+  public endpointService = new EndpointService('Location');
 
   constructor() {
     super();

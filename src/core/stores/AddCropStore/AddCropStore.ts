@@ -6,7 +6,7 @@ import { EndpointService } from '../../apis/EndpointService';
 import { runInAction } from 'mobx';
 
 class AddCropStore extends BaseFormStore<Plant> {
-  private endpointService = new EndpointService('/plant');
+  private endpointService = new EndpointService('Plant');
 
   constructor() {
     super();

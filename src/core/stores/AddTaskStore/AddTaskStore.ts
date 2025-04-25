@@ -8,7 +8,7 @@ import { EndpointService } from '../../apis/EndpointService';
 import { runInAction } from 'mobx';
 
 class AddTaskStore extends BaseFormStore<Task> {
-  public endpointService = new EndpointService('/plant');
+  public endpointService = new EndpointService('Todo');
 
   constructor() {
     super();

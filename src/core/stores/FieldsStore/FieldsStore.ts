@@ -4,7 +4,7 @@ import { EndpointService } from '../../apis/EndpointService';
 import { LocationItem } from '../../../auxiliary/interfaces/LocationItem';
 
 class FieldsStore {
-  private endpointService = new EndpointService('/Location');
+  private endpointService = new EndpointService('Location');
   locations: LocationItem[] = [];
   isLoading = false;
 

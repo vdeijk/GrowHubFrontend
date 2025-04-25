@@ -11,7 +11,7 @@ export class EndpointService {
 
   constructor(endpoint: string) {
     this.endpoint = endpoint;
-    this.url = `${this.BASE_URL}${endpoint}`;
+    this.url = `${this.BASE_URL}/${endpoint}/`;
 
     makeObservable(this, {
       isLoading: observable,
@@ -69,9 +69,7 @@ export class EndpointService {
     this.setIsLoading(true);
 
     try {
-      await axios.delete(this.url, {
-        params: { id },
-      });
+      await axios.delete(`${this.url}${id}`);
 
       toast.success('Data deleted successfully!');
     } catch (error) {
