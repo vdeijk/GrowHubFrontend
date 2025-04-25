@@ -18,7 +18,7 @@ const CropsPage: React.FC = observer(() => {
 
   const searchBarProps: SearchBarProps = {
     searchQuery: cropsStore.searchQuery,
-    genusFilter: cropsStore.filterCriteria["genus"],
+    genusFilter: cropsStore.filterCriteria['genus'],
   };
 
   const tableProps: TableProps<Plant> = {
@@ -64,7 +64,7 @@ const CropsPage: React.FC = observer(() => {
         <SearchBarContainer {...searchBarProps} />
         <div className={styles.buttonContainer}>
           <TableWithSorting {...tableProps} />
-          <ButtonContainer {...buttonContainerData} />
+          <ButtonContainer buttons={[buttonContainerData]} />
         </div>
       </LoadingWrapper>
     </section>

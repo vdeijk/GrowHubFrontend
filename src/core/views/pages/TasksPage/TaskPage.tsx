@@ -64,7 +64,7 @@ const TasksPage: React.FC = observer(() => {
         <SearchBarTasks {...searchBarProps} />
         <div className={styles.buttonContainer}>
           <TableWithSorting {...tableProps} />
-          <ButtonContainer {...buttonContainerData} />
+          <ButtonContainer buttons={[buttonContainerData]} />
         </div>
       </LoadingWrapper>
     </section>

@@ -64,7 +64,7 @@ const CropsDatabasePage: React.FC = observer(() => {
         <SearchBarCrops {...searchBarProps} />
         <div className={styles.buttonContainer}>
           <Table {...tableProps} />
-          <ButtonContainer {...buttonContainerData} />
+          <ButtonContainer buttons={[buttonContainerData]} />
         </div>
       </LoadingWrapper>
     </section>

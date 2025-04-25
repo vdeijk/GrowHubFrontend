@@ -36,7 +36,7 @@ const MapSection: React.FC = observer(() => {
           customStyles={{ marginBottom: '2rem' }}
         />
         <Map {...mapData} />
-        <ButtonContainer {...buttonContainerData} />
+        <ButtonContainer buttons={[buttonContainerData]} />
       </LoadingWrapper>
     </section>
   );

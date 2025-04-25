@@ -48,7 +48,7 @@ const CurrentWeatherContainer: React.FC = observer(() => {
           />
         ))}
       </div>
-      <ButtonContainer {...buttonContainerData} />
+      <ButtonContainer buttons={[buttonContainerData]} />
     </>
   );
 

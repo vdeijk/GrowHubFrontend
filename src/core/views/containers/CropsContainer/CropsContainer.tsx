@@ -41,7 +41,7 @@ const Plants: React.FC = observer(() => {
           index,
         }))}
       />
-      <ButtonContainer {...buttonContainerData} />
+      <ButtonContainer buttons={[buttonContainerData]} />
     </>
   );
 

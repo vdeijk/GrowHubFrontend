@@ -27,7 +27,7 @@ const Tasks: React.FC = observer(() => {
         {taskStore.items.slice(0, 3).map((task) => (
           <Task key={task.id} taskData={task} />
         ))}
-        <ButtonContainer {...buttonContainerData} />
+        <ButtonContainer buttons={[buttonContainerData]} />
       </LoadingWrapper>
     </section>
   );

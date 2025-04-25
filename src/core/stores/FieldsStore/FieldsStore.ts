@@ -3,10 +3,12 @@ import weatherStore from '../CurrentWeatherStore/WeatherStore';
 import { EndpointService } from '../../apis/EndpointService';
 import { LocationItem } from '../../../auxiliary/interfaces/LocationItem';
 
+
 class FieldsStore {
   private endpointService = new EndpointService('Location');
   locations: LocationItem[] = [];
-  isLoading = false;
+  isLoading = false; 
+  centerMapTrigger = false;
 
   constructor() {
     makeAutoObservable(this);
