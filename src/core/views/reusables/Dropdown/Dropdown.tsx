@@ -17,6 +17,7 @@ const Dropdown: React.FC<DropdownProps> = ({
   options,
   ariaLabel,
   label,
+  required,
 }) => {
 
   return (
@@ -27,6 +28,7 @@ const Dropdown: React.FC<DropdownProps> = ({
         </label>
       )}
       <select
+        required={required}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         className={styles.dropdown}
