@@ -18,7 +18,6 @@ export class FormField<T> {
   }
 
   public setValue = (value: T) => {
-    console.log('setValue', value, this.label);
     this.value = value;
   };
 
