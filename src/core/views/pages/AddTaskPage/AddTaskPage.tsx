@@ -31,7 +31,6 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
 
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
-      console.log('Task added successfully');
 
       if (isEditing && id) {
         addTaskStore.updateTask(id);

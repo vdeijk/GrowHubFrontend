@@ -3,7 +3,10 @@ import { InputField } from '../../../auxiliary/classes/InputField';
 import { DateField } from '../../../auxiliary/classes/DateField';
 
 export abstract class BaseFormStore {
-  fields: Record<string, InputField<string | boolean | number| DateField<string>>> = {};
+  fields: Record<
+    string,
+    InputField<string | boolean | number | DateField<string>>
+  > = {};
 
   isLoading: boolean = false;
 
@@ -39,8 +42,6 @@ export abstract class BaseFormStore {
       .map((field) => field.validateRequired())
       .filter((error) => error !== null);
 
-      console.log("validateForm", errors);
-    // Check if any field has an error
     if (errors.length > 0) {
       console.error('Form validation failed:', errors);
       return false;
