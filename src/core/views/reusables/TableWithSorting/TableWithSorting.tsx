@@ -23,7 +23,7 @@ const TableWithSorting = <T,>({
     }
     return '⇅';
   };
-
+  
   return (
     <table className={styles.table}>
       <thead>
