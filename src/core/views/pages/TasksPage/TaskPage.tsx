@@ -30,8 +30,10 @@ const TasksPage: React.FC = observer(() => {
 
   const searchBarProps: SearchBarTasksProps = {
     searchQuery: taskStore.searchQuery,
-    categoryFilter: taskStore.filterCriteria['category'],
-    priorityFilter: taskStore.filterCriteria['priority'],
+    categoryFilter: taskStore.dropdownFilters['category'],
+    priorityFilter: taskStore.dropdownFilters['priority'],
+    startDateFilter: taskStore.dateFilters['startDate'],
+    endDateFilter: taskStore.dateFilters['endDate'],
   };
 
   const tableProps: TableProps<Task> = {

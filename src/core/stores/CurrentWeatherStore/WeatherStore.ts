@@ -5,7 +5,6 @@ import { LocationItem } from '../../../auxiliary/interfaces/LocationItem';
 import { formatCoordinate } from '../../../auxiliary/utils/formatCoordinates';
 import { EndpointService } from '../../apis/EndpointService';
 import { Weather } from '../../../auxiliary/interfaces/Weather';
-import { toJS } from 'mobx';
 
 class WeatherStore {
   private endpointService = new EndpointService('Weather/forecast');
@@ -40,7 +39,6 @@ class WeatherStore {
 
       runInAction(() => {
         this.weatherData = data;
-        console.log(toJS(this.weatherData));
         this.locationFullName = `${data.location.name}, ${data.location.region}, ${data.location.country}`;
       });
     } catch (error) {

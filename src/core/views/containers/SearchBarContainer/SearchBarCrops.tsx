@@ -20,14 +20,14 @@ const SearchBarCrops: React.FC<SearchBarProps> = observer(
           value={searchQuery.value}
           onChange={searchQuery.setValue}
           placeholder={searchQuery.placeholder}
-          aria-label="Search by Name"
+          aria-label="Search"
         />
         <Dropdown
           value={genusFilter.value}
           onChange={genusFilter.setValue}
           options={genusFilter.options}
           label={genusFilter.label}
-          aria-label="Filter by Genus"
+          aria-label="Genus"
         />
       </div>
     );

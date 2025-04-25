@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './Dropdown.module.css';
 import { DropdownOption } from '../../../../auxiliary/interfaces/DropdownOptions';
-import { toJS } from 'mobx';
 
 export interface DropdownProps {
   value: string;

@@ -10,7 +10,7 @@ class CropsStore extends SearchableStore<Plant> {
   constructor() {
     super(['commonName']);
 
-    this.setFilterCriteria('genus', '');
+    this.setDropdownFilters('genus', '');
 
     this.debouncedFilterPlants = debounce(this.filterItems.bind(this), 500);
   }
@@ -38,7 +38,7 @@ class CropsStore extends SearchableStore<Plant> {
       runInAction(() => {
         this.items = data;
         this.filteredItems = this.items;
-        this.filterCriteria['genus'].options = this.extractGenera();
+        this.dropdownFilters['genus'].options = this.extractGenera();
       });
     } finally {
       runInAction(() => {
@@ -65,7 +65,7 @@ class CropsStore extends SearchableStore<Plant> {
   };
 
   public matchesFilterCriteria(plant: Plant): boolean {
-    const value = this.filterCriteria['genus'].value;
+    const value = this.dropdownFilters['genus'].value;
     return value === '' || plant.genus === value;
   }
 

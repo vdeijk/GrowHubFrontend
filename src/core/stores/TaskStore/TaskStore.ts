@@ -15,17 +15,19 @@ class TaskStore extends SearchableStore<Task> {
 
     this.debouncedFilterItems = debounce(this.filterItems.bind(this), 500);
 
-    this.setFilterCriteria('category', '');
-    this.setFilterCriteria('priority', '');
-    this.filterCriteria['category'].options = this.generateDropdownOptions(
+    this.setDropdownFilters('category', '', "Category");
+    this.setDropdownFilters('priority', '', "Priority");
+    this.dropdownFilters['category'].options = this.generateDropdownOptions(
       Object.values(Category),
       'All Categories',
     );
-
-    this.filterCriteria['priority'].options = this.generateDropdownOptions(
+    this.dropdownFilters['priority'].options = this.generateDropdownOptions(
       Object.values(Priority),
       'All Priorities',
     );
+
+    this.setDateFilters('startDate', '', "Start Date");
+    this.setDateFilters('endDate', '', "End Date");
   }
 
   isLoading: boolean = false;
@@ -68,8 +70,10 @@ class TaskStore extends SearchableStore<Task> {
   }
 
   public matchesFilterCriteria(item: Task): boolean {
-    const categoryValue = this.filterCriteria['category'].value;
-    const priorityValue = this.filterCriteria['priority'].value;
+    const categoryValue = this.dropdownFilters['category'].value;
+    const priorityValue = this.dropdownFilters['priority'].value;
+    const startDateValue = this.dateFilters['startDate'].value;
+    const endDateValue = this.dateFilters['endDate'].value;
 
     const matchesCategory = this.matchesStringCriteria(
       item.category,
@@ -80,7 +84,13 @@ class TaskStore extends SearchableStore<Task> {
       priorityValue,
     );
 
-    return matchesCategory && matchesPriority;
+    const matchesDateRange = this.matchesDateRangeCriteria(
+      item.dueDate,
+      startDateValue,
+      endDateValue,
+    );
+
+    return matchesCategory && matchesPriority && matchesDateRange;
   }
 
   public async deleteTask(id: number) {
@@ -110,6 +120,24 @@ class TaskStore extends SearchableStore<Task> {
       })),
     ];
   };
+
+  private matchesDateRangeCriteria(
+    dueDate: string | undefined,
+    startDate: string,
+    endDate: string,
+  ): boolean {
+    if (!startDate || !endDate) return true;
+    if (!dueDate) return false;
+
+    const taskDate = new Date(dueDate);
+    const start = startDate ? new Date(startDate) : null;
+    const end = endDate ? new Date(endDate) : null;
+
+    const isAfterStartDate = !start || taskDate >= start;
+    const isBeforeEndDate = !end || taskDate <= end;
+
+    return isAfterStartDate && isBeforeEndDate;
+  }
 }
 
 const taskStore = new TaskStore();

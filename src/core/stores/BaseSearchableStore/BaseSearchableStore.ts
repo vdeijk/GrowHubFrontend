@@ -8,6 +8,7 @@ import {
 import { debounce } from '../../../auxiliary/utils/debounce';
 import { InputField } from '../../../auxiliary/classes/InputField';
 import { Dropdown } from '../../../auxiliary/classes/Dropdown';
+import { DateField } from '../../../auxiliary/classes/DateField';
 
 export abstract class SearchableStore<T> {
   items: T[] = [];
@@ -20,7 +21,8 @@ export abstract class SearchableStore<T> {
     'Enter search query',
     50,
   );
-  filterCriteria: Record<string, Dropdown<string>> = {};
+  dropdownFilters: Record<string, Dropdown<string>> = {};
+  dateFilters: Record<string, DateField<string>> = {};
   sortField: keyof T | null = null;
   sortOrder: 'asc' | 'desc' = 'asc';
   searchableFields: (keyof T)[] = [];
@@ -32,10 +34,12 @@ export abstract class SearchableStore<T> {
       items: observable,
       filteredItems: observable,
       searchQuery: observable,
-      filterCriteria: observable,
+      dropdownFilters: observable,
+      dateFilters: observable,
       sortField: observable,
       sortOrder: observable,
-      setFilterCriteria: action,
+      setDropdownFilters: action,
+      setDateFilters: action,
       filterItems: action,
       setSortField: action,
       sortItems: action,
@@ -54,7 +58,15 @@ export abstract class SearchableStore<T> {
 
     reaction(
       () =>
-        Object.values(this.filterCriteria).map((dropdown) => dropdown.value),
+        Object.values(this.dropdownFilters).map((dropdown) => dropdown.value),
+      () => {
+        this.filterItems();
+      },
+    );
+
+    reaction(
+      () =>
+        Object.values(this.dateFilters).map((dateFilter) => dateFilter.value),
       () => {
         this.filterItems();
       },
@@ -63,17 +75,31 @@ export abstract class SearchableStore<T> {
 
   abstract matchesFilterCriteria(item: T): boolean;
 
-  public setFilterCriteria = (key: string, criteria: string) => {
+  public setDateFilters = (key: string, criteria: string, label: string) => {
     runInAction(() => {
-      if (!this.filterCriteria[key]) {
-        this.filterCriteria[key] = new Dropdown<string>(
+      if (!this.dateFilters[key]) {
+        this.dateFilters[key] = new DateField<string>(
           '',
-          `Filter by ${key}`,
+          label,
           false,
         );
       }
 
-      this.filterCriteria[key].setValue(criteria);
+      this.dateFilters[key].setValue(criteria);
+    });
+  };
+
+  public setDropdownFilters = (key: string, criteria: string, label: string) => {
+    runInAction(() => {
+      if (!this.dropdownFilters[key]) {
+        this.dropdownFilters[key] = new Dropdown<string>(
+          '',
+          label,
+          false,
+        );
+      }
+
+      this.dropdownFilters[key].setValue(criteria);
     });
   };
 
@@ -134,4 +160,3 @@ export abstract class SearchableStore<T> {
     });
   };
 }
-
