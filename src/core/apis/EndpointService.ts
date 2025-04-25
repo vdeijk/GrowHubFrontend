@@ -22,7 +22,8 @@ export class EndpointService {
     this.setIsLoading(true);
 
     try {
-      const response = await axios.get(`${this.url}${id}`, { params });
+      const url = id ? `${this.url}${id}` : this.url;
+      const response = await axios.get(url, { params });
 
       return response.data as T;
     } catch (error) {
