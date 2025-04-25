@@ -18,7 +18,7 @@ const CropsDatabasePage: React.FC = observer(() => {
 
   const searchBarProps: SearchBarProps = {
     searchQuery: cropsStore.searchQuery,
-    genusFilter: cropsStore.filterCriteria['genus'],
+    genusFilter: cropsStore.dropdownFilters['genus'],
   };
 
   const tableProps: TableProps<Plant> = {
