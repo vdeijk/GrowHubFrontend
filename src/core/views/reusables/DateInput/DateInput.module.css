@@ -4,6 +4,8 @@
   border: 1px solid #ccc;
   border-radius: var(--border-radius-small);
   width: 100%;
+  
+  font-family: Poppins;
   font-size: 1.5rem;
 }
 

@@ -82,7 +82,7 @@ class RouterStore {
 
   public handleRouteChange = (path: string, navigate?: NavigateFunction) => {
     try {
-      const adjustedPath = path.replace('/GrowHubFrontend', '');
+      const adjustedPath = path.replace('/growhub', '');
       this.currentLabel = this.getLabel(adjustedPath);
       if (this.currentLabel === 'Unknown Page' && navigate) {
         navigate('/404');
