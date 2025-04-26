@@ -102,5 +102,3 @@ const App: React.FC = observer(() => {
 });
 
 export default App;
-
-/*test*/
