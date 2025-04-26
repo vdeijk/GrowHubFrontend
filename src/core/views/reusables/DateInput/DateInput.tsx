@@ -19,11 +19,14 @@ const DateInput: React.FC<DateInputProps> = ({
   label,
   error,
 }) => {
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
-    onChange(newValue); 
+    onChange(newValue);
   };
+
+  const formattedValue = value
+    ? new Date(value).toISOString().split('T')[0]
+    : '';
 
   return (
     <div className={label ? styles.container : ''}>
@@ -36,7 +39,7 @@ const DateInput: React.FC<DateInputProps> = ({
         id="textInput"
         required={required}
         type="date"
-        value={value || ''}
+        value={formattedValue}
         onChange={handleChange}
         placeholder={placeholder}
         className={styles.textInput}
