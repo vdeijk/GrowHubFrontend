@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './SearchBarContainer.module.css';
 import TextInput from '../../reusables/TextInput/TextInput';
 import Dropdown from '../../reusables/Dropdown/Dropdown';
-import { InputField } from '../../../../auxiliary/classes/InputFieldString';
+import { InputField } from '../../../../auxiliary/classes/InputField';
 import { Dropdown as DropdownClass } from '../../../../auxiliary/classes/Dropdown';
 import { observer } from 'mobx-react-lite';
 

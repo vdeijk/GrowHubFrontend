@@ -11,7 +11,7 @@ describe('PlantsStore', () => {
   });
 
   it('should initialize with an empty plants array and loading set to false', () => {
-    expect(plantsStore.plants).toEqual([]);
+    expect(plantsStore.items).toEqual([]);
     expect(plantsStore.isLoading).toBe(false);
   });
 });

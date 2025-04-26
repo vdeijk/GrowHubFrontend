@@ -1,6 +1,5 @@
 import { makeAutoObservable } from 'mobx';
 import { Turnover } from '../../../auxiliary/interfaces/Turnover';
-import { getData } from '../../apis/getData';
 import { runInAction } from 'mobx';
 
 class TurnoverStore {
@@ -22,10 +21,10 @@ class TurnoverStore {
       runInAction(() => {
         this.isLoading = true;
       });
-      const turnovers = await getData('/Turnover');
+      //const turnovers = await getData('/Turnover');
 
       runInAction(() => {
-        this.turnovers = turnovers;
+        // this.turnovers = turnovers;
         this.isLoading = false;
       });
     } catch (error) {
