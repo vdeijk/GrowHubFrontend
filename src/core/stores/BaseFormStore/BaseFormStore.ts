@@ -16,7 +16,7 @@ export abstract class BaseFormStore {
       isLoading: observable,
       updateFormField: action,
       resetForm: action,
-      validateForm: action,
+      validateRequired: action,
     });
   }
 
@@ -37,7 +37,7 @@ export abstract class BaseFormStore {
     });
   };
 
-  public validateForm = (): boolean => {
+  public validateRequired = (): boolean => {
     const errors = Object.values(this.fields)
       .map((field) => field.validateRequired())
       .filter((error) => error !== null);
