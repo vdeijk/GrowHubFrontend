@@ -15,8 +15,8 @@ class TaskStore extends SearchableStore<Task> {
 
     this.debouncedFilterItems = debounce(this.filterItems.bind(this), 500);
 
-    this.setDropdownFilters('category', '', "Category");
-    this.setDropdownFilters('priority', '', "Priority");
+    this.setDropdownFilters('category', '', 'Category');
+    this.setDropdownFilters('priority', '', 'Priority');
     this.dropdownFilters['category'].options = this.generateDropdownOptions(
       Object.values(Category),
       '',
@@ -26,8 +26,8 @@ class TaskStore extends SearchableStore<Task> {
       '',
     );
 
-    this.setDateFilters('startDate', '', "Start Date");
-    this.setDateFilters('endDate', '', "End Date");
+    this.setDateFilters('startDate', '', 'Start Date');
+    this.setDateFilters('endDate', '', 'End Date');
   }
 
   isLoading: boolean = false;

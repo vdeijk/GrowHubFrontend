@@ -34,7 +34,7 @@ const SearchBarTasks: React.FC<SearchBarTasksProps> = observer(
           aria-label="Title"
         />
         <DateInput
-            label={startDateFilter.label}
+          label={startDateFilter.label}
           value={startDateFilter?.value || ''}
           onChange={(date) => startDateFilter?.setValue(date || '')}
           aria-label="Start Date"

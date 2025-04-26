@@ -24,7 +24,7 @@ export class InputField<T> extends FormField<T> {
       this.value.length > this.maxLength
     ) {
       this.error = `Input cannot exceed ${this.maxLength} characters`;
-      
+
       return true;
     }
 

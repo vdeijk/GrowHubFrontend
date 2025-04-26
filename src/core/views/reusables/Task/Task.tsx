@@ -18,8 +18,7 @@ interface TaskProps {
 }
 
 const Task: React.FC<TaskProps> = ({ taskData }) => {
-  const { title, priority, category, completed, dueDate } =
-    taskData;
+  const { title, priority, category, completed, dueDate } = taskData;
 
   const formatDate = (dateString: string) => {
     if (!dateString) return '';

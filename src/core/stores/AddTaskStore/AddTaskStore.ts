@@ -102,6 +102,12 @@ class AddTaskStore extends BaseFormStore {
 
     taskStore.fetchData();
   };
+
+  public validateForm() {
+    if (this.validateRequired()) return true;
+
+    return false;
+  }
 }
 
 const addTaskStore = new AddTaskStore();

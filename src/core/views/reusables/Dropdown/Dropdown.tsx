@@ -19,7 +19,6 @@ const Dropdown: React.FC<DropdownProps> = ({
   label,
   required,
 }) => {
-
   return (
     <div className={label ? styles.container : ''}>
       {label && (

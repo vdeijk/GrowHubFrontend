@@ -30,6 +30,8 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
     }, [isEditing, id]);
 
     const handleSubmit = (e: React.FormEvent) => {
+      if (!addTaskStore.validateForm()) return;
+
       e.preventDefault();
 
       if (isEditing && id) {

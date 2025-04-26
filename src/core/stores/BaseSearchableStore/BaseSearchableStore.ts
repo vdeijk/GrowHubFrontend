@@ -78,25 +78,21 @@ export abstract class SearchableStore<T> {
   public setDateFilters = (key: string, criteria: string, label: string) => {
     runInAction(() => {
       if (!this.dateFilters[key]) {
-        this.dateFilters[key] = new DateField<string>(
-          '',
-          label,
-          false,
-        );
+        this.dateFilters[key] = new DateField<string>('', label, false);
       }
 
       this.dateFilters[key].setValue(criteria);
     });
   };
 
-  public setDropdownFilters = (key: string, criteria: string, label: string) => {
+  public setDropdownFilters = (
+    key: string,
+    criteria: string,
+    label: string,
+  ) => {
     runInAction(() => {
       if (!this.dropdownFilters[key]) {
-        this.dropdownFilters[key] = new Dropdown<string>(
-          '',
-          label,
-          false,
-        );
+        this.dropdownFilters[key] = new Dropdown<string>('', label, false);
       }
 
       this.dropdownFilters[key].setValue(criteria);

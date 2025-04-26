@@ -67,6 +67,12 @@ class AddCropStore extends BaseFormStore {
       this.fields.scientificNameField.setValue(String(data.scientificName));
     });
   };
+
+  public validateForm() {
+    if (this.validateRequired()) return true;
+
+    return false;
+  }
 }
 
 const addCropStore = new AddCropStore();

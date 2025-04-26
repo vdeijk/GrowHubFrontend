@@ -30,6 +30,8 @@ const AddCropPage: React.FC<AddCropPageProps> = observer(
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
 
+      if (!addCropStore.validateForm()) return;
+
       if (isEditing && id) {
         addCropStore.updateCrop(id);
       } else {
