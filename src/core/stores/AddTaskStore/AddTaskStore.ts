@@ -92,7 +92,7 @@ class AddTaskStore extends BaseFormStore {
       title: this.fields.titleField.value as string,
       priority: this.fields.priorityField.value as Priority,
       field: this.fields.fieldField.value as string,
-      dueDate: this.fields.dueDate.value as string,
+      dueDate: this.fields.dueDateField.value as string,
       description: this.fields.descriptionField.value as string,
       category: this.fields.categoryField.value as Category,
       completed: this.fields.completedField.value as boolean,
