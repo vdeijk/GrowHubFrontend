@@ -58,7 +58,7 @@ class CropsDatabaseStore extends SearchableStore<Plant> {
       label: genus,
     }));
     if (!genusOptions.some((option) => option.value === '')) {
-      genusOptions.unshift({ value: '', label: 'All Genera' });
+      genusOptions.unshift({ value: '', label: '' });
     }
 
     return genusOptions;

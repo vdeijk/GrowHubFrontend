@@ -19,11 +19,11 @@ class TaskStore extends SearchableStore<Task> {
     this.setDropdownFilters('priority', '', "Priority");
     this.dropdownFilters['category'].options = this.generateDropdownOptions(
       Object.values(Category),
-      'All Categories',
+      '',
     );
     this.dropdownFilters['priority'].options = this.generateDropdownOptions(
       Object.values(Priority),
-      'All Priorities',
+      '',
     );
 
     this.setDateFilters('startDate', '', "Start Date");
