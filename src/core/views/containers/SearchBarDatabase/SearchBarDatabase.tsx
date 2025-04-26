@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './SearchBarContainer.module.css';
+import styles from './SearchBarDatabase.module.css';
 import TextInput from '../../reusables/TextInput/TextInput';
 import Dropdown from '../../reusables/Dropdown/Dropdown';
 import { InputField } from '../../../../auxiliary/classes/InputField';
@@ -11,7 +11,7 @@ export interface SearchBarProps {
   genusFilter: DropdownClass<string>;
 }
 
-const SearchBarCrops: React.FC<SearchBarProps> = observer(
+const SearchBarDatabase: React.FC<SearchBarProps> = observer(
   ({ searchQuery, genusFilter }) => {
     return (
       <div className={styles.container}>
@@ -34,4 +34,4 @@ const SearchBarCrops: React.FC<SearchBarProps> = observer(
   },
 );
 
-export default SearchBarCrops;
+export default SearchBarDatabase;

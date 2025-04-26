@@ -2,7 +2,8 @@ import React from 'react';
 import MapSectionContainer from '../../containers/MapSectionContainer/MapSectionContainer';
 import CurrentWeatherContainer from '../../containers/CurrentWeatherContainer/CurrentWeatherContainer';
 import AgriTasksContainer from '../../containers/AgriTasksContainer/AgriTasksContainer';
-import CropsContainer from '../../containers/CropsContainer/CropsContainer';
+import CropsDatabaseContainer from '../../containers/CropsDatabaseContainer/CropsDatabaseContainer';
+import YourCropsContainer from '../../containers/YourCropsContainer/YourCropsContainer';
 
 const DashboardPage: React.FC = () => {
   return (
@@ -10,7 +11,8 @@ const DashboardPage: React.FC = () => {
       <CurrentWeatherContainer />
       <MapSectionContainer />
       <AgriTasksContainer />
-      <CropsContainer />
+      <YourCropsContainer />
+      <CropsDatabaseContainer />
     </>
   );
 };

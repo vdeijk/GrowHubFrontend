@@ -6,7 +6,7 @@ import DashboardPage from './core/views/pages/DashboardPage/DashboardPage';
 import FooterContainer from './core/views/containers/FooterContainer/FooterContainer';
 import profilePicture from './auxiliary/assets/profile.jpeg';
 import { Routes, Route } from 'react-router-dom';
-import CropsPage from './core/views/pages/CropsPage/CropsPage';
+import CropsPage from './core/views/pages/YourCropsPage/YourCropsPage';
 import routerStore from './core/stores/RouterStore/RouterStore';
 import PageLayout from './core/views/reusables/PageLayout/PageLayout';
 import AddCropPage from './core/views/pages/AddCropPage/AddCropPage';
@@ -21,7 +21,8 @@ import { useAuth0 } from '@auth0/auth0-react';
 import LoadingWrapper from './core/views/reusables/LoadingWrapper/LoadingWrapper';
 import LandingPage from './core/views/pages/LandingPage/LandingPage';
 import fieldsStore from './core/stores/FieldsStore/FieldsStore';
-import cropsStore from './core/stores/CropsStore/CropsStore';
+import yourCropsStore from './core/stores/CropsStore/YourCropsStore';
+import cropsDatabaseStore from './core/stores/CropsDatabaseStore/CropsDatabaseStore';
 import taskStore from './core/stores/TaskStore/TaskStore';
 import weatherStore from './core/stores/CurrentWeatherStore/WeatherStore';
 import UpgradePage from './core/views/pages/UpgradePage/UpgradePage';
@@ -29,7 +30,7 @@ import CropsDatabasePage from './core/views/pages/CropsDatabasePage/CropsDatabas
 import AddTaskPage from './core/views/pages/AddTaskPage/AddTaskPage';
 
 const App: React.FC = observer(() => {
-  const { isAuthenticated, isLoading } = useAuth0();
+  const { isAuthenticated, isLoading, user } = useAuth0();
   const [isFetched, setIsFetched] = useState(false);
 
   useEffect(() => {
@@ -44,7 +45,8 @@ const App: React.FC = observer(() => {
     try {
       await Promise.all([
         fieldsStore.fetchData(),
-        cropsStore.fetchData(),
+        yourCropsStore.fetchData(),
+        cropsDatabaseStore.fetchData(),
         taskStore.fetchData(),
         weatherStore.fetchData(),
       ]);
@@ -60,9 +62,9 @@ const App: React.FC = observer(() => {
   return (
     <main className="appContainer">
       <ToastContainer style={{ zIndex: 9999 }} />
-      <NavbarContainer userName="YourUserName" />
+      <NavbarContainer userName={user?.name || ''} />
       <MenuContainer
-        userName="YourUserName"
+        userName={user?.name || ''}
         profilePicture={profilePicture}
         menuLinks={routerStore.getVisibleLinks()}
         curPageTitle={routerStore.currentLabel}
@@ -102,5 +104,3 @@ const App: React.FC = observer(() => {
 });
 
 export default App;
-
-/*test*/

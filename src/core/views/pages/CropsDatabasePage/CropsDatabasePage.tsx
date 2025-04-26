@@ -1,48 +1,58 @@
 import React from 'react';
-import SearchBarCrops from '../../containers/SearchBarContainer/SearchBarCrops';
+import SearchBarDatabase from '../../containers/SearchBarDatabase/SearchBarDatabase';
 import Table from '../../reusables/TableWithSorting/TableWithSorting';
 import styles from './CropsDatabasePage.module.css';
-import cropsStore from '../../../stores/CropsStore/CropsStore';
+import cropsDatabaseStore from '../../../stores/CropsDatabaseStore/CropsDatabaseStore';
 import { observer } from 'mobx-react-lite';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
-import { SearchBarProps } from '../../containers/SearchBarContainer/SearchBarCrops';
+import { SearchBarProps } from '../../containers/SearchBarCrops/SearchBarCrops';
 import { TableProps } from '../../reusables/TableWithSorting/TableWithSorting';
 import { Plant } from '../../../../auxiliary/interfaces/Plant';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
-import { FaEdit } from 'react-icons/fa';
-import { FaTrash } from 'react-icons/fa';
+import ActionIcons from '../../reusables/ActionIcons/ActionIcons';
+import popupStore from '../../../stores/PopupStore/PopupStore';
+import PlantDatabasePopup from '../../reusables/PlantDatabasePopup/PlantDatabasePopup';
+import Popup from '../../containers/Popup/Popup';
 
 const CropsDatabasePage: React.FC = observer(() => {
   const navigate = useRouterNavigation();
 
   const searchBarProps: SearchBarProps = {
-    searchQuery: cropsStore.searchQuery,
-    genusFilter: cropsStore.dropdownFilters['genus'],
+    searchQuery: cropsDatabaseStore.searchQuery,
+    genusFilter: cropsDatabaseStore.dropdownFilters['genus'],
+  };
+
+  const handlePopup = (id: number | undefined) => {
+    popupStore.openPopup(<PlantDatabasePopup />);
+  };
+
+  const handleEdit = (id: number | undefined) => {
+    navigate(`/addCropPage/${id}`);
+  };
+
+  const handleDelete = (id: number | undefined) => {
+    if (id === undefined) return;
+
+    cropsDatabaseStore.deletePlant(id);
   };
 
   const tableProps: TableProps<Plant> = {
-    headers: cropsStore.tableHeaders,
-    data: cropsStore.filteredItems.map((item) => ({
+    headers: cropsDatabaseStore.tableHeaders,
+    data: cropsDatabaseStore.filteredItems.map((item) => ({
       ...item,
       actions: (
-        <div className={styles.actionIcons}>
-          <FaEdit
-            className={styles.editIcon}
-            onClick={() => item.id !== undefined && handleEdit(item.id)}
-            title="Edit Plant"
-          />
-          <FaTrash
-            className={styles.deleteIcon}
-            onClick={() => item.id !== undefined && handleDelete(item.id)}
-            title="Delete Plant"
-          />
-        </div>
+        <ActionIcons
+          item={item as { id: number | undefined }}
+          handlePopup={handlePopup}
+          handleEdit={handleEdit}
+          handleDelete={handleDelete}
+        />
       ),
     })),
-    onSort: (field) => cropsStore.setSortField(field),
-    sortField: cropsStore.sortField,
-    sortOrder: cropsStore.sortOrder,
+    onSort: (field) => cropsDatabaseStore.setSortField(field),
+    sortField: cropsDatabaseStore.sortField,
+    sortOrder: cropsDatabaseStore.sortOrder,
   };
 
   const buttonContainerData = {
@@ -50,18 +60,11 @@ const CropsDatabasePage: React.FC = observer(() => {
     label: 'Add Crop',
   };
 
-  const handleEdit = (id: number) => {
-    navigate(`/addCropPage/${id}`);
-  };
-
-  const handleDelete = (id: number) => {
-    cropsStore.deletePlant(id);
-  };
-
   return (
     <section className={styles.section}>
-      <LoadingWrapper isLoading={cropsStore.isLoading}>
-        <SearchBarCrops {...searchBarProps} />
+      <Popup />
+      <LoadingWrapper isLoading={cropsDatabaseStore.isLoading}>
+        <SearchBarDatabase {...searchBarProps} />
         <div className={styles.buttonContainer}>
           <Table {...tableProps} />
           <ButtonContainer buttons={[buttonContainerData]} />

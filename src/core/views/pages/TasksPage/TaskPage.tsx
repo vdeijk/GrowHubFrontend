@@ -4,13 +4,16 @@ import taskStore from '../../../stores/TaskStore/TaskStore';
 import styles from './TasksPage.module.css';
 import { observer } from 'mobx-react-lite';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
-import { FaTrash, FaEdit } from 'react-icons/fa';
 import { TableProps } from '../../reusables/TableWithSorting/TableWithSorting';
 import { Task } from '../../../../auxiliary/interfaces/Task';
 import SearchBarTasks from '../../containers/SearchBarTasks/SearchBarTasks';
 import { SearchBarTasksProps } from '../../containers/SearchBarTasks/SearchBarTasks';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
+import ActionIcons from '../../reusables/ActionIcons/ActionIcons';
+import popupStore from '../../../stores/PopupStore/PopupStore';
+import PlantDatabasePopup from '../../reusables/PlantDatabasePopup/PlantDatabasePopup';
+import Popup from '../../containers/Popup/Popup';
 
 const TasksPage: React.FC = observer(() => {
   const navigate = useRouterNavigation();
@@ -20,11 +23,17 @@ const TasksPage: React.FC = observer(() => {
     label: 'Add AgriTask',
   };
 
-  const handleEdit = (id: number) => {
+  const handlePopup = (id: number | undefined) => {
+    popupStore.openPopup(<PlantDatabasePopup />);
+  };
+
+  const handleEdit = (id: number | undefined) => {
     navigate(`/addTaskPage/${id}`);
   };
 
-  const handleDelete = (id: number) => {
+  const handleDelete = (id: number | undefined) => {
+    if (id === undefined) return;
+
     taskStore.deleteTask(id);
   };
 
@@ -38,21 +47,15 @@ const TasksPage: React.FC = observer(() => {
 
   const tableProps: TableProps<Task> = {
     headers: taskStore.tableHeaders,
-    data: taskStore.filteredItems.map((task) => ({
-      ...task,
+    data: taskStore.filteredItems.map((item) => ({
+      ...item,
       actions: (
-        <div className={styles.actionIcons}>
-          <FaEdit
-            className={styles.editIcon}
-            onClick={() => task.id !== undefined && handleEdit(task.id)}
-            title="Edit Plant"
-          />
-          <FaTrash
-            className={styles.deleteIcon}
-            onClick={() => task.id !== undefined && handleDelete(task.id)}
-            title="Delete Plant"
-          />
-        </div>
+        <ActionIcons
+          item={item as { id: number | undefined }}
+          handlePopup={handlePopup}
+          handleEdit={handleEdit}
+          handleDelete={handleDelete}
+        />
       ),
     })),
     onSort: (field) => taskStore.setSortField(field),
@@ -62,6 +65,7 @@ const TasksPage: React.FC = observer(() => {
 
   return (
     <section className={styles.taskPage}>
+      <Popup />
       <LoadingWrapper isLoading={taskStore.isLoading}>
         <SearchBarTasks {...searchBarProps} />
         <div className={styles.buttonContainer}>

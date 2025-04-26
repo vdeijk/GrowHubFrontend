@@ -4,7 +4,7 @@ import { debounce } from '../../../auxiliary/utils/debounce';
 import { runInAction } from 'mobx';
 import { EndpointService } from '../../apis/EndpointService';
 
-class CropsStore extends SearchableStore<Plant> {
+class YourCropsStore extends SearchableStore<Plant> {
   private endpointService = new EndpointService('Plant');
 
   constructor() {
@@ -19,8 +19,11 @@ class CropsStore extends SearchableStore<Plant> {
   debouncedFilterPlants: (criteria: string) => void = () => {};
   tableHeaders: { id: keyof Plant; label: string; sortable: boolean }[] = [
     { id: 'commonName', label: 'Common Name', sortable: true },
-    { id: 'genus', label: 'Genus', sortable: true },
-    { id: 'scientificName', label: 'Scientific Name', sortable: true },
+    { id: 'sunPreference', label: 'sunPreference', sortable: true },
+    { id: 'waterNeeds', label: 'waterNeeds', sortable: true },
+    { id: 'soilType', label: 'soilType', sortable: true },
+    { id: 'soilPH', label: 'soilPH', sortable: true },
+    { id: 'pruning', label: 'pruning', sortable: true },
     { id: 'actions', label: 'Actions', sortable: false },
   ];
 
@@ -76,5 +79,5 @@ class CropsStore extends SearchableStore<Plant> {
   };
 }
 
-const cropsStore = new CropsStore();
-export default cropsStore;
+const yourCropsStore = new YourCropsStore();
+export default yourCropsStore;

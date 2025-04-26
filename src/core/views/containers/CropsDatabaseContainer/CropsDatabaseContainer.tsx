@@ -1,15 +1,15 @@
 import React from 'react';
-import styles from './CropsContainer.module.css';
+import styles from './CropsDatabaseContainer.module.css';
 import TableWithoutSorting from '../../reusables/TableWithoutSorting/TableWithoutSorting';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
-import plantsStore from '../../../stores/CropsStore/CropsStore';
+import cropsDatabaseStore from '../../../stores/CropsDatabaseStore/CropsDatabaseStore';
 import Heading from '../../reusables/Heading/Heading';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import { observer } from 'mobx-react-lite';
 import { Plant } from '../../../../auxiliary/interfaces/Plant';
 
-const Plants: React.FC = observer(() => {
+const CropsDatabaseContainer: React.FC = observer(() => {
   const navigate = useRouterNavigation();
 
   const buttonContainerData = {
@@ -17,7 +17,7 @@ const Plants: React.FC = observer(() => {
     label: 'View All Crops',
   };
 
-  const headersWithoutActions = plantsStore.tableHeaders.filter(
+  const headersWithoutActions = cropsDatabaseStore.tableHeaders.filter(
     (header) => header.id !== 'actions',
   );
 
@@ -31,12 +31,12 @@ const Plants: React.FC = observer(() => {
     <>
       <Heading
         level={6}
-        text="Your Crops"
+        text="Crop Database"
         customStyles={{ marginBottom: '2rem' }}
       />
       <TableWithoutSorting<Plant>
         headers={headersWithoutActions}
-        data={plantsStore.items.slice(0, 9).map((plant, index) => ({
+        data={cropsDatabaseStore.items.slice(0, 9).map((plant, index) => ({
           ...omit(plant, 'actions'),
           index,
         }))}
@@ -47,11 +47,11 @@ const Plants: React.FC = observer(() => {
 
   return (
     <section className={styles.section}>
-      <LoadingWrapper isLoading={plantsStore.isLoading}>
+      <LoadingWrapper isLoading={cropsDatabaseStore.isLoading}>
         {children}
       </LoadingWrapper>
     </section>
   );
 });
 
-export default Plants;
+export default CropsDatabaseContainer;

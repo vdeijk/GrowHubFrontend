@@ -17,10 +17,15 @@ class RouterStore {
     },
     { path: '/fieldsPage', label: 'Fields', hidden: false, isDynamic: false },
     { path: '/tasksPage', label: 'AgriTasks', hidden: false, isDynamic: false },
-    // { path: '/cropsPage', label: 'Crops', hidden: false, isDynamic: false },
+    {
+      path: '/cropsPage',
+      label: 'Your Crops',
+      hidden: false,
+      isDynamic: false,
+    },
     {
       path: '/cropsDatabase',
-      label: 'Crops database',
+      label: 'Crops Database',
       hidden: false,
       isDynamic: false,
     },
