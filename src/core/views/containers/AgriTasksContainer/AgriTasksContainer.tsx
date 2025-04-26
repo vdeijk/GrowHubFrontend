@@ -7,7 +7,6 @@ import Heading from '../../reusables/Heading/Heading';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
-import { toJS } from 'mobx';
 
 const Tasks: React.FC = observer(() => {
   const navigate = useRouterNavigation();
@@ -16,8 +15,6 @@ const Tasks: React.FC = observer(() => {
     clickHandler: () => navigate('/tasksPage'),
     label: 'View All AgriTasks',
   };
-
-  console.log(toJS(taskStore.items));
 
   return (
     <section className={styles.section}>
