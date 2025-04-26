@@ -1,97 +1,66 @@
-import { makeAutoObservable } from 'mobx';
 import { Task } from '../../../auxiliary/interfaces/Task';
 import { runInAction } from 'mobx';
-import { getData } from '../../apis/getData';
-import { TextInputState } from '../../../auxiliary/interfaces/TextInputState';
 import { debounce } from '../../../auxiliary/utils/debounce';
-import { validate } from '../../../auxiliary/utils/validationMaxLength';
 import { Priority } from '../../../auxiliary/enums/Priority';
 import { Category } from '../../../auxiliary/enums/Category';
-import { deleteData } from '../../apis/deleteData';
+import { SearchableStore } from '../BaseSearchableStore/BaseSearchableStore';
+import { DropdownOption } from '../../../auxiliary/interfaces/DropdownOptions';
+import { EndpointService } from '../../apis/EndpointService';
 
-class TaskStore {
-  tasks: Task[] = [];
-  isLoading = false;
-  searchQuery: TextInputState = { value: '', error: '', maxLength: 10 };
-  filterCriteria: { category: string | null; priority: string | null } = {
-    category: null,
-    priority: null,
-  };
-  filteredTasks: Task[] = [];
+class TaskStore extends SearchableStore<Task> {
+  private endpointService = new EndpointService('Todo');
+
+  constructor() {
+    super(['title']);
+
+    this.debouncedFilterItems = debounce(this.filterItems.bind(this), 500);
+
+    this.setDropdownFilters('category', '', 'Category');
+    this.setDropdownFilters('priority', '', 'Priority');
+    this.dropdownFilters['category'].options = this.generateDropdownOptions(
+      Object.values(Category),
+      '',
+    );
+    this.dropdownFilters['priority'].options = this.generateDropdownOptions(
+      Object.values(Priority),
+      '',
+    );
+
+    this.setDateFilters('startDate', '', 'Start Date');
+    this.setDateFilters('endDate', '', 'End Date');
+  }
+
+  isLoading: boolean = false;
   tableHeaders: { id: keyof Task; label: string; sortable: boolean }[] = [
     { id: 'title', label: 'Title', sortable: true },
     { id: 'priority', label: 'Priority', sortable: true },
     { id: 'dueDate', label: 'Due Date', sortable: true },
-    { id: 'description', label: 'Description', sortable: false },
     { id: 'category', label: 'Category', sortable: false },
     { id: 'actions', label: 'Actions', sortable: false },
   ];
-  debouncedFilteredTasks: () => void;
-  categoryOptions = [
-    { value: null, label: 'All' },
-    ...Object.values(Category).map((category) => ({
-      value: category,
-      label: category,
-    })),
-  ];
-  priorityOptions = [
-    { value: null, label: 'All' },
-    ...Object.values(Priority).map((priority) => ({
-      value: priority,
-      label: priority,
-    })),
-  ];
-  sortField: keyof Task | null = null;
-  sortOrder: 'asc' | 'desc' = 'asc';
-
-  constructor() {
-    makeAutoObservable(this);
-
-    this.fetchData();
-
-    this.debouncedFilteredTasks = debounce(this.filterTasks.bind(this), 500);
-  }
 
   public toggleComplete(id: number) {
-    const task = this.tasks.find((task) => task.id === id);
+    const task = this.items.find((task) => task.id === id);
     if (task) {
       task.completed = !task.completed;
     }
   }
 
-  public addTask(task: Task) {
-    task.id = this.tasks.length
-      ? (this.tasks[this.tasks.length - 1]?.id ?? 0) + 1
-      : 1;
-    this.tasks.push(task);
-  }
-
-  public updateTask(id: number, updatedTask: Task) {
-    const index = this.tasks.findIndex((task) => task.id === id);
-    if (index !== -1) {
-      this.tasks[index] = { ...updatedTask, id };
-    }
-  }
-
-  public async deleteTask(id: number) {
-    await deleteData(`/todo/${id}`, id);
-
-    this.fetchData();
-  }
-
   public async fetchData() {
+    runInAction(() => {
+      this.isLoading = true;
+    });
+
     try {
-      runInAction(() => {
-        this.isLoading = true;
-      });
-      const tasks = await getData('/Todo');
+      const data: Task[] | undefined =
+        await this.endpointService.getData<Task[]>();
+
+      if (!data) return;
 
       runInAction(() => {
-        this.tasks = tasks;
-        this.filteredTasks = this.tasks;
+        this.items = data;
+        this.filteredItems = this.items;
       });
-    } catch (error) {
-      console.error('Error fetching data:', error);
     } finally {
       runInAction(() => {
         this.isLoading = false;
@@ -99,76 +68,75 @@ class TaskStore {
     }
   }
 
-  public setSortField = (field: keyof Task) => {
-    runInAction(() => {
-      if (this.sortField === field) {
-        this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
-      } else {
-        this.sortField = field;
-        this.sortOrder = 'asc';
-      }
-      this.sortTasks();
-    });
+  public matchesFilterCriteria(item: Task): boolean {
+    const categoryValue = this.dropdownFilters['category'].value;
+    const priorityValue = this.dropdownFilters['priority'].value;
+    const startDateValue = this.dateFilters['startDate'].value;
+    const endDateValue = this.dateFilters['endDate'].value;
+
+    const matchesCategory = this.matchesStringCriteria(
+      item.category,
+      categoryValue,
+    );
+    const matchesPriority = this.matchesStringCriteria(
+      item.priority,
+      priorityValue,
+    );
+
+    const matchesDateRange = this.matchesDateRangeCriteria(
+      item.dueDate,
+      startDateValue,
+      endDateValue,
+    );
+
+    return matchesCategory && matchesPriority && matchesDateRange;
+  }
+
+  public async deleteTask(id: number) {
+    await this.endpointService.deleteData(id);
+
+    this.fetchData();
+  }
+
+  private matchesStringCriteria = (
+    itemValue: string | undefined,
+    filterValue: string | undefined,
+  ): boolean => {
+    if (!filterValue || filterValue.trim() === '') return true;
+    if (!itemValue) return false;
+    return itemValue.toLowerCase() === filterValue.toLowerCase();
   };
 
-  public sortTasks = () => {
-    this.filteredTasks = this.filteredTasks.slice().sort((a, b) => {
-      const fieldA = (a as Task)[this.sortField as keyof Task];
-      const fieldB = (b as Task)[this.sortField as keyof Task];
-      if (fieldA === undefined || fieldB === undefined) {
-        return 0;
-      }
-      if (fieldA < fieldB) {
-        return this.sortOrder === 'asc' ? -1 : 1;
-      }
-      if (fieldA > fieldB) {
-        return this.sortOrder === 'asc' ? 1 : -1;
-      }
-      return 0;
-    });
+  private generateDropdownOptions = <T extends string | number>(
+    values: T[],
+    allLabel: string = 'All',
+  ): DropdownOption<T>[] => {
+    return [
+      { value: '' as T, label: allLabel },
+      ...values.map((value) => ({
+        value,
+        label: String(value),
+      })),
+    ];
   };
 
-  public setFilterCriteria = (
-    type: 'category' | 'priority',
-    value: string | null,
-  ) => {
-    runInAction(() => {
-      this.filterCriteria[type] = value;
-      this.filterTasks();
-    });
-  };
+  private matchesDateRangeCriteria(
+    dueDate: string | undefined,
+    startDate: string,
+    endDate: string,
+  ): boolean {
+    if (!startDate || !endDate) return true;
+    if (!dueDate) return false;
 
-  public setSearchQuery = (query: string) => {
-    runInAction(() => {
-      this.searchQuery.error = validate(query, this.searchQuery.maxLength);
+    const taskDate = new Date(dueDate);
+    const start = startDate ? new Date(startDate) : null;
+    const end = endDate ? new Date(endDate) : null;
 
-      if (this.searchQuery.error) {
-        return;
-      }
+    const isAfterStartDate = !start || taskDate >= start;
+    const isBeforeEndDate = !end || taskDate <= end;
 
-      this.searchQuery.value = query;
-
-      this.debouncedFilteredTasks();
-    });
-  };
-  public filterTasks = () => {
-    this.filteredTasks = this.tasks.filter((task) => {
-      const matchesSearchQuery = task.title
-        .toLowerCase()
-        .includes(this.searchQuery.value.toLowerCase());
-      const matchesCategory =
-        !this.filterCriteria.category ||
-        task.category.toLowerCase() ===
-          this.filterCriteria.category.toLowerCase();
-      const matchesPriority =
-        !this.filterCriteria.priority ||
-        task.priority.toLowerCase() ===
-          this.filterCriteria.priority.toLowerCase();
-
-      const matches = matchesSearchQuery && matchesCategory && matchesPriority;
-      return matches;
-    });
-  };
+    return isAfterStartDate && isBeforeEndDate;
+  }
 }
 
 const taskStore = new TaskStore();

@@ -9,8 +9,6 @@ import { TableProps } from '../../reusables/TableWithSorting/TableWithSorting';
 import { Task } from '../../../../auxiliary/interfaces/Task';
 import SearchBarTasks from '../../containers/SearchBarTasks/SearchBarTasks';
 import { SearchBarTasksProps } from '../../containers/SearchBarTasks/SearchBarTasks';
-import { Category } from '../../../../auxiliary/enums/Category';
-import { Priority } from '../../../../auxiliary/enums/Priority';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 
@@ -31,27 +29,16 @@ const TasksPage: React.FC = observer(() => {
   };
 
   const searchBarProps: SearchBarTasksProps = {
-    searchQuery: taskStore.searchQuery.value,
-    error: taskStore.searchQuery.error,
-    setSearchQuery: taskStore.setSearchQuery,
-    filterCriteria: {
-      category: taskStore.filterCriteria.category as Category | null,
-      priority: taskStore.filterCriteria.priority as Priority | null,
-    },
-    setFilterCriteria: taskStore.setFilterCriteria,
-    categoryOptions: taskStore.categoryOptions.map((option) => ({
-      ...option,
-      value: option.value === null ? '' : option.value,
-    })),
-    priorityOptions: taskStore.priorityOptions.map((option) => ({
-      ...option,
-      value: option.value === null ? '' : option.value,
-    })),
+    searchQuery: taskStore.searchQuery,
+    categoryFilter: taskStore.dropdownFilters['category'],
+    priorityFilter: taskStore.dropdownFilters['priority'],
+    startDateFilter: taskStore.dateFilters['startDate'],
+    endDateFilter: taskStore.dateFilters['endDate'],
   };
 
   const tableProps: TableProps<Task> = {
     headers: taskStore.tableHeaders,
-    data: taskStore.filteredTasks.map((task) => ({
+    data: taskStore.filteredItems.map((task) => ({
       ...task,
       actions: (
         <div className={styles.actionIcons}>
@@ -79,7 +66,7 @@ const TasksPage: React.FC = observer(() => {
         <SearchBarTasks {...searchBarProps} />
         <div className={styles.buttonContainer}>
           <TableWithSorting {...tableProps} />
-          <ButtonContainer {...buttonContainerData} />
+          <ButtonContainer buttons={[buttonContainerData]} />
         </div>
       </LoadingWrapper>
     </section>

@@ -24,10 +24,10 @@ const Tasks: React.FC = observer(() => {
           text="AgriTasks"
           customStyles={{ marginBottom: '2rem' }}
         ></Heading>
-        {taskStore.tasks.slice(0, 3).map((task) => (
+        {taskStore.items.slice(0, 3).map((task) => (
           <Task key={task.id} taskData={task} />
         ))}
-        <ButtonContainer {...buttonContainerData} />
+        <ButtonContainer buttons={[buttonContainerData]} />
       </LoadingWrapper>
     </section>
   );

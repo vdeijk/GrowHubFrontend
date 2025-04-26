@@ -3,6 +3,7 @@ import { FormField } from './FormField';
 export class InputField<T> extends FormField<T> {
   placeholder?: string;
   maxLength?: number;
+  error?: string | null;
 
   constructor(
     value: T,
@@ -16,14 +17,17 @@ export class InputField<T> extends FormField<T> {
     this.maxLength = maxLength;
   }
 
-  public validateMaxLength = (): string | null => {
+  public validateMaxLength = (): boolean => {
     if (
       this.maxLength &&
       typeof this.value === 'string' &&
       this.value.length > this.maxLength
     ) {
-      return `Input cannot exceed ${this.maxLength} characters`;
+      this.error = `Input cannot exceed ${this.maxLength} characters`;
+
+      return true;
     }
-    return null;
+
+    return false;
   };
 }

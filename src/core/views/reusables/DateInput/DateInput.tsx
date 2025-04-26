@@ -4,7 +4,7 @@ import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
 export interface DateInputProps {
   value: string;
-  onChange: (value: string) => void;
+  onChange: (value: string | null) => void;
   placeholder?: string;
   required?: boolean;
   label?: string;
@@ -19,6 +19,15 @@ const DateInput: React.FC<DateInputProps> = ({
   label,
   error,
 }) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    onChange(newValue);
+  };
+
+  const formattedValue = value
+    ? new Date(value).toISOString().split('T')[0]
+    : '';
+
   return (
     <div className={label ? styles.container : ''}>
       {label && (
@@ -30,8 +39,8 @@ const DateInput: React.FC<DateInputProps> = ({
         id="textInput"
         required={required}
         type="date"
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
+        value={formattedValue}
+        onChange={handleChange}
         placeholder={placeholder}
         className={styles.textInput}
         aria-invalid={!!error}

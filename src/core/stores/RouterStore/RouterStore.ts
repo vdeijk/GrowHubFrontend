@@ -76,13 +76,14 @@ class RouterStore {
   }
 
   private handlePopState = () => {
-    const path = window.location.pathname;
+    const path = window.location.hash.replace('#', '');
     this.currentLabel = this.getLabel(path);
   };
 
   public handleRouteChange = (path: string, navigate?: NavigateFunction) => {
     try {
-      this.currentLabel = this.getLabel(path);
+      const adjustedPath = path.replace('/growhub', '');
+      this.currentLabel = this.getLabel(adjustedPath);
       if (this.currentLabel === 'Unknown Page' && navigate) {
         navigate('/404');
       }
