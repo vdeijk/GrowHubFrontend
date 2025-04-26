@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './Dropdown.module.css';
 import { DropdownOption } from '../../../../auxiliary/interfaces/DropdownOptions';
-import { toJS } from 'mobx';
 
 export interface DropdownProps {
   value: string;
@@ -18,6 +17,7 @@ const Dropdown: React.FC<DropdownProps> = ({
   options,
   ariaLabel,
   label,
+  required,
 }) => {
   return (
     <div className={label ? styles.container : ''}>
@@ -27,6 +27,7 @@ const Dropdown: React.FC<DropdownProps> = ({
         </label>
       )}
       <select
+        required={required}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         className={styles.dropdown}

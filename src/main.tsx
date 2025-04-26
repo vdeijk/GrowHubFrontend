@@ -9,6 +9,8 @@ import { Auth0Provider } from '@auth0/auth0-react';
 
 settingsStore.initialize();
 
+const basename = import.meta.env.VITE_BASENAME || '/';
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Auth0Provider
@@ -18,7 +20,7 @@ createRoot(document.getElementById('root')!).render(
         redirect_uri: window.location.origin,
       }}
     >
-      <HashRouter>
+      <HashRouter basename={basename}>
         <App />
       </HashRouter>
     </Auth0Provider>

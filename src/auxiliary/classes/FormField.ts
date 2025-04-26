@@ -17,13 +17,13 @@ export class FormField<T> {
     });
   }
 
-  public setValue(value: T) {
+  public setValue = (value: T) => {
     this.value = value;
-  }
+  };
 
-  public reset() {
+  public reset = () => {
     this.value = '' as T;
-  }
+  };
 
   public validateRequired = (): string | null => {
     if (this.required && !this.value) {

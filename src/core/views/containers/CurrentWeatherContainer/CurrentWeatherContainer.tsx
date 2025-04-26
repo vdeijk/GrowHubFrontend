@@ -31,7 +31,7 @@ const CurrentWeatherContainer: React.FC = observer(() => {
         text="Current Weather"
         customStyles={{ marginBottom: '2rem' }}
       ></Heading>
-      <h4 className={styles.h4}>The Hague, South Holland</h4>
+      <h4 className={styles.h4}>{weatherStore.locationFullName}</h4>
       <div className={styles.container}>
         <img
           src={weather?.current?.condition.icon}
@@ -48,7 +48,7 @@ const CurrentWeatherContainer: React.FC = observer(() => {
           />
         ))}
       </div>
-      <ButtonContainer {...buttonContainerData} />
+      <ButtonContainer buttons={[buttonContainerData]} />
     </>
   );
 

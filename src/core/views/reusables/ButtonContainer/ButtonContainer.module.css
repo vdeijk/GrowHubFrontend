@@ -1,6 +1,8 @@
 .buttonContainer {
-  width: 100%;
   display: grid;
+  grid-auto-flow: column;
+  justify-content: end;
+  grid-gap: 2rem;
   align-items: end;
   margin-top: var(--spacing-medium);
 }

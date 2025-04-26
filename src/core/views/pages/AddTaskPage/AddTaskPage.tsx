@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import Button, { ButtonProps } from '../../reusables/Button/Button';
 import Dropdown from '../../reusables/Dropdown/Dropdown';
-//import DateInput from '../../reusables/DateInput/DateInput';
+import DateInput, { DateInputProps } from '../../reusables/DateInput/DateInput';
 import { DropdownProps } from '../../reusables/Dropdown/Dropdown';
 import taskStore from '../../../stores/TaskStore/TaskStore';
 
@@ -30,6 +30,8 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
     }, [isEditing, id]);
 
     const handleSubmit = (e: React.FormEvent) => {
+      if (!addTaskStore.validateForm()) return;
+
       e.preventDefault();
 
       if (isEditing && id) {
@@ -39,54 +41,48 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
       }
 
       addTaskStore.resetForm();
-
       navigate('/tasksPage');
     };
+
     const titleProps: TextInputProps = {
+      ...addTaskStore.fields.titleField,
       value: String(addTaskStore.fields.titleField.value),
       onChange: (value: string) =>
         addTaskStore.fields.titleField.setValue(value),
-      placeholder: 'Title',
-      label: 'Title',
-      required: true,
     };
 
     const priorityProps: DropdownProps = {
+      ...addTaskStore.fields.priorityField,
       value: String(addTaskStore.fields.priorityField.value),
       onChange: (value: string) =>
         addTaskStore.fields.priorityField.setValue(value),
-      label: 'Priority',
-      required: true,
-      options: taskStore.priorityOptions.map((option) => ({
-        ...option,
-        value: option.value === null ? '' : option.value,
-      })),
+      options: taskStore.dropdownFilters['priority'].options,
+    };
+
+    const dueDateProps: DateInputProps = {
+      ...addTaskStore.fields.dueDateField,
+      value: String(addTaskStore.fields.dueDateField.value || ''),
+      onChange: (value) =>
+        addTaskStore.fields.dueDateField.setValue(value || ''),
     };
 
     const descriptionProps: TextInputProps = {
+      ...addTaskStore.fields.descriptionField,
       value: String(addTaskStore.fields.descriptionField.value),
       onChange: (value: string) =>
         addTaskStore.fields.descriptionField.setValue(value),
-      placeholder: 'Enter description',
-      label: 'Description',
-      required: true,
     };
 
     const categoryProps: DropdownProps = {
+      ...addTaskStore.fields.categoryField,
       value: String(addTaskStore.fields.categoryField.value),
       onChange: (value: string) =>
         addTaskStore.fields.categoryField.setValue(value),
-      label: 'Category',
-      required: true,
-      options: taskStore.categoryOptions.map((option) => ({
-        ...option,
-        value: option.value === null ? '' : option.value,
-      })),
+      options: taskStore.dropdownFilters['category'].options,
     };
 
     const buttonProps: ButtonProps = {
       type: 'submit',
-      onClick: () => navigate('/tasksPage'),
       label: isEditing ? 'Edit AgriTask' : 'Add AgriTask',
       customStyles: { marginTop: '1rem' },
     };
@@ -97,7 +93,7 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
           <form onSubmit={handleSubmit} className={styles.form}>
             <TextInput {...titleProps} />
             <Dropdown {...priorityProps} />
-            {/* <DateInput {...waterNeedsProps} /> */}
+            <DateInput {...dueDateProps} />
             <TextInput {...descriptionProps} />
             <Dropdown {...categoryProps} />
             <Button {...buttonProps} />

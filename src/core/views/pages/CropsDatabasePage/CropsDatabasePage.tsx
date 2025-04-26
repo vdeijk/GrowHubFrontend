@@ -1,11 +1,11 @@
 import React from 'react';
-import SearchBarContainer from '../../containers/SearchBarContainer/SearchBarContainer';
+import SearchBarCrops from '../../containers/SearchBarContainer/SearchBarCrops';
 import Table from '../../reusables/TableWithSorting/TableWithSorting';
 import styles from './CropsDatabasePage.module.css';
-import plantsStore from '../../../stores/CropsStore/CropsStore';
+import cropsStore from '../../../stores/CropsStore/CropsStore';
 import { observer } from 'mobx-react-lite';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
-import { SearchBarProps } from '../../containers/SearchBarContainer/SearchBarContainer';
+import { SearchBarProps } from '../../containers/SearchBarContainer/SearchBarCrops';
 import { TableProps } from '../../reusables/TableWithSorting/TableWithSorting';
 import { Plant } from '../../../../auxiliary/interfaces/Plant';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
@@ -17,36 +17,32 @@ const CropsDatabasePage: React.FC = observer(() => {
   const navigate = useRouterNavigation();
 
   const searchBarProps: SearchBarProps = {
-    searchQuery: plantsStore.searchQuery.value,
-    error: plantsStore.searchQuery.error,
-    setSearchQuery: plantsStore.setSearchQuery,
-    filterCriteria: plantsStore.filterCriteria,
-    setFilterCriteria: plantsStore.setFilterCriteria,
-    genusOptions: plantsStore.genusOptions,
+    searchQuery: cropsStore.searchQuery,
+    genusFilter: cropsStore.dropdownFilters['genus'],
   };
 
   const tableProps: TableProps<Plant> = {
-    headers: plantsStore.tableHeaders,
-    data: plantsStore.filteredPlants.map((plant) => ({
-      ...plant,
+    headers: cropsStore.tableHeaders,
+    data: cropsStore.filteredItems.map((item) => ({
+      ...item,
       actions: (
         <div className={styles.actionIcons}>
           <FaEdit
             className={styles.editIcon}
-            onClick={() => plant.id !== undefined && handleEdit(plant.id)}
+            onClick={() => item.id !== undefined && handleEdit(item.id)}
             title="Edit Plant"
           />
           <FaTrash
             className={styles.deleteIcon}
-            onClick={() => plant.id !== undefined && handleDelete(plant.id)}
+            onClick={() => item.id !== undefined && handleDelete(item.id)}
             title="Delete Plant"
           />
         </div>
       ),
     })),
-    onSort: (field) => plantsStore.setSortField(field),
-    sortField: plantsStore.sortField,
-    sortOrder: plantsStore.sortOrder,
+    onSort: (field) => cropsStore.setSortField(field),
+    sortField: cropsStore.sortField,
+    sortOrder: cropsStore.sortOrder,
   };
 
   const buttonContainerData = {
@@ -59,16 +55,16 @@ const CropsDatabasePage: React.FC = observer(() => {
   };
 
   const handleDelete = (id: number) => {
-    plantsStore.deletePlant(id);
+    cropsStore.deletePlant(id);
   };
 
   return (
     <section className={styles.section}>
-      <LoadingWrapper isLoading={plantsStore.isLoading}>
-        <SearchBarContainer {...searchBarProps} />
+      <LoadingWrapper isLoading={cropsStore.isLoading}>
+        <SearchBarCrops {...searchBarProps} />
         <div className={styles.buttonContainer}>
           <Table {...tableProps} />
-          <ButtonContainer {...buttonContainerData} />
+          <ButtonContainer buttons={[buttonContainerData]} />
         </div>
       </LoadingWrapper>
     </section>

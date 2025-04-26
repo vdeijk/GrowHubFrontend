@@ -1,12 +1,13 @@
 import { makeAutoObservable, runInAction } from 'mobx';
-import { getData } from '../../apis/getData';
-import { LocationItem } from '../../../auxiliary/interfaces/LocationItem';
-import { deleteData } from '../../apis/deleteData';
 import weatherStore from '../CurrentWeatherStore/WeatherStore';
+import { EndpointService } from '../../apis/EndpointService';
+import { LocationItem } from '../../../auxiliary/interfaces/LocationItem';
 
 class FieldsStore {
+  private endpointService = new EndpointService('Location');
   locations: LocationItem[] = [];
   isLoading = false;
+  centerMapTrigger = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -20,9 +21,13 @@ class FieldsStore {
     });
 
     try {
-      const locations = await getData('/Location');
+      const data: LocationItem[] | undefined =
+        await this.endpointService.getData<LocationItem[]>();
+
+      if (!data) return;
+
       runInAction(() => {
-        this.locations = locations;
+        this.locations = data;
 
         weatherStore.setLocation(this.locations[0]?.id?.toString() || '');
         weatherStore.fetchData();
@@ -35,7 +40,7 @@ class FieldsStore {
   }
 
   public deleteField = async (id: number) => {
-    await deleteData(`/location/${id}`, id);
+    await this.endpointService.deleteData(id);
 
     this.fetchData();
 

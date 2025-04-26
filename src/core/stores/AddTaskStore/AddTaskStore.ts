@@ -4,13 +4,25 @@ import { Task } from '../../../auxiliary/interfaces/Task';
 import { BaseFormStore } from '../BaseFormStore/BaseFormStore';
 import { InputField } from '../../../auxiliary/classes/InputField';
 import taskStore from '../TaskStore/TaskStore';
+import { EndpointService } from '../../apis/EndpointService';
+import { runInAction } from 'mobx';
+import { DateField } from '../../../auxiliary/classes/DateField';
 
-class AddTaskStore extends BaseFormStore<Task> {
+class AddTaskStore extends BaseFormStore {
+  public endpointService = new EndpointService('Todo');
+
   constructor() {
     super();
 
+    //@ts-ignore
     this.fields = {
-      titleField: new InputField<string>('', 'Title', true, 'Enter task title'),
+      titleField: new InputField<string>(
+        '',
+        'Title',
+        true,
+        'Enter task title',
+        30,
+      ),
       priorityField: new InputField<Priority>(
         Priority.Medium,
         'Priority',
@@ -21,47 +33,58 @@ class AddTaskStore extends BaseFormStore<Task> {
         'Field',
         false,
         'Enter field name',
+        30,
       ),
-      //dueDateField: new InputField<Date>(new Date(), 'Due Date', false),
+      dueDateField: new DateField<string>('', 'Due Date', true),
       descriptionField: new InputField<string>(
         '',
         'Description',
         false,
         'Enter task description',
+        30,
       ),
       categoryField: new InputField<Category>(Category.Work, 'Category', true),
       completedField: new InputField<boolean>(false, 'Completed', false),
-    };
+    } as Record<
+      string,
+      InputField<string | number | boolean> | DateField<string>
+    >;
   }
 
-  public async addTask() {
+  public addTask = async () => {
     const data: Task = {
       title: this.fields.titleField.value as string,
       priority: this.fields.priorityField.value as Priority,
       field: this.fields.fieldField.value as string,
-      dueDate: new Date('2025-12-31'),
+      dueDate: this.fields.dueDateField.value as string,
       description: this.fields.descriptionField.value as string,
       category: this.fields.categoryField.value as Category,
       completed: this.fields.completedField.value as boolean,
     };
 
-    await this.addData('/todo', data);
+    await this.endpointService.postData(data);
+
     taskStore.fetchData();
-  }
+  };
 
-  public async loadTask(id: string) {
-    await this.loadData(`/todo/${id}`, (task) => {
-      this.fields.titleField.setValue(task.title);
-      this.fields.priorityField.setValue(task.priority);
-      this.fields.fieldField.setValue(task.field);
-      //this.fields.dueDateField.setValue(new Date('2025-12-31'));
-      this.fields.descriptionField.setValue(task.description);
-      this.fields.categoryField.setValue(task.category);
-      this.fields.completedField.setValue(task.completed);
+  public loadTask = async (id: string) => {
+    const data: Task | undefined = await this.endpointService.getData<Task>(
+      `${id}`,
+    );
+
+    if (!data) return;
+
+    runInAction(() => {
+      this.fields.titleField.setValue(data.title);
+      this.fields.priorityField.setValue(data.priority);
+      this.fields.fieldField.setValue(data.field);
+      this.fields.dueDateField.setValue(data.dueDate);
+      this.fields.descriptionField.setValue(data.description);
+      this.fields.categoryField.setValue(data.category);
     });
-  }
+  };
 
-  public async updateTask(id: string) {
+  public updateTask = async (id: string) => {
     const numberId = Number(id);
     if (Number.isNaN(numberId)) return;
 
@@ -69,14 +92,21 @@ class AddTaskStore extends BaseFormStore<Task> {
       title: this.fields.titleField.value as string,
       priority: this.fields.priorityField.value as Priority,
       field: this.fields.fieldField.value as string,
-      dueDate: new Date('2025-12-31'),
+      dueDate: this.fields.dueDateField.value as string,
       description: this.fields.descriptionField.value as string,
       category: this.fields.categoryField.value as Category,
       completed: this.fields.completedField.value as boolean,
     };
 
-    await this.editData(`/todo/${id}`, data);
+    await this.endpointService.putData(`${id}`, data);
+
     taskStore.fetchData();
+  };
+
+  public validateForm() {
+    if (this.validateRequired()) return true;
+
+    return false;
   }
 }
 

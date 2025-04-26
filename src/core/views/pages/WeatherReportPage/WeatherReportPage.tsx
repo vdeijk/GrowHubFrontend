@@ -14,7 +14,7 @@ const WeatherReportPage: React.FC = observer(() => {
     label: location.name,
   }));
 
-  const weatherForecast = weatherStore.weatherData.forecast.forecastday;
+  const weatherForecast = weatherStore.weatherData?.forecast.forecastday;
 
   const children = (
     <>

@@ -75,7 +75,7 @@ const TurnoverGraph: React.FC<GraphProps> = ({ data, width, height }) => {
         customStyles={{ marginBottom: '2rem' }}
       />
       <svg ref={svgRef} width="100%" height={height}></svg>
-      <ButtonContainer {...buttonContainerData} />
+      <ButtonContainer buttons={[buttonContainerData]} />
     </section>
   );
 };

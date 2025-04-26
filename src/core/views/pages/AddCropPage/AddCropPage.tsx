@@ -7,6 +7,8 @@ import styles from './AddCropPage.module.css';
 import { observer } from 'mobx-react-lite';
 import { useParams } from 'react-router-dom';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
+import Dropdown from '../../reusables/Dropdown/Dropdown';
+import cropsStore from '../../../stores/CropsStore/CropsStore';
 
 interface AddCropPageProps {
   isEditing?: boolean;
@@ -28,6 +30,8 @@ const AddCropPage: React.FC<AddCropPageProps> = observer(
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
 
+      if (!addCropStore.validateForm()) return;
+
       if (isEditing && id) {
         addCropStore.updateCrop(id);
       } else {
@@ -36,7 +40,7 @@ const AddCropPage: React.FC<AddCropPageProps> = observer(
 
       addCropStore.resetForm();
 
-      navigate('/cropsPage');
+      navigate('/cropsDatabase');
     };
 
     const buttonProps: ButtonProps = {
@@ -56,6 +60,7 @@ const AddCropPage: React.FC<AddCropPageProps> = observer(
     const genusFieldModel = {
       ...addCropStore.fields.genusField,
       value: String(addCropStore.fields.genusField.value),
+      options: cropsStore.dropdownFilters['genus'].options,
       onChange: (value: string) =>
         addCropStore.fields.genusField.setValue(value),
     };
@@ -72,7 +77,7 @@ const AddCropPage: React.FC<AddCropPageProps> = observer(
         <LoadingWrapper isLoading={addCropStore.isLoading}>
           <form onSubmit={handleSubmit} className={styles.form}>
             <TextInput {...nameFieldModel} />
-            <TextInput {...genusFieldModel} />
+            <Dropdown {...genusFieldModel} />
             <TextInput {...scientificNameFieldModel} />
             <Button {...buttonProps} />
           </form>

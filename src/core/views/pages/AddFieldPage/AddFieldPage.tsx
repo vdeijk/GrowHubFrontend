@@ -27,6 +27,8 @@ const AddFieldPage: React.FC<AddFieldPageProps> = observer(
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
 
+      if (!addFieldStore.validateForm()) return;
+
       if (isEditing && id) {
         addFieldStore.updateField(id);
       } else {
@@ -40,7 +42,6 @@ const AddFieldPage: React.FC<AddFieldPageProps> = observer(
 
     const buttonProps: ButtonProps = {
       type: 'submit',
-      onClick: () => navigate('/tasksPage'),
       label: isEditing ? 'Edit Field' : 'Add Field',
       customStyles: { marginTop: '1rem' },
     };
@@ -56,14 +57,14 @@ const AddFieldPage: React.FC<AddFieldPageProps> = observer(
       ...addFieldStore.fields.latitudeField,
       value: String(addFieldStore.fields.latitudeField.value),
       onChange: (value: string) =>
-        addFieldStore.fields.latitudeField.setValue(Number(value)),
+        addFieldStore.fields.latitudeField.setValue(value),
     };
 
     const longitudeFieldModel = {
       ...addFieldStore.fields.longitudeField,
       value: String(addFieldStore.fields.longitudeField.value),
       onChange: (value: string) =>
-        addFieldStore.fields.longitudeField.setValue(Number(value)),
+        addFieldStore.fields.longitudeField.setValue(value),
     };
 
     return (

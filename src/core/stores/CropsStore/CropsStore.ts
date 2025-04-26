@@ -1,35 +1,28 @@
-import { makeAutoObservable, runInAction } from 'mobx';
+import { SearchableStore } from '../BaseSearchableStore/BaseSearchableStore';
 import { Plant } from '../../../auxiliary/interfaces/Plant';
 import { debounce } from '../../../auxiliary/utils/debounce';
-import { getData } from '../../apis/getData';
-import { validate } from '../../../auxiliary/utils/validationMaxLength';
-import { TextInputState } from '../../../auxiliary/interfaces/TextInputState';
-import { deleteData } from '../../apis/deleteData';
+import { runInAction } from 'mobx';
+import { EndpointService } from '../../apis/EndpointService';
 
-class CropsStore {
-  plants: Plant[] = [];
-  searchQuery: TextInputState = { value: '', error: '', maxLength: 10 };
-  filterCriteria: string = '';
-  filteredPlants: Plant[] = [];
+class CropsStore extends SearchableStore<Plant> {
+  private endpointService = new EndpointService('Plant');
+
+  constructor() {
+    super(['commonName']);
+
+    this.setDropdownFilters('genus', '', 'Genus');
+
+    this.debouncedFilterPlants = debounce(this.filterItems.bind(this), 500);
+  }
+
   isLoading: boolean = false;
-  debouncedFilterPlants: () => void;
-  genusOptions: { value: string; label: string }[] = [];
+  debouncedFilterPlants: (criteria: string) => void = () => {};
   tableHeaders: { id: keyof Plant; label: string; sortable: boolean }[] = [
     { id: 'commonName', label: 'Common Name', sortable: true },
     { id: 'genus', label: 'Genus', sortable: true },
     { id: 'scientificName', label: 'Scientific Name', sortable: true },
     { id: 'actions', label: 'Actions', sortable: false },
   ];
-  sortField: keyof Plant | null = null;
-  sortOrder: 'asc' | 'desc' = 'asc';
-
-  constructor() {
-    makeAutoObservable(this, {
-      debouncedFilterPlants: false,
-    });
-
-    this.debouncedFilterPlants = debounce(this.filterPlants.bind(this), 500);
-  }
 
   public async fetchData() {
     runInAction(() => {
@@ -37,12 +30,15 @@ class CropsStore {
     });
 
     try {
-      const plants = await getData('/Plant');
+      const data: Plant[] | undefined =
+        await this.endpointService.getData<Plant[]>();
+
+      if (!data) return;
 
       runInAction(() => {
-        this.plants = plants;
-        this.filteredPlants = this.plants;
-        this.genusOptions = this.extractGenera();
+        this.items = data;
+        this.filteredItems = this.items;
+        this.dropdownFilters['genus'].options = this.extractGenera();
       });
     } finally {
       runInAction(() => {
@@ -53,8 +49,8 @@ class CropsStore {
 
   public extractGenera = () => {
     const genera = new Set<string>();
-    this.plants.forEach((plant) => {
-      genera.add(String(plant.genus));
+    this.items.forEach((item) => {
+      genera.add(String(item.genus));
     });
 
     const genusOptions = Array.from(genera).map((genus) => ({
@@ -62,77 +58,19 @@ class CropsStore {
       label: genus,
     }));
     if (!genusOptions.some((option) => option.value === '')) {
-      genusOptions.unshift({ value: '', label: 'All Genera' });
+      genusOptions.unshift({ value: '', label: '' });
     }
 
     return genusOptions;
   };
 
-  public setSearchQuery = (query: string) => {
-    runInAction(() => {
-      this.searchQuery.error = validate(query, this.searchQuery.maxLength);
-
-      if (this.searchQuery.error) {
-        return;
-      }
-
-      this.searchQuery.value = query;
-
-      this.debouncedFilterPlants();
-    });
-  };
-
-  public setFilterCriteria = (criteria: string) => {
-    runInAction(() => {
-      this.filterCriteria = criteria;
-      this.filterPlants();
-    });
-  };
-
-  public filterPlants = () => {
-    this.filteredPlants = this.plants.filter((plant) => {
-      return (
-        typeof plant.commonName === 'string' &&
-        plant.commonName
-          .toLowerCase()
-          .includes(this.searchQuery.value.toLowerCase()) &&
-        (this.filterCriteria === '' || plant.genus === this.filterCriteria)
-      );
-    });
-    this.sortPlants();
-  };
-
-  public setSortField = (field: keyof Plant) => {
-    runInAction(() => {
-      if (this.sortField === field) {
-        this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
-      } else {
-        this.sortField = field;
-        this.sortOrder = 'asc';
-      }
-      this.sortPlants();
-    });
-  };
-
-  public sortPlants = () => {
-    this.filteredPlants = this.filteredPlants.slice().sort((a, b) => {
-      const fieldA = (a as Plant)[this.sortField as keyof Plant];
-      const fieldB = (b as Plant)[this.sortField as keyof Plant];
-      if (fieldA === undefined || fieldB === undefined) {
-        return 0;
-      }
-      if (fieldA < fieldB) {
-        return this.sortOrder === 'asc' ? -1 : 1;
-      }
-      if (fieldA > fieldB) {
-        return this.sortOrder === 'asc' ? 1 : -1;
-      }
-      return 0;
-    });
-  };
+  public matchesFilterCriteria(plant: Plant): boolean {
+    const value = this.dropdownFilters['genus'].value;
+    return value === '' || plant.genus === value;
+  }
 
   public deletePlant = async (id: number) => {
-    await deleteData(`/plant/${id}`, id);
+    await this.endpointService.deleteData(id);
 
     this.fetchData();
   };
