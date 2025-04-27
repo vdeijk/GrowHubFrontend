@@ -2,8 +2,6 @@ import { JSX } from 'react';
 
 export interface Plant {
   commonName: string | boolean | string;
-  genus: string | boolean | string;
-  scientificName: string | boolean | string;
   id?: number;
   sunPreference?: string | boolean | string;
   waterNeeds?: string | boolean | string;

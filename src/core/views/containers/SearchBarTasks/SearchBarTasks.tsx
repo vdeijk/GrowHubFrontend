@@ -14,6 +14,7 @@ export interface SearchBarTasksProps {
   priorityFilter: DropdownClass<string>;
   startDateFilter: DateField<string>;
   endDateFilter: DateField<string>;
+  statusFilter: DropdownClass<string>;
 }
 
 const SearchBarTasks: React.FC<SearchBarTasksProps> = observer(
@@ -23,6 +24,7 @@ const SearchBarTasks: React.FC<SearchBarTasksProps> = observer(
     categoryFilter,
     startDateFilter,
     endDateFilter,
+    statusFilter,
   }) => {
     return (
       <div className={styles.container}>
@@ -58,6 +60,13 @@ const SearchBarTasks: React.FC<SearchBarTasksProps> = observer(
           options={categoryFilter.options}
           aria-label="Category"
           label="Category"
+        />
+        <Dropdown
+          value={statusFilter.value}
+          onChange={statusFilter.setValue}
+          options={statusFilter.options}
+          aria-label="Status"
+          label={statusFilter.label}
         />
       </div>
     );

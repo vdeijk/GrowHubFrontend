@@ -30,12 +30,14 @@ const TableWithSorting = <T,>({
         <tr>
           {headers.map((header) => (
             <th key={String(header.id)} onClick={() => onSort(header.id)}>
-              {header.label}
-              {header.sortable !== false && (
-                <span className={styles.sortIndicator}>
-                  {getSortIndicator(header.id)}
-                </span>
-              )}
+              <div className={styles.headerContent}>
+                {header.label}
+                {header.sortable !== false && (
+                  <span className={styles.sortIndicator}>
+                    {getSortIndicator(header.id)}
+                  </span>
+                )}
+              </div>
             </th>
           ))}
         </tr>

@@ -1,15 +1,16 @@
 import { Priority } from '../enums/Priority';
 import { Category } from '../enums/Category';
 import { JSX } from 'react';
+import { TaskStatus } from '../enums/Task';
 
 export interface Task {
   id?: number;
   title: string;
   dueDate: string;
-  field: string;
   priority: Priority;
   category: Category;
-  completed: boolean;
+  status: TaskStatus;
   description: string;
   actions?: JSX.Element;
 }
+

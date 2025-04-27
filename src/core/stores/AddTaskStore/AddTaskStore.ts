@@ -7,6 +7,7 @@ import taskStore from '../TaskStore/TaskStore';
 import { EndpointService } from '../../apis/EndpointService';
 import { runInAction } from 'mobx';
 import { DateField } from '../../../auxiliary/classes/DateField';
+import { TaskStatus } from '../../../auxiliary/enums/Task';
 
 class AddTaskStore extends BaseFormStore {
   public endpointService = new EndpointService('Todo');
@@ -44,7 +45,7 @@ class AddTaskStore extends BaseFormStore {
         30,
       ),
       categoryField: new InputField<Category>(Category.Work, 'Category', true),
-      completedField: new InputField<boolean>(false, 'Completed', false),
+      statusField: new InputField<TaskStatus>(TaskStatus.NotStarted, 'Status', true),
     } as Record<
       string,
       InputField<string | number | boolean> | DateField<string>
@@ -55,11 +56,10 @@ class AddTaskStore extends BaseFormStore {
     const data: Task = {
       title: this.fields.titleField.value as string,
       priority: this.fields.priorityField.value as Priority,
-      field: this.fields.fieldField.value as string,
       dueDate: this.fields.dueDateField.value as string,
       description: this.fields.descriptionField.value as string,
       category: this.fields.categoryField.value as Category,
-      completed: this.fields.completedField.value as boolean,
+      status: this.fields.statusField.value as TaskStatus,
     };
 
     await this.endpointService.postData(data);
@@ -77,10 +77,10 @@ class AddTaskStore extends BaseFormStore {
     runInAction(() => {
       this.fields.titleField.setValue(data.title);
       this.fields.priorityField.setValue(data.priority);
-      this.fields.fieldField.setValue(data.field);
       this.fields.dueDateField.setValue(data.dueDate);
       this.fields.descriptionField.setValue(data.description);
       this.fields.categoryField.setValue(data.category);
+      this.fields.statusField.setValue(data.status);
     });
   };
 
@@ -91,11 +91,10 @@ class AddTaskStore extends BaseFormStore {
     const data: Task = {
       title: this.fields.titleField.value as string,
       priority: this.fields.priorityField.value as Priority,
-      field: this.fields.fieldField.value as string,
       dueDate: this.fields.dueDateField.value as string,
       description: this.fields.descriptionField.value as string,
       category: this.fields.categoryField.value as Category,
-      completed: this.fields.completedField.value as boolean,
+      status: this.fields.statusField.value as TaskStatus,
     };
 
     await this.endpointService.putData(`${id}`, data);

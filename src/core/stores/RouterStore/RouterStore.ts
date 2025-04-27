@@ -29,7 +29,7 @@ class RouterStore {
       hidden: false,
       isDynamic: false,
     },
-    { path: '/upgrade', label: 'Upgrade', hidden: false, isDynamic: false },
+    // { path: '/upgrade', label: 'Upgrade', hidden: false, isDynamic: false },
     { path: '/addCropPage', label: 'Add Crop', hidden: true, isDynamic: false },
     {
       path: '/addFieldPage',

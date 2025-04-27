@@ -1,11 +1,13 @@
 import { SearchableStore } from '../BaseSearchableStore/BaseSearchableStore';
-import { Plant } from '../../../auxiliary/interfaces/Plant';
+import { YourCrop } from '../../../auxiliary/interfaces/YourCrop';
 import { debounce } from '../../../auxiliary/utils/debounce';
 import { runInAction } from 'mobx';
 import { EndpointService } from '../../apis/EndpointService';
+import { PaginationStore } from '../PaginationStore/PaginationStore';
 
 class YourCropsStore extends SearchableStore<Plant> {
   private endpointService = new EndpointService('Plant');
+  public paginationStore = new PaginationStore();
 
   constructor() {
     super(['commonName']);
@@ -17,14 +19,17 @@ class YourCropsStore extends SearchableStore<Plant> {
 
   isLoading: boolean = false;
   debouncedFilterPlants: (criteria: string) => void = () => {};
-  tableHeaders: { id: keyof Plant; label: string; sortable: boolean }[] = [
+  tableHeaders: { id: keyof YourCrop; label: string; sortable: boolean }[] = [
+    { id: 'id', label: 'Id', sortable: true },
     { id: 'commonName', label: 'Common Name', sortable: true },
-    { id: 'sunPreference', label: 'sunPreference', sortable: true },
-    { id: 'waterNeeds', label: 'waterNeeds', sortable: true },
-    { id: 'soilType', label: 'soilType', sortable: true },
-    { id: 'soilPH', label: 'soilPH', sortable: true },
-    { id: 'pruning', label: 'pruning', sortable: true },
     { id: 'actions', label: 'Actions', sortable: false },
+    { id: 'location', label: 'Location', sortable: true },
+    { id: 'lastWatered', label: 'Last Watered', sortable: true },
+    { id: 'lastFertilized', label: 'Last Fertilized', sortable: true },
+    { id: 'lastPruned', label: 'Last Pruned', sortable: true },
+    { id: 'lastHarvested', label: 'Last Harvested', sortable: true },
+    { id: 'healthStatus', label: 'Health Status', sortable: true },
+    { id: 'growthStage', label: 'Growth Stage', sortable: true },
   ];
 
   public async fetchData() {
@@ -33,8 +38,8 @@ class YourCropsStore extends SearchableStore<Plant> {
     });
 
     try {
-      const data: Plant[] | undefined =
-        await this.endpointService.getData<Plant[]>();
+      const data: YourCrop[] | undefined =
+        await this.endpointService.getData<YourCrop[]>();
 
       if (!data) return;
 
@@ -67,7 +72,7 @@ class YourCropsStore extends SearchableStore<Plant> {
     return genusOptions;
   };
 
-  public matchesFilterCriteria(plant: Plant): boolean {
+  public matchesFilterCriteria(plant: YourCrop): boolean {
     const value = this.dropdownFilters['genus'].value;
     return value === '' || plant.genus === value;
   }

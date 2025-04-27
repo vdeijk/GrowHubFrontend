@@ -2,7 +2,7 @@ import React from 'react';
 import SearchBarCrops from '../../containers/SearchBarCrops/SearchBarCrops';
 import TableWithSorting from '../../reusables/TableWithSorting/TableWithSorting';
 import styles from './YourCropsPage.module.css';
-import cropsStore from '../../../stores/CropsStore/YourCropsStore';
+import cropsStore from '../../../stores/YourCropsStore/YourCropsStore';
 import { observer } from 'mobx-react-lite';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import { SearchBarProps } from '../../containers/SearchBarCrops/SearchBarCrops';
@@ -11,9 +11,7 @@ import { Plant } from '../../../../auxiliary/interfaces/Plant';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import ActionIcons from '../../reusables/ActionIcons/ActionIcons';
-import popupStore from '../../../stores/PopupStore/PopupStore';
-import PlantDatabasePopup from '../../reusables/PlantDatabasePopup/PlantDatabasePopup';
-import Popup from '../../containers/Popup/Popup';
+import Pagination from '../../reusables/Pagination/Pagination';
 
 const YourCropsPage: React.FC = observer(() => {
   const navigate = useRouterNavigation();
@@ -21,10 +19,6 @@ const YourCropsPage: React.FC = observer(() => {
   const searchBarProps: SearchBarProps = {
     searchQuery: cropsStore.searchQuery,
     genusFilter: cropsStore.dropdownFilters['genus'],
-  };
-
-  const handlePopup = (id: number | undefined) => {
-    popupStore.openPopup(<PlantDatabasePopup />);
   };
 
   const handleEdit = (id: number | undefined) => {
@@ -45,7 +39,6 @@ const YourCropsPage: React.FC = observer(() => {
         <div className={styles.actionIcons}>
           <ActionIcons
             item={item as { id: number | undefined }}
-            handlePopup={handlePopup}
             handleEdit={handleEdit}
             handleDelete={handleDelete}
           />
@@ -64,13 +57,19 @@ const YourCropsPage: React.FC = observer(() => {
 
   return (
     <section className={styles.section}>
-      <Popup />
       <LoadingWrapper isLoading={cropsStore.isLoading}>
         <SearchBarCrops {...searchBarProps} />
         <div className={styles.buttonContainer}>
-          <TableWithSorting {...tableProps} />
+          <div className={styles.tableContainer}>
+            <TableWithSorting {...tableProps} />
+          </div>
           <ButtonContainer buttons={[buttonContainerData]} />
         </div>
+        <Pagination
+          currentPage={1}
+          totalPages={10}
+          onPageChange={(page) => paginationStore.setCurrentPage(page)}
+        />
       </LoadingWrapper>
     </section>
   );

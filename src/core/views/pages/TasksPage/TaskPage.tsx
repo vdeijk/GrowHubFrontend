@@ -12,8 +12,10 @@ import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import ActionIcons from '../../reusables/ActionIcons/ActionIcons';
 import popupStore from '../../../stores/PopupStore/PopupStore';
-import PlantDatabasePopup from '../../reusables/PlantDatabasePopup/PlantDatabasePopup';
+import PlantDatabasePopup from '../../reusables/TaskPopup/TaskPopup';
 import Popup from '../../containers/Popup/Popup';
+import Pagination from '../../reusables/Pagination/Pagination';
+import paginationStore from '../../../stores/PaginationStore/PaginationStore';
 
 const TasksPage: React.FC = observer(() => {
   const navigate = useRouterNavigation();
@@ -24,7 +26,11 @@ const TasksPage: React.FC = observer(() => {
   };
 
   const handlePopup = (id: number | undefined) => {
-    popupStore.openPopup(<PlantDatabasePopup />);
+    const description = taskStore.items.find(
+      (item) => item.id === id,
+    )?.description;
+
+    popupStore.openPopup(<PlantDatabasePopup description={description} />);
   };
 
   const handleEdit = (id: number | undefined) => {
@@ -41,6 +47,7 @@ const TasksPage: React.FC = observer(() => {
     searchQuery: taskStore.searchQuery,
     categoryFilter: taskStore.dropdownFilters['category'],
     priorityFilter: taskStore.dropdownFilters['priority'],
+    statusFilter: taskStore.dropdownFilters['status'],
     startDateFilter: taskStore.dateFilters['startDate'],
     endDateFilter: taskStore.dateFilters['endDate'],
   };
@@ -72,6 +79,11 @@ const TasksPage: React.FC = observer(() => {
           <TableWithSorting {...tableProps} />
           <ButtonContainer buttons={[buttonContainerData]} />
         </div>
+        <Pagination
+          currentPage={1}
+          totalPages={10}
+          onPageChange={(page) => paginationStore.setCurrentPage(page)}
+        />
       </LoadingWrapper>
     </section>
   );

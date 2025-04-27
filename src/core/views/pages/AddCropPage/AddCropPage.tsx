@@ -8,7 +8,7 @@ import { observer } from 'mobx-react-lite';
 import { useParams } from 'react-router-dom';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import Dropdown from '../../reusables/Dropdown/Dropdown';
-import cropsStore from '../../../stores/CropsStore/YourCropsStore';
+import cropsStore from '../../../stores/YourCropsStore/YourCropsStore';
 
 interface AddCropPageProps {
   isEditing?: boolean;

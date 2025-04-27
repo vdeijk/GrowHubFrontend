@@ -21,7 +21,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import LoadingWrapper from './core/views/reusables/LoadingWrapper/LoadingWrapper';
 import LandingPage from './core/views/pages/LandingPage/LandingPage';
 import fieldsStore from './core/stores/FieldsStore/FieldsStore';
-import yourCropsStore from './core/stores/CropsStore/YourCropsStore';
+import yourCropsStore from './core/stores/YourCropsStore/YourCropsStore';
 import cropsDatabaseStore from './core/stores/CropsDatabaseStore/CropsDatabaseStore';
 import taskStore from './core/stores/TaskStore/TaskStore';
 import weatherStore from './core/stores/CurrentWeatherStore/WeatherStore';

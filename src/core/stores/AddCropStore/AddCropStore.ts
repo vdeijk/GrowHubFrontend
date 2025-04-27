@@ -1,10 +1,11 @@
 import { Plant } from '../../../auxiliary/interfaces/Plant';
-import cropsStore from '../CropsStore/YourCropsStore';
+import cropsStore from '../YourCropsStore/YourCropsStore';
 import { InputField } from '../../../auxiliary/classes/InputField';
 import { BaseFormStore } from '../BaseFormStore/BaseFormStore';
 import { EndpointService } from '../../apis/EndpointService';
 import { runInAction } from 'mobx';
 import { Dropdown } from '../../../auxiliary/classes/Dropdown';
+import { localStorageService } from '../../../auxiliary/classes/LocalStorageService';
 
 class AddCropStore extends BaseFormStore {
   private endpointService = new EndpointService('Plant');
@@ -20,20 +21,39 @@ class AddCropStore extends BaseFormStore {
         true,
         'Enter common name',
       ),
-      genusField: new InputField<string>('', 'Genus', true, 'Enter genus'),
-      scientificNameField: new Dropdown<string>('', 'Scientific Name', true),
+      sunPreferenceField: new Dropdown<string>('', 'Sun Preference', true),
+      waterNeedsField: new Dropdown<string>('', 'Water Needs', true),
+      soilTypeField: new Dropdown<string>('', 'Soil Type', true),
+      soilPHField: new Dropdown<string>('', 'Soil PH', true),
+      pruningField: new Dropdown<string>('', 'Pruning', true),
+      temperatureRangeField: new Dropdown<string>(
+        '',
+        'Temperature Range',
+        true,
+      ),
+      plantTypeField: new Dropdown<string>('', 'Plant Type', true),
+      growthRateField: new Dropdown<string>('', 'Growth Rate', true),
+      fertilizerNeedsField: new Dropdown<string>('', 'fertilizer Needs', true),
     } as Record<string, InputField<string | number | boolean>>;
   }
 
   public addCrop = async () => {
     const data: Plant = {
       commonName: this.fields.nameField.value as string,
-      genus: this.fields.genusField.value as string,
-      scientificName: this.fields.scientificNameField.value as string,
+      sunPreference: this.fields.sunPreferenceField.value as string,
+      waterNeeds: this.fields.waterNeedsField.value as string,
+      soilType: this.fields.soilTypeField.value as string,
+      soilPH: this.fields.soilPHField.value as string,
+      pruning: this.fields.pruningField.value as string,
+      temperatureRange: this.fields.temperatureRangeField.value as string,
+      plantType: this.fields.plantTypeField.value as string,
+      growthRate: this.fields.growthRateField.value as string,
+      fertilizerNeeds: this.fields.fertilizerNeedsField.value as string,
     };
 
     await this.endpointService.postData(data);
 
+    localStorageService.invalidateCache('cropsDatabaseItems');
     cropsStore.fetchData();
   };
 
@@ -44,9 +64,15 @@ class AddCropStore extends BaseFormStore {
 
     const data: Plant = {
       commonName: this.fields.nameField.value as string,
-      genus: this.fields.genusField.value as string,
-      scientificName: this.fields.scientificNameField.value as string,
-      id: numberId as number,
+      sunPreference: this.fields.sunPreferenceField.value as string,
+      waterNeeds: this.fields.waterNeedsField.value as string,
+      soilType: this.fields.soilTypeField.value as string,
+      soilPH: this.fields.soilPHField.value as string,
+      pruning: this.fields.pruningField.value as string,
+      temperatureRange: this.fields.temperatureRangeField.value as string,
+      plantType: this.fields.plantTypeField.value as string,
+      growthRate: this.fields.growthRateField.value as string,
+      fertilizerNeeds: this.fields.fertilizerNeedsField.value as string,
     };
 
     await this.endpointService.putData(`${id}`, data);
@@ -63,8 +89,15 @@ class AddCropStore extends BaseFormStore {
 
     runInAction(() => {
       this.fields.nameField.setValue(String(data.commonName));
-      this.fields.genusField.setValue(String(data.genus));
-      this.fields.scientificNameField.setValue(String(data.scientificName));
+      this.fields.sunPreferenceField.setValue(String(data.sunPreference));
+      this.fields.waterNeedsField.setValue(String(data.waterNeeds));
+      this.fields.soilTypeField.setValue(String(data.soilType));
+      this.fields.soilPHField.setValue(String(data.soilPH));
+      this.fields.pruningField.setValue(String(data.pruning));
+      this.fields.temperatureRangeField.setValue(String(data.temperatureRange));
+      this.fields.plantTypeField.setValue(String(data.plantType));
+      this.fields.growthRateField.setValue(String(data.growthRate));
+      this.fields.fertilizerNeedsField.setValue(String(data.fertilizerNeeds));
     });
   };
 

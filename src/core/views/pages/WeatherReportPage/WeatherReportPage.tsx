@@ -68,6 +68,12 @@ const WeatherReportPage: React.FC = observer(() => {
                     boldSpan: `${day.day.daily_chance_of_rain}%`,
                   }}
                 />
+                <TextWithBoldSpan
+                  textWithBoldSpanData={{
+                    label: 'Humidity',
+                    boldSpan: `${day.day.avghumidity}%`,
+                  }}
+                />
               </div>
             </div>
           ))}

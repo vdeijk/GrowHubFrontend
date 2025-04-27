@@ -1,5 +1,5 @@
 import { makeAutoObservable, runInAction } from 'mobx';
-import plantsStore from '../CropsStore/YourCropsStore';
+import plantsStore from '../YourCropsStore/YourCropsStore';
 
 class SettingsStore {
   useRealData: boolean = false;

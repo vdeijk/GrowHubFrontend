@@ -5,26 +5,23 @@ import styles from './CropsDatabasePage.module.css';
 import cropsDatabaseStore from '../../../stores/CropsDatabaseStore/CropsDatabaseStore';
 import { observer } from 'mobx-react-lite';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
-import { SearchBarProps } from '../../containers/SearchBarCrops/SearchBarCrops';
 import { TableProps } from '../../reusables/TableWithSorting/TableWithSorting';
 import { Plant } from '../../../../auxiliary/interfaces/Plant';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import ActionIcons from '../../reusables/ActionIcons/ActionIcons';
-import popupStore from '../../../stores/PopupStore/PopupStore';
-import PlantDatabasePopup from '../../reusables/PlantDatabasePopup/PlantDatabasePopup';
-import Popup from '../../containers/Popup/Popup';
+import Pagination from '../../reusables/Pagination/Pagination';
+import { SearchBarDatabaseProps } from '../../containers/SearchBarDatabase/SearchBarDatabase';
 
 const CropsDatabasePage: React.FC = observer(() => {
   const navigate = useRouterNavigation();
+  const { paginationStore } = cropsDatabaseStore;
 
-  const searchBarProps: SearchBarProps = {
+  const searchBarProps: SearchBarDatabaseProps = {
     searchQuery: cropsDatabaseStore.searchQuery,
     genusFilter: cropsDatabaseStore.dropdownFilters['genus'],
-  };
-
-  const handlePopup = (id: number | undefined) => {
-    popupStore.openPopup(<PlantDatabasePopup />);
+    isLoading: cropsDatabaseStore.isLoading,
+    handleSync: cropsDatabaseStore.fetchData,
   };
 
   const handleEdit = (id: number | undefined) => {
@@ -44,7 +41,6 @@ const CropsDatabasePage: React.FC = observer(() => {
       actions: (
         <ActionIcons
           item={item as { id: number | undefined }}
-          handlePopup={handlePopup}
           handleEdit={handleEdit}
           handleDelete={handleDelete}
         />
@@ -62,13 +58,19 @@ const CropsDatabasePage: React.FC = observer(() => {
 
   return (
     <section className={styles.section}>
-      <Popup />
       <LoadingWrapper isLoading={cropsDatabaseStore.isLoading}>
         <SearchBarDatabase {...searchBarProps} />
         <div className={styles.buttonContainer}>
-          <Table {...tableProps} />
+          <div className={styles.tableContainer}>
+            <Table {...tableProps} />
+          </div>
           <ButtonContainer buttons={[buttonContainerData]} />
         </div>
+        <Pagination
+          currentPage={1}
+          totalPages={10}
+          onPageChange={(page) => paginationStore.setCurrentPage(page)}
+        />
       </LoadingWrapper>
     </section>
   );

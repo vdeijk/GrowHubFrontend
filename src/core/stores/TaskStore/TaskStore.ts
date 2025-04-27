@@ -6,9 +6,12 @@ import { Category } from '../../../auxiliary/enums/Category';
 import { SearchableStore } from '../BaseSearchableStore/BaseSearchableStore';
 import { DropdownOption } from '../../../auxiliary/interfaces/DropdownOptions';
 import { EndpointService } from '../../apis/EndpointService';
+import { PaginationStore } from '../PaginationStore/PaginationStore';
+import { TaskStatus } from '../../../auxiliary/enums/Task';
 
 class TaskStore extends SearchableStore<Task> {
   private endpointService = new EndpointService('Todo');
+  public paginationStore = new PaginationStore();
 
   constructor() {
     super(['title']);
@@ -17,12 +20,17 @@ class TaskStore extends SearchableStore<Task> {
 
     this.setDropdownFilters('category', '', 'Category');
     this.setDropdownFilters('priority', '', 'Priority');
+    this.setDropdownFilters('status', '', 'Status');
     this.dropdownFilters['category'].options = this.generateDropdownOptions(
       Object.values(Category),
       '',
     );
     this.dropdownFilters['priority'].options = this.generateDropdownOptions(
       Object.values(Priority),
+      '',
+    );
+    this.dropdownFilters['status'].options = this.generateDropdownOptions(
+      Object.values(TaskStatus),
       '',
     );
 
@@ -35,14 +43,15 @@ class TaskStore extends SearchableStore<Task> {
     { id: 'title', label: 'Title', sortable: true },
     { id: 'priority', label: 'Priority', sortable: true },
     { id: 'dueDate', label: 'Due Date', sortable: true },
-    { id: 'category', label: 'Category', sortable: false },
+    { id: 'category', label: 'Category', sortable: true },
+    { id: 'status', label: 'Status', sortable: true },
     { id: 'actions', label: 'Actions', sortable: false },
   ];
 
   public toggleComplete(id: number) {
     const task = this.items.find((task) => task.id === id);
     if (task) {
-      task.completed = !task.completed;
+      //task.completed = !task.completed;
     }
   }
 

@@ -81,6 +81,14 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
       options: taskStore.dropdownFilters['category'].options,
     };
 
+    const statusProps: DropdownProps = {
+      ...addTaskStore.fields.statusField,
+      value: String(addTaskStore.fields.statusField.value),
+      onChange: (value: string) =>
+        addTaskStore.fields.statusField.setValue(value),
+      options: taskStore.dropdownFilters['status'].options,
+    };
+
     const buttonProps: ButtonProps = {
       type: 'submit',
       label: isEditing ? 'Edit AgriTask' : 'Add AgriTask',
@@ -96,6 +104,7 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
             <DateInput {...dueDateProps} />
             <TextInput {...descriptionProps} />
             <Dropdown {...categoryProps} />
+            <Dropdown {...statusProps} />
             <Button {...buttonProps} />
           </form>
         </LoadingWrapper>
