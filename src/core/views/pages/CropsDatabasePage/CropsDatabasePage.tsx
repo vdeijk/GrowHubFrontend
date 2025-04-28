@@ -19,7 +19,15 @@ const CropsDatabasePage: React.FC = observer(() => {
 
   const searchBarProps: SearchBarDatabaseProps = {
     searchQuery: cropsDatabaseStore.searchQuery,
-    genusFilter: cropsDatabaseStore.dropdownFilters['genus'],
+    sunPreference: cropsDatabaseStore.dropdownFilters['sunPreference'],
+    waterNeeds: cropsDatabaseStore.dropdownFilters['waterNeeds'],
+    soilType: cropsDatabaseStore.dropdownFilters['soilType'],
+    soilPH: cropsDatabaseStore.dropdownFilters['soilPH'],
+    pruning: cropsDatabaseStore.dropdownFilters['pruning'],
+    temperatureRange: cropsDatabaseStore.dropdownFilters['temperatureRange'],
+    plantType: cropsDatabaseStore.dropdownFilters['plantType'],
+    growthRate: cropsDatabaseStore.dropdownFilters['growthRate'],
+    fertilizerNeeds: cropsDatabaseStore.dropdownFilters['fertilizerNeeds'],
     isLoading: cropsDatabaseStore.isLoading,
     handleSync: cropsDatabaseStore.fetchData,
   };

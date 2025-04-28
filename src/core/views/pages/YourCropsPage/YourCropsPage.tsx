@@ -19,7 +19,13 @@ const YourCropsPage: React.FC = observer(() => {
 
   const searchBarProps: SearchBarProps = {
     searchQuery: cropsStore.searchQuery,
-    genusFilter: cropsStore.dropdownFilters['genus'],
+    location: cropsStore.dropdownFilters.location,
+    waterNeeds: cropsStore.dropdownFilters.waterNeeds,
+    healthStatus: cropsStore.dropdownFilters.healthStatus,
+    lastWatered: cropsStore.dateFilters.lastWatered,
+    lastFertilized: cropsStore.dateFilters.lastFertilized,
+    lastPruned: cropsStore.dateFilters.lastPruned,
+    lastHarvested: cropsStore.dateFilters.lastHarvested,
   };
 
   const handleEdit = (id: number | undefined) => {

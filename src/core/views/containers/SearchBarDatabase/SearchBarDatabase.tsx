@@ -9,13 +9,34 @@ import SyncButton from '../../reusables/SyncButton/SyncButton';
 
 export interface SearchBarDatabaseProps {
   searchQuery: InputField<string>;
-  genusFilter: DropdownClass<string>;
+  sunPreference: DropdownClass<string>;
+  waterNeeds: DropdownClass<string>;
+  soilType: DropdownClass<string>;
+  soilPH: DropdownClass<string>;
+  pruning: DropdownClass<string>;
+  temperatureRange: DropdownClass<string>;
+  plantType: DropdownClass<string>;
+  growthRate: DropdownClass<string>;
+  fertilizerNeeds: DropdownClass<string>;
   isLoading: boolean;
   handleSync: () => void;
 }
 
 const SearchBarDatabase: React.FC<SearchBarDatabaseProps> = observer(
-  ({ searchQuery, genusFilter, isLoading, handleSync }) => {
+  ({
+    searchQuery,
+    sunPreference,
+    waterNeeds,
+    soilType,
+    soilPH,
+    pruning,
+    temperatureRange,
+    plantType,
+    growthRate,
+    fertilizerNeeds,
+    isLoading,
+    handleSync,
+  }) => {
     return (
       <div className={styles.container}>
         <TextInput
@@ -27,66 +48,66 @@ const SearchBarDatabase: React.FC<SearchBarDatabaseProps> = observer(
         />
         <Dropdown
           value={'Sun Preference'}
-          onChange={genusFilter.setValue}
-          options={genusFilter.options}
-          label={'Sun Preference'}
-          aria-label="Genus"
+          onChange={sunPreference.setValue}
+          options={sunPreference.options}
+          label={sunPreference.label}
+          aria-label="Sun Preference'"
         />
         <Dropdown
-          value={'Water Needs'}
-          onChange={genusFilter.setValue}
-          options={genusFilter.options}
-          label={'Water Needs'}
-          aria-label="Genus"
+          value={waterNeeds.value}
+          onChange={waterNeeds.setValue}
+          options={waterNeeds.options}
+          label={waterNeeds.label}
+          aria-label="Water Needs"
         />
         <Dropdown
-          value={genusFilter.value}
-          onChange={genusFilter.setValue}
-          options={genusFilter.options}
-          label={'Soil Type'}
-          aria-label="Genus"
-        />
-        <TextInput
-          label={'Soil PH'}
-          value={searchQuery.value}
-          onChange={searchQuery.setValue}
-          placeholder={searchQuery.placeholder}
-          aria-label="Search"
+          value={soilType.value}
+          onChange={soilType.setValue}
+          options={soilType.options}
+          label={soilType.label}
+          aria-label="Soil Type"
         />
         <Dropdown
-          value={genusFilter.value}
-          onChange={genusFilter.setValue}
-          options={genusFilter.options}
-          label={'Pruning'}
-          aria-label="Genus"
-        />
-        <TextInput
-          label={'Temperature Range'}
-          value={searchQuery.value}
-          onChange={searchQuery.setValue}
-          placeholder={searchQuery.placeholder}
-          aria-label="Search"
+          value={soilPH.value}
+          onChange={soilPH.setValue}
+          options={soilPH.options}
+          label={soilPH.label}
+          aria-label="Soil PH"
         />
         <Dropdown
-          value={genusFilter.value}
-          onChange={genusFilter.setValue}
-          options={genusFilter.options}
-          label={'Plant Type'}
-          aria-label="Genus"
+          value={pruning.value}
+          onChange={pruning.setValue}
+          options={pruning.options}
+          label={pruning.label}
+          aria-label="Pruning"
         />
         <Dropdown
-          value={genusFilter.value}
-          onChange={genusFilter.setValue}
-          options={genusFilter.options}
-          label={'Growth Rate'}
-          aria-label="Genus"
+          value={temperatureRange.value}
+          onChange={temperatureRange.setValue}
+          options={temperatureRange.options}
+          label={temperatureRange.label}
+          aria-label="Temperature Range"
         />
         <Dropdown
-          value={genusFilter.value}
-          onChange={genusFilter.setValue}
-          options={genusFilter.options}
-          label={'Fertilizer Needs'}
-          aria-label="Genus"
+          value={plantType.value}
+          onChange={plantType.setValue}
+          options={plantType.options}
+          label={plantType.label}
+          aria-label="Plant Type"
+        />
+        <Dropdown
+          value={growthRate.value}
+          onChange={growthRate.setValue}
+          options={growthRate.options}
+          label={growthRate.label}
+          aria-label="Growth Rate"
+        />
+        <Dropdown
+          value={fertilizerNeeds.value}
+          onChange={fertilizerNeeds.setValue}
+          options={fertilizerNeeds.options}
+          label={fertilizerNeeds.label}
+          aria-label="Fertilizer Needs"
         />
         <SyncButton onClick={handleSync} isSyncing={isLoading} />
       </div>

@@ -6,14 +6,30 @@ import { InputField } from '../../../../auxiliary/classes/InputField';
 import { Dropdown as DropdownClass } from '../../../../auxiliary/classes/Dropdown';
 import { observer } from 'mobx-react-lite';
 import DateInput from '../../reusables/DateInput/DateInput';
+import { DateField as DateInputClass } from '../../../../auxiliary/classes/DateField';
 
 export interface SearchBarProps {
+  location: DropdownClass<string>;
   searchQuery: InputField<string>;
-  genusFilter: DropdownClass<string>;
+  waterNeeds: DropdownClass<string>;
+  healthStatus: DropdownClass<string>;
+  lastWatered: DateInputClass<string>;
+  lastFertilized: DateInputClass<string>;
+  lastPruned: DateInputClass<string>;
+  lastHarvested: DateInputClass<string>;
 }
 
 const SearchBarCrops: React.FC<SearchBarProps> = observer(
-  ({ searchQuery, genusFilter }) => {
+  ({
+    location,
+    searchQuery,
+    waterNeeds,
+    healthStatus,
+    lastWatered,
+    lastFertilized,
+    lastPruned,
+    lastHarvested,
+  }) => {
     return (
       <div className={styles.container}>
         <TextInput
@@ -22,51 +38,51 @@ const SearchBarCrops: React.FC<SearchBarProps> = observer(
           onChange={searchQuery.setValue}
           placeholder={searchQuery.placeholder}
           aria-label="Search"
+        />{' '}
+        <Dropdown
+          value={location.value}
+          onChange={location.setValue}
+          options={location.options}
+          label={location.label}
+          aria-label="Location"
         />
         <Dropdown
-          value={genusFilter.value}
-          onChange={genusFilter.setValue}
-          options={genusFilter.options}
-          label={'Location'}
-          aria-label="Genus"
-        />
-        <DateInput
-          label={'Last Watered'}
-          value={''}
-          onChange={(date) => console.log(date)}
-          aria-label="End Date"
-        />
-        <DateInput
-          label={'Last Fertilized'}
-          value={''}
-          onChange={(date) => console.log(date)}
-          aria-label="End Date"
-        />
-        <DateInput
-          label={'Last Pruned'}
-          value={''}
-          onChange={(date) => console.log(date)}
-          aria-label="End Date"
-        />
-        <DateInput
-          label={'Last Harvested'}
-          value={''}
-          onChange={(date) => console.log(date)}
-          aria-label="End Date"
+          value={waterNeeds.value}
+          onChange={waterNeeds.setValue}
+          options={waterNeeds.options}
+          label={waterNeeds.label}
+          aria-label="Water Needs"
         />
         <Dropdown
-          value={genusFilter.value}
-          onChange={genusFilter.setValue}
-          options={genusFilter.options}
-          label={'Health Status'}
-          aria-label="Genus"
+          value={healthStatus.value}
+          onChange={healthStatus.setValue}
+          options={healthStatus.options}
+          label={healthStatus.label}
+          aria-label="Health Status"
         />
-        <Dropdown
-          value={genusFilter.value}
-          onChange={genusFilter.setValue}
-          options={genusFilter.options}
-          label={'Growth Stage'}
-          aria-label="Genus"
+        <DateInput
+          value={lastWatered.value}
+          onChange={(date) => console.log(date)}
+          label={lastWatered.label}
+          aria-label="Last Watered"
+        />
+        <DateInput
+          value={lastFertilized.value}
+          onChange={(date) => console.log(date)}
+          label={lastFertilized.label}
+          aria-label="Last Fertilized"
+        />
+        <DateInput
+          value={lastPruned.value}
+          onChange={(date) => console.log(date)}
+          label={lastPruned.label}
+          aria-label="Last Pruned"
+        />
+        <DateInput
+          value={lastHarvested.value}
+          onChange={(date) => console.log(date)}
+          label={lastHarvested.label}
+          aria-label="Last Harvested"
         />
       </div>
     );

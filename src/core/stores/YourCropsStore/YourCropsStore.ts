@@ -30,12 +30,16 @@ class YourCropsStore extends SearchableStore<YourCrop> {
       '',
     );
 
+    this.setDateFilters('lastWatered', '', 'Last Watered');
+    this.setDateFilters('lastFertilized', '', 'Last Fertilized');
+    this.setDateFilters('lastPruned', '', 'Last Pruned');
+    this.setDateFilters('lastHarvested', '', 'Last Harvested');
+
     this.debouncedFilterPlants = debounce(this.filterItems.bind(this), 500);
 
     makeObservable(this, {
       isLoading: observable,
       fetchData: action,
-      extractGenera: action,
       matchesFilterCriteria: action,
     });
   }
@@ -78,23 +82,6 @@ class YourCropsStore extends SearchableStore<YourCrop> {
       });
     }
   }
-
-  public extractGenera = () => {
-    const genera = new Set<string>();
-    this.items.forEach((item) => {
-      genera.add(String(item.location));
-    });
-
-    const genusOptions = Array.from(genera).map((genus) => ({
-      value: genus,
-      label: genus,
-    }));
-    if (!genusOptions.some((option) => option.value === '')) {
-      genusOptions.unshift({ value: '', label: '' });
-    }
-
-    return genusOptions;
-  };
 
   public matchesFilterCriteria(plant: YourCrop): boolean {
     const value = this.dropdownFilters['genus'].value;

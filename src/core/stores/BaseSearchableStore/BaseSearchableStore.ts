@@ -113,7 +113,6 @@ export abstract class SearchableStore<T> {
         this.dropdownFilters[key] = new Dropdown<string>('', label, false);
       }
 
-      console.log('options', this.dropdownFilters[key], options);
       this.dropdownFilters[key].setValue(criteria);
       this.dropdownFilters[key].generateDropdownOptions(
         options.map((option) => String(option)),

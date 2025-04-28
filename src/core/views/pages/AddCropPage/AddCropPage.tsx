@@ -8,7 +8,7 @@ import { observer } from 'mobx-react-lite';
 import { useParams } from 'react-router-dom';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import Dropdown from '../../reusables/Dropdown/Dropdown';
-import cropsStore from '../../../stores/YourCropsStore/YourCropsStore';
+import cropsDatabaseStore from '../../../stores/CropsDatabaseStore/CropsDatabaseStore';
 
 interface AddCropPageProps {
   isEditing?: boolean;
@@ -58,75 +58,75 @@ const AddCropPage: React.FC<AddCropPageProps> = observer(
     };
 
     const sunPreferenceFieldModel = {
-      ...addCropStore.fields.genusField,
-      value: String(addCropStore.fields.genusField.value),
-      options: cropsStore.dropdownFilters['genus'].options,
+      ...addCropStore.fields.sunPreferenceField,
+      value: String(addCropStore.fields.sunPreferenceField.value),
+      options: cropsDatabaseStore.dropdownFilters["sunPreference"].options,
       onChange: (value: string) =>
-        addCropStore.fields.genusField.setValue(value),
+        addCropStore.fields.sunPreferenceField.setValue(value),
     };
 
     const waterNeedsFieldModel = {
-      ...addCropStore.fields.genusField,
-      value: String(addCropStore.fields.genusField.value),
-      options: cropsStore.dropdownFilters['genus'].options,
+      ...addCropStore.fields.waterNeedsField,
+      value: String(addCropStore.fields.waterNeedsField.value),
+      options: cropsDatabaseStore.dropdownFilters["waterNeeds"].options,
       onChange: (value: string) =>
-        addCropStore.fields.genusField.setValue(value),
+        addCropStore.fields.waterNeedsField.setValue(value),
     };
 
     const soilTypeFieldModel = {
-      ...addCropStore.fields.genusField,
-      value: String(addCropStore.fields.genusField.value),
-      options: cropsStore.dropdownFilters['genus'].options,
+      ...addCropStore.fields.soilTypeField,
+      value: String(addCropStore.fields.soilTypeField.value),
+      options: cropsDatabaseStore.dropdownFilters["soilType"].options,
       onChange: (value: string) =>
-        addCropStore.fields.genusField.setValue(value),
+        addCropStore.fields.soilTypeField.setValue(value),
     };
 
     const soilPHFieldModel = {
-      ...addCropStore.fields.genusField,
-      value: String(addCropStore.fields.genusField.value),
-      options: cropsStore.dropdownFilters['genus'].options,
+      ...addCropStore.fields.soilPHField,
+      value: String(addCropStore.fields.soilPHField.value),
+      options: cropsDatabaseStore.dropdownFilters["soilType"].options,
       onChange: (value: string) =>
-        addCropStore.fields.genusField.setValue(value),
+        addCropStore.fields.soilPHField.setValue(value),
     };
 
     const pruningFieldModel = {
-      ...addCropStore.fields.genusField,
-      value: String(addCropStore.fields.genusField.value),
-      options: cropsStore.dropdownFilters['genus'].options,
+      ...addCropStore.fields.pruningField,
+      value: String(addCropStore.fields.pruningField.value),
+      options: cropsDatabaseStore.dropdownFilters["pruning"].options,
       onChange: (value: string) =>
-        addCropStore.fields.genusField.setValue(value),
+        addCropStore.fields.pruningField.setValue(value),
     };
 
     const temperatureRangeFieldModel = {
-      ...addCropStore.fields.genusField,
-      value: String(addCropStore.fields.genusField.value),
-      options: cropsStore.dropdownFilters['genus'].options,
+      ...addCropStore.fields.temperatureRangeField,
+      value: String(addCropStore.fields.temperatureRangeField.value),
+      options: cropsDatabaseStore.dropdownFilters["temperatureRange"].options,
       onChange: (value: string) =>
-        addCropStore.fields.genusField.setValue(value),
+        addCropStore.fields.temperatureRangeField.setValue(value),
     };
 
     const plantTypeFieldModel = {
-      ...addCropStore.fields.genusField,
-      value: String(addCropStore.fields.genusField.value),
-      options: cropsStore.dropdownFilters['genus'].options,
+      ...addCropStore.fields.plantTypeField,
+      value: String(addCropStore.fields.plantTypeField.value),
+      options: cropsDatabaseStore.dropdownFilters["plantType"].options,
       onChange: (value: string) =>
-        addCropStore.fields.genusField.setValue(value),
+        addCropStore.fields.plantTypeField.setValue(value),
     };
 
     const growthRateFieldModel = {
-      ...addCropStore.fields.genusField,
-      value: String(addCropStore.fields.genusField.value),
-      options: cropsStore.dropdownFilters['genus'].options,
+      ...addCropStore.fields.growthRateField,
+      value: String(addCropStore.fields.growthRateField.value),
+      options: cropsDatabaseStore.dropdownFilters["growthRate"].options,
       onChange: (value: string) =>
-        addCropStore.fields.genusField.setValue(value),
+        addCropStore.fields.growthRateField.setValue(value),
     };
 
     const fertilizerNeedsFieldModel = {
-      ...addCropStore.fields.genusField,
-      value: String(addCropStore.fields.genusField.value),
-      options: cropsStore.dropdownFilters['genus'].options,
+      ...addCropStore.fields.fertilizerNeedsField,
+      value: String(addCropStore.fields.fertilizerNeedsField.value),
+      options: cropsDatabaseStore.dropdownFilters["fertilizerNeeds"].options,
       onChange: (value: string) =>
-        addCropStore.fields.genusField.setValue(value),
+        addCropStore.fields.fertilizerNeedsField.setValue(value),
     };
 
     return (
