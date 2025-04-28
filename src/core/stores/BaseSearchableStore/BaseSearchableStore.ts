@@ -44,7 +44,6 @@ export abstract class SearchableStore<T> {
       this.paginatedItems = this.paginationStore.paginateItems(
         this.filteredItems,
       );
-      console.log('Filtered items updated:', this.filteredItems);
     });
 
     makeObservable(this, {

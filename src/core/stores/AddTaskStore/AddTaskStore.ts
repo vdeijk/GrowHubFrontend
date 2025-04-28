@@ -45,7 +45,11 @@ class AddTaskStore extends BaseFormStore {
         30,
       ),
       categoryField: new InputField<Category>(Category.Work, 'Category', true),
-      statusField: new InputField<TaskStatus>(TaskStatus.NotStarted, 'Status', true),
+      statusField: new InputField<TaskStatus>(
+        TaskStatus.NotStarted,
+        'Status',
+        true,
+      ),
     } as Record<
       string,
       InputField<string | number | boolean> | DateField<string>

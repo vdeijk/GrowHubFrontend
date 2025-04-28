@@ -1,5 +1,5 @@
 export enum Pruning {
-    LIGHT = "Light",
-    MODERATE = "Moderate",
-    HEAVY = "Heavy"
-  }
+  LIGHT = 'Light',
+  MODERATE = 'Moderate',
+  HEAVY = 'Heavy',
+}

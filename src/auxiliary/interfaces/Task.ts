@@ -13,4 +13,3 @@ export interface Task {
   description: string;
   actions?: JSX.Element;
 }
-

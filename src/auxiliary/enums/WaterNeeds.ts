@@ -1,5 +1,5 @@
 export enum WaterNeeds {
-    LOW = "Low",
-    MEDIUM = "Medium",
-    HIGH = "High"
-  }
+  LOW = 'Low',
+  MEDIUM = 'Medium',
+  HIGH = 'High',
+}

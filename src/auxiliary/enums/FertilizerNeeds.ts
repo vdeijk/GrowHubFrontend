@@ -1,6 +1,6 @@
 export enum FertilizerNeeds {
-    NONE = "None",
-    LOW = "Low",
-    MEDIUM = "Medium",
-    HIGH = "High"
-  }
+  NONE = 'None',
+  LOW = 'Low',
+  MEDIUM = 'Medium',
+  HIGH = 'High',
+}

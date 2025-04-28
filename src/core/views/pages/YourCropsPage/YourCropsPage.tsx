@@ -56,6 +56,7 @@ const YourCropsPage: React.FC = observer(() => {
     label: 'Add Crop',
   };
 
+  console.log('YourCropsPage rendered', cropsStore.isLoading);
   return (
     <section className={styles.section}>
       <LoadingWrapper isLoading={cropsStore.isLoading}>

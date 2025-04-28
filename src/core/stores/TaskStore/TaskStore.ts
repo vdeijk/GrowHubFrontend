@@ -1,5 +1,4 @@
 import { Task } from '../../../auxiliary/interfaces/Task';
-import { runInAction } from 'mobx';
 import { debounce } from '../../../auxiliary/utils/debounce';
 import { Priority } from '../../../auxiliary/enums/Priority';
 import { Category } from '../../../auxiliary/enums/Category';
@@ -9,6 +8,7 @@ import { EndpointService } from '../../apis/EndpointService';
 import { PaginationStore } from '../PaginationStore/PaginationStore';
 import { TaskStatus } from '../../../auxiliary/enums/Task';
 import EventBus from '../../../auxiliary/utils/EventTarget';
+import { makeObservable, runInAction, observable, action } from 'mobx';
 
 class TaskStore extends SearchableStore<Task> {
   private endpointService = new EndpointService('Todo');
@@ -43,6 +43,12 @@ class TaskStore extends SearchableStore<Task> {
 
     this.setDateFilters('startDate', '', 'Start Date');
     this.setDateFilters('endDate', '', 'End Date');
+
+    makeObservable(this, {
+      isLoading: observable,
+      fetchData: action,
+      matchesFilterCriteria: action,
+    });
   }
 
   isLoading: boolean = false;

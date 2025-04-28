@@ -1,7 +1,7 @@
 import { SearchableStore } from '../BaseSearchableStore/BaseSearchableStore';
 import { Plant } from '../../../auxiliary/interfaces/Plant';
 import { debounce } from '../../../auxiliary/utils/debounce';
-import { runInAction } from 'mobx';
+import { makeObservable, runInAction, observable, action } from 'mobx';
 import { EndpointService } from '../../apis/EndpointService';
 import { PaginationStore } from '../PaginationStore/PaginationStore';
 import { localStorageService } from '../../../auxiliary/classes/LocalStorageService';
@@ -16,6 +16,13 @@ class CropsDatabaseStore extends SearchableStore<Plant> {
     this.setDropdownFilters('genus', '', 'Genus');
 
     this.debouncedFilterPlants = debounce(this.filterItems.bind(this), 500);
+
+    makeObservable(this, {
+      isLoading: observable,
+      fetchData: action,
+      extractGenera: action,
+      matchesFilterCriteria: action,
+    });
   }
 
   isLoading: boolean = false;

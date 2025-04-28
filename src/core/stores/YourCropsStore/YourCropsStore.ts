@@ -1,11 +1,10 @@
 import { SearchableStore } from '../BaseSearchableStore/BaseSearchableStore';
 import { YourCrop } from '../../../auxiliary/interfaces/YourCrop';
 import { debounce } from '../../../auxiliary/utils/debounce';
-import { runInAction } from 'mobx';
+import { makeObservable, runInAction, observable, action } from 'mobx';
 import { EndpointService } from '../../apis/EndpointService';
 import { PaginationStore } from '../PaginationStore/PaginationStore';
 import EventBus from '../../../auxiliary/utils/EventTarget';
-import { toJS } from 'mobx';
 
 class YourCropsStore extends SearchableStore<YourCrop> {
   private endpointService = new EndpointService('YourCrops');
@@ -18,12 +17,18 @@ class YourCropsStore extends SearchableStore<YourCrop> {
       this.paginatedItems = this.paginationStore.paginateItems(
         this.filteredItems,
       );
-  
     });
 
     this.setDropdownFilters('genus', '', 'Genus');
 
     this.debouncedFilterPlants = debounce(this.filterItems.bind(this), 500);
+
+    makeObservable(this, {
+      isLoading: observable,
+      fetchData: action,
+      extractGenera: action,
+      matchesFilterCriteria: action,
+    });
   }
 
   isLoading: boolean = false;
@@ -46,10 +51,11 @@ class YourCropsStore extends SearchableStore<YourCrop> {
       this.isLoading = true;
     });
 
+    console.log('Fetching data from API...');
+
     try {
       const data: YourCrop[] | undefined =
         await this.endpointService.getData<YourCrop[]>();
-
       if (!data) return;
 
       runInAction(() => {
@@ -58,7 +64,7 @@ class YourCropsStore extends SearchableStore<YourCrop> {
         this.paginatedItems = this.paginationStore.paginateItems(
           this.filteredItems,
         );
-        
+
         this.dropdownFilters['genus'].options = this.extractGenera();
       });
     } finally {
