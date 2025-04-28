@@ -57,7 +57,7 @@ const AddCropPage: React.FC<AddCropPageProps> = observer(
         addCropStore.fields.nameField.setValue(value),
     };
 
-    const genusFieldModel = {
+    const sunPreferenceFieldModel = {
       ...addCropStore.fields.genusField,
       value: String(addCropStore.fields.genusField.value),
       options: cropsStore.dropdownFilters['genus'].options,
@@ -65,11 +65,68 @@ const AddCropPage: React.FC<AddCropPageProps> = observer(
         addCropStore.fields.genusField.setValue(value),
     };
 
-    const scientificNameFieldModel = {
-      ...addCropStore.fields.scientificNameField,
-      value: String(addCropStore.fields.scientificNameField.value),
+    const waterNeedsFieldModel = {
+      ...addCropStore.fields.genusField,
+      value: String(addCropStore.fields.genusField.value),
+      options: cropsStore.dropdownFilters['genus'].options,
       onChange: (value: string) =>
-        addCropStore.fields.scientificNameField.setValue(value),
+        addCropStore.fields.genusField.setValue(value),
+    };
+
+    const soilTypeFieldModel = {
+      ...addCropStore.fields.genusField,
+      value: String(addCropStore.fields.genusField.value),
+      options: cropsStore.dropdownFilters['genus'].options,
+      onChange: (value: string) =>
+        addCropStore.fields.genusField.setValue(value),
+    };
+
+    const soilPHFieldModel = {
+      ...addCropStore.fields.genusField,
+      value: String(addCropStore.fields.genusField.value),
+      options: cropsStore.dropdownFilters['genus'].options,
+      onChange: (value: string) =>
+        addCropStore.fields.genusField.setValue(value),
+    };
+
+    const pruningFieldModel = {
+      ...addCropStore.fields.genusField,
+      value: String(addCropStore.fields.genusField.value),
+      options: cropsStore.dropdownFilters['genus'].options,
+      onChange: (value: string) =>
+        addCropStore.fields.genusField.setValue(value),
+    };
+
+    const temperatureRangeFieldModel = {
+      ...addCropStore.fields.genusField,
+      value: String(addCropStore.fields.genusField.value),
+      options: cropsStore.dropdownFilters['genus'].options,
+      onChange: (value: string) =>
+        addCropStore.fields.genusField.setValue(value),
+    };
+
+    const plantTypeFieldModel = {
+      ...addCropStore.fields.genusField,
+      value: String(addCropStore.fields.genusField.value),
+      options: cropsStore.dropdownFilters['genus'].options,
+      onChange: (value: string) =>
+        addCropStore.fields.genusField.setValue(value),
+    };
+
+    const growthRateFieldModel = {
+      ...addCropStore.fields.genusField,
+      value: String(addCropStore.fields.genusField.value),
+      options: cropsStore.dropdownFilters['genus'].options,
+      onChange: (value: string) =>
+        addCropStore.fields.genusField.setValue(value),
+    };
+
+    const fertilizerNeedsFieldModel = {
+      ...addCropStore.fields.genusField,
+      value: String(addCropStore.fields.genusField.value),
+      options: cropsStore.dropdownFilters['genus'].options,
+      onChange: (value: string) =>
+        addCropStore.fields.genusField.setValue(value),
     };
 
     return (
@@ -77,8 +134,15 @@ const AddCropPage: React.FC<AddCropPageProps> = observer(
         <LoadingWrapper isLoading={addCropStore.isLoading}>
           <form onSubmit={handleSubmit} className={styles.form}>
             <TextInput {...nameFieldModel} />
-            <Dropdown {...genusFieldModel} />
-            <TextInput {...scientificNameFieldModel} />
+            <Dropdown {...sunPreferenceFieldModel} />
+            <Dropdown {...waterNeedsFieldModel} />
+            <Dropdown {...soilTypeFieldModel} />
+            <Dropdown {...soilPHFieldModel} />
+            <Dropdown {...pruningFieldModel} />
+            <Dropdown {...temperatureRangeFieldModel} />
+            <Dropdown {...plantTypeFieldModel} />
+            <Dropdown {...growthRateFieldModel} />
+            <Dropdown {...fertilizerNeedsFieldModel} />
             <Button {...buttonProps} />
           </form>
         </LoadingWrapper>

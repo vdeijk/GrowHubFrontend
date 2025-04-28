@@ -3,12 +3,10 @@ import { debounce } from '../../../auxiliary/utils/debounce';
 import { Priority } from '../../../auxiliary/enums/Priority';
 import { Category } from '../../../auxiliary/enums/Category';
 import { SearchableStore } from '../BaseSearchableStore/BaseSearchableStore';
-import { DropdownOption } from '../../../auxiliary/interfaces/DropdownOptions';
 import { EndpointService } from '../../apis/EndpointService';
 import { PaginationStore } from '../PaginationStore/PaginationStore';
-import { TaskStatus } from '../../../auxiliary/enums/Task';
-import EventBus from '../../../auxiliary/utils/EventTarget';
 import { makeObservable, runInAction, observable, action } from 'mobx';
+import { TaskStatus } from '../../../auxiliary/enums/Task';
 
 class TaskStore extends SearchableStore<Task> {
   private endpointService = new EndpointService('Todo');
@@ -17,26 +15,26 @@ class TaskStore extends SearchableStore<Task> {
   constructor() {
     super(['title']);
 
-    EventBus.addEventListener('pagination:currentPageChanged', () => {
-      this.paginatedItems = this.paginationStore.paginateItems(
-        this.filteredItems,
-      );
-    });
-
     this.debouncedFilterItems = debounce(this.filterItems.bind(this), 500);
 
-    this.setDropdownFilters('category', '', 'Category');
-    this.setDropdownFilters('priority', '', 'Priority');
-    this.setDropdownFilters('status', '', 'Status');
-    this.dropdownFilters['category'].options = this.generateDropdownOptions(
+    this.setDropdownFilters(
+      'category',
+      '',
+      'Category',
       Object.values(Category),
       '',
     );
-    this.dropdownFilters['priority'].options = this.generateDropdownOptions(
+    this.setDropdownFilters(
+      'priority',
+      '',
+      'Priority',
       Object.values(Priority),
       '',
     );
-    this.dropdownFilters['status'].options = this.generateDropdownOptions(
+    this.setDropdownFilters(
+      'status',
+      '',
+      'Status',
       Object.values(TaskStatus),
       '',
     );
@@ -130,19 +128,6 @@ class TaskStore extends SearchableStore<Task> {
     if (!filterValue || filterValue.trim() === '') return true;
     if (!itemValue) return false;
     return itemValue.toLowerCase() === filterValue.toLowerCase();
-  };
-
-  private generateDropdownOptions = <T extends string | number>(
-    values: T[],
-    allLabel: string = 'All',
-  ): DropdownOption<T>[] => {
-    return [
-      { value: '' as T, label: allLabel },
-      ...values.map((value) => ({
-        value,
-        label: String(value),
-      })),
-    ];
   };
 
   private matchesDateRangeCriteria(

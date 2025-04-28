@@ -4,7 +4,8 @@ import { debounce } from '../../../auxiliary/utils/debounce';
 import { makeObservable, runInAction, observable, action } from 'mobx';
 import { EndpointService } from '../../apis/EndpointService';
 import { PaginationStore } from '../PaginationStore/PaginationStore';
-import EventBus from '../../../auxiliary/utils/EventTarget';
+import { WaterNeeds } from '../../../auxiliary/enums/WaterNeeds';
+import { HealthStatus } from '../../../auxiliary/enums/HealthStatus';
 
 class YourCropsStore extends SearchableStore<YourCrop> {
   private endpointService = new EndpointService('YourCrops');
@@ -13,13 +14,21 @@ class YourCropsStore extends SearchableStore<YourCrop> {
   constructor() {
     super(['commonName']);
 
-    EventBus.addEventListener('pagination:currentPageChanged', () => {
-      this.paginatedItems = this.paginationStore.paginateItems(
-        this.filteredItems,
-      );
-    });
-
-    this.setDropdownFilters('genus', '', 'Genus');
+    this.setDropdownFilters('location', '', 'Location', ['test'], '');
+    this.setDropdownFilters(
+      'waterNeeds',
+      '',
+      'WaterNeeds',
+      Object.values(WaterNeeds),
+      '',
+    );
+    this.setDropdownFilters(
+      'healthStatus',
+      '',
+      'Health Status',
+      Object.values(HealthStatus),
+      '',
+    );
 
     this.debouncedFilterPlants = debounce(this.filterItems.bind(this), 500);
 
@@ -51,8 +60,6 @@ class YourCropsStore extends SearchableStore<YourCrop> {
       this.isLoading = true;
     });
 
-    console.log('Fetching data from API...');
-
     try {
       const data: YourCrop[] | undefined =
         await this.endpointService.getData<YourCrop[]>();
@@ -64,8 +71,6 @@ class YourCropsStore extends SearchableStore<YourCrop> {
         this.paginatedItems = this.paginationStore.paginateItems(
           this.filteredItems,
         );
-
-        this.dropdownFilters['genus'].options = this.extractGenera();
       });
     } finally {
       runInAction(() => {

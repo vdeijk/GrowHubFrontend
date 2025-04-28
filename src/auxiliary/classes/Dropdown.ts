@@ -15,7 +15,13 @@ export class Dropdown<T> extends FormField<T> {
     this.options = options;
   }
 
-  public setOptions(options: DropdownOption<T>[]) {
-    this.options = options;
+  public generateDropdownOptions(values: T[], allLabel: string = ''): void {
+    this.options = [
+      { value: '' as T, label: allLabel },
+      ...values.map((value) => ({
+        value,
+        label: String(value),
+      })),
+    ];
   }
 }

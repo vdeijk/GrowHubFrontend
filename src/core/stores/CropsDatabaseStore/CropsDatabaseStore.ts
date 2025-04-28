@@ -5,6 +5,14 @@ import { makeObservable, runInAction, observable, action } from 'mobx';
 import { EndpointService } from '../../apis/EndpointService';
 import { PaginationStore } from '../PaginationStore/PaginationStore';
 import { localStorageService } from '../../../auxiliary/classes/LocalStorageService';
+import { SunPreference } from '../../../auxiliary/enums/SunPreference';
+import { WaterNeeds } from '../../../auxiliary/enums/WaterNeeds';
+import { SoilType } from '../../../auxiliary/enums/SoilType';
+import { SoilPH } from '../../../auxiliary/enums/SoilPH';
+import { Pruning } from '../../../auxiliary/enums/Pruning';
+import { PlantType } from '../../../auxiliary/enums/PlantType';
+import { GrowthRate } from '../../../auxiliary/enums/GrowthRate';
+import { FertilizerNeeds } from '../../../auxiliary/enums/FertilizerNeeds';
 
 class CropsDatabaseStore extends SearchableStore<Plant> {
   private endpointService = new EndpointService('Plant');
@@ -13,14 +21,69 @@ class CropsDatabaseStore extends SearchableStore<Plant> {
   constructor() {
     super(['commonName']);
 
-    this.setDropdownFilters('genus', '', 'Genus');
+    this.setDropdownFilters(
+      'sunPreference',
+      '',
+      'Sun Preference',
+      Object.values(SunPreference),
+      '',
+    );
+    this.setDropdownFilters(
+      'waterNeeds',
+      '',
+      'WaterNeeds',
+      Object.values(WaterNeeds),
+      '',
+    );
+    this.setDropdownFilters(
+      'soilType',
+      '',
+      'Soil Type',
+      Object.values(SoilType),
+      '',
+    );
+    this.setDropdownFilters('soilPH', '', 'Soil PH', Object.values(SoilPH), '');
+    this.setDropdownFilters(
+      'pruning',
+      '',
+      'Pruning',
+      Object.values(Pruning),
+      '',
+    );
+    this.setDropdownFilters(
+      'temperatureRange',
+      '',
+      'Temperature Range',
+      Object.values(PlantType),
+      '',
+    );
+    this.setDropdownFilters(
+      'plantType',
+      '',
+      'Plant Type',
+      Object.values(PlantType),
+      '',
+    );
+    this.setDropdownFilters(
+      'growthRate',
+      '',
+      'Growth Rate',
+      Object.values(GrowthRate),
+      '',
+    );
+    this.setDropdownFilters(
+      'fertilizerNeeds',
+      '',
+      'Fertilizer Needs',
+      Object.values(FertilizerNeeds),
+      '',
+    );
 
     this.debouncedFilterPlants = debounce(this.filterItems.bind(this), 500);
 
     makeObservable(this, {
       isLoading: observable,
       fetchData: action,
-      extractGenera: action,
       matchesFilterCriteria: action,
     });
   }
@@ -61,30 +124,12 @@ class CropsDatabaseStore extends SearchableStore<Plant> {
         this.paginatedItems = this.paginationStore.paginateItems(
           this.filteredItems,
         );
-        this.dropdownFilters['genus'].options = this.extractGenera();
       });
     } finally {
       runInAction(() => {
         this.isLoading = false;
       });
     }
-  };
-
-  public extractGenera = () => {
-    const genera = new Set<string>();
-    this.items.forEach((item) => {
-      genera.add(String(item.genus));
-    });
-
-    const genusOptions = Array.from(genera).map((genus) => ({
-      value: genus,
-      label: genus,
-    }));
-    if (!genusOptions.some((option) => option.value === '')) {
-      genusOptions.unshift({ value: '', label: '' });
-    }
-
-    return genusOptions;
   };
 
   public matchesFilterCriteria = (plant: Plant): boolean => {

@@ -101,17 +101,24 @@ export abstract class SearchableStore<T> {
     });
   };
 
-  public setDropdownFilters = (
+  public setDropdownFilters = <T>(
     key: string,
     criteria: string,
     label: string,
+    options: T[],
+    allLabel: string = 'All',
   ) => {
     runInAction(() => {
       if (!this.dropdownFilters[key]) {
         this.dropdownFilters[key] = new Dropdown<string>('', label, false);
       }
 
+      console.log('options', this.dropdownFilters[key], options);
       this.dropdownFilters[key].setValue(criteria);
+      this.dropdownFilters[key].generateDropdownOptions(
+        options.map((option) => String(option)),
+        allLabel,
+      );
     });
   };
 
