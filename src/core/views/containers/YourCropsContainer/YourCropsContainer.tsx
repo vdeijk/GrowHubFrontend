@@ -7,13 +7,13 @@ import Heading from '../../reusables/Heading/Heading';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import { observer } from 'mobx-react-lite';
-import { Plant } from '../../../../auxiliary/interfaces/Plant';
+import { YourCrop } from '../../../../auxiliary/interfaces/YourCrop';
 
 const YourCropsContainer: React.FC = observer(() => {
   const navigate = useRouterNavigation();
 
   const buttonContainerData = {
-    clickHandler: () => navigate('/cropsDatabase'),
+    clickHandler: () => navigate('/cropsPage'),
     label: 'View All Crops',
   };
 
@@ -34,7 +34,7 @@ const YourCropsContainer: React.FC = observer(() => {
         text="Your Crops"
         customStyles={{ marginBottom: '2rem' }}
       />
-      <TableWithoutSorting<Plant>
+      <TableWithoutSorting<YourCrop>
         headers={headersWithoutActions}
         data={plantsStore.items.slice(0, 9).map((plant, index) => ({
           ...omit(plant, 'actions'),

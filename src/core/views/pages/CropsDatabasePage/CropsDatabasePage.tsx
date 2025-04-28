@@ -36,7 +36,7 @@ const CropsDatabasePage: React.FC = observer(() => {
 
   const tableProps: TableProps<Plant> = {
     headers: cropsDatabaseStore.tableHeaders,
-    data: cropsDatabaseStore.filteredItems.map((item) => ({
+    data: cropsDatabaseStore.paginatedItems.map((item) => ({
       ...item,
       actions: (
         <ActionIcons
@@ -67,8 +67,8 @@ const CropsDatabasePage: React.FC = observer(() => {
           <ButtonContainer buttons={[buttonContainerData]} />
         </div>
         <Pagination
-          currentPage={1}
-          totalPages={10}
+          currentPage={paginationStore.currentPage}
+          totalPages={paginationStore.totalPages}
           onPageChange={(page) => paginationStore.setCurrentPage(page)}
         />
       </LoadingWrapper>

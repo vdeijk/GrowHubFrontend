@@ -4,13 +4,22 @@ import { debounce } from '../../../auxiliary/utils/debounce';
 import { runInAction } from 'mobx';
 import { EndpointService } from '../../apis/EndpointService';
 import { PaginationStore } from '../PaginationStore/PaginationStore';
+import EventBus from '../../../auxiliary/utils/EventTarget';
+import { toJS } from 'mobx';
 
-class YourCropsStore extends SearchableStore<Plant> {
-  private endpointService = new EndpointService('Plant');
+class YourCropsStore extends SearchableStore<YourCrop> {
+  private endpointService = new EndpointService('YourCrops');
   public paginationStore = new PaginationStore();
 
   constructor() {
     super(['commonName']);
+
+    EventBus.addEventListener('pagination:currentPageChanged', () => {
+      this.paginatedItems = this.paginationStore.paginateItems(
+        this.filteredItems,
+      );
+  
+    });
 
     this.setDropdownFilters('genus', '', 'Genus');
 
@@ -46,6 +55,10 @@ class YourCropsStore extends SearchableStore<Plant> {
       runInAction(() => {
         this.items = data;
         this.filteredItems = this.items;
+        this.paginatedItems = this.paginationStore.paginateItems(
+          this.filteredItems,
+        );
+        
         this.dropdownFilters['genus'].options = this.extractGenera();
       });
     } finally {
@@ -58,7 +71,7 @@ class YourCropsStore extends SearchableStore<Plant> {
   public extractGenera = () => {
     const genera = new Set<string>();
     this.items.forEach((item) => {
-      genera.add(String(item.genus));
+      genera.add(String(item.location));
     });
 
     const genusOptions = Array.from(genera).map((genus) => ({
@@ -74,7 +87,7 @@ class YourCropsStore extends SearchableStore<Plant> {
 
   public matchesFilterCriteria(plant: YourCrop): boolean {
     const value = this.dropdownFilters['genus'].value;
-    return value === '' || plant.genus === value;
+    return value === '' || plant.location === value;
   }
 
   public deletePlant = async (id: number) => {

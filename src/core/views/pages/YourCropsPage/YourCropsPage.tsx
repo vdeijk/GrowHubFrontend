@@ -7,13 +7,14 @@ import { observer } from 'mobx-react-lite';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import { SearchBarProps } from '../../containers/SearchBarCrops/SearchBarCrops';
 import { TableProps } from '../../reusables/TableWithSorting/TableWithSorting';
-import { Plant } from '../../../../auxiliary/interfaces/Plant';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import ActionIcons from '../../reusables/ActionIcons/ActionIcons';
 import Pagination from '../../reusables/Pagination/Pagination';
+import { YourCrop } from '../../../../auxiliary/interfaces/YourCrop';
 
 const YourCropsPage: React.FC = observer(() => {
+  const { paginationStore } = cropsStore;
   const navigate = useRouterNavigation();
 
   const searchBarProps: SearchBarProps = {
@@ -31,9 +32,9 @@ const YourCropsPage: React.FC = observer(() => {
     cropsStore.deletePlant(id);
   };
 
-  const tableProps: TableProps<Plant> = {
+  const tableProps: TableProps<YourCrop> = {
     headers: cropsStore.tableHeaders,
-    data: cropsStore.filteredItems.map((item) => ({
+    data: cropsStore.paginatedItems.map((item) => ({
       ...item,
       actions: (
         <div className={styles.actionIcons}>
@@ -66,8 +67,8 @@ const YourCropsPage: React.FC = observer(() => {
           <ButtonContainer buttons={[buttonContainerData]} />
         </div>
         <Pagination
-          currentPage={1}
-          totalPages={10}
+          currentPage={paginationStore.currentPage}
+          totalPages={paginationStore.totalPages}
           onPageChange={(page) => paginationStore.setCurrentPage(page)}
         />
       </LoadingWrapper>

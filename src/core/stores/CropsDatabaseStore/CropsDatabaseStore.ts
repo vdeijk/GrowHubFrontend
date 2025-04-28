@@ -43,7 +43,7 @@ class CropsDatabaseStore extends SearchableStore<Plant> {
       const data = await localStorageService.fetchWithCache<Plant[]>(
         'cropsDatabaseItems',
         async () => (await this.endpointService.getData<Plant[]>()) || [],
-        7 
+        7,
       );
 
       if (!data) return;
@@ -51,6 +51,9 @@ class CropsDatabaseStore extends SearchableStore<Plant> {
       runInAction(() => {
         this.items = data;
         this.filteredItems = this.items;
+        this.paginatedItems = this.paginationStore.paginateItems(
+          this.filteredItems,
+        );
         this.dropdownFilters['genus'].options = this.extractGenera();
       });
     } finally {

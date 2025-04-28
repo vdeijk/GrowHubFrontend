@@ -9,10 +9,14 @@ import { debounce } from '../../../auxiliary/utils/debounce';
 import { InputField } from '../../../auxiliary/classes/InputField';
 import { Dropdown } from '../../../auxiliary/classes/Dropdown';
 import { DateField } from '../../../auxiliary/classes/DateField';
+import EventBus from '../../../auxiliary/utils/EventTarget';
+import { PaginationStore } from '../PaginationStore/PaginationStore';
 
 export abstract class SearchableStore<T> {
+  public paginationStore = new PaginationStore();
   items: T[] = [];
   filteredItems: T[] = [];
+  paginatedItems: T[] = [];
   debouncedFilterItems: () => void;
   searchQuery = new InputField<string>(
     '',
@@ -29,6 +33,19 @@ export abstract class SearchableStore<T> {
 
   constructor(searchableFields: (keyof T)[]) {
     this.searchableFields = searchableFields;
+
+    EventBus.addEventListener('pagination:currentPageChanged', () => {
+      this.paginatedItems = this.paginationStore.paginateItems(
+        this.filteredItems,
+      );
+    });
+
+    EventBus.addEventListener('filteredItems:updated', () => {
+      this.paginatedItems = this.paginationStore.paginateItems(
+        this.filteredItems,
+      );
+      console.log('Filtered items updated:', this.filteredItems);
+    });
 
     makeObservable(this, {
       items: observable,
@@ -119,6 +136,7 @@ export abstract class SearchableStore<T> {
     });
 
     this.sortItems();
+    EventBus.dispatchEvent(new Event('filteredItems:updated'));
   };
 
   public setSortField = (field: keyof T) => {
@@ -130,6 +148,7 @@ export abstract class SearchableStore<T> {
         this.sortOrder = 'asc';
       }
       this.sortItems();
+      EventBus.dispatchEvent(new Event('filteredItems:updated'));
     });
   };
 

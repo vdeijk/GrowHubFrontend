@@ -15,9 +15,9 @@ import popupStore from '../../../stores/PopupStore/PopupStore';
 import PlantDatabasePopup from '../../reusables/TaskPopup/TaskPopup';
 import Popup from '../../containers/Popup/Popup';
 import Pagination from '../../reusables/Pagination/Pagination';
-import paginationStore from '../../../stores/PaginationStore/PaginationStore';
 
 const TasksPage: React.FC = observer(() => {
+  const paginationStore = taskStore.paginationStore;
   const navigate = useRouterNavigation();
 
   const buttonContainerData = {
@@ -54,7 +54,7 @@ const TasksPage: React.FC = observer(() => {
 
   const tableProps: TableProps<Task> = {
     headers: taskStore.tableHeaders,
-    data: taskStore.filteredItems.map((item) => ({
+    data: taskStore.paginatedItems.map((item) => ({
       ...item,
       actions: (
         <ActionIcons
@@ -80,8 +80,8 @@ const TasksPage: React.FC = observer(() => {
           <ButtonContainer buttons={[buttonContainerData]} />
         </div>
         <Pagination
-          currentPage={1}
-          totalPages={10}
+          currentPage={paginationStore.currentPage}
+          totalPages={paginationStore.totalPages}
           onPageChange={(page) => paginationStore.setCurrentPage(page)}
         />
       </LoadingWrapper>

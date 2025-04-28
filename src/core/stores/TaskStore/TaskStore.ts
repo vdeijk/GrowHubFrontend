@@ -8,6 +8,7 @@ import { DropdownOption } from '../../../auxiliary/interfaces/DropdownOptions';
 import { EndpointService } from '../../apis/EndpointService';
 import { PaginationStore } from '../PaginationStore/PaginationStore';
 import { TaskStatus } from '../../../auxiliary/enums/Task';
+import EventBus from '../../../auxiliary/utils/EventTarget';
 
 class TaskStore extends SearchableStore<Task> {
   private endpointService = new EndpointService('Todo');
@@ -15,6 +16,12 @@ class TaskStore extends SearchableStore<Task> {
 
   constructor() {
     super(['title']);
+
+    EventBus.addEventListener('pagination:currentPageChanged', () => {
+      this.paginatedItems = this.paginationStore.paginateItems(
+        this.filteredItems,
+      );
+    });
 
     this.debouncedFilterItems = debounce(this.filterItems.bind(this), 500);
 
@@ -69,6 +76,9 @@ class TaskStore extends SearchableStore<Task> {
       runInAction(() => {
         this.items = data;
         this.filteredItems = this.items;
+        this.paginatedItems = this.paginationStore.paginateItems(
+          this.filteredItems,
+        );
       });
     } finally {
       runInAction(() => {
