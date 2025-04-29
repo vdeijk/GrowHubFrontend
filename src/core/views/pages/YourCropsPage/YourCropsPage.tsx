@@ -29,7 +29,7 @@ const YourCropsPage: React.FC = observer(() => {
   };
 
   const handleEdit = (id: number | undefined) => {
-    navigate(`/addCropPage/${id}`);
+    navigate(`/addYourCropPage/${id}`);
   };
 
   const handleDelete = (id: number | undefined) => {
