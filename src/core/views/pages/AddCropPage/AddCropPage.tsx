@@ -143,6 +143,7 @@ const AddCropPage: React.FC<AddCropPageProps> = observer(
             <Dropdown {...plantTypeFieldModel} />
             <Dropdown {...growthRateFieldModel} />
             <Dropdown {...fertilizerNeedsFieldModel} />
+            <div></div>
             <Button {...buttonProps} />
           </form>
         </LoadingWrapper>

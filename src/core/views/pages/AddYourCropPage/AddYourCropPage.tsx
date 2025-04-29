@@ -123,6 +123,7 @@ const AddYourCropPage: React.FC<AddYourCropPageProps> = observer(
             <DateInput {...lastFertilizedFieldModel} />
             <DateInput {...lastPrunedFieldModel} />
             <DateInput {...lastHarvestedFieldModel} />
+            <div></div>
             <Button {...buttonProps} />
           </form>
         </LoadingWrapper>

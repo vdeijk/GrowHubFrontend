@@ -72,7 +72,9 @@ const AddFieldPage: React.FC<AddFieldPageProps> = observer(
         <form onSubmit={handleSubmit} className={styles.form}>
           <TextInput {...locationNameFieldModel} />
           <TextInput {...latitudeFieldModel} />
+          <div></div>
           <TextInput {...longitudeFieldModel} />
+          <div></div>
           <Button {...buttonProps} />
         </form>
       </section>

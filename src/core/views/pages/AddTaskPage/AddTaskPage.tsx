@@ -105,6 +105,7 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
             <TextInput {...descriptionProps} />
             <Dropdown {...categoryProps} />
             <Dropdown {...statusProps} />
+            <div></div>
             <Button {...buttonProps} />
           </form>
         </LoadingWrapper>
