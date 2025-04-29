@@ -110,6 +110,7 @@ export abstract class SearchableStore<T> {
       this.searchableFields,
     );
     filtered = FilterService.filterByDropdowns(filtered, this.dropdownFilters);
+    filtered = FilterService.filterByEndDate(filtered, this.dateFilters);
     filtered = FilterService.filterByDateRange(filtered, this.dateFilters);
 
     runInAction(() => {

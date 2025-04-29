@@ -35,7 +35,7 @@ class YourCropsStore extends SearchableStore<YourCrop> {
     this.initDropdownFilter(
       'waterNeeds',
       '',
-      'WaterNeeds',
+      'Water Needs',
       Object.values(WaterNeeds),
       '',
     );
