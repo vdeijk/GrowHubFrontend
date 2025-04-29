@@ -13,6 +13,8 @@ import EventBus from '../../../auxiliary/utils/EventTarget';
 import { PaginationStore } from '../PaginationStore/PaginationStore';
 import SortService from '../../apis/SortService';
 import { FilterService } from '../../apis/FilterService';
+import { DateFieldModel } from '../../../auxiliary/interfaces/DateFieldModel';
+import { DropdownFieldModel } from '../../../auxiliary/interfaces/DropdownFieldModel';
 
 export abstract class SearchableStore<T> {
   public paginationStore = new PaginationStore();
@@ -84,37 +86,47 @@ export abstract class SearchableStore<T> {
   public get sortOrder(): 'asc' | 'desc' {
     return this.sortService.sortOrder;
   }
-
-  public initDateFilter = (key: string, criteria: string, label: string) => {
+  public initDateFilter = (field: DateFieldModel) => {
     runInAction(() => {
-      if (!this.dateFilters[key]) {
-        this.dateFilters[key] = new DateField<string>('', label, false);
+      if (!this.dateFilters[field.key]) {
+        this.dateFilters[field.key] = new DateField<string>(
+          '',
+          field.label,
+          false,
+        );
       }
 
-      this.dateFilters[key].setValue(criteria);
+      this.dateFilters[field.key].setValue(field.defaultValue);
     });
   };
 
-  public initDropdownFilter = <T>(
-    key: string,
-    criteria: string,
-    label: string,
-    options: T[],
-    allLabel: string = 'All',
-  ) => {
+  public initDropdownFilter = (field: DropdownFieldModel) => {
     runInAction(() => {
-      if (!this.dropdownFilters[key]) {
-        this.dropdownFilters[key] = new Dropdown<string>('', label, false);
+      if (!this.dropdownFilters[field.key]) {
+        this.dropdownFilters[field.key] = new Dropdown<string>(
+          '',
+          field.label,
+          false,
+        );
       }
 
-      this.dropdownFilters[key].setValue(criteria);
-      this.dropdownFilters[key].generateDropdownOptions(
-        options.map((option) => String(option)),
-        allLabel,
+      const resolvedOptions =
+        typeof field.options === 'function' ? field.options() : field.options;
+
+      if (!resolvedOptions || !Array.isArray(resolvedOptions)) {
+        console.error(
+          `Dropdown options for key "${field.key}" are invalid or undefined.`,
+        );
+        return;
+      }
+
+      this.dropdownFilters[field.key].setValue(field.defaultValue);
+      this.dropdownFilters[field.key].generateDropdownOptions(
+        resolvedOptions.map(String),
       );
     });
   };
-
+  
   public filterItems = () => {
     let filtered = FilterService.filterBySearchQuery(
       this.items,

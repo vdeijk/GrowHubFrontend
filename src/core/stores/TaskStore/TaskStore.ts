@@ -1,6 +1,4 @@
 import { Task } from '../../../auxiliary/interfaces/Task';
-import { Priority } from '../../../auxiliary/enums/Priority';
-import { Category } from '../../../auxiliary/enums/Category';
 import { SearchableStore } from '../BaseSearchableStore/BaseSearchableStore';
 import { EndpointService } from '../../apis/EndpointService';
 import { PaginationStore } from '../PaginationStore/PaginationStore';
@@ -11,8 +9,8 @@ import {
   action,
   computed,
 } from 'mobx';
-import { TaskStatus } from '../../../auxiliary/enums/Task';
 import { InputField } from '../../../auxiliary/classes/InputField';
+import TaskData from '../../../auxiliary/data/TaskData';
 
 class TaskStore extends SearchableStore<Task> {
   private endpointService = new EndpointService('Todo');
@@ -21,15 +19,7 @@ class TaskStore extends SearchableStore<Task> {
   public get isLoading(): boolean {
     return this.endpointService.isLoading;
   }
-  public tableHeaders: { id: keyof Task; label: string; sortable: boolean }[] =
-    [
-      { id: 'title', label: 'Title', sortable: true },
-      { id: 'priority', label: 'Priority', sortable: true },
-      { id: 'dueDate', label: 'Due Date', sortable: true },
-      { id: 'category', label: 'Category', sortable: true },
-      { id: 'status', label: 'Status', sortable: true },
-      { id: 'actions', label: 'Actions', sortable: false },
-    ];
+  public tableHeaders = TaskData.tableHeaders;
   public searchQuery = new InputField<string>(
     '',
     'Search',
@@ -49,29 +39,13 @@ class TaskStore extends SearchableStore<Task> {
       30,
     );
 
-    this.initDropdownFilter(
-      'category',
-      '',
-      'Category',
-      Object.values(Category),
-      '',
-    );
-    this.initDropdownFilter(
-      'priority',
-      '',
-      'Priority',
-      Object.values(Priority),
-      '',
-    );
-    this.initDropdownFilter(
-      'status',
-      '',
-      'Status',
-      Object.values(TaskStatus),
-      '',
-    );
-    this.initDateFilter('startDate', '', 'Start Date');
-    this.initDateFilter('endDate', '', 'End Date');
+    Object.values(TaskData.dropdowns).forEach((dropdown) => {
+      this.initDropdownFilter(dropdown);
+    });
+
+    TaskData.dateFields.forEach((dateField) => {
+      this.initDateFilter(dateField);
+    });
 
     makeObservable(this, {
       isLoading: computed,

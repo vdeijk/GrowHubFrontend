@@ -11,16 +11,8 @@ import {
 import { EndpointService } from '../../apis/EndpointService';
 import { PaginationStore } from '../PaginationStore/PaginationStore';
 import { localStorageService } from '../../../auxiliary/classes/LocalStorageService';
-import { SunPreference } from '../../../auxiliary/enums/SunPreference';
-import { WaterNeeds } from '../../../auxiliary/enums/WaterNeeds';
-import { SoilType } from '../../../auxiliary/enums/SoilType';
-import { SoilPH } from '../../../auxiliary/enums/SoilPH';
-import { Pruning } from '../../../auxiliary/enums/Pruning';
-import { PlantType } from '../../../auxiliary/enums/PlantType';
-import { GrowthRate } from '../../../auxiliary/enums/GrowthRate';
-import { FertilizerNeeds } from '../../../auxiliary/enums/FertilizerNeeds';
 import { InputField } from '../../../auxiliary/classes/InputField';
-import { ClimateZone } from '../../../auxiliary/enums/ClimateZone';
+import CropsDatabaseData from '../../../auxiliary/data/CropsDatabaseData';
 
 class CropsDatabaseStore extends SearchableStore<Plant> {
   private endpointService = new EndpointService('Plant');
@@ -39,63 +31,9 @@ class CropsDatabaseStore extends SearchableStore<Plant> {
   constructor() {
     super(['commonName']);
 
-    this.initDropdownFilter(
-      'sunPreference',
-      '',
-      'Sun Preference',
-      Object.values(SunPreference),
-      '',
-    );
-    this.initDropdownFilter(
-      'waterNeeds',
-      '',
-      'Water Needs',
-      Object.values(WaterNeeds),
-      '',
-    );
-    this.initDropdownFilter(
-      'soilType',
-      '',
-      'Soil Type',
-      Object.values(SoilType),
-      '',
-    );
-    this.initDropdownFilter('soilPH', '', 'Soil PH', Object.values(SoilPH), '');
-    this.initDropdownFilter(
-      'pruning',
-      '',
-      'Pruning',
-      Object.values(Pruning),
-      '',
-    );
-    this.initDropdownFilter(
-      'climateZone',
-      '',
-      'Climate Zone',
-      Object.values(ClimateZone),
-      '',
-    );
-    this.initDropdownFilter(
-      'plantType',
-      '',
-      'Plant Type',
-      Object.values(PlantType),
-      '',
-    );
-    this.initDropdownFilter(
-      'growthRate',
-      '',
-      'Growth Rate',
-      Object.values(GrowthRate),
-      '',
-    );
-    this.initDropdownFilter(
-      'fertilizerNeeds',
-      '',
-      'Fertilizer Needs',
-      Object.values(FertilizerNeeds),
-      '',
-    );
+    Object.values(CropsDatabaseData.dropdowns).forEach((dropdown) => {
+      this.initDropdownFilter(dropdown);
+    });
 
     this.debouncedFilterPlants = debounce(this.filterItems.bind(this), 500);
 
@@ -107,19 +45,7 @@ class CropsDatabaseStore extends SearchableStore<Plant> {
   }
 
   debouncedFilterPlants: (criteria: string) => void = () => {};
-  tableHeaders: { id: keyof Plant; label: string; sortable: boolean }[] = [
-    { id: 'commonName', label: 'Common Name', sortable: true },
-    { id: 'actions', label: 'Actions', sortable: false },
-    { id: 'sunPreference', label: 'Sun Preference', sortable: true },
-    { id: 'waterNeeds', label: 'Water Needs', sortable: true },
-    { id: 'soilType', label: 'Soil Type', sortable: true },
-    { id: 'soilPH', label: 'Soil PH', sortable: true },
-    { id: 'pruning', label: 'Pruning', sortable: true },
-    { id: 'climateZone', label: 'Climate Zone', sortable: true },
-    { id: 'plantType', label: 'Plant Type', sortable: true },
-    { id: 'growthRate', label: 'Growth Rate', sortable: true },
-    { id: 'fertilizerNeeds', label: 'Fertilizer Needs', sortable: true },
-  ];
+  tableHeaders = CropsDatabaseData.tableHeaders;
 
   public syncData = () => {
     localStorageService.invalidateCache('cropsDatabaseItems');

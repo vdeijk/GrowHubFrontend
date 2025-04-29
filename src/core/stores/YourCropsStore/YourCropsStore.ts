@@ -10,15 +10,11 @@ import {
 } from 'mobx';
 import { EndpointService } from '../../apis/EndpointService';
 import { PaginationStore } from '../PaginationStore/PaginationStore';
-import { GrowthStage } from '../../../auxiliary/enums/GrowthStage';
-import { HealthStatus } from '../../../auxiliary/enums/HealthStatus';
+import YourCropsData from '../../../auxiliary/data/YourCropData';
 import { InputField } from '../../../auxiliary/classes/InputField';
-import fieldsStore from '../FieldsStore/FieldsStore';
-import { LocationItem } from '../../../auxiliary/interfaces/LocationItem';
 import EventBus from '../../../auxiliary/utils/EventTarget';
 
 class YourCropsStore extends SearchableStore<YourCrop> {
-  private endpointService = new EndpointService('YourCrops');
   public paginationStore = new PaginationStore();
   public get isLoading(): boolean {
     return this.endpointService.isLoading;
@@ -30,36 +26,25 @@ class YourCropsStore extends SearchableStore<YourCrop> {
     'Enter search query',
     50,
   );
+  public debouncedFilterPlants: (criteria: string) => void = () => {};
+  public tableHeaders = YourCropsData.tableHeaders;
+
+  private endpointService = new EndpointService('YourCrops');
 
   constructor() {
     super(['commonName']);
 
     EventBus.addEventListener('locations:updated', () => {
-      const fields: LocationItem[] = fieldsStore.getLocations();
-      const locationNames = fields.map((field) => field.name);
-
-      this.initDropdownFilter('location', '', 'Location', locationNames, '');
+      this.initDropdownFilter(YourCropsData.dropdowns['location']);
     });
 
-    this.initDropdownFilter(
-      'growthStage',
-      '',
-      'Growth Stage',
-      Object.values(GrowthStage),
-      '',
-    );
-    this.initDropdownFilter(
-      'healthStatus',
-      '',
-      'Health Status',
-      Object.values(HealthStatus),
-      '',
-    );
+    Object.values(YourCropsData.dropdowns).forEach((dropdown) => {
+      this.initDropdownFilter(dropdown);
+    });
 
-    this.initDateFilter('lastWatered', '', 'Last Watered');
-    this.initDateFilter('lastFertilized', '', 'Last Fertilized');
-    this.initDateFilter('lastPruned', '', 'Last Pruned');
-    this.initDateFilter('lastHarvested', '', 'Last Harvested');
+    YourCropsData.dateFields.forEach((dateField) => {
+      this.initDateFilter(dateField);
+    });
 
     this.debouncedFilterPlants = debounce(this.filterItems.bind(this), 500);
 
@@ -69,20 +54,6 @@ class YourCropsStore extends SearchableStore<YourCrop> {
       searchQuery: observable,
     });
   }
-
-  debouncedFilterPlants: (criteria: string) => void = () => {};
-  tableHeaders: { id: keyof YourCrop; label: string; sortable: boolean }[] = [
-    { id: 'id', label: 'Id', sortable: true },
-    { id: 'commonName', label: 'Common Name', sortable: true },
-    { id: 'actions', label: 'Actions', sortable: false },
-    { id: 'location', label: 'Location', sortable: true },
-    { id: 'lastWatered', label: 'Last Watered', sortable: true },
-    { id: 'lastFertilized', label: 'Last Fertilized', sortable: true },
-    { id: 'lastPruned', label: 'Last Pruned', sortable: true },
-    { id: 'lastHarvested', label: 'Last Harvested', sortable: true },
-    { id: 'healthStatus', label: 'Health Status', sortable: true },
-    { id: 'growthStage', label: 'Growth Stage', sortable: true },
-  ];
 
   public async fetchData() {
     const data: YourCrop[] | undefined =
