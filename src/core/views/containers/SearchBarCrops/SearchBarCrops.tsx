@@ -62,25 +62,25 @@ const SearchBarCrops: React.FC<SearchBarProps> = observer(
         />
         <DateInput
           value={lastWatered.value}
-          onChange={(date) => console.log(date)}
+          onChange={(date) => lastWatered?.setValue(date || '')}
           label={lastWatered.label}
           aria-label="Last Watered"
         />
         <DateInput
           value={lastFertilized.value}
-          onChange={(date) => console.log(date)}
+          onChange={(date) => lastFertilized?.setValue(date || '')}
           label={lastFertilized.label}
           aria-label="Last Fertilized"
         />
         <DateInput
           value={lastPruned.value}
-          onChange={(date) => console.log(date)}
+          onChange={(date) => lastPruned?.setValue(date || '')}
           label={lastPruned.label}
           aria-label="Last Pruned"
         />
         <DateInput
           value={lastHarvested.value}
-          onChange={(date) => console.log(date)}
+          onChange={(date) => lastHarvested?.setValue(date || '')}
           label={lastHarvested.label}
           aria-label="Last Harvested"
         />

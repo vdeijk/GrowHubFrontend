@@ -47,7 +47,7 @@ const SearchBarDatabase: React.FC<SearchBarDatabaseProps> = observer(
           aria-label="Search"
         />
         <Dropdown
-          value={'Sun Preference'}
+          value={sunPreference.value}
           onChange={sunPreference.setValue}
           options={sunPreference.options}
           label={sunPreference.label}

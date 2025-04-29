@@ -58,7 +58,6 @@ class YourCropsStore extends SearchableStore<YourCrop> {
       isLoading: computed,
       fetchData: action,
       searchQuery: observable,
-      matchesFilterCriteria: action,
     });
   }
 
@@ -88,11 +87,6 @@ class YourCropsStore extends SearchableStore<YourCrop> {
         this.filteredItems,
       );
     });
-  }
-
-  public matchesFilterCriteria(plant: YourCrop): boolean {
-    const value = this.dropdownFilters['genus'].value;
-    return value === '' || plant.location === value;
   }
 
   public deletePlant = async (id: number) => {

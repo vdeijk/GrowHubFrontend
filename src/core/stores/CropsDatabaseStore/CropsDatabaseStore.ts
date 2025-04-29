@@ -48,7 +48,7 @@ class CropsDatabaseStore extends SearchableStore<Plant> {
     this.initDropdownFilter(
       'waterNeeds',
       '',
-      'WaterNeeds',
+      'Water Needs',
       Object.values(WaterNeeds),
       '',
     );
@@ -102,7 +102,6 @@ class CropsDatabaseStore extends SearchableStore<Plant> {
       isLoading: computed,
       fetchData: action,
       searchQuery: observable,
-      matchesFilterCriteria: action,
     });
   }
 
@@ -111,7 +110,7 @@ class CropsDatabaseStore extends SearchableStore<Plant> {
     { id: 'commonName', label: 'Common Name', sortable: true },
     { id: 'actions', label: 'Actions', sortable: false },
     { id: 'sunPreference', label: 'Sun Preference', sortable: true },
-    { id: 'waterNeeds', label: 'WaterNeeds', sortable: true },
+    { id: 'waterNeeds', label: 'Water Needs', sortable: true },
     { id: 'soilType', label: 'Soil Type', sortable: true },
     { id: 'soilPH', label: 'Soil PH', sortable: true },
     { id: 'pruning', label: 'Pruning', sortable: true },
@@ -144,22 +143,10 @@ class CropsDatabaseStore extends SearchableStore<Plant> {
     });
   };
 
-  public matchesFilterCriteria = (plant: Plant): boolean => {
-    const value = this.dropdownFilters['genus'].value;
-    return value === '' || plant.genus === value;
-  };
-
   public deletePlant = async (id: number) => {
     await this.endpointService.deleteData(id);
 
     this.fetchData();
-  };
-
-  public setPage = (page: number) => {
-    if (page > 0 && page <= this.paginationStore.totalPages) {
-      this.paginationStore.setCurrentPage(page);
-      this.fetchData();
-    }
   };
 }
 
