@@ -29,15 +29,19 @@ export abstract class SearchableStore<T> {
     this.debouncedFilterItems = debounce(this.filterItems.bind(this), 500);
 
     EventBus.addEventListener('pagination:currentPageChanged', () => {
-      this.paginatedItems = this.paginationStore.paginateItems(
-        this.filteredItems,
-      );
+      runInAction(() => {
+        this.paginatedItems = this.paginationStore.paginateItems(
+          this.filteredItems,
+        );
+      });
     });
 
     EventBus.addEventListener('filteredItems:updated', () => {
-      this.paginatedItems = this.paginationStore.paginateItems(
-        this.filteredItems,
-      );
+      runInAction(() => {
+        this.paginatedItems = this.paginationStore.paginateItems(
+          this.filteredItems,
+        );
+      });
     });
 
     EventBus.addEventListener('searchQuery:updated', () => {

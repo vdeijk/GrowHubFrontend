@@ -78,13 +78,7 @@ const TasksPage: React.FC = observer(() => {
     sortField: taskStore.sortField,
     sortOrder: taskStore.sortOrder,
   };
-
-  console.log(
-    'taskStore.isLoading',
-    taskStore.isLoading,
-    taskStore.paginatedItems,
-  );
-
+  
   return (
     <section className={styles.taskPage}>
       <Popup />

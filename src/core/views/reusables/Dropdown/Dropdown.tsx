@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './Dropdown.module.css';
 import { DropdownOption } from '../../../../auxiliary/interfaces/DropdownOptions';
+import EventBus from '../../../../auxiliary/utils/EventTarget';
 
 export interface DropdownProps {
   value: string;
@@ -19,6 +20,13 @@ const Dropdown: React.FC<DropdownProps> = ({
   label,
   required,
 }) => {
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const newValue = event.target.value;
+    onChange(newValue);
+
+    EventBus.dispatchEvent(new Event(`dropdownFilters:updated`));
+  };
+
   return (
     <div className={label ? styles.container : ''}>
       {label && (
@@ -29,7 +37,7 @@ const Dropdown: React.FC<DropdownProps> = ({
       <select
         required={required}
         value={value}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={handleChange}
         className={styles.dropdown}
         aria-label={ariaLabel}
       >

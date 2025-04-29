@@ -1,5 +1,4 @@
 import { Task } from '../../../auxiliary/interfaces/Task';
-import { debounce } from '../../../auxiliary/utils/debounce';
 import { Priority } from '../../../auxiliary/enums/Priority';
 import { Category } from '../../../auxiliary/enums/Category';
 import { SearchableStore } from '../BaseSearchableStore/BaseSearchableStore';
@@ -49,8 +48,6 @@ class TaskStore extends SearchableStore<Task> {
       'Enter task description',
       30,
     );
-
-    this.debouncedFilterItems = debounce(this.filterItems.bind(this), 500);
 
     this.initDropdownFilter(
       'category',

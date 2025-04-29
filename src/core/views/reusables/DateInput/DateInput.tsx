@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './DateInput.module.css';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import EventBus from '../../../../auxiliary/utils/EventTarget';
 
 export interface DateInputProps {
   value: string;
@@ -19,14 +20,16 @@ const DateInput: React.FC<DateInputProps> = ({
   label,
   error,
 }) => {
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
-    onChange(newValue);
-  };
-
   const formattedValue = value
     ? new Date(value).toISOString().split('T')[0]
     : '';
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = event.target.value;
+    onChange(newValue);
+
+    EventBus.dispatchEvent(new Event(`dateFilters:updated`));
+  };
 
   return (
     <div className={label ? styles.container : ''}>
