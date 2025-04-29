@@ -2,8 +2,8 @@ import { makeAutoObservable } from 'mobx';
 import { runInAction } from 'mobx';
 import fieldsStore from '../FieldsStore/FieldsStore';
 import { LocationItem } from '../../../auxiliary/interfaces/LocationItem';
-import { formatCoordinate } from '../../../auxiliary/utils/formatCoordinates';
-import { EndpointService } from '../../apis/EndpointService';
+import FormatService from '../../services/FormatService';
+import { EndpointService } from '../../services/EndpointService';
 import { Weather } from '../../../auxiliary/interfaces/Weather';
 
 class WeatherStore {
@@ -70,8 +70,8 @@ class WeatherStore {
       return '';
     }
 
-    const latitude = formatCoordinate(location.latitude);
-    const longitude = formatCoordinate(location.longitude);
+    const latitude = FormatService.formatCoordinate(location.latitude);
+    const longitude = FormatService.formatCoordinate(location.longitude);
 
     return `${latitude},${longitude}`;
   }

@@ -1,8 +1,8 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import weatherStore from '../CurrentWeatherStore/WeatherStore';
-import { EndpointService } from '../../apis/EndpointService';
+import { EndpointService } from '../../services/EndpointService';
 import { LocationItem } from '../../../auxiliary/interfaces/LocationItem';
-import EventBus from '../../../auxiliary/utils/EventTarget';
+import EventBus from '../../services/EventTarget';
 
 class FieldsStore {
   private endpointService = new EndpointService('Location');

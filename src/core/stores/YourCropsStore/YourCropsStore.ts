@@ -1,6 +1,6 @@
 import { SearchableStore } from '../BaseSearchableStore/BaseSearchableStore';
 import { YourCrop } from '../../../auxiliary/interfaces/YourCrop';
-import { debounce } from '../../../auxiliary/utils/debounce';
+import { debounce } from '../../services/DebounceService';
 import {
   makeObservable,
   runInAction,
@@ -8,11 +8,11 @@ import {
   action,
   computed,
 } from 'mobx';
-import { EndpointService } from '../../apis/EndpointService';
+import { EndpointService } from '../../services/EndpointService';
 import { PaginationStore } from '../PaginationStore/PaginationStore';
-import YourCropsData from '../../../auxiliary/data/YourCropData';
+import YourCropsData from '../../../auxiliary/classes/YourCropData';
 import { InputField } from '../../../auxiliary/classes/InputField';
-import EventBus from '../../../auxiliary/utils/EventTarget';
+import EventBus from '../../services/EventTarget';
 
 class YourCropsStore extends SearchableStore<YourCrop> {
   public paginationStore = new PaginationStore();

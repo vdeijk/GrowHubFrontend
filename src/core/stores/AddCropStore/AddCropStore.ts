@@ -2,10 +2,10 @@ import { Plant } from '../../../auxiliary/interfaces/Plant';
 import cropsStore from '../YourCropsStore/YourCropsStore';
 import { InputField } from '../../../auxiliary/classes/InputField';
 import { BaseFormStore } from '../BaseFormStore/BaseFormStore';
-import { EndpointService } from '../../apis/EndpointService';
+import { EndpointService } from '../../services/EndpointService';
 import { runInAction } from 'mobx';
 import { Dropdown } from '../../../auxiliary/classes/Dropdown';
-import { localStorageService } from '../../../auxiliary/classes/LocalStorageService';
+import { localStorageService } from '../../services/LocalStorageService';
 
 class AddCropStore extends BaseFormStore {
   private endpointService = new EndpointService('Plant');
@@ -26,11 +26,7 @@ class AddCropStore extends BaseFormStore {
       soilTypeField: new Dropdown<string>('', 'Soil Type', true),
       soilPHField: new Dropdown<string>('', 'Soil PH', true),
       pruningField: new Dropdown<string>('', 'Pruning', true),
-      climateZone: new Dropdown<string>(
-        '',
-        'Climate Zone',
-        true,
-      ),
+      climateZone: new Dropdown<string>('', 'Climate Zone', true),
       plantTypeField: new Dropdown<string>('', 'Plant Type', true),
       growthRateField: new Dropdown<string>('', 'Growth Rate', true),
       fertilizerNeedsField: new Dropdown<string>('', 'fertilizer Needs', true),

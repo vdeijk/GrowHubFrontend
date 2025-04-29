@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx';
-import EventBus from '../../../auxiliary/utils/EventTarget';
+import EventBus from '../../services/EventTarget';
 
 export class PaginationStore {
   public currentPage: number = 1;

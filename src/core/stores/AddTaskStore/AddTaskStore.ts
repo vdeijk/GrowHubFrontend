@@ -4,7 +4,7 @@ import { Task } from '../../../auxiliary/interfaces/Task';
 import { BaseFormStore } from '../BaseFormStore/BaseFormStore';
 import { InputField } from '../../../auxiliary/classes/InputField';
 import taskStore from '../TaskStore/TaskStore';
-import { EndpointService } from '../../apis/EndpointService';
+import { EndpointService } from '../../services/EndpointService';
 import { runInAction } from 'mobx';
 import { DateField } from '../../../auxiliary/classes/DateField';
 import { TaskStatus } from '../../../auxiliary/enums/Task';

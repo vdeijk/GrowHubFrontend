@@ -1,6 +1,6 @@
 import { SearchableStore } from '../BaseSearchableStore/BaseSearchableStore';
 import { Plant } from '../../../auxiliary/interfaces/Plant';
-import { debounce } from '../../../auxiliary/utils/debounce';
+import { debounce } from '../../services/DebounceService';
 import {
   makeObservable,
   runInAction,
@@ -8,11 +8,11 @@ import {
   action,
   computed,
 } from 'mobx';
-import { EndpointService } from '../../apis/EndpointService';
+import { EndpointService } from '../../services/EndpointService';
 import { PaginationStore } from '../PaginationStore/PaginationStore';
-import { localStorageService } from '../../../auxiliary/classes/LocalStorageService';
+import { localStorageService } from '../../services/LocalStorageService';
 import { InputField } from '../../../auxiliary/classes/InputField';
-import CropsDatabaseData from '../../../auxiliary/data/CropsDatabaseData';
+import CropsDatabaseData from '../../../auxiliary/classes/CropsDatabaseData';
 
 class CropsDatabaseStore extends SearchableStore<Plant> {
   private endpointService = new EndpointService('Plant');

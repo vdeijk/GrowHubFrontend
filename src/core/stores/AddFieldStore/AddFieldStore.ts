@@ -2,7 +2,7 @@ import { BaseFormStore } from '../BaseFormStore/BaseFormStore';
 import { InputField } from '../../../auxiliary/classes/InputField';
 import { LocationItem } from '../../../auxiliary/interfaces/LocationItem';
 import fieldsStore from '../FieldsStore/FieldsStore';
-import { EndpointService } from '../../apis/EndpointService';
+import { EndpointService } from '../../services/EndpointService';
 import { runInAction } from 'mobx';
 
 class AddFieldStore extends BaseFormStore {

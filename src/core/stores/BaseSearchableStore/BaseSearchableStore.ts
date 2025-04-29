@@ -5,17 +5,16 @@ import {
   action,
   computed,
 } from 'mobx';
-import { debounce } from '../../../auxiliary/utils/debounce';
 import { InputField } from '../../../auxiliary/classes/InputField';
 import { Dropdown } from '../../../auxiliary/classes/Dropdown';
 import { DateField } from '../../../auxiliary/classes/DateField';
-import EventBus from '../../../auxiliary/utils/EventTarget';
+import EventBus from '../../services/EventTarget';
 import { PaginationStore } from '../PaginationStore/PaginationStore';
-import SortService from '../../apis/SortService';
-import { FilterService } from '../../apis/FilterService';
+import SortService from '../../services/SortService';
+import { FilterService } from '../../services/FilterService';
 import { DateFieldModel } from '../../../auxiliary/interfaces/DateFieldModel';
 import { DropdownFieldModel } from '../../../auxiliary/interfaces/DropdownFieldModel';
-
+import DebounceService from '../../services/DebounceService';
 export abstract class SearchableStore<T> {
   public paginationStore = new PaginationStore();
   public sortService = new SortService<T>();
@@ -32,7 +31,10 @@ export abstract class SearchableStore<T> {
   constructor(searchableFields: (keyof T)[]) {
     this.searchableFields = searchableFields;
 
-    this.debouncedFilterItems = debounce(this.filterItems.bind(this), 500);
+    this.debouncedFilterItems = DebounceService.debounce(
+      this.filterItems.bind(this),
+      500,
+    );
 
     EventBus.addEventListener('pagination:currentPageChanged', () => {
       runInAction(() => {
@@ -126,7 +128,7 @@ export abstract class SearchableStore<T> {
       );
     });
   };
-  
+
   public filterItems = () => {
     let filtered = FilterService.filterBySearchQuery(
       this.items,
