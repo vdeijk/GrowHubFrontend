@@ -5,7 +5,7 @@ import ButtonContainer, {
   ButtonConfig,
 } from '../../reusables/ButtonContainer/ButtonContainer';
 import FieldListContainer from '../../containers/FieldListContainer/FieldListContainer';
-import fieldsStore from '../../../stores/FieldsStore/FieldsStore';
+import fieldsStore from '../../../stores/derived/FieldsStore/FieldsStore';
 import { observer } from 'mobx-react-lite';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';

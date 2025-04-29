@@ -4,7 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import styles from './Map.module.css';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
-import fieldsStore from '../../../stores/FieldsStore/FieldsStore';
+import fieldsStore from '../../../stores/derived/FieldsStore/FieldsStore';
 import { observer } from 'mobx-react-lite';
 import EventBus from '../../../services/EventBusService/EventBusService';
 

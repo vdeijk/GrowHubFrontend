@@ -7,10 +7,10 @@ import { observer } from 'mobx-react-lite';
 import { useParams } from 'react-router-dom';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import Dropdown from '../../reusables/Dropdown/Dropdown';
-import addYourCropStore from '../../../stores/AddYourCropStore/AddYourCropStore';
+import addYourCropStore from '../../../stores/derived/AddYourCropStore/AddYourCropStore';
 import DateInput from '../../reusables/DateInput/DateInput';
 import { DateInputProps } from '../../reusables/DateInput/DateInput';
-import yourCropsStore from '../../../stores/YourCropsStore/YourCropsStore';
+import yourCropsStore from '../../../stores/derived/YourCropsStore/YourCropsStore';
 
 interface AddYourCropPageProps {
   isEditing?: boolean;

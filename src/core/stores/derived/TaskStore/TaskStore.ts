@@ -1,6 +1,6 @@
-import { Task } from '../../../auxiliary/interfaces/Task';
-import { SearchableStore } from '../BaseSearchableStore/BaseSearchableStore';
-import { EndpointService } from '../../services/EndpointService/EndpointService';
+import { Task } from '../../../../auxiliary/interfaces/Task';
+import { SearchableStore } from '../../base/BaseSearchableStore/BaseSearchableStore';
+import { EndpointService } from '../../../services/EndpointService/EndpointService';
 import {
   makeObservable,
   runInAction,
@@ -8,9 +8,9 @@ import {
   action,
   computed,
 } from 'mobx';
-import { InputField } from '../../../auxiliary/classes/InputField';
-import TaskData from '../../../auxiliary/classes/TaskData';
-import { PaginationService } from '../../services/PaginationService/PaginationService';
+import { InputField } from '../../../../auxiliary/classes/InputField';
+import TaskData from '../../../../auxiliary/classes/TaskData';
+import { PaginationService } from '../../../services/PaginationService/PaginationService';
 
 class TaskStore extends SearchableStore<Task> {
   private endpointService = new EndpointService('Todo');

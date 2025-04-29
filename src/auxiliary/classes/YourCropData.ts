@@ -1,6 +1,6 @@
 import { GrowthStage } from '../enums/GrowthStage';
 import { HealthStatus } from '../enums/HealthStatus';
-import fieldsStore from '../../core/stores/FieldsStore/FieldsStore';
+import fieldsStore from '../../core/stores/derived/FieldsStore/FieldsStore';
 import { DropdownFieldModel } from '../interfaces/DropdownFieldModel';
 import { DateFieldModel } from '../interfaces/DateFieldModel';
 

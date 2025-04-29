@@ -1,6 +1,6 @@
 import { makeObservable, observable, action, runInAction } from 'mobx';
-import { InputField } from '../../../auxiliary/classes/InputField';
-import { DateField } from '../../../auxiliary/classes/DateField';
+import { InputField } from '../../../../auxiliary/classes/InputField';
+import { DateField } from '../../../../auxiliary/classes/DateField';
 
 export abstract class BaseFormStore {
   fields: Record<

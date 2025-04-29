@@ -1,5 +1,5 @@
-import { SearchableStore } from '../BaseSearchableStore/BaseSearchableStore';
-import { YourCrop } from '../../../auxiliary/interfaces/YourCrop';
+import { SearchableStore } from '../../base/BaseSearchableStore/BaseSearchableStore';
+import { YourCrop } from '../../../../auxiliary/interfaces/YourCrop';
 import {
   makeObservable,
   runInAction,
@@ -7,12 +7,12 @@ import {
   action,
   computed,
 } from 'mobx';
-import { EndpointService } from '../../services/EndpointService/EndpointService';
-import YourCropsData from '../../../auxiliary/classes/YourCropData';
-import { InputField } from '../../../auxiliary/classes/InputField';
-import EventBus from '../../services/EventBusService/EventBusService';
-import DebounceService from '../../services/DebounceService/DebounceService';
-import { PaginationService } from '../../services/PaginationService/PaginationService';
+import { EndpointService } from '../../../services/EndpointService/EndpointService';
+import YourCropsData from '../../../../auxiliary/classes/YourCropData';
+import { InputField } from '../../../../auxiliary/classes/InputField';
+import EventBus from '../../../services/EventBusService/EventBusService';
+import DebounceService from '../../../services/DebounceService/DebounceService';
+import { PaginationService } from '../../../services/PaginationService/PaginationService';
 
 class YourCropsStore extends SearchableStore<YourCrop> {
   public paginationService = new PaginationService();

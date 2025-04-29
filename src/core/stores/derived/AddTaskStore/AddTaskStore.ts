@@ -1,13 +1,13 @@
-import { Category } from '../../../auxiliary/enums/Category';
-import { Priority } from '../../../auxiliary/enums/Priority';
-import { Task } from '../../../auxiliary/interfaces/Task';
-import { BaseFormStore } from '../BaseFormStore/BaseFormStore';
-import { InputField } from '../../../auxiliary/classes/InputField';
+import { Category } from '../../../../auxiliary/enums/Category';
+import { Priority } from '../../../../auxiliary/enums/Priority';
+import { Task } from '../../../../auxiliary/interfaces/Task';
+import { BaseFormStore } from '../../base/BaseFormStore/BaseFormStore';
+import { InputField } from '../../../../auxiliary/classes/InputField';
 import taskStore from '../TaskStore/TaskStore';
-import { EndpointService } from '../../services/EndpointService/EndpointService';
+import { EndpointService } from '../../../services/EndpointService/EndpointService';
 import { runInAction } from 'mobx';
-import { DateField } from '../../../auxiliary/classes/DateField';
-import { TaskStatus } from '../../../auxiliary/enums/Task';
+import { DateField } from '../../../../auxiliary/classes/DateField';
+import { TaskStatus } from '../../../../auxiliary/enums/Task';
 
 class AddTaskStore extends BaseFormStore {
   public endpointService = new EndpointService('Todo');

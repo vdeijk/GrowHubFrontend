@@ -1,12 +1,12 @@
 import React from 'react';
 import styles from './WeatherReportPage.module.css';
 import { observer } from 'mobx-react-lite';
-import weatherStore from '../../../stores/WeatherStore/WeatherStore';
+import weatherStore from '../../../stores/derived/WeatherStore/WeatherStore';
 import TextWithBoldSpan from '../../reusables/TextWithBoldSpan/TextWithBoldSpan';
 import Heading from '../../reusables/Heading/Heading';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import Dropdown from '../../reusables/Dropdown/Dropdown';
-import fieldsStore from '../../../stores/FieldsStore/FieldsStore';
+import fieldsStore from '../../../stores/derived/FieldsStore/FieldsStore';
 
 const WeatherReportPage: React.FC = observer(() => {
   const options = fieldsStore.locations.map((location) => ({

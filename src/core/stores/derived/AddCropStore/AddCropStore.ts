@@ -1,11 +1,11 @@
-import { Plant } from '../../../auxiliary/interfaces/Plant';
-import cropsStore from '../YourCropsStore/YourCropsStore';
-import { InputField } from '../../../auxiliary/classes/InputField';
-import { BaseFormStore } from '../BaseFormStore/BaseFormStore';
-import { EndpointService } from '../../services/EndpointService/EndpointService';
+import { Plant } from '../../../../auxiliary/interfaces/Plant';
+import cropsDatabaseStore from '../CropsDatabaseStore/CropsDatabaseStore';
+import { InputField } from '../../../../auxiliary/classes/InputField';
+import { BaseFormStore } from '../../base/BaseFormStore/BaseFormStore';
+import { EndpointService } from '../../../services/EndpointService/EndpointService';
 import { runInAction } from 'mobx';
-import { Dropdown } from '../../../auxiliary/classes/Dropdown';
-import { localStorageService } from '../../services/LocalStorageService/LocalStorageService';
+import { Dropdown } from '../../../../auxiliary/classes/Dropdown';
+import { localStorageService } from '../../../services/LocalStorageService/LocalStorageService';
 
 class AddCropStore extends BaseFormStore {
   private endpointService = new EndpointService('Plant');
@@ -50,7 +50,7 @@ class AddCropStore extends BaseFormStore {
     await this.endpointService.postData(data);
 
     localStorageService.invalidateCache('cropsDatabaseItems');
-    cropsStore.fetchData();
+    cropsDatabaseStore.fetchData();
   };
 
   public updateCrop = async (id: string) => {
@@ -73,7 +73,7 @@ class AddCropStore extends BaseFormStore {
 
     await this.endpointService.putData(`${id}`, data);
 
-    cropsStore.fetchData();
+    cropsDatabaseStore.fetchData();
   };
 
   public loadCrop = async (id: string) => {

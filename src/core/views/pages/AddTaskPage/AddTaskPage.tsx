@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import TextInput, { TextInputProps } from '../../reusables/TextInput/TextInput';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
-import addTaskStore from '../../../stores/AddTaskStore/AddTaskStore';
+import addTaskStore from '../../../stores/derived/AddTaskStore/AddTaskStore';
 import styles from './AddTaskPage.module.css';
 import { observer } from 'mobx-react-lite';
 import { useParams } from 'react-router-dom';
@@ -10,7 +10,7 @@ import Button, { ButtonProps } from '../../reusables/Button/Button';
 import Dropdown from '../../reusables/Dropdown/Dropdown';
 import DateInput, { DateInputProps } from '../../reusables/DateInput/DateInput';
 import { DropdownProps } from '../../reusables/Dropdown/Dropdown';
-import taskStore from '../../../stores/TaskStore/TaskStore';
+import taskStore from '../../../stores/derived/TaskStore/TaskStore';
 
 interface AddTaskPageProps {
   isEditing?: boolean;

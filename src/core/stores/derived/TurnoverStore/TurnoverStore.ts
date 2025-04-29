@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx';
-import { Turnover } from '../../../auxiliary/interfaces/Turnover';
+import { Turnover } from '../../../../auxiliary/interfaces/Turnover';
 import { runInAction } from 'mobx';
 
 class TurnoverStore {

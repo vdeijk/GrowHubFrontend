@@ -1,7 +1,7 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 import CheckboxInput from '../../reusables/CheckboxInput/CheckboxInput';
-import settingsStore from '../../../stores/SettingsStore/SettingsStore';
+import settingsStore from '../../../stores/derived/SettingsStore/SettingsStore';
 import Heading from '../../reusables/Heading/Heading';
 
 const SettingsPage: React.FC = observer(() => {

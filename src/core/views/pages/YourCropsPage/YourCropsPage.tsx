@@ -2,7 +2,7 @@ import React from 'react';
 import SearchBarCrops from '../../containers/SearchBarCrops/SearchBarCrops';
 import TableWithSorting from '../../reusables/TableWithSorting/TableWithSorting';
 import styles from './YourCropsPage.module.css';
-import cropsStore from '../../../stores/YourCropsStore/YourCropsStore';
+import cropsStore from '../../../stores/derived/YourCropsStore/YourCropsStore';
 import { observer } from 'mobx-react-lite';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import { SearchBarProps } from '../../containers/SearchBarCrops/SearchBarCrops';

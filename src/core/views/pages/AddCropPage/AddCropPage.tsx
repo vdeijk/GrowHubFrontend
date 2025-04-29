@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import TextInput from '../../reusables/TextInput/TextInput';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
-import addCropStore from '../../../stores/AddCropStore/AddCropStore';
+import addCropStore from '../../../stores/derived/AddCropStore/AddCropStore';
 import Button, { ButtonProps } from '../../reusables/Button/Button';
 import styles from './AddCropPage.module.css';
 import { observer } from 'mobx-react-lite';
 import { useParams } from 'react-router-dom';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import Dropdown from '../../reusables/Dropdown/Dropdown';
-import cropsDatabaseStore from '../../../stores/CropsDatabaseStore/CropsDatabaseStore';
+import cropsDatabaseStore from '../../../stores/derived/CropsDatabaseStore/CropsDatabaseStore';
 
 interface AddCropPageProps {
   isEditing?: boolean;

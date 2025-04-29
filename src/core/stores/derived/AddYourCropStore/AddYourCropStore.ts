@@ -1,12 +1,12 @@
-import { YourCrop } from '../../../auxiliary/interfaces/YourCrop';
-import cropsStore from '../YourCropsStore/YourCropsStore';
-import { InputField } from '../../../auxiliary/classes/InputField';
-import { BaseFormStore } from '../BaseFormStore/BaseFormStore';
-import { EndpointService } from '../../services/EndpointService/EndpointService';
+import { YourCrop } from '../../../../auxiliary/interfaces/YourCrop';
+import yourCropsStore from '../YourCropsStore/YourCropsStore';
+import { InputField } from '../../../../auxiliary/classes/InputField';
+import { BaseFormStore } from '../../base/BaseFormStore/BaseFormStore';
+import { EndpointService } from '../../../services/EndpointService/EndpointService';
 import { runInAction } from 'mobx';
-import { Dropdown } from '../../../auxiliary/classes/Dropdown';
-import { localStorageService } from '../../services/LocalStorageService/LocalStorageService';
-import { DateField } from '../../../auxiliary/classes/DateField';
+import { Dropdown } from '../../../../auxiliary/classes/Dropdown';
+import { localStorageService } from '../../../services/LocalStorageService/LocalStorageService';
+import { DateField } from '../../../../auxiliary/classes/DateField';
 
 class AddYourCropStore extends BaseFormStore {
   private endpointService = new EndpointService('YourCrops');
@@ -47,7 +47,7 @@ class AddYourCropStore extends BaseFormStore {
     await this.endpointService.postData(data);
 
     localStorageService.invalidateCache('cropsDatabaseItems');
-    cropsStore.fetchData();
+    yourCropsStore.fetchData();
   };
 
   public updateCrop = async (id: string) => {
@@ -68,7 +68,7 @@ class AddYourCropStore extends BaseFormStore {
 
     await this.endpointService.putData(`${id}`, data);
 
-    cropsStore.fetchData();
+    yourCropsStore.fetchData();
   };
 
   public loadCrop = async (id: string) => {

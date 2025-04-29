@@ -4,7 +4,7 @@ import './index.css';
 import './variables.css';
 import App from './App';
 import { HashRouter } from 'react-router-dom';
-import settingsStore from './core/stores/SettingsStore/SettingsStore';
+import settingsStore from './core/stores/derived/SettingsStore/SettingsStore';
 import { Auth0Provider } from '@auth0/auth0-react';
 
 settingsStore.initialize();

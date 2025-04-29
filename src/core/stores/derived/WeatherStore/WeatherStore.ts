@@ -1,10 +1,10 @@
 import { makeAutoObservable } from 'mobx';
 import { runInAction } from 'mobx';
 import fieldsStore from '../FieldsStore/FieldsStore';
-import { LocationItem } from '../../../auxiliary/interfaces/LocationItem';
-import FormatService from '../../services/FormatService/FormatService';
-import { EndpointService } from '../../services/EndpointService/EndpointService';
-import { Weather } from '../../../auxiliary/interfaces/Weather';
+import { LocationItem } from '../../../../auxiliary/interfaces/LocationItem';
+import FormatService from '../../../services/FormatService/FormatService';
+import { EndpointService } from '../../../services/EndpointService/EndpointService';
+import { Weather } from '../../../../auxiliary/interfaces/Weather';
 
 class WeatherStore {
   private endpointService = new EndpointService('Weather/forecast');
