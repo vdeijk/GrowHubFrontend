@@ -17,9 +17,12 @@ const YourCropsContainer: React.FC = observer(() => {
     label: 'View All Crops',
   };
 
-  const headersWithoutActions = plantsStore.tableHeaders.filter(
-    (header) => header.id !== 'actions',
-  );
+  const headersWithoutActions = plantsStore.tableHeaders
+    .filter((header) => header.id !== 'actions')
+    .map((header) => ({
+      ...header,
+      id: header.id as keyof YourCrop,
+    }));
 
   const omit = <T, K extends keyof T>(obj: T, key: K): Omit<T, K> => {
     const rest = { ...obj };
