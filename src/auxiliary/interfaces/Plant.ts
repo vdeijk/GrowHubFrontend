@@ -8,7 +8,7 @@ export interface Plant {
   soilType?: string | boolean | string;
   soilPH?: string | boolean | string;
   pruning?: string | boolean | string;
-  temperatureRange?: string | boolean | string;
+  climateZone?: string | boolean | string;
   plantType?: string | boolean | string;
   growthRate?: string | boolean | string;
   matureSize?: string | boolean | string;

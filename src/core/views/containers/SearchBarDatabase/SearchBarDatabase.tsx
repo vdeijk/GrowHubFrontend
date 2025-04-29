@@ -14,7 +14,7 @@ export interface SearchBarDatabaseProps {
   soilType: DropdownClass<string>;
   soilPH: DropdownClass<string>;
   pruning: DropdownClass<string>;
-  temperatureRange: DropdownClass<string>;
+  climateZone: DropdownClass<string>;
   plantType: DropdownClass<string>;
   growthRate: DropdownClass<string>;
   fertilizerNeeds: DropdownClass<string>;
@@ -30,7 +30,7 @@ const SearchBarDatabase: React.FC<SearchBarDatabaseProps> = observer(
     soilType,
     soilPH,
     pruning,
-    temperatureRange,
+    climateZone,
     plantType,
     growthRate,
     fertilizerNeeds,
@@ -82,11 +82,11 @@ const SearchBarDatabase: React.FC<SearchBarDatabaseProps> = observer(
           aria-label="Pruning"
         />
         <Dropdown
-          value={temperatureRange.value}
-          onChange={temperatureRange.setValue}
-          options={temperatureRange.options}
-          label={temperatureRange.label}
-          aria-label="Temperature Range"
+          value={climateZone.value}
+          onChange={climateZone.setValue}
+          options={climateZone.options}
+          label={climateZone.label}
+          aria-label="Climate Zone"
         />
         <Dropdown
           value={plantType.value}

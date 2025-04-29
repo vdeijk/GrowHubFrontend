@@ -24,7 +24,7 @@ const CropsDatabasePage: React.FC = observer(() => {
     soilType: cropsDatabaseStore.dropdownFilters['soilType'],
     soilPH: cropsDatabaseStore.dropdownFilters['soilPH'],
     pruning: cropsDatabaseStore.dropdownFilters['pruning'],
-    temperatureRange: cropsDatabaseStore.dropdownFilters['temperatureRange'],
+    climateZone: cropsDatabaseStore.dropdownFilters['climateZone'],
     plantType: cropsDatabaseStore.dropdownFilters['plantType'],
     growthRate: cropsDatabaseStore.dropdownFilters['growthRate'],
     fertilizerNeeds: cropsDatabaseStore.dropdownFilters['fertilizerNeeds'],

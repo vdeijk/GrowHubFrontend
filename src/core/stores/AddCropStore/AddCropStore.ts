@@ -26,9 +26,9 @@ class AddCropStore extends BaseFormStore {
       soilTypeField: new Dropdown<string>('', 'Soil Type', true),
       soilPHField: new Dropdown<string>('', 'Soil PH', true),
       pruningField: new Dropdown<string>('', 'Pruning', true),
-      temperatureRangeField: new Dropdown<string>(
+      climateZone: new Dropdown<string>(
         '',
-        'Temperature Range',
+        'Climate Zone',
         true,
       ),
       plantTypeField: new Dropdown<string>('', 'Plant Type', true),
@@ -45,7 +45,7 @@ class AddCropStore extends BaseFormStore {
       soilType: this.fields.soilTypeField.value as string,
       soilPH: this.fields.soilPHField.value as string,
       pruning: this.fields.pruningField.value as string,
-      temperatureRange: this.fields.temperatureRangeField.value as string,
+      climateZone: this.fields.climateZone.value as string,
       plantType: this.fields.plantTypeField.value as string,
       growthRate: this.fields.growthRateField.value as string,
       fertilizerNeeds: this.fields.fertilizerNeedsField.value as string,
@@ -69,7 +69,7 @@ class AddCropStore extends BaseFormStore {
       soilType: this.fields.soilTypeField.value as string,
       soilPH: this.fields.soilPHField.value as string,
       pruning: this.fields.pruningField.value as string,
-      temperatureRange: this.fields.temperatureRangeField.value as string,
+      climateZone: this.fields.climateZone.value as string,
       plantType: this.fields.plantTypeField.value as string,
       growthRate: this.fields.growthRateField.value as string,
       fertilizerNeeds: this.fields.fertilizerNeedsField.value as string,
@@ -94,7 +94,7 @@ class AddCropStore extends BaseFormStore {
       this.fields.soilTypeField.setValue(String(data.soilType));
       this.fields.soilPHField.setValue(String(data.soilPH));
       this.fields.pruningField.setValue(String(data.pruning));
-      this.fields.temperatureRangeField.setValue(String(data.temperatureRange));
+      this.fields.climateZoneField.setValue(String(data.climateZone));
       this.fields.plantTypeField.setValue(String(data.plantType));
       this.fields.growthRateField.setValue(String(data.growthRate));
       this.fields.fertilizerNeedsField.setValue(String(data.fertilizerNeeds));

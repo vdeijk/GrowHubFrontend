@@ -67,22 +67,6 @@ const AddYourCropPage: React.FC<AddYourCropPageProps> = observer(
         addYourCropStore.fields.locationField.setValue(value),
     };
 
-    const growthStageField = {
-      ...addYourCropStore.fields.growthStageField,
-      value: String(addYourCropStore.fields.growthStageField.value),
-      options: yourCropsStore.dropdownFilters['waterNeeds'].options,
-      onChange: (value: string) =>
-        addYourCropStore.fields.growthStageField.setValue(value),
-    };
-
-    const healthStatusFieldModel = {
-      ...addYourCropStore.fields.healthStatusField,
-      value: String(addYourCropStore.fields.healthStatusField.value),
-      options: yourCropsStore.dropdownFilters['healthStatus'].options,
-      onChange: (value: string) =>
-        addYourCropStore.fields.soilTypeField.setValue(value),
-    };
-
     const lastWateredFieldModel: DateInputProps = {
       ...addYourCropStore.fields.lastWateredField,
       value: String(addYourCropStore.fields.lastWateredField.value || ''),
@@ -109,6 +93,22 @@ const AddYourCropPage: React.FC<AddYourCropPageProps> = observer(
       value: String(addYourCropStore.fields.lastHarvestedField.value || ''),
       onChange: (value) =>
         addYourCropStore.fields.lastHarvestedField.setValue(value || ''),
+    };
+
+    const healthStatusFieldModel = {
+      ...addYourCropStore.fields.healthStatusField,
+      value: String(addYourCropStore.fields.healthStatusField.value),
+      options: yourCropsStore.dropdownFilters['healthStatus'].options,
+      onChange: (value: string) =>
+        addYourCropStore.fields.soilTypeField.setValue(value),
+    };
+
+    const growthStageField = {
+      ...addYourCropStore.fields.growthStageField,
+      value: String(addYourCropStore.fields.growthStageField.value),
+      options: yourCropsStore.dropdownFilters['growthStage'].options,
+      onChange: (value: string) =>
+        addYourCropStore.fields.growthStageField.setValue(value),
     };
 
     return (

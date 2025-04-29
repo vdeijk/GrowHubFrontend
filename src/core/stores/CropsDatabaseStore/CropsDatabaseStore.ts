@@ -20,6 +20,7 @@ import { PlantType } from '../../../auxiliary/enums/PlantType';
 import { GrowthRate } from '../../../auxiliary/enums/GrowthRate';
 import { FertilizerNeeds } from '../../../auxiliary/enums/FertilizerNeeds';
 import { InputField } from '../../../auxiliary/classes/InputField';
+import { ClimateZone } from '../../../auxiliary/enums/ClimateZone';
 
 class CropsDatabaseStore extends SearchableStore<Plant> {
   private endpointService = new EndpointService('Plant');
@@ -68,10 +69,10 @@ class CropsDatabaseStore extends SearchableStore<Plant> {
       '',
     );
     this.initDropdownFilter(
-      'temperatureRange',
+      'climateZone',
       '',
-      'Temperature Range',
-      Object.values(PlantType),
+      'Climate Zone',
+      Object.values(ClimateZone),
       '',
     );
     this.initDropdownFilter(
@@ -114,7 +115,7 @@ class CropsDatabaseStore extends SearchableStore<Plant> {
     { id: 'soilType', label: 'Soil Type', sortable: true },
     { id: 'soilPH', label: 'Soil PH', sortable: true },
     { id: 'pruning', label: 'Pruning', sortable: true },
-    { id: 'temperatureRange', label: 'Temperature Range', sortable: true },
+    { id: 'climateZone', label: 'Climate Zone', sortable: true },
     { id: 'plantType', label: 'Plant Type', sortable: true },
     { id: 'growthRate', label: 'Growth Rate', sortable: true },
     { id: 'fertilizerNeeds', label: 'Fertilizer Needs', sortable: true },

@@ -97,12 +97,12 @@ const AddCropPage: React.FC<AddCropPageProps> = observer(
         addCropStore.fields.pruningField.setValue(value),
     };
 
-    const temperatureRangeFieldModel = {
-      ...addCropStore.fields.temperatureRangeField,
-      value: String(addCropStore.fields.temperatureRangeField.value),
-      options: cropsDatabaseStore.dropdownFilters['temperatureRange'].options,
+    const climateZoneFieldModel = {
+      ...addCropStore.fields.climateZone,
+      value: String(addCropStore.fields.climateZone.value),
+      options: cropsDatabaseStore.dropdownFilters['climateZone'].options,
       onChange: (value: string) =>
-        addCropStore.fields.temperatureRangeField.setValue(value),
+        addCropStore.fields.climateZone.setValue(value),
     };
 
     const plantTypeFieldModel = {
@@ -139,7 +139,7 @@ const AddCropPage: React.FC<AddCropPageProps> = observer(
             <Dropdown {...soilTypeFieldModel} />
             <Dropdown {...soilPHFieldModel} />
             <Dropdown {...pruningFieldModel} />
-            <Dropdown {...temperatureRangeFieldModel} />
+            <Dropdown {...climateZoneFieldModel} />
             <Dropdown {...plantTypeFieldModel} />
             <Dropdown {...growthRateFieldModel} />
             <Dropdown {...fertilizerNeedsFieldModel} />
