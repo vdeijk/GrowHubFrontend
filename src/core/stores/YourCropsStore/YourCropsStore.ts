@@ -13,6 +13,9 @@ import { PaginationStore } from '../PaginationStore/PaginationStore';
 import { GrowthStage } from '../../../auxiliary/enums/GrowthStage';
 import { HealthStatus } from '../../../auxiliary/enums/HealthStatus';
 import { InputField } from '../../../auxiliary/classes/InputField';
+import fieldsStore from '../FieldsStore/FieldsStore';
+import { LocationItem } from '../../../auxiliary/interfaces/LocationItem';
+import EventBus from '../../../auxiliary/utils/EventTarget';
 
 class YourCropsStore extends SearchableStore<YourCrop> {
   private endpointService = new EndpointService('YourCrops');
@@ -31,7 +34,13 @@ class YourCropsStore extends SearchableStore<YourCrop> {
   constructor() {
     super(['commonName']);
 
-    this.initDropdownFilter('location', '', 'Location', ['test'], '');
+    EventBus.addEventListener('locations:updated', () => {
+      const fields: LocationItem[] = fieldsStore.getLocations();
+      const locationNames = fields.map((field) => field.name);
+
+      this.initDropdownFilter('location', '', 'Location', locationNames, '');
+    });
+
     this.initDropdownFilter(
       'growthStage',
       '',

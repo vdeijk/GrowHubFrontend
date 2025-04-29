@@ -2,6 +2,7 @@ import { makeAutoObservable, runInAction } from 'mobx';
 import weatherStore from '../CurrentWeatherStore/WeatherStore';
 import { EndpointService } from '../../apis/EndpointService';
 import { LocationItem } from '../../../auxiliary/interfaces/LocationItem';
+import EventBus from '../../../auxiliary/utils/EventTarget';
 
 class FieldsStore {
   private endpointService = new EndpointService('Location');
@@ -31,6 +32,8 @@ class FieldsStore {
 
         weatherStore.setLocation(this.locations[0]?.id?.toString() || '');
         weatherStore.fetchData();
+
+        EventBus.dispatchEvent(new CustomEvent('locations:updated'));
       });
     } finally {
       runInAction(() => {
@@ -46,6 +49,10 @@ class FieldsStore {
 
     weatherStore.fetchData();
   };
+
+  public getLocations(): LocationItem[] {
+    return this.locations;
+  }
 }
 
 const fieldsStore = new FieldsStore();
