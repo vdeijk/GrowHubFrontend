@@ -16,7 +16,7 @@ const FieldsPage: React.FC = observer(() => {
 
   const buttonConfigs: ButtonConfig[] = [
     {
-      clickHandler: () => EventBus.dispatchEvent(new Event('centerMap')),
+      clickHandler: () => EventBus.dispatchEvent('centerMap', undefined),
       label: 'Center Map',
     },
     {

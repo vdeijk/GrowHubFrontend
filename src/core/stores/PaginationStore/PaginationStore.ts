@@ -13,7 +13,7 @@ export class PaginationStore {
   public setCurrentPage(page: number) {
     if (page > 0 && page <= this.totalPages) {
       this.currentPage = page;
-      EventBus.dispatchEvent(new Event('pagination:currentPageChanged'));
+      EventBus.dispatchEvent('pagination:currentPageChanged', undefined);
     }
   }
 

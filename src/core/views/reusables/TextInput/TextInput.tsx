@@ -24,7 +24,7 @@ const TextInput: React.FC<TextInputProps> = ({
     const newValue = event.target.value;
     onChange(newValue);
 
-    EventBus.dispatchEvent(new Event(`searchQuery:updated`));
+    EventBus.dispatchEvent(`searchQuery:updated`, undefined);
   };
 
   return (

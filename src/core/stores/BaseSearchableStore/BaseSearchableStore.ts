@@ -143,7 +143,7 @@ export abstract class SearchableStore<T> {
       this.filteredItems = this.sortService.sortItems(filtered);
     });
 
-    EventBus.dispatchEvent(new Event('filteredItems:updated'));
+    EventBus.dispatchEvent('filteredItems:updated', undefined);
   };
 
   public sortItems = (field: keyof T) => {
@@ -153,6 +153,6 @@ export abstract class SearchableStore<T> {
       this.filteredItems = this.sortService.sortItems(this.filteredItems);
     });
 
-    EventBus.dispatchEvent(new Event('filteredItems:updated'));
+    EventBus.dispatchEvent('filteredItems:updated', undefined);
   };
 }

@@ -30,7 +30,7 @@ class FieldsStore {
       weatherStore.setLocation(this.locations[0]?.id?.toString() || '');
       weatherStore.fetchData();
 
-      EventBus.dispatchEvent(new CustomEvent('locations:updated'));
+      EventBus.dispatchEvent('locations:updated', undefined);
     });
   }
 

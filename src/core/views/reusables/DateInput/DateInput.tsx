@@ -28,7 +28,7 @@ const DateInput: React.FC<DateInputProps> = ({
     const newValue = event.target.value;
     onChange(newValue);
 
-    EventBus.dispatchEvent(new Event(`dateFilters:updated`));
+    EventBus.dispatchEvent(`dateFilters:updated`, undefined);
   };
 
   return (

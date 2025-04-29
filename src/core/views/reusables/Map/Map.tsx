@@ -99,10 +99,10 @@ const Map: React.FC<MapProps> = observer(
     useEffect(() => {
       const handleCenterMap = () => centerMap();
 
-      EventBus.addEventListener('centerMap', handleCenterMap);
+      EventBus.addEventListener('centerMap:updated', handleCenterMap);
 
       return () => {
-        EventBus.removeEventListener('centerMap', handleCenterMap);
+        EventBus.removeEventListener('centerMap:updated', handleCenterMap);
       };
     }, [markers]);
 

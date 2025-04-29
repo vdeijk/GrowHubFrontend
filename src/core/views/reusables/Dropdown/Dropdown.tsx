@@ -24,7 +24,7 @@ const Dropdown: React.FC<DropdownProps> = ({
     const newValue = event.target.value;
     onChange(newValue);
 
-    EventBus.dispatchEvent(new Event(`dropdownFilters:updated`));
+    EventBus.dispatchEvent(`dropdownFilters:updated`, undefined);
   };
 
   return (

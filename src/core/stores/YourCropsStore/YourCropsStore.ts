@@ -1,6 +1,5 @@
 import { SearchableStore } from '../BaseSearchableStore/BaseSearchableStore';
 import { YourCrop } from '../../../auxiliary/interfaces/YourCrop';
-import { debounce } from '../../services/DebounceService';
 import {
   makeObservable,
   runInAction,
@@ -13,6 +12,7 @@ import { PaginationStore } from '../PaginationStore/PaginationStore';
 import YourCropsData from '../../../auxiliary/classes/YourCropData';
 import { InputField } from '../../../auxiliary/classes/InputField';
 import EventBus from '../../services/EventTarget';
+import DebounceService from '../../services/DebounceService';
 
 class YourCropsStore extends SearchableStore<YourCrop> {
   public paginationStore = new PaginationStore();
@@ -46,7 +46,10 @@ class YourCropsStore extends SearchableStore<YourCrop> {
       this.initDateFilter(dateField);
     });
 
-    this.debouncedFilterPlants = debounce(this.filterItems.bind(this), 500);
+    this.debouncedFilterPlants = DebounceService.debounce(
+      this.filterItems.bind(this),
+      500,
+    );
 
     makeObservable(this, {
       isLoading: computed,
