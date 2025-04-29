@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './DateInput.module.css';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import EventBus from '../../../services/EventTarget';
+import EventBus from '../../../services/EventBusService';
 
 export interface DateInputProps {
   value: string;

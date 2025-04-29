@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Dropdown.module.css';
 import { DropdownOption } from '../../../../auxiliary/interfaces/DropdownOptions';
-import EventBus from '../../../services/EventTarget';
+import EventBus from '../../../services/EventBusService';
 
 export interface DropdownProps {
   value: string;

@@ -11,10 +11,8 @@ import { SearchBarTasksProps } from '../../containers/SearchBarTasks/SearchBarTa
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import ActionIcons from '../../reusables/ActionIcons/ActionIcons';
-import popupStore from '../../../stores/PopupStore/PopupStore';
 import Popup from '../../containers/Popup/Popup';
 import Pagination from '../../reusables/Pagination/Pagination';
-import TaskPopup from '../../reusables/TaskPopup/TaskPopup';
 
 const TasksPage: React.FC = observer(() => {
   const paginationStore = taskStore.paginationStore;
@@ -23,18 +21,6 @@ const TasksPage: React.FC = observer(() => {
   const buttonContainerData = {
     clickHandler: () => navigate('/addTaskPage'),
     label: 'Add AgriTask',
-  };
-
-  const handlePopup = (id: number | undefined) => {
-    const task = taskStore.items.find((item) => item.id === id);
-
-    if (!task || !task.id) return;
-
-    taskStore.descriptionField.setValue(task.description);
-
-    popupStore.openPopup(
-      <TaskPopup descriptionField={taskStore.descriptionField} />,
-    );
   };
 
   const handleEdit = (id: number | undefined) => {
@@ -63,7 +49,6 @@ const TasksPage: React.FC = observer(() => {
       actions: (
         <ActionIcons
           item={item as { id: number | undefined }}
-          handlePopup={handlePopup}
           handleEdit={handleEdit}
           handleDelete={handleDelete}
         />

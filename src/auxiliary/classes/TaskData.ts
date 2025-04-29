@@ -7,11 +7,11 @@ import { TaskStatus } from '../enums/Task';
 class TaskData {
   public static tableHeaders = [
     { id: 'title', label: 'Title', sortable: true },
+    { id: 'actions', label: 'Actions', sortable: false },
     { id: 'priority', label: 'Priority', sortable: true },
     { id: 'dueDate', label: 'Due Date', sortable: true },
     { id: 'category', label: 'Category', sortable: true },
     { id: 'status', label: 'Status', sortable: true },
-    { id: 'actions', label: 'Actions', sortable: false },
   ];
 
   public static dropdowns: Record<string, DropdownFieldModel> = {

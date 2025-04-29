@@ -1,10 +1,10 @@
 import { makeAutoObservable } from 'mobx';
-import EventBus from '../../services/EventTarget';
+import EventBus from '../../services/EventBusService';
 
 export class PaginationStore {
   public currentPage: number = 1;
   public totalPages: number = 1;
-  public pageSize: number = 5;
+  public pageSize: number = 10;
 
   constructor() {
     makeAutoObservable(this);

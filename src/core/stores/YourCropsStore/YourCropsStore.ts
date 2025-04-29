@@ -11,7 +11,7 @@ import { EndpointService } from '../../services/EndpointService';
 import { PaginationStore } from '../PaginationStore/PaginationStore';
 import YourCropsData from '../../../auxiliary/classes/YourCropData';
 import { InputField } from '../../../auxiliary/classes/InputField';
-import EventBus from '../../services/EventTarget';
+import EventBus from '../../services/EventBusService';
 import DebounceService from '../../services/DebounceService';
 
 class YourCropsStore extends SearchableStore<YourCrop> {

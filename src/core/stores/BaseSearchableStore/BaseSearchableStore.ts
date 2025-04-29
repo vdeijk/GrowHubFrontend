@@ -8,7 +8,7 @@ import {
 import { InputField } from '../../../auxiliary/classes/InputField';
 import { Dropdown } from '../../../auxiliary/classes/Dropdown';
 import { DateField } from '../../../auxiliary/classes/DateField';
-import EventBus from '../../services/EventTarget';
+import EventBus from '../../services/EventBusService';
 import { PaginationStore } from '../PaginationStore/PaginationStore';
 import SortService from '../../services/SortService';
 import { FilterService } from '../../services/FilterService';
