@@ -54,7 +54,7 @@ const CropsDatabasePage: React.FC = observer(() => {
         />
       ),
     })),
-    onSort: (field) => cropsDatabaseStore.setSortField(field),
+    onSort: (field) => cropsDatabaseStore.sortItems(field),
     sortField: cropsDatabaseStore.sortField,
     sortOrder: cropsDatabaseStore.sortOrder,
   };

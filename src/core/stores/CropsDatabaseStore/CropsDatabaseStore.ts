@@ -1,7 +1,13 @@
 import { SearchableStore } from '../BaseSearchableStore/BaseSearchableStore';
 import { Plant } from '../../../auxiliary/interfaces/Plant';
 import { debounce } from '../../../auxiliary/utils/debounce';
-import { makeObservable, runInAction, observable, action } from 'mobx';
+import {
+  makeObservable,
+  runInAction,
+  observable,
+  action,
+  computed,
+} from 'mobx';
 import { EndpointService } from '../../apis/EndpointService';
 import { PaginationStore } from '../PaginationStore/PaginationStore';
 import { localStorageService } from '../../../auxiliary/classes/LocalStorageService';
@@ -13,65 +19,76 @@ import { Pruning } from '../../../auxiliary/enums/Pruning';
 import { PlantType } from '../../../auxiliary/enums/PlantType';
 import { GrowthRate } from '../../../auxiliary/enums/GrowthRate';
 import { FertilizerNeeds } from '../../../auxiliary/enums/FertilizerNeeds';
+import { InputField } from '../../../auxiliary/classes/InputField';
 
 class CropsDatabaseStore extends SearchableStore<Plant> {
   private endpointService = new EndpointService('Plant');
   public paginationStore = new PaginationStore();
+  public get isLoading(): boolean {
+    return this.endpointService.isLoading;
+  }
+  public searchQuery = new InputField<string>(
+    '',
+    'Search',
+    false,
+    'Enter search query',
+    50,
+  );
 
   constructor() {
     super(['commonName']);
 
-    this.setDropdownFilters(
+    this.initDropdownFilter(
       'sunPreference',
       '',
       'Sun Preference',
       Object.values(SunPreference),
       '',
     );
-    this.setDropdownFilters(
+    this.initDropdownFilter(
       'waterNeeds',
       '',
       'WaterNeeds',
       Object.values(WaterNeeds),
       '',
     );
-    this.setDropdownFilters(
+    this.initDropdownFilter(
       'soilType',
       '',
       'Soil Type',
       Object.values(SoilType),
       '',
     );
-    this.setDropdownFilters('soilPH', '', 'Soil PH', Object.values(SoilPH), '');
-    this.setDropdownFilters(
+    this.initDropdownFilter('soilPH', '', 'Soil PH', Object.values(SoilPH), '');
+    this.initDropdownFilter(
       'pruning',
       '',
       'Pruning',
       Object.values(Pruning),
       '',
     );
-    this.setDropdownFilters(
+    this.initDropdownFilter(
       'temperatureRange',
       '',
       'Temperature Range',
       Object.values(PlantType),
       '',
     );
-    this.setDropdownFilters(
+    this.initDropdownFilter(
       'plantType',
       '',
       'Plant Type',
       Object.values(PlantType),
       '',
     );
-    this.setDropdownFilters(
+    this.initDropdownFilter(
       'growthRate',
       '',
       'Growth Rate',
       Object.values(GrowthRate),
       '',
     );
-    this.setDropdownFilters(
+    this.initDropdownFilter(
       'fertilizerNeeds',
       '',
       'Fertilizer Needs',
@@ -82,13 +99,13 @@ class CropsDatabaseStore extends SearchableStore<Plant> {
     this.debouncedFilterPlants = debounce(this.filterItems.bind(this), 500);
 
     makeObservable(this, {
-      isLoading: observable,
+      isLoading: computed,
       fetchData: action,
+      searchQuery: observable,
       matchesFilterCriteria: action,
     });
   }
 
-  isLoading: boolean = false;
   debouncedFilterPlants: (criteria: string) => void = () => {};
   tableHeaders: { id: keyof Plant; label: string; sortable: boolean }[] = [
     { id: 'commonName', label: 'Common Name', sortable: true },
@@ -110,31 +127,21 @@ class CropsDatabaseStore extends SearchableStore<Plant> {
   };
 
   public fetchData = async () => {
+    const data = await localStorageService.fetchWithCache<Plant[]>(
+      'cropsDatabaseItems',
+      async () => (await this.endpointService.getData<Plant[]>()) || [],
+      7,
+    );
+
+    if (!data) return;
+
     runInAction(() => {
-      this.isLoading = true;
-    });
-
-    try {
-      const data = await localStorageService.fetchWithCache<Plant[]>(
-        'cropsDatabaseItems',
-        async () => (await this.endpointService.getData<Plant[]>()) || [],
-        7,
+      this.items = data;
+      this.filteredItems = this.items;
+      this.paginatedItems = this.paginationStore.paginateItems(
+        this.filteredItems,
       );
-
-      if (!data) return;
-
-      runInAction(() => {
-        this.items = data;
-        this.filteredItems = this.items;
-        this.paginatedItems = this.paginationStore.paginateItems(
-          this.filteredItems,
-        );
-      });
-    } finally {
-      runInAction(() => {
-        this.isLoading = false;
-      });
-    }
+    });
   };
 
   public matchesFilterCriteria = (plant: Plant): boolean => {

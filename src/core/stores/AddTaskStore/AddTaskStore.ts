@@ -101,6 +101,7 @@ class AddTaskStore extends BaseFormStore {
       status: this.fields.statusField.value as TaskStatus,
     };
 
+    console.log('data', data, id);
     await this.endpointService.putData(`${id}`, data);
 
     taskStore.fetchData();

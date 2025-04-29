@@ -52,7 +52,7 @@ const YourCropsPage: React.FC = observer(() => {
         </div>
       ),
     })),
-    onSort: (field) => cropsStore.setSortField(field),
+    onSort: (field) => cropsStore.sortItems(field),
     sortField: cropsStore.sortField,
     sortOrder: cropsStore.sortOrder,
   };

@@ -1,38 +1,32 @@
-import {
-  makeObservable,
-  runInAction,
-  observable,
-  action,
-  reaction,
-} from 'mobx';
+import { makeObservable, runInAction, observable, action } from 'mobx';
 import { debounce } from '../../../auxiliary/utils/debounce';
 import { InputField } from '../../../auxiliary/classes/InputField';
 import { Dropdown } from '../../../auxiliary/classes/Dropdown';
 import { DateField } from '../../../auxiliary/classes/DateField';
 import EventBus from '../../../auxiliary/utils/EventTarget';
 import { PaginationStore } from '../PaginationStore/PaginationStore';
+import SortService from '../../apis/SortService';
+import { FilterService } from '../../apis/FilterService';
 
 export abstract class SearchableStore<T> {
   public paginationStore = new PaginationStore();
-  items: T[] = [];
-  filteredItems: T[] = [];
-  paginatedItems: T[] = [];
-  debouncedFilterItems: () => void;
-  searchQuery = new InputField<string>(
-    '',
-    'Search',
-    false,
-    'Enter search query',
-    50,
-  );
-  dropdownFilters: Record<string, Dropdown<string>> = {};
-  dateFilters: Record<string, DateField<string>> = {};
-  sortField: keyof T | null = null;
-  sortOrder: 'asc' | 'desc' = 'asc';
-  searchableFields: (keyof T)[] = [];
+  public sortService = new SortService<T>();
+  public filterService = new FilterService();
+  public items: T[] = [];
+  public filteredItems: T[] = [];
+  public paginatedItems: T[] = [];
+  public debouncedFilterItems: () => void;
+  public abstract searchQuery: InputField<string>;
+  public dropdownFilters: Record<string, Dropdown<string>> = {};
+  public dateFilters: Record<string, DateField<string>> = {};
+  public sortField: keyof T | null = null;
+  public sortOrder: 'asc' | 'desc' = 'asc';
+  public searchableFields: (keyof T)[] = [];
 
   constructor(searchableFields: (keyof T)[]) {
     this.searchableFields = searchableFields;
+
+    this.debouncedFilterItems = debounce(this.filterItems.bind(this), 500);
 
     EventBus.addEventListener('pagination:currentPageChanged', () => {
       this.paginatedItems = this.paginationStore.paginateItems(
@@ -46,52 +40,36 @@ export abstract class SearchableStore<T> {
       );
     });
 
+    EventBus.addEventListener('searchQuery:updated', () => {
+      if (!this.searchQuery.validateMaxLength()) {
+        this.debouncedFilterItems();
+      }
+    });
+
+    EventBus.addEventListener('dropdownFilters:updated', () => {
+      this.filterItems();
+    });
+
+    EventBus.addEventListener('dateFilters:updated', () => {
+      this.filterItems();
+    });
+
     makeObservable(this, {
       items: observable,
       filteredItems: observable,
-      searchQuery: observable,
+      paginatedItems: observable,
       dropdownFilters: observable,
       dateFilters: observable,
       sortField: observable,
       sortOrder: observable,
-      setDropdownFilters: action,
-      setDateFilters: action,
+      initDropdownFilter: action,
+      initDateFilter: action,
       filterItems: action,
-      setSortField: action,
       sortItems: action,
     });
-
-    this.debouncedFilterItems = debounce(this.filterItems.bind(this), 500);
-
-    reaction(
-      () => this.searchQuery.value,
-      () => {
-        if (!this.searchQuery.validateMaxLength()) {
-          this.debouncedFilterItems();
-        }
-      },
-    );
-
-    reaction(
-      () =>
-        Object.values(this.dropdownFilters).map((dropdown) => dropdown.value),
-      () => {
-        this.filterItems();
-      },
-    );
-
-    reaction(
-      () =>
-        Object.values(this.dateFilters).map((dateFilter) => dateFilter.value),
-      () => {
-        this.filterItems();
-      },
-    );
   }
 
-  abstract matchesFilterCriteria(item: T): boolean;
-
-  public setDateFilters = (key: string, criteria: string, label: string) => {
+  public initDateFilter = (key: string, criteria: string, label: string) => {
     runInAction(() => {
       if (!this.dateFilters[key]) {
         this.dateFilters[key] = new DateField<string>('', label, false);
@@ -101,7 +79,7 @@ export abstract class SearchableStore<T> {
     });
   };
 
-  public setDropdownFilters = <T>(
+  public initDropdownFilter = <T>(
     key: string,
     criteria: string,
     label: string,
@@ -122,61 +100,28 @@ export abstract class SearchableStore<T> {
   };
 
   public filterItems = () => {
-    this.filteredItems = this.items.filter((item) => {
-      const matchesQuery =
-        this.searchQuery.value === '' ||
-        this.searchableFields.some((field) => {
-          const fieldValue = item[field];
-          return (
-            typeof fieldValue === 'string' &&
-            fieldValue
-              .toLowerCase()
-              .includes(this.searchQuery.value.toLowerCase())
-          );
-        });
+    let filtered = FilterService.filterBySearchQuery(
+      this.items,
+      this.searchQuery.value,
+      this.searchableFields,
+    );
+    filtered = FilterService.filterByDropdowns(filtered, this.dropdownFilters);
+    filtered = FilterService.filterByDateRange(filtered, this.dateFilters);
 
-      const matchesCriteria = this.matchesFilterCriteria(item);
-
-      return matchesQuery && matchesCriteria;
+    runInAction(() => {
+      this.filteredItems = this.sortService.sortItems(filtered);
     });
 
-    this.sortItems();
     EventBus.dispatchEvent(new Event('filteredItems:updated'));
   };
 
-  public setSortField = (field: keyof T) => {
+  public sortItems = (field: keyof T) => {
+    this.sortService.setSortField(field);
+
     runInAction(() => {
-      if (this.sortField === field) {
-        this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
-      } else {
-        this.sortField = field;
-        this.sortOrder = 'asc';
-      }
-      this.sortItems();
-      EventBus.dispatchEvent(new Event('filteredItems:updated'));
+      this.filteredItems = this.sortService.sortItems(this.filteredItems);
     });
-  };
 
-  public sortItems = () => {
-    runInAction(() => {
-      this.filteredItems = this.filteredItems.slice().sort((a, b) => {
-        const fieldA = this.sortField ? (a[this.sortField] as any) : null;
-        const fieldB = this.sortField ? (b[this.sortField] as any) : null;
-
-        if (fieldA === undefined || fieldB === undefined) {
-          return 0;
-        }
-
-        if (fieldA < fieldB) {
-          return this.sortOrder === 'asc' ? -1 : 1;
-        }
-
-        if (fieldA > fieldB) {
-          return this.sortOrder === 'asc' ? 1 : -1;
-        }
-
-        return 0;
-      });
-    });
+    EventBus.dispatchEvent(new Event('filteredItems:updated'));
   };
 }

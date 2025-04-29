@@ -12,9 +12,10 @@ import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import ActionIcons from '../../reusables/ActionIcons/ActionIcons';
 import popupStore from '../../../stores/PopupStore/PopupStore';
-import PlantDatabasePopup from '../../reusables/TaskPopup/TaskPopup';
 import Popup from '../../containers/Popup/Popup';
 import Pagination from '../../reusables/Pagination/Pagination';
+import addTaskStore from '../../../stores/AddTaskStore/AddTaskStore';
+import TaskPopup from '../../reusables/TaskPopup/TaskPopup';
 
 const TasksPage: React.FC = observer(() => {
   const paginationStore = taskStore.paginationStore;
@@ -26,11 +27,19 @@ const TasksPage: React.FC = observer(() => {
   };
 
   const handlePopup = (id: number | undefined) => {
-    const description = taskStore.items.find(
-      (item) => item.id === id,
-    )?.description;
+    const task = taskStore.items.find((item) => item.id === id);
 
-    popupStore.openPopup(<PlantDatabasePopup description={description} />);
+    if (!task || !task.id) return;
+
+    taskStore.descriptionField.setValue(task.description);
+
+    popupStore.openPopup(
+      <TaskPopup
+        task={task}
+        updateTask={() => addTaskStore.updateTask(id?.toString() || '')}
+        descriptionField={taskStore.descriptionField}
+      />,
+    );
   };
 
   const handleEdit = (id: number | undefined) => {
@@ -65,10 +74,16 @@ const TasksPage: React.FC = observer(() => {
         />
       ),
     })),
-    onSort: (field) => taskStore.setSortField(field),
+    onSort: (field) => taskStore.sortItems(field),
     sortField: taskStore.sortField,
     sortOrder: taskStore.sortOrder,
   };
+
+  console.log(
+    'taskStore.isLoading',
+    taskStore.isLoading,
+    taskStore.paginatedItems,
+  );
 
   return (
     <section className={styles.taskPage}>

@@ -1,28 +1,45 @@
 import { SearchableStore } from '../BaseSearchableStore/BaseSearchableStore';
 import { YourCrop } from '../../../auxiliary/interfaces/YourCrop';
 import { debounce } from '../../../auxiliary/utils/debounce';
-import { makeObservable, runInAction, observable, action } from 'mobx';
+import {
+  makeObservable,
+  runInAction,
+  observable,
+  action,
+  computed,
+} from 'mobx';
 import { EndpointService } from '../../apis/EndpointService';
 import { PaginationStore } from '../PaginationStore/PaginationStore';
 import { WaterNeeds } from '../../../auxiliary/enums/WaterNeeds';
 import { HealthStatus } from '../../../auxiliary/enums/HealthStatus';
+import { InputField } from '../../../auxiliary/classes/InputField';
 
 class YourCropsStore extends SearchableStore<YourCrop> {
   private endpointService = new EndpointService('YourCrops');
   public paginationStore = new PaginationStore();
+  public get isLoading(): boolean {
+    return this.endpointService.isLoading;
+  }
+  public searchQuery = new InputField<string>(
+    '',
+    'Search',
+    false,
+    'Enter search query',
+    50,
+  );
 
   constructor() {
     super(['commonName']);
 
-    this.setDropdownFilters('location', '', 'Location', ['test'], '');
-    this.setDropdownFilters(
+    this.initDropdownFilter('location', '', 'Location', ['test'], '');
+    this.initDropdownFilter(
       'waterNeeds',
       '',
       'WaterNeeds',
       Object.values(WaterNeeds),
       '',
     );
-    this.setDropdownFilters(
+    this.initDropdownFilter(
       'healthStatus',
       '',
       'Health Status',
@@ -30,21 +47,21 @@ class YourCropsStore extends SearchableStore<YourCrop> {
       '',
     );
 
-    this.setDateFilters('lastWatered', '', 'Last Watered');
-    this.setDateFilters('lastFertilized', '', 'Last Fertilized');
-    this.setDateFilters('lastPruned', '', 'Last Pruned');
-    this.setDateFilters('lastHarvested', '', 'Last Harvested');
+    this.initDateFilter('lastWatered', '', 'Last Watered');
+    this.initDateFilter('lastFertilized', '', 'Last Fertilized');
+    this.initDateFilter('lastPruned', '', 'Last Pruned');
+    this.initDateFilter('lastHarvested', '', 'Last Harvested');
 
     this.debouncedFilterPlants = debounce(this.filterItems.bind(this), 500);
 
     makeObservable(this, {
-      isLoading: observable,
+      isLoading: computed,
       fetchData: action,
+      searchQuery: observable,
       matchesFilterCriteria: action,
     });
   }
 
-  isLoading: boolean = false;
   debouncedFilterPlants: (criteria: string) => void = () => {};
   tableHeaders: { id: keyof YourCrop; label: string; sortable: boolean }[] = [
     { id: 'id', label: 'Id', sortable: true },
@@ -60,27 +77,17 @@ class YourCropsStore extends SearchableStore<YourCrop> {
   ];
 
   public async fetchData() {
+    const data: YourCrop[] | undefined =
+      await this.endpointService.getData<YourCrop[]>();
+    if (!data) return;
+
     runInAction(() => {
-      this.isLoading = true;
+      this.items = data;
+      this.filteredItems = this.items;
+      this.paginatedItems = this.paginationStore.paginateItems(
+        this.filteredItems,
+      );
     });
-
-    try {
-      const data: YourCrop[] | undefined =
-        await this.endpointService.getData<YourCrop[]>();
-      if (!data) return;
-
-      runInAction(() => {
-        this.items = data;
-        this.filteredItems = this.items;
-        this.paginatedItems = this.paginationStore.paginateItems(
-          this.filteredItems,
-        );
-      });
-    } finally {
-      runInAction(() => {
-        this.isLoading = false;
-      });
-    }
   }
 
   public matchesFilterCriteria(plant: YourCrop): boolean {
