@@ -6,9 +6,11 @@ import EventBus from '../../../auxiliary/utils/EventTarget';
 
 class FieldsStore {
   private endpointService = new EndpointService('Location');
-  locations: LocationItem[] = [];
-  isLoading = false;
-  centerMapTrigger = false;
+  public locations: LocationItem[] = [];
+  public centerMapTrigger = false;
+  public get isLoading(): boolean {
+    return this.endpointService.isLoading;
+  }
 
   constructor() {
     makeAutoObservable(this);
@@ -17,29 +19,19 @@ class FieldsStore {
   }
 
   public async fetchData() {
+    const data: LocationItem[] | undefined =
+      await this.endpointService.getData<LocationItem[]>();
+
+    if (!data) return;
+
     runInAction(() => {
-      this.isLoading = true;
+      this.locations = data;
+
+      weatherStore.setLocation(this.locations[0]?.id?.toString() || '');
+      weatherStore.fetchData();
+
+      EventBus.dispatchEvent(new CustomEvent('locations:updated'));
     });
-
-    try {
-      const data: LocationItem[] | undefined =
-        await this.endpointService.getData<LocationItem[]>();
-
-      if (!data) return;
-
-      runInAction(() => {
-        this.locations = data;
-
-        weatherStore.setLocation(this.locations[0]?.id?.toString() || '');
-        weatherStore.fetchData();
-
-        EventBus.dispatchEvent(new CustomEvent('locations:updated'));
-      });
-    } finally {
-      runInAction(() => {
-        this.isLoading = false;
-      });
-    }
   }
 
   public deleteField = async (id: number) => {
