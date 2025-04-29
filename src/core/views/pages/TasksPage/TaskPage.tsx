@@ -14,7 +14,6 @@ import ActionIcons from '../../reusables/ActionIcons/ActionIcons';
 import popupStore from '../../../stores/PopupStore/PopupStore';
 import Popup from '../../containers/Popup/Popup';
 import Pagination from '../../reusables/Pagination/Pagination';
-import addTaskStore from '../../../stores/AddTaskStore/AddTaskStore';
 import TaskPopup from '../../reusables/TaskPopup/TaskPopup';
 
 const TasksPage: React.FC = observer(() => {
@@ -34,11 +33,7 @@ const TasksPage: React.FC = observer(() => {
     taskStore.descriptionField.setValue(task.description);
 
     popupStore.openPopup(
-      <TaskPopup
-        task={task}
-        updateTask={() => addTaskStore.updateTask(id?.toString() || '')}
-        descriptionField={taskStore.descriptionField}
-      />,
+      <TaskPopup descriptionField={taskStore.descriptionField} />,
     );
   };
 
@@ -78,7 +73,7 @@ const TasksPage: React.FC = observer(() => {
     sortField: taskStore.sortField,
     sortOrder: taskStore.sortOrder,
   };
-  
+
   return (
     <section className={styles.taskPage}>
       <Popup />
