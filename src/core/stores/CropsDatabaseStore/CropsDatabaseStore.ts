@@ -7,16 +7,16 @@ import {
   action,
   computed,
 } from 'mobx';
-import { EndpointService } from '../../services/EndpointService';
-import { PaginationStore } from '../PaginationStore/PaginationStore';
-import { localStorageService } from '../../services/LocalStorageService';
+import { EndpointService } from '../../services/EndpointService/EndpointService';
+import { localStorageService } from '../../services/LocalStorageService/LocalStorageService';
 import { InputField } from '../../../auxiliary/classes/InputField';
 import CropsDatabaseData from '../../../auxiliary/classes/CropsDatabaseData';
-import DebounceService from '../../services/DebounceService';
+import DebounceService from '../../services/DebounceService/DebounceService';
+import { PaginationService } from '../../services/PaginationService/PaginationService';
 
 class CropsDatabaseStore extends SearchableStore<Plant> {
   private endpointService = new EndpointService('Plant');
-  public paginationStore = new PaginationStore();
+  public paginationService = new PaginationService();
   public get isLoading(): boolean {
     return this.endpointService.isLoading;
   }
@@ -67,7 +67,7 @@ class CropsDatabaseStore extends SearchableStore<Plant> {
     runInAction(() => {
       this.items = data;
       this.filteredItems = this.items;
-      this.paginatedItems = this.paginationStore.paginateItems(
+      this.paginatedItems = this.paginationService.paginateItems(
         this.filteredItems,
       );
     });

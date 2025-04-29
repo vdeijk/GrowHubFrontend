@@ -1,5 +1,5 @@
 import React from 'react';
-import popupStore from '../../../stores/PopupStore/PopupStore';
+import popupStore from '../../../services/PopupService/PopupService';
 import { observer } from 'mobx-react-lite';
 import ButtonContainer from '../ButtonContainer/ButtonContainer';
 import styles from './TaskPopup.module.css';

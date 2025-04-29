@@ -2,10 +2,10 @@ import { Plant } from '../../../auxiliary/interfaces/Plant';
 import cropsStore from '../YourCropsStore/YourCropsStore';
 import { InputField } from '../../../auxiliary/classes/InputField';
 import { BaseFormStore } from '../BaseFormStore/BaseFormStore';
-import { EndpointService } from '../../services/EndpointService';
+import { EndpointService } from '../../services/EndpointService/EndpointService';
 import { runInAction } from 'mobx';
 import { Dropdown } from '../../../auxiliary/classes/Dropdown';
-import { localStorageService } from '../../services/LocalStorageService';
+import { localStorageService } from '../../services/LocalStorageService/LocalStorageService';
 
 class AddCropStore extends BaseFormStore {
   private endpointService = new EndpointService('Plant');

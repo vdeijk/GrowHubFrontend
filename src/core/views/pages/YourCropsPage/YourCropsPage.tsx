@@ -14,7 +14,7 @@ import Pagination from '../../reusables/Pagination/Pagination';
 import { YourCrop } from '../../../../auxiliary/interfaces/YourCrop';
 
 const YourCropsPage: React.FC = observer(() => {
-  const { paginationStore } = cropsStore;
+  const { paginationService } = cropsStore;
   const navigate = useRouterNavigation();
 
   const searchBarProps: SearchBarProps = {
@@ -73,9 +73,9 @@ const YourCropsPage: React.FC = observer(() => {
           <ButtonContainer buttons={[buttonContainerData]} />
         </div>
         <Pagination
-          currentPage={paginationStore.currentPage}
-          totalPages={paginationStore.totalPages}
-          onPageChange={(page) => paginationStore.setCurrentPage(page)}
+          currentPage={paginationService.currentPage}
+          totalPages={paginationService.totalPages}
+          onPageChange={(page) => paginationService.setCurrentPage(page)}
         />
       </LoadingWrapper>
     </section>

@@ -1,4 +1,4 @@
-import { EventMap } from '../../auxiliary/interfaces/EventMap';
+import { EventMap } from '../../../auxiliary/interfaces/EventMap';
 
 class EventBusService<T extends Record<string, object | void>> {
   private eventTarget = new EventTarget();

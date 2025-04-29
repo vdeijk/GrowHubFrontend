@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 import React from 'react';
 
-class PopupStore {
+class PopupService {
   public isOpen = false;
   public content: React.ReactNode = null;
 
@@ -20,5 +20,5 @@ class PopupStore {
   };
 }
 
-const popupStore = new PopupStore();
-export default popupStore;
+const popupService = new PopupService();
+export default popupService;

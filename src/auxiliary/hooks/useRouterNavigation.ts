@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import routerStore from '../../core/stores/RouterStore/RouterStore';
+import routerStore from '../../core/services/RouterService/RouterService';
 
 const useRouterNavigation = () => {
   const navigate = useNavigate();

@@ -9,7 +9,7 @@ import fieldsStore from '../../../stores/FieldsStore/FieldsStore';
 import { observer } from 'mobx-react-lite';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
-import EventBus from '../../../services/EventBusService';
+import EventBus from '../../../services/EventBusService/EventBusService';
 
 const FieldsPage: React.FC = observer(() => {
   const navigate = useRouterNavigation();

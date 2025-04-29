@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { matchRoutes, NavigateFunction } from 'react-router-dom';
 import { RouteObject } from 'react-router-dom';
 
-class RouterStore {
+class RouterService {
   currentLabel: string = '';
   menuLinks: MenuLinkData[] = [
     { path: '/', label: 'Dashboard', hidden: false, isDynamic: false },
@@ -122,5 +122,5 @@ class RouterStore {
   }
 }
 
-const routerStore = new RouterStore();
-export default routerStore;
+const routerService = new RouterService();
+export default routerService;

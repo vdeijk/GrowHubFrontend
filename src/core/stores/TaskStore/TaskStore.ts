@@ -1,7 +1,6 @@
 import { Task } from '../../../auxiliary/interfaces/Task';
 import { SearchableStore } from '../BaseSearchableStore/BaseSearchableStore';
-import { EndpointService } from '../../services/EndpointService';
-import { PaginationStore } from '../PaginationStore/PaginationStore';
+import { EndpointService } from '../../services/EndpointService/EndpointService';
 import {
   makeObservable,
   runInAction,
@@ -11,10 +10,11 @@ import {
 } from 'mobx';
 import { InputField } from '../../../auxiliary/classes/InputField';
 import TaskData from '../../../auxiliary/classes/TaskData';
+import { PaginationService } from '../../services/PaginationService/PaginationService';
 
 class TaskStore extends SearchableStore<Task> {
   private endpointService = new EndpointService('Todo');
-  public paginationStore = new PaginationStore();
+  public paginationService = new PaginationService();
   public descriptionField: InputField<string>;
   public get isLoading(): boolean {
     return this.endpointService.isLoading;
@@ -64,7 +64,7 @@ class TaskStore extends SearchableStore<Task> {
     runInAction(() => {
       this.items = data;
       this.filteredItems = this.items;
-      this.paginatedItems = this.paginationStore.paginateItems(
+      this.paginatedItems = this.paginationService.paginateItems(
         this.filteredItems,
       );
     });

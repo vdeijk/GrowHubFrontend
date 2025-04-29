@@ -6,7 +6,7 @@ import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 import fieldsStore from '../../../stores/FieldsStore/FieldsStore';
 import { observer } from 'mobx-react-lite';
-import EventBus from '../../../services/EventBusService';
+import EventBus from '../../../services/EventBusService/EventBusService';
 
 interface MapProps {
   enableScroll?: boolean;

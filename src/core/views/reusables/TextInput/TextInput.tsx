@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './TextInput.module.css';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import EventBus from '../../../services/EventBusService';
+import EventBus from '../../../services/EventBusService/EventBusService';
 
 export interface TextInputProps {
   value: string;

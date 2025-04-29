@@ -15,7 +15,7 @@ import { SearchBarDatabaseProps } from '../../containers/SearchBarDatabase/Searc
 
 const CropsDatabasePage: React.FC = observer(() => {
   const navigate = useRouterNavigation();
-  const { paginationStore } = cropsDatabaseStore;
+  const { paginationService } = cropsDatabaseStore;
 
   const searchBarProps: SearchBarDatabaseProps = {
     searchQuery: cropsDatabaseStore.searchQuery,
@@ -75,9 +75,9 @@ const CropsDatabasePage: React.FC = observer(() => {
           <ButtonContainer buttons={[buttonContainerData]} />
         </div>
         <Pagination
-          currentPage={paginationStore.currentPage}
-          totalPages={paginationStore.totalPages}
-          onPageChange={(page) => paginationStore.setCurrentPage(page)}
+          currentPage={paginationService.currentPage}
+          totalPages={paginationService.totalPages}
+          onPageChange={(page) => paginationService.setCurrentPage(page)}
         />
       </LoadingWrapper>
     </section>

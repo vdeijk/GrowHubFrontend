@@ -1,6 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import popupStore from '../../../stores/PopupStore/PopupStore';
+import popupStore from '../../../services/PopupService/PopupService';
 import styles from './Popup.module.css';
 
 const Popup: React.FC = observer(() => {

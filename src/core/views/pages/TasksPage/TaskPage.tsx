@@ -15,7 +15,7 @@ import Popup from '../../containers/Popup/Popup';
 import Pagination from '../../reusables/Pagination/Pagination';
 
 const TasksPage: React.FC = observer(() => {
-  const paginationStore = taskStore.paginationStore;
+  const paginationService = taskStore.paginationService;
   const navigate = useRouterNavigation();
 
   const buttonContainerData = {
@@ -69,9 +69,9 @@ const TasksPage: React.FC = observer(() => {
           <ButtonContainer buttons={[buttonContainerData]} />
         </div>
         <Pagination
-          currentPage={paginationStore.currentPage}
-          totalPages={paginationStore.totalPages}
-          onPageChange={(page) => paginationStore.setCurrentPage(page)}
+          currentPage={paginationService.currentPage}
+          totalPages={paginationService.totalPages}
+          onPageChange={(page) => paginationService.setCurrentPage(page)}
         />
       </LoadingWrapper>
     </section>

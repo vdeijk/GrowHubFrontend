@@ -7,7 +7,7 @@ import FooterContainer from './core/views/containers/FooterContainer/FooterConta
 import profilePicture from './auxiliary/assets/cropGrowHub.jpg';
 import { Routes, Route } from 'react-router-dom';
 import CropsPage from './core/views/pages/YourCropsPage/YourCropsPage';
-import routerStore from './core/stores/RouterStore/RouterStore';
+import routerStore from './core/services/RouterService/RouterService';
 import PageLayout from './core/views/layouts/PageLayout/PageLayout';
 import AddCropPage from './core/views/pages/AddCropPage/AddCropPage';
 import { ToastContainer } from 'react-toastify';
@@ -24,7 +24,7 @@ import fieldsStore from './core/stores/FieldsStore/FieldsStore';
 import yourCropsStore from './core/stores/YourCropsStore/YourCropsStore';
 import cropsDatabaseStore from './core/stores/CropsDatabaseStore/CropsDatabaseStore';
 import taskStore from './core/stores/TaskStore/TaskStore';
-import weatherStore from './core/stores/CurrentWeatherStore/WeatherStore';
+import weatherStore from './core/stores/WeatherStore/WeatherStore';
 import UpgradePage from './core/views/pages/UpgradePage/UpgradePage';
 import CropsDatabasePage from './core/views/pages/CropsDatabasePage/CropsDatabasePage';
 import AddTaskPage from './core/views/pages/AddTaskPage/AddTaskPage';
