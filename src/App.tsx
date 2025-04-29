@@ -4,7 +4,7 @@ import NavbarContainer from './core/views/containers/NavbarContainer/NavbarConta
 import MenuContainer from './core/views/containers/MenuContainer/MenuContainer';
 import DashboardPage from './core/views/pages/DashboardPage/DashboardPage';
 import FooterContainer from './core/views/containers/FooterContainer/FooterContainer';
-import profilePicture from './auxiliary/assets/profile.jpeg';
+import profilePicture from './auxiliary/assets/cropGrowHub.jpg';
 import { Routes, Route } from 'react-router-dom';
 import CropsPage from './core/views/pages/YourCropsPage/YourCropsPage';
 import routerStore from './core/stores/RouterStore/RouterStore';

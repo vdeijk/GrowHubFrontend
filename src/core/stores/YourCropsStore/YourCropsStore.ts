@@ -10,7 +10,7 @@ import {
 } from 'mobx';
 import { EndpointService } from '../../apis/EndpointService';
 import { PaginationStore } from '../PaginationStore/PaginationStore';
-import { WaterNeeds } from '../../../auxiliary/enums/WaterNeeds';
+import { GrowthStage } from '../../../auxiliary/enums/GrowthStage';
 import { HealthStatus } from '../../../auxiliary/enums/HealthStatus';
 import { InputField } from '../../../auxiliary/classes/InputField';
 
@@ -33,10 +33,10 @@ class YourCropsStore extends SearchableStore<YourCrop> {
 
     this.initDropdownFilter('location', '', 'Location', ['test'], '');
     this.initDropdownFilter(
-      'waterNeeds',
+      'growthStage',
       '',
-      'Water Needs',
-      Object.values(WaterNeeds),
+      'Growth Stage',
+      Object.values(GrowthStage),
       '',
     );
     this.initDropdownFilter(

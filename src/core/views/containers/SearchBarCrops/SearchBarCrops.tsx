@@ -11,7 +11,7 @@ import { DateField as DateInputClass } from '../../../../auxiliary/classes/DateF
 export interface SearchBarProps {
   location: DropdownClass<string>;
   searchQuery: InputField<string>;
-  waterNeeds: DropdownClass<string>;
+  growthStage: DropdownClass<string>;
   healthStatus: DropdownClass<string>;
   lastWatered: DateInputClass<string>;
   lastFertilized: DateInputClass<string>;
@@ -23,7 +23,7 @@ const SearchBarCrops: React.FC<SearchBarProps> = observer(
   ({
     location,
     searchQuery,
-    waterNeeds,
+    growthStage,
     healthStatus,
     lastWatered,
     lastFertilized,
@@ -45,20 +45,6 @@ const SearchBarCrops: React.FC<SearchBarProps> = observer(
           options={location.options}
           label={location.label}
           aria-label="Location"
-        />
-        <Dropdown
-          value={waterNeeds.value}
-          onChange={waterNeeds.setValue}
-          options={waterNeeds.options}
-          label={waterNeeds.label}
-          aria-label="Water Needs"
-        />
-        <Dropdown
-          value={healthStatus.value}
-          onChange={healthStatus.setValue}
-          options={healthStatus.options}
-          label={healthStatus.label}
-          aria-label="Health Status"
         />
         <DateInput
           value={lastWatered.value}
@@ -83,6 +69,20 @@ const SearchBarCrops: React.FC<SearchBarProps> = observer(
           onChange={(date) => lastHarvested?.setValue(date || '')}
           label={lastHarvested.label}
           aria-label="Last Harvested"
+        />
+        <Dropdown
+          value={healthStatus.value}
+          onChange={healthStatus.setValue}
+          options={healthStatus.options}
+          label={healthStatus.label}
+          aria-label="Health Status"
+        />
+        <Dropdown
+          value={growthStage.value}
+          onChange={growthStage.setValue}
+          options={growthStage.options}
+          label={growthStage.label}
+          aria-label="Growth Stage"
         />
       </div>
     );

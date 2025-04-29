@@ -6,6 +6,7 @@
 
 .syncButton {
   height: 100%;
+  width: max-content;
   display: grid;
   justify-content: start;
   align-content: space-between;

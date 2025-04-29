@@ -20,7 +20,7 @@ const YourCropsPage: React.FC = observer(() => {
   const searchBarProps: SearchBarProps = {
     searchQuery: cropsStore.searchQuery,
     location: cropsStore.dropdownFilters.location,
-    waterNeeds: cropsStore.dropdownFilters.waterNeeds,
+    growthStage: cropsStore.dropdownFilters.growthStage,
     healthStatus: cropsStore.dropdownFilters.healthStatus,
     lastWatered: cropsStore.dateFilters.lastWatered,
     lastFertilized: cropsStore.dateFilters.lastFertilized,
