@@ -29,10 +29,17 @@ import UpgradePage from './core/views/pages/UpgradePage/UpgradePage';
 import CropsDatabasePage from './core/views/pages/CropsDatabasePage/CropsDatabasePage';
 import AddTaskPage from './core/views/pages/AddTaskPage/AddTaskPage';
 import AddYourCropPage from './core/views/pages/AddYourCropPage/AddYourCropPage';
+import { useLocation } from 'react-router-dom';
 
 const App: React.FC = observer(() => {
   const { isAuthenticated, isLoading, user } = useAuth0();
   const [isFetched, setIsFetched] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    const currentPath = location.pathname;
+    routerStore.handleRouteChange(currentPath);
+  }, [location]);
 
   useEffect(() => {
     if (!isFetched && isAuthenticated) {
