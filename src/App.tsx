@@ -8,7 +8,7 @@ import profilePicture from './auxiliary/assets/cropGrowHub.jpg';
 import { Routes, Route } from 'react-router-dom';
 import CropsPage from './core/views/pages/YourCropsPage/YourCropsPage';
 import routerStore from './core/stores/RouterStore/RouterStore';
-import PageLayout from './core/views/reusables/PageLayout/PageLayout';
+import PageLayout from './core/views/layouts/PageLayout/PageLayout';
 import AddCropPage from './core/views/pages/AddCropPage/AddCropPage';
 import { ToastContainer } from 'react-toastify';
 import WeatherReportPage from './core/views/pages/WeatherReportPage/WeatherReportPage';

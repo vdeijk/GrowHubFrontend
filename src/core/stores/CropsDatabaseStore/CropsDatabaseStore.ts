@@ -1,6 +1,5 @@
 import { SearchableStore } from '../BaseSearchableStore/BaseSearchableStore';
 import { Plant } from '../../../auxiliary/interfaces/Plant';
-import { debounce } from '../../services/DebounceService';
 import {
   makeObservable,
   runInAction,
@@ -13,6 +12,7 @@ import { PaginationStore } from '../PaginationStore/PaginationStore';
 import { localStorageService } from '../../services/LocalStorageService';
 import { InputField } from '../../../auxiliary/classes/InputField';
 import CropsDatabaseData from '../../../auxiliary/classes/CropsDatabaseData';
+import DebounceService from '../../services/DebounceService';
 
 class CropsDatabaseStore extends SearchableStore<Plant> {
   private endpointService = new EndpointService('Plant');
@@ -35,7 +35,10 @@ class CropsDatabaseStore extends SearchableStore<Plant> {
       this.initDropdownFilter(dropdown);
     });
 
-    this.debouncedFilterPlants = debounce(this.filterItems.bind(this), 500);
+    this.debouncedFilterPlants = DebounceService.debounce(
+      this.filterItems.bind(this),
+      500,
+    );
 
     makeObservable(this, {
       isLoading: computed,
