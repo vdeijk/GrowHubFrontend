@@ -31,6 +31,7 @@ class RouterStore {
     },
     // { path: '/upgrade', label: 'Upgrade', hidden: false, isDynamic: false },
     { path: '/addCropPage', label: 'Add Crop', hidden: true, isDynamic: false },
+    { path: '/addYourCropPage', label: 'Add Your Crop', hidden: true, isDynamic: false },
     {
       path: '/addFieldPage',
       label: 'Add Field',

@@ -29,7 +29,7 @@ const CropsDatabasePage: React.FC = observer(() => {
     growthRate: cropsDatabaseStore.dropdownFilters['growthRate'],
     fertilizerNeeds: cropsDatabaseStore.dropdownFilters['fertilizerNeeds'],
     isLoading: cropsDatabaseStore.isLoading,
-    handleSync: cropsDatabaseStore.fetchData,
+    handleSync: cropsDatabaseStore.syncData,
   };
 
   const handleEdit = (id: number | undefined) => {

@@ -38,7 +38,7 @@ const SearchBarCrops: React.FC<SearchBarProps> = observer(
           onChange={searchQuery.setValue}
           placeholder={searchQuery.placeholder}
           aria-label="Search"
-        />{' '}
+        />
         <Dropdown
           value={location.value}
           onChange={location.setValue}

@@ -104,6 +104,11 @@ class CropsDatabaseStore extends SearchableStore<Plant> {
     { id: 'fertilizerNeeds', label: 'Fertilizer Needs', sortable: true },
   ];
 
+  public syncData = () => {
+    localStorageService.invalidateCache('cropsDatabaseItems');
+    this.fetchData();
+  };
+
   public fetchData = async () => {
     runInAction(() => {
       this.isLoading = true;

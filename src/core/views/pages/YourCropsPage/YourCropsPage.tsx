@@ -58,7 +58,7 @@ const YourCropsPage: React.FC = observer(() => {
   };
 
   const buttonContainerData = {
-    clickHandler: () => navigate('/addCropPage'),
+    clickHandler: () => navigate('/addYourCropPage'),
     label: 'Add Crop',
   };
 

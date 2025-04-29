@@ -28,6 +28,7 @@ import weatherStore from './core/stores/CurrentWeatherStore/WeatherStore';
 import UpgradePage from './core/views/pages/UpgradePage/UpgradePage';
 import CropsDatabasePage from './core/views/pages/CropsDatabasePage/CropsDatabasePage';
 import AddTaskPage from './core/views/pages/AddTaskPage/AddTaskPage';
+import AddYourCropPage from './core/views/pages/AddYourCropPage/AddYourCropPage';
 
 const App: React.FC = observer(() => {
   const { isAuthenticated, isLoading, user } = useAuth0();
@@ -88,7 +89,12 @@ const App: React.FC = observer(() => {
               path="/addCropPage/:id"
               element={<AddCropPage isEditing={true} />}
             />
-            <Route path="/addCropPage" element={<AddCropPage />} />
+            <Route path="/addCropPage" element={<AddCropPage />} />{' '}
+            <Route
+              path="/addYourCropPage/:id"
+              element={<AddYourCropPage isEditing={true} />}
+            />
+            <Route path="/addYourCropPage" element={<AddYourCropPage />} />
             <Route
               path="/addTaskPage/:id"
               element={<AddTaskPage isEditing={true} />}
@@ -102,5 +108,7 @@ const App: React.FC = observer(() => {
     </main>
   );
 });
+
+//AddYourCropPage
 
 export default App;

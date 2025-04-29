@@ -18,10 +18,7 @@ export class LocalStorageService {
     const lastFetchKey = `${key}_lastFetch`;
     const cachedData = localStorage.getItem(key);
 
-    console.log('cachedData ', lastFetchKey, cachedData?.length);
-
     if (cachedData && !this.isFetchDue(lastFetchKey, cacheDurationInDays)) {
-      console.log('cache');
       return JSON.parse(cachedData) as T;
     }
 
@@ -34,7 +31,6 @@ export class LocalStorageService {
   public invalidateCache = (key: string): void => {
     localStorage.removeItem(key);
     localStorage.removeItem(`${key}_lastFetch`);
-    console.log('Cache invalidated for key:', key);
   };
 }
 
