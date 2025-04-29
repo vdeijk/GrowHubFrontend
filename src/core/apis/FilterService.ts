@@ -42,18 +42,17 @@ export class FilterService {
     );
   }
 
-  
   public static filterByEndDate<T>(
     items: T[],
     dateFilters: Record<string, DateField<string>>,
   ): T[] {
     return items.filter((item) => {
       return Object.keys(dateFilters).every((key) => {
-        const filterValue = dateFilters[key].value; 
-        if (!filterValue) return true; 
+        const filterValue = dateFilters[key].value;
+        if (!filterValue) return true;
 
         const itemDate = (item as any)[key];
-        if (!itemDate) return true; 
+        if (!itemDate) return true;
 
         const itemDateObj = new Date(itemDate);
         const filterDateObj = new Date(filterValue);

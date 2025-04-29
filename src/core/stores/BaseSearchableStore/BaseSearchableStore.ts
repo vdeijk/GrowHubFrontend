@@ -1,4 +1,10 @@
-import { makeObservable, runInAction, observable, action } from 'mobx';
+import {
+  makeObservable,
+  runInAction,
+  observable,
+  action,
+  computed,
+} from 'mobx';
 import { debounce } from '../../../auxiliary/utils/debounce';
 import { InputField } from '../../../auxiliary/classes/InputField';
 import { Dropdown } from '../../../auxiliary/classes/Dropdown';
@@ -19,8 +25,6 @@ export abstract class SearchableStore<T> {
   public abstract searchQuery: InputField<string>;
   public dropdownFilters: Record<string, Dropdown<string>> = {};
   public dateFilters: Record<string, DateField<string>> = {};
-  public sortField: keyof T | null = null;
-  public sortOrder: 'asc' | 'desc' = 'asc';
   public searchableFields: (keyof T)[] = [];
 
   constructor(searchableFields: (keyof T)[]) {
@@ -64,13 +68,21 @@ export abstract class SearchableStore<T> {
       paginatedItems: observable,
       dropdownFilters: observable,
       dateFilters: observable,
-      sortField: observable,
-      sortOrder: observable,
+      sortField: computed,
+      sortOrder: computed,
       initDropdownFilter: action,
       initDateFilter: action,
       filterItems: action,
       sortItems: action,
     });
+  }
+
+  public get sortField(): keyof T | null {
+    return this.sortService.sortField;
+  }
+
+  public get sortOrder(): 'asc' | 'desc' {
+    return this.sortService.sortOrder;
   }
 
   public initDateFilter = (key: string, criteria: string, label: string) => {

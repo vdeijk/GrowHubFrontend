@@ -26,7 +26,7 @@ const TextInput: React.FC<TextInputProps> = ({
 
     EventBus.dispatchEvent(new Event(`searchQuery:updated`));
   };
-  
+
   return (
     <div className={label ? styles.container : ''}>
       {label && (
