@@ -11,7 +11,6 @@ import { EndpointService } from '../../../services/EndpointService/EndpointServi
 import { localStorageService } from '../../../services/LocalStorageService/LocalStorageService';
 import { InputField } from '../../../../auxiliary/classes/InputField';
 import CropsDatabaseData from '../../../../auxiliary/classes/CropsDatabaseData';
-import DebounceService from '../../../services/DebounceService/DebounceService';
 import { PaginationService } from '../../../services/PaginationService/PaginationService';
 
 class CropsDatabaseStore extends SearchableStore<PlantItem> {
@@ -34,11 +33,6 @@ class CropsDatabaseStore extends SearchableStore<PlantItem> {
     Object.values(CropsDatabaseData.dropdowns).forEach((dropdown) => {
       this.initDropdownFilter(dropdown);
     });
-
-    this.debouncedFilterPlants = DebounceService.debounce(
-      this.filterItems.bind(this),
-      500,
-    );
 
     makeObservable(this, {
       isLoading: computed,

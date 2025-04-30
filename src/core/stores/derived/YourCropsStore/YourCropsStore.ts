@@ -11,7 +11,6 @@ import { EndpointService } from '../../../services/EndpointService/EndpointServi
 import YourCropsData from '../../../../auxiliary/classes/YourCropData';
 import { InputField } from '../../../../auxiliary/classes/InputField';
 import EventBus from '../../../services/EventBusService/EventBusService';
-import DebounceService from '../../../services/DebounceService/DebounceService';
 import { PaginationService } from '../../../services/PaginationService/PaginationService';
 
 class YourCropsStore extends SearchableStore<YourCropItem> {
@@ -45,11 +44,6 @@ class YourCropsStore extends SearchableStore<YourCropItem> {
     YourCropsData.dateFields.forEach((dateField) => {
       this.initDateFilter(dateField);
     });
-
-    this.debouncedFilterPlants = DebounceService.debounce(
-      this.filterItems.bind(this),
-      500,
-    );
 
     makeObservable(this, {
       isLoading: computed,

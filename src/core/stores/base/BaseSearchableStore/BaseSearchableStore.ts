@@ -142,6 +142,7 @@ export abstract class SearchableStore<T> {
 
     runInAction(() => {
       this.filteredItems = this.sortService.sortItems(filtered);
+      this.paginationService.setCurrentPage(1);
     });
 
     EventBus.dispatchEvent('filteredItems:updated', undefined);
@@ -152,6 +153,7 @@ export abstract class SearchableStore<T> {
 
     runInAction(() => {
       this.filteredItems = this.sortService.sortItems(this.filteredItems);
+      this.paginationService.setCurrentPage(1);
     });
 
     EventBus.dispatchEvent('filteredItems:updated', undefined);
