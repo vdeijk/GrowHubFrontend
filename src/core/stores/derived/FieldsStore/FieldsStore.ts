@@ -7,7 +7,6 @@ import EventBus from '../../../services/EventBusService/EventBusService';
 class FieldsStore {
   private endpointService = new EndpointService('Location');
   public locations: LocationItem[] = [];
-  public centerMapTrigger = false;
   public get isLoading(): boolean {
     return this.endpointService.isLoading;
   }
@@ -29,9 +28,9 @@ class FieldsStore {
 
       weatherStore.setLocation(this.locations[0]?.id?.toString() || '');
       weatherStore.fetchData();
-
-      EventBus.dispatchEvent('locations:updated', undefined);
     });
+
+    EventBus.dispatchEvent('locations:updated', undefined);
   }
 
   public deleteField = async (id: number) => {

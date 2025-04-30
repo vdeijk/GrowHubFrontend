@@ -84,7 +84,7 @@ const AddCropPage: React.FC<AddCropPageProps> = observer(
     const soilPHFieldModel = {
       ...addCropStore.fields.soilPHField,
       value: String(addCropStore.fields.soilPHField.value),
-      options: cropsDatabaseStore.dropdownFilters['soilType'].options,
+      options: cropsDatabaseStore.dropdownFilters['soilPH'].options,
       onChange: (value: string) =>
         addCropStore.fields.soilPHField.setValue(value),
     };

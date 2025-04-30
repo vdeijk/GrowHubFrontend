@@ -6,5 +6,4 @@ export interface EventMap {
   'dropdownFilters:updated': void;
   'dateFilters:updated': void;
   'locations:updated': void;
-  'centerMap:updated': void;
 }

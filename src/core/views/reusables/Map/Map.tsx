@@ -7,6 +7,7 @@ import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 import fieldsStore from '../../../stores/derived/FieldsStore/FieldsStore';
 import { observer } from 'mobx-react-lite';
 import EventBus from '../../../services/EventBusService/EventBusService';
+import { toJS } from 'mobx';
 
 interface MapProps {
   enableScroll?: boolean;
@@ -18,17 +19,19 @@ const Map: React.FC<MapProps> = observer(
     const mapRef = useRef<HTMLDivElement | null>(null);
     const mapInstanceRef = useRef<L.Map | null>(null);
 
-    const DefaultIcon = L.icon({
-      iconUrl: markerIcon,
-      shadowUrl: markerShadow,
-      iconSize: [25, 41],
-      iconAnchor: [12, 41],
-      popupAnchor: [1, -34],
-      shadowSize: [41, 41],
-    });
-    L.Marker.prototype.options.icon = DefaultIcon;
+    useEffect(() => {
+      const DefaultIcon = L.icon({
+        iconUrl: markerIcon,
+        shadowUrl: markerShadow,
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41],
+      });
+      L.Marker.prototype.options.icon = DefaultIcon;
+    }, []);
 
-    const initMap = () => {
+    useEffect(() => {
       if (mapRef.current && !mapInstanceRef.current) {
         const map = L.map(mapRef.current, {
           scrollWheelZoom: enableScroll,
@@ -40,71 +43,62 @@ const Map: React.FC<MapProps> = observer(
           attribution:
             '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
         }).addTo(map);
-
-        addMarkers(map);
-        fitMapToMarkers(map);
       }
-    };
-
-    const addMarkers = (map: L.Map) => {
-      map.eachLayer((layer) => {
-        if (layer instanceof L.Marker) {
-          map.removeLayer(layer);
-        }
-      });
-
-      markers.forEach((marker) => {
-        L.marker([marker.lat, marker.lng])
-          .addTo(map)
-          .bindTooltip(marker.popupContent, {
-            permanent: true,
-            direction: 'top',
-            className: styles.customTooltip,
-          });
-      });
-    };
-
-    const fitMapToMarkers = (map: L.Map) => {
-      if (markers.length > 0) {
-        const bounds = L.latLngBounds(
-          markers.map((marker) => [marker.lat, marker.lng] as [number, number]),
-        );
-        map.fitBounds(bounds, { padding: [20, 20] });
-      }
-    };
-
-    const centerMap = () => {
-      if (mapRef.current && fieldsStore.locations.length > 0) {
-        const bounds = L.latLngBounds(
-          fieldsStore.locations.map((location) =>
-            L.latLng(location.latitude, location.longitude),
-          ),
-        );
-        mapInstanceRef.current?.fitBounds(bounds);
-      } else {
-        console.warn('No locations available to center the map.');
-      }
-    };
+    }, [enableScroll]);
 
     useEffect(() => {
-      initMap();
-
       if (mapInstanceRef.current) {
-        mapInstanceRef.current.scrollWheelZoom[
-          enableScroll ? 'enable' : 'disable'
-        ]();
+        const map = mapInstanceRef.current;
+
+        map.eachLayer((layer) => {
+          if (layer instanceof L.Marker) {
+            map.removeLayer(layer);
+          }
+        });
+
+        markers.forEach((marker) => {
+          L.marker([marker.lat, marker.lng])
+            .addTo(map)
+            .bindTooltip(marker.popupContent, {
+              permanent: true,
+              direction: 'top',
+              className: styles.customTooltip,
+            });
+        });
+
+        if (markers.length > 0) {
+          const bounds = L.latLngBounds(
+            markers.map(
+              (marker) => [marker.lat, marker.lng] as [number, number],
+            ),
+          );
+          map.fitBounds(bounds, { padding: [20, 20] });
+        }
       }
-    }, [enableScroll, initMap]);
+    }, [markers]);
 
     useEffect(() => {
-      const handleCenterMap = () => centerMap();
+      const handleCenterMap = () => {
+        if (mapInstanceRef.current && fieldsStore.locations.length > 0) {
+          const bounds = L.latLngBounds(
+            fieldsStore.locations.map((location) =>
+              L.latLng(location.latitude, location.longitude),
+            ),
+          );
+          mapInstanceRef.current.fitBounds(bounds);
+        } else {
+          console.warn('No locations available to center the map.');
+        }
+      };
 
-      EventBus.addEventListener('centerMap:updated', handleCenterMap);
+      EventBus.addEventListener('centerMap', handleCenterMap);
+      EventBus.addEventListener('locations:updated', handleCenterMap);
 
       return () => {
-        EventBus.removeEventListener('centerMap:updated', handleCenterMap);
+        EventBus.removeEventListener('centerMap', handleCenterMap);
+        EventBus.removeEventListener('locations:updated', handleCenterMap);
       };
-    }, [markers]);
+    }, []);
 
     return (
       <section className={styles.map}>
