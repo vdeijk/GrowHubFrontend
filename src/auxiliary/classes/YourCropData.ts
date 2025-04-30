@@ -54,7 +54,7 @@ class YourCropsData {
     this.dropdowns['location'].options = fieldsStore
       .getLocations()
       .map((field) => ({
-        value: field.name ?? "",
+        value: field.name ?? '',
         label: field.name ?? '',
       }));
   }

@@ -59,57 +59,30 @@ const AddYourCropPage: React.FC<AddYourCropPageProps> = observer(
         addYourCropStore.fields.nameField.setValue(value),
     };
 
-    const locationFieldModel = {
-      ...addYourCropStore.fields.locationField,
-      value: String(addYourCropStore.fields.locationField.value),
-      options: yourCropsStore.dropdownFilters['location'].options,
-      onChange: (value: string) =>
-        addYourCropStore.fields.locationField.setValue(value),
-    };
+    const createDropdownFieldModel = (fieldKey: string) => ({
+      ...addYourCropStore.fields[fieldKey],
+      value: String(addYourCropStore.fields[fieldKey].value),
+      options: yourCropsStore.dropdownFilters[fieldKey].options,
+      onChange: (value: string | number) =>
+        addYourCropStore.fields[fieldKey].setValue(String(value)),
+    });
 
-    const lastWateredFieldModel: DateInputProps = {
-      ...addYourCropStore.fields.lastWateredField,
-      value: String(addYourCropStore.fields.lastWateredField.value || ''),
+    const createDateFieldModel = (fieldKey: string): DateInputProps => ({
+      ...addYourCropStore.fields[fieldKey],
+      value: String(addYourCropStore.fields[fieldKey].value || ''),
       onChange: (value) =>
-        addYourCropStore.fields.lastWateredField.setValue(value || ''),
-    };
+        addYourCropStore.fields[fieldKey].setValue(value || ''),
+    });
 
-    const lastFertilizedFieldModel: DateInputProps = {
-      ...addYourCropStore.fields.lastFertilizedField,
-      value: String(addYourCropStore.fields.lastFertilizedField.value || ''),
-      onChange: (value) =>
-        addYourCropStore.fields.lastFertilizedField.setValue(value || ''),
-    };
-
-    const lastPrunedFieldModel: DateInputProps = {
-      ...addYourCropStore.fields.lastPrunedField,
-      value: String(addYourCropStore.fields.lastPrunedField.value || ''),
-      onChange: (value) =>
-        addYourCropStore.fields.lastPrunedField.setValue(value || ''),
-    };
-
-    const lastHarvestedFieldModel: DateInputProps = {
-      ...addYourCropStore.fields.lastHarvestedField,
-      value: String(addYourCropStore.fields.lastHarvestedField.value || ''),
-      onChange: (value) =>
-        addYourCropStore.fields.lastHarvestedField.setValue(value || ''),
-    };
-
-    const healthStatusFieldModel = {
-      ...addYourCropStore.fields.healthStatusField,
-      value: String(addYourCropStore.fields.healthStatusField.value),
-      options: yourCropsStore.dropdownFilters['healthStatus'].options,
-      onChange: (value: string) =>
-        addYourCropStore.fields.healthStatusField.setValue(value),
-    };
-
-    const growthStageField = {
-      ...addYourCropStore.fields.growthStageField,
-      value: String(addYourCropStore.fields.growthStageField.value),
-      options: yourCropsStore.dropdownFilters['growthStage'].options,
-      onChange: (value: string) =>
-        addYourCropStore.fields.growthStageField.setValue(value),
-    };
+    const lastWateredFieldModel = createDateFieldModel('lastWateredField');
+    const lastFertilizedFieldModel = createDateFieldModel(
+      'lastFertilizedField',
+    );
+    const lastPrunedFieldModel = createDateFieldModel('lastPrunedField');
+    const lastHarvestedFieldModel = createDateFieldModel('lastHarvestedField');
+    const locationFieldModel = createDropdownFieldModel('location');
+    const growthStageFieldModel = createDropdownFieldModel('growthStage');
+    const healthStatusFieldModel = createDropdownFieldModel('healthStatus');
 
     return (
       <section className={styles.section}>
@@ -117,7 +90,7 @@ const AddYourCropPage: React.FC<AddYourCropPageProps> = observer(
           <form onSubmit={handleSubmit} className={styles.form}>
             <TextInput {...nameFieldModel} />
             <Dropdown {...locationFieldModel} />
-            <Dropdown {...growthStageField} />
+            <Dropdown {...growthStageFieldModel} />
             <Dropdown {...healthStatusFieldModel} />
             <DateInput {...lastWateredFieldModel} />
             <DateInput {...lastFertilizedFieldModel} />

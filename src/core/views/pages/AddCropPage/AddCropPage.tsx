@@ -57,77 +57,26 @@ const AddCropPage: React.FC<AddCropPageProps> = observer(
         addCropStore.fields.nameField.setValue(value),
     };
 
-    const sunPreferenceFieldModel = {
-      ...addCropStore.fields.sunPreferenceField,
-      value: String(addCropStore.fields.sunPreferenceField.value),
-      options: cropsDatabaseStore.dropdownFilters['sunPreference'].options,
-      onChange: (value: string) =>
-        addCropStore.fields.sunPreferenceField.setValue(value),
-    };
+    const createDropdownFieldModel = (fieldKey: string) => ({
+      ...addCropStore.fields[fieldKey],
+      value: String(addCropStore.fields[fieldKey].value),
+      options: cropsDatabaseStore.dropdownFilters[fieldKey].options,
+      onChange: (value: string | number) =>
+        addCropStore.fields[fieldKey].setValue(String(value)),
+    });
 
-    const waterNeedsFieldModel = {
-      ...addCropStore.fields.waterNeedsField,
-      value: String(addCropStore.fields.waterNeedsField.value),
-      options: cropsDatabaseStore.dropdownFilters['waterNeeds'].options,
-      onChange: (value: string) =>
-        addCropStore.fields.waterNeedsField.setValue(value),
-    };
-
-    const soilTypeFieldModel = {
-      ...addCropStore.fields.soilTypeField,
-      value: String(addCropStore.fields.soilTypeField.value),
-      options: cropsDatabaseStore.dropdownFilters['soilType'].options,
-      onChange: (value: string) =>
-        addCropStore.fields.soilTypeField.setValue(value),
-    };
-
-    const soilPHFieldModel = {
-      ...addCropStore.fields.soilPHField,
-      value: String(addCropStore.fields.soilPHField.value),
-      options: cropsDatabaseStore.dropdownFilters['soilPH'].options,
-      onChange: (value: string) =>
-        addCropStore.fields.soilPHField.setValue(value),
-    };
-
-    const pruningFieldModel = {
-      ...addCropStore.fields.pruningField,
-      value: String(addCropStore.fields.pruningField.value),
-      options: cropsDatabaseStore.dropdownFilters['pruning'].options,
-      onChange: (value: string) =>
-        addCropStore.fields.pruningField.setValue(value),
-    };
-
-    const climateZoneFieldModel = {
-      ...addCropStore.fields.climateZone,
-      value: String(addCropStore.fields.climateZone.value),
-      options: cropsDatabaseStore.dropdownFilters['climateZone'].options,
-      onChange: (value: string) =>
-        addCropStore.fields.climateZone.setValue(value),
-    };
-
-    const plantTypeFieldModel = {
-      ...addCropStore.fields.plantTypeField,
-      value: String(addCropStore.fields.plantTypeField.value),
-      options: cropsDatabaseStore.dropdownFilters['plantType'].options,
-      onChange: (value: string) =>
-        addCropStore.fields.plantTypeField.setValue(value),
-    };
-
-    const growthRateFieldModel = {
-      ...addCropStore.fields.growthRateField,
-      value: String(addCropStore.fields.growthRateField.value),
-      options: cropsDatabaseStore.dropdownFilters['growthRate'].options,
-      onChange: (value: string) =>
-        addCropStore.fields.growthRateField.setValue(value),
-    };
-
-    const fertilizerNeedsFieldModel = {
-      ...addCropStore.fields.fertilizerNeedsField,
-      value: String(addCropStore.fields.fertilizerNeedsField.value),
-      options: cropsDatabaseStore.dropdownFilters['fertilizerNeeds'].options,
-      onChange: (value: string) =>
-        addCropStore.fields.fertilizerNeedsField.setValue(value),
-    };
+    const sunPreferenceFieldModel =
+      createDropdownFieldModel('sunPreferenceField');
+    const waterNeedsFieldModel = createDropdownFieldModel('waterNeedsField');
+    const soilTypeFieldModel = createDropdownFieldModel('soilTypeField');
+    const soilPHFieldModel = createDropdownFieldModel('soilPHField');
+    const pruningFieldModel = createDropdownFieldModel('pruningField');
+    const climateZoneFieldModel = createDropdownFieldModel('climateZone');
+    const plantTypeFieldModel = createDropdownFieldModel('plantTypeField');
+    const growthRateFieldModel = createDropdownFieldModel('growthRateField');
+    const fertilizerNeedsFieldModel = createDropdownFieldModel(
+      'fertilizerNeedsField',
+    );
 
     return (
       <section className={styles.section}>

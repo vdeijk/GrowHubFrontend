@@ -44,8 +44,8 @@ const FieldsPage: React.FC = observer(() => {
       (location) =>
         location.latitude !== undefined &&
         location.longitude !== undefined &&
-        location.name !== null && 
-        location.name !== undefined
+        location.name !== null &&
+        location.name !== undefined,
     )
     .map((location) => ({
       lat: location.latitude as number,

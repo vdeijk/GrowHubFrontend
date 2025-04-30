@@ -9,7 +9,6 @@ import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import Button, { ButtonProps } from '../../reusables/Button/Button';
 import Dropdown from '../../reusables/Dropdown/Dropdown';
 import DateInput, { DateInputProps } from '../../reusables/DateInput/DateInput';
-import { DropdownProps } from '../../reusables/Dropdown/Dropdown';
 import taskStore from '../../../stores/derived/TaskStore/TaskStore';
 
 interface AddTaskPageProps {
@@ -44,50 +43,33 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
       navigate('/tasksPage');
     };
 
-    const titleProps: TextInputProps = {
-      ...addTaskStore.fields.titleField,
-      value: String(addTaskStore.fields.titleField.value),
+    const createTextInputFieldModel = (fieldKey: string): TextInputProps => ({
+      ...addTaskStore.fields[fieldKey],
+      value: String(addTaskStore.fields[fieldKey].value || ''),
       onChange: (value: string) =>
-        addTaskStore.fields.titleField.setValue(value),
-    };
+        addTaskStore.fields[fieldKey].setValue(value),
+    });
 
-    const priorityProps: DropdownProps = {
-      ...addTaskStore.fields.priorityField,
-      value: String(addTaskStore.fields.priorityField.value),
-      onChange: (value: string) =>
-        addTaskStore.fields.priorityField.setValue(value),
-      options: taskStore.dropdownFilters['priority'].options,
-    };
+    const createDropdownFieldModel = (fieldKey: string) => ({
+      ...addTaskStore.fields[fieldKey],
+      value: String(addTaskStore.fields[fieldKey].value),
+      options: taskStore.dropdownFilters[fieldKey].options,
+      onChange: (value: string | number) =>
+        addTaskStore.fields[fieldKey].setValue(String(value)),
+    });
 
-    const dueDateProps: DateInputProps = {
-      ...addTaskStore.fields.dueDateField,
-      value: String(addTaskStore.fields.dueDateField.value || ''),
-      onChange: (value) =>
-        addTaskStore.fields.dueDateField.setValue(value || ''),
-    };
+    const createDateFieldModel = (fieldKey: string): DateInputProps => ({
+      ...addTaskStore.fields[fieldKey],
+      value: String(addTaskStore.fields[fieldKey].value || ''),
+      onChange: (value) => addTaskStore.fields[fieldKey].setValue(value || ''),
+    });
 
-    const descriptionProps: TextInputProps = {
-      ...addTaskStore.fields.descriptionField,
-      value: String(addTaskStore.fields.descriptionField.value),
-      onChange: (value: string) =>
-        addTaskStore.fields.descriptionField.setValue(value),
-    };
-
-    const categoryProps: DropdownProps = {
-      ...addTaskStore.fields.categoryField,
-      value: String(addTaskStore.fields.categoryField.value),
-      onChange: (value: string) =>
-        addTaskStore.fields.categoryField.setValue(value),
-      options: taskStore.dropdownFilters['category'].options,
-    };
-
-    const statusProps: DropdownProps = {
-      ...addTaskStore.fields.statusField,
-      value: String(addTaskStore.fields.statusField.value),
-      onChange: (value: string) =>
-        addTaskStore.fields.statusField.setValue(value),
-      options: taskStore.dropdownFilters['todoStatus'].options,
-    };
+    const titleProps = createTextInputFieldModel('titleField');
+    const descriptionProps = createTextInputFieldModel('descriptionField');
+    const priorityProps = createDropdownFieldModel('priorityField');
+    const categoryProps = createDropdownFieldModel('category');
+    const statusProps = createDropdownFieldModel('todoStatus');
+    const dueDateProps = createDateFieldModel('dueDateField');
 
     const buttonProps: ButtonProps = {
       type: 'submit',

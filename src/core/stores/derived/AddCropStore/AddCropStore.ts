@@ -37,7 +37,7 @@ class AddCropStore extends BaseFormStore {
       soilTypeField: new Dropdown<string>('', 'Soil Type', true),
       soilPHField: new Dropdown<string>('', 'Soil PH', true),
       pruningField: new Dropdown<string>('', 'Pruning', true),
-      climateZone: new Dropdown<string>('', 'Climate Zone', true),
+      climateZoneField: new Dropdown<string>('', 'Climate Zone', true),
       plantTypeField: new Dropdown<string>('', 'Plant Type', true),
       growthRateField: new Dropdown<string>('', 'Growth Rate', true),
       fertilizerNeedsField: new Dropdown<string>('', 'fertilizer Needs', true),
@@ -53,7 +53,8 @@ class AddCropStore extends BaseFormStore {
       soilType: this.fields.soilTypeField.value as PlantItemSoilTypeEnum,
       soilPH: this.fields.soilPHField.value as PlantItemSoilPHEnum,
       pruning: this.fields.pruningField.value as PlantItemPruningEnum,
-      climateZone: this.fields.climateZone.value as PlantItemClimateZoneEnum,
+      climateZone: this.fields.climateZoneField
+        .value as PlantItemClimateZoneEnum,
       plantType: this.fields.plantTypeField.value as PlantItemPlantTypeEnum,
       growthRate: this.fields.growthRateField.value as PlantItemGrowthRateEnum,
       fertilizerNeeds: this.fields.fertilizerNeedsField
@@ -79,7 +80,8 @@ class AddCropStore extends BaseFormStore {
       soilType: this.fields.soilTypeField.value as PlantItemSoilTypeEnum,
       soilPH: this.fields.soilPHField.value as PlantItemSoilPHEnum,
       pruning: this.fields.pruningField.value as PlantItemPruningEnum,
-      climateZone: this.fields.climateZone.value as PlantItemClimateZoneEnum,
+      climateZone: this.fields.climateZoneField
+        .value as PlantItemClimateZoneEnum,
       plantType: this.fields.plantTypeField.value as PlantItemPlantTypeEnum,
       growthRate: this.fields.growthRateField.value as PlantItemGrowthRateEnum,
       fertilizerNeeds: this.fields.fertilizerNeedsField
@@ -97,6 +99,7 @@ class AddCropStore extends BaseFormStore {
 
     if (!data) return;
 
+    console.log('data', data);
     runInAction(() => {
       this.fields.nameField.setValue(String(data.commonName));
       this.fields.sunPreferenceField.setValue(String(data.sunPreference));
