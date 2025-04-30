@@ -7,7 +7,6 @@ import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 import fieldsStore from '../../../stores/derived/FieldsStore/FieldsStore';
 import { observer } from 'mobx-react-lite';
 import EventBus from '../../../services/EventBusService/EventBusService';
-import { toJS } from 'mobx';
 
 interface MapProps {
   enableScroll?: boolean;
@@ -81,9 +80,14 @@ const Map: React.FC<MapProps> = observer(
       const handleCenterMap = () => {
         if (mapInstanceRef.current && fieldsStore.locations.length > 0) {
           const bounds = L.latLngBounds(
-            fieldsStore.locations.map((location) =>
-              L.latLng(location.latitude, location.longitude),
-            ),
+            fieldsStore.locations
+              .map((location) =>
+                location.latitude !== undefined &&
+                location.longitude !== undefined
+                  ? L.latLng(location.latitude, location.longitude)
+                  : null,
+              )
+              .filter((latLng) => latLng !== null) as L.LatLng[],
           );
           mapInstanceRef.current.fitBounds(bounds);
         } else {
