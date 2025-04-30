@@ -5,7 +5,7 @@ import EventBus from '../../../services/EventBusService/EventBusService';
 
 export interface DropdownProps {
   value: string;
-  onChange: (value: string) => void;
+  onChange: (value: number | string) => void;
   options: DropdownOption[];
   ariaLabel?: string;
   label?: string;
@@ -20,9 +20,8 @@ const Dropdown: React.FC<DropdownProps> = ({
   label,
   required,
 }) => {
-  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const newValue = event.target.value;
-    onChange(newValue);
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    onChange(e.target.value);
 
     EventBus.dispatchEvent(`dropdownFilters:updated`, undefined);
   };

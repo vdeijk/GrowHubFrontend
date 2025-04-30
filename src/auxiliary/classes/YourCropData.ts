@@ -27,28 +27,37 @@ class YourCropsData {
     location: {
       key: 'location',
       label: 'Location',
-      options: () =>
-        fieldsStore
-          .getLocations()
-          .map((field) => field.name)
-          .filter(
-            (name): name is string => name !== null && name !== undefined,
-          ),
+      options: [],
       defaultValue: '',
     },
     growthStage: {
       key: 'growthStage',
       label: 'Growth Stage',
-      options: Object.values(YourCropItemGrowthStageEnum),
+      options: Object.values(YourCropItemGrowthStageEnum).map((value) => ({
+        value,
+        label: value,
+      })),
       defaultValue: '',
     },
     healthStatus: {
       key: 'healthStatus',
       label: 'Health Status',
-      options: Object.values(YourCropItemHealthStatusEnum),
+      options: Object.values(YourCropItemHealthStatusEnum).map((value) => ({
+        value,
+        label: value,
+      })),
       defaultValue: '',
     },
   };
+
+  public static updateLocationDropdownOptions() {
+    this.dropdowns['location'].options = fieldsStore
+      .getLocations()
+      .map((field) => ({
+        value: field.name ?? "",
+        label: field.name ?? '',
+      }));
+  }
 
   public static dateFields: DateFieldModel[] = [
     { key: 'lastWatered', label: 'Last Watered', defaultValue: '' },

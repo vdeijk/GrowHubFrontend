@@ -33,55 +33,82 @@ class CropsDatabaseData {
     sunPreference: {
       key: 'sunPreference',
       label: 'Sun Preference',
-      options: Object.values(PlantItemSunPreferenceEnum),
+      options: Object.values(PlantItemSunPreferenceEnum).map((value) => ({
+        value: value,
+        label: value,
+      })),
       defaultValue: '',
     },
     waterNeeds: {
       key: 'waterNeeds',
       label: 'Water Needs',
-      options: Object.values(PlantItemWaterNeedsEnum),
+      options: Object.values(PlantItemWaterNeedsEnum).map((value) => ({
+        value: value,
+        label: value,
+      })),
       defaultValue: '',
     },
     soilType: {
       key: 'soilType',
       label: 'Soil Type',
-      options: Object.values(PlantItemSoilTypeEnum),
+      options: Object.values(PlantItemSoilTypeEnum).map((value) => ({
+        value: value,
+        label: value,
+      })),
       defaultValue: '',
     },
     soilPH: {
       key: 'soilPH',
       label: 'Soil PH',
-      options: Object.values(PlantItemSoilPHEnum),
+      options: Object.values(PlantItemSoilPHEnum).map((value) => ({
+        value: value,
+        label: value,
+      })),
       defaultValue: '',
     },
     pruning: {
       key: 'pruning',
       label: 'Pruning',
-      options: Object.values(PlantItemPruningEnum),
+      options: Object.values(PlantItemPruningEnum).map((value) => ({
+        value: value,
+        label: value,
+      })),
       defaultValue: '',
     },
     climateZone: {
       key: 'climateZone',
       label: 'Climate Zone',
-      options: Object.values(PlantItemClimateZoneEnum),
+      options: Object.values(PlantItemClimateZoneEnum).map((value) => ({
+        value: value,
+        label: value,
+      })),
       defaultValue: '',
     },
     plantType: {
       key: 'plantType',
       label: 'Plant Type',
-      options: Object.values(PlantItemPlantTypeEnum),
+      options: Object.values(PlantItemPlantTypeEnum).map((value) => ({
+        value: value,
+        label: value,
+      })),
       defaultValue: '',
     },
     growthRate: {
       key: 'growthRate',
       label: 'Growth Rate',
-      options: Object.values(PlantItemGrowthRateEnum),
+      options: Object.values(PlantItemGrowthRateEnum).map((value) => ({
+        value: value,
+        label: value,
+      })),
       defaultValue: '',
     },
     fertilizerNeeds: {
       key: 'fertilizerNeeds',
       label: 'Fertilizer Needs',
-      options: Object.values(PlantItemFertilizerNeedsEnum),
+      options: Object.values(PlantItemFertilizerNeedsEnum).map((value) => ({
+        value: value,
+        label: value,
+      })),
       defaultValue: '',
     },
   };

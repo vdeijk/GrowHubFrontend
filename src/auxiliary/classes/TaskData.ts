@@ -23,19 +23,28 @@ class TaskData {
     category: {
       key: 'category',
       label: 'Category',
-      options: Object.values(TodoItemCategoryEnum),
+      options: Object.values(TodoItemCategoryEnum).map((value) => ({
+        value: value,
+        label: value,
+      })),
       defaultValue: '',
     },
     priority: {
       key: 'priority',
       label: 'Priority',
-      options: Object.values(TodoItemPriorityEnum),
+      options: Object.values(TodoItemPriorityEnum).map((value) => ({
+        value: value,
+        label: value,
+      })),
       defaultValue: '',
     },
     status: {
       key: 'todoStatus',
       label: 'Status',
-      options: Object.values(TodoItemTodoStatusEnum),
+      options: Object.values(TodoItemTodoStatusEnum).map((value) => ({
+        value: value,
+        label: value,
+      })),
       defaultValue: '',
     },
   };

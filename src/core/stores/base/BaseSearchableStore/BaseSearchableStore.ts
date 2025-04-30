@@ -106,8 +106,8 @@ export abstract class SearchableStore<T> {
   public initDropdownFilter = (field: DropdownFieldModel) => {
     runInAction(() => {
       if (!this.dropdownFilters[field.key]) {
-        this.dropdownFilters[field.key] = new Dropdown<string>(
-          '',
+        this.dropdownFilters[field.key] = new Dropdown(
+          field.defaultValue,
           field.label,
           false,
         );
@@ -123,10 +123,7 @@ export abstract class SearchableStore<T> {
         return;
       }
 
-      this.dropdownFilters[field.key].setValue(field.defaultValue);
-      this.dropdownFilters[field.key].generateDropdownOptions(
-        resolvedOptions.map(String),
-      );
+      this.dropdownFilters[field.key].generateDropdownOptions(resolvedOptions);
     });
   };
 

@@ -1,11 +1,12 @@
 # TurnoverItem
 
+
 ## Properties
 
-| Name       | Type       | Description | Notes                             |
-| ---------- | ---------- | ----------- | --------------------------------- |
-| **date**   | **string** |             | [optional] [default to undefined] |
-| **amount** | **number** |             | [optional] [default to undefined] |
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**date** | **string** |  | [optional] [default to undefined]
+**amount** | **number** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -13,8 +14,8 @@
 import { TurnoverItem } from './api';
 
 const instance: TurnoverItem = {
-  date,
-  amount,
+    date,
+    amount,
 };
 ```
 
