@@ -12,7 +12,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "format": "prettier --write .",
-    "generate-api": "openapi-generator-cli generate -i ./api/swagger.json -g typescript-axios -o ./src/api"
+    "generate-api": "openapi-generator-cli generate -i ./src/api/swagger.json -g typescript-axios -o ./src/api"
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.3.0",
