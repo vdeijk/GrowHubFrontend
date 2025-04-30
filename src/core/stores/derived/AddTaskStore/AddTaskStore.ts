@@ -31,13 +31,6 @@ class AddTaskStore extends BaseFormStore {
         'Priority',
         true,
       ),
-      fieldField: new InputField<string>(
-        '',
-        'Field',
-        false,
-        'Enter field name',
-        30,
-      ),
       dueDateField: new DateField<string>('', 'Due Date', true),
       descriptionField: new InputField<string>(
         '',

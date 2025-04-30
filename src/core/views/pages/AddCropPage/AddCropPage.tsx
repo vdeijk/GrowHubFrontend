@@ -65,18 +65,16 @@ const AddCropPage: React.FC<AddCropPageProps> = observer(
         addCropStore.fields[fieldKey].setValue(String(value)),
     });
 
-    const sunPreferenceFieldModel =
-      createDropdownFieldModel('sunPreferenceField');
-    const waterNeedsFieldModel = createDropdownFieldModel('waterNeedsField');
-    const soilTypeFieldModel = createDropdownFieldModel('soilTypeField');
-    const soilPHFieldModel = createDropdownFieldModel('soilPHField');
-    const pruningFieldModel = createDropdownFieldModel('pruningField');
+    const sunPreferenceFieldModel = createDropdownFieldModel('sunPreference');
+    const waterNeedsFieldModel = createDropdownFieldModel('waterNeeds');
+    const soilTypeFieldModel = createDropdownFieldModel('soilType');
+    const soilPHFieldModel = createDropdownFieldModel('soilPH');
+    const pruningFieldModel = createDropdownFieldModel('pruning');
     const climateZoneFieldModel = createDropdownFieldModel('climateZone');
-    const plantTypeFieldModel = createDropdownFieldModel('plantTypeField');
-    const growthRateFieldModel = createDropdownFieldModel('growthRateField');
-    const fertilizerNeedsFieldModel = createDropdownFieldModel(
-      'fertilizerNeedsField',
-    );
+    const plantTypeFieldModel = createDropdownFieldModel('plantType');
+    const growthRateFieldModel = createDropdownFieldModel('growthRate');
+    const fertilizerNeedsFieldModel =
+      createDropdownFieldModel('fertilizerNeeds');
 
     return (
       <section className={styles.section}>

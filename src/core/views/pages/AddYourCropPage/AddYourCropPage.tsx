@@ -74,15 +74,13 @@ const AddYourCropPage: React.FC<AddYourCropPageProps> = observer(
         addYourCropStore.fields[fieldKey].setValue(value || ''),
     });
 
-    const lastWateredFieldModel = createDateFieldModel('lastWateredField');
-    const lastFertilizedFieldModel = createDateFieldModel(
-      'lastFertilizedField',
-    );
-    const lastPrunedFieldModel = createDateFieldModel('lastPrunedField');
-    const lastHarvestedFieldModel = createDateFieldModel('lastHarvestedField');
     const locationFieldModel = createDropdownFieldModel('location');
     const growthStageFieldModel = createDropdownFieldModel('growthStage');
     const healthStatusFieldModel = createDropdownFieldModel('healthStatus');
+    const lastWateredFieldModel = createDateFieldModel('lastWatered');
+    const lastFertilizedFieldModel = createDateFieldModel('lastFertilized');
+    const lastPrunedFieldModel = createDateFieldModel('lastPruned');
+    const lastHarvestedFieldModel = createDateFieldModel('lastHarvested');
 
     return (
       <section className={styles.section}>

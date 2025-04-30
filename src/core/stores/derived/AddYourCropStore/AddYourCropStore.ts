@@ -26,28 +26,27 @@ class AddYourCropStore extends BaseFormStore {
         true,
         'Enter common name',
       ),
-      locationField: new Dropdown<string>('', 'Location', true),
-      growthStageField: new Dropdown<string>('', 'Growth Stage', true),
-      healthStatusField: new Dropdown<string>('', 'Health Status', true),
-      lastWateredField: new DateField<string>('', 'Last Watered', false),
-      lastFertilizedField: new DateField<string>('', 'Last Fertilized', false),
-      lastPrunedField: new DateField<string>('', 'Last Pruned', false),
-      lastHarvestedField: new DateField<string>('', 'Last Harvested', false),
+      location: new Dropdown<string>('', 'Location', true),
+      growthStage: new Dropdown<string>('', 'Growth Stage', true),
+      healthStatus: new Dropdown<string>('', 'Health Status', true),
+      lastWatered: new DateField<string>('', 'Last Watered', false),
+      lastFertilized: new DateField<string>('', 'Last Fertilized', false),
+      lastPruned: new DateField<string>('', 'Last Pruned', false),
+      lastHarvested: new DateField<string>('', 'Last Harvested', false),
     } as Record<string, InputField<string | number | boolean>>;
   }
 
   public addCrop = async () => {
     const data: YourCropItem = {
       commonName: this.fields.nameField.value as string,
-      location: this.fields.locationField.value as string,
-      lastWatered: this.fields.lastWateredField.value as string,
-      lastFertilized: this.fields.lastFertilizedField.value as string,
-      lastPruned: this.fields.lastPrunedField.value as string,
-      lastHarvested: this.fields.lastHarvestedField.value as string,
-      healthStatus: this.fields.healthStatusField
+      location: this.fields.location.value as string,
+      growthStage: this.fields.growthStage.value as YourCropItemGrowthStageEnum,
+      healthStatus: this.fields.healthStatus
         .value as YourCropItemHealthStatusEnum,
-      growthStage: this.fields.growthStageField
-        .value as YourCropItemGrowthStageEnum,
+      lastWatered: this.fields.lastWatered.value as string,
+      lastFertilized: this.fields.lastFertilized.value as string,
+      lastPruned: this.fields.lastPruned.value as string,
+      lastHarvested: this.fields.lastHarvested.value as string,
     };
 
     await this.endpointService.postData(data);
@@ -63,15 +62,14 @@ class AddYourCropStore extends BaseFormStore {
 
     const data: YourCropItem = {
       commonName: this.fields.nameField.value as string,
-      location: this.fields.locationField.value as string,
-      lastWatered: this.fields.lastWateredField.value as string,
-      lastFertilized: this.fields.lastFertilizedField.value as string,
-      lastPruned: this.fields.lastPrunedField.value as string,
-      lastHarvested: this.fields.lastHarvestedField.value as string,
-      healthStatus: this.fields.healthStatusField
+      location: this.fields.location.value as string,
+      growthStage: this.fields.growthStage.value as YourCropItemGrowthStageEnum,
+      healthStatus: this.fields.healthStatus
         .value as YourCropItemHealthStatusEnum,
-      growthStage: this.fields.growthStageField
-        .value as YourCropItemGrowthStageEnum,
+      lastWatered: this.fields.lastWatered.value as string,
+      lastFertilized: this.fields.lastFertilized.value as string,
+      lastPruned: this.fields.lastPruned.value as string,
+      lastHarvested: this.fields.lastHarvested.value as string,
     };
 
     await this.endpointService.putData(`${id}`, data);
@@ -87,13 +85,13 @@ class AddYourCropStore extends BaseFormStore {
 
     runInAction(() => {
       this.fields.nameField.setValue(String(data.commonName));
-      this.fields.locationField.setValue(String(data.location));
-      this.fields.lastWateredField.setValue(String(data.lastWatered));
-      this.fields.lastFertilizedField.setValue(String(data.lastFertilized));
-      this.fields.lastPrunedField.setValue(String(data.lastPruned));
-      this.fields.lastHarvestedField.setValue(String(data.lastHarvested));
-      this.fields.healthStatusField.setValue(String(data.healthStatus));
-      this.fields.growthStageField.setValue(String(data.growthStage));
+      this.fields.location.setValue(String(data.location));
+      this.fields.healthStatus.setValue(String(data.healthStatus));
+      this.fields.growthStage.setValue(String(data.growthStage));
+      this.fields.lastWatered.setValue(String(data.lastWatered));
+      this.fields.lastFertilized.setValue(String(data.lastFertilized));
+      this.fields.lastPruned.setValue(String(data.lastPruned));
+      this.fields.lastHarvested.setValue(String(data.lastHarvested));
     });
   };
 

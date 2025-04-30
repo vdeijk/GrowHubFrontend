@@ -32,32 +32,31 @@ class AddCropStore extends BaseFormStore {
         true,
         'Enter common name',
       ),
-      sunPreferenceField: new Dropdown<string>('', 'Sun Preference', true),
-      waterNeedsField: new Dropdown<string>('', 'Water Needs', true),
-      soilTypeField: new Dropdown<string>('', 'Soil Type', true),
-      soilPHField: new Dropdown<string>('', 'Soil PH', true),
-      pruningField: new Dropdown<string>('', 'Pruning', true),
-      climateZoneField: new Dropdown<string>('', 'Climate Zone', true),
-      plantTypeField: new Dropdown<string>('', 'Plant Type', true),
-      growthRateField: new Dropdown<string>('', 'Growth Rate', true),
-      fertilizerNeedsField: new Dropdown<string>('', 'fertilizer Needs', true),
+      sunPreference: new Dropdown<string>('', 'Sun Preference', true),
+      waterNeeds: new Dropdown<string>('', 'Water Needs', true),
+      soilType: new Dropdown<string>('', 'Soil Type', true),
+      soilPH: new Dropdown<string>('', 'Soil PH', true),
+      pruning: new Dropdown<string>('', 'Pruning', true),
+      climateZone: new Dropdown<string>('', 'Climate Zone', true),
+      plantType: new Dropdown<string>('', 'Plant Type', true),
+      growthRate: new Dropdown<string>('', 'Growth Rate', true),
+      fertilizerNeeds: new Dropdown<string>('', 'fertilizer Needs', true),
     } as Record<string, InputField<string | number | boolean>>;
   }
 
   public addCrop = async () => {
     const data: PlantItem = {
       commonName: this.fields.nameField.value as string,
-      sunPreference: this.fields.sunPreferenceField
+      sunPreference: this.fields.sunPreference
         .value as PlantItemSunPreferenceEnum,
-      waterNeeds: this.fields.waterNeedsField.value as PlantItemWaterNeedsEnum,
-      soilType: this.fields.soilTypeField.value as PlantItemSoilTypeEnum,
-      soilPH: this.fields.soilPHField.value as PlantItemSoilPHEnum,
-      pruning: this.fields.pruningField.value as PlantItemPruningEnum,
-      climateZone: this.fields.climateZoneField
-        .value as PlantItemClimateZoneEnum,
-      plantType: this.fields.plantTypeField.value as PlantItemPlantTypeEnum,
-      growthRate: this.fields.growthRateField.value as PlantItemGrowthRateEnum,
-      fertilizerNeeds: this.fields.fertilizerNeedsField
+      waterNeeds: this.fields.waterNeeds.value as PlantItemWaterNeedsEnum,
+      soilType: this.fields.soilType.value as PlantItemSoilTypeEnum,
+      soilPH: this.fields.soilPH.value as PlantItemSoilPHEnum,
+      pruning: this.fields.pruning.value as PlantItemPruningEnum,
+      climateZone: this.fields.climateZone.value as PlantItemClimateZoneEnum,
+      plantType: this.fields.plantType.value as PlantItemPlantTypeEnum,
+      growthRate: this.fields.growthRate.value as PlantItemGrowthRateEnum,
+      fertilizerNeeds: this.fields.fertilizerNeeds
         .value as PlantItemFertilizerNeedsEnum,
     };
 
@@ -74,17 +73,16 @@ class AddCropStore extends BaseFormStore {
 
     const data: PlantItem = {
       commonName: this.fields.nameField.value as string,
-      sunPreference: this.fields.sunPreferenceField
+      sunPreference: this.fields.sunPreference
         .value as PlantItemSunPreferenceEnum,
-      waterNeeds: this.fields.waterNeedsField.value as PlantItemWaterNeedsEnum,
-      soilType: this.fields.soilTypeField.value as PlantItemSoilTypeEnum,
-      soilPH: this.fields.soilPHField.value as PlantItemSoilPHEnum,
-      pruning: this.fields.pruningField.value as PlantItemPruningEnum,
-      climateZone: this.fields.climateZoneField
-        .value as PlantItemClimateZoneEnum,
-      plantType: this.fields.plantTypeField.value as PlantItemPlantTypeEnum,
-      growthRate: this.fields.growthRateField.value as PlantItemGrowthRateEnum,
-      fertilizerNeeds: this.fields.fertilizerNeedsField
+      waterNeeds: this.fields.waterNeeds.value as PlantItemWaterNeedsEnum,
+      soilType: this.fields.soilType.value as PlantItemSoilTypeEnum,
+      soilPH: this.fields.soilPH.value as PlantItemSoilPHEnum,
+      pruning: this.fields.pruning.value as PlantItemPruningEnum,
+      climateZone: this.fields.climateZone.value as PlantItemClimateZoneEnum,
+      plantType: this.fields.plantType.value as PlantItemPlantTypeEnum,
+      growthRate: this.fields.growthRate.value as PlantItemGrowthRateEnum,
+      fertilizerNeeds: this.fields.fertilizerNeeds
         .value as PlantItemFertilizerNeedsEnum,
     };
 
@@ -99,18 +97,17 @@ class AddCropStore extends BaseFormStore {
 
     if (!data) return;
 
-    console.log('data', data);
     runInAction(() => {
       this.fields.nameField.setValue(String(data.commonName));
-      this.fields.sunPreferenceField.setValue(String(data.sunPreference));
-      this.fields.waterNeedsField.setValue(String(data.waterNeeds));
-      this.fields.soilTypeField.setValue(String(data.soilType));
-      this.fields.soilPHField.setValue(String(data.soilPH));
-      this.fields.pruningField.setValue(String(data.pruning));
-      this.fields.climateZoneField.setValue(String(data.climateZone));
-      this.fields.plantTypeField.setValue(String(data.plantType));
-      this.fields.growthRateField.setValue(String(data.growthRate));
-      this.fields.fertilizerNeedsField.setValue(String(data.fertilizerNeeds));
+      this.fields.sunPreference.setValue(String(data.sunPreference));
+      this.fields.waterNeeds.setValue(String(data.waterNeeds));
+      this.fields.soilType.setValue(String(data.soilType));
+      this.fields.soilPH.setValue(String(data.soilPH));
+      this.fields.pruning.setValue(String(data.pruning));
+      this.fields.climateZone.setValue(String(data.climateZone));
+      this.fields.plantType.setValue(String(data.plantType));
+      this.fields.growthRate.setValue(String(data.growthRate));
+      this.fields.fertilizerNeeds.setValue(String(data.fertilizerNeeds));
     });
   };
 
