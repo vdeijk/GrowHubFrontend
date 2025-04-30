@@ -1,5 +1,5 @@
 import { SearchableStore } from '../../base/BaseSearchableStore/BaseSearchableStore';
-import { Plant } from '../../../../auxiliary/interfaces/Plant';
+import { PlantItem } from '../../../../api';
 import {
   makeObservable,
   runInAction,
@@ -14,7 +14,7 @@ import CropsDatabaseData from '../../../../auxiliary/classes/CropsDatabaseData';
 import DebounceService from '../../../services/DebounceService/DebounceService';
 import { PaginationService } from '../../../services/PaginationService/PaginationService';
 
-class CropsDatabaseStore extends SearchableStore<Plant> {
+class CropsDatabaseStore extends SearchableStore<PlantItem> {
   private endpointService = new EndpointService('Plant');
   public paginationService = new PaginationService();
   public get isLoading(): boolean {
@@ -56,9 +56,9 @@ class CropsDatabaseStore extends SearchableStore<Plant> {
   };
 
   public fetchData = async () => {
-    const data = await localStorageService.fetchWithCache<Plant[]>(
+    const data = await localStorageService.fetchWithCache<PlantItem[]>(
       'cropsDatabaseItems',
-      async () => (await this.endpointService.getData<Plant[]>()) || [],
+      async () => (await this.endpointService.getData<PlantItem[]>()) || [],
       7,
     );
 

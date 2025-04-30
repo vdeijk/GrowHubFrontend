@@ -1,4 +1,4 @@
-import { Task } from '../../../../auxiliary/interfaces/Task';
+import { TodoItem } from '../../../../api';
 import { BaseFormStore } from '../../base/BaseFormStore/BaseFormStore';
 import { InputField } from '../../../../auxiliary/classes/InputField';
 import taskStore from '../TaskStore/TaskStore';
@@ -63,13 +63,13 @@ class AddTaskStore extends BaseFormStore {
   }
 
   public addTask = async () => {
-    const data: Task = {
+    const data: TodoItem = {
       title: this.fields.titleField.value as string,
       priority: this.fields.priorityField.value as TodoItemPriorityEnum,
       dueDate: this.fields.dueDateField.value as string,
       description: this.fields.descriptionField.value as string,
       category: this.fields.categoryField.value as TodoItemCategoryEnum,
-      status: this.fields.statusField.value as TodoItemTodoStatusEnum,
+      todoStatus: this.fields.statusField.value as TodoItemTodoStatusEnum,
     };
 
     await this.endpointService.postData(data);
@@ -78,19 +78,18 @@ class AddTaskStore extends BaseFormStore {
   };
 
   public loadTask = async (id: string) => {
-    const data: Task | undefined = await this.endpointService.getData<Task>(
-      `${id}`,
-    );
+    const data: TodoItem | undefined =
+      await this.endpointService.getData<TodoItem>(`${id}`);
 
     if (!data) return;
 
     runInAction(() => {
-      this.fields.titleField.setValue(data.title);
-      this.fields.priorityField.setValue(data.priority);
-      this.fields.dueDateField.setValue(data.dueDate);
-      this.fields.descriptionField.setValue(data.description);
-      this.fields.categoryField.setValue(data.category);
-      this.fields.statusField.setValue(data.status);
+      this.fields.titleField.setValue(data.title ?? '');
+      this.fields.priorityField.setValue(data.priority ?? '');
+      this.fields.dueDateField.setValue(data.dueDate ?? '');
+      this.fields.descriptionField.setValue(data.description ?? '');
+      this.fields.categoryField.setValue(data.category ?? '');
+      this.fields.statusField.setValue(data.todoStatus ?? '');
     });
   };
 
@@ -98,13 +97,13 @@ class AddTaskStore extends BaseFormStore {
     const numberId = Number(id);
     if (Number.isNaN(numberId)) return;
 
-    const data: Task = {
+    const data: TodoItem = {
       title: this.fields.titleField.value as string,
       priority: this.fields.priorityField.value as TodoItemPriorityEnum,
       dueDate: this.fields.dueDateField.value as string,
       description: this.fields.descriptionField.value as string,
       category: this.fields.categoryField.value as TodoItemCategoryEnum,
-      status: this.fields.statusField.value as TodoItemTodoStatusEnum,
+      todoStatus: this.fields.statusField.value as TodoItemTodoStatusEnum,
     };
 
     await this.endpointService.putData(`${id}`, data);

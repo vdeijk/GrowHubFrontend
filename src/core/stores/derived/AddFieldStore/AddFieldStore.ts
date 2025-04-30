@@ -1,6 +1,6 @@
 import { BaseFormStore } from '../../base/BaseFormStore/BaseFormStore';
 import { InputField } from '../../../../auxiliary/classes/InputField';
-import { LocationItem } from '../../../../auxiliary/interfaces/LocationItem';
+import { LocationItem } from '../../../../api';
 import fieldsStore from '../FieldsStore/FieldsStore';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
 import { runInAction } from 'mobx';
@@ -75,12 +75,12 @@ class AddFieldStore extends BaseFormStore {
 
     if (!data) return;
     runInAction(() => {
-      this.fields.locationNameField.setValue(data.name);
+      this.fields.locationNameField.setValue(data.name ?? '');
       (addFieldStore.fields.latitudeField as InputField<number>).setValue(
-        data.latitude,
+        data.latitude ?? 0,
       );
       (addFieldStore.fields.longitudeField as InputField<number>).setValue(
-        data.longitude,
+        data.longitude ?? 0,
       );
     });
   };

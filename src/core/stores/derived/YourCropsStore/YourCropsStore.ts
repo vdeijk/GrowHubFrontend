@@ -1,5 +1,5 @@
 import { SearchableStore } from '../../base/BaseSearchableStore/BaseSearchableStore';
-import { YourCrop } from '../../../../auxiliary/interfaces/YourCrop';
+import { YourCropItem } from '../../../../api';
 import {
   makeObservable,
   runInAction,
@@ -14,7 +14,7 @@ import EventBus from '../../../services/EventBusService/EventBusService';
 import DebounceService from '../../../services/DebounceService/DebounceService';
 import { PaginationService } from '../../../services/PaginationService/PaginationService';
 
-class YourCropsStore extends SearchableStore<YourCrop> {
+class YourCropsStore extends SearchableStore<YourCropItem> {
   public paginationService = new PaginationService();
   public get isLoading(): boolean {
     return this.endpointService.isLoading;
@@ -59,8 +59,8 @@ class YourCropsStore extends SearchableStore<YourCrop> {
   }
 
   public async fetchData() {
-    const data: YourCrop[] | undefined =
-      await this.endpointService.getData<YourCrop[]>();
+    const data: YourCropItem[] | undefined =
+      await this.endpointService.getData<YourCropItem[]>();
     if (!data) return;
 
     runInAction(() => {

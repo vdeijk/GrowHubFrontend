@@ -1,4 +1,4 @@
-import { YourCrop } from '../../../../auxiliary/interfaces/YourCrop';
+import { YourCropItem, YourCropItemGrowthStageEnum, YourCropItemHealthStatusEnum } from '../../../../api';
 import yourCropsStore from '../YourCropsStore/YourCropsStore';
 import { InputField } from '../../../../auxiliary/classes/InputField';
 import { BaseFormStore } from '../../base/BaseFormStore/BaseFormStore';
@@ -25,23 +25,23 @@ class AddYourCropStore extends BaseFormStore {
       locationField: new Dropdown<string>('', 'Location', true),
       growthStageField: new Dropdown<string>('', 'Growth Stage', true),
       healthStatusField: new Dropdown<string>('', 'Health Status', true),
-      lastWateredField: new DateField<string>('', 'Last Watered', true),
-      lastFertilizedField: new DateField<string>('', 'Last Fertilized', true),
-      lastPrunedField: new DateField<string>('', 'Last Pruned', true),
-      lastHarvestedField: new DateField<string>('', 'Last Harvested', true),
+      lastWateredField: new DateField<string>('', 'Last Watered', false),
+      lastFertilizedField: new DateField<string>('', 'Last Fertilized', false),
+      lastPrunedField: new DateField<string>('', 'Last Pruned', false),
+      lastHarvestedField: new DateField<string>('', 'Last Harvested', false),
     } as Record<string, InputField<string | number | boolean>>;
   }
 
   public addCrop = async () => {
-    const data: YourCrop = {
+    const data: YourCropItem = {
       commonName: this.fields.nameField.value as string,
       location: this.fields.locationField.value as string,
       lastWatered: this.fields.lastWateredField.value as string,
       lastFertilized: this.fields.lastFertilizedField.value as string,
       lastPruned: this.fields.lastPrunedField.value as string,
       lastHarvested: this.fields.lastHarvestedField.value as string,
-      healthStatus: this.fields.healthStatusField.value as string,
-      growthStage: this.fields.growthStageField.value as string,
+      healthStatus: this.fields.healthStatusField.value as YourCropItemHealthStatusEnum,
+      growthStage: this.fields.growthStageField.value as YourCropItemGrowthStageEnum,
     };
 
     await this.endpointService.postData(data);
@@ -55,15 +55,15 @@ class AddYourCropStore extends BaseFormStore {
 
     if (Number.isNaN(numberId)) return;
 
-    const data: YourCrop = {
+    const data: YourCropItem = {
       commonName: this.fields.nameField.value as string,
       location: this.fields.locationField.value as string,
       lastWatered: this.fields.lastWateredField.value as string,
       lastFertilized: this.fields.lastFertilizedField.value as string,
       lastPruned: this.fields.lastPrunedField.value as string,
       lastHarvested: this.fields.lastHarvestedField.value as string,
-      healthStatus: this.fields.healthStatusField.value as string,
-      growthStage: this.fields.growthStageField.value as string,
+      healthStatus: this.fields.healthStatusField.value as YourCropItemHealthStatusEnum,
+      growthStage: this.fields.growthStageField.value as YourCropItemGrowthStageEnum,
     };
 
     await this.endpointService.putData(`${id}`, data);
@@ -72,8 +72,8 @@ class AddYourCropStore extends BaseFormStore {
   };
 
   public loadCrop = async (id: string) => {
-    const data: YourCrop | undefined =
-      await this.endpointService.getData<YourCrop>(`${id}`);
+    const data: YourCropItem | undefined =
+      await this.endpointService.getData<YourCropItem>(`${id}`);
 
     if (!data) return;
 

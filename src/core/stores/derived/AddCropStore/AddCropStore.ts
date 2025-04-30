@@ -1,4 +1,15 @@
-import { Plant } from '../../../../auxiliary/interfaces/Plant';
+import {
+  PlantItem,
+  PlantItemClimateZoneEnum,
+  PlantItemFertilizerNeedsEnum,
+  PlantItemGrowthRateEnum,
+  PlantItemPlantTypeEnum,
+  PlantItemPruningEnum,
+  PlantItemSoilPHEnum,
+  PlantItemSoilTypeEnum,
+  PlantItemSunPreferenceEnum,
+  PlantItemWaterNeedsEnum,
+} from '../../../../api';
 import cropsDatabaseStore from '../CropsDatabaseStore/CropsDatabaseStore';
 import { InputField } from '../../../../auxiliary/classes/InputField';
 import { BaseFormStore } from '../../base/BaseFormStore/BaseFormStore';
@@ -34,17 +45,19 @@ class AddCropStore extends BaseFormStore {
   }
 
   public addCrop = async () => {
-    const data: Plant = {
+    const data: PlantItem = {
       commonName: this.fields.nameField.value as string,
-      sunPreference: this.fields.sunPreferenceField.value as string,
-      waterNeeds: this.fields.waterNeedsField.value as string,
-      soilType: this.fields.soilTypeField.value as string,
-      soilPH: this.fields.soilPHField.value as string,
-      pruning: this.fields.pruningField.value as string,
-      climateZone: this.fields.climateZone.value as string,
-      plantType: this.fields.plantTypeField.value as string,
-      growthRate: this.fields.growthRateField.value as string,
-      fertilizerNeeds: this.fields.fertilizerNeedsField.value as string,
+      sunPreference: this.fields.sunPreferenceField
+        .value as PlantItemSunPreferenceEnum,
+      waterNeeds: this.fields.waterNeedsField.value as PlantItemWaterNeedsEnum,
+      soilType: this.fields.soilTypeField.value as PlantItemSoilTypeEnum,
+      soilPH: this.fields.soilPHField.value as PlantItemSoilPHEnum,
+      pruning: this.fields.pruningField.value as PlantItemPruningEnum,
+      climateZone: this.fields.climateZone.value as PlantItemClimateZoneEnum,
+      plantType: this.fields.plantTypeField.value as PlantItemPlantTypeEnum,
+      growthRate: this.fields.growthRateField.value as PlantItemGrowthRateEnum,
+      fertilizerNeeds: this.fields.fertilizerNeedsField
+        .value as PlantItemFertilizerNeedsEnum,
     };
 
     await this.endpointService.postData(data);
@@ -58,17 +71,19 @@ class AddCropStore extends BaseFormStore {
 
     if (Number.isNaN(numberId)) return;
 
-    const data: Plant = {
+    const data: PlantItem = {
       commonName: this.fields.nameField.value as string,
-      sunPreference: this.fields.sunPreferenceField.value as string,
-      waterNeeds: this.fields.waterNeedsField.value as string,
-      soilType: this.fields.soilTypeField.value as string,
-      soilPH: this.fields.soilPHField.value as string,
-      pruning: this.fields.pruningField.value as string,
-      climateZone: this.fields.climateZone.value as string,
-      plantType: this.fields.plantTypeField.value as string,
-      growthRate: this.fields.growthRateField.value as string,
-      fertilizerNeeds: this.fields.fertilizerNeedsField.value as string,
+      sunPreference: this.fields.sunPreferenceField
+        .value as PlantItemSunPreferenceEnum,
+      waterNeeds: this.fields.waterNeedsField.value as PlantItemWaterNeedsEnum,
+      soilType: this.fields.soilTypeField.value as PlantItemSoilTypeEnum,
+      soilPH: this.fields.soilPHField.value as PlantItemSoilPHEnum,
+      pruning: this.fields.pruningField.value as PlantItemPruningEnum,
+      climateZone: this.fields.climateZone.value as PlantItemClimateZoneEnum,
+      plantType: this.fields.plantTypeField.value as PlantItemPlantTypeEnum,
+      growthRate: this.fields.growthRateField.value as PlantItemGrowthRateEnum,
+      fertilizerNeeds: this.fields.fertilizerNeedsField
+        .value as PlantItemFertilizerNeedsEnum,
     };
 
     await this.endpointService.putData(`${id}`, data);
@@ -77,9 +92,8 @@ class AddCropStore extends BaseFormStore {
   };
 
   public loadCrop = async (id: string) => {
-    const data: Plant | undefined = await this.endpointService.getData<Plant>(
-      `${id}`,
-    );
+    const data: PlantItem | undefined =
+      await this.endpointService.getData<PlantItem>(`${id}`);
 
     if (!data) return;
 

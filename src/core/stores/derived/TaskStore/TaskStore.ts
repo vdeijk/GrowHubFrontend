@@ -1,4 +1,4 @@
-import { Task } from '../../../../auxiliary/interfaces/Task';
+import { TodoItem } from '../../../../api';
 import { SearchableStore } from '../../base/BaseSearchableStore/BaseSearchableStore';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
 import {
@@ -12,7 +12,7 @@ import { InputField } from '../../../../auxiliary/classes/InputField';
 import TaskData from '../../../../auxiliary/classes/TaskData';
 import { PaginationService } from '../../../services/PaginationService/PaginationService';
 
-class TaskStore extends SearchableStore<Task> {
+class TaskStore extends SearchableStore<TodoItem> {
   private endpointService = new EndpointService('Todo');
   public paginationService = new PaginationService();
   public descriptionField: InputField<string>;
@@ -56,8 +56,8 @@ class TaskStore extends SearchableStore<Task> {
   }
 
   public fetchData = async () => {
-    const data: Task[] | undefined =
-      await this.endpointService.getData<Task[]>();
+    const data: TodoItem[] | undefined =
+      await this.endpointService.getData<TodoItem[]>();
 
     if (!data) return;
 

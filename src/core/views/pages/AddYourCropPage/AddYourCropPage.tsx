@@ -100,7 +100,7 @@ const AddYourCropPage: React.FC<AddYourCropPageProps> = observer(
       value: String(addYourCropStore.fields.healthStatusField.value),
       options: yourCropsStore.dropdownFilters['healthStatus'].options,
       onChange: (value: string) =>
-        addYourCropStore.fields.soilTypeField.setValue(value),
+        addYourCropStore.fields.healthStatusField.setValue(value),
     };
 
     const growthStageField = {
