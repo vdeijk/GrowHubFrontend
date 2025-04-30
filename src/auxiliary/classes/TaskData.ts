@@ -3,9 +3,14 @@ import { DateFieldModel } from '../interfaces/DateFieldModel';
 import { TodoItemCategoryEnum } from '../../api';
 import { TodoItemPriorityEnum } from '../../api';
 import { TodoItemTodoStatusEnum } from '../../api';
+import { TodoItem } from '../../api';
 
 class TaskData {
-  public static tableHeaders = [
+  public static tableHeaders: {
+    id: keyof TodoItem | 'actions';
+    label: string;
+    sortable: boolean;
+  }[] = [
     { id: 'title', label: 'Title', sortable: true },
     { id: 'actions', label: 'Actions', sortable: false },
     { id: 'priority', label: 'Priority', sortable: true },

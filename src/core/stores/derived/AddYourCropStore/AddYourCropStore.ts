@@ -1,4 +1,8 @@
-import { YourCropItem, YourCropItemGrowthStageEnum, YourCropItemHealthStatusEnum } from '../../../../api';
+import {
+  YourCropItem,
+  YourCropItemGrowthStageEnum,
+  YourCropItemHealthStatusEnum,
+} from '../../../../api';
 import yourCropsStore from '../YourCropsStore/YourCropsStore';
 import { InputField } from '../../../../auxiliary/classes/InputField';
 import { BaseFormStore } from '../../base/BaseFormStore/BaseFormStore';
@@ -40,8 +44,10 @@ class AddYourCropStore extends BaseFormStore {
       lastFertilized: this.fields.lastFertilizedField.value as string,
       lastPruned: this.fields.lastPrunedField.value as string,
       lastHarvested: this.fields.lastHarvestedField.value as string,
-      healthStatus: this.fields.healthStatusField.value as YourCropItemHealthStatusEnum,
-      growthStage: this.fields.growthStageField.value as YourCropItemGrowthStageEnum,
+      healthStatus: this.fields.healthStatusField
+        .value as YourCropItemHealthStatusEnum,
+      growthStage: this.fields.growthStageField
+        .value as YourCropItemGrowthStageEnum,
     };
 
     await this.endpointService.postData(data);
@@ -62,8 +68,10 @@ class AddYourCropStore extends BaseFormStore {
       lastFertilized: this.fields.lastFertilizedField.value as string,
       lastPruned: this.fields.lastPrunedField.value as string,
       lastHarvested: this.fields.lastHarvestedField.value as string,
-      healthStatus: this.fields.healthStatusField.value as YourCropItemHealthStatusEnum,
-      growthStage: this.fields.growthStageField.value as YourCropItemGrowthStageEnum,
+      healthStatus: this.fields.healthStatusField
+        .value as YourCropItemHealthStatusEnum,
+      growthStage: this.fields.growthStageField
+        .value as YourCropItemGrowthStageEnum,
     };
 
     await this.endpointService.putData(`${id}`, data);

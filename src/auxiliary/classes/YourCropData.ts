@@ -3,9 +3,14 @@ import { DropdownFieldModel } from '../interfaces/DropdownFieldModel';
 import { DateFieldModel } from '../interfaces/DateFieldModel';
 import { YourCropItemGrowthStageEnum } from '../../api';
 import { YourCropItemHealthStatusEnum } from '../../api';
+import { YourCropItem } from '../../api';
 
 class YourCropsData {
-  public static tableHeaders = [
+  public static tableHeaders: {
+    id: keyof YourCropItem | 'actions';
+    label: string;
+    sortable: boolean;
+  }[] = [
     { id: 'id', label: 'Id', sortable: true },
     { id: 'commonName', label: 'Common Name', sortable: true },
     { id: 'actions', label: 'Actions', sortable: false },
@@ -22,7 +27,13 @@ class YourCropsData {
     location: {
       key: 'location',
       label: 'Location',
-      options: () => fieldsStore.getLocations().map((field) => field.name),
+      options: () =>
+        fieldsStore
+          .getLocations()
+          .map((field) => field.name)
+          .filter(
+            (name): name is string => name !== null && name !== undefined,
+          ),
       defaultValue: '',
     },
     growthStage: {

@@ -5,7 +5,7 @@ import styles from './TasksPage.module.css';
 import { observer } from 'mobx-react-lite';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import { TableProps } from '../../reusables/TableWithSorting/TableWithSorting';
-import { Task } from '../../../../auxiliary/interfaces/Task';
+import { TodoItem } from '../../../../api';
 import SearchBarTasks from '../../containers/SearchBarTasks/SearchBarTasks';
 import { SearchBarTasksProps } from '../../containers/SearchBarTasks/SearchBarTasks';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
@@ -42,8 +42,12 @@ const TasksPage: React.FC = observer(() => {
     endDateFilter: taskStore.dateFilters['endDate'],
   };
 
-  const tableProps: TableProps<Task> = {
-    headers: taskStore.tableHeaders,
+  const tableProps: TableProps<TodoItem> = {
+    headers: taskStore.tableHeaders as {
+      id: keyof TodoItem;
+      label: string;
+      sortable: boolean;
+    }[],
     data: taskStore.paginatedItems.map((item) => ({
       ...item,
       actions: (
@@ -54,7 +58,7 @@ const TasksPage: React.FC = observer(() => {
         />
       ),
     })),
-    onSort: (field) => taskStore.sortItems(field),
+    onSort: (field) => taskStore.sortItems(field as keyof TodoItem),
     sortField: taskStore.sortField,
     sortOrder: taskStore.sortOrder,
   };

@@ -12,7 +12,6 @@ import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation
 import ActionIcons from '../../reusables/ActionIcons/ActionIcons';
 import Pagination from '../../reusables/Pagination/Pagination';
 import { SearchBarDatabaseProps } from '../../containers/SearchBarDatabase/SearchBarDatabase';
-import { toJS } from 'mobx';
 
 const CropsDatabasePage: React.FC = observer(() => {
   const navigate = useRouterNavigation();

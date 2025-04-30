@@ -15,14 +15,14 @@ export interface DateInputProps {
 const DateInput: React.FC<DateInputProps> = ({
   value,
   onChange,
-  placeholder,
   required = false,
   label,
   error,
 }) => {
-  const formattedValue = value
-    ? new Date(value).toISOString().split('T')[0]
-    : '';
+  const formattedValue =
+    value && !isNaN(new Date(value).getTime())
+      ? new Date(value).toISOString().split('T')[0]
+      : '';
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value;
@@ -44,7 +44,6 @@ const DateInput: React.FC<DateInputProps> = ({
         type="date"
         value={formattedValue}
         onChange={handleChange}
-        placeholder={placeholder}
         className={styles.textInput}
         aria-invalid={!!error}
         aria-describedby={error ? 'error-message' : undefined}

@@ -18,9 +18,13 @@ export class FormField<T> {
   }
 
   public setValue = (value: T) => {
-    this.value = value;
+    if (value === null || value === undefined) {
+      console.warn(`Invalid value for ${this.label}:`, value);
+      this.value = '' as T;
+    } else {
+      this.value = value;
+    }
   };
-
   public reset = () => {
     this.value = '' as T;
   };

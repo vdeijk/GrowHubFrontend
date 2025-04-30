@@ -7,7 +7,7 @@ import Heading from '../../reusables/Heading/Heading';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import { observer } from 'mobx-react-lite';
-import { Plant } from '../../../../auxiliary/interfaces/Plant';
+import { PlantItem } from '../../../../api';
 
 const CropsDatabaseContainer: React.FC = observer(() => {
   const navigate = useRouterNavigation();
@@ -21,7 +21,7 @@ const CropsDatabaseContainer: React.FC = observer(() => {
     .filter((header) => header.id !== 'actions')
     .map((header) => ({
       ...header,
-      id: header.id as keyof Plant,
+      id: header.id as keyof PlantItem,
     }));
 
   const omit = <T, K extends keyof T>(obj: T, key: K): Omit<T, K> => {
@@ -37,10 +37,10 @@ const CropsDatabaseContainer: React.FC = observer(() => {
         text="Crop Database"
         customStyles={{ marginBottom: '2rem' }}
       />
-      <TableWithoutSorting<Plant>
+      <TableWithoutSorting<PlantItem>
         headers={headersWithoutActions}
         data={cropsDatabaseStore.items.slice(0, 9).map((plant, index) => ({
-          ...omit(plant, 'actions'),
+          ...('actions' in plant ? omit(plant, 'actions') : plant),
           index,
         }))}
       />

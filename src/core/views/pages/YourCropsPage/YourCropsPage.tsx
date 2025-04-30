@@ -11,7 +11,8 @@ import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import ActionIcons from '../../reusables/ActionIcons/ActionIcons';
 import Pagination from '../../reusables/Pagination/Pagination';
-import { YourCrop } from '../../../../auxiliary/interfaces/YourCrop';
+import { YourCropItem } from '../../../../api';
+import { toJS } from 'mobx';
 
 const YourCropsPage: React.FC = observer(() => {
   const { paginationService } = cropsStore;
@@ -38,8 +39,12 @@ const YourCropsPage: React.FC = observer(() => {
     cropsStore.deletePlant(id);
   };
 
-  const tableProps: TableProps<YourCrop> = {
-    headers: cropsStore.tableHeaders,
+  const tableProps: TableProps<YourCropItem> = {
+    headers: cropsStore.tableHeaders as {
+      id: keyof YourCropItem;
+      label: string;
+      sortable: boolean;
+    }[],
     data: cropsStore.paginatedItems.map((item) => ({
       ...item,
       actions: (
@@ -52,7 +57,7 @@ const YourCropsPage: React.FC = observer(() => {
         </div>
       ),
     })),
-    onSort: (field) => cropsStore.sortItems(field),
+    onSort: (field: keyof YourCropItem) => cropsStore.sortItems(field),
     sortField: cropsStore.sortField,
     sortOrder: cropsStore.sortOrder,
   };
