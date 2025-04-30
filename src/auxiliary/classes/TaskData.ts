@@ -1,8 +1,8 @@
 import { DropdownFieldModel } from '../interfaces/DropdownFieldModel';
 import { DateFieldModel } from '../interfaces/DateFieldModel';
-import { Category } from '../enums/Category';
-import { Priority } from '../enums/Priority';
-import { TaskStatus } from '../enums/Task';
+import { TodoItemCategoryEnum } from '../../api';
+import { TodoItemPriorityEnum } from '../../api';
+import { TodoItemTodoStatusEnum } from '../../api';
 
 class TaskData {
   public static tableHeaders = [
@@ -18,19 +18,19 @@ class TaskData {
     category: {
       key: 'category',
       label: 'Category',
-      options: Object.values(Category),
+      options: Object.values(TodoItemCategoryEnum),
       defaultValue: '',
     },
     priority: {
       key: 'priority',
       label: 'Priority',
-      options: Object.values(Priority),
+      options: Object.values(TodoItemPriorityEnum),
       defaultValue: '',
     },
     status: {
       key: 'status',
       label: 'Status',
-      options: Object.values(TaskStatus),
+      options: Object.values(TodoItemTodoStatusEnum),
       defaultValue: '',
     },
   };

@@ -1,8 +1,8 @@
-import { GrowthStage } from '../enums/GrowthStage';
-import { HealthStatus } from '../enums/HealthStatus';
 import fieldsStore from '../../core/stores/derived/FieldsStore/FieldsStore';
 import { DropdownFieldModel } from '../interfaces/DropdownFieldModel';
 import { DateFieldModel } from '../interfaces/DateFieldModel';
+import { YourCropItemGrowthStageEnum } from '../../api';
+import { YourCropItemHealthStatusEnum } from '../../api';
 
 class YourCropsData {
   public static tableHeaders = [
@@ -28,13 +28,13 @@ class YourCropsData {
     growthStage: {
       key: 'growthStage',
       label: 'Growth Stage',
-      options: Object.values(GrowthStage),
+      options: Object.values(YourCropItemGrowthStageEnum),
       defaultValue: '',
     },
     healthStatus: {
       key: 'healthStatus',
       label: 'Health Status',
-      options: Object.values(HealthStatus),
+      options: Object.values(YourCropItemHealthStatusEnum),
       defaultValue: '',
     },
   };

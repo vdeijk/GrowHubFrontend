@@ -1,5 +1,3 @@
-import { Category } from '../../../../auxiliary/enums/Category';
-import { Priority } from '../../../../auxiliary/enums/Priority';
 import { Task } from '../../../../auxiliary/interfaces/Task';
 import { BaseFormStore } from '../../base/BaseFormStore/BaseFormStore';
 import { InputField } from '../../../../auxiliary/classes/InputField';
@@ -7,7 +5,11 @@ import taskStore from '../TaskStore/TaskStore';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
 import { runInAction } from 'mobx';
 import { DateField } from '../../../../auxiliary/classes/DateField';
-import { TaskStatus } from '../../../../auxiliary/enums/Task';
+import {
+  TodoItemCategoryEnum,
+  TodoItemPriorityEnum,
+  TodoItemTodoStatusEnum,
+} from '../../../../api';
 
 class AddTaskStore extends BaseFormStore {
   public endpointService = new EndpointService('Todo');
@@ -24,8 +26,8 @@ class AddTaskStore extends BaseFormStore {
         'Enter task title',
         30,
       ),
-      priorityField: new InputField<Priority>(
-        Priority.Medium,
+      priorityField: new InputField<TodoItemPriorityEnum>(
+        TodoItemPriorityEnum.Medium,
         'Priority',
         true,
       ),
@@ -44,9 +46,13 @@ class AddTaskStore extends BaseFormStore {
         'Enter task description',
         30,
       ),
-      categoryField: new InputField<Category>(Category.Work, 'Category', true),
-      statusField: new InputField<TaskStatus>(
-        TaskStatus.NotStarted,
+      categoryField: new InputField<TodoItemCategoryEnum>(
+        TodoItemCategoryEnum.Work,
+        'Category',
+        true,
+      ),
+      statusField: new InputField<TodoItemTodoStatusEnum>(
+        TodoItemTodoStatusEnum.NotStarted,
         'Status',
         true,
       ),
@@ -59,11 +65,11 @@ class AddTaskStore extends BaseFormStore {
   public addTask = async () => {
     const data: Task = {
       title: this.fields.titleField.value as string,
-      priority: this.fields.priorityField.value as Priority,
+      priority: this.fields.priorityField.value as TodoItemPriorityEnum,
       dueDate: this.fields.dueDateField.value as string,
       description: this.fields.descriptionField.value as string,
-      category: this.fields.categoryField.value as Category,
-      status: this.fields.statusField.value as TaskStatus,
+      category: this.fields.categoryField.value as TodoItemCategoryEnum,
+      status: this.fields.statusField.value as TodoItemTodoStatusEnum,
     };
 
     await this.endpointService.postData(data);
@@ -94,11 +100,11 @@ class AddTaskStore extends BaseFormStore {
 
     const data: Task = {
       title: this.fields.titleField.value as string,
-      priority: this.fields.priorityField.value as Priority,
+      priority: this.fields.priorityField.value as TodoItemPriorityEnum,
       dueDate: this.fields.dueDateField.value as string,
       description: this.fields.descriptionField.value as string,
-      category: this.fields.categoryField.value as Category,
-      status: this.fields.statusField.value as TaskStatus,
+      category: this.fields.categoryField.value as TodoItemCategoryEnum,
+      status: this.fields.statusField.value as TodoItemTodoStatusEnum,
     };
 
     await this.endpointService.putData(`${id}`, data);

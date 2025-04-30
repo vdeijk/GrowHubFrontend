@@ -1,15 +1,17 @@
-import { Priority } from '../enums/Priority';
-import { Category } from '../enums/Category';
+
 import { JSX } from 'react';
-import { TaskStatus } from '../enums/Task';
+import { TodoItemPriorityEnum } from '../../api';
+import { TodoItemCategoryEnum } from '../../api';
+import { TodoItemTodoStatusEnum } from '../../api';
+
 
 export interface Task {
   id?: number;
   title: string;
   dueDate: string;
-  priority: Priority;
-  category: Category;
-  status: TaskStatus;
+  priority: TodoItemPriorityEnum;
+  category: TodoItemCategoryEnum;
+  status: TodoItemTodoStatusEnum;
   description: string;
   actions?: JSX.Element;
 }

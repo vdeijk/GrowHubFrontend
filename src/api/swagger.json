@@ -7,7 +7,9 @@
   "paths": {
     "/api/Location": {
       "get": {
-        "tags": ["Location"],
+        "tags": [
+          "Location"
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -41,7 +43,9 @@
         }
       },
       "post": {
-        "tags": ["Location"],
+        "tags": [
+          "Location"
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -70,7 +74,9 @@
     },
     "/api/Location/{id}": {
       "get": {
-        "tags": ["Location"],
+        "tags": [
+          "Location"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -106,7 +112,9 @@
         }
       },
       "put": {
-        "tags": ["Location"],
+        "tags": [
+          "Location"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -144,7 +152,9 @@
         }
       },
       "delete": {
-        "tags": ["Location"],
+        "tags": [
+          "Location"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -165,7 +175,9 @@
     },
     "/api/Plant": {
       "get": {
-        "tags": ["Plant"],
+        "tags": [
+          "Plant"
+        ],
         "operationId": "GetPlants",
         "responses": {
           "200": {
@@ -200,7 +212,9 @@
         }
       },
       "post": {
-        "tags": ["Plant"],
+        "tags": [
+          "Plant"
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -229,7 +243,9 @@
     },
     "/api/Plant/{id}": {
       "get": {
-        "tags": ["Plant"],
+        "tags": [
+          "Plant"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -265,7 +281,9 @@
         }
       },
       "put": {
-        "tags": ["Plant"],
+        "tags": [
+          "Plant"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -303,7 +321,9 @@
         }
       },
       "delete": {
-        "tags": ["Plant"],
+        "tags": [
+          "Plant"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -324,7 +344,9 @@
     },
     "/api/Todo": {
       "get": {
-        "tags": ["Todo"],
+        "tags": [
+          "Todo"
+        ],
         "operationId": "GetTodoItems",
         "responses": {
           "200": {
@@ -359,7 +381,9 @@
         }
       },
       "post": {
-        "tags": ["Todo"],
+        "tags": [
+          "Todo"
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -388,7 +412,9 @@
     },
     "/api/Todo/{id}": {
       "get": {
-        "tags": ["Todo"],
+        "tags": [
+          "Todo"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -424,7 +450,9 @@
         }
       },
       "put": {
-        "tags": ["Todo"],
+        "tags": [
+          "Todo"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -462,7 +490,9 @@
         }
       },
       "delete": {
-        "tags": ["Todo"],
+        "tags": [
+          "Todo"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -483,7 +513,9 @@
     },
     "/api/Turnover": {
       "get": {
-        "tags": ["Turnover"],
+        "tags": [
+          "Turnover"
+        ],
         "operationId": "GetTurnovers",
         "responses": {
           "200": {
@@ -520,7 +552,9 @@
     },
     "/api/Weather/forecast": {
       "get": {
-        "tags": ["Weather"],
+        "tags": [
+          "Weather"
+        ],
         "parameters": [
           {
             "name": "city",
@@ -547,7 +581,9 @@
     },
     "/api/YourCrops": {
       "get": {
-        "tags": ["YourCrops"],
+        "tags": [
+          "YourCrops"
+        ],
         "operationId": "GetCrops",
         "responses": {
           "200": {
@@ -582,7 +618,9 @@
         }
       },
       "post": {
-        "tags": ["YourCrops"],
+        "tags": [
+          "YourCrops"
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -611,7 +649,9 @@
     },
     "/api/YourCrops/{id}": {
       "get": {
-        "tags": ["YourCrops"],
+        "tags": [
+          "YourCrops"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -647,7 +687,9 @@
         }
       },
       "put": {
-        "tags": ["YourCrops"],
+        "tags": [
+          "YourCrops"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -685,7 +727,9 @@
         }
       },
       "delete": {
-        "tags": ["YourCrops"],
+        "tags": [
+          "YourCrops"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -707,36 +751,6 @@
   },
   "components": {
     "schemas": {
-      "Category": {
-        "enum": [0, 1, 2],
-        "type": "integer",
-        "format": "int32"
-      },
-      "ClimateZone": {
-        "enum": [0, 1, 2, 3, 4, 5],
-        "type": "integer",
-        "format": "int32"
-      },
-      "FertilizerNeeds": {
-        "enum": [0, 1, 2, 3],
-        "type": "integer",
-        "format": "int32"
-      },
-      "GrowthRate": {
-        "enum": [0, 1, 2],
-        "type": "integer",
-        "format": "int32"
-      },
-      "GrowthStage": {
-        "enum": [0, 1, 2, 3, 4, 5, 6],
-        "type": "integer",
-        "format": "int32"
-      },
-      "HealthStatus": {
-        "enum": [0, 1, 2, 3, 4],
-        "type": "integer",
-        "format": "int32"
-      },
       "LocationItem": {
         "type": "object",
         "properties": {
@@ -772,64 +786,98 @@
             "nullable": true
           },
           "sunPreference": {
-            "$ref": "#/components/schemas/SunPreference"
+            "enum": [
+              "FullSun",
+              "PartialShade",
+              "FullShade"
+            ],
+            "type": "string",
+            "nullable": true
           },
           "waterNeeds": {
-            "$ref": "#/components/schemas/WaterNeeds"
+            "enum": [
+              "Low",
+              "Medium",
+              "High"
+            ],
+            "type": "string",
+            "nullable": true
           },
           "soilType": {
-            "$ref": "#/components/schemas/SoilType"
+            "enum": [
+              "Loam",
+              "Sand",
+              "Clay",
+              "Silt",
+              "Peat",
+              "Chalk"
+            ],
+            "type": "string",
+            "nullable": true
           },
           "soilPH": {
-            "$ref": "#/components/schemas/SoilPH"
+            "enum": [
+              "Acidic",
+              "Neutral",
+              "Alkaline"
+            ],
+            "type": "string",
+            "nullable": true
           },
           "pruning": {
-            "$ref": "#/components/schemas/Pruning"
+            "enum": [
+              "Light",
+              "Moderate",
+              "Heavy"
+            ],
+            "type": "string",
+            "nullable": true
           },
           "climateZone": {
-            "$ref": "#/components/schemas/ClimateZone"
+            "enum": [
+              "Arid",
+              "SemiArid",
+              "Mediterranean",
+              "Temperate",
+              "Tropical",
+              "Subtropical"
+            ],
+            "type": "string",
+            "nullable": true
           },
           "plantType": {
-            "$ref": "#/components/schemas/PlantType"
+            "enum": [
+              "Tree",
+              "Shrub",
+              "Flower",
+              "Vine",
+              "Herb",
+              "Grass"
+            ],
+            "type": "string",
+            "nullable": true
           },
           "growthRate": {
-            "$ref": "#/components/schemas/GrowthRate"
+            "enum": [
+              "Slow",
+              "Medium",
+              "Fast"
+            ],
+            "type": "string",
+            "nullable": true
           },
           "fertilizerNeeds": {
-            "$ref": "#/components/schemas/FertilizerNeeds"
+            "enum": [
+              "None",
+              "Low",
+              "Medium",
+              "High"
+            ],
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
-      },
-      "PlantType": {
-        "enum": [0, 1, 2, 3, 4, 5],
-        "type": "integer",
-        "format": "int32"
-      },
-      "Priority": {
-        "enum": [0, 1, 2],
-        "type": "integer",
-        "format": "int32"
-      },
-      "Pruning": {
-        "enum": [0, 1, 2],
-        "type": "integer",
-        "format": "int32"
-      },
-      "SoilPH": {
-        "enum": [0, 1, 2],
-        "type": "integer",
-        "format": "int32"
-      },
-      "SoilType": {
-        "enum": [0, 1, 2, 3, 4, 5],
-        "type": "integer",
-        "format": "int32"
-      },
-      "SunPreference": {
-        "enum": [0, 1, 2],
-        "type": "integer",
-        "format": "int32"
       },
       "TodoItem": {
         "type": "object",
@@ -843,17 +891,34 @@
             "nullable": true
           },
           "todoStatus": {
-            "$ref": "#/components/schemas/TodoStatus"
+            "enum": [
+              "NotStarted",
+              "InProgress",
+              "Completed",
+              "OnHold",
+              "Cancelled"
+            ],
+            "type": "string"
           },
           "dueDate": {
             "type": "string",
             "format": "date-time"
           },
           "priority": {
-            "$ref": "#/components/schemas/Priority"
+            "enum": [
+              "High",
+              "Medium",
+              "Low"
+            ],
+            "type": "string"
           },
           "category": {
-            "$ref": "#/components/schemas/Category"
+            "enum": [
+              "Work",
+              "Personal",
+              "Other"
+            ],
+            "type": "string"
           },
           "description": {
             "type": "string",
@@ -861,11 +926,6 @@
           }
         },
         "additionalProperties": false
-      },
-      "TodoStatus": {
-        "enum": [0, 1, 2, 3, 4],
-        "type": "integer",
-        "format": "int32"
       },
       "TurnoverItem": {
         "type": "object",
@@ -880,11 +940,6 @@
           }
         },
         "additionalProperties": false
-      },
-      "WaterNeeds": {
-        "enum": [0, 1, 2],
-        "type": "integer",
-        "format": "int32"
       },
       "YourCropItem": {
         "type": "object",
@@ -919,10 +974,26 @@
             "nullable": true
           },
           "healthStatus": {
-            "$ref": "#/components/schemas/HealthStatus"
+            "enum": [
+              "Poor",
+              "Fair",
+              "Good",
+              "VeryGood",
+              "Excellent"
+            ],
+            "type": "string"
           },
           "growthStage": {
-            "$ref": "#/components/schemas/GrowthStage"
+            "enum": [
+              "Germination",
+              "Seedling",
+              "Vegetative",
+              "Budding",
+              "Flowering",
+              "Fruiting",
+              "Maturity"
+            ],
+            "type": "string"
           }
         },
         "additionalProperties": false

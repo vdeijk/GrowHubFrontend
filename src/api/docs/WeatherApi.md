@@ -1,19 +1,22 @@
 # WeatherApi
 
-All URIs are relative to _http://localhost_
+All URIs are relative to *http://localhost*
 
-| Method                                              | HTTP request                  | Description |
-| --------------------------------------------------- | ----------------------------- | ----------- |
-| [**apiWeatherForecastGet**](#apiweatherforecastget) | **GET** /api/Weather/forecast |             |
+|Method | HTTP request | Description|
+|------------- | ------------- | -------------|
+|[**apiWeatherForecastGet**](#apiweatherforecastget) | **GET** /api/Weather/forecast | |
 
 # **apiWeatherForecastGet**
-
 > apiWeatherForecastGet()
+
 
 ### Example
 
 ```typescript
-import { WeatherApi, Configuration } from './api';
+import {
+    WeatherApi,
+    Configuration
+} from './api';
 
 const configuration = new Configuration();
 const apiInstance = new WeatherApi(configuration);
@@ -21,15 +24,19 @@ const apiInstance = new WeatherApi(configuration);
 let city: string; // (optional) (default to undefined)
 let days: number; // (optional) (default to undefined)
 
-const { status, data } = await apiInstance.apiWeatherForecastGet(city, days);
+const { status, data } = await apiInstance.apiWeatherForecastGet(
+    city,
+    days
+);
 ```
 
 ### Parameters
 
-| Name     | Type         | Description | Notes                            |
-| -------- | ------------ | ----------- | -------------------------------- |
-| **city** | [**string**] |             | (optional) defaults to undefined |
-| **days** | [**number**] |             | (optional) defaults to undefined |
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **city** | [**string**] |  | (optional) defaults to undefined|
+| **days** | [**number**] |  | (optional) defaults to undefined|
+
 
 ### Return type
 
@@ -41,13 +48,14 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: Not defined
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
 
 ### HTTP response details
-
 | Status code | Description | Response headers |
-| ----------- | ----------- | ---------------- |
-| **200**     | OK          | -                |
+|-------------|-------------|------------------|
+|**200** | OK |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+

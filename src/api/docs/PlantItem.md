@@ -1,20 +1,21 @@
 # PlantItem
 
+
 ## Properties
 
-| Name                | Type                                      | Description | Notes                             |
-| ------------------- | ----------------------------------------- | ----------- | --------------------------------- |
-| **commonName**      | **string**                                |             | [optional] [default to undefined] |
-| **id**              | **number**                                |             | [optional] [default to undefined] |
-| **sunPreference**   | [**SunPreference**](SunPreference.md)     |             | [optional] [default to undefined] |
-| **waterNeeds**      | [**WaterNeeds**](WaterNeeds.md)           |             | [optional] [default to undefined] |
-| **soilType**        | [**SoilType**](SoilType.md)               |             | [optional] [default to undefined] |
-| **soilPH**          | [**SoilPH**](SoilPH.md)                   |             | [optional] [default to undefined] |
-| **pruning**         | [**Pruning**](Pruning.md)                 |             | [optional] [default to undefined] |
-| **climateZone**     | [**ClimateZone**](ClimateZone.md)         |             | [optional] [default to undefined] |
-| **plantType**       | [**PlantType**](PlantType.md)             |             | [optional] [default to undefined] |
-| **growthRate**      | [**GrowthRate**](GrowthRate.md)           |             | [optional] [default to undefined] |
-| **fertilizerNeeds** | [**FertilizerNeeds**](FertilizerNeeds.md) |             | [optional] [default to undefined] |
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**commonName** | **string** |  | [optional] [default to undefined]
+**id** | **number** |  | [optional] [default to undefined]
+**sunPreference** | **string** |  | [optional] [default to undefined]
+**waterNeeds** | **string** |  | [optional] [default to undefined]
+**soilType** | **string** |  | [optional] [default to undefined]
+**soilPH** | **string** |  | [optional] [default to undefined]
+**pruning** | **string** |  | [optional] [default to undefined]
+**climateZone** | **string** |  | [optional] [default to undefined]
+**plantType** | **string** |  | [optional] [default to undefined]
+**growthRate** | **string** |  | [optional] [default to undefined]
+**fertilizerNeeds** | **string** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -22,17 +23,17 @@
 import { PlantItem } from './api';
 
 const instance: PlantItem = {
-  commonName,
-  id,
-  sunPreference,
-  waterNeeds,
-  soilType,
-  soilPH,
-  pruning,
-  climateZone,
-  plantType,
-  growthRate,
-  fertilizerNeeds,
+    commonName,
+    id,
+    sunPreference,
+    waterNeeds,
+    soilType,
+    soilPH,
+    pruning,
+    climateZone,
+    plantType,
+    growthRate,
+    fertilizerNeeds,
 };
 ```
 

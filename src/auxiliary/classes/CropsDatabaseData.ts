@@ -1,13 +1,13 @@
 import { DropdownFieldModel } from '../interfaces/DropdownFieldModel';
-import { SunPreference } from '../enums/SunPreference';
-import { WaterNeeds } from '../enums/WaterNeeds';
-import { SoilType } from '../enums/SoilType';
-import { SoilPH } from '../enums/SoilPH';
-import { Pruning } from '../enums/Pruning';
-import { PlantType } from '../enums/PlantType';
-import { GrowthRate } from '../enums/GrowthRate';
-import { FertilizerNeeds } from '../enums/FertilizerNeeds';
-import { ClimateZone } from '../enums/ClimateZone';
+import { PlantItemSunPreferenceEnum } from '../../api';
+import { PlantItemWaterNeedsEnum } from '../../api';
+import { PlantItemSoilTypeEnum } from '../../api';
+import { PlantItemSoilPHEnum } from '../../api';
+import { PlantItemPruningEnum } from '../../api';
+import { PlantItemClimateZoneEnum } from '../../api';
+import { PlantItemPlantTypeEnum } from '../../api';
+import { PlantItemGrowthRateEnum } from '../../api';
+import { PlantItemFertilizerNeedsEnum } from '../../api';
 
 class CropsDatabaseData {
   public static tableHeaders = [
@@ -28,55 +28,55 @@ class CropsDatabaseData {
     sunPreference: {
       key: 'sunPreference',
       label: 'Sun Preference',
-      options: Object.values(SunPreference),
+      options: Object.values(PlantItemSunPreferenceEnum),
       defaultValue: '',
     },
     waterNeeds: {
       key: 'waterNeeds',
       label: 'Water Needs',
-      options: Object.values(WaterNeeds),
+      options: Object.values(PlantItemWaterNeedsEnum),
       defaultValue: '',
     },
     soilType: {
       key: 'soilType',
       label: 'Soil Type',
-      options: Object.values(SoilType),
+      options: Object.values(PlantItemSoilTypeEnum),
       defaultValue: '',
     },
     soilPH: {
       key: 'soilPH',
       label: 'Soil PH',
-      options: Object.values(SoilPH),
+      options: Object.values(PlantItemSoilPHEnum),
       defaultValue: '',
     },
     pruning: {
       key: 'pruning',
       label: 'Pruning',
-      options: Object.values(Pruning),
+      options: Object.values(PlantItemPruningEnum),
       defaultValue: '',
     },
     climateZone: {
       key: 'climateZone',
       label: 'Climate Zone',
-      options: Object.values(ClimateZone),
+      options: Object.values(PlantItemClimateZoneEnum),
       defaultValue: '',
     },
     plantType: {
       key: 'plantType',
       label: 'Plant Type',
-      options: Object.values(PlantType),
+      options: Object.values(PlantItemPlantTypeEnum),
       defaultValue: '',
     },
     growthRate: {
       key: 'growthRate',
       label: 'Growth Rate',
-      options: Object.values(GrowthRate),
+      options: Object.values(PlantItemGrowthRateEnum),
       defaultValue: '',
     },
     fertilizerNeeds: {
       key: 'fertilizerNeeds',
       label: 'Fertilizer Needs',
-      options: Object.values(FertilizerNeeds),
+      options: Object.values(PlantItemFertilizerNeedsEnum),
       defaultValue: '',
     },
   };
