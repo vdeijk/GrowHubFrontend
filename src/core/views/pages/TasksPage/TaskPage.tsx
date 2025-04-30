@@ -37,7 +37,7 @@ const TasksPage: React.FC = observer(() => {
     searchQuery: taskStore.searchQuery,
     categoryFilter: taskStore.dropdownFilters['category'],
     priorityFilter: taskStore.dropdownFilters['priority'],
-    statusFilter: taskStore.dropdownFilters['status'],
+    statusFilter: taskStore.dropdownFilters['todoStatus'],
     startDateFilter: taskStore.dateFilters['startDate'],
     endDateFilter: taskStore.dateFilters['endDate'],
   };

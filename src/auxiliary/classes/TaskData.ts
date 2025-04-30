@@ -11,7 +11,7 @@ class TaskData {
     { id: 'priority', label: 'Priority', sortable: true },
     { id: 'dueDate', label: 'Due Date', sortable: true },
     { id: 'category', label: 'Category', sortable: true },
-    { id: 'status', label: 'Status', sortable: true },
+    { id: 'todoStatus', label: 'Status', sortable: true },
   ];
 
   public static dropdowns: Record<string, DropdownFieldModel> = {
@@ -28,7 +28,7 @@ class TaskData {
       defaultValue: '',
     },
     status: {
-      key: 'status',
+      key: 'todoStatus',
       label: 'Status',
       options: Object.values(TodoItemTodoStatusEnum),
       defaultValue: '',

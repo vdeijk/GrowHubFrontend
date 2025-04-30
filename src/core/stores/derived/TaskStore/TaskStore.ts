@@ -7,6 +7,7 @@ import {
   observable,
   action,
   computed,
+  toJS,
 } from 'mobx';
 import { InputField } from '../../../../auxiliary/classes/InputField';
 import TaskData from '../../../../auxiliary/classes/TaskData';
@@ -63,6 +64,7 @@ class TaskStore extends SearchableStore<Task> {
 
     runInAction(() => {
       this.items = data;
+      console.log('Fetched data:', toJS(this.items));
       this.filteredItems = this.items;
       this.paginatedItems = this.paginationService.paginateItems(
         this.filteredItems,
