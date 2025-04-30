@@ -6,7 +6,6 @@ import {
   observable,
   action,
   computed,
-  toJS,
 } from 'mobx';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
 import YourCropsData from '../../../../auxiliary/classes/YourCropData';
@@ -37,10 +36,6 @@ class YourCropsStore extends SearchableStore<YourCropItem> {
     EventBus.addEventListener('locations:updated', () => {
       YourCropsData.updateLocationDropdownOptions();
       this.initDropdownFilter(YourCropsData.dropdowns['location']);
-      console.log(
-        'YourCropsData.dropdowns[location]',
-        toJS(YourCropsData.dropdowns['location']),
-      );
     });
 
     Object.values(YourCropsData.dropdowns).forEach((dropdown) => {

@@ -34,6 +34,8 @@ const Map: React.FC<MapProps> = observer(
       if (mapRef.current && !mapInstanceRef.current) {
         const map = L.map(mapRef.current, {
           scrollWheelZoom: enableScroll,
+          minZoom: 2, // Allow zooming out further
+          maxZoom: 18, // Set a reasonable maximum zoom level
         });
         map.setView([52.0705, 4.3007], 13);
         mapInstanceRef.current = map;
@@ -89,7 +91,13 @@ const Map: React.FC<MapProps> = observer(
               )
               .filter((latLng) => latLng !== null) as L.LatLng[],
           );
-          mapInstanceRef.current.fitBounds(bounds);
+
+          setTimeout(() => {
+            if (mapInstanceRef.current) {
+              mapInstanceRef.current.invalidateSize();
+              mapInstanceRef.current.fitBounds(bounds);
+            }
+          }, 100);
         } else {
           console.warn('No locations available to center the map.');
         }
@@ -102,7 +110,7 @@ const Map: React.FC<MapProps> = observer(
         EventBus.removeEventListener('centerMap', handleCenterMap);
         EventBus.removeEventListener('locations:updated', handleCenterMap);
       };
-    }, []);
+    }, [fieldsStore.locations]);
 
     return (
       <section className={styles.map}>
