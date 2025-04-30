@@ -86,7 +86,7 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
       value: String(addTaskStore.fields.statusField.value),
       onChange: (value: string) =>
         addTaskStore.fields.statusField.setValue(value),
-      options: taskStore.dropdownFilters['status'].options,
+      options: taskStore.dropdownFilters['todoStatus'].options,
     };
 
     const buttonProps: ButtonProps = {

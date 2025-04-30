@@ -64,12 +64,6 @@ class CropsDatabaseStore extends SearchableStore<Plant> {
 
     if (!data) return;
 
-    
-      console.log(
-        'cropsDatabaseStore.paginatedItems ',
-        data
-      );
-
     runInAction(() => {
       this.items = data;
       this.filteredItems = this.items;
