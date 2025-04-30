@@ -49,21 +49,21 @@ const SearchBarTasks: React.FC<SearchBarTasksProps> = observer(
         />
         <Dropdown
           value={priorityFilter.value}
-          onChange={priorityFilter.setValue}
+          onChange={(value) => priorityFilter.setValue(String(value))}
           options={priorityFilter.options}
           aria-label="Priority"
           label="Priority"
         />
         <Dropdown
           value={categoryFilter.value}
-          onChange={categoryFilter.setValue}
+          onChange={(value) => categoryFilter.setValue(String(value))}
           options={categoryFilter.options}
           aria-label="Category"
           label="Category"
         />
         <Dropdown
           value={statusFilter.value}
-          onChange={statusFilter.setValue}
+          onChange={(value) => statusFilter.setValue(String(value))}
           options={statusFilter.options}
           aria-label="Status"
           label={statusFilter.label}

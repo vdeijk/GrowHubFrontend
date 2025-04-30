@@ -50,7 +50,8 @@ class TaskData {
   };
 
   public static dateFields: DateFieldModel[] = [
-    { key: 'dueDate', label: 'Due Date', defaultValue: '' },
+    { key: 'startDate', label: 'Start Date', defaultValue: '' },
+    { key: 'endDate', label: 'End Date', defaultValue: '' },
   ];
 }
 

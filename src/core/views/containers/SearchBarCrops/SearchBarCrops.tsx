@@ -41,7 +41,7 @@ const SearchBarCrops: React.FC<SearchBarProps> = observer(
         />
         <Dropdown
           value={location.value}
-          onChange={location.setValue}
+          onChange={(value) => location.setValue(String(value))}
           options={location.options}
           label={location.label}
           aria-label="Location"
@@ -72,14 +72,14 @@ const SearchBarCrops: React.FC<SearchBarProps> = observer(
         />
         <Dropdown
           value={healthStatus.value}
-          onChange={healthStatus.setValue}
+          onChange={(value) => healthStatus.setValue(String(value))}
           options={healthStatus.options}
           label={healthStatus.label}
           aria-label="Health Status"
         />
         <Dropdown
           value={growthStage.value}
-          onChange={growthStage.setValue}
+          onChange={(value) => growthStage.setValue(String(value))}
           options={growthStage.options}
           label={growthStage.label}
           aria-label="Growth Stage"
