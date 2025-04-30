@@ -8,10 +8,15 @@ interface TableRowProps<T> {
 const TableRow = <T,>({ tableRowData, headers }: TableRowProps<T>) => {
   const formatDate = (dateString: string) => {
     if (!dateString) return '';
+
     const date = new Date(dateString);
+
+    if (isNaN(date.getTime())) return '';
+
     const day = String(date.getDate()).padStart(2, '0');
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const year = date.getFullYear();
+
     return `${day}/${month}/${year}`;
   };
 
@@ -22,10 +27,13 @@ const TableRow = <T,>({ tableRowData, headers }: TableRowProps<T>) => {
       return cellValue as React.ReactNode;
     }
 
+    if (cellValue === null || cellValue === undefined) {
+      return '';
+    }
+
     if (headerId === 'dueDate' && typeof cellValue === 'string') {
       return formatDate(cellValue);
     }
-
     return String(cellValue ?? '');
   };
 

@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import TextInput from '../../reusables/TextInput/TextInput';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
-import addCropStore from '../../../stores/AddCropStore/AddCropStore';
+import addCropStore from '../../../stores/derived/AddCropStore/AddCropStore';
 import Button, { ButtonProps } from '../../reusables/Button/Button';
 import styles from './AddCropPage.module.css';
 import { observer } from 'mobx-react-lite';
 import { useParams } from 'react-router-dom';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import Dropdown from '../../reusables/Dropdown/Dropdown';
-import cropsStore from '../../../stores/CropsStore/YourCropsStore';
+import cropsDatabaseStore from '../../../stores/derived/CropsDatabaseStore/CropsDatabaseStore';
 
 interface AddCropPageProps {
   isEditing?: boolean;
@@ -57,28 +57,40 @@ const AddCropPage: React.FC<AddCropPageProps> = observer(
         addCropStore.fields.nameField.setValue(value),
     };
 
-    const genusFieldModel = {
-      ...addCropStore.fields.genusField,
-      value: String(addCropStore.fields.genusField.value),
-      options: cropsStore.dropdownFilters['genus'].options,
-      onChange: (value: string) =>
-        addCropStore.fields.genusField.setValue(value),
-    };
+    const createDropdownFieldModel = (fieldKey: string) => ({
+      ...addCropStore.fields[fieldKey],
+      value: String(addCropStore.fields[fieldKey].value),
+      options: cropsDatabaseStore.dropdownFilters[fieldKey].options,
+      onChange: (value: string | number) =>
+        addCropStore.fields[fieldKey].setValue(String(value)),
+    });
 
-    const scientificNameFieldModel = {
-      ...addCropStore.fields.scientificNameField,
-      value: String(addCropStore.fields.scientificNameField.value),
-      onChange: (value: string) =>
-        addCropStore.fields.scientificNameField.setValue(value),
-    };
+    const sunPreferenceFieldModel = createDropdownFieldModel('sunPreference');
+    const waterNeedsFieldModel = createDropdownFieldModel('waterNeeds');
+    const soilTypeFieldModel = createDropdownFieldModel('soilType');
+    const soilPHFieldModel = createDropdownFieldModel('soilPH');
+    const pruningFieldModel = createDropdownFieldModel('pruning');
+    const climateZoneFieldModel = createDropdownFieldModel('climateZone');
+    const plantTypeFieldModel = createDropdownFieldModel('plantType');
+    const growthRateFieldModel = createDropdownFieldModel('growthRate');
+    const fertilizerNeedsFieldModel =
+      createDropdownFieldModel('fertilizerNeeds');
 
     return (
       <section className={styles.section}>
         <LoadingWrapper isLoading={addCropStore.isLoading}>
           <form onSubmit={handleSubmit} className={styles.form}>
             <TextInput {...nameFieldModel} />
-            <Dropdown {...genusFieldModel} />
-            <TextInput {...scientificNameFieldModel} />
+            <Dropdown {...sunPreferenceFieldModel} />
+            <Dropdown {...waterNeedsFieldModel} />
+            <Dropdown {...soilTypeFieldModel} />
+            <Dropdown {...soilPHFieldModel} />
+            <Dropdown {...pruningFieldModel} />
+            <Dropdown {...climateZoneFieldModel} />
+            <Dropdown {...plantTypeFieldModel} />
+            <Dropdown {...growthRateFieldModel} />
+            <Dropdown {...fertilizerNeedsFieldModel} />
+            <div></div>
             <Button {...buttonProps} />
           </form>
         </LoadingWrapper>

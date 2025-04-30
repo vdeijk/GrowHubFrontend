@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import TextInput from '../../reusables/TextInput/TextInput';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
-import addFieldStore from '../../../stores/AddFieldStore/AddFieldStore';
+import addFieldStore from '../../../stores/derived/AddFieldStore/AddFieldStore';
 import Button, { ButtonProps } from '../../reusables/Button/Button';
 import styles from './AddFieldPage.module.css';
 import { observer } from 'mobx-react-lite';
 import { useParams } from 'react-router-dom';
+import { TextInputProps } from '../../reusables/TextInput/TextInput';
 
 interface AddFieldPageProps {
   isEditing?: boolean;
@@ -46,33 +47,26 @@ const AddFieldPage: React.FC<AddFieldPageProps> = observer(
       customStyles: { marginTop: '1rem' },
     };
 
-    const locationNameFieldModel = {
-      ...addFieldStore.fields.locationNameField,
-      value: String(addFieldStore.fields.locationNameField.value),
+    const createTextInputFieldModel = (fieldKey: string): TextInputProps => ({
+      ...addFieldStore.fields[fieldKey],
+      value: String(addFieldStore.fields[fieldKey].value || ''),
       onChange: (value: string) =>
-        addFieldStore.fields.locationNameField.setValue(value),
-    };
+        addFieldStore.fields[fieldKey].setValue(value),
+    });
 
-    const latitudeFieldModel = {
-      ...addFieldStore.fields.latitudeField,
-      value: String(addFieldStore.fields.latitudeField.value),
-      onChange: (value: string) =>
-        addFieldStore.fields.latitudeField.setValue(value),
-    };
-
-    const longitudeFieldModel = {
-      ...addFieldStore.fields.longitudeField,
-      value: String(addFieldStore.fields.longitudeField.value),
-      onChange: (value: string) =>
-        addFieldStore.fields.longitudeField.setValue(value),
-    };
+    const locationNameFieldModel =
+      createTextInputFieldModel('locationNameField');
+    const latitudeFieldModel = createTextInputFieldModel('latitudeField');
+    const longitudeFieldModel = createTextInputFieldModel('longitudeField');
 
     return (
       <section className={styles.section}>
         <form onSubmit={handleSubmit} className={styles.form}>
           <TextInput {...locationNameFieldModel} />
           <TextInput {...latitudeFieldModel} />
+          <div></div>
           <TextInput {...longitudeFieldModel} />
+          <div></div>
           <Button {...buttonProps} />
         </form>
       </section>

@@ -4,11 +4,11 @@ import NavbarContainer from './core/views/containers/NavbarContainer/NavbarConta
 import MenuContainer from './core/views/containers/MenuContainer/MenuContainer';
 import DashboardPage from './core/views/pages/DashboardPage/DashboardPage';
 import FooterContainer from './core/views/containers/FooterContainer/FooterContainer';
-import profilePicture from './auxiliary/assets/profile.jpeg';
+import profilePicture from './auxiliary/assets/cropGrowHub.jpg';
 import { Routes, Route } from 'react-router-dom';
 import CropsPage from './core/views/pages/YourCropsPage/YourCropsPage';
-import routerStore from './core/stores/RouterStore/RouterStore';
-import PageLayout from './core/views/reusables/PageLayout/PageLayout';
+import routerStore from './core/services/RouterService/RouterService';
+import PageLayout from './core/views/layouts/PageLayout/PageLayout';
 import AddCropPage from './core/views/pages/AddCropPage/AddCropPage';
 import { ToastContainer } from 'react-toastify';
 import WeatherReportPage from './core/views/pages/WeatherReportPage/WeatherReportPage';
@@ -20,18 +20,26 @@ import NotFoundPage from './core/views/pages/NotFoundPage/NotFoundPage';
 import { useAuth0 } from '@auth0/auth0-react';
 import LoadingWrapper from './core/views/reusables/LoadingWrapper/LoadingWrapper';
 import LandingPage from './core/views/pages/LandingPage/LandingPage';
-import fieldsStore from './core/stores/FieldsStore/FieldsStore';
-import yourCropsStore from './core/stores/CropsStore/YourCropsStore';
-import cropsDatabaseStore from './core/stores/CropsDatabaseStore/CropsDatabaseStore';
-import taskStore from './core/stores/TaskStore/TaskStore';
-import weatherStore from './core/stores/CurrentWeatherStore/WeatherStore';
+import fieldsStore from './core/stores/derived/FieldsStore/FieldsStore';
+import yourCropsStore from './core/stores/derived/YourCropsStore/YourCropsStore';
+import cropsDatabaseStore from './core/stores/derived/CropsDatabaseStore/CropsDatabaseStore';
+import taskStore from './core/stores/derived/TaskStore/TaskStore';
+import weatherStore from './core/stores/derived/WeatherStore/WeatherStore';
 import UpgradePage from './core/views/pages/UpgradePage/UpgradePage';
 import CropsDatabasePage from './core/views/pages/CropsDatabasePage/CropsDatabasePage';
 import AddTaskPage from './core/views/pages/AddTaskPage/AddTaskPage';
+import AddYourCropPage from './core/views/pages/AddYourCropPage/AddYourCropPage';
+import { useLocation } from 'react-router-dom';
 
 const App: React.FC = observer(() => {
   const { isAuthenticated, isLoading, user } = useAuth0();
   const [isFetched, setIsFetched] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    const currentPath = location.pathname;
+    routerStore.handleRouteChange(currentPath);
+  }, [location]);
 
   useEffect(() => {
     if (!isFetched && isAuthenticated) {
@@ -88,7 +96,12 @@ const App: React.FC = observer(() => {
               path="/addCropPage/:id"
               element={<AddCropPage isEditing={true} />}
             />
-            <Route path="/addCropPage" element={<AddCropPage />} />
+            <Route path="/addCropPage" element={<AddCropPage />} />{' '}
+            <Route
+              path="/addYourCropPage/:id"
+              element={<AddYourCropPage isEditing={true} />}
+            />
+            <Route path="/addYourCropPage" element={<AddYourCropPage />} />
             <Route
               path="/addTaskPage/:id"
               element={<AddTaskPage isEditing={true} />}
@@ -102,5 +115,7 @@ const App: React.FC = observer(() => {
     </main>
   );
 });
+
+//AddYourCropPage
 
 export default App;

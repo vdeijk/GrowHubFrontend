@@ -1,15 +1,26 @@
+.headerContent {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  white-space: nowrap;
+}
+
 .table {
-  width: 100%;
   border-collapse: collapse;
   font-family: 'Poppins', sans-serif;
   background: #fdfdfd;
-  table-layout: fixed;
+  width: max-content;
+  table-layout: auto;
+  border-collapse: collapse;
+  min-width: 100%;
 }
 
 .table th,
 .table td {
+  white-space: nowrap;
+  width: max-content;
   border: 1px solid #ddd;
-  padding: 8px;
+  padding: 0.8rem 3.2rem 0.8rem 0.8rem;
   text-align: left;
   font-size: 1.5rem;
 }
@@ -31,5 +42,5 @@
   right: 8px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 1.5rem;
+  font-size: 1.6rem;
 }

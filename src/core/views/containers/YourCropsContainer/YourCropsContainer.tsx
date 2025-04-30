@@ -2,24 +2,27 @@ import React from 'react';
 import styles from './YourCropsContainer.module.css';
 import TableWithoutSorting from '../../reusables/TableWithoutSorting/TableWithoutSorting';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
-import plantsStore from '../../../stores/CropsStore/YourCropsStore';
+import plantsStore from '../../../stores/derived/YourCropsStore/YourCropsStore';
 import Heading from '../../reusables/Heading/Heading';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import { observer } from 'mobx-react-lite';
-import { Plant } from '../../../../auxiliary/interfaces/Plant';
+import { YourCropItem } from '../../../../api';
 
 const YourCropsContainer: React.FC = observer(() => {
   const navigate = useRouterNavigation();
 
   const buttonContainerData = {
-    clickHandler: () => navigate('/cropsDatabase'),
+    clickHandler: () => navigate('/cropsPage'),
     label: 'View All Crops',
   };
 
-  const headersWithoutActions = plantsStore.tableHeaders.filter(
-    (header) => header.id !== 'actions',
-  );
+  const headersWithoutActions = plantsStore.tableHeaders
+    .filter((header) => header.id !== 'actions')
+    .map((header) => ({
+      ...header,
+      id: header.id as keyof YourCropItem,
+    }));
 
   const omit = <T, K extends keyof T>(obj: T, key: K): Omit<T, K> => {
     const rest = { ...obj };
@@ -34,11 +37,10 @@ const YourCropsContainer: React.FC = observer(() => {
         text="Your Crops"
         customStyles={{ marginBottom: '2rem' }}
       />
-      <TableWithoutSorting<Plant>
+      <TableWithoutSorting<YourCropItem>
         headers={headersWithoutActions}
-        data={plantsStore.items.slice(0, 9).map((plant, index) => ({
-          ...omit(plant, 'actions'),
-          index,
+        data={plantsStore.items.slice(0, 9).map((plant) => ({
+          ...('actions' in plant ? omit(plant, 'actions') : plant),
         }))}
       />
       <ButtonContainer buttons={[buttonContainerData]} />

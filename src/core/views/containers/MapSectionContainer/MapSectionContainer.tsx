@@ -4,7 +4,7 @@ import Map from '../../reusables/Map/Map';
 import Heading from '../../reusables/Heading/Heading';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import { observer } from 'mobx-react-lite';
-import locationStore from '../../../stores/FieldsStore/FieldsStore';
+import locationStore from '../../../stores/derived/FieldsStore/FieldsStore';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 

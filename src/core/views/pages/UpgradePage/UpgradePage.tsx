@@ -3,7 +3,7 @@ import styles from './UpgradePage.module.css';
 import Heading from '../../reusables/Heading/Heading';
 import Button from '../../reusables/Button/Button';
 import { observer } from 'mobx-react-lite';
-import upgradeStore from '../../../stores/UpgradeStore/UpgradeStore';
+import upgradeStore from '../../../stores/derived/UpgradeStore/UpgradeStore';
 
 const UpgradePage: React.FC = observer(() => {
   return (

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import TextInput, { TextInputProps } from '../../reusables/TextInput/TextInput';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
-import addTaskStore from '../../../stores/AddTaskStore/AddTaskStore';
+import addTaskStore from '../../../stores/derived/AddTaskStore/AddTaskStore';
 import styles from './AddTaskPage.module.css';
 import { observer } from 'mobx-react-lite';
 import { useParams } from 'react-router-dom';
@@ -9,8 +9,7 @@ import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import Button, { ButtonProps } from '../../reusables/Button/Button';
 import Dropdown from '../../reusables/Dropdown/Dropdown';
 import DateInput, { DateInputProps } from '../../reusables/DateInput/DateInput';
-import { DropdownProps } from '../../reusables/Dropdown/Dropdown';
-import taskStore from '../../../stores/TaskStore/TaskStore';
+import taskStore from '../../../stores/derived/TaskStore/TaskStore';
 
 interface AddTaskPageProps {
   isEditing?: boolean;
@@ -44,42 +43,33 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
       navigate('/tasksPage');
     };
 
-    const titleProps: TextInputProps = {
-      ...addTaskStore.fields.titleField,
-      value: String(addTaskStore.fields.titleField.value),
+    const createTextInputFieldModel = (fieldKey: string): TextInputProps => ({
+      ...addTaskStore.fields[fieldKey],
+      value: String(addTaskStore.fields[fieldKey].value || ''),
       onChange: (value: string) =>
-        addTaskStore.fields.titleField.setValue(value),
-    };
+        addTaskStore.fields[fieldKey].setValue(value),
+    });
 
-    const priorityProps: DropdownProps = {
-      ...addTaskStore.fields.priorityField,
-      value: String(addTaskStore.fields.priorityField.value),
-      onChange: (value: string) =>
-        addTaskStore.fields.priorityField.setValue(value),
-      options: taskStore.dropdownFilters['priority'].options,
-    };
+    const createDropdownFieldModel = (fieldKey: string) => ({
+      ...addTaskStore.fields[fieldKey],
+      value: String(addTaskStore.fields[fieldKey].value),
+      options: taskStore.dropdownFilters[fieldKey]?.options || [],
+      onChange: (value: string | number) =>
+        addTaskStore.fields[fieldKey].setValue(String(value)),
+    });
 
-    const dueDateProps: DateInputProps = {
-      ...addTaskStore.fields.dueDateField,
-      value: String(addTaskStore.fields.dueDateField.value || ''),
-      onChange: (value) =>
-        addTaskStore.fields.dueDateField.setValue(value || ''),
-    };
+    const createDateFieldModel = (fieldKey: string): DateInputProps => ({
+      ...addTaskStore.fields[fieldKey],
+      value: String(addTaskStore.fields[fieldKey].value || ''),
+      onChange: (value) => addTaskStore.fields[fieldKey].setValue(value || ''),
+    });
 
-    const descriptionProps: TextInputProps = {
-      ...addTaskStore.fields.descriptionField,
-      value: String(addTaskStore.fields.descriptionField.value),
-      onChange: (value: string) =>
-        addTaskStore.fields.descriptionField.setValue(value),
-    };
-
-    const categoryProps: DropdownProps = {
-      ...addTaskStore.fields.categoryField,
-      value: String(addTaskStore.fields.categoryField.value),
-      onChange: (value: string) =>
-        addTaskStore.fields.categoryField.setValue(value),
-      options: taskStore.dropdownFilters['category'].options,
-    };
+    const titleProps = createTextInputFieldModel('titleField');
+    const priorityProps = createDropdownFieldModel('priority');
+    const dueDateProps = createDateFieldModel('dueDate');
+    const descriptionProps = createTextInputFieldModel('description');
+    const categoryProps = createDropdownFieldModel('category');
+    const statusProps = createDropdownFieldModel('todoStatus');
 
     const buttonProps: ButtonProps = {
       type: 'submit',
@@ -96,6 +86,8 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
             <DateInput {...dueDateProps} />
             <TextInput {...descriptionProps} />
             <Dropdown {...categoryProps} />
+            <Dropdown {...statusProps} />
+            <div></div>
             <Button {...buttonProps} />
           </form>
         </LoadingWrapper>

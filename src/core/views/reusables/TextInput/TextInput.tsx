@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './TextInput.module.css';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import EventBus from '../../../services/EventBusService/EventBusService';
 
 export interface TextInputProps {
   value: string;
@@ -19,11 +20,19 @@ const TextInput: React.FC<TextInputProps> = ({
   label,
   error,
 }) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = event.target.value;
+    onChange(newValue);
+
+    EventBus.dispatchEvent(`searchQuery:updated`, undefined);
+  };
+
   return (
     <div className={label ? styles.container : ''}>
       {label && (
         <label className={styles.label} htmlFor={label}>
           {label}
+          {required && <span className={styles.requiredIndicator}>*</span>}
         </label>
       )}
       <input
@@ -31,7 +40,7 @@ const TextInput: React.FC<TextInputProps> = ({
         required={required}
         type="text"
         value={value}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={handleChange}
         placeholder={placeholder}
         className={styles.textInput}
         aria-invalid={!!error}

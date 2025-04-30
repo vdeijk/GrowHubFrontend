@@ -5,18 +5,18 @@ import ButtonContainer, {
   ButtonConfig,
 } from '../../reusables/ButtonContainer/ButtonContainer';
 import FieldListContainer from '../../containers/FieldListContainer/FieldListContainer';
-import fieldsStore from '../../../stores/FieldsStore/FieldsStore';
+import fieldsStore from '../../../stores/derived/FieldsStore/FieldsStore';
 import { observer } from 'mobx-react-lite';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
-import EventBus from '../../../../auxiliary/utils/EventTarget';
+import EventBus from '../../../services/EventBusService/EventBusService';
 
 const FieldsPage: React.FC = observer(() => {
   const navigate = useRouterNavigation();
 
   const buttonConfigs: ButtonConfig[] = [
     {
-      clickHandler: () => EventBus.dispatchEvent(new Event('centerMap')),
+      clickHandler: () => EventBus.dispatchEvent('centerMap', undefined),
       label: 'Center Map',
     },
     {
@@ -39,11 +39,19 @@ const FieldsPage: React.FC = observer(() => {
     onDelete: handleDelete,
   };
 
-  const markers = fieldsStore.locations.map((location) => ({
-    lat: location.latitude,
-    lng: location.longitude,
-    popupContent: location.name,
-  }));
+  const markers = fieldsStore.locations
+    .filter(
+      (location) =>
+        location.latitude !== undefined &&
+        location.longitude !== undefined &&
+        location.name !== null &&
+        location.name !== undefined,
+    )
+    .map((location) => ({
+      lat: location.latitude as number,
+      lng: location.longitude as number,
+      popupContent: location.name as string,
+    }));
 
   const mapData = {
     enableScroll: true,

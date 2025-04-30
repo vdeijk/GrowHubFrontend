@@ -7,7 +7,7 @@ interface ActionIconsProps<T extends { id?: number | undefined }> {
   item: T;
   handleEdit: (id: number | undefined) => void;
   handleDelete: (id: number | undefined) => void;
-  handlePopup: (id: number | undefined) => void;
+  handlePopup?: (id: number | undefined) => void;
 }
 
 const ActionIcons = observer(
@@ -16,11 +16,13 @@ const ActionIcons = observer(
 
     return (
       <div className={styles.actionIcons}>
-        <FaSearch
-          className={styles.viewIcon}
-          onClick={() => item.id !== undefined && handlePopup(item.id!)}
-          title="View Info"
-        />
+        {handlePopup && (
+          <FaSearch
+            className={styles.viewIcon}
+            onClick={() => item.id !== undefined && handlePopup(item.id!)}
+            title="View Info"
+          />
+        )}
         <FaEdit
           className={styles.editIcon}
           onClick={() => item.id !== undefined && handleEdit(item.id)}

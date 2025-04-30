@@ -2,23 +2,14 @@ import React from 'react';
 import styles from './Task.module.css';
 import TextWithBoldSpan from '../TextWithBoldSpan/TextWithBoldSpan';
 import { TextWithBoldSpanData } from '../../../../auxiliary/interfaces/TextWithBoldSpanData';
-import { Priority } from '../../../../auxiliary/enums/Priority';
-import { Category } from '../../../../auxiliary/enums/Category';
+import { Task as TaskInterface } from '../../../../auxiliary/interfaces/Task';
 
 interface TaskProps {
-  taskData: {
-    id?: number | undefined;
-    title: string;
-    dueDate: string;
-    priority: Priority;
-    category: Category;
-    completed: boolean;
-    description: string;
-  };
+  taskData: TaskInterface;
 }
 
 const Task: React.FC<TaskProps> = ({ taskData }) => {
-  const { title, priority, category, completed, dueDate } = taskData;
+  const { title, priority, category, dueDate } = taskData;
 
   const formatDate = (dateString: string) => {
     if (!dateString) return '';
@@ -36,7 +27,7 @@ const Task: React.FC<TaskProps> = ({ taskData }) => {
   ];
 
   return (
-    <div className={`${styles.task} ${completed ? styles.completed : ''}`}>
+    <div className={`${styles.task}`}>
       <div className={styles.taskInfo}>
         <h4 className={styles.taskTitle}>{title}</h4>
         <div className={styles.taskDetails}>
