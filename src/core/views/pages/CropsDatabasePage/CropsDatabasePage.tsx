@@ -6,12 +6,12 @@ import cropsDatabaseStore from '../../../stores/derived/CropsDatabaseStore/Crops
 import { observer } from 'mobx-react-lite';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import { TableProps } from '../../reusables/TableWithSorting/TableWithSorting';
-import { Plant } from '../../../../auxiliary/interfaces/Plant';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import ActionIcons from '../../reusables/ActionIcons/ActionIcons';
 import Pagination from '../../reusables/Pagination/Pagination';
 import { SearchBarDatabaseProps } from '../../containers/SearchBarDatabase/SearchBarDatabase';
+import { PlantItem } from '../../../../api';
 
 const CropsDatabasePage: React.FC = observer(() => {
   const navigate = useRouterNavigation();
@@ -42,8 +42,12 @@ const CropsDatabasePage: React.FC = observer(() => {
     cropsDatabaseStore.deletePlant(id);
   };
 
-  const tableProps: TableProps<Plant> = {
-    headers: cropsDatabaseStore.tableHeaders,
+  const tableProps: TableProps<PlantItem> = {
+    headers: cropsDatabaseStore.tableHeaders as {
+      id: keyof PlantItem;
+      label: string;
+      sortable: boolean;
+    }[],
     data: cropsDatabaseStore.paginatedItems.map((item) => ({
       ...item,
       actions: (

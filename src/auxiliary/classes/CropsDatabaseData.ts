@@ -8,9 +8,14 @@ import { PlantItemClimateZoneEnum } from '../../api';
 import { PlantItemPlantTypeEnum } from '../../api';
 import { PlantItemGrowthRateEnum } from '../../api';
 import { PlantItemFertilizerNeedsEnum } from '../../api';
+import { PlantItem } from '../../api';
 
 class CropsDatabaseData {
-  public static tableHeaders = [
+  public static tableHeaders: {
+    id: keyof PlantItem | 'actions';
+    label: string;
+    sortable: boolean;
+  }[] = [
     { id: 'commonName', label: 'Common Name', sortable: true },
     { id: 'actions', label: 'Actions', sortable: false },
     { id: 'sunPreference', label: 'Sun Preference', sortable: true },

@@ -12,7 +12,6 @@ import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation
 import ActionIcons from '../../reusables/ActionIcons/ActionIcons';
 import Pagination from '../../reusables/Pagination/Pagination';
 import { YourCropItem } from '../../../../api';
-import { toJS } from 'mobx';
 
 const YourCropsPage: React.FC = observer(() => {
   const { paginationService } = cropsStore;
