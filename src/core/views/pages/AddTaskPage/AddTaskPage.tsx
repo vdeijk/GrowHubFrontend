@@ -71,11 +71,11 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
     });
 
     const titleProps = createTextInputFieldModel('titleField');
-    const priorityProps = createDropdownFieldModel('priorityField');
-    const dueDateProps = createDateFieldModel('dueDateField');
-    const descriptionProps = createTextInputFieldModel('descriptionField');
-    const categoryProps = createDropdownFieldModel('categoryField');
-    const statusProps = createDropdownFieldModel('statusField');
+    const priorityProps = createDropdownFieldModel('priority');
+    const dueDateProps = createDateFieldModel('dueDate');
+    const descriptionProps = createTextInputFieldModel('description');
+    const categoryProps = createDropdownFieldModel('category');
+    const statusProps = createDropdownFieldModel('todoStatus');
 
     const buttonProps: ButtonProps = {
       type: 'submit',

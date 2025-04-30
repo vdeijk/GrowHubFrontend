@@ -70,6 +70,8 @@ class CropsDatabaseStore extends SearchableStore<PlantItem> {
   public deletePlant = async (id: number) => {
     await this.endpointService.deleteData(id);
 
+    localStorageService.invalidateCache('cropsDatabaseItems');
+
     this.fetchData();
   };
 }

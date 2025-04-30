@@ -38,7 +38,7 @@ class TaskData {
       })),
       defaultValue: '',
     },
-    status: {
+    todoStatus: {
       key: 'todoStatus',
       label: 'Status',
       options: Object.values(TodoItemTodoStatusEnum).map((value) => ({
