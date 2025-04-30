@@ -2,10 +2,10 @@ import React from 'react';
 import styles from './Task.module.css';
 import TextWithBoldSpan from '../TextWithBoldSpan/TextWithBoldSpan';
 import { TextWithBoldSpanData } from '../../../../auxiliary/interfaces/TextWithBoldSpanData';
-import { Task as TaskInterface } from '../../../../auxiliary/interfaces/Task';
+import { TodoItem } from '../../../../api';
 
 interface TaskProps {
-  taskData: TaskInterface;
+  taskData: TodoItem;
 }
 
 const Task: React.FC<TaskProps> = ({ taskData }) => {
@@ -21,9 +21,9 @@ const Task: React.FC<TaskProps> = ({ taskData }) => {
   };
 
   const textsWithBoldSpan: TextWithBoldSpanData[] = [
-    { label: 'Due', boldSpan: formatDate(dueDate) },
-    { label: 'Priority', boldSpan: priority },
-    { label: 'Category', boldSpan: category },
+    { label: 'Due', boldSpan: formatDate(dueDate || '') },
+    { label: 'Priority', boldSpan: priority || 'N/A' },
+    { label: 'Category', boldSpan: category || 'N/A' },
   ];
 
   return (

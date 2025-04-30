@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './FieldListContainer.module.css';
-import { LocationItem } from '../../../../auxiliary/interfaces/LocationItem';
+import { LocationItem } from '../../../../api';
 import FarmLocation from '../../reusables/FarmLocation/FarmLocation';
 
 interface LocationListProps {

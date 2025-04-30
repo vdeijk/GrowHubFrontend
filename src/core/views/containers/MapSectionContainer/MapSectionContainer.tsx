@@ -16,11 +16,18 @@ const MapSection: React.FC = observer(() => {
     label: 'View All Fields',
   };
 
-  const markers = locationStore.locations.map((location) => ({
-    lat: location.latitude,
-    lng: location.longitude,
-    popupContent: location.name,
-  }));
+  const markers = locationStore.locations
+    .filter(
+      (location) =>
+        location.latitude !== undefined &&
+        location.longitude !== undefined &&
+        location.name !== null,
+    )
+    .map((location) => ({
+      lat: location.latitude!,
+      lng: location.longitude!,
+      popupContent: location.name!,
+    }));
 
   const mapData = {
     enableScroll: false,
