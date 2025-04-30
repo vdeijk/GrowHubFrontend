@@ -18,3 +18,9 @@
   font-size: 1.4rem;
   font-weight: bold;
 }
+
+.requiredIndicator {
+  color: var(--color-red);
+  margin-left: 4px;
+  font-size: 1rem;
+}

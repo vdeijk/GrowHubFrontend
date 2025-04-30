@@ -36,6 +36,7 @@ const DateInput: React.FC<DateInputProps> = ({
       {label && (
         <label className={styles.label} htmlFor={label}>
           {label}
+          {required && <span className={styles.requiredIndicator}>*</span>}
         </label>
       )}
       <input

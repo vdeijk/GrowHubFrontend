@@ -32,6 +32,7 @@ const Dropdown: React.FC<DropdownProps> = ({
       {label && (
         <label className={styles.label} htmlFor={label}>
           {label}
+          {required && <span className={styles.requiredIndicator}>*</span>}
         </label>
       )}
       <select
