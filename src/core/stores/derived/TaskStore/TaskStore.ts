@@ -62,9 +62,9 @@ class TaskStore extends SearchableStore<Task> {
 
     if (!data) return;
 
+    console.log('tasks ', data);
     runInAction(() => {
       this.items = data;
-      console.log('Fetched data:', toJS(this.items));
       this.filteredItems = this.items;
       this.paginatedItems = this.paginationService.paginateItems(
         this.filteredItems,
