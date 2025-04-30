@@ -10,7 +10,6 @@ import Button, { ButtonProps } from '../../reusables/Button/Button';
 import Dropdown from '../../reusables/Dropdown/Dropdown';
 import DateInput, { DateInputProps } from '../../reusables/DateInput/DateInput';
 import taskStore from '../../../stores/derived/TaskStore/TaskStore';
-import { toJS } from 'mobx';
 
 interface AddTaskPageProps {
   isEditing?: boolean;
@@ -51,18 +50,13 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
         addTaskStore.fields[fieldKey].setValue(value),
     });
 
-    const createDropdownFieldModel = (fieldKey: string) => {
-      console.log('Creating dropdown for fieldKey:', fieldKey);
-      console.log('Dropdown Filters:', toJS(taskStore.dropdownFilters));
-
-      return {
-        ...addTaskStore.fields[fieldKey],
-        value: String(addTaskStore.fields[fieldKey].value),
-        options: taskStore.dropdownFilters[fieldKey]?.options || [],
-        onChange: (value: string | number) =>
-          addTaskStore.fields[fieldKey].setValue(String(value)),
-      };
-    };
+    const createDropdownFieldModel = (fieldKey: string) => ({
+      ...addTaskStore.fields[fieldKey],
+      value: String(addTaskStore.fields[fieldKey].value),
+      options: taskStore.dropdownFilters[fieldKey]?.options || [],
+      onChange: (value: string | number) =>
+        addTaskStore.fields[fieldKey].setValue(String(value)),
+    });
 
     const createDateFieldModel = (fieldKey: string): DateInputProps => ({
       ...addTaskStore.fields[fieldKey],

@@ -85,7 +85,7 @@ class AddCropStore extends BaseFormStore {
       fertilizerNeeds: this.fields.fertilizerNeeds
         .value as PlantItemFertilizerNeedsEnum,
     };
-    
+
     await this.endpointService.putData(`${id}`, data);
 
     localStorageService.invalidateCache('cropsDatabaseItems');
