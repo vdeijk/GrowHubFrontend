@@ -30,7 +30,7 @@ class RouterService {
       isDynamic: false,
     },
     // { path: '/upgrade', label: 'Upgrade', hidden: false, isDynamic: false },
-    { path: '/addCropPage', label: 'Add Crop', hidden: true, isDynamic: false },
+
     {
       path: '/addYourCropPage',
       label: 'Add Your Crop',
@@ -38,16 +38,23 @@ class RouterService {
       isDynamic: false,
     },
     {
-      path: '/addFieldPage',
-      label: 'Add Field',
+      path: '/addYourCropPage/:id',
+      label: 'Edit Your Crop',
       hidden: true,
-      isDynamic: false,
+      isDynamic: true,
     },
+    { path: '/addCropPage', label: 'Add Crop', hidden: true, isDynamic: false },
     {
       path: '/addCropPage/:id',
       label: 'Edit Crop',
       hidden: true,
       isDynamic: true,
+    },
+    {
+      path: '/addFieldPage',
+      label: 'Add Field',
+      hidden: true,
+      isDynamic: false,
     },
     {
       path: '/addFieldPage/:id',
