@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx';
-import { Dropdown } from '../../auxiliary/classes/Dropdown';
-import { DateField } from '../../auxiliary/classes/DateField';
+import { Dropdown } from '../../../auxiliary/classes/Dropdown';
+import { DateField } from '../../../auxiliary/classes/DateField';
 
 export class FilterService {
   constructor() {

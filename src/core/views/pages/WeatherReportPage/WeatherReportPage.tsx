@@ -11,9 +11,8 @@ import fieldsStore from '../../../stores/derived/FieldsStore/FieldsStore';
 const WeatherReportPage: React.FC = observer(() => {
   const options = fieldsStore.locations.map((location) => ({
     value: location.id?.toString() || '',
-    label: location.name,
+    label: location.name || 'Unknown',
   }));
-
   const weatherForecast = weatherStore.weatherData?.forecast.forecastday;
 
   const children = (
@@ -22,7 +21,7 @@ const WeatherReportPage: React.FC = observer(() => {
         <Dropdown
           label="Choose Field"
           value={weatherStore.selectedLocation?.id?.toString() || ''}
-          onChange={(id) => weatherStore.setLocation(id)}
+          onChange={(id) => weatherStore.setLocation(String(id))}
           options={options}
           aria-label="Choose Field"
         />

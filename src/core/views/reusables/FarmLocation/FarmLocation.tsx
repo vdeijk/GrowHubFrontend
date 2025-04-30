@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './FarmLocation.module.css';
 import { FaEdit, FaTrash } from 'react-icons/fa';
-import { LocationItem } from '../../../../auxiliary/interfaces/LocationItem';
+import { LocationItem } from '../../../../api';
 
 interface LocationProps {
   location: LocationItem;

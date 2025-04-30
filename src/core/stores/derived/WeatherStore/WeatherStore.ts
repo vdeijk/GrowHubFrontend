@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 import { runInAction } from 'mobx';
 import fieldsStore from '../FieldsStore/FieldsStore';
-import { LocationItem } from '../../../../auxiliary/interfaces/LocationItem';
+import { LocationItem } from '../../../../api';
 import FormatService from '../../../services/FormatService/FormatService';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
 import { Weather } from '../../../../auxiliary/interfaces/Weather';
@@ -70,15 +70,21 @@ class WeatherStore {
       return '';
     }
 
-    const latitude = FormatService.formatCoordinate(location.latitude);
-    const longitude = FormatService.formatCoordinate(location.longitude);
+    const latitude =
+      location.latitude !== undefined
+        ? FormatService.formatCoordinate(location.latitude)
+        : '';
+    const longitude =
+      location.longitude !== undefined
+        ? FormatService.formatCoordinate(location.longitude)
+        : '';
 
     return `${latitude},${longitude}`;
   }
 
   get selectedLocationName(): string {
     return this.selectedLocation
-      ? this.selectedLocation.name
+      ? (this.selectedLocation.name ?? 'Unknown Location')
       : 'Unknown Location';
   }
 }
