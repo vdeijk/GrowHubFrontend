@@ -30,6 +30,8 @@ import CropsDatabasePage from './core/views/pages/CropsDatabasePage/CropsDatabas
 import AddTaskPage from './core/views/pages/AddTaskPage/AddTaskPage';
 import AddYourCropPage from './core/views/pages/AddYourCropPage/AddYourCropPage';
 import { useLocation } from 'react-router-dom';
+import Measurements from './core/views/pages/MeasurementsPage/MeasurementsPage';
+import measurementsStore from './core/stores/derived/MeasurementsStore/MeasurementsStore';
 
 const App: React.FC = observer(() => {
   const { isAuthenticated, isLoading, user } = useAuth0();
@@ -52,11 +54,12 @@ const App: React.FC = observer(() => {
   const fetchAllData = async () => {
     try {
       await Promise.all([
+        weatherStore.fetchData(),
+        taskStore.fetchData(),
+        measurementsStore.fetchData(),
         fieldsStore.fetchData(),
         yourCropsStore.fetchData(),
         cropsDatabaseStore.fetchData(),
-        taskStore.fetchData(),
-        weatherStore.fetchData(),
       ]);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -107,6 +110,8 @@ const App: React.FC = observer(() => {
               element={<AddTaskPage isEditing={true} />}
             />
             <Route path="/addTaskPage" element={<AddTaskPage />} />
+            <Route path="/measurements" element={<Measurements />} />
+            <Route path="/measurements/:id" element={<Measurements />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </LoadingWrapper>

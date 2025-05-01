@@ -73,6 +73,117 @@ export interface LocationItem {
 /**
  *
  * @export
+ * @interface MeasurementItem
+ */
+export interface MeasurementItem {
+  /**
+   *
+   * @type {string}
+   * @memberof MeasurementItem
+   */
+  title?: string | null;
+  /**
+   *
+   * @type {number}
+   * @memberof MeasurementItem
+   */
+  id?: number;
+  /**
+   *
+   * @type {number}
+   * @memberof MeasurementItem
+   */
+  batchId?: number;
+  /**
+   *
+   * @type {string}
+   * @memberof MeasurementItem
+   */
+  lightLevel?: MeasurementItemLightLevelEnum;
+  /**
+   *
+   * @type {string}
+   * @memberof MeasurementItem
+   */
+  soilDryness?: MeasurementItemSoilDrynessEnum;
+  /**
+   *
+   * @type {number}
+   * @memberof MeasurementItem
+   */
+  soilPH?: number;
+  /**
+   *
+   * @type {string}
+   * @memberof MeasurementItem
+   */
+  healthStatus?: MeasurementItemHealthStatusEnum;
+  /**
+   *
+   * @type {string}
+   * @memberof MeasurementItem
+   */
+  growthStage?: MeasurementItemGrowthStageEnum;
+  /**
+   *
+   * @type {number}
+   * @memberof MeasurementItem
+   */
+  temperature?: number;
+  /**
+   *
+   * @type {string}
+   * @memberof MeasurementItem
+   */
+  date?: string | null;
+}
+
+export const MeasurementItemLightLevelEnum = {
+  VeryLow: 'VeryLow',
+  Low: 'Low',
+  Moderate: 'Moderate',
+  Light: 'Light',
+  VeryLight: 'VeryLight',
+} as const;
+
+export type MeasurementItemLightLevelEnum =
+  (typeof MeasurementItemLightLevelEnum)[keyof typeof MeasurementItemLightLevelEnum];
+export const MeasurementItemSoilDrynessEnum = {
+  VeryWet: 'VeryWet',
+  Wet: 'Wet',
+  Moist: 'Moist',
+  Dry: 'Dry',
+  VeryDry: 'VeryDry',
+} as const;
+
+export type MeasurementItemSoilDrynessEnum =
+  (typeof MeasurementItemSoilDrynessEnum)[keyof typeof MeasurementItemSoilDrynessEnum];
+export const MeasurementItemHealthStatusEnum = {
+  Poor: 'Poor',
+  Fair: 'Fair',
+  Good: 'Good',
+  VeryGood: 'VeryGood',
+  Excellent: 'Excellent',
+} as const;
+
+export type MeasurementItemHealthStatusEnum =
+  (typeof MeasurementItemHealthStatusEnum)[keyof typeof MeasurementItemHealthStatusEnum];
+export const MeasurementItemGrowthStageEnum = {
+  Germination: 'Germination',
+  Seedling: 'Seedling',
+  Vegetative: 'Vegetative',
+  Budding: 'Budding',
+  Flowering: 'Flowering',
+  Fruiting: 'Fruiting',
+  Maturity: 'Maturity',
+} as const;
+
+export type MeasurementItemGrowthStageEnum =
+  (typeof MeasurementItemGrowthStageEnum)[keyof typeof MeasurementItemGrowthStageEnum];
+
+/**
+ *
+ * @export
  * @interface PlantItem
  */
 export interface PlantItem {
@@ -90,143 +201,125 @@ export interface PlantItem {
   id?: number | null;
   /**
    *
-   * @type {string}
+   * @type {number}
    * @memberof PlantItem
    */
-  sunPreference?: PlantItemSunPreferenceEnum | null;
+  waterCycle?: number;
+  /**
+   *
+   * @type {number}
+   * @memberof PlantItem
+   */
+  pruningCycle?: number;
+  /**
+   *
+   * @type {number}
+   * @memberof PlantItem
+   */
+  fertilizationCycle?: number;
+  /**
+   *
+   * @type {number}
+   * @memberof PlantItem
+   */
+  harvestCycle?: number;
   /**
    *
    * @type {string}
    * @memberof PlantItem
    */
-  waterNeeds?: PlantItemWaterNeedsEnum | null;
+  wateringNotes?: string | null;
   /**
    *
    * @type {string}
    * @memberof PlantItem
    */
-  soilType?: PlantItemSoilTypeEnum | null;
+  fertilizingNotes?: string | null;
   /**
    *
    * @type {string}
    * @memberof PlantItem
    */
-  soilPH?: PlantItemSoilPHEnum | null;
+  pruningNotes?: string | null;
   /**
    *
    * @type {string}
    * @memberof PlantItem
    */
-  pruning?: PlantItemPruningEnum | null;
+  temperatureNotes?: string | null;
   /**
    *
    * @type {string}
    * @memberof PlantItem
    */
-  climateZone?: PlantItemClimateZoneEnum | null;
+  harvestNotes?: string | null;
   /**
    *
    * @type {string}
    * @memberof PlantItem
    */
-  plantType?: PlantItemPlantTypeEnum | null;
+  phNotes?: string | null;
   /**
    *
    * @type {string}
    * @memberof PlantItem
    */
-  growthRate?: PlantItemGrowthRateEnum | null;
+  harvestStart?: string;
   /**
    *
    * @type {string}
    * @memberof PlantItem
    */
-  fertilizerNeeds?: PlantItemFertilizerNeedsEnum | null;
+  harvestEnd?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof PlantItem
+   */
+  pruningStart?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof PlantItem
+   */
+  pruningEnd?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof PlantItem
+   */
+  fertilizingStart?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof PlantItem
+   */
+  fertilizingEnd?: string;
+  /**
+   *
+   * @type {number}
+   * @memberof PlantItem
+   */
+  phMin?: number;
+  /**
+   *
+   * @type {number}
+   * @memberof PlantItem
+   */
+  phMax?: number;
+  /**
+   *
+   * @type {number}
+   * @memberof PlantItem
+   */
+  temperatureMin?: number;
+  /**
+   *
+   * @type {number}
+   * @memberof PlantItem
+   */
+  temperatureMax?: number;
 }
-
-export const PlantItemSunPreferenceEnum = {
-  FullSun: 'FullSun',
-  PartialShade: 'PartialShade',
-  FullShade: 'FullShade',
-} as const;
-
-export type PlantItemSunPreferenceEnum =
-  (typeof PlantItemSunPreferenceEnum)[keyof typeof PlantItemSunPreferenceEnum];
-export const PlantItemWaterNeedsEnum = {
-  Low: 'Low',
-  Medium: 'Medium',
-  High: 'High',
-} as const;
-
-export type PlantItemWaterNeedsEnum =
-  (typeof PlantItemWaterNeedsEnum)[keyof typeof PlantItemWaterNeedsEnum];
-export const PlantItemSoilTypeEnum = {
-  Loam: 'Loam',
-  Sand: 'Sand',
-  Clay: 'Clay',
-  Silt: 'Silt',
-  Peat: 'Peat',
-  Chalk: 'Chalk',
-} as const;
-
-export type PlantItemSoilTypeEnum =
-  (typeof PlantItemSoilTypeEnum)[keyof typeof PlantItemSoilTypeEnum];
-export const PlantItemSoilPHEnum = {
-  Acidic: 'Acidic',
-  Neutral: 'Neutral',
-  Alkaline: 'Alkaline',
-} as const;
-
-export type PlantItemSoilPHEnum =
-  (typeof PlantItemSoilPHEnum)[keyof typeof PlantItemSoilPHEnum];
-export const PlantItemPruningEnum = {
-  Light: 'Light',
-  Moderate: 'Moderate',
-  Heavy: 'Heavy',
-} as const;
-
-export type PlantItemPruningEnum =
-  (typeof PlantItemPruningEnum)[keyof typeof PlantItemPruningEnum];
-export const PlantItemClimateZoneEnum = {
-  Arid: 'Arid',
-  SemiArid: 'SemiArid',
-  Mediterranean: 'Mediterranean',
-  Temperate: 'Temperate',
-  Tropical: 'Tropical',
-  Subtropical: 'Subtropical',
-} as const;
-
-export type PlantItemClimateZoneEnum =
-  (typeof PlantItemClimateZoneEnum)[keyof typeof PlantItemClimateZoneEnum];
-export const PlantItemPlantTypeEnum = {
-  Tree: 'Tree',
-  Shrub: 'Shrub',
-  Flower: 'Flower',
-  Vine: 'Vine',
-  Herb: 'Herb',
-  Grass: 'Grass',
-} as const;
-
-export type PlantItemPlantTypeEnum =
-  (typeof PlantItemPlantTypeEnum)[keyof typeof PlantItemPlantTypeEnum];
-export const PlantItemGrowthRateEnum = {
-  Slow: 'Slow',
-  Medium: 'Medium',
-  Fast: 'Fast',
-} as const;
-
-export type PlantItemGrowthRateEnum =
-  (typeof PlantItemGrowthRateEnum)[keyof typeof PlantItemGrowthRateEnum];
-export const PlantItemFertilizerNeedsEnum = {
-  None: 'None',
-  Low: 'Low',
-  Medium: 'Medium',
-  High: 'High',
-} as const;
-
-export type PlantItemFertilizerNeedsEnum =
-  (typeof PlantItemFertilizerNeedsEnum)[keyof typeof PlantItemFertilizerNeedsEnum];
-
 /**
  *
  * @export
@@ -239,6 +332,12 @@ export interface TodoItem {
    * @memberof TodoItem
    */
   id?: number;
+  /**
+   *
+   * @type {number}
+   * @memberof TodoItem
+   */
+  batchId?: number;
   /**
    *
    * @type {string}
@@ -296,8 +395,12 @@ export const TodoItemPriorityEnum = {
 export type TodoItemPriorityEnum =
   (typeof TodoItemPriorityEnum)[keyof typeof TodoItemPriorityEnum];
 export const TodoItemCategoryEnum = {
-  Work: 'Work',
-  Personal: 'Personal',
+  Fertilize: 'Fertilize',
+  Harvest: 'Harvest',
+  Prune: 'Prune',
+  Water: 'Water',
+  Sow: 'Sow',
+  Measure: 'Measure',
   Other: 'Other',
 } as const;
 
@@ -343,6 +446,18 @@ export interface YourCropItem {
   commonName?: string | null;
   /**
    *
+   * @type {number}
+   * @memberof YourCropItem
+   */
+  amount?: number;
+  /**
+   *
+   * @type {number}
+   * @memberof YourCropItem
+   */
+  databaseId?: number;
+  /**
+   *
    * @type {string}
    * @memberof YourCropItem
    */
@@ -355,10 +470,22 @@ export interface YourCropItem {
   lastWatered?: string | null;
   /**
    *
+   * @type {number}
+   * @memberof YourCropItem
+   */
+  waterCycle?: number;
+  /**
+   *
    * @type {string}
    * @memberof YourCropItem
    */
   lastFertilized?: string | null;
+  /**
+   *
+   * @type {number}
+   * @memberof YourCropItem
+   */
+  fertilizationCycle?: number;
   /**
    *
    * @type {string}
@@ -370,43 +497,20 @@ export interface YourCropItem {
    * @type {string}
    * @memberof YourCropItem
    */
+  pruneCycle?: string | null;
+  /**
+   *
+   * @type {string}
+   * @memberof YourCropItem
+   */
   lastHarvested?: string | null;
   /**
    *
    * @type {string}
    * @memberof YourCropItem
    */
-  healthStatus?: YourCropItemHealthStatusEnum;
-  /**
-   *
-   * @type {string}
-   * @memberof YourCropItem
-   */
-  growthStage?: YourCropItemGrowthStageEnum;
+  harvestCycle?: string | null;
 }
-
-export const YourCropItemHealthStatusEnum = {
-  Poor: 'Poor',
-  Fair: 'Fair',
-  Good: 'Good',
-  VeryGood: 'VeryGood',
-  Excellent: 'Excellent',
-} as const;
-
-export type YourCropItemHealthStatusEnum =
-  (typeof YourCropItemHealthStatusEnum)[keyof typeof YourCropItemHealthStatusEnum];
-export const YourCropItemGrowthStageEnum = {
-  Germination: 'Germination',
-  Seedling: 'Seedling',
-  Vegetative: 'Vegetative',
-  Budding: 'Budding',
-  Flowering: 'Flowering',
-  Fruiting: 'Fruiting',
-  Maturity: 'Maturity',
-} as const;
-
-export type YourCropItemGrowthStageEnum =
-  (typeof YourCropItemGrowthStageEnum)[keyof typeof YourCropItemGrowthStageEnum];
 
 /**
  * LocationApi - axios parameter creator
@@ -962,6 +1066,569 @@ export class LocationApi extends BaseAPI {
   ) {
     return LocationApiFp(this.configuration)
       .apiLocationPost(locationItem, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+}
+
+/**
+ * MeasurementsApi - axios parameter creator
+ * @export
+ */
+export const MeasurementsApiAxiosParamCreator = function (
+  configuration?: Configuration,
+) {
+  return {
+    /**
+     *
+     * @param {number} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    apiMeasurementsIdDelete: async (
+      id: number,
+      options: RawAxiosRequestConfig = {},
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'id' is not null or undefined
+      assertParamExists('apiMeasurementsIdDelete', 'id', id);
+      const localVarPath = `/api/Measurements/{id}`.replace(
+        `{${'id'}}`,
+        encodeURIComponent(String(id)),
+      );
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: 'DELETE',
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @param {number} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    apiMeasurementsIdGet: async (
+      id: number,
+      options: RawAxiosRequestConfig = {},
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'id' is not null or undefined
+      assertParamExists('apiMeasurementsIdGet', 'id', id);
+      const localVarPath = `/api/Measurements/{id}`.replace(
+        `{${'id'}}`,
+        encodeURIComponent(String(id)),
+      );
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: 'GET',
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @param {number} id
+     * @param {MeasurementItem} [measurementItem]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    apiMeasurementsIdPut: async (
+      id: number,
+      measurementItem?: MeasurementItem,
+      options: RawAxiosRequestConfig = {},
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'id' is not null or undefined
+      assertParamExists('apiMeasurementsIdPut', 'id', id);
+      const localVarPath = `/api/Measurements/{id}`.replace(
+        `{${'id'}}`,
+        encodeURIComponent(String(id)),
+      );
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: 'PUT',
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      localVarHeaderParameter['Content-Type'] = 'application/json';
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+      localVarRequestOptions.data = serializeDataIfNeeded(
+        measurementItem,
+        localVarRequestOptions,
+        configuration,
+      );
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @param {MeasurementItem} [measurementItem]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    apiMeasurementsPost: async (
+      measurementItem?: MeasurementItem,
+      options: RawAxiosRequestConfig = {},
+    ): Promise<RequestArgs> => {
+      const localVarPath = `/api/Measurements`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: 'POST',
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      localVarHeaderParameter['Content-Type'] = 'application/json';
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+      localVarRequestOptions.data = serializeDataIfNeeded(
+        measurementItem,
+        localVarRequestOptions,
+        configuration,
+      );
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getMeasurements: async (
+      options: RawAxiosRequestConfig = {},
+    ): Promise<RequestArgs> => {
+      const localVarPath = `/api/Measurements`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: 'GET',
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+  };
+};
+
+/**
+ * MeasurementsApi - functional programming interface
+ * @export
+ */
+export const MeasurementsApiFp = function (configuration?: Configuration) {
+  const localVarAxiosParamCreator =
+    MeasurementsApiAxiosParamCreator(configuration);
+  return {
+    /**
+     *
+     * @param {number} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async apiMeasurementsIdDelete(
+      id: number,
+      options?: RawAxiosRequestConfig,
+    ): Promise<
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.apiMeasurementsIdDelete(id, options);
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap['MeasurementsApi.apiMeasurementsIdDelete']?.[
+          localVarOperationServerIndex
+        ]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration,
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+    /**
+     *
+     * @param {number} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async apiMeasurementsIdGet(
+      id: number,
+      options?: RawAxiosRequestConfig,
+    ): Promise<
+      (
+        axios?: AxiosInstance,
+        basePath?: string,
+      ) => AxiosPromise<MeasurementItem>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.apiMeasurementsIdGet(id, options);
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap['MeasurementsApi.apiMeasurementsIdGet']?.[
+          localVarOperationServerIndex
+        ]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration,
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+    /**
+     *
+     * @param {number} id
+     * @param {MeasurementItem} [measurementItem]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async apiMeasurementsIdPut(
+      id: number,
+      measurementItem?: MeasurementItem,
+      options?: RawAxiosRequestConfig,
+    ): Promise<
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.apiMeasurementsIdPut(
+          id,
+          measurementItem,
+          options,
+        );
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap['MeasurementsApi.apiMeasurementsIdPut']?.[
+          localVarOperationServerIndex
+        ]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration,
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+    /**
+     *
+     * @param {MeasurementItem} [measurementItem]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async apiMeasurementsPost(
+      measurementItem?: MeasurementItem,
+      options?: RawAxiosRequestConfig,
+    ): Promise<
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.apiMeasurementsPost(
+          measurementItem,
+          options,
+        );
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap['MeasurementsApi.apiMeasurementsPost']?.[
+          localVarOperationServerIndex
+        ]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration,
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+    /**
+     *
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async getMeasurements(
+      options?: RawAxiosRequestConfig,
+    ): Promise<
+      (
+        axios?: AxiosInstance,
+        basePath?: string,
+      ) => AxiosPromise<Array<MeasurementItem>>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.getMeasurements(options);
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap['MeasurementsApi.getMeasurements']?.[
+          localVarOperationServerIndex
+        ]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration,
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+  };
+};
+
+/**
+ * MeasurementsApi - factory interface
+ * @export
+ */
+export const MeasurementsApiFactory = function (
+  configuration?: Configuration,
+  basePath?: string,
+  axios?: AxiosInstance,
+) {
+  const localVarFp = MeasurementsApiFp(configuration);
+  return {
+    /**
+     *
+     * @param {number} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    apiMeasurementsIdDelete(
+      id: number,
+      options?: RawAxiosRequestConfig,
+    ): AxiosPromise<void> {
+      return localVarFp
+        .apiMeasurementsIdDelete(id, options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     *
+     * @param {number} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    apiMeasurementsIdGet(
+      id: number,
+      options?: RawAxiosRequestConfig,
+    ): AxiosPromise<MeasurementItem> {
+      return localVarFp
+        .apiMeasurementsIdGet(id, options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     *
+     * @param {number} id
+     * @param {MeasurementItem} [measurementItem]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    apiMeasurementsIdPut(
+      id: number,
+      measurementItem?: MeasurementItem,
+      options?: RawAxiosRequestConfig,
+    ): AxiosPromise<void> {
+      return localVarFp
+        .apiMeasurementsIdPut(id, measurementItem, options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     *
+     * @param {MeasurementItem} [measurementItem]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    apiMeasurementsPost(
+      measurementItem?: MeasurementItem,
+      options?: RawAxiosRequestConfig,
+    ): AxiosPromise<void> {
+      return localVarFp
+        .apiMeasurementsPost(measurementItem, options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     *
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getMeasurements(
+      options?: RawAxiosRequestConfig,
+    ): AxiosPromise<Array<MeasurementItem>> {
+      return localVarFp
+        .getMeasurements(options)
+        .then((request) => request(axios, basePath));
+    },
+  };
+};
+
+/**
+ * MeasurementsApi - object-oriented interface
+ * @export
+ * @class MeasurementsApi
+ * @extends {BaseAPI}
+ */
+export class MeasurementsApi extends BaseAPI {
+  /**
+   *
+   * @param {number} id
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof MeasurementsApi
+   */
+  public apiMeasurementsIdDelete(id: number, options?: RawAxiosRequestConfig) {
+    return MeasurementsApiFp(this.configuration)
+      .apiMeasurementsIdDelete(id, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @param {number} id
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof MeasurementsApi
+   */
+  public apiMeasurementsIdGet(id: number, options?: RawAxiosRequestConfig) {
+    return MeasurementsApiFp(this.configuration)
+      .apiMeasurementsIdGet(id, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @param {number} id
+   * @param {MeasurementItem} [measurementItem]
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof MeasurementsApi
+   */
+  public apiMeasurementsIdPut(
+    id: number,
+    measurementItem?: MeasurementItem,
+    options?: RawAxiosRequestConfig,
+  ) {
+    return MeasurementsApiFp(this.configuration)
+      .apiMeasurementsIdPut(id, measurementItem, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @param {MeasurementItem} [measurementItem]
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof MeasurementsApi
+   */
+  public apiMeasurementsPost(
+    measurementItem?: MeasurementItem,
+    options?: RawAxiosRequestConfig,
+  ) {
+    return MeasurementsApiFp(this.configuration)
+      .apiMeasurementsPost(measurementItem, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof MeasurementsApi
+   */
+  public getMeasurements(options?: RawAxiosRequestConfig) {
+    return MeasurementsApiFp(this.configuration)
+      .getMeasurements(options)
       .then((request) => request(this.axios, this.basePath));
   }
 }

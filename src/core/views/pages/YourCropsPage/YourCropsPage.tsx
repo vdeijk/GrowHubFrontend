@@ -20,8 +20,6 @@ const YourCropsPage: React.FC = observer(() => {
   const searchBarProps: SearchBarProps = {
     searchQuery: cropsStore.searchQuery,
     location: cropsStore.dropdownFilters.location,
-    growthStage: cropsStore.dropdownFilters.growthStage,
-    healthStatus: cropsStore.dropdownFilters.healthStatus,
     lastWatered: cropsStore.dateFilters.lastWatered,
     lastFertilized: cropsStore.dateFilters.lastFertilized,
     lastPruned: cropsStore.dateFilters.lastPruned,
@@ -38,6 +36,8 @@ const YourCropsPage: React.FC = observer(() => {
     cropsStore.deletePlant(id);
   };
 
+  const handlePopup = (id: number | undefined) => {};
+
   const tableProps: TableProps<YourCropItem> = {
     headers: cropsStore.tableHeaders as {
       id: keyof YourCropItem;
@@ -50,6 +50,7 @@ const YourCropsPage: React.FC = observer(() => {
         <div className={styles.actionIcons}>
           <ActionIcons
             item={item as { id: number | undefined }}
+            handlePopup={handlePopup}
             handleEdit={handleEdit}
             handleDelete={handleDelete}
           />

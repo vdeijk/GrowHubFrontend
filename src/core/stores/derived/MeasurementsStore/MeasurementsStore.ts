@@ -1,5 +1,5 @@
 import { SearchableStore } from '../../base/BaseSearchableStore/BaseSearchableStore';
-import { PlantItem } from '../../../../api';
+import { MeasurementItem } from '../../../../api';
 import {
   makeObservable,
   runInAction,
@@ -8,13 +8,12 @@ import {
   computed,
 } from 'mobx';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
-import { localStorageService } from '../../../services/LocalStorageService/LocalStorageService';
 import { InputField } from '../../../../auxiliary/classes/InputField';
-import CropsDatabaseData from '../../../../auxiliary/classes/CropsDatabaseData';
+import MeasurementsData from '../../../../auxiliary/classes/MeasurementsData';
 import { PaginationService } from '../../../services/PaginationService/PaginationService';
 
-class CropsDatabaseStore extends SearchableStore<PlantItem> {
-  private endpointService = new EndpointService('Plant');
+class MeasurementsStore extends SearchableStore<MeasurementItem> {
+  private endpointService = new EndpointService('Measurements');
   public paginationService = new PaginationService();
   public get isLoading(): boolean {
     return this.endpointService.isLoading;
@@ -28,7 +27,15 @@ class CropsDatabaseStore extends SearchableStore<PlantItem> {
   );
 
   constructor() {
-    super(['commonName']);
+    super(['title']);
+
+    Object.values(MeasurementsData.dropdowns).forEach((dropdown) => {
+      this.initDropdownFilter(dropdown);
+    });
+
+    MeasurementsData.dateFields.forEach((dateField) => {
+      this.initDateFilter(dateField);
+    });
 
     makeObservable(this, {
       isLoading: computed,
@@ -37,20 +44,11 @@ class CropsDatabaseStore extends SearchableStore<PlantItem> {
     });
   }
 
-  debouncedFilterPlants: (criteria: string) => void = () => {};
-  tableHeaders = CropsDatabaseData.tableHeaders;
-
-  public syncData = () => {
-    localStorageService.invalidateCache('cropsDatabaseItems');
-    this.fetchData();
-  };
+  debouncedFilterMeasurements: (criteria: string) => void = () => {};
+  tableHeaders = MeasurementsData.tableHeaders;
 
   public fetchData = async () => {
-    const data = await localStorageService.fetchWithCache<PlantItem[]>(
-      'cropsDatabaseItems',
-      async () => (await this.endpointService.getData<PlantItem[]>()) || [],
-      7,
-    );
+    const data = await this.endpointService.getData<MeasurementItem[]>();
 
     if (!data) return;
 
@@ -63,14 +61,12 @@ class CropsDatabaseStore extends SearchableStore<PlantItem> {
     });
   };
 
-  public deletePlant = async (id: number) => {
+  public deleteMeasurement = async (id: number) => {
     await this.endpointService.deleteData(id);
-
-    localStorageService.invalidateCache('cropsDatabaseItems');
 
     this.fetchData();
   };
 }
 
-const cropsDatabaseStore = new CropsDatabaseStore();
-export default cropsDatabaseStore;
+const measurementsStore = new MeasurementsStore();
+export default measurementsStore;

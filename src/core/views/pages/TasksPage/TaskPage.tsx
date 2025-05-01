@@ -42,6 +42,8 @@ const TasksPage: React.FC = observer(() => {
     endDateFilter: taskStore.dateFilters['endDate'],
   };
 
+  const handlePopup = (id: number | undefined) => {};
+
   const tableProps: TableProps<TodoItem> = {
     headers: taskStore.tableHeaders as {
       id: keyof TodoItem;
@@ -53,6 +55,7 @@ const TasksPage: React.FC = observer(() => {
       actions: (
         <ActionIcons
           item={item as { id: number | undefined }}
+          handlePopup={handlePopup}
           handleEdit={handleEdit}
           handleDelete={handleDelete}
         />

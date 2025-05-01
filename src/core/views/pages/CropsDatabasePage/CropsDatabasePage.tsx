@@ -42,6 +42,8 @@ const CropsDatabasePage: React.FC = observer(() => {
     cropsDatabaseStore.deletePlant(id);
   };
 
+  const handlePopup = (id: number | undefined) => {};
+
   const tableProps: TableProps<PlantItem> = {
     headers: cropsDatabaseStore.tableHeaders as {
       id: keyof PlantItem;
@@ -52,6 +54,7 @@ const CropsDatabasePage: React.FC = observer(() => {
       ...item,
       actions: (
         <ActionIcons
+          handlePopup={handlePopup}
           item={item as { id: number | undefined }}
           handleEdit={handleEdit}
           handleDelete={handleDelete}
@@ -71,7 +74,7 @@ const CropsDatabasePage: React.FC = observer(() => {
   return (
     <section className={styles.section}>
       <LoadingWrapper isLoading={cropsDatabaseStore.isLoading}>
-        <SearchBarDatabase {...searchBarProps} />
+        {/* <SearchBarDatabase {...searchBarProps} /> */}
         <div className={styles.buttonContainer}>
           <div className={styles.tableContainer}>
             <Table {...tableProps} />

@@ -11,8 +11,6 @@ import { DateField as DateInputClass } from '../../../../auxiliary/classes/DateF
 export interface SearchBarProps {
   location: DropdownClass<string>;
   searchQuery: InputField<string>;
-  growthStage: DropdownClass<string>;
-  healthStatus: DropdownClass<string>;
   lastWatered: DateInputClass<string>;
   lastFertilized: DateInputClass<string>;
   lastPruned: DateInputClass<string>;
@@ -23,8 +21,6 @@ const SearchBarCrops: React.FC<SearchBarProps> = observer(
   ({
     location,
     searchQuery,
-    growthStage,
-    healthStatus,
     lastWatered,
     lastFertilized,
     lastPruned,
@@ -69,20 +65,6 @@ const SearchBarCrops: React.FC<SearchBarProps> = observer(
           onChange={(date) => lastHarvested?.setValue(date || '')}
           label={lastHarvested.label}
           aria-label="Last Harvested"
-        />
-        <Dropdown
-          value={healthStatus.value}
-          onChange={(value) => healthStatus.setValue(String(value))}
-          options={healthStatus.options}
-          label={healthStatus.label}
-          aria-label="Health Status"
-        />
-        <Dropdown
-          value={growthStage.value}
-          onChange={(value) => growthStage.setValue(String(value))}
-          options={growthStage.options}
-          label={growthStage.label}
-          aria-label="Growth Stage"
         />
       </div>
     );

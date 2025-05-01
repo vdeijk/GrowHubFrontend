@@ -13,6 +13,7 @@ class TaskData {
   }[] = [
     { id: 'title', label: 'Title', sortable: true },
     { id: 'actions', label: 'Actions', sortable: false },
+    { id: 'batchId', label: 'Batch Id', sortable: true },
     { id: 'priority', label: 'Priority', sortable: true },
     { id: 'dueDate', label: 'Due Date', sortable: true },
     { id: 'category', label: 'Category', sortable: true },
