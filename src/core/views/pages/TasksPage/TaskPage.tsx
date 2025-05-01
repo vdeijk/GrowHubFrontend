@@ -13,6 +13,8 @@ import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation
 import ActionIcons from '../../reusables/ActionIcons/ActionIcons';
 import Popup from '../../containers/Popup/Popup';
 import Pagination from '../../reusables/Pagination/Pagination';
+import TaskPopup from '../../reusables/TaskPopup/TaskPopup';
+import popupService from '../../../services/PopupService/PopupService';
 
 const TasksPage: React.FC = observer(() => {
   const paginationService = taskStore.paginationService;
@@ -34,7 +36,7 @@ const TasksPage: React.FC = observer(() => {
   };
 
   const searchBarProps: SearchBarTasksProps = {
-    searchQuery: taskStore.searchQuery,
+    searchQuery: taskStore.textFilters.searchQuery,
     categoryFilter: taskStore.dropdownFilters['category'],
     priorityFilter: taskStore.dropdownFilters['priority'],
     statusFilter: taskStore.dropdownFilters['todoStatus'],
@@ -42,7 +44,22 @@ const TasksPage: React.FC = observer(() => {
     endDateFilter: taskStore.dateFilters['endDate'],
   };
 
-  const handlePopup = (id: number | undefined) => {};
+  const handlePopup = (id: number | undefined) => {
+    if (id === undefined) return;
+
+    const task = taskStore.items.find((item) => item.id === id);
+    if (!task) return;
+
+    popupService.openPopup(
+      <TaskPopup
+        descriptionField={{
+          ...taskStore.textFilters.descriptionField,
+          setValue: (value) =>
+            taskStore.textFilters.descriptionField.setValue(value ?? ''),
+        }}
+      />,
+    );
+  };
 
   const tableProps: TableProps<TodoItem> = {
     headers: taskStore.tableHeaders as {

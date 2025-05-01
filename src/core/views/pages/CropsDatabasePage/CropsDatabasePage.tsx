@@ -12,14 +12,16 @@ import ActionIcons from '../../reusables/ActionIcons/ActionIcons';
 import Pagination from '../../reusables/Pagination/Pagination';
 import { SearchBarDatabaseProps } from '../../containers/SearchBarDatabase/SearchBarDatabase';
 import { PlantItem } from '../../../../api';
-import { toJS } from 'mobx';
+import popupService from '../../../services/PopupService/PopupService';
+import TaskPopup from '../../reusables/TaskPopup/TaskPopup';
+import Popup from '../../containers/Popup/Popup';
 
 const CropsDatabasePage: React.FC = observer(() => {
   const navigate = useRouterNavigation();
   const { paginationService } = cropsDatabaseStore;
 
   const searchBarProps: SearchBarDatabaseProps = {
-    searchQuery: cropsDatabaseStore.searchQuery,
+    searchQuery: cropsDatabaseStore.textFilters.searchQuery,
     harvestStart: cropsDatabaseStore.dateFilters['harvestStart'],
     harvestEnd: cropsDatabaseStore.dateFilters['harvestEnd'],
     pruningStart: cropsDatabaseStore.dateFilters['pruningStart'],
@@ -40,7 +42,24 @@ const CropsDatabasePage: React.FC = observer(() => {
     cropsDatabaseStore.deletePlant(id);
   };
 
-  const handlePopup = (id: number | undefined) => {};
+  const handlePopup = (id: number | undefined) => {
+    if (id === undefined) return;
+
+    const task = cropsDatabaseStore.items.find((item) => item.id === id);
+    if (!task) return;
+
+    popupService.openPopup(
+      <TaskPopup
+        descriptionField={{
+          ...cropsDatabaseStore.textFilters.descriptionField,
+          setValue: (value) =>
+            cropsDatabaseStore.textFilters.descriptionField.setValue(
+              value ?? '',
+            ),
+        }}
+      />,
+    );
+  };
 
   const tableProps: TableProps<PlantItem> = {
     headers: cropsDatabaseStore.tableHeaders as {
@@ -71,6 +90,7 @@ const CropsDatabasePage: React.FC = observer(() => {
 
   return (
     <section className={styles.section}>
+      <Popup />
       <LoadingWrapper isLoading={cropsDatabaseStore.isLoading}>
         <SearchBarDatabase {...searchBarProps} />
         <div className={styles.buttonContainer}>

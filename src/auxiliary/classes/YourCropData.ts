@@ -3,6 +3,7 @@ import { DropdownFieldModel } from '../interfaces/DropdownFieldModel';
 import { DateFieldModel } from '../interfaces/DateFieldModel';
 import { YourCropItem } from '../../api';
 import { TableHeaderModel } from '../interfaces/TableHeaderModel';
+import { InputFieldModel } from '../interfaces/InputFieldModel';
 
 class YourCropsData {
   public static tableHeaders: TableHeaderModel<YourCropItem>[] = [
@@ -27,6 +28,15 @@ class YourCropsData {
       type: 'date',
     },
   ];
+
+  public static textFields: Record<string, InputFieldModel> = {
+    searchQuery: { key: 'searchQuery', label: 'Search', defaultValue: '' },
+    descriptionField: {
+      key: 'description',
+      label: 'Description',
+      defaultValue: '',
+    },
+  };
 
   public static dropdowns: Record<string, DropdownFieldModel> = {
     location: {

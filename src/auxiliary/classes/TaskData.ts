@@ -5,6 +5,7 @@ import { TodoItemPriorityEnum } from '../../api';
 import { TodoItemTodoStatusEnum } from '../../api';
 import { TodoItem } from '../../api';
 import { TableHeaderModel } from '../interfaces/TableHeaderModel';
+import { InputFieldModel } from '../interfaces/InputFieldModel';
 
 class TaskData {
   public static tableHeaders: TableHeaderModel<TodoItem>[] = [
@@ -16,6 +17,15 @@ class TaskData {
     { id: 'category', label: 'Category', sortable: true, type: 'string' },
     { id: 'todoStatus', label: 'Status', sortable: true, type: 'string' },
   ];
+
+  public static textFields: Record<string, InputFieldModel> = {
+    searchQuery: { key: 'searchQuery', label: 'Search', defaultValue: '' },
+    descriptionField: {
+      key: 'description',
+      label: 'Description',
+      defaultValue: '',
+    },
+  };
 
   public static dropdowns: Record<string, DropdownFieldModel> = {
     category: {

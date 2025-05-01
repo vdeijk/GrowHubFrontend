@@ -9,7 +9,7 @@ import { InputField } from '../../../../auxiliary/classes/InputField';
 import Heading from '../Heading/Heading';
 
 interface TaskPopupProps {
-  descriptionField: InputField<string>;
+  descriptionField: InputField<string | null | undefined>;
 }
 
 const TaskPopup: React.FC<TaskPopupProps> = observer(({ descriptionField }) => {

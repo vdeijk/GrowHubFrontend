@@ -1,6 +1,7 @@
 import { DateFieldModel } from '../interfaces/DateFieldModel';
 import { PlantItem } from '../../api';
 import { TableHeaderModel } from '../interfaces/TableHeaderModel';
+import { InputFieldModel } from '../interfaces/InputFieldModel';
 
 class CropsDatabaseData {
   public static tableHeaders: TableHeaderModel<PlantItem>[] = [
@@ -67,6 +68,15 @@ class CropsDatabaseData {
       type: 'number',
     },
   ];
+
+  public static textFields: Record<string, InputFieldModel> = {
+    searchQuery: { key: 'searchQuery', label: 'Search', defaultValue: '' },
+    descriptionField: {
+      key: 'description',
+      label: 'Description',
+      defaultValue: '',
+    },
+  };
 
   public static dateFields: DateFieldModel[] = [
     { key: 'harvestStart', label: 'Harvest Start', defaultValue: '' },

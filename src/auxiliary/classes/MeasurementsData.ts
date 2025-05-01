@@ -8,6 +8,7 @@ import {
   MeasurementItemSoilDrynessEnum,
 } from '../../api';
 import { TableHeaderModel } from '../interfaces/TableHeaderModel';
+import { InputFieldModel } from '../interfaces/InputFieldModel';
 
 class MeasurementsData {
   public static tableHeaders: TableHeaderModel<MeasurementItem>[] = [
@@ -37,10 +38,32 @@ class MeasurementsData {
     },
   ];
 
+  public static textFields: Record<string, InputFieldModel> = {
+    searchQuery: { key: 'searchQuery', label: 'Search', defaultValue: '' },
+    descriptionField: {
+      key: 'description',
+      label: 'Description',
+      defaultValue: '',
+    },
+  };
+
+  public static inputFields: Record<string, InputFieldModel> = {
+    phMin: {
+      key: 'phMin',
+      label: 'PH Min',
+      defaultValue: '',
+    },
+    phMax: {
+      key: 'phMax',
+      label: 'PH Max',
+      defaultValue: '',
+    },
+  };
+
   public static dropdowns: Record<string, DropdownFieldModel> = {
     light: {
       key: 'lightLevel',
-      label: 'Light',
+      label: 'Light Level',
       options: Object.values(MeasurementItemLightLevelEnum).map((value) => ({
         value: value,
         label: value,
@@ -49,7 +72,7 @@ class MeasurementsData {
     },
     dryness: {
       key: 'soilDryness',
-      label: 'Dryness',
+      label: 'Soil Dryness',
       options: Object.values(MeasurementItemSoilDrynessEnum).map((value) => ({
         value: value,
         label: value,
@@ -77,7 +100,8 @@ class MeasurementsData {
   };
 
   public static dateFields: DateFieldModel[] = [
-    { key: 'datae', label: 'Date', defaultValue: '' },
+    { key: 'dateMax', label: 'Date Max', defaultValue: '' },
+    { key: 'dateMin', label: 'Date Min', defaultValue: '' },
   ];
 }
 

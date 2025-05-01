@@ -12,13 +12,16 @@ import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation
 import ActionIcons from '../../reusables/ActionIcons/ActionIcons';
 import Pagination from '../../reusables/Pagination/Pagination';
 import { YourCropItem } from '../../../../api';
+import TaskPopup from '../../reusables/TaskPopup/TaskPopup';
+import popupService from '../../../services/PopupService/PopupService';
+import Popup from '../../containers/Popup/Popup';
 
 const YourCropsPage: React.FC = observer(() => {
   const { paginationService } = cropsStore;
   const navigate = useRouterNavigation();
 
   const searchBarProps: SearchBarProps = {
-    searchQuery: cropsStore.searchQuery,
+    searchQuery: cropsStore.textFilters.searchQuery,
     location: cropsStore.dropdownFilters.location,
     lastWatered: cropsStore.dateFilters.lastWatered,
     lastFertilized: cropsStore.dateFilters.lastFertilized,
@@ -36,7 +39,22 @@ const YourCropsPage: React.FC = observer(() => {
     cropsStore.deletePlant(id);
   };
 
-  const handlePopup = (id: number | undefined) => {};
+  const handlePopup = (id: number | undefined) => {
+    if (id === undefined) return;
+
+    const task = cropsStore.items.find((item) => item.id === id);
+    if (!task) return;
+
+    popupService.openPopup(
+      <TaskPopup
+        descriptionField={{
+          ...cropsStore.textFilters.descriptionField,
+          setValue: (value) =>
+            cropsStore.textFilters.descriptionField.setValue(value ?? ''),
+        }}
+      />,
+    );
+  };
 
   const tableProps: TableProps<YourCropItem> = {
     headers: cropsStore.tableHeaders as {
@@ -69,6 +87,7 @@ const YourCropsPage: React.FC = observer(() => {
 
   return (
     <section className={styles.section}>
+      <Popup />
       <LoadingWrapper isLoading={cropsStore.isLoading}>
         <SearchBarCrops {...searchBarProps} />
         <div className={styles.buttonContainer}>

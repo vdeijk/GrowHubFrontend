@@ -12,6 +12,9 @@ import ActionIcons from '../../reusables/ActionIcons/ActionIcons';
 import SearchBarMeasurements from '../../containers/SearchBarMeasurements/SearchBarMeasurements';
 import { SearchBarMeasurementsProps } from '../../containers/SearchBarMeasurements/SearchBarMeasurements';
 import { observer } from 'mobx-react-lite';
+import popupService from '../../../services/PopupService/PopupService';
+import TaskPopup from '../../reusables/TaskPopup/TaskPopup';
+import Popup from '../../containers/Popup/Popup';
 
 interface MeasurementsProps {}
 
@@ -24,7 +27,24 @@ const MeasurementsPage: React.FC<MeasurementsProps> = observer(() => {
     label: 'Add Measurement',
   };
 
-  const handlePopup = (id: number | undefined) => {};
+  const handlePopup = (id: number | undefined) => {
+    if (id === undefined) return;
+
+    const task = measurementsStore.items.find((item) => item.id === id);
+    if (!task) return;
+
+    popupService.openPopup(
+      <TaskPopup
+        descriptionField={{
+          ...measurementsStore.textFilters.descriptionField,
+          setValue: (value) =>
+            measurementsStore.textFilters.descriptionField.setValue(
+              value ?? '',
+            ),
+        }}
+      />,
+    );
+  };
 
   const handleEdit = (id: number | undefined) => {
     navigate(`/addMeasurement/${id}`);
@@ -37,11 +57,15 @@ const MeasurementsPage: React.FC<MeasurementsProps> = observer(() => {
   };
 
   const searchBarProps: SearchBarMeasurementsProps = {
-    searchQuery: measurementsStore.searchQuery,
+    searchQuery: measurementsStore.textFilters.searchQuery,
     soilDryness: measurementsStore.dropdownFilters['soilDryness'],
     lightLevel: measurementsStore.dropdownFilters['lightLevel'],
+    phMin: measurementsStore.textFilters['phMin'],
+    phMax: measurementsStore.textFilters['phMax'],
     healthStatus: measurementsStore.dropdownFilters['healthStatus'],
     growthStage: measurementsStore.dropdownFilters['growthStage'],
+    dateMax: measurementsStore.dateFilters['dateMax'],
+    dateMin: measurementsStore.dateFilters['dateMin'],
   };
 
   const tableProps: TableProps<MeasurementItem> = {
@@ -69,6 +93,7 @@ const MeasurementsPage: React.FC<MeasurementsProps> = observer(() => {
 
   return (
     <section className={styles.section}>
+      <Popup />
       <LoadingWrapper isLoading={measurementsStore.isLoading}>
         <SearchBarMeasurements {...searchBarProps} />
         <div className={styles.buttonContainer}>

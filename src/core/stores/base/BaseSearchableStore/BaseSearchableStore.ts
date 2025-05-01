@@ -15,6 +15,7 @@ import { DateFieldModel } from '../../../../auxiliary/interfaces/DateFieldModel'
 import { DropdownFieldModel } from '../../../../auxiliary/interfaces/DropdownFieldModel';
 import DebounceService from '../../../services/DebounceService/DebounceService';
 import { PaginationService } from '../../../services/PaginationService/PaginationService';
+import { InputFieldModel } from '../../../../auxiliary/interfaces/InputFieldModel';
 
 export abstract class SearchableStore<T> {
   public paginationService = new PaginationService();
@@ -24,7 +25,7 @@ export abstract class SearchableStore<T> {
   public filteredItems: T[] = [];
   public paginatedItems: T[] = [];
   public debouncedFilterItems: () => void;
-  public abstract searchQuery: InputField<string>;
+  public textFilters: Record<string, InputField<string>> = {};
   public dropdownFilters: Record<string, Dropdown<string>> = {};
   public dateFilters: Record<string, DateField<string>> = {};
   public searchableFields: (keyof T)[] = [];
@@ -54,7 +55,7 @@ export abstract class SearchableStore<T> {
     });
 
     EventBus.addEventListener('searchQuery:updated', () => {
-      if (!this.searchQuery.validateMaxLength()) {
+      if (!this.textFilters.searchQuery.validateMaxLength()) {
         this.debouncedFilterItems();
       }
     });
@@ -71,6 +72,7 @@ export abstract class SearchableStore<T> {
       items: observable,
       filteredItems: observable,
       paginatedItems: observable,
+      textFilters: observable,
       dropdownFilters: observable,
       dateFilters: observable,
       sortField: computed,
@@ -89,6 +91,14 @@ export abstract class SearchableStore<T> {
   public get sortOrder(): 'asc' | 'desc' {
     return this.sortService.sortOrder;
   }
+
+  public initTextFilter = (field: InputFieldModel) => {
+    runInAction(() => {
+      if (!this.textFilters[field.key]) {
+        this.textFilters[field.key] = new InputField<string>('', field.label);
+      }
+    });
+  };
 
   public initDateFilter = (field: DateFieldModel) => {
     runInAction(() => {
@@ -131,7 +141,7 @@ export abstract class SearchableStore<T> {
   public filterItems = () => {
     let filtered = FilterService.filterBySearchQuery(
       this.items,
-      this.searchQuery.value,
+      this.textFilters.searchQuery.value,
       this.searchableFields,
     );
     filtered = FilterService.filterByDropdowns(filtered, this.dropdownFilters);

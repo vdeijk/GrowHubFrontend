@@ -1,43 +1,24 @@
 import { TodoItem } from '../../../../api';
 import { SearchableStore } from '../../base/BaseSearchableStore/BaseSearchableStore';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
-import {
-  makeObservable,
-  runInAction,
-  observable,
-  action,
-  computed,
-} from 'mobx';
-import { InputField } from '../../../../auxiliary/classes/InputField';
+import { makeObservable, runInAction, action, computed } from 'mobx';
 import TaskData from '../../../../auxiliary/classes/TaskData';
 import { PaginationService } from '../../../services/PaginationService/PaginationService';
 
 class TaskStore extends SearchableStore<TodoItem> {
   private endpointService = new EndpointService('Todo');
   public paginationService = new PaginationService();
-  public descriptionField: InputField<string>;
   public get isLoading(): boolean {
     return this.endpointService.isLoading;
   }
   public tableHeaders = TaskData.tableHeaders;
-  public searchQuery = new InputField<string>(
-    '',
-    'Search',
-    false,
-    'Enter search query',
-    50,
-  );
 
   constructor() {
     super(['title']);
 
-    this.descriptionField = new InputField<string>(
-      '',
-      'Description',
-      false,
-      'Enter task description',
-      30,
-    );
+    Object.values(TaskData.textFields).forEach((textField) => {
+      this.initTextFilter(textField);
+    });
 
     Object.values(TaskData.dropdowns).forEach((dropdown) => {
       this.initDropdownFilter(dropdown);
@@ -49,8 +30,6 @@ class TaskStore extends SearchableStore<TodoItem> {
 
     makeObservable(this, {
       isLoading: computed,
-      searchQuery: observable,
-      descriptionField: observable,
       fetchData: action,
     });
   }

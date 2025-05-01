@@ -1,15 +1,8 @@
 import { SearchableStore } from '../../base/BaseSearchableStore/BaseSearchableStore';
 import { YourCropItem } from '../../../../api';
-import {
-  makeObservable,
-  runInAction,
-  observable,
-  action,
-  computed,
-} from 'mobx';
+import { makeObservable, runInAction, action, computed } from 'mobx';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
 import YourCropsData from '../../../../auxiliary/classes/YourCropData';
-import { InputField } from '../../../../auxiliary/classes/InputField';
 import EventBus from '../../../services/EventBusService/EventBusService';
 import { PaginationService } from '../../../services/PaginationService/PaginationService';
 
@@ -18,13 +11,6 @@ class YourCropsStore extends SearchableStore<YourCropItem> {
   public get isLoading(): boolean {
     return this.endpointService.isLoading;
   }
-  public searchQuery = new InputField<string>(
-    '',
-    'Search',
-    false,
-    'Enter search query',
-    50,
-  );
   public debouncedFilterPlants: (criteria: string) => void = () => {};
   public tableHeaders = YourCropsData.tableHeaders;
 
@@ -38,6 +24,10 @@ class YourCropsStore extends SearchableStore<YourCropItem> {
       this.initDropdownFilter(YourCropsData.dropdowns['location']);
     });
 
+    Object.values(YourCropsData.textFields).forEach((textField) => {
+      this.initTextFilter(textField);
+    });
+
     Object.values(YourCropsData.dropdowns).forEach((dropdown) => {
       this.initDropdownFilter(dropdown);
     });
@@ -49,7 +39,6 @@ class YourCropsStore extends SearchableStore<YourCropItem> {
     makeObservable(this, {
       isLoading: computed,
       fetchData: action,
-      searchQuery: observable,
     });
   }
 

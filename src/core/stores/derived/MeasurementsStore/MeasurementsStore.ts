@@ -1,14 +1,7 @@
 import { SearchableStore } from '../../base/BaseSearchableStore/BaseSearchableStore';
 import { MeasurementItem } from '../../../../api';
-import {
-  makeObservable,
-  runInAction,
-  observable,
-  action,
-  computed,
-} from 'mobx';
+import { makeObservable, runInAction, action, computed } from 'mobx';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
-import { InputField } from '../../../../auxiliary/classes/InputField';
 import MeasurementsData from '../../../../auxiliary/classes/MeasurementsData';
 import { PaginationService } from '../../../services/PaginationService/PaginationService';
 
@@ -18,16 +11,17 @@ class MeasurementsStore extends SearchableStore<MeasurementItem> {
   public get isLoading(): boolean {
     return this.endpointService.isLoading;
   }
-  public searchQuery = new InputField<string>(
-    '',
-    'Search',
-    false,
-    'Enter search query',
-    50,
-  );
 
   constructor() {
     super(['title']);
+
+    Object.values(MeasurementsData.textFields).forEach((textField) => {
+      this.initTextFilter(textField);
+    });
+
+    Object.values(MeasurementsData.inputFields).forEach((inputField) => {
+      this.initTextFilter(inputField);
+    });
 
     Object.values(MeasurementsData.dropdowns).forEach((dropdown) => {
       this.initDropdownFilter(dropdown);
@@ -40,7 +34,6 @@ class MeasurementsStore extends SearchableStore<MeasurementItem> {
     makeObservable(this, {
       isLoading: computed,
       fetchData: action,
-      searchQuery: observable,
     });
   }
 
