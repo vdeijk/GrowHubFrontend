@@ -1,29 +1,71 @@
 import { DateFieldModel } from '../interfaces/DateFieldModel';
 import { PlantItem } from '../../api';
+import { TableHeaderModel } from '../interfaces/TableHeaderModel';
 
 class CropsDatabaseData {
-  public static tableHeaders: {
-    id: keyof PlantItem | 'actions';
-    label: string;
-    sortable: boolean;
-  }[] = [
-    { id: 'id', label: 'ID', sortable: true },
-    { id: 'commonName', label: 'Common Name', sortable: true },
-    { id: 'actions', label: 'Actions', sortable: false },
-    { id: 'waterCycle', label: 'Water Cycle', sortable: true },
-    { id: 'pruningCycle', label: 'Pruning Cycle', sortable: true },
-    { id: 'fertilizationCycle', label: 'Fertilization Cycle', sortable: true },
-    { id: 'harvestCycle', label: 'Harvest Cycle', sortable: true },
-    { id: 'harvestStart', label: 'Harvest Start', sortable: true },
-    { id: 'harvestEnd', label: 'Harvest End', sortable: true },
-    { id: 'pruningStart', label: 'Pruning Start', sortable: true },
-    { id: 'pruningEnd', label: 'Pruning End', sortable: true },
-    { id: 'fertilizingStart', label: 'Fertilizing Start', sortable: true },
-    { id: 'fertilizingEnd', label: 'Fertilizing End', sortable: true },
-    { id: 'phMin', label: 'PH Min', sortable: true },
-    { id: 'phMax', label: 'PH Max', sortable: true },
-    { id: 'temperatureMin', label: 'Temperature Min', sortable: true },
-    { id: 'temperatureMax', label: 'Temperature Max', sortable: true },
+  public static tableHeaders: TableHeaderModel<PlantItem>[] = [
+    { id: 'id', label: 'ID', sortable: true, type: 'number' },
+    { id: 'commonName', label: 'Common Name', sortable: true, type: 'string' },
+    { id: 'actions', label: 'Actions', sortable: false, type: 'action' },
+    { id: 'waterCycle', label: 'Water Cycle', sortable: true, type: 'number' },
+    {
+      id: 'pruningCycle',
+      label: 'Pruning Cycle',
+      sortable: true,
+      type: 'number',
+    },
+    {
+      id: 'fertilizationCycle',
+      label: 'Fertilization Cycle',
+      sortable: true,
+      type: 'number',
+    },
+    {
+      id: 'harvestCycle',
+      label: 'Harvest Cycle',
+      sortable: true,
+      type: 'number',
+    },
+    {
+      id: 'harvestStart',
+      label: 'Harvest Start',
+      sortable: true,
+      type: 'date',
+    },
+    { id: 'harvestEnd', label: 'Harvest End', sortable: true, type: 'date' },
+    {
+      id: 'pruningStart',
+      label: 'Pruning Start',
+      sortable: true,
+      type: 'date',
+    },
+    { id: 'pruningEnd', label: 'Pruning End', sortable: true, type: 'date' },
+    {
+      id: 'fertilizingStart',
+      label: 'Fertilizing Start',
+      sortable: true,
+      type: 'date',
+    },
+    {
+      id: 'fertilizingEnd',
+      label: 'Fertilizing End',
+      sortable: true,
+      type: 'date',
+    },
+    { id: 'phMin', label: 'PH Min', sortable: true, type: 'number' },
+    { id: 'phMax', label: 'PH Max', sortable: true, type: 'number' },
+    {
+      id: 'temperatureMin',
+      label: 'Temperature Min',
+      sortable: true,
+      type: 'number',
+    },
+    {
+      id: 'temperatureMax',
+      label: 'Temperature Max',
+      sortable: true,
+      type: 'number',
+    },
   ];
 
   public static dateFields: DateFieldModel[] = [

@@ -67,12 +67,14 @@ const TasksPage: React.FC = observer(() => {
   };
 
   return (
-    <section className={styles.taskPage}>
+    <section className={styles.section}>
       <Popup />
       <LoadingWrapper isLoading={taskStore.isLoading}>
         <SearchBarTasks {...searchBarProps} />
         <div className={styles.buttonContainer}>
-          <TableWithSorting {...tableProps} />
+          <div className={styles.tableContainer}>
+            <TableWithSorting {...tableProps} />
+          </div>
           <ButtonContainer buttons={[buttonContainerData]} />
         </div>
         <Pagination

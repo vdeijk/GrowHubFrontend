@@ -30,6 +30,10 @@ class CropsDatabaseStore extends SearchableStore<PlantItem> {
   constructor() {
     super(['commonName']);
 
+    CropsDatabaseData.dateFields.forEach((dateField) => {
+      this.initDateFilter(dateField);
+    });
+
     makeObservable(this, {
       isLoading: computed,
       fetchData: action,

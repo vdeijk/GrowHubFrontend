@@ -24,6 +24,8 @@ const MeasurementsPage: React.FC<MeasurementsProps> = observer(() => {
     label: 'Add Measurement',
   };
 
+  const handlePopup = (id: number | undefined) => {};
+
   const handleEdit = (id: number | undefined) => {
     navigate(`/addMeasurement/${id}`);
   };
@@ -53,6 +55,7 @@ const MeasurementsPage: React.FC<MeasurementsProps> = observer(() => {
       actions: (
         <ActionIcons
           item={item as { id: number | undefined }}
+          handlePopup={handlePopup}
           handleEdit={handleEdit}
           handleDelete={handleDelete}
         />
@@ -65,7 +68,7 @@ const MeasurementsPage: React.FC<MeasurementsProps> = observer(() => {
   };
 
   return (
-    <section className={styles.taskPage}>
+    <section className={styles.section}>
       <LoadingWrapper isLoading={measurementsStore.isLoading}>
         <SearchBarMeasurements {...searchBarProps} />
         <div className={styles.buttonContainer}>

@@ -6,26 +6,35 @@ import {
   MeasurementItemHealthStatusEnum,
   MeasurementItemLightLevelEnum,
   MeasurementItemSoilDrynessEnum,
-  TodoItemCategoryEnum,
 } from '../../api';
-import { TodoItemPriorityEnum } from '../../api';
-import { TodoItemTodoStatusEnum } from '../../api';
+import { TableHeaderModel } from '../interfaces/TableHeaderModel';
 
 class MeasurementsData {
-  public static tableHeaders: {
-    id: keyof MeasurementItem | 'actions';
-    label: string;
-    sortable: boolean;
-  }[] = [
-    { id: 'title', label: 'Title', sortable: true },
-    { id: 'actions', label: 'Actions', sortable: false },
-    { id: 'batchId', label: 'Batch Id', sortable: true },
-    { id: 'date', label: 'Date', sortable: true },
-    { id: 'soilPH', label: 'Soil PH', sortable: false },
-    { id: 'lightLevel', label: 'Light Level', sortable: true },
-    { id: 'soilDryness', label: 'Soil Dryness', sortable: true },
-    { id: 'healthStatus', label: 'Health Status', sortable: true },
-    { id: 'growthStage', label: 'Growth Stage', sortable: true },
+  public static tableHeaders: TableHeaderModel<MeasurementItem>[] = [
+    { id: 'title', label: 'Title', sortable: true, type: 'string' },
+    { id: 'actions', label: 'Actions', sortable: false, type: 'action' },
+    { id: 'batchId', label: 'Batch Id', sortable: true, type: 'number' },
+    { id: 'date', label: 'Date', sortable: true, type: 'date' },
+    { id: 'soilPH', label: 'Soil PH', sortable: false, type: 'number' },
+    { id: 'lightLevel', label: 'Light Level', sortable: true, type: 'string' },
+    {
+      id: 'soilDryness',
+      label: 'Soil Dryness',
+      sortable: true,
+      type: 'string',
+    },
+    {
+      id: 'healthStatus',
+      label: 'Health Status',
+      sortable: true,
+      type: 'string',
+    },
+    {
+      id: 'growthStage',
+      label: 'Growth Stage',
+      sortable: true,
+      type: 'string',
+    },
   ];
 
   public static dropdowns: Record<string, DropdownFieldModel> = {

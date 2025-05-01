@@ -1,23 +1,21 @@
 import React from 'react';
 import styles from './SearchBarDatabase.module.css';
 import TextInput from '../../reusables/TextInput/TextInput';
-import Dropdown from '../../reusables/Dropdown/Dropdown';
+import DateInput from '../../reusables/DateInput/DateInput';
 import { InputField } from '../../../../auxiliary/classes/InputField';
-import { Dropdown as DropdownClass } from '../../../../auxiliary/classes/Dropdown';
+import { DateField } from '../../../../auxiliary/classes/DateField';
 import { observer } from 'mobx-react-lite';
 import SyncButton from '../../reusables/SyncButton/SyncButton';
+import { toJS } from 'mobx';
 
 export interface SearchBarDatabaseProps {
   searchQuery: InputField<string>;
-  sunPreference: DropdownClass<string>;
-  waterNeeds: DropdownClass<string>;
-  soilType: DropdownClass<string>;
-  soilPH: DropdownClass<string>;
-  pruning: DropdownClass<string>;
-  climateZone: DropdownClass<string>;
-  plantType: DropdownClass<string>;
-  growthRate: DropdownClass<string>;
-  fertilizerNeeds: DropdownClass<string>;
+  harvestStart: DateField<string>;
+  harvestEnd: DateField<string>;
+  pruningStart: DateField<string>;
+  pruningEnd: DateField<string>;
+  fertilizingStart: DateField<string>;
+  fertilizingEnd: DateField<string>;
   isLoading: boolean;
   handleSync: () => void;
 }
@@ -25,15 +23,12 @@ export interface SearchBarDatabaseProps {
 const SearchBarDatabase: React.FC<SearchBarDatabaseProps> = observer(
   ({
     searchQuery,
-    sunPreference,
-    waterNeeds,
-    soilType,
-    soilPH,
-    pruning,
-    climateZone,
-    plantType,
-    growthRate,
-    fertilizerNeeds,
+    harvestStart,
+    harvestEnd,
+    pruningStart,
+    pruningEnd,
+    fertilizingStart,
+    fertilizingEnd,
     isLoading,
     handleSync,
   }) => {
@@ -46,69 +41,43 @@ const SearchBarDatabase: React.FC<SearchBarDatabaseProps> = observer(
           placeholder={searchQuery.placeholder}
           aria-label="Search"
         />
-        <Dropdown
-          value={sunPreference.value}
-          onChange={(value) => sunPreference.setValue(String(value))}
-          options={sunPreference.options}
-          label={sunPreference.label}
-          aria-label="Sun Preference'"
+        <DateInput
+          value={harvestStart.value}
+          onChange={(date) => harvestStart?.setValue(date || '')}
+          label={harvestStart.label}
+          aria-label="Harvest Start"
         />
-        <Dropdown
-          value={waterNeeds.value}
-          onChange={(value) => waterNeeds.setValue(String(value))}
-          options={waterNeeds.options}
-          label={waterNeeds.label}
-          aria-label="Water Needs"
+        <DateInput
+          value={harvestEnd.value}
+          onChange={(date) => harvestEnd?.setValue(date || '')}
+          label={harvestEnd.label}
+          aria-label="Harvest End"
         />
-        <Dropdown
-          value={soilType.value}
-          onChange={(value) => soilType.setValue(String(value))}
-          options={soilType.options}
-          label={soilType.label}
-          aria-label="Soil Type"
+        <DateInput
+          value={pruningStart.value}
+          onChange={(date) => pruningStart?.setValue(date || '')}
+          label={pruningStart.label}
+          aria-label="Pruning Start"
         />
-        <Dropdown
-          value={soilPH.value}
-          onChange={(value) => soilPH.setValue(String(value))}
-          options={soilPH.options}
-          label={soilPH.label}
-          aria-label="Soil PH"
+        <DateInput
+          value={pruningEnd.value}
+          onChange={(date) => pruningEnd?.setValue(date || '')}
+          label={pruningEnd.label}
+          aria-label="Pruning End"
         />
-        <Dropdown
-          value={pruning.value}
-          onChange={(value) => pruning.setValue(String(value))}
-          options={pruning.options}
-          label={pruning.label}
-          aria-label="Pruning"
+        <DateInput
+          value={fertilizingStart.value}
+          onChange={(date) => fertilizingStart?.setValue(date || '')}
+          label={fertilizingStart.label}
+          aria-label="Fertilizing Start"
         />
-        <Dropdown
-          value={climateZone.value}
-          onChange={(value) => climateZone.setValue(String(value))}
-          options={climateZone.options}
-          label={climateZone.label}
-          aria-label="Climate Zone"
+        <DateInput
+          value={fertilizingEnd.value}
+          onChange={(date) => fertilizingEnd?.setValue(date || '')}
+          label={fertilizingEnd.label}
+          aria-label="Fertilizing End"
         />
-        <Dropdown
-          value={plantType.value}
-          onChange={(value) => plantType.setValue(String(value))}
-          options={plantType.options}
-          label={plantType.label}
-          aria-label="Plant Type"
-        />
-        <Dropdown
-          value={growthRate.value}
-          onChange={(value) => growthRate.setValue(String(value))}
-          options={growthRate.options}
-          label={growthRate.label}
-          aria-label="Growth Rate"
-        />
-        <Dropdown
-          value={fertilizerNeeds.value}
-          onChange={(value) => fertilizerNeeds.setValue(String(value))}
-          options={fertilizerNeeds.options}
-          label={fertilizerNeeds.label}
-          aria-label="Fertilizer Needs"
-        />
+
         <SyncButton onClick={handleSync} isSyncing={isLoading} />
       </div>
     );

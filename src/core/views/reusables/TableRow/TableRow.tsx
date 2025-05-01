@@ -1,8 +1,9 @@
 import React from 'react';
+import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
 
 interface TableRowProps<T> {
   tableRowData: T;
-  headers: { id: keyof T; label: string }[];
+  headers: TableHeaderModel<T>[];
 }
 
 const TableRow = <T,>({ tableRowData, headers }: TableRowProps<T>) => {
@@ -20,10 +21,13 @@ const TableRow = <T,>({ tableRowData, headers }: TableRowProps<T>) => {
     return `${day}/${month}/${year}`;
   };
 
-  const renderCellContent = (headerId: keyof T) => {
+  const renderCellContent = (
+    headerId: keyof T,
+    type?: 'date' | 'string' | 'number' | 'action',
+  ) => {
     const cellValue = tableRowData[headerId];
 
-    if (React.isValidElement(cellValue)) {
+    if (type === 'action') {
       return cellValue as React.ReactNode;
     }
 
@@ -31,16 +35,19 @@ const TableRow = <T,>({ tableRowData, headers }: TableRowProps<T>) => {
       return '';
     }
 
-    if (headerId === 'dueDate' && typeof cellValue === 'string') {
+    if (type === 'date' && typeof cellValue === 'string') {
       return formatDate(cellValue);
     }
+
     return String(cellValue ?? '');
   };
 
   return (
     <tr>
       {headers.map((header) => (
-        <td key={String(header.id)}>{renderCellContent(header.id)}</td>
+        <td key={String(header.id)}>
+          {renderCellContent(header.id as keyof T, header.type)}
+        </td>
       ))}
     </tr>
   );

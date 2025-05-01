@@ -4,20 +4,17 @@ import { TodoItemCategoryEnum } from '../../api';
 import { TodoItemPriorityEnum } from '../../api';
 import { TodoItemTodoStatusEnum } from '../../api';
 import { TodoItem } from '../../api';
+import { TableHeaderModel } from '../interfaces/TableHeaderModel';
 
 class TaskData {
-  public static tableHeaders: {
-    id: keyof TodoItem | 'actions';
-    label: string;
-    sortable: boolean;
-  }[] = [
-    { id: 'title', label: 'Title', sortable: true },
-    { id: 'actions', label: 'Actions', sortable: false },
-    { id: 'batchId', label: 'Batch Id', sortable: true },
-    { id: 'priority', label: 'Priority', sortable: true },
-    { id: 'dueDate', label: 'Due Date', sortable: true },
-    { id: 'category', label: 'Category', sortable: true },
-    { id: 'todoStatus', label: 'Status', sortable: true },
+  public static tableHeaders: TableHeaderModel<TodoItem>[] = [
+    { id: 'title', label: 'Title', sortable: true, type: 'string' },
+    { id: 'actions', label: 'Actions', sortable: false, type: 'action' },
+    { id: 'batchId', label: 'Batch Id', sortable: true, type: 'number' },
+    { id: 'priority', label: 'Priority', sortable: true, type: 'string' },
+    { id: 'dueDate', label: 'Due Date', sortable: true, type: 'date' },
+    { id: 'category', label: 'Category', sortable: true, type: 'string' },
+    { id: 'todoStatus', label: 'Status', sortable: true, type: 'string' },
   ];
 
   public static dropdowns: Record<string, DropdownFieldModel> = {

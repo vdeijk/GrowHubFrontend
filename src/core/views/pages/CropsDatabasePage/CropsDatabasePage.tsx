@@ -12,6 +12,7 @@ import ActionIcons from '../../reusables/ActionIcons/ActionIcons';
 import Pagination from '../../reusables/Pagination/Pagination';
 import { SearchBarDatabaseProps } from '../../containers/SearchBarDatabase/SearchBarDatabase';
 import { PlantItem } from '../../../../api';
+import { toJS } from 'mobx';
 
 const CropsDatabasePage: React.FC = observer(() => {
   const navigate = useRouterNavigation();
@@ -19,15 +20,12 @@ const CropsDatabasePage: React.FC = observer(() => {
 
   const searchBarProps: SearchBarDatabaseProps = {
     searchQuery: cropsDatabaseStore.searchQuery,
-    sunPreference: cropsDatabaseStore.dropdownFilters['sunPreference'],
-    waterNeeds: cropsDatabaseStore.dropdownFilters['waterNeeds'],
-    soilType: cropsDatabaseStore.dropdownFilters['soilType'],
-    soilPH: cropsDatabaseStore.dropdownFilters['soilPH'],
-    pruning: cropsDatabaseStore.dropdownFilters['pruning'],
-    climateZone: cropsDatabaseStore.dropdownFilters['climateZone'],
-    plantType: cropsDatabaseStore.dropdownFilters['plantType'],
-    growthRate: cropsDatabaseStore.dropdownFilters['growthRate'],
-    fertilizerNeeds: cropsDatabaseStore.dropdownFilters['fertilizerNeeds'],
+    harvestStart: cropsDatabaseStore.dateFilters['harvestStart'],
+    harvestEnd: cropsDatabaseStore.dateFilters['harvestEnd'],
+    pruningStart: cropsDatabaseStore.dateFilters['pruningStart'],
+    pruningEnd: cropsDatabaseStore.dateFilters['pruningEnd'],
+    fertilizingStart: cropsDatabaseStore.dateFilters['fertilizingStart'],
+    fertilizingEnd: cropsDatabaseStore.dateFilters['fertilizingEnd'],
     isLoading: cropsDatabaseStore.isLoading,
     handleSync: cropsDatabaseStore.syncData,
   };
@@ -74,7 +72,7 @@ const CropsDatabasePage: React.FC = observer(() => {
   return (
     <section className={styles.section}>
       <LoadingWrapper isLoading={cropsDatabaseStore.isLoading}>
-        {/* <SearchBarDatabase {...searchBarProps} /> */}
+        <SearchBarDatabase {...searchBarProps} />
         <div className={styles.buttonContainer}>
           <div className={styles.tableContainer}>
             <Table {...tableProps} />

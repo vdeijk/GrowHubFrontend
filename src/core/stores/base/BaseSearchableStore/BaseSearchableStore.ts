@@ -89,6 +89,7 @@ export abstract class SearchableStore<T> {
   public get sortOrder(): 'asc' | 'desc' {
     return this.sortService.sortOrder;
   }
+
   public initDateFilter = (field: DateFieldModel) => {
     runInAction(() => {
       if (!this.dateFilters[field.key]) {
