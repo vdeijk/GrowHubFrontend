@@ -85,6 +85,18 @@ class RouterService {
       hidden: true,
       isDynamic: false,
     },
+    {
+      path: '/addMeasureMentPage/',
+      label: 'Add Measurement',
+      hidden: true,
+      isDynamic: true,
+    },
+    {
+      path: '/addMeasureMentPage/:id',
+      label: 'Edit Measurement',
+      hidden: true,
+      isDynamic: true,
+    },
   ];
 
   private routeDefs: RouteObject[] = [];

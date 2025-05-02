@@ -24,7 +24,7 @@ const MeasurementsPage: React.FC<MeasurementsProps> = observer(() => {
   const navigate = useRouterNavigation();
 
   const buttonContainerData = {
-    clickHandler: () => navigate('/addMeasurement'),
+    clickHandler: () => navigate('/addMeasurementPage'),
     label: 'Add Measurement',
   };
 

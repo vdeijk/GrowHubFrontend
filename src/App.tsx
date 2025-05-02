@@ -32,6 +32,7 @@ import AddBatchPage from './core/views/pages/AddBatchPage/AddBatchPage';
 import { useLocation } from 'react-router-dom';
 import MeasurementsPage from './core/views/pages/MeasurementsPage/MeasurementsPage';
 import measurementsStore from './core/stores/derived/MeasurementsStore/MeasurementsStore';
+import AddMeasurementPage from './core/views/pages/AddMeasurementPage/AddMeasurementPage';
 
 const App: React.FC = observer(() => {
   const { isAuthenticated, isLoading, user } = useAuth0();
@@ -87,31 +88,40 @@ const App: React.FC = observer(() => {
             <Route path="/weatherReportPage" element={<WeatherReportPage />} />
             <Route path="/tasksPage" element={<TasksPage />} />
             <Route path="/fieldsPage" element={<FieldsPage />} />
+            <Route path="/measurementsPage" element={<MeasurementsPage />} />
+            <Route path="/batchesPage" element={<BatchesPage />} />
+            <Route path="/cropsPage" element={<CropsPage />} />
+            <Route path="/upgradePage" element={<UpgradePage />} />
+
+            <Route path="/addFieldPage" element={<AddFieldPage />} />
             <Route
               path="/addFieldPage/:id"
               element={<AddFieldPage isEditing={true} />}
             />
-            <Route path="/addFieldPage" element={<AddFieldPage />} />
-            <Route path="/batchesPage" element={<BatchesPage />} />
-            <Route path="/upgradePage" element={<UpgradePage />} />
-            <Route path="/cropsPage" element={<CropsPage />} />
-            <Route
-              path="/addCropPage/:id"
-              element={<AddCropPage isEditing={true} />}
-            />
-            <Route path="/addCropPage" element={<AddCropPage />} />{' '}
-            <Route
-              path="/addBatchPage/:id"
-              element={<AddBatchPage isEditing={true} />}
-            />
-            <Route path="/addBatchPage" element={<AddBatchPage />} />
+            <Route path="/addTaskPage" element={<AddTaskPage />} />
             <Route
               path="/addTaskPage/:id"
               element={<AddTaskPage isEditing={true} />}
             />
-            <Route path="/addTaskPage" element={<AddTaskPage />} />
-            <Route path="/measurementsPage" element={<MeasurementsPage />} />
-            <Route path="/measurementsPage/:id" element={<MeasurementsPage />} />
+            <Route
+              path="/addMeasurementPage"
+              element={<AddMeasurementPage />}
+            />
+            <Route
+              path="/addMeasurementsPage/:id"
+              element={<AddMeasurementPage />}
+            />
+            <Route path="/addBatchPage" element={<AddBatchPage />} />
+            <Route
+              path="/addBatchPage/:id"
+              element={<AddBatchPage isEditing={true} />}
+            />
+            <Route path="/addCropPage" element={<AddCropPage />} />
+            <Route
+              path="/addCropPage/:id"
+              element={<AddCropPage isEditing={true} />}
+            />
+
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </LoadingWrapper>
