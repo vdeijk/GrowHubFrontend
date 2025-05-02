@@ -13,7 +13,7 @@ import Pagination from '../../reusables/Pagination/Pagination';
 import { SearchBarDatabaseProps } from '../../containers/SearchBarDatabase/SearchBarDatabase';
 import { PlantItem } from '../../../../api';
 import popupService from '../../../services/PopupService/PopupService';
-import TaskPopup from '../../reusables/TaskPopup/TaskPopup';
+import NotesPopup from '../../reusables/NotesPopup/NotesPopup';
 import Popup from '../../containers/Popup/Popup';
 
 const CropsDatabasePage: React.FC = observer(() => {
@@ -48,15 +48,12 @@ const CropsDatabasePage: React.FC = observer(() => {
     const task = cropsDatabaseStore.items.find((item) => item.id === id);
     if (!task) return;
 
+    cropsDatabaseStore.textFilters.description.setValue(task.description ?? '');
+
     popupService.openPopup(
-      <TaskPopup
-        descriptionField={{
-          ...cropsDatabaseStore.textFilters.descriptionField,
-          setValue: (value) =>
-            cropsDatabaseStore.textFilters.descriptionField.setValue(
-              value ?? '',
-            ),
-        }}
+      <NotesPopup
+        description={cropsDatabaseStore.textFilters.description}
+        title={'Crop Notes'}
       />,
     );
   };

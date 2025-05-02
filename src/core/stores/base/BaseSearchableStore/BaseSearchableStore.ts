@@ -77,6 +77,7 @@ export abstract class SearchableStore<T> {
       dateFilters: observable,
       sortField: computed,
       sortOrder: computed,
+      initTextFilter: action,
       initDropdownFilter: action,
       initDateFilter: action,
       filterItems: action,

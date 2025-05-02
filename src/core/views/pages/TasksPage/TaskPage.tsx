@@ -13,7 +13,7 @@ import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation
 import ActionIcons from '../../reusables/ActionIcons/ActionIcons';
 import Popup from '../../containers/Popup/Popup';
 import Pagination from '../../reusables/Pagination/Pagination';
-import TaskPopup from '../../reusables/TaskPopup/TaskPopup';
+import NotesPopup from '../../reusables/NotesPopup/NotesPopup';
 import popupService from '../../../services/PopupService/PopupService';
 
 const TasksPage: React.FC = observer(() => {
@@ -50,13 +50,12 @@ const TasksPage: React.FC = observer(() => {
     const task = taskStore.items.find((item) => item.id === id);
     if (!task) return;
 
+    taskStore.textFilters.description.setValue(task.description ?? '');
+
     popupService.openPopup(
-      <TaskPopup
-        descriptionField={{
-          ...taskStore.textFilters.descriptionField,
-          setValue: (value) =>
-            taskStore.textFilters.descriptionField.setValue(value ?? ''),
-        }}
+      <NotesPopup
+        description={taskStore.textFilters.description}
+        title={'Task Notes'}
       />,
     );
   };

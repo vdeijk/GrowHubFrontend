@@ -13,7 +13,7 @@ import SearchBarMeasurements from '../../containers/SearchBarMeasurements/Search
 import { SearchBarMeasurementsProps } from '../../containers/SearchBarMeasurements/SearchBarMeasurements';
 import { observer } from 'mobx-react-lite';
 import popupService from '../../../services/PopupService/PopupService';
-import TaskPopup from '../../reusables/TaskPopup/TaskPopup';
+import NotesPopup from '../../reusables/NotesPopup/NotesPopup';
 import Popup from '../../containers/Popup/Popup';
 
 interface MeasurementsProps {}
@@ -33,15 +33,12 @@ const MeasurementsPage: React.FC<MeasurementsProps> = observer(() => {
     const task = measurementsStore.items.find((item) => item.id === id);
     if (!task) return;
 
+    measurementsStore.textFilters.description.setValue(task.description ?? '');
+
     popupService.openPopup(
-      <TaskPopup
-        descriptionField={{
-          ...measurementsStore.textFilters.descriptionField,
-          setValue: (value) =>
-            measurementsStore.textFilters.descriptionField.setValue(
-              value ?? '',
-            ),
-        }}
+      <NotesPopup
+        description={measurementsStore.textFilters.description}
+        title={'Measurement Notes'}
       />,
     );
   };

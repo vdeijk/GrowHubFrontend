@@ -42,7 +42,7 @@ class MeasurementsData {
     searchQuery: { key: 'searchQuery', label: 'Search', defaultValue: '' },
     descriptionField: {
       key: 'description',
-      label: 'Description',
+      label: 'Notes',
       defaultValue: '',
     },
   };

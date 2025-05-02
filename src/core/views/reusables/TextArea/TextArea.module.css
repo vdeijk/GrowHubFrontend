@@ -1,0 +1,27 @@
+.textArea {
+  padding: 10px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: var(--border-radius-small);
+  width: 100%;
+  font-size: 1.5rem;
+  font-family: Poppins;
+  height: 12rem;
+}
+
+.container {
+  display: grid;
+  grid-gap: 0.5rem;
+  align-items: center;
+}
+
+.label {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.requiredIndicator {
+  color: var(--color-red);
+  margin-left: 4px;
+  font-size: 1rem;
+}

@@ -12,9 +12,10 @@ import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation
 import ActionIcons from '../../reusables/ActionIcons/ActionIcons';
 import Pagination from '../../reusables/Pagination/Pagination';
 import { YourCropItem } from '../../../../api';
-import TaskPopup from '../../reusables/TaskPopup/TaskPopup';
+import NotesPopup from '../../reusables/NotesPopup/NotesPopup';
 import popupService from '../../../services/PopupService/PopupService';
 import Popup from '../../containers/Popup/Popup';
+import yourCropsStore from '../../../stores/derived/YourCropsStore/YourCropsStore';
 
 const YourCropsPage: React.FC = observer(() => {
   const { paginationService } = cropsStore;
@@ -42,16 +43,15 @@ const YourCropsPage: React.FC = observer(() => {
   const handlePopup = (id: number | undefined) => {
     if (id === undefined) return;
 
-    const task = cropsStore.items.find((item) => item.id === id);
+    const task = yourCropsStore.items.find((item) => item.id === id);
     if (!task) return;
 
+    yourCropsStore.textFilters.description.setValue(task.description ?? '');
+
     popupService.openPopup(
-      <TaskPopup
-        descriptionField={{
-          ...cropsStore.textFilters.descriptionField,
-          setValue: (value) =>
-            cropsStore.textFilters.descriptionField.setValue(value ?? ''),
-        }}
+      <NotesPopup
+        description={yourCropsStore.textFilters.description}
+        title={'Batch Notes'}
       />,
     );
   };
