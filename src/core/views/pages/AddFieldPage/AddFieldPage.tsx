@@ -48,10 +48,10 @@ const AddFieldPage: React.FC<AddFieldPageProps> = observer(
     };
 
     const createTextInputFieldModel = (fieldKey: string): TextInputProps => ({
-      ...addFieldStore.fields[fieldKey],
-      value: String(addFieldStore.fields[fieldKey].value || ''),
+      ...addFieldStore.inputFields[fieldKey],
+      value: String(addFieldStore.inputFields[fieldKey].value || ''),
       onChange: (value: string) =>
-        addFieldStore.fields[fieldKey].setValue(value),
+        addFieldStore.inputFields[fieldKey].setValue(value),
     });
 
     const locationNameFieldModel =

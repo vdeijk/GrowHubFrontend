@@ -1,15 +1,14 @@
 import { TodoItem } from '../../../../api';
 import { BaseFormStore } from '../../base/BaseFormStore/BaseFormStore';
-import { InputField } from '../../../../auxiliary/classes/InputField';
 import taskStore from '../TasksStore/TasksStore';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
 import { runInAction } from 'mobx';
-import { DateField } from '../../../../auxiliary/classes/DateField';
 import {
   TodoItemCategoryEnum,
   TodoItemPriorityEnum,
   TodoItemTodoStatusEnum,
 } from '../../../../api';
+import AddTaskData from '../../../../auxiliary/data/AddTaskData';
 
 class AddTaskStore extends BaseFormStore {
   public endpointService = new EndpointService('Todo');
@@ -17,52 +16,28 @@ class AddTaskStore extends BaseFormStore {
   constructor() {
     super();
 
-    //@ts-ignore
-    this.fields = {
-      titleField: new InputField<string>(
-        '',
-        'Title',
-        true,
-        'Enter task title',
-        30,
-      ),
-      priority: new InputField<TodoItemPriorityEnum>(
-        TodoItemPriorityEnum.Medium,
-        'Priority',
-        true,
-      ),
-      dueDate: new DateField<string>('', 'Due Date', true),
-      description: new InputField<string>(
-        '',
-        'Description',
-        false,
-        'Enter task description',
-        30,
-      ),
-      category: new InputField<TodoItemCategoryEnum>(
-        TodoItemCategoryEnum.Prune,
-        'Category',
-        true,
-      ),
-      todoStatus: new InputField<TodoItemTodoStatusEnum>(
-        TodoItemTodoStatusEnum.NotStarted,
-        'Status',
-        true,
-      ),
-    } as Record<
-      string,
-      InputField<string | number | boolean> | DateField<string>
-    >;
+    Object.values(AddTaskData.textFields).forEach((textField) => {
+      this.initTextFilter(textField);
+    });
+
+    Object.values(AddTaskData.dropdowns).forEach((dropdown) => {
+      this.initDropdownFilter(dropdown);
+    });
+
+    AddTaskData.dateFields.forEach((dateField) => {
+      this.initDateFilter(dateField);
+    });
   }
 
   public addTask = async () => {
     const data: TodoItem = {
-      title: this.fields.titleField.value as string,
-      priority: this.fields.priority.value as TodoItemPriorityEnum,
-      dueDate: this.fields.dueDate.value as string,
-      notes: this.fields.description.value as string,
-      category: this.fields.category.value as TodoItemCategoryEnum,
-      todoStatus: this.fields.todoStatus.value as TodoItemTodoStatusEnum,
+      title: this.inputFields.titleField.value as string,
+      priority: this.dropdownFields.priority.value as TodoItemPriorityEnum,
+      dueDate: this.dateFields.dueDate.value as string,
+      notes: this.inputFields.description.value as string,
+      category: this.dropdownFields.category.value as TodoItemCategoryEnum,
+      todoStatus: this.dropdownFields.todoStatus
+        .value as TodoItemTodoStatusEnum,
     };
 
     await this.endpointService.postData(data);
@@ -77,12 +52,12 @@ class AddTaskStore extends BaseFormStore {
     if (!data) return;
 
     runInAction(() => {
-      this.fields.titleField.setValue(data.title ?? '');
-      this.fields.priorityField.setValue(data.priority ?? '');
-      this.fields.dueDateField.setValue(data.dueDate ?? '');
-      this.fields.descriptionField.setValue(data.notes ?? '');
-      this.fields.categoryField.setValue(data.category ?? '');
-      this.fields.todoStatus.setValue(data.todoStatus ?? '');
+      this.inputFields.titleField.setValue(data.title ?? '');
+      this.dropdownFields.priorityField.setValue(data.priority ?? '');
+      this.dateFields.dueDateField.setValue(data.dueDate ?? '');
+      this.inputFields.descriptionField.setValue(data.notes ?? '');
+      this.dropdownFields.categoryField.setValue(data.category ?? '');
+      this.dropdownFields.todoStatus.setValue(data.todoStatus ?? '');
     });
   };
 
@@ -91,12 +66,13 @@ class AddTaskStore extends BaseFormStore {
     if (Number.isNaN(numberId)) return;
 
     const data: TodoItem = {
-      title: this.fields.titleField.value as string,
-      priority: this.fields.priority.value as TodoItemPriorityEnum,
-      dueDate: this.fields.dueDate.value as string,
-      notes: this.fields.description.value as string,
-      category: this.fields.category.value as TodoItemCategoryEnum,
-      todoStatus: this.fields.todoStatus.value as TodoItemTodoStatusEnum,
+      title: this.inputFields.titleField.value as string,
+      priority: this.dropdownFields.priority.value as TodoItemPriorityEnum,
+      dueDate: this.dateFields.dueDate.value as string,
+      notes: this.inputFields.description.value as string,
+      category: this.dropdownFields.category.value as TodoItemCategoryEnum,
+      todoStatus: this.dropdownFields.todoStatus
+        .value as TodoItemTodoStatusEnum,
     };
 
     await this.endpointService.putData(`${id}`, data);

@@ -44,24 +44,24 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
     };
 
     const createTextInputFieldModel = (fieldKey: string): TextInputProps => ({
-      ...addTaskStore.fields[fieldKey],
-      value: String(addTaskStore.fields[fieldKey].value || ''),
+      ...addTaskStore.inputFields[fieldKey],
+      value: String(addTaskStore.inputFields[fieldKey].value || ''),
       onChange: (value: string) =>
-        addTaskStore.fields[fieldKey].setValue(value),
+        addTaskStore.inputFields[fieldKey].setValue(value),
     });
 
     const createDropdownFieldModel = (fieldKey: string) => ({
-      ...addTaskStore.fields[fieldKey],
-      value: String(addTaskStore.fields[fieldKey].value),
+      ...addTaskStore.dropdownFields[fieldKey],
+      value: String(addTaskStore.dropdownFields[fieldKey].value),
       options: taskStore.dropdownFilters[fieldKey]?.options || [],
       onChange: (value: string | number) =>
-        addTaskStore.fields[fieldKey].setValue(String(value)),
+        addTaskStore.dropdownFields[fieldKey].setValue(String(value)),
     });
 
     const createDateFieldModel = (fieldKey: string): DateInputProps => ({
-      ...addTaskStore.fields[fieldKey],
-      value: String(addTaskStore.fields[fieldKey].value || ''),
-      onChange: (value) => addTaskStore.fields[fieldKey].setValue(value || ''),
+      ...addTaskStore.dateFields[fieldKey],
+      value: String(addTaskStore.dateFields[fieldKey].value || ''),
+      onChange: (value) => addTaskStore.dateFields[fieldKey].setValue(value || ''),
     });
 
     const titleProps = createTextInputFieldModel('titleField');

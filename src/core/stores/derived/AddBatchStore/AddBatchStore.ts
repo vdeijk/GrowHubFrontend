@@ -4,7 +4,7 @@ import { BaseFormStore } from '../../base/BaseFormStore/BaseFormStore';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
 import { runInAction } from 'mobx';
 import { localStorageService } from '../../../services/LocalStorageService/LocalStorageService';
-import AddCropData from '../../../../auxiliary/data/AddCropData';
+import AddBatchData from '../../../../auxiliary/data/AddBatchData';
 
 class AddBatchStore extends BaseFormStore {
   private endpointService = new EndpointService('YourCrops');
@@ -12,12 +12,12 @@ class AddBatchStore extends BaseFormStore {
   constructor() {
     super();
 
-    Object.values(AddCropData.textFields).forEach((textField) => {
+    Object.values(AddBatchData.textFields).forEach((textField) => {
       this.initTextFilter(textField);
     });
 
-    Object.values(AddCropData.dropdownFields).forEach((dropdownField) => {
-      this.initDropdownFilter(dropdownField);
+    Object.values(AddBatchData.dateFields).forEach((dateField) => {
+      this.initDateFilter(dateField);
     });
   }
 

@@ -73,11 +73,14 @@ const AddBatchPage: React.FC<AddBatchPageProps> = observer(
     const createDateFieldModel = (fieldKey: string): DateInputProps => ({
       ...addBatchStore.dateFields[fieldKey],
       value: String(addBatchStore.dateFields[fieldKey].value || ''),
-      onChange: (value) => addBatchStore.dateFields[fieldKey].setValue(value || ''),
+      onChange: (value) =>
+        addBatchStore.dateFields[fieldKey].setValue(value || ''),
     });
 
-    const nameFieldModel = createTextInputFieldModel('name');
-    const locationFieldModel = createDropdownFieldModel('location');
+    const commonNameModel = createTextInputFieldModel('commonName');
+    const notesModel = createTextInputFieldModel('notes');
+    const amountModel = createTextInputFieldModel('amount');
+    // const locationFieldModel = createDropdownFieldModel('location');
     const lastWateredFieldModel = createDateFieldModel('lastWatered');
     const lastFertilizedFieldModel = createDateFieldModel('lastFertilized');
     const lastPrunedFieldModel = createDateFieldModel('lastPruned');
@@ -87,8 +90,10 @@ const AddBatchPage: React.FC<AddBatchPageProps> = observer(
       <section className={styles.section}>
         <LoadingWrapper isLoading={addBatchStore.isLoading}>
           <form onSubmit={handleSubmit} className={styles.form}>
-            <TextInput {...nameFieldModel} />
-            <Dropdown {...locationFieldModel} />
+            <TextInput {...commonNameModel} />
+            <TextInput {...notesModel} />
+            <TextInput {...amountModel} />
+            {/* <Dropdown {...locationFieldModel} /> */}
             <DateInput {...lastWateredFieldModel} />
             <DateInput {...lastFertilizedFieldModel} />
             <DateInput {...lastPrunedFieldModel} />
