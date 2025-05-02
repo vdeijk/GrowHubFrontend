@@ -1,8 +1,8 @@
 import React from 'react';
-import SearchBarDatabase from '../../containers/SearchBarCrops/SearchBarCrops';
+import SearchBar from '../../containers/SearchBar/Searchbar';
 import TableWithSorting from '../../reusables/TableWithSorting/TableWithSorting';
 import styles from './CropsPage.module.css';
-import cropsDatabaseStore from '../../../stores/derived/CropsStore/CropsStore';
+import cropsStore from '../../../stores/derived/CropsStore/CropsStore';
 import { observer } from 'mobx-react-lite';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import { TableProps } from '../../reusables/TableWithSorting/TableWithSorting';
@@ -10,27 +10,22 @@ import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import ActionIcons from '../../reusables/ActionIcons/ActionIcons';
 import Pagination from '../../reusables/Pagination/Pagination';
-import { SearchBarDatabaseProps } from '../../containers/SearchBarCrops/SearchBarCrops';
 import { PlantItem } from '../../../../api';
 import popupService from '../../../services/PopupService/PopupService';
 import NotesPopup from '../../reusables/NotesPopup/NotesPopup';
 import Popup from '../../containers/Popup/Popup';
 import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
+import SyncButton from '../../reusables/SyncButton/SyncButton';
+import { SearchBarProps } from '../../containers/SearchBar/Searchbar';
 
 const CropsPage: React.FC = observer(() => {
   const navigate = useRouterNavigation();
-  const { paginationService } = cropsDatabaseStore;
+  const { paginationService } = cropsStore;
 
-  const searchBarProps: SearchBarDatabaseProps = {
-    searchQuery: cropsDatabaseStore.textFilters.searchQuery,
-    harvestStart: cropsDatabaseStore.dateFilters['harvestStart'],
-    harvestEnd: cropsDatabaseStore.dateFilters['harvestEnd'],
-    pruningStart: cropsDatabaseStore.dateFilters['pruningStart'],
-    pruningEnd: cropsDatabaseStore.dateFilters['pruningEnd'],
-    fertilizingStart: cropsDatabaseStore.dateFilters['fertilizingStart'],
-    fertilizingEnd: cropsDatabaseStore.dateFilters['fertilizingEnd'],
-    isLoading: cropsDatabaseStore.isLoading,
-    handleSync: cropsDatabaseStore.syncData,
+  const searchBarProps: SearchBarProps = {
+    inputFields: Object.values(cropsStore.textFilters),
+    dateFields: Object.values(cropsStore.dateFilters),
+    dropdownFields: Object.values(cropsStore.dropdownFilters),
   };
 
   const handleEdit = (id: number | undefined) => {
@@ -40,28 +35,28 @@ const CropsPage: React.FC = observer(() => {
   const handleDelete = (id: number | undefined) => {
     if (id === undefined) return;
 
-    cropsDatabaseStore.deletePlant(id);
+    cropsStore.deletePlant(id);
   };
 
   const handlePopup = (id: number | undefined) => {
     if (id === undefined) return;
 
-    const task = cropsDatabaseStore.items.find((item) => item.id === id);
+    const task = cropsStore.items.find((item) => item.id === id);
     if (!task) return;
 
-    cropsDatabaseStore.textFilters.description.setValue(task.notes ?? '');
+    cropsStore.textFilters.description.setValue(task.notes ?? '');
 
     popupService.openPopup(
       <NotesPopup
-        description={cropsDatabaseStore.textFilters.description}
+        description={cropsStore.textFilters.description}
         title={'Crop Notes'}
       />,
     );
   };
 
   const tableProps: TableProps<PlantItem> = {
-    headers: cropsDatabaseStore.tableHeaders as TableHeaderModel<PlantItem>[],
-    data: cropsDatabaseStore.paginatedItems.map((item) => ({
+    headers: cropsStore.tableHeaders as TableHeaderModel<PlantItem>[],
+    data: cropsStore.paginatedItems.map((item) => ({
       ...item,
       actions: (
         <ActionIcons
@@ -72,9 +67,9 @@ const CropsPage: React.FC = observer(() => {
         />
       ),
     })),
-    onSort: (field) => cropsDatabaseStore.sortItems(field),
-    sortField: cropsDatabaseStore.sortField,
-    sortOrder: cropsDatabaseStore.sortOrder,
+    onSort: (field) => cropsStore.sortItems(field),
+    sortField: cropsStore.sortField,
+    sortOrder: cropsStore.sortOrder,
   };
 
   const buttonContainerData = {
@@ -85,13 +80,19 @@ const CropsPage: React.FC = observer(() => {
   return (
     <section className={styles.section}>
       <Popup />
-      <LoadingWrapper isLoading={cropsDatabaseStore.isLoading}>
-        <SearchBarDatabase {...searchBarProps} />
-        <div className={styles.buttonContainer}>
+      <LoadingWrapper isLoading={cropsStore.isLoading}>
+        <SearchBar {...searchBarProps} />
+        <div className={styles.contentContainer}>
           <div className={styles.tableContainer}>
             <TableWithSorting {...tableProps} />
           </div>
-          <ButtonContainer buttons={[buttonContainerData]} />
+          <div className={styles.buttonContainer}>
+            <SyncButton
+              onClick={cropsStore.syncData}
+              isSyncing={cropsStore.isLoading}
+            />
+            <ButtonContainer buttons={[buttonContainerData]} />
+          </div>
         </div>
         <Pagination
           currentPage={paginationService.currentPage}

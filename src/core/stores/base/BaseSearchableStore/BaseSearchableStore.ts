@@ -6,7 +6,7 @@ import {
   computed,
 } from 'mobx';
 import { InputField } from '../../../../auxiliary/classes/InputField';
-import { Dropdown } from '../../../../auxiliary/classes/Dropdown';
+import { DropdownField } from '../../../../auxiliary/classes/DropdownField';
 import { DateField } from '../../../../auxiliary/classes/DateField';
 import EventBus from '../../../services/EventBusService/EventBusService';
 import SortService from '../../../services/SortService/SortService';
@@ -26,7 +26,7 @@ export abstract class SearchableStore<T> {
   public paginatedItems: T[] = [];
   public debouncedFilterItems: () => void;
   public textFilters: Record<string, InputField<string>> = {};
-  public dropdownFilters: Record<string, Dropdown<string>> = {};
+  public dropdownFilters: Record<string, DropdownField<string>> = {};
   public dateFilters: Record<string, DateField<string>> = {};
   public searchableFields: (keyof T)[] = [];
 
@@ -118,7 +118,7 @@ export abstract class SearchableStore<T> {
   public initDropdownFilter = (field: DropdownFieldModel) => {
     runInAction(() => {
       if (!this.dropdownFilters[field.key]) {
-        this.dropdownFilters[field.key] = new Dropdown(
+        this.dropdownFilters[field.key] = new DropdownField(
           field.defaultValue,
           field.label,
           false,

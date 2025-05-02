@@ -1,11 +1,11 @@
 import React from 'react';
-import SearchBarCrops from '../../containers/SearchBarBatches/SearchBarBatches';
+import SearchBar from '../../containers/SearchBar/Searchbar';
 import TableWithSorting from '../../reusables/TableWithSorting/TableWithSorting';
 import styles from './BatchesPage.module.css';
 import cropsStore from '../../../stores/derived/BatchesStore/BatchesStore';
 import { observer } from 'mobx-react-lite';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
-import { SearchBarProps } from '../../containers/SearchBarBatches/SearchBarBatches';
+import { SearchBarProps } from '../../containers/SearchBar/Searchbar';
 import { TableProps } from '../../reusables/TableWithSorting/TableWithSorting';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
@@ -15,7 +15,7 @@ import { YourCropItem } from '../../../../api';
 import NotesPopup from '../../reusables/NotesPopup/NotesPopup';
 import popupService from '../../../services/PopupService/PopupService';
 import Popup from '../../containers/Popup/Popup';
-import yourCropsStore from '../../../stores/derived/BatchesStore/BatchesStore';
+import batchesStore from '../../../stores/derived/BatchesStore/BatchesStore';
 import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
 
 const BatchesPage: React.FC = observer(() => {
@@ -23,12 +23,9 @@ const BatchesPage: React.FC = observer(() => {
   const navigate = useRouterNavigation();
 
   const searchBarProps: SearchBarProps = {
-    searchQuery: cropsStore.textFilters.searchQuery,
-    location: cropsStore.dropdownFilters.location,
-    lastWatered: cropsStore.dateFilters.lastWatered,
-    lastFertilized: cropsStore.dateFilters.lastFertilized,
-    lastPruned: cropsStore.dateFilters.lastPruned,
-    lastHarvested: cropsStore.dateFilters.lastHarvested,
+    inputFields: Object.values(cropsStore.textFilters),
+    dateFields: Object.values(cropsStore.dateFilters),
+    dropdownFields: Object.values(cropsStore.dropdownFilters),
   };
 
   const handleEdit = (id: number | undefined) => {
@@ -44,21 +41,21 @@ const BatchesPage: React.FC = observer(() => {
   const handlePopup = (id: number | undefined) => {
     if (id === undefined) return;
 
-    const task = yourCropsStore.items.find((item) => item.id === id);
+    const task = batchesStore.items.find((item) => item.id === id);
     if (!task) return;
 
-    yourCropsStore.textFilters.description.setValue(task.notes ?? '');
+    batchesStore.textFilters.description.setValue(task.notes ?? '');
 
     popupService.openPopup(
       <NotesPopup
-        description={yourCropsStore.textFilters.description}
+        description={batchesStore.textFilters.description}
         title={'Batch Notes'}
       />,
     );
   };
 
   const tableProps: TableProps<YourCropItem> = {
-    headers: yourCropsStore.tableHeaders as TableHeaderModel<YourCropItem>[],
+    headers: batchesStore.tableHeaders as TableHeaderModel<YourCropItem>[],
     data: cropsStore.paginatedItems.map((item) => ({
       ...item,
       actions: (
@@ -86,7 +83,7 @@ const BatchesPage: React.FC = observer(() => {
     <section className={styles.section}>
       <Popup />
       <LoadingWrapper isLoading={cropsStore.isLoading}>
-        <SearchBarCrops {...searchBarProps} />
+        <SearchBar {...searchBarProps} />
         <div className={styles.buttonContainer}>
           <div className={styles.tableContainer}>
             <TableWithSorting {...tableProps} />

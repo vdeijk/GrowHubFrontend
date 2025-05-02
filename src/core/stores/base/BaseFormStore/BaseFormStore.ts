@@ -1,13 +1,13 @@
 import { makeObservable, observable, action, runInAction } from 'mobx';
 import { InputField } from '../../../../auxiliary/classes/InputField';
 import { DateField } from '../../../../auxiliary/classes/DateField';
-import { Dropdown } from '../../../../auxiliary/classes/Dropdown';
+import { DropdownField } from '../../../../auxiliary/classes/DropdownField';
 import { InputFieldModel } from '../../../../auxiliary/interfaces/InputFieldModel';
 import { DropdownFieldModel } from '../../../../auxiliary/interfaces/DropdownFieldModel';
 import { DateFieldModel } from '../../../../auxiliary/interfaces/DateFieldModel';
 
 export abstract class BaseFormStore {
-  dropdownFields: Record<string, Dropdown<string>> = {};
+  dropdownFields: Record<string, DropdownField<string>> = {};
   inputFields: Record<string, InputField<string>> = {};
   dateFields: Record<string, DateField<string>> = {};
 
@@ -53,7 +53,7 @@ export abstract class BaseFormStore {
   public initDropdownFilter = (field: DropdownFieldModel) => {
     runInAction(() => {
       if (!this.dropdownFields[field.key]) {
-        this.dropdownFields[field.key] = new Dropdown(
+        this.dropdownFields[field.key] = new DropdownField(
           field.defaultValue,
           field.label,
           false,

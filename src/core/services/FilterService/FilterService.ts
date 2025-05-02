@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx';
-import { Dropdown } from '../../../auxiliary/classes/Dropdown';
+import { DropdownField } from '../../../auxiliary/classes/DropdownField';
 import { DateField } from '../../../auxiliary/classes/DateField';
 
 export class FilterService {
@@ -29,7 +29,7 @@ export class FilterService {
 
   public static filterByDropdowns<T>(
     items: T[],
-    dropdownFilters: Record<string, Dropdown<string>>,
+    dropdownFilters: Record<string, DropdownField<string>>,
   ): T[] {
     return items.filter((item) =>
       Object.keys(dropdownFilters).every((key) => {

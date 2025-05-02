@@ -9,8 +9,8 @@ import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation
 import { TableProps } from '../../reusables/TableWithSorting/TableWithSorting';
 import { MeasurementItem } from '../../../../api';
 import ActionIcons from '../../reusables/ActionIcons/ActionIcons';
-import SearchBarMeasurements from '../../containers/SearchBarMeasurements/SearchBarMeasurements';
-import { SearchBarMeasurementsProps } from '../../containers/SearchBarMeasurements/SearchBarMeasurements';
+import SearchBar from '../../containers/SearchBar/Searchbar';
+import { SearchBarProps } from '../../containers/SearchBar/Searchbar';
 import { observer } from 'mobx-react-lite';
 import popupService from '../../../services/PopupService/PopupService';
 import NotesPopup from '../../reusables/NotesPopup/NotesPopup';
@@ -54,16 +54,10 @@ const MeasurementsPage: React.FC<MeasurementsProps> = observer(() => {
     measurementsStore.deleteMeasurement(id);
   };
 
-  const searchBarProps: SearchBarMeasurementsProps = {
-    searchQuery: measurementsStore.textFilters.searchQuery,
-    soilDryness: measurementsStore.dropdownFilters['soilDryness'],
-    lightLevel: measurementsStore.dropdownFilters['lightLevel'],
-    phMin: measurementsStore.textFilters['phMin'],
-    phMax: measurementsStore.textFilters['phMax'],
-    healthStatus: measurementsStore.dropdownFilters['healthStatus'],
-    growthStage: measurementsStore.dropdownFilters['growthStage'],
-    dateMax: measurementsStore.dateFilters['dateMax'],
-    dateMin: measurementsStore.dateFilters['dateMin'],
+  const searchBarProps: SearchBarProps = {
+    inputFields: Object.values(measurementsStore.textFilters),
+    dateFields: Object.values(measurementsStore.dateFilters),
+    dropdownFields: Object.values(measurementsStore.dropdownFilters),
   };
 
   const tableProps: TableProps<MeasurementItem> = {
@@ -90,7 +84,7 @@ const MeasurementsPage: React.FC<MeasurementsProps> = observer(() => {
     <section className={styles.section}>
       <Popup />
       <LoadingWrapper isLoading={measurementsStore.isLoading}>
-        <SearchBarMeasurements {...searchBarProps} />
+        <SearchBar {...searchBarProps} />
         <div className={styles.buttonContainer}>
           <div className={styles.tableContainer}>
             <TableWithSorting {...tableProps} />

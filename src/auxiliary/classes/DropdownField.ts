@@ -1,7 +1,7 @@
 import { FormField } from './FormField';
 import { DropdownOption } from '../interfaces/DropdownOptions';
 
-export class Dropdown<T> extends FormField<T> {
+export class DropdownField<T> extends FormField<T> {
   options: DropdownOption[] = [];
 
   constructor(

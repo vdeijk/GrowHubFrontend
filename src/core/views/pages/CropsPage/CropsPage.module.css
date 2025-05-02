@@ -9,10 +9,17 @@
   grid-column: 1/-1;
 }
 
-.buttonContainer {
+.contentContainer {
   background-color: var(--color-white);
   padding: var(--spacing-medium);
   border-radius: var(--border-radius-large);
   box-shadow: var(--box-shadow);
   grid-column: 1/-1;
+}
+
+.buttonContainer {
+  grid-gap: 2rem;
+  display: grid;
+  justify-content: end;
+  grid-auto-flow: column;
 }

@@ -6,8 +6,8 @@ import { observer } from 'mobx-react-lite';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import { TableProps } from '../../reusables/TableWithSorting/TableWithSorting';
 import { TodoItem } from '../../../../api';
-import SearchBarTasks from '../../containers/SearchBarTasks/SearchBarTasks';
-import { SearchBarTasksProps } from '../../containers/SearchBarTasks/SearchBarTasks';
+import { SearchBarProps } from '../../containers/SearchBar/Searchbar';
+import SearchBar from '../../containers/SearchBar/Searchbar';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import ActionIcons from '../../reusables/ActionIcons/ActionIcons';
@@ -36,13 +36,10 @@ const TasksPage: React.FC = observer(() => {
     taskStore.deleteTask(id);
   };
 
-  const searchBarProps: SearchBarTasksProps = {
-    searchQuery: taskStore.textFilters.searchQuery,
-    categoryFilter: taskStore.dropdownFilters['category'],
-    priorityFilter: taskStore.dropdownFilters['priority'],
-    statusFilter: taskStore.dropdownFilters['todoStatus'],
-    startDateFilter: taskStore.dateFilters['startDate'],
-    endDateFilter: taskStore.dateFilters['endDate'],
+  const searchBarProps: SearchBarProps = {
+    inputFields: Object.values(taskStore.textFilters),
+    dateFields: Object.values(taskStore.dateFilters),
+    dropdownFields: Object.values(taskStore.dropdownFilters),
   };
 
   const handlePopup = (id: number | undefined) => {
@@ -83,7 +80,7 @@ const TasksPage: React.FC = observer(() => {
     <section className={styles.section}>
       <Popup />
       <LoadingWrapper isLoading={taskStore.isLoading}>
-        <SearchBarTasks {...searchBarProps} />
+        <SearchBar {...searchBarProps} />
         <div className={styles.buttonContainer}>
           <div className={styles.tableContainer}>
             <TableWithSorting {...tableProps} />
