@@ -1,9 +1,10 @@
 import React from 'react';
 import styles from './TableWithSorting.module.css';
 import TableRow from '../TableRow/TableRow';
+import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
 
 export interface TableProps<T> {
-  headers: { id: keyof T; label: string; sortable: boolean }[];
+  headers: TableHeaderModel<T>[];
   onSort: (field: keyof T) => void;
   sortField: keyof T | null;
   sortOrder: 'asc' | 'desc';
@@ -29,12 +30,15 @@ const TableWithSorting = <T,>({
       <thead>
         <tr>
           {headers.map((header) => (
-            <th key={String(header.id)} onClick={() => onSort(header.id)}>
+            <th
+              key={String(header.id)}
+              onClick={() => onSort(header.id as keyof T)}
+            >
               <div className={styles.headerContent}>
                 {header.label}
                 {header.sortable !== false && (
                   <span className={styles.sortIndicator}>
-                    {getSortIndicator(header.id)}
+                    {getSortIndicator(header.id as keyof T)}
                   </span>
                 )}
               </div>

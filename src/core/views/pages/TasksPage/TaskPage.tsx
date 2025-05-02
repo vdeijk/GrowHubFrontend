@@ -15,6 +15,7 @@ import Popup from '../../containers/Popup/Popup';
 import Pagination from '../../reusables/Pagination/Pagination';
 import NotesPopup from '../../reusables/NotesPopup/NotesPopup';
 import popupService from '../../../services/PopupService/PopupService';
+import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
 
 const TasksPage: React.FC = observer(() => {
   const paginationService = taskStore.paginationService;
@@ -50,7 +51,7 @@ const TasksPage: React.FC = observer(() => {
     const task = taskStore.items.find((item) => item.id === id);
     if (!task) return;
 
-    taskStore.textFilters.description.setValue(task.description ?? '');
+    taskStore.textFilters.description.setValue(task.notes ?? '');
 
     popupService.openPopup(
       <NotesPopup
@@ -61,11 +62,7 @@ const TasksPage: React.FC = observer(() => {
   };
 
   const tableProps: TableProps<TodoItem> = {
-    headers: taskStore.tableHeaders as {
-      id: keyof TodoItem;
-      label: string;
-      sortable: boolean;
-    }[],
+    headers: taskStore.tableHeaders as TableHeaderModel<TodoItem>[],
     data: taskStore.paginatedItems.map((item) => ({
       ...item,
       actions: (

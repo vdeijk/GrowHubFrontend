@@ -1,7 +1,5 @@
 import {
   YourCropItem,
-  YourCropItemGrowthStageEnum,
-  YourCropItemHealthStatusEnum,
 } from '../../../../api';
 import yourCropsStore from '../YourCropsStore/YourCropsStore';
 import { InputField } from '../../../../auxiliary/classes/InputField';
@@ -40,9 +38,6 @@ class AddMeasurementStore extends BaseFormStore {
     const data: YourCropItem = {
       commonName: this.fields.nameField.value as string,
       location: this.fields.location.value as string,
-      growthStage: this.fields.growthStage.value as YourCropItemGrowthStageEnum,
-      healthStatus: this.fields.healthStatus
-        .value as YourCropItemHealthStatusEnum,
       lastWatered: this.fields.lastWatered.value as string,
       lastFertilized: this.fields.lastFertilized.value as string,
       lastPruned: this.fields.lastPruned.value as string,
@@ -63,9 +58,6 @@ class AddMeasurementStore extends BaseFormStore {
     const data: YourCropItem = {
       commonName: this.fields.nameField.value as string,
       location: this.fields.location.value as string,
-      growthStage: this.fields.growthStage.value as YourCropItemGrowthStageEnum,
-      healthStatus: this.fields.healthStatus
-        .value as YourCropItemHealthStatusEnum,
       lastWatered: this.fields.lastWatered.value as string,
       lastFertilized: this.fields.lastFertilized.value as string,
       lastPruned: this.fields.lastPruned.value as string,
@@ -86,8 +78,6 @@ class AddMeasurementStore extends BaseFormStore {
     runInAction(() => {
       this.fields.nameField.setValue(String(data.commonName));
       this.fields.location.setValue(String(data.location));
-      this.fields.healthStatus.setValue(String(data.healthStatus));
-      this.fields.growthStage.setValue(String(data.growthStage));
       this.fields.lastWatered.setValue(String(data.lastWatered));
       this.fields.lastFertilized.setValue(String(data.lastFertilized));
       this.fields.lastPruned.setValue(String(data.lastPruned));

@@ -40,7 +40,7 @@ class AddTaskStore extends BaseFormStore {
         30,
       ),
       category: new InputField<TodoItemCategoryEnum>(
-        TodoItemCategoryEnum.Work,
+        TodoItemCategoryEnum.Prune,
         'Category',
         true,
       ),
@@ -60,7 +60,7 @@ class AddTaskStore extends BaseFormStore {
       title: this.fields.titleField.value as string,
       priority: this.fields.priority.value as TodoItemPriorityEnum,
       dueDate: this.fields.dueDate.value as string,
-      description: this.fields.description.value as string,
+      notes: this.fields.description.value as string,
       category: this.fields.category.value as TodoItemCategoryEnum,
       todoStatus: this.fields.todoStatus.value as TodoItemTodoStatusEnum,
     };
@@ -80,7 +80,7 @@ class AddTaskStore extends BaseFormStore {
       this.fields.titleField.setValue(data.title ?? '');
       this.fields.priorityField.setValue(data.priority ?? '');
       this.fields.dueDateField.setValue(data.dueDate ?? '');
-      this.fields.descriptionField.setValue(data.description ?? '');
+      this.fields.descriptionField.setValue(data.notes ?? '');
       this.fields.categoryField.setValue(data.category ?? '');
       this.fields.todoStatus.setValue(data.todoStatus ?? '');
     });
@@ -94,7 +94,7 @@ class AddTaskStore extends BaseFormStore {
       title: this.fields.titleField.value as string,
       priority: this.fields.priority.value as TodoItemPriorityEnum,
       dueDate: this.fields.dueDate.value as string,
-      description: this.fields.description.value as string,
+      notes: this.fields.description.value as string,
       category: this.fields.category.value as TodoItemCategoryEnum,
       todoStatus: this.fields.todoStatus.value as TodoItemTodoStatusEnum,
     };

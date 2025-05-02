@@ -1,9 +1,10 @@
 import React from 'react';
 import styles from './TableWithoutSorting.module.css';
 import TableRow from '../TableRow/TableRow';
+import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
 
 export interface TableProps<T> {
-  headers: { id: keyof T; label: string; sortable: boolean }[];
+  headers: TableHeaderModel<T>[];
   data: T[];
 }
 

@@ -15,6 +15,7 @@ import { observer } from 'mobx-react-lite';
 import popupService from '../../../services/PopupService/PopupService';
 import NotesPopup from '../../reusables/NotesPopup/NotesPopup';
 import Popup from '../../containers/Popup/Popup';
+import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
 
 interface MeasurementsProps {}
 
@@ -33,7 +34,7 @@ const MeasurementsPage: React.FC<MeasurementsProps> = observer(() => {
     const task = measurementsStore.items.find((item) => item.id === id);
     if (!task) return;
 
-    measurementsStore.textFilters.description.setValue(task.description ?? '');
+    measurementsStore.textFilters.description.setValue(task.notes ?? '');
 
     popupService.openPopup(
       <NotesPopup
@@ -66,11 +67,7 @@ const MeasurementsPage: React.FC<MeasurementsProps> = observer(() => {
   };
 
   const tableProps: TableProps<MeasurementItem> = {
-    headers: measurementsStore.tableHeaders as {
-      id: keyof MeasurementItem;
-      label: string;
-      sortable: boolean;
-    }[],
+    headers: measurementsStore.tableHeaders as TableHeaderModel<MeasurementItem>[],
     data: measurementsStore.paginatedItems.map((item) => ({
       ...item,
       actions: (

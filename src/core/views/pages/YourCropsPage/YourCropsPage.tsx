@@ -16,6 +16,7 @@ import NotesPopup from '../../reusables/NotesPopup/NotesPopup';
 import popupService from '../../../services/PopupService/PopupService';
 import Popup from '../../containers/Popup/Popup';
 import yourCropsStore from '../../../stores/derived/YourCropsStore/YourCropsStore';
+import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
 
 const YourCropsPage: React.FC = observer(() => {
   const { paginationService } = cropsStore;
@@ -46,7 +47,7 @@ const YourCropsPage: React.FC = observer(() => {
     const task = yourCropsStore.items.find((item) => item.id === id);
     if (!task) return;
 
-    yourCropsStore.textFilters.description.setValue(task.description ?? '');
+    yourCropsStore.textFilters.description.setValue(task.notes ?? '');
 
     popupService.openPopup(
       <NotesPopup
@@ -57,11 +58,7 @@ const YourCropsPage: React.FC = observer(() => {
   };
 
   const tableProps: TableProps<YourCropItem> = {
-    headers: cropsStore.tableHeaders as {
-      id: keyof YourCropItem;
-      label: string;
-      sortable: boolean;
-    }[],
+    headers: yourCropsStore.tableHeaders as TableHeaderModel<YourCropItem>[],
     data: cropsStore.paginatedItems.map((item) => ({
       ...item,
       actions: (

@@ -15,6 +15,7 @@ import { PlantItem } from '../../../../api';
 import popupService from '../../../services/PopupService/PopupService';
 import NotesPopup from '../../reusables/NotesPopup/NotesPopup';
 import Popup from '../../containers/Popup/Popup';
+import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
 
 const CropsDatabasePage: React.FC = observer(() => {
   const navigate = useRouterNavigation();
@@ -48,7 +49,7 @@ const CropsDatabasePage: React.FC = observer(() => {
     const task = cropsDatabaseStore.items.find((item) => item.id === id);
     if (!task) return;
 
-    cropsDatabaseStore.textFilters.description.setValue(task.description ?? '');
+    cropsDatabaseStore.textFilters.description.setValue(task.notes ?? '');
 
     popupService.openPopup(
       <NotesPopup
@@ -59,11 +60,7 @@ const CropsDatabasePage: React.FC = observer(() => {
   };
 
   const tableProps: TableProps<PlantItem> = {
-    headers: cropsDatabaseStore.tableHeaders as {
-      id: keyof PlantItem;
-      label: string;
-      sortable: boolean;
-    }[],
+    headers: cropsDatabaseStore.tableHeaders as TableHeaderModel<PlantItem>[],
     data: cropsDatabaseStore.paginatedItems.map((item) => ({
       ...item,
       actions: (

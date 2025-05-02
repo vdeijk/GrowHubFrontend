@@ -1,13 +1,14 @@
 # LocationItem
 
+
 ## Properties
 
-| Name          | Type       | Description | Notes                             |
-| ------------- | ---------- | ----------- | --------------------------------- |
-| **id**        | **number** |             | [optional] [default to undefined] |
-| **name**      | **string** |             | [optional] [default to undefined] |
-| **latitude**  | **number** |             | [optional] [default to undefined] |
-| **longitude** | **number** |             | [optional] [default to undefined] |
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**id** | **number** |  | [optional] [default to undefined]
+**name** | **string** |  | [optional] [default to undefined]
+**latitude** | **number** |  | [optional] [default to undefined]
+**longitude** | **number** |  | [optional] [default to undefined]
 
 ## Example
 
@@ -15,10 +16,10 @@
 import { LocationItem } from './api';
 
 const instance: LocationItem = {
-  id,
-  name,
-  latitude,
-  longitude,
+    id,
+    name,
+    latitude,
+    longitude,
 };
 ```
 

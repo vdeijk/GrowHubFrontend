@@ -1,15 +1,4 @@
-import {
-  PlantItem,
-  PlantItemClimateZoneEnum,
-  PlantItemFertilizerNeedsEnum,
-  PlantItemGrowthRateEnum,
-  PlantItemPlantTypeEnum,
-  PlantItemPruningEnum,
-  PlantItemSoilPHEnum,
-  PlantItemSoilTypeEnum,
-  PlantItemSunPreferenceEnum,
-  PlantItemWaterNeedsEnum,
-} from '../../../../api';
+import { PlantItem } from '../../../../api';
 import cropsDatabaseStore from '../CropsDatabaseStore/CropsDatabaseStore';
 import { InputField } from '../../../../auxiliary/classes/InputField';
 import { BaseFormStore } from '../../base/BaseFormStore/BaseFormStore';
@@ -47,17 +36,6 @@ class AddCropStore extends BaseFormStore {
   public addCrop = async () => {
     const data: PlantItem = {
       commonName: this.fields.nameField.value as string,
-      sunPreference: this.fields.sunPreference
-        .value as PlantItemSunPreferenceEnum,
-      waterNeeds: this.fields.waterNeeds.value as PlantItemWaterNeedsEnum,
-      soilType: this.fields.soilType.value as PlantItemSoilTypeEnum,
-      soilPH: this.fields.soilPH.value as PlantItemSoilPHEnum,
-      pruning: this.fields.pruning.value as PlantItemPruningEnum,
-      climateZone: this.fields.climateZone.value as PlantItemClimateZoneEnum,
-      plantType: this.fields.plantType.value as PlantItemPlantTypeEnum,
-      growthRate: this.fields.growthRate.value as PlantItemGrowthRateEnum,
-      fertilizerNeeds: this.fields.fertilizerNeeds
-        .value as PlantItemFertilizerNeedsEnum,
     };
 
     await this.endpointService.postData(data);
@@ -73,17 +51,6 @@ class AddCropStore extends BaseFormStore {
 
     const data: PlantItem = {
       commonName: this.fields.nameField.value as string,
-      sunPreference: this.fields.sunPreference
-        .value as PlantItemSunPreferenceEnum,
-      waterNeeds: this.fields.waterNeeds.value as PlantItemWaterNeedsEnum,
-      soilType: this.fields.soilType.value as PlantItemSoilTypeEnum,
-      soilPH: this.fields.soilPH.value as PlantItemSoilPHEnum,
-      pruning: this.fields.pruning.value as PlantItemPruningEnum,
-      climateZone: this.fields.climateZone.value as PlantItemClimateZoneEnum,
-      plantType: this.fields.plantType.value as PlantItemPlantTypeEnum,
-      growthRate: this.fields.growthRate.value as PlantItemGrowthRateEnum,
-      fertilizerNeeds: this.fields.fertilizerNeeds
-        .value as PlantItemFertilizerNeedsEnum,
     };
 
     await this.endpointService.putData(`${id}`, data);
@@ -100,15 +67,6 @@ class AddCropStore extends BaseFormStore {
 
     runInAction(() => {
       this.fields.nameField.setValue(String(data.commonName));
-      this.fields.sunPreference.setValue(String(data.sunPreference));
-      this.fields.waterNeeds.setValue(String(data.waterNeeds));
-      this.fields.soilType.setValue(String(data.soilType));
-      this.fields.soilPH.setValue(String(data.soilPH));
-      this.fields.pruning.setValue(String(data.pruning));
-      this.fields.climateZone.setValue(String(data.climateZone));
-      this.fields.plantType.setValue(String(data.plantType));
-      this.fields.growthRate.setValue(String(data.growthRate));
-      this.fields.fertilizerNeeds.setValue(String(data.fertilizerNeeds));
     });
   };
 
