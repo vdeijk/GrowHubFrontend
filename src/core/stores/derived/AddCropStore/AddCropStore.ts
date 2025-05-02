@@ -16,11 +16,9 @@ class AddCropStore extends BaseFormStore {
       this.initTextFilter(textField);
     });
 
-    Object.values(AddCropData.dropdownFields).forEach(
-      (dropdownField) => {
-        this.initDropdownFilter(dropdownField);
-      },
-    );
+    Object.values(AddCropData.dropdownFields).forEach((dropdownField) => {
+      this.initDropdownFilter(dropdownField);
+    });
   }
 
   public addCrop = async () => {

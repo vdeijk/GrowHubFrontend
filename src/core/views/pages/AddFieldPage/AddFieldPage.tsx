@@ -55,9 +55,9 @@ const AddFieldPage: React.FC<AddFieldPageProps> = observer(
     });
 
     const locationNameFieldModel =
-      createTextInputFieldModel('locationNameField');
-    const latitudeFieldModel = createTextInputFieldModel('latitudeField');
-    const longitudeFieldModel = createTextInputFieldModel('longitudeField');
+      createTextInputFieldModel('name');
+    const latitudeFieldModel = createTextInputFieldModel('latitude');
+    const longitudeFieldModel = createTextInputFieldModel('longitude');
 
     return (
       <section className={styles.section}>

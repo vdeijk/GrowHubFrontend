@@ -23,7 +23,7 @@ const TasksPage: React.FC = observer(() => {
 
   const buttonContainerData = {
     clickHandler: () => navigate('/addTaskPage'),
-    label: 'Add AgriTask',
+    label: 'Add Task',
   };
 
   const handleEdit = (id: number | undefined) => {

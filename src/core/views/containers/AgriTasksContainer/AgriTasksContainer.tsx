@@ -13,7 +13,7 @@ const Tasks: React.FC = observer(() => {
 
   const buttonContainerData = {
     clickHandler: () => navigate('/tasksPage'),
-    label: 'View All AgriTasks',
+    label: 'View All Tasks',
   };
 
   return (
@@ -21,7 +21,7 @@ const Tasks: React.FC = observer(() => {
       <LoadingWrapper isLoading={taskStore.isLoading}>
         <Heading
           level={6}
-          text="AgriTasks"
+          text="Tasks"
           customStyles={{ marginBottom: '2rem' }}
         ></Heading>
         {taskStore.items.slice(0, 3).map((task) => (

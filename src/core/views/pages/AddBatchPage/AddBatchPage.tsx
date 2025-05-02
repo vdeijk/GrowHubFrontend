@@ -48,7 +48,7 @@ const AddBatchPage: React.FC<AddBatchPageProps> = observer(
     const buttonProps: ButtonProps = {
       type: 'submit',
       onClick: () => navigate('/tasksPage'),
-      label: isEditing ? 'Edit Crop' : 'Add Crop',
+      label: isEditing ? 'Edit Batch' : 'Add Batch',
       customStyles: { marginTop: '1rem' },
     };
 
@@ -93,6 +93,7 @@ const AddBatchPage: React.FC<AddBatchPageProps> = observer(
             <TextInput {...commonNameModel} />
             <TextInput {...notesModel} />
             <TextInput {...amountModel} />
+            <div></div>
             {/* <Dropdown {...locationFieldModel} /> */}
             <DateInput {...lastWateredFieldModel} />
             <DateInput {...lastFertilizedFieldModel} />

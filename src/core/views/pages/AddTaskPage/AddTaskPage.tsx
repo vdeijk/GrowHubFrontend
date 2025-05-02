@@ -73,7 +73,7 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
 
     const buttonProps: ButtonProps = {
       type: 'submit',
-      label: isEditing ? 'Edit AgriTask' : 'Add AgriTask',
+      label: isEditing ? 'Edit Task' : 'Add Task',
       customStyles: { marginTop: '1rem' },
     };
 

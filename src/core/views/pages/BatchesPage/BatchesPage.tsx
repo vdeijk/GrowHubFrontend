@@ -79,7 +79,7 @@ const BatchesPage: React.FC = observer(() => {
 
   const buttonContainerData = {
     clickHandler: () => navigate('/addYourCropPage'),
-    label: 'Add Crop',
+    label: 'Add Batch',
   };
 
   return (

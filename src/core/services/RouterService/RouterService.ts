@@ -39,7 +39,7 @@ class RouterService {
 
     {
       path: '/addYourCropPage',
-      label: 'Add Your Crop',
+      label: 'Add Batch',
       hidden: true,
       isDynamic: false,
     },
@@ -49,7 +49,7 @@ class RouterService {
       hidden: true,
       isDynamic: true,
     },
-    { path: '/addCropPage', label: 'Add Crop', hidden: true, isDynamic: false },
+    { path: '/addCropPage', label: 'Add Batch', hidden: true, isDynamic: false },
     {
       path: '/addCropPage/:id',
       label: 'Edit Crop',
@@ -70,13 +70,13 @@ class RouterService {
     },
     {
       path: '/addTaskPage',
-      label: 'Add AgriTask',
+      label: 'Add Task',
       hidden: true,
       isDynamic: false,
     },
     {
       path: '/addTaskPage/:id',
-      label: 'Edit AgriTask',
+      label: 'Edit Task',
       hidden: true,
       isDynamic: false,
     },

@@ -4,7 +4,7 @@ import { LocationItem } from '../../../../api';
 import fieldsStore from '../FieldsStore/FieldsStore';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
 import { runInAction } from 'mobx';
-import FieldsData from '../../../../auxiliary/data/FieldsData';
+import AddFieldData from '../../../../auxiliary/data/AddFieldData';
 
 class AddFieldStore extends BaseFormStore {
   public endpointService = new EndpointService('Location');
@@ -12,7 +12,7 @@ class AddFieldStore extends BaseFormStore {
   constructor() {
     super();
 
-    Object.values(FieldsData.textFields).forEach((textField) => {
+    Object.values(AddFieldData.textFields).forEach((textField) => {
       this.initTextFilter(textField);
     });
   }
