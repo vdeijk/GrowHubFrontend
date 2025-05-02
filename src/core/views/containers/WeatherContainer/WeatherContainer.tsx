@@ -9,7 +9,7 @@ import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 
-const CurrentWeatherContainer: React.FC = observer(() => {
+const WeatherContainer: React.FC = observer(() => {
   const navigate = useRouterNavigation();
 
   const weather = weatherStore?.weatherData;
@@ -61,4 +61,4 @@ const CurrentWeatherContainer: React.FC = observer(() => {
   );
 });
 
-export default CurrentWeatherContainer;
+export default WeatherContainer;

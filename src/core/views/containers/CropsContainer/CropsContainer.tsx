@@ -9,7 +9,7 @@ import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import { observer } from 'mobx-react-lite';
 import { PlantItem } from '../../../../api';
 
-const CropsDatabaseContainer: React.FC = observer(() => {
+const CropsContainer: React.FC = observer(() => {
   const navigate = useRouterNavigation();
 
   const buttonContainerData = {
@@ -57,4 +57,4 @@ const CropsDatabaseContainer: React.FC = observer(() => {
   );
 });
 
-export default CropsDatabaseContainer;
+export default CropsContainer;

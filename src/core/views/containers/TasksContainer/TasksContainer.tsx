@@ -1,14 +1,14 @@
 import React from 'react';
 import Task from '../../reusables/Task/Task';
 import taskStore from '../../../stores/derived/TasksStore/TasksStore';
-import styles from './AgriTasksContainer.module.css';
+import styles from './TasksContainer.module.css';
 import { observer } from 'mobx-react-lite';
 import Heading from '../../reusables/Heading/Heading';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 
-const Tasks: React.FC = observer(() => {
+const TasksContainer: React.FC = observer(() => {
   const navigate = useRouterNavigation();
 
   const buttonContainerData = {
@@ -33,4 +33,4 @@ const Tasks: React.FC = observer(() => {
   );
 });
 
-export default Tasks;
+export default TasksContainer;
