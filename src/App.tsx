@@ -6,14 +6,14 @@ import DashboardPage from './core/views/pages/DashboardPage/DashboardPage';
 import FooterContainer from './core/views/containers/FooterContainer/FooterContainer';
 import profilePicture from './auxiliary/assets/cropGrowHub.jpg';
 import { Routes, Route } from 'react-router-dom';
-import CropsPage from './core/views/pages/BatchesPage/BatchesPage';
+import BatchesPage from './core/views/pages/BatchesPage/BatchesPage';
 import routerStore from './core/services/RouterService/RouterService';
 import PageLayout from './core/views/layouts/PageLayout/PageLayout';
 import AddCropPage from './core/views/pages/AddCropPage/AddCropPage';
 import { ToastContainer } from 'react-toastify';
 import WeatherReportPage from './core/views/pages/WeatherReportPage/WeatherReportPage';
 import FieldsPage from './core/views/pages/FieldsPage/FieldsPage';
-import TasksPage from './core/views/pages/TasksPage/TaskPage';
+import TasksPage from './core/views/pages/TasksPage/TasksPage';
 import AddFieldPage from './core/views/pages/AddFieldPage/AddFieldPage';
 import { observer } from 'mobx-react-lite';
 import NotFoundPage from './core/views/pages/NotFoundPage/NotFoundPage';
@@ -21,16 +21,16 @@ import { useAuth0 } from '@auth0/auth0-react';
 import LoadingWrapper from './core/views/reusables/LoadingWrapper/LoadingWrapper';
 import LandingPage from './core/views/pages/LandingPage/LandingPage';
 import fieldsStore from './core/stores/derived/FieldsStore/FieldsStore';
-import yourCropsStore from './core/stores/derived/BatchesStore/BatchesStore';
-import cropsDatabaseStore from './core/stores/derived/CropsStore/CropsStore';
+import batchesStore from './core/stores/derived/BatchesStore/BatchesStore';
+import cropsStore from './core/stores/derived/CropsStore/CropsStore';
 import taskStore from './core/stores/derived/TasksStore/TasksStore';
 import weatherStore from './core/stores/derived/WeatherStore/WeatherStore';
 import UpgradePage from './core/views/pages/UpgradePage/UpgradePage';
-import CropsDatabasePage from './core/views/pages/CropsPage/CropsPage';
+import CropsPage from './core/views/pages/CropsPage/CropsPage';
 import AddTaskPage from './core/views/pages/AddTaskPage/AddTaskPage';
-import AddYourCropPage from './core/views/pages/AddBatchPage/AddBatchPage';
+import AddBatchPage from './core/views/pages/AddBatchPage/AddBatchPage';
 import { useLocation } from 'react-router-dom';
-import Measurements from './core/views/pages/MeasurementsPage/MeasurementsPage';
+import MeasurementsPage from './core/views/pages/MeasurementsPage/MeasurementsPage';
 import measurementsStore from './core/stores/derived/MeasurementsStore/MeasurementsStore';
 
 const App: React.FC = observer(() => {
@@ -58,8 +58,8 @@ const App: React.FC = observer(() => {
         taskStore.fetchData(),
         measurementsStore.fetchData(),
         fieldsStore.fetchData(),
-        yourCropsStore.fetchData(),
-        cropsDatabaseStore.fetchData(),
+        batchesStore.fetchData(),
+        cropsStore.fetchData(),
       ]);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -92,26 +92,26 @@ const App: React.FC = observer(() => {
               element={<AddFieldPage isEditing={true} />}
             />
             <Route path="/addFieldPage" element={<AddFieldPage />} />
+            <Route path="/batchesPage" element={<BatchesPage />} />
+            <Route path="/upgradePage" element={<UpgradePage />} />
             <Route path="/cropsPage" element={<CropsPage />} />
-            <Route path="/upgrade" element={<UpgradePage />} />
-            <Route path="/cropsDatabase" element={<CropsDatabasePage />} />
             <Route
               path="/addCropPage/:id"
               element={<AddCropPage isEditing={true} />}
             />
             <Route path="/addCropPage" element={<AddCropPage />} />{' '}
             <Route
-              path="/addYourCropPage/:id"
-              element={<AddYourCropPage isEditing={true} />}
+              path="/addBatchPage/:id"
+              element={<AddBatchPage isEditing={true} />}
             />
-            <Route path="/addYourCropPage" element={<AddYourCropPage />} />
+            <Route path="/addBatchPage" element={<AddBatchPage />} />
             <Route
               path="/addTaskPage/:id"
               element={<AddTaskPage isEditing={true} />}
             />
             <Route path="/addTaskPage" element={<AddTaskPage />} />
-            <Route path="/measurements" element={<Measurements />} />
-            <Route path="/measurements/:id" element={<Measurements />} />
+            <Route path="/measurementsPage" element={<MeasurementsPage />} />
+            <Route path="/measurementsPage/:id" element={<MeasurementsPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </LoadingWrapper>

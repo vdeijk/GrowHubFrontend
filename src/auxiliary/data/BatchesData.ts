@@ -35,6 +35,11 @@ class BatchesData {
       label: 'Notes',
       defaultValue: '',
     },
+    amount: {
+      key: 'amount',
+      label: 'Amount',
+      defaultValue: '',
+    },
   };
 
   public static dropdowns: Record<string, DropdownFieldModel> = {

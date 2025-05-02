@@ -20,7 +20,7 @@
   width: 100%;
   display: grid;
   align-items: center;
-  justify-items: center;
+  justify-items: start;
   margin-bottom: 4rem;
   font-size: 1.6rem;
   color: #fdfdfd;

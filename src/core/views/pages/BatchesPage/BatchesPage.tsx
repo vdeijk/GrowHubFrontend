@@ -29,7 +29,7 @@ const BatchesPage: React.FC = observer(() => {
   };
 
   const handleEdit = (id: number | undefined) => {
-    navigate(`/addYourCropPage/${id}`);
+    navigate(`/addBatchPage/${id}`);
   };
 
   const handleDelete = (id: number | undefined) => {
@@ -75,7 +75,7 @@ const BatchesPage: React.FC = observer(() => {
   };
 
   const buttonContainerData = {
-    clickHandler: () => navigate('/addYourCropPage'),
+    clickHandler: () => navigate('/addBatchPage'),
     label: 'Add Batch',
   };
 
