@@ -15,7 +15,6 @@ class MeasurementsData {
     { id: 'title', label: 'Title', sortable: true, type: 'string' },
     { id: 'actions', label: 'Actions', sortable: false, type: 'action' },
     { id: 'batchId', label: 'Batch Id', sortable: true, type: 'number' },
-    { id: 'date', label: 'Date', sortable: true, type: 'date' },
     { id: 'soilPH', label: 'Soil PH', sortable: false, type: 'number' },
     { id: 'lightLevel', label: 'Light Level', sortable: true, type: 'string' },
     {
@@ -36,6 +35,7 @@ class MeasurementsData {
       sortable: true,
       type: 'string',
     },
+    { id: 'date', label: 'Date', sortable: true, type: 'date' },
   ];
 
   public static textFields: Record<string, InputFieldModel> = {

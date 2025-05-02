@@ -13,9 +13,9 @@ class TasksData {
     { id: 'actions', label: 'Actions', sortable: false, type: 'action' },
     { id: 'batchId', label: 'Batch Id', sortable: true, type: 'number' },
     { id: 'priority', label: 'Priority', sortable: true, type: 'string' },
-    { id: 'dueDate', label: 'Due Date', sortable: true, type: 'date' },
     { id: 'category', label: 'Category', sortable: true, type: 'string' },
     { id: 'todoStatus', label: 'Status', sortable: true, type: 'string' },
+    { id: 'dueDate', label: 'Due Date', sortable: true, type: 'date' },
   ];
 
   public static textFields: Record<string, InputFieldModel> = {

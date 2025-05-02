@@ -35,18 +35,9 @@ const SearchBarTasks: React.FC<SearchBarTasksProps> = observer(
           label={searchQuery.label}
           aria-label="Title"
         />
-        <DateInput
-          label={startDateFilter.label}
-          value={startDateFilter?.value || ''}
-          onChange={(date) => startDateFilter?.setValue(date || '')}
-          aria-label="Start Date"
-        />
-        <DateInput
-          label={endDateFilter.label}
-          value={endDateFilter?.value || ''}
-          onChange={(date) => endDateFilter?.setValue(date || '')}
-          aria-label="End Date"
-        />
+        <div></div>
+        <div></div>
+        <div></div>
         <Dropdown
           value={priorityFilter.value}
           onChange={(value) => priorityFilter.setValue(String(value))}
@@ -67,6 +58,19 @@ const SearchBarTasks: React.FC<SearchBarTasksProps> = observer(
           options={statusFilter.options}
           aria-label="Status"
           label={statusFilter.label}
+        />{' '}
+        <div></div>
+        <DateInput
+          label={startDateFilter.label}
+          value={startDateFilter?.value || ''}
+          onChange={(date) => startDateFilter?.setValue(date || '')}
+          aria-label="Start Date"
+        />
+        <DateInput
+          label={endDateFilter.label}
+          value={endDateFilter?.value || ''}
+          onChange={(date) => endDateFilter?.setValue(date || '')}
+          aria-label="End Date"
         />
       </div>
     );

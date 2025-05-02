@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchBarDatabase from '../../containers/SearchBarDatabase/SearchBarDatabase';
+import SearchBarDatabase from '../../containers/SearchBarCrops/SearchBarCrops';
 import TableWithSorting from '../../reusables/TableWithSorting/TableWithSorting';
 import styles from './CropsPage.module.css';
 import cropsDatabaseStore from '../../../stores/derived/CropsStore/CropsStore';
@@ -10,7 +10,7 @@ import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import ActionIcons from '../../reusables/ActionIcons/ActionIcons';
 import Pagination from '../../reusables/Pagination/Pagination';
-import { SearchBarDatabaseProps } from '../../containers/SearchBarDatabase/SearchBarDatabase';
+import { SearchBarDatabaseProps } from '../../containers/SearchBarCrops/SearchBarCrops';
 import { PlantItem } from '../../../../api';
 import popupService from '../../../services/PopupService/PopupService';
 import NotesPopup from '../../reusables/NotesPopup/NotesPopup';

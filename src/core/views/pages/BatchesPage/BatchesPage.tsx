@@ -1,11 +1,11 @@
 import React from 'react';
-import SearchBarCrops from '../../containers/SearchBarCrops/SearchBarCrops';
+import SearchBarCrops from '../../containers/SearchBarBatches/SearchBarBatches';
 import TableWithSorting from '../../reusables/TableWithSorting/TableWithSorting';
 import styles from './BatchesPage.module.css';
 import cropsStore from '../../../stores/derived/BatchesStore/BatchesStore';
 import { observer } from 'mobx-react-lite';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
-import { SearchBarProps } from '../../containers/SearchBarCrops/SearchBarCrops';
+import { SearchBarProps } from '../../containers/SearchBarBatches/SearchBarBatches';
 import { TableProps } from '../../reusables/TableWithSorting/TableWithSorting';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';

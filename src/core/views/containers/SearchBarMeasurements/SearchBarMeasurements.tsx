@@ -41,19 +41,6 @@ const SearchBarMeasurements: React.FC<SearchBarMeasurementsProps> = observer(
           placeholder={searchQuery.placeholder}
           aria-label="Search"
         />
-        <DateInput
-          value={dateMin.value}
-          onChange={(date) => dateMin?.setValue(date || '')}
-          label={dateMin.label}
-          aria-label="Last Watered"
-        />
-        <DateInput
-          value={dateMax.value}
-          onChange={(date) => dateMax?.setValue(date || '')}
-          label={dateMax.label}
-          aria-label="Last Watered"
-        />
-        <div></div>
         <TextInput
           label={phMin.label}
           value={phMin.value}
@@ -68,6 +55,7 @@ const SearchBarMeasurements: React.FC<SearchBarMeasurementsProps> = observer(
           placeholder={phMax.placeholder}
           aria-label="Ph Max"
         />
+        <div></div>
         <Dropdown
           value={soilDryness.value}
           onChange={(value) => soilDryness.setValue(String(value))}
@@ -95,6 +83,18 @@ const SearchBarMeasurements: React.FC<SearchBarMeasurementsProps> = observer(
           options={growthStage.options}
           label={growthStage.label}
           aria-label="Growth Stage"
+        />
+        <DateInput
+          value={dateMin.value}
+          onChange={(date) => dateMin?.setValue(date || '')}
+          label={dateMin.label}
+          aria-label="Last Watered"
+        />
+        <DateInput
+          value={dateMax.value}
+          onChange={(date) => dateMax?.setValue(date || '')}
+          label={dateMax.label}
+          aria-label="Last Watered"
         />
       </div>
     );

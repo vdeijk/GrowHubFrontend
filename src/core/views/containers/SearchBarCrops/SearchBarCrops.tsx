@@ -1,30 +1,35 @@
 import React from 'react';
-import styles from './SearchBarCrops.module.css';
+import styles from './SearchBarDatabase.module.css';
 import TextInput from '../../reusables/TextInput/TextInput';
-import Dropdown from '../../reusables/Dropdown/Dropdown';
-import { InputField } from '../../../../auxiliary/classes/InputField';
-import { Dropdown as DropdownClass } from '../../../../auxiliary/classes/Dropdown';
-import { observer } from 'mobx-react-lite';
 import DateInput from '../../reusables/DateInput/DateInput';
-import { DateField as DateInputClass } from '../../../../auxiliary/classes/DateField';
+import { InputField } from '../../../../auxiliary/classes/InputField';
+import { DateField } from '../../../../auxiliary/classes/DateField';
+import { observer } from 'mobx-react-lite';
+import SyncButton from '../../reusables/SyncButton/SyncButton';
 
-export interface SearchBarProps {
-  location: DropdownClass<string>;
+export interface SearchBarDatabaseProps {
   searchQuery: InputField<string>;
-  lastWatered: DateInputClass<string>;
-  lastFertilized: DateInputClass<string>;
-  lastPruned: DateInputClass<string>;
-  lastHarvested: DateInputClass<string>;
+  harvestStart: DateField<string>;
+  harvestEnd: DateField<string>;
+  pruningStart: DateField<string>;
+  pruningEnd: DateField<string>;
+  fertilizingStart: DateField<string>;
+  fertilizingEnd: DateField<string>;
+  isLoading: boolean;
+  handleSync: () => void;
 }
 
-const SearchBarCrops: React.FC<SearchBarProps> = observer(
+const SearchBarCrops: React.FC<SearchBarDatabaseProps> = observer(
   ({
-    location,
     searchQuery,
-    lastWatered,
-    lastFertilized,
-    lastPruned,
-    lastHarvested,
+    harvestStart,
+    harvestEnd,
+    pruningStart,
+    pruningEnd,
+    fertilizingStart,
+    fertilizingEnd,
+    isLoading,
+    handleSync,
   }) => {
     return (
       <div className={styles.container}>
@@ -35,37 +40,48 @@ const SearchBarCrops: React.FC<SearchBarProps> = observer(
           placeholder={searchQuery.placeholder}
           aria-label="Search"
         />
-        <Dropdown
-          value={location.value}
-          onChange={(value) => location.setValue(String(value))}
-          options={location.options}
-          label={location.label}
-          aria-label="Location"
+        <div></div>
+        <div></div>
+        <div></div>
+        <DateInput
+          value={harvestStart.value}
+          onChange={(date) => harvestStart?.setValue(date || '')}
+          label={harvestStart.label}
+          aria-label="Harvest Start"
         />
         <DateInput
-          value={lastWatered.value}
-          onChange={(date) => lastWatered?.setValue(date || '')}
-          label={lastWatered.label}
-          aria-label="Last Watered"
+          value={harvestEnd.value}
+          onChange={(date) => harvestEnd?.setValue(date || '')}
+          label={harvestEnd.label}
+          aria-label="Harvest End"
         />
         <DateInput
-          value={lastFertilized.value}
-          onChange={(date) => lastFertilized?.setValue(date || '')}
-          label={lastFertilized.label}
-          aria-label="Last Fertilized"
+          value={pruningStart.value}
+          onChange={(date) => pruningStart?.setValue(date || '')}
+          label={pruningStart.label}
+          aria-label="Pruning Start"
         />
         <DateInput
-          value={lastPruned.value}
-          onChange={(date) => lastPruned?.setValue(date || '')}
-          label={lastPruned.label}
-          aria-label="Last Pruned"
+          value={pruningEnd.value}
+          onChange={(date) => pruningEnd?.setValue(date || '')}
+          label={pruningEnd.label}
+          aria-label="Pruning End"
         />
         <DateInput
-          value={lastHarvested.value}
-          onChange={(date) => lastHarvested?.setValue(date || '')}
-          label={lastHarvested.label}
-          aria-label="Last Harvested"
+          value={fertilizingStart.value}
+          onChange={(date) => fertilizingStart?.setValue(date || '')}
+          label={fertilizingStart.label}
+          aria-label="Fertilizing Start"
         />
+        <DateInput
+          value={fertilizingEnd.value}
+          onChange={(date) => fertilizingEnd?.setValue(date || '')}
+          label={fertilizingEnd.label}
+          aria-label="Fertilizing End"
+        />
+        <div></div>
+        <div></div>
+        <SyncButton onClick={handleSync} isSyncing={isLoading} />
       </div>
     );
   },

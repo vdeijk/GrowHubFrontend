@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './YourCropsContainer.module.css';
+import styles from './BatchesContainer.module.css';
 import TableWithoutSorting from '../../reusables/TableWithoutSorting/TableWithoutSorting';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import plantsStore from '../../../stores/derived/BatchesStore/BatchesStore';
@@ -9,7 +9,7 @@ import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import { observer } from 'mobx-react-lite';
 import { YourCropItem } from '../../../../api';
 
-const YourCropsContainer: React.FC = observer(() => {
+const BatchesContainer: React.FC = observer(() => {
   const navigate = useRouterNavigation();
 
   const buttonContainerData = {
@@ -56,4 +56,4 @@ const YourCropsContainer: React.FC = observer(() => {
   );
 });
 
-export default YourCropsContainer;
+export default BatchesContainer;

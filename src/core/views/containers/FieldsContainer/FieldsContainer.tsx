@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './MapSectionContainer.module.css';
+import styles from './FieldsContainer.module.css';
 import Map from '../../reusables/Map/Map';
 import Heading from '../../reusables/Heading/Heading';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
@@ -8,7 +8,7 @@ import locationStore from '../../../stores/derived/FieldsStore/FieldsStore';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 
-const MapSection: React.FC = observer(() => {
+const FieldsContainer: React.FC = observer(() => {
   const navigate = useRouterNavigation();
 
   const buttonContainerData = {
@@ -49,4 +49,4 @@ const MapSection: React.FC = observer(() => {
   );
 });
 
-export default MapSection;
+export default FieldsContainer;

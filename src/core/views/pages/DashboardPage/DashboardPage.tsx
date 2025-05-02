@@ -1,8 +1,8 @@
 import React from 'react';
-import MapSectionContainer from '../../containers/MapSectionContainer/MapSectionContainer';
+import MapSectionContainer from '../../containers/FieldsContainer/FieldsContainer';
 import CurrentWeatherContainer from '../../containers/CurrentWeatherContainer/CurrentWeatherContainer';
 import AgriTasksContainer from '../../containers/AgriTasksContainer/AgriTasksContainer';
-import YourCropsContainer from '../../containers/YourCropsContainer/YourCropsContainer';
+import YourCropsContainer from '../../containers/BatchesContainer/BatchesContainer';
 
 const DashboardPage: React.FC = () => {
   return (
