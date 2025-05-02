@@ -2,7 +2,7 @@
   width: 100%;
   border-radius: var(--border-radius-large);
   box-shadow: var(--box-shadow);
-  background-color: #fdfdfd;
+  background-color: #FDFDFD;
   padding: 2rem;
   display: grid;
   grid-auto-flow: column;
@@ -14,7 +14,7 @@
   width: 100%;
   border-radius: var(--border-radius-large);
   box-shadow: var(--box-shadow);
-  background-color: #fdfdfd;
+  background-color: #FDFDFD;
   padding: 2rem;
 }
 
@@ -29,7 +29,7 @@
 }
 
 .forecast__day {
-  background-color: #f0f0f0;
+  background-color: #F0F0F0;
   border: 1px solid #ddd;
   border-radius: var(--border-radius-large);
   padding: var(--spacing-small);

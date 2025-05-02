@@ -17,3 +17,7 @@
   background-color: #4caf50;
   color: #fdfdfd;
 }
+
+.table tbody tr:nth-child(even) {
+  background-color: #f0f0f0;
+}

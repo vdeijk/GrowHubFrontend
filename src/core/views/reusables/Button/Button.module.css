@@ -3,7 +3,7 @@
   border: none;
   border-radius: var(--border-radius-small);
   border: 2px solid #ef767a;
-  background: none;
+  background: #fdfdfd;
   color: #4caf50;
   cursor: pointer;
   transition: all 0.3s;

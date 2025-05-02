@@ -31,6 +31,7 @@ const SearchBar: React.FC<SearchBarProps> = observer(
                 aria-label={field.label}
               />
             ))}
+          {/* {inputFields?.length > 0 && <hr className={styles.divider}></hr>} */}
         </div>
         <div className={styles.subContainer}>
           {dropdownFields.map((field, index) => (
@@ -43,6 +44,7 @@ const SearchBar: React.FC<SearchBarProps> = observer(
               label={field.label}
             />
           ))}
+          {/* {inputFields?.length > 0 && <hr className={styles.divider}></hr>} */}
         </div>
         <div className={styles.subContainer}>
           {dateFields.map((field, index) => (

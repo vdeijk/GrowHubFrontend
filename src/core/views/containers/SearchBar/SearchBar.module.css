@@ -4,7 +4,7 @@
   margin-bottom: 2rem;
   grid-gap: var(--spacing-small);
   background-color: var(--color-white);
-  border-radius: var(--border-radius-small);
+  border-radius: var(--border-radius-large);
   box-shadow: var(--box-shadow);
   padding: 2rem;
 }
@@ -15,3 +15,13 @@
   align-items: center;
   grid-gap: 1rem;
 }
+
+/*
+.divider {
+  border: none;
+  border-top: 2px solid var(--color-primary);
+  width: 80%;
+  justify-self: start;
+  grid-column: 1 / -1;
+  margin: 2rem auto 2rem auto;
+}*/
