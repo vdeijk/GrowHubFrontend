@@ -1,5 +1,5 @@
 import { YourCropItem } from '../../../../api';
-import yourCropsStore from '../YourCropsStore/YourCropsStore';
+import yourCropsStore from '../BatchesStore/BatchesStore';
 import { InputField } from '../../../../auxiliary/classes/InputField';
 import { BaseFormStore } from '../../base/BaseFormStore/BaseFormStore';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';

@@ -2,11 +2,11 @@ import { SearchableStore } from '../../base/BaseSearchableStore/BaseSearchableSt
 import { YourCropItem } from '../../../../api';
 import { makeObservable, runInAction, action, computed } from 'mobx';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
-import YourCropsData from '../../../../auxiliary/classes/YourCropData';
+import YourCropsData from '../../../../auxiliary/data/BatchesData';
 import EventBus from '../../../services/EventBusService/EventBusService';
 import { PaginationService } from '../../../services/PaginationService/PaginationService';
 
-class YourCropsStore extends SearchableStore<YourCropItem> {
+class BatchesStore extends SearchableStore<YourCropItem> {
   public paginationService = new PaginationService();
   public get isLoading(): boolean {
     return this.endpointService.isLoading;
@@ -63,5 +63,5 @@ class YourCropsStore extends SearchableStore<YourCropItem> {
   };
 }
 
-const yourCropsStore = new YourCropsStore();
-export default yourCropsStore;
+const batchesStore = new BatchesStore();
+export default batchesStore;

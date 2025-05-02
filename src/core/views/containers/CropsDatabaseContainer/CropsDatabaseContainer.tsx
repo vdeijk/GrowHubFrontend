@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './CropsDatabaseContainer.module.css';
 import TableWithoutSorting from '../../reusables/TableWithoutSorting/TableWithoutSorting';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
-import cropsDatabaseStore from '../../../stores/derived/CropsDatabaseStore/CropsDatabaseStore';
+import cropsDatabaseStore from '../../../stores/derived/CropsStore/CropsStore';
 import Heading from '../../reusables/Heading/Heading';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';

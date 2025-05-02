@@ -2,45 +2,45 @@ import React, { useEffect } from 'react';
 import TextInput from '../../reusables/TextInput/TextInput';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import Button, { ButtonProps } from '../../reusables/Button/Button';
-import styles from './AddYourCropPage.module.css';
+import styles from './AddBatchPage.module.css';
 import { observer } from 'mobx-react-lite';
 import { useParams } from 'react-router-dom';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import Dropdown from '../../reusables/Dropdown/Dropdown';
-import addYourCropStore from '../../../stores/derived/AddYourCropStore/AddYourCropStore';
+import addBatchStore from '../../../stores/derived/AddBatchStore/AddBatchStore';
 import DateInput from '../../reusables/DateInput/DateInput';
 import { DateInputProps } from '../../reusables/DateInput/DateInput';
-import yourCropsStore from '../../../stores/derived/YourCropsStore/YourCropsStore';
+import { TextInputProps } from '../../reusables/TextInput/TextInput';
 
-interface AddYourCropPageProps {
+interface AddBatchPageProps {
   isEditing?: boolean;
 }
 
-const AddYourCropPage: React.FC<AddYourCropPageProps> = observer(
+const AddBatchPage: React.FC<AddBatchPageProps> = observer(
   ({ isEditing = false }) => {
     const navigate = useRouterNavigation();
     const { id } = useParams<{ id: string }>();
 
     useEffect(() => {
       if (isEditing && id) {
-        addYourCropStore.loadCrop(id);
+        addBatchStore.loadCrop(id);
       } else {
-        addYourCropStore.resetForm();
+        addBatchStore.resetForm();
       }
     }, [isEditing, id]);
 
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
 
-      if (!addYourCropStore.validateForm()) return;
+      if (!addBatchStore.validateForm()) return;
 
       if (isEditing && id) {
-        addYourCropStore.updateCrop(id);
+        addBatchStore.updateCrop(id);
       } else {
-        addYourCropStore.addCrop();
+        addBatchStore.addCrop();
       }
 
-      addYourCropStore.resetForm();
+      addBatchStore.resetForm();
 
       navigate('/cropsPage');
     };
@@ -52,28 +52,31 @@ const AddYourCropPage: React.FC<AddYourCropPageProps> = observer(
       customStyles: { marginTop: '1rem' },
     };
 
-    const nameFieldModel = {
-      ...addYourCropStore.fields.nameField,
-      value: String(addYourCropStore.fields.nameField.value),
-      onChange: (value: string) =>
-        addYourCropStore.fields.nameField.setValue(value),
+    const createTextInputFieldModel = (fieldKey: string): TextInputProps => {
+      return {
+        ...addBatchStore.inputFields[fieldKey],
+        value: String(addBatchStore.inputFields[fieldKey].value || ''),
+        onChange: (value: string) =>
+          addBatchStore.inputFields[fieldKey].setValue(value),
+      };
     };
 
-    const createDropdownFieldModel = (fieldKey: string) => ({
-      ...addYourCropStore.fields[fieldKey],
-      value: String(addYourCropStore.fields[fieldKey].value),
-      options: yourCropsStore.dropdownFilters[fieldKey].options,
-      onChange: (value: string | number) =>
-        addYourCropStore.fields[fieldKey].setValue(String(value)),
-    });
+    const createDropdownFieldModel = (fieldKey: string) => {
+      return {
+        ...addBatchStore.dropdownFields[fieldKey],
+        value: String(addBatchStore.dropdownFields[fieldKey].value),
+        onChange: (value: string | number) =>
+          addBatchStore.dropdownFields[fieldKey].setValue(String(value)),
+      };
+    };
 
     const createDateFieldModel = (fieldKey: string): DateInputProps => ({
-      ...addYourCropStore.fields[fieldKey],
-      value: String(addYourCropStore.fields[fieldKey].value || ''),
-      onChange: (value) =>
-        addYourCropStore.fields[fieldKey].setValue(value || ''),
+      ...addBatchStore.dateFields[fieldKey],
+      value: String(addBatchStore.dateFields[fieldKey].value || ''),
+      onChange: (value) => addBatchStore.dateFields[fieldKey].setValue(value || ''),
     });
 
+    const nameFieldModel = createTextInputFieldModel('name');
     const locationFieldModel = createDropdownFieldModel('location');
     const lastWateredFieldModel = createDateFieldModel('lastWatered');
     const lastFertilizedFieldModel = createDateFieldModel('lastFertilized');
@@ -82,7 +85,7 @@ const AddYourCropPage: React.FC<AddYourCropPageProps> = observer(
 
     return (
       <section className={styles.section}>
-        <LoadingWrapper isLoading={addYourCropStore.isLoading}>
+        <LoadingWrapper isLoading={addBatchStore.isLoading}>
           <form onSubmit={handleSubmit} className={styles.form}>
             <TextInput {...nameFieldModel} />
             <Dropdown {...locationFieldModel} />
@@ -99,4 +102,4 @@ const AddYourCropPage: React.FC<AddYourCropPageProps> = observer(
   },
 );
 
-export default AddYourCropPage;
+export default AddBatchPage;

@@ -11,7 +11,6 @@ class AddFieldStore extends BaseFormStore {
   constructor() {
     super();
 
-    //@ts-ignore
     this.fields = {
       locationNameField: new InputField<string>(
         '',

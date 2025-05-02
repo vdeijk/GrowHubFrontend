@@ -1,13 +1,13 @@
-import { PlantItem } from '../../../../api';
-import cropsDatabaseStore from '../CropsStore/CropsStore';
+import { YourCropItem } from '../../../../api';
+import yourCropsStore from '../BatchesStore/BatchesStore';
 import { BaseFormStore } from '../../base/BaseFormStore/BaseFormStore';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
 import { runInAction } from 'mobx';
 import { localStorageService } from '../../../services/LocalStorageService/LocalStorageService';
 import AddCropData from '../../../../auxiliary/data/AddCropData';
 
-class AddCropStore extends BaseFormStore {
-  private endpointService = new EndpointService('Plant');
+class AddBatchStore extends BaseFormStore {
+  private endpointService = new EndpointService('YourCrops');
 
   constructor() {
     super();
@@ -16,22 +16,20 @@ class AddCropStore extends BaseFormStore {
       this.initTextFilter(textField);
     });
 
-    Object.values(AddCropData.dropdownFields).forEach(
-      (dropdownField) => {
-        this.initDropdownFilter(dropdownField);
-      },
-    );
+    Object.values(AddCropData.dropdownFields).forEach((dropdownField) => {
+      this.initDropdownFilter(dropdownField);
+    });
   }
 
   public addCrop = async () => {
-    const data: PlantItem = {
+    const data: YourCropItem = {
       commonName: this.inputFields.nameField.value as string,
     };
 
     await this.endpointService.postData(data);
 
     localStorageService.invalidateCache('cropsDatabaseItems');
-    cropsDatabaseStore.fetchData();
+    yourCropsStore.fetchData();
   };
 
   public updateCrop = async (id: string) => {
@@ -39,19 +37,18 @@ class AddCropStore extends BaseFormStore {
 
     if (Number.isNaN(numberId)) return;
 
-    const data: PlantItem = {
-      commonName: this.inputFields.commonName.value as string,
+    const data: YourCropItem = {
+      commonName: this.inputFields.nameField.value as string,
     };
 
     await this.endpointService.putData(`${id}`, data);
 
-    localStorageService.invalidateCache('cropsDatabaseItems');
-    cropsDatabaseStore.fetchData();
+    yourCropsStore.fetchData();
   };
 
   public loadCrop = async (id: string) => {
-    const data: PlantItem | undefined =
-      await this.endpointService.getData<PlantItem>(`${id}`);
+    const data: YourCropItem | undefined =
+      await this.endpointService.getData<YourCropItem>(`${id}`);
 
     if (!data) return;
 
@@ -67,5 +64,5 @@ class AddCropStore extends BaseFormStore {
   }
 }
 
-const addCropStore = new AddCropStore();
-export default addCropStore;
+const addBatchStore = new AddBatchStore();
+export default addBatchStore;

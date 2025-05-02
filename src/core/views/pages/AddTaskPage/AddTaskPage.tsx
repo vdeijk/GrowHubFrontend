@@ -9,7 +9,7 @@ import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import Button, { ButtonProps } from '../../reusables/Button/Button';
 import Dropdown from '../../reusables/Dropdown/Dropdown';
 import DateInput, { DateInputProps } from '../../reusables/DateInput/DateInput';
-import taskStore from '../../../stores/derived/TaskStore/TaskStore';
+import taskStore from '../../../stores/derived/TasksStore/TasksStore';
 
 interface AddTaskPageProps {
   isEditing?: boolean;

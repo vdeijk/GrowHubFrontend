@@ -3,10 +3,10 @@ import { PlantItem } from '../../../../api';
 import { makeObservable, runInAction, action, computed } from 'mobx';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
 import { localStorageService } from '../../../services/LocalStorageService/LocalStorageService';
-import CropsDatabaseData from '../../../../auxiliary/classes/CropsDatabaseData';
+import CropsDatabaseData from '../../../../auxiliary/data/CropsData';
 import { PaginationService } from '../../../services/PaginationService/PaginationService';
 
-class CropsDatabaseStore extends SearchableStore<PlantItem> {
+class CropsStore extends SearchableStore<PlantItem> {
   private endpointService = new EndpointService('Plant');
   public paginationService = new PaginationService();
   public get isLoading(): boolean {
@@ -65,5 +65,5 @@ class CropsDatabaseStore extends SearchableStore<PlantItem> {
   };
 }
 
-const cropsDatabaseStore = new CropsDatabaseStore();
-export default cropsDatabaseStore;
+const cropsStore = new CropsStore();
+export default cropsStore;

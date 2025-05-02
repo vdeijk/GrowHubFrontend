@@ -3,7 +3,7 @@ import { PlantItem } from '../../api';
 import { TableHeaderModel } from '../interfaces/TableHeaderModel';
 import { InputFieldModel } from '../interfaces/InputFieldModel';
 
-class CropsDatabaseData {
+class CropsData {
   public static tableHeaders: TableHeaderModel<PlantItem>[] = [
     { id: 'id', label: 'ID', sortable: true, type: 'number' },
     { id: 'commonName', label: 'Common Name', sortable: true, type: 'string' },
@@ -88,4 +88,4 @@ class CropsDatabaseData {
   ];
 }
 
-export default CropsDatabaseData;
+export default CropsData;

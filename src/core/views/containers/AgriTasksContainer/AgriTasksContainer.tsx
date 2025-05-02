@@ -1,6 +1,6 @@
 import React from 'react';
 import Task from '../../reusables/Task/Task';
-import taskStore from '../../../stores/derived/TaskStore/TaskStore';
+import taskStore from '../../../stores/derived/TasksStore/TasksStore';
 import styles from './AgriTasksContainer.module.css';
 import { observer } from 'mobx-react-lite';
 import Heading from '../../reusables/Heading/Heading';

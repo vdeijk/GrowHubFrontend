@@ -7,7 +7,7 @@ import { TodoItem } from '../../api';
 import { TableHeaderModel } from '../interfaces/TableHeaderModel';
 import { InputFieldModel } from '../interfaces/InputFieldModel';
 
-class TaskData {
+class TasksData {
   public static tableHeaders: TableHeaderModel<TodoItem>[] = [
     { id: 'title', label: 'Title', sortable: true, type: 'string' },
     { id: 'actions', label: 'Actions', sortable: false, type: 'action' },
@@ -63,4 +63,4 @@ class TaskData {
   ];
 }
 
-export default TaskData;
+export default TasksData;

@@ -2,10 +2,10 @@ import { TodoItem } from '../../../../api';
 import { SearchableStore } from '../../base/BaseSearchableStore/BaseSearchableStore';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
 import { makeObservable, runInAction, action, computed } from 'mobx';
-import TaskData from '../../../../auxiliary/classes/TaskData';
+import TaskData from '../../../../auxiliary/data/TasksData';
 import { PaginationService } from '../../../services/PaginationService/PaginationService';
 
-class TaskStore extends SearchableStore<TodoItem> {
+class TasksStore extends SearchableStore<TodoItem> {
   private endpointService = new EndpointService('Todo');
   public paginationService = new PaginationService();
   public get isLoading(): boolean {
@@ -56,5 +56,5 @@ class TaskStore extends SearchableStore<TodoItem> {
   };
 }
 
-const taskStore = new TaskStore();
-export default taskStore;
+const tasksStore = new TasksStore();
+export default tasksStore;

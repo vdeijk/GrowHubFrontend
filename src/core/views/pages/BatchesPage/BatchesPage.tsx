@@ -2,7 +2,7 @@ import React from 'react';
 import SearchBarCrops from '../../containers/SearchBarCrops/SearchBarCrops';
 import TableWithSorting from '../../reusables/TableWithSorting/TableWithSorting';
 import styles from './YourCropsPage.module.css';
-import cropsStore from '../../../stores/derived/YourCropsStore/YourCropsStore';
+import cropsStore from '../../../stores/derived/BatchesStore/BatchesStore';
 import { observer } from 'mobx-react-lite';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import { SearchBarProps } from '../../containers/SearchBarCrops/SearchBarCrops';
@@ -15,10 +15,10 @@ import { YourCropItem } from '../../../../api';
 import NotesPopup from '../../reusables/NotesPopup/NotesPopup';
 import popupService from '../../../services/PopupService/PopupService';
 import Popup from '../../containers/Popup/Popup';
-import yourCropsStore from '../../../stores/derived/YourCropsStore/YourCropsStore';
+import yourCropsStore from '../../../stores/derived/BatchesStore/BatchesStore';
 import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
 
-const YourCropsPage: React.FC = observer(() => {
+const BatchesPage: React.FC = observer(() => {
   const { paginationService } = cropsStore;
   const navigate = useRouterNavigation();
 
@@ -103,4 +103,4 @@ const YourCropsPage: React.FC = observer(() => {
   );
 });
 
-export default YourCropsPage;
+export default BatchesPage;

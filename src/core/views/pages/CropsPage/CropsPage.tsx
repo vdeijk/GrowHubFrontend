@@ -2,7 +2,7 @@ import React from 'react';
 import SearchBarDatabase from '../../containers/SearchBarDatabase/SearchBarDatabase';
 import TableWithSorting from '../../reusables/TableWithSorting/TableWithSorting';
 import styles from './CropsDatabasePage.module.css';
-import cropsDatabaseStore from '../../../stores/derived/CropsDatabaseStore/CropsDatabaseStore';
+import cropsDatabaseStore from '../../../stores/derived/CropsStore/CropsStore';
 import { observer } from 'mobx-react-lite';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import { TableProps } from '../../reusables/TableWithSorting/TableWithSorting';
@@ -17,7 +17,7 @@ import NotesPopup from '../../reusables/NotesPopup/NotesPopup';
 import Popup from '../../containers/Popup/Popup';
 import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
 
-const CropsDatabasePage: React.FC = observer(() => {
+const CropsPage: React.FC = observer(() => {
   const navigate = useRouterNavigation();
   const { paginationService } = cropsDatabaseStore;
 
@@ -103,4 +103,4 @@ const CropsDatabasePage: React.FC = observer(() => {
   );
 });
 
-export default CropsDatabasePage;
+export default CropsPage;

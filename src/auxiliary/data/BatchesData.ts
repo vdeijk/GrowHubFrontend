@@ -5,7 +5,7 @@ import { YourCropItem } from '../../api';
 import { TableHeaderModel } from '../interfaces/TableHeaderModel';
 import { InputFieldModel } from '../interfaces/InputFieldModel';
 
-class YourCropsData {
+class BatchesData {
   public static tableHeaders: TableHeaderModel<YourCropItem>[] = [
     { id: 'id', label: 'Id', sortable: true, type: 'number' },
     { id: 'commonName', label: 'Common Name', sortable: true, type: 'string' },
@@ -63,4 +63,4 @@ class YourCropsData {
   ];
 }
 
-export default YourCropsData;
+export default BatchesData;

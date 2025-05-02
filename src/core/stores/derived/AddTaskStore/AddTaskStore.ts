@@ -1,7 +1,7 @@
 import { TodoItem } from '../../../../api';
 import { BaseFormStore } from '../../base/BaseFormStore/BaseFormStore';
 import { InputField } from '../../../../auxiliary/classes/InputField';
-import taskStore from '../TaskStore/TaskStore';
+import taskStore from '../TasksStore/TasksStore';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
 import { runInAction } from 'mobx';
 import { DateField } from '../../../../auxiliary/classes/DateField';

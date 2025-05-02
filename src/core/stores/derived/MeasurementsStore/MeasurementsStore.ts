@@ -2,7 +2,7 @@ import { SearchableStore } from '../../base/BaseSearchableStore/BaseSearchableSt
 import { MeasurementItem } from '../../../../api';
 import { makeObservable, runInAction, action, computed } from 'mobx';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
-import MeasurementsData from '../../../../auxiliary/classes/MeasurementsData';
+import MeasurementsData from '../../../../auxiliary/data/MeasurementsData';
 import { PaginationService } from '../../../services/PaginationService/PaginationService';
 
 class MeasurementsStore extends SearchableStore<MeasurementItem> {

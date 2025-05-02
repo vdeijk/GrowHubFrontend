@@ -1,6 +1,6 @@
 import React from 'react';
 import TableWithSorting from '../../reusables/TableWithSorting/TableWithSorting';
-import taskStore from '../../../stores/derived/TaskStore/TaskStore';
+import taskStore from '../../../stores/derived/TasksStore/TasksStore';
 import styles from './TasksPage.module.css';
 import { observer } from 'mobx-react-lite';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
