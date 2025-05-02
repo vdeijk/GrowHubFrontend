@@ -18,7 +18,6 @@ const TableWithSorting = <T,>({
   sortField,
   sortOrder,
 }: TableProps<T>) => {
-
   const getSortIndicator = (field: keyof T) => {
     if (sortField === field) {
       return sortOrder === 'asc' ? '▲' : '▼';

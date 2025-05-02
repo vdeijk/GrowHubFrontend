@@ -1,6 +1,4 @@
-import {
-  YourCropItem,
-} from '../../../../api';
+import { YourCropItem } from '../../../../api';
 import yourCropsStore from '../YourCropsStore/YourCropsStore';
 import { InputField } from '../../../../auxiliary/classes/InputField';
 import { BaseFormStore } from '../../base/BaseFormStore/BaseFormStore';

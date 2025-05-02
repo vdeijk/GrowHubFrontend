@@ -46,7 +46,7 @@ class CropsDatabaseStore extends SearchableStore<PlantItem> {
     );
 
     if (!data) return;
-    
+
     runInAction(() => {
       this.items = data;
       this.filteredItems = this.items;

@@ -67,7 +67,8 @@ const MeasurementsPage: React.FC<MeasurementsProps> = observer(() => {
   };
 
   const tableProps: TableProps<MeasurementItem> = {
-    headers: measurementsStore.tableHeaders as TableHeaderModel<MeasurementItem>[],
+    headers:
+      measurementsStore.tableHeaders as TableHeaderModel<MeasurementItem>[],
     data: measurementsStore.paginatedItems.map((item) => ({
       ...item,
       actions: (
