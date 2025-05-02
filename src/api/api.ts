@@ -59,6 +59,12 @@ export interface LocationItem {
   name?: string | null;
   /**
    *
+   * @type {string}
+   * @memberof LocationItem
+   */
+  notes?: string | null;
+  /**
+   *
    * @type {number}
    * @memberof LocationItem
    */

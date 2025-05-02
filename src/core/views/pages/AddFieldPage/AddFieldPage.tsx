@@ -7,6 +7,7 @@ import styles from './AddFieldPage.module.css';
 import { observer } from 'mobx-react-lite';
 import { useParams } from 'react-router-dom';
 import { TextInputProps } from '../../reusables/TextInput/TextInput';
+import TextArea from '../../reusables/TextArea/TextArea';
 
 interface AddFieldPageProps {
   isEditing?: boolean;
@@ -54,8 +55,8 @@ const AddFieldPage: React.FC<AddFieldPageProps> = observer(
         addFieldStore.inputFields[fieldKey].setValue(value),
     });
 
-    const locationNameFieldModel =
-      createTextInputFieldModel('name');
+    const locationNameFieldModel = createTextInputFieldModel('name');
+    const notesFieldModel = createTextInputFieldModel('notes');
     const latitudeFieldModel = createTextInputFieldModel('latitude');
     const longitudeFieldModel = createTextInputFieldModel('longitude');
 
@@ -63,8 +64,8 @@ const AddFieldPage: React.FC<AddFieldPageProps> = observer(
       <section className={styles.section}>
         <form onSubmit={handleSubmit} className={styles.form}>
           <TextInput {...locationNameFieldModel} />
+          <TextArea {...notesFieldModel} />
           <TextInput {...latitudeFieldModel} />
-          <div></div>
           <TextInput {...longitudeFieldModel} />
           <div></div>
           <Button {...buttonProps} />

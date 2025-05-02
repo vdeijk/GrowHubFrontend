@@ -6,6 +6,7 @@ class AddMeasurementData {
   public static textFields: Record<string, InputFieldModel> = {
     titleField: { key: 'nameField', label: 'Title Field', defaultValue: '' },
     description: { key: 'description', label: 'Description', defaultValue: '' },
+    notes:  { key: 'notes', label: 'Notes', defaultValue: '' }, 
   };
 
   public static dropdowns: Record<string, DropdownFieldModel> = {
@@ -38,4 +39,3 @@ class AddMeasurementData {
 }
 
 export default AddMeasurementData;
-

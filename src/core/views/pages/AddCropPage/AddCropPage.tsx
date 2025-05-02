@@ -9,6 +9,7 @@ import { useParams } from 'react-router-dom';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import Dropdown from '../../reusables/Dropdown/Dropdown';
 import { TextInputProps } from '../../reusables/TextInput/TextInput';
+import TextArea from '../../reusables/TextArea/TextArea';
 
 interface AddCropPageProps {
   isEditing?: boolean;
@@ -72,6 +73,7 @@ const AddCropPage: React.FC<AddCropPageProps> = observer(
     const waterCycle = createTextInputFieldModel('waterCycle');
     const pruningCycle = createTextInputFieldModel('pruningCycle');
     const fertilizationCycle = createTextInputFieldModel('fertilizationCycle');
+    const notes = createTextInputFieldModel('notes');
     const harvestCycle = createTextInputFieldModel('harvestCycle');
     const harvestStart = createDropdownFieldModel('harvestStart');
     const harvestEnd = createDropdownFieldModel('harvestEnd');
@@ -89,7 +91,7 @@ const AddCropPage: React.FC<AddCropPageProps> = observer(
         <LoadingWrapper isLoading={addCropStore.isLoading}>
           <form onSubmit={handleSubmit} className={styles.form}>
             <TextInput {...commonName} />
-            <div></div>
+            <TextArea {...notes} />
             <TextInput {...waterCycle} />
             <TextInput {...pruningCycle} />
             <TextInput {...fertilizationCycle} />

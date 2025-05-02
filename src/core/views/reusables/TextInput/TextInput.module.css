@@ -11,7 +11,7 @@
 .container {
   display: grid;
   grid-gap: 0.5rem;
-  align-items: center;
+  align-content: start;
 }
 
 .label {

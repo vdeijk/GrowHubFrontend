@@ -5,7 +5,7 @@ import { InputFieldModel } from '../interfaces/InputFieldModel';
 class AddBatchData {
   public static textFields: Record<string, InputFieldModel> = {
     commonName: { key: 'commonName', label: 'Title Field', defaultValue: '' },
-    notes: { key: 'notes', label: 'Description', defaultValue: '' },
+    notes: { key: 'notes', label: 'Notes', defaultValue: '' },
     amount: { key: 'amount', label: 'Amount', defaultValue: '' },
   };
 
@@ -27,4 +27,3 @@ class AddBatchData {
 }
 
 export default AddBatchData;
-

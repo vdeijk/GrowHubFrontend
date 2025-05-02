@@ -877,6 +877,10 @@
             "type": "string",
             "nullable": true
           },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          },
           "latitude": {
             "type": "number",
             "format": "double"

@@ -49,7 +49,12 @@ class RouterService {
       hidden: true,
       isDynamic: true,
     },
-    { path: '/addCropPage', label: 'Add Batch', hidden: true, isDynamic: false },
+    {
+      path: '/addCropPage',
+      label: 'Add Batch',
+      hidden: true,
+      isDynamic: false,
+    },
     {
       path: '/addCropPage/:id',
       label: 'Edit Crop',

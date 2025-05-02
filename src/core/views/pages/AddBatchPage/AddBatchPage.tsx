@@ -6,11 +6,11 @@ import styles from './AddBatchPage.module.css';
 import { observer } from 'mobx-react-lite';
 import { useParams } from 'react-router-dom';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
-import Dropdown from '../../reusables/Dropdown/Dropdown';
 import addBatchStore from '../../../stores/derived/AddBatchStore/AddBatchStore';
 import DateInput from '../../reusables/DateInput/DateInput';
 import { DateInputProps } from '../../reusables/DateInput/DateInput';
 import { TextInputProps } from '../../reusables/TextInput/TextInput';
+import TextArea from '../../reusables/TextArea/TextArea';
 
 interface AddBatchPageProps {
   isEditing?: boolean;
@@ -61,14 +61,14 @@ const AddBatchPage: React.FC<AddBatchPageProps> = observer(
       };
     };
 
-    const createDropdownFieldModel = (fieldKey: string) => {
-      return {
-        ...addBatchStore.dropdownFields[fieldKey],
-        value: String(addBatchStore.dropdownFields[fieldKey].value),
-        onChange: (value: string | number) =>
-          addBatchStore.dropdownFields[fieldKey].setValue(String(value)),
-      };
-    };
+    // const createDropdownFieldModel = (fieldKey: string) => {
+    //   return {
+    //     ...addBatchStore.dropdownFields[fieldKey],
+    //     value: String(addBatchStore.dropdownFields[fieldKey].value),
+    //     onChange: (value: string | number) =>
+    //       addBatchStore.dropdownFields[fieldKey].setValue(String(value)),
+    //   };
+    // };
 
     const createDateFieldModel = (fieldKey: string): DateInputProps => ({
       ...addBatchStore.dateFields[fieldKey],
@@ -91,8 +91,8 @@ const AddBatchPage: React.FC<AddBatchPageProps> = observer(
         <LoadingWrapper isLoading={addBatchStore.isLoading}>
           <form onSubmit={handleSubmit} className={styles.form}>
             <TextInput {...commonNameModel} />
-            <TextInput {...notesModel} />
             <TextInput {...amountModel} />
+            <TextArea {...notesModel} />
             <div></div>
             {/* <Dropdown {...locationFieldModel} /> */}
             <DateInput {...lastWateredFieldModel} />

@@ -10,6 +10,7 @@ import Button, { ButtonProps } from '../../reusables/Button/Button';
 import Dropdown from '../../reusables/Dropdown/Dropdown';
 import DateInput, { DateInputProps } from '../../reusables/DateInput/DateInput';
 import taskStore from '../../../stores/derived/TasksStore/TasksStore';
+import TextArea from '../../reusables/TextArea/TextArea';
 
 interface AddTaskPageProps {
   isEditing?: boolean;
@@ -61,13 +62,14 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
     const createDateFieldModel = (fieldKey: string): DateInputProps => ({
       ...addTaskStore.dateFields[fieldKey],
       value: String(addTaskStore.dateFields[fieldKey].value || ''),
-      onChange: (value) => addTaskStore.dateFields[fieldKey].setValue(value || ''),
+      onChange: (value) =>
+        addTaskStore.dateFields[fieldKey].setValue(value || ''),
     });
 
     const titleProps = createTextInputFieldModel('titleField');
+    const notesProps = createTextInputFieldModel('notes');
     const priorityProps = createDropdownFieldModel('priority');
     const dueDateProps = createDateFieldModel('dueDate');
-    const descriptionProps = createTextInputFieldModel('description');
     const categoryProps = createDropdownFieldModel('category');
     const statusProps = createDropdownFieldModel('todoStatus');
 
@@ -82,9 +84,9 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
         <LoadingWrapper isLoading={addTaskStore.isLoading}>
           <form onSubmit={handleSubmit} className={styles.form}>
             <TextInput {...titleProps} />
+            <TextArea {...notesProps} />
             <Dropdown {...priorityProps} />
             <DateInput {...dueDateProps} />
-            <TextInput {...descriptionProps} />
             <Dropdown {...categoryProps} />
             <Dropdown {...statusProps} />
             <div></div>
