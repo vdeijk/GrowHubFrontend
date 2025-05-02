@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './SearchBarCrops.module.css';
+import styles from './SearchBarBatches.module.css';
 import TextInput from '../../reusables/TextInput/TextInput';
 import Dropdown from '../../reusables/Dropdown/Dropdown';
 import { InputField } from '../../../../auxiliary/classes/InputField';

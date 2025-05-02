@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './SearchBarDatabase.module.css';
+import styles from './SearchBarCrops.module.css';
 import TextInput from '../../reusables/TextInput/TextInput';
 import DateInput from '../../reusables/DateInput/DateInput';
 import { InputField } from '../../../../auxiliary/classes/InputField';
