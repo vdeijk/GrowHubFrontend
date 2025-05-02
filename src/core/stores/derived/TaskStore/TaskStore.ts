@@ -4,7 +4,6 @@ import { EndpointService } from '../../../services/EndpointService/EndpointServi
 import { makeObservable, runInAction, action, computed } from 'mobx';
 import TaskData from '../../../../auxiliary/classes/TaskData';
 import { PaginationService } from '../../../services/PaginationService/PaginationService';
-import { toJS } from 'mobx';
 
 class TaskStore extends SearchableStore<TodoItem> {
   private endpointService = new EndpointService('Todo');

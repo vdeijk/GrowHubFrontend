@@ -8,7 +8,8 @@ import { observer } from 'mobx-react-lite';
 import { useParams } from 'react-router-dom';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import Dropdown from '../../reusables/Dropdown/Dropdown';
-import cropsDatabaseStore from '../../../stores/derived/CropsDatabaseStore/CropsDatabaseStore';
+import { TextInputProps } from '../../reusables/TextInput/TextInput';
+import { toJS } from 'mobx';
 
 interface AddCropPageProps {
   isEditing?: boolean;
@@ -50,46 +51,60 @@ const AddCropPage: React.FC<AddCropPageProps> = observer(
       customStyles: { marginTop: '1rem' },
     };
 
-    const nameFieldModel = {
-      ...addCropStore.fields.nameField,
-      value: String(addCropStore.fields.nameField.value),
-      onChange: (value: string) =>
-        addCropStore.fields.nameField.setValue(value),
+    const createTextInputFieldModel = (fieldKey: string): TextInputProps => {
+      return {
+        ...addCropStore.inputFields[fieldKey],
+        value: String(addCropStore.inputFields[fieldKey].value || ''),
+        onChange: (value: string) =>
+          addCropStore.inputFields[fieldKey].setValue(value),
+      };
     };
 
-    const createDropdownFieldModel = (fieldKey: string) => ({
-      ...addCropStore.fields[fieldKey],
-      value: String(addCropStore.fields[fieldKey].value),
-      options: cropsDatabaseStore.dropdownFilters[fieldKey].options,
-      onChange: (value: string | number) =>
-        addCropStore.fields[fieldKey].setValue(String(value)),
-    });
+    const createDropdownFieldModel = (fieldKey: string) => {
+      return {
+        ...addCropStore.dropdownFields[fieldKey],
+        value: String(addCropStore.dropdownFields[fieldKey].value),
+        onChange: (value: string | number) =>
+          addCropStore.dropdownFields[fieldKey].setValue(String(value)),
+      };
+    };
 
-    const sunPreferenceFieldModel = createDropdownFieldModel('sunPreference');
-    const waterNeedsFieldModel = createDropdownFieldModel('waterNeeds');
-    const soilTypeFieldModel = createDropdownFieldModel('soilType');
-    const soilPHFieldModel = createDropdownFieldModel('soilPH');
-    const pruningFieldModel = createDropdownFieldModel('pruning');
-    const climateZoneFieldModel = createDropdownFieldModel('climateZone');
-    const plantTypeFieldModel = createDropdownFieldModel('plantType');
-    const growthRateFieldModel = createDropdownFieldModel('growthRate');
-    const fertilizerNeedsFieldModel =
-      createDropdownFieldModel('fertilizerNeeds');
+    const commonName = createTextInputFieldModel('commonName');
+    const waterCycle = createTextInputFieldModel('waterCycle');
+    const pruningCycle = createTextInputFieldModel('pruningCycle');
+    const fertilizationCycle = createTextInputFieldModel('fertilizationCycle');
+    const harvestCycle = createTextInputFieldModel('harvestCycle');
+    const harvestStart = createDropdownFieldModel('harvestStart');
+    const harvestEnd = createDropdownFieldModel('harvestEnd');
+    const pruningStart = createDropdownFieldModel('pruningStart');
+    const pruningEnd = createDropdownFieldModel('pruningEnd');
+    const fertilizingStart = createDropdownFieldModel('fertilizingStart');
+    const fertilizingEnd = createDropdownFieldModel('fertilizingEnd');
+    const phMin = createTextInputFieldModel('phMin');
+    const phMax = createTextInputFieldModel('phMax');
+    const temperatureMin = createTextInputFieldModel('temperatureMin');
+    const temperatureMax = createTextInputFieldModel('temperatureMax');
 
     return (
       <section className={styles.section}>
         <LoadingWrapper isLoading={addCropStore.isLoading}>
           <form onSubmit={handleSubmit} className={styles.form}>
-            <TextInput {...nameFieldModel} />
-            <Dropdown {...sunPreferenceFieldModel} />
-            <Dropdown {...waterNeedsFieldModel} />
-            <Dropdown {...soilTypeFieldModel} />
-            <Dropdown {...soilPHFieldModel} />
-            <Dropdown {...pruningFieldModel} />
-            <Dropdown {...climateZoneFieldModel} />
-            <Dropdown {...plantTypeFieldModel} />
-            <Dropdown {...growthRateFieldModel} />
-            <Dropdown {...fertilizerNeedsFieldModel} />
+            <TextInput {...commonName} />
+            <div></div>
+            <TextInput {...waterCycle} />
+            <TextInput {...pruningCycle} />
+            <TextInput {...fertilizationCycle} />
+            <TextInput {...harvestCycle} />
+            <Dropdown {...harvestStart} />
+            <Dropdown {...harvestEnd} />
+            <Dropdown {...pruningStart} />
+            <Dropdown {...pruningEnd} />
+            <Dropdown {...fertilizingStart} />
+            <Dropdown {...fertilizingEnd} />
+            <TextInput {...phMin} />
+            <TextInput {...phMax} />
+            <TextInput {...temperatureMin} />
+            <TextInput {...temperatureMax} />
             <div></div>
             <Button {...buttonProps} />
           </form>

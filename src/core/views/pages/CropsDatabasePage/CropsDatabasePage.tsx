@@ -1,6 +1,6 @@
 import React from 'react';
 import SearchBarDatabase from '../../containers/SearchBarDatabase/SearchBarDatabase';
-import Table from '../../reusables/TableWithSorting/TableWithSorting';
+import TableWithSorting from '../../reusables/TableWithSorting/TableWithSorting';
 import styles from './CropsDatabasePage.module.css';
 import cropsDatabaseStore from '../../../stores/derived/CropsDatabaseStore/CropsDatabaseStore';
 import { observer } from 'mobx-react-lite';
@@ -89,7 +89,7 @@ const CropsDatabasePage: React.FC = observer(() => {
         <SearchBarDatabase {...searchBarProps} />
         <div className={styles.buttonContainer}>
           <div className={styles.tableContainer}>
-            <Table {...tableProps} />
+            <TableWithSorting {...tableProps} />
           </div>
           <ButtonContainer buttons={[buttonContainerData]} />
         </div>

@@ -75,8 +75,6 @@ const AddYourCropPage: React.FC<AddYourCropPageProps> = observer(
     });
 
     const locationFieldModel = createDropdownFieldModel('location');
-    const growthStageFieldModel = createDropdownFieldModel('growthStage');
-    const healthStatusFieldModel = createDropdownFieldModel('healthStatus');
     const lastWateredFieldModel = createDateFieldModel('lastWatered');
     const lastFertilizedFieldModel = createDateFieldModel('lastFertilized');
     const lastPrunedFieldModel = createDateFieldModel('lastPruned');
@@ -88,8 +86,6 @@ const AddYourCropPage: React.FC<AddYourCropPageProps> = observer(
           <form onSubmit={handleSubmit} className={styles.form}>
             <TextInput {...nameFieldModel} />
             <Dropdown {...locationFieldModel} />
-            <Dropdown {...growthStageFieldModel} />
-            <Dropdown {...healthStatusFieldModel} />
             <DateInput {...lastWateredFieldModel} />
             <DateInput {...lastFertilizedFieldModel} />
             <DateInput {...lastPrunedFieldModel} />

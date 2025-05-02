@@ -122,6 +122,7 @@ export abstract class SearchableStore<T> {
           field.defaultValue,
           field.label,
           false,
+          typeof field.options === 'function' ? field.options() : field.options,
         );
       }
 

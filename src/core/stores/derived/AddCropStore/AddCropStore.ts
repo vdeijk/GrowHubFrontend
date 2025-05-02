@@ -1,11 +1,10 @@
 import { PlantItem } from '../../../../api';
 import cropsDatabaseStore from '../CropsDatabaseStore/CropsDatabaseStore';
-import { InputField } from '../../../../auxiliary/classes/InputField';
 import { BaseFormStore } from '../../base/BaseFormStore/BaseFormStore';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
 import { runInAction } from 'mobx';
-import { Dropdown } from '../../../../auxiliary/classes/Dropdown';
 import { localStorageService } from '../../../services/LocalStorageService/LocalStorageService';
+import AddCropsDatabaseData from '../../../../auxiliary/classes/AddCropsDatabaseData';
 
 class AddCropStore extends BaseFormStore {
   private endpointService = new EndpointService('Plant');
@@ -13,29 +12,20 @@ class AddCropStore extends BaseFormStore {
   constructor() {
     super();
 
-    //@ts-ignore
-    this.fields = {
-      nameField: new InputField<string>(
-        '',
-        'Common Name',
-        true,
-        'Enter common name',
-      ),
-      sunPreference: new Dropdown<string>('', 'Sun Preference', true),
-      waterNeeds: new Dropdown<string>('', 'Water Needs', true),
-      soilType: new Dropdown<string>('', 'Soil Type', true),
-      soilPH: new Dropdown<string>('', 'Soil PH', true),
-      pruning: new Dropdown<string>('', 'Pruning', true),
-      climateZone: new Dropdown<string>('', 'Climate Zone', true),
-      plantType: new Dropdown<string>('', 'Plant Type', true),
-      growthRate: new Dropdown<string>('', 'Growth Rate', true),
-      fertilizerNeeds: new Dropdown<string>('', 'fertilizer Needs', true),
-    } as Record<string, InputField<string | number | boolean>>;
+    Object.values(AddCropsDatabaseData.textFields).forEach((textField) => {
+      this.initTextFilter(textField);
+    });
+
+    Object.values(AddCropsDatabaseData.dropdownFields).forEach(
+      (dropdownField) => {
+        this.initDropdownFilter(dropdownField);
+      },
+    );
   }
 
   public addCrop = async () => {
     const data: PlantItem = {
-      commonName: this.fields.nameField.value as string,
+      commonName: this.inputFields.nameField.value as string,
     };
 
     await this.endpointService.postData(data);
@@ -50,7 +40,7 @@ class AddCropStore extends BaseFormStore {
     if (Number.isNaN(numberId)) return;
 
     const data: PlantItem = {
-      commonName: this.fields.nameField.value as string,
+      commonName: this.inputFields.commonName.value as string,
     };
 
     await this.endpointService.putData(`${id}`, data);
@@ -66,7 +56,7 @@ class AddCropStore extends BaseFormStore {
     if (!data) return;
 
     runInAction(() => {
-      this.fields.nameField.setValue(String(data.commonName));
+      this.inputFields.nameField.setValue(String(data.commonName));
     });
   };
 

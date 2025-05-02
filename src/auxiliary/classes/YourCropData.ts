@@ -10,7 +10,6 @@ class YourCropsData {
     { id: 'id', label: 'Id', sortable: true, type: 'number' },
     { id: 'commonName', label: 'Common Name', sortable: true, type: 'string' },
     { id: 'actions', label: 'Actions', sortable: false, type: 'action' },
-    { id: 'databaseId', label: 'Database Id', sortable: true, type: 'number' },
     { id: 'amount', label: 'Amount', sortable: true, type: 'number' },
     { id: 'location', label: 'Location', sortable: true, type: 'string' },
     { id: 'lastWatered', label: 'Last Watered', sortable: true, type: 'date' },
