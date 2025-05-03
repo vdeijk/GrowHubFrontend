@@ -27,19 +27,23 @@ const TableRow = <T,>({ tableRowData, headers }: TableRowProps<T>) => {
   ) => {
     const cellValue = tableRowData[headerId];
 
-    if (type === 'action') {
-      return cellValue as React.ReactNode;
-    }
+    switch (type) {
+      case 'action':
+        return cellValue as React.ReactNode;
 
-    if (cellValue === null || cellValue === undefined) {
-      return '';
-    }
+      case 'date':
+        if (typeof cellValue === 'string') {
+          return formatDate(cellValue);
+        }
+        break;
 
-    if (type === 'date' && typeof cellValue === 'string') {
-      return formatDate(cellValue);
-    }
+      case 'string':
+      case 'number':
+        return String(cellValue ?? '');
 
-    return String(cellValue ?? '');
+      default:
+        return '';
+    }
   };
 
   return (

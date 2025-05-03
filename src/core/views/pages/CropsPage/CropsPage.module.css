@@ -18,8 +18,10 @@
 }
 
 .buttonContainer {
+  height: 100%;
   grid-gap: 2rem;
   display: grid;
   justify-content: end;
   grid-auto-flow: column;
+  align-content: end;
 }

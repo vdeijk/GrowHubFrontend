@@ -20,10 +20,6 @@ class CropsStore extends SearchableStore<PlantItem> {
       this.initTextFilter(textField);
     });
 
-    CropsDatabaseData.dateFields.forEach((dateField) => {
-      this.initDateFilter(dateField);
-    });
-
     makeObservable(this, {
       isLoading: computed,
       fetchData: action,

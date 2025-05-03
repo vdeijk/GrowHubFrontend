@@ -1,4 +1,3 @@
-import { DateFieldModel } from '../interfaces/DateFieldModel';
 import { PlantItem } from '../../api';
 import { TableHeaderModel } from '../interfaces/TableHeaderModel';
 import { InputFieldModel } from '../interfaces/InputFieldModel';
@@ -77,7 +76,11 @@ class CropsData {
       defaultValue: '',
     },
   };
+}
 
+export default CropsData;
+
+/*import { DateFieldModel } from '../interfaces/DateFieldModel';
   public static dateFields: DateFieldModel[] = [
     { key: 'harvestStart', label: 'Harvest Start', defaultValue: '' },
     { key: 'harvestEnd', label: 'Harvest End', defaultValue: '' },
@@ -85,7 +88,4 @@ class CropsData {
     { key: 'pruningEnd', label: 'Pruning End', defaultValue: '' },
     { key: 'fertilizingStart', label: 'Fertilizing Start', defaultValue: '' },
     { key: 'fertilizingEnd', label: 'Fertilizing End', defaultValue: '' },
-  ];
-}
-
-export default CropsData;
+  ];*/
