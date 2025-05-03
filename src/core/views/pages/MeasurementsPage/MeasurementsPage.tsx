@@ -45,7 +45,7 @@ const MeasurementsPage: React.FC<MeasurementsProps> = observer(() => {
   };
 
   const handleEdit = (id: number | undefined) => {
-    navigate(`/addMeasurement/${id}`);
+    navigate(`/addMeasurementPage/${id}`);
   };
 
   const handleDelete = (id: number | undefined) => {

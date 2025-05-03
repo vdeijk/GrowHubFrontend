@@ -532,6 +532,12 @@ export interface YourCropItem {
   id?: number | null;
   /**
    *
+   * @type {number}
+   * @memberof YourCropItem
+   */
+  cropId?: number | null;
+  /**
+   *
    * @type {string}
    * @memberof YourCropItem
    */

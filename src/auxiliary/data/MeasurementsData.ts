@@ -14,17 +14,10 @@ class MeasurementsData {
   public static tableHeaders: TableHeaderModel<MeasurementItem>[] = [
     {
       id: 'title',
-      label: 'Title',
+      label: 'Crop Name',
       sortable: true,
       type: 'string',
       tooltip: 'The crop type of the reading',
-    },
-    {
-      id: 'actions',
-      label: 'Actions',
-      sortable: false,
-      type: 'action',
-      tooltip: 'View, edit or delete the reading',
     },
     {
       id: 'batchId',
@@ -32,6 +25,13 @@ class MeasurementsData {
       sortable: true,
       type: 'number',
       tooltip: 'Use this identifier to link the reading to a batch',
+    },
+    {
+      id: 'actions',
+      label: 'Actions',
+      sortable: false,
+      type: 'action',
+      tooltip: 'View, edit or delete the reading',
     },
     {
       id: 'soilPH',

@@ -67,7 +67,6 @@ const TableRow = <T,>({ tableRowData, headers }: TableRowProps<T>) => {
         );
 
       case 'boolean':
-        console.log(tableRowData);
         return (
           <span
             style={{

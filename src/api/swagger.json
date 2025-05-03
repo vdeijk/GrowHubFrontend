@@ -1180,6 +1180,11 @@
             "format": "int32",
             "nullable": true
           },
+          "cropId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
           "commonName": {
             "type": "string",
             "nullable": true

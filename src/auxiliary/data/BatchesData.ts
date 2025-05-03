@@ -17,10 +17,17 @@ class BatchesData {
     },
     {
       id: 'commonName',
-      label: 'Common Name',
+      label: 'Crop Name',
       sortable: true,
       type: 'string',
       tooltip: 'The common name of the batch',
+    },
+    {
+      id: 'cropId',
+      label: 'Crop Id',
+      sortable: true,
+      type: 'string',
+      tooltip: 'Use this identifier to link the batch to a crop type',
     },
     {
       id: 'actions',

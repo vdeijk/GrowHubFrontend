@@ -1,18 +1,17 @@
 .button {
-    background: var(--color-white);
-    color: var(--color-primary);
-    border: none;
-    border-radius: 50%;
-    width: 2.4rem;
-    height: 2.4rem;
-    font-weight: bold;
-    cursor: pointer;
-    line-height: 1;
-    font-size: 1.5rem;
-  }
-  
-  .button:hover {
-    background: var(--color-text);
-    color: var(--color-white);
-  }
-  
+  background: var(--color-white);
+  color: var(--color-primary);
+  border: none;
+  border-radius: 50%;
+  width: 2.4rem;
+  height: 2.4rem;
+  font-weight: bold;
+  cursor: pointer;
+  line-height: 1;
+  font-size: 1.5rem;
+}
+
+.button:hover {
+  background: var(--color-text);
+  color: var(--color-white);
+}

@@ -13,7 +13,7 @@ class CropsData {
     },
     {
       id: 'commonName',
-      label: 'Common Name',
+      label: 'Crop Name',
       sortable: true,
       type: 'string',
       tooltip: 'The common name of the crop',
@@ -60,14 +60,16 @@ class CropsData {
       label: 'PH Min',
       sortable: true,
       type: 'number',
-      tooltip: 'The minimum pH level of the soil this crop should be planted in',
+      tooltip:
+        'The minimum pH level of the soil this crop should be planted in',
     },
     {
       id: 'phMax',
       label: 'PH Max',
       sortable: true,
       type: 'number',
-      tooltip: 'The maximum pH level of the soil this crop should be planted in',
+      tooltip:
+        'The maximum pH level of the soil this crop should be planted in',
     },
     {
       id: 'temperatureMin',

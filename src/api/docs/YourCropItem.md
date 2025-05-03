@@ -5,6 +5,7 @@
 | Name               | Type       | Description | Notes                             |
 | ------------------ | ---------- | ----------- | --------------------------------- |
 | **id**             | **number** |             | [optional] [default to undefined] |
+| **cropId**         | **number** |             | [optional] [default to undefined] |
 | **commonName**     | **string** |             | [optional] [default to undefined] |
 | **amount**         | **number** |             | [optional] [default to undefined] |
 | **databaseId**     | **number** |             | [optional] [default to undefined] |
@@ -23,6 +24,7 @@ import { YourCropItem } from './api';
 
 const instance: YourCropItem = {
   id,
+  cropId,
   commonName,
   amount,
   databaseId,
