@@ -43,7 +43,7 @@ const TableRow = <T,>({ tableRowData, headers }: TableRowProps<T>) => {
 
   const renderCellContent = (
     headerId: keyof T,
-    type?: 'date' | 'string' | 'number' | 'action',
+    type?: 'date' | 'string' | 'number' | 'action' | 'boolean',
   ) => {
     const cellValue = tableRowData[headerId];
     const cellColor = getCellColor(tableRowData, String(headerId));
@@ -64,6 +64,18 @@ const TableRow = <T,>({ tableRowData, headers }: TableRowProps<T>) => {
       case 'number':
         return (
           <span style={{ color: cellColor }}>{String(cellValue ?? '')}</span>
+        );
+
+      case 'boolean':
+        console.log(tableRowData);
+        return (
+          <span
+            style={{
+              color: cellValue ? 'var(--color-primary)' : 'var(--color-red)',
+            }}
+          >
+            {cellValue ? '✔' : '✖'}
+          </span>
         );
 
       default:
