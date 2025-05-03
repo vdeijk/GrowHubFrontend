@@ -13,17 +13,17 @@ class BatchesData {
     { id: 'amount', label: 'Amount', sortable: true, type: 'number' },
     { id: 'location', label: 'Location', sortable: true, type: 'string' },
     { id: 'planted', label: 'Planted', sortable: true, type: 'date' },
-    { id: 'lastWatered', label: 'Last Watered', sortable: true, type: 'date' },
+    { id: 'lastWatered', label: 'Watered', sortable: true, type: 'date' },
     {
       id: 'lastFertilized',
-      label: 'Last Fertilized',
+      label: 'Fertilized',
       sortable: true,
       type: 'date',
     },
-    { id: 'lastPruned', label: 'Last Pruned', sortable: true, type: 'date' },
+    { id: 'lastPruned', label: 'Pruned', sortable: true, type: 'date' },
     {
       id: 'lastHarvested',
-      label: 'Last Harvested',
+      label: 'Harvested',
       sortable: true,
       type: 'date',
     },
@@ -62,10 +62,12 @@ class BatchesData {
   }
 
   public static dateFields: DateFieldModel[] = [
-    { key: 'lastWatered', label: 'Last Watered', defaultValue: '' },
-    { key: 'lastFertilized', label: 'Last Fertilized', defaultValue: '' },
-    { key: 'lastPruned', label: 'Last Pruned', defaultValue: '' },
-    { key: 'lastHarvested', label: 'Last Harvested', defaultValue: '' },
+    { key: 'plantedBefore', label: 'Planted Before', defaultValue: '' },
+    { key: 'plantedAfter', label: 'Planted After', defaultValue: '' },
+    { key: 'lastWatered', label: 'Watered Before', defaultValue: '' },
+    { key: 'lastFertilized', label: 'Fertilized Before', defaultValue: '' },
+    { key: 'lastPruned', label: 'Pruned Before', defaultValue: '' },
+    { key: 'lastHarvested', label: 'Harvested Before', defaultValue: '' },
   ];
 }
 
