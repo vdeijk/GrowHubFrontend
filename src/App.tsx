@@ -4,7 +4,6 @@ import NavbarContainer from './core/views/containers/NavbarContainer/NavbarConta
 import MenuContainer from './core/views/containers/MenuContainer/MenuContainer';
 import DashboardPage from './core/views/pages/DashboardPage/DashboardPage';
 import FooterContainer from './core/views/containers/FooterContainer/FooterContainer';
-import profilePicture from './auxiliary/assets/cropGrowHub.jpg';
 import { Routes, Route } from 'react-router-dom';
 import BatchesPage from './core/views/pages/BatchesPage/BatchesPage';
 import routerStore from './core/services/RouterService/RouterService';
@@ -75,12 +74,7 @@ const App: React.FC = observer(() => {
     <main className="appContainer">
       <ToastContainer style={{ zIndex: 9999 }} />
       <NavbarContainer userName={user?.name || ''} />
-      <MenuContainer
-        userName={user?.name || ''}
-        profilePicture={profilePicture}
-        menuLinks={routerStore.getVisibleLinks()}
-        curPageTitle={routerStore.currentLabel}
-      />
+      <MenuContainer />
       <PageLayout>
         <LoadingWrapper isLoading={isLoading}>
           <Routes>
@@ -130,7 +124,5 @@ const App: React.FC = observer(() => {
     </main>
   );
 });
-
-//AddYourCropPage
 
 export default App;

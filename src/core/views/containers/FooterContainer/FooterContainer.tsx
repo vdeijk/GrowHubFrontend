@@ -5,7 +5,7 @@ const FooterContainer: React.FC = () => {
   return (
     <footer className={styles.footer}>
       <p>
-        &copy; {new Date().getFullYear()} Van der Eijk Web Development. All
+        &copy; {new Date().getFullYear()} VanEyk Web Development. All
         rights reserved.
       </p>
     </footer>

@@ -34,3 +34,11 @@
   object-fit: cover;
   margin-bottom: var(--spacing-small);
 }
+
+.heading {
+  width: 100%;
+  justify-content: space-between;
+  display: grid;
+  grid-auto-flow: column;
+
+}
