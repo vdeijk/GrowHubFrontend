@@ -16,47 +16,57 @@ export interface SearchBarProps {
 
 const SearchBar: React.FC<SearchBarProps> = observer(
   ({ inputFields, dateFields, dropdownFields }) => {
+    const inputFieldsDisplay = (
+      <div className={styles.subContainer}>
+        {inputFields
+          .filter((field) => field.label.toLowerCase() !== 'notes')
+          .map((field, index) => (
+            <TextInput
+              key={`input-${index}`}
+              label={field.label}
+              value={field.value}
+              onChange={field.setValue}
+              placeholder={field.placeholder}
+              aria-label={field.label}
+            />
+          ))}
+      </div>
+    );
+
+    const dateFieldsDisplay = (
+      <div className={styles.subContainer}>
+        {dateFields.map((field, index) => (
+          <DateInput
+            key={`date-${index}`}
+            value={field.value}
+            onChange={(date) => field.setValue(date || '')}
+            label={field.label}
+            aria-label={field.label}
+          />
+        ))}
+      </div>
+    );
+
+    const dropdownFieldsDisplay = (
+      <div className={styles.subContainer}>
+        {dropdownFields.map((field, index) => (
+          <Dropdown
+            key={`dropdown-${index}`}
+            value={field.value}
+            onChange={(value) => field.setValue(String(value))}
+            options={field.options}
+            aria-label={field.label}
+            label={field.label}
+          />
+        ))}
+      </div>
+    );
+
     return (
       <section className={styles.container}>
-        <div className={styles.subContainer}>
-          {inputFields
-            .filter((field) => field.label.toLowerCase() !== 'notes')
-            .map((field, index) => (
-              <TextInput
-                key={`input-${index}`}
-                label={field.label}
-                value={field.value}
-                onChange={field.setValue}
-                placeholder={field.placeholder}
-                aria-label={field.label}
-              />
-            ))}
-          {/* {inputFields?.length > 0 && <hr className={styles.divider}></hr>} */}
-        </div>
-        <div className={styles.subContainer}>
-          {dropdownFields.map((field, index) => (
-            <Dropdown
-              key={`dropdown-${index}`}
-              value={field.value}
-              onChange={(value) => field.setValue(String(value))}
-              options={field.options}
-              aria-label={field.label}
-              label={field.label}
-            />
-          ))}
-          {/* {inputFields?.length > 0 && <hr className={styles.divider}></hr>} */}
-        </div>
-        <div className={styles.subContainer}>
-          {dateFields.map((field, index) => (
-            <DateInput
-              key={`date-${index}`}
-              value={field.value}
-              onChange={(date) => field.setValue(date || '')}
-              label={field.label}
-              aria-label={field.label}
-            />
-          ))}
-        </div>
+        {inputFields.length > 0 && inputFieldsDisplay}
+        {dropdownFields.length > 0 && dropdownFieldsDisplay}
+        {dateFields.length > 0 && dateFieldsDisplay}
       </section>
     );
   },
