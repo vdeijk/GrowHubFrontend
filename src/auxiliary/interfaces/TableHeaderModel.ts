@@ -3,4 +3,5 @@ export interface TableHeaderModel<T> {
   label: string;
   sortable: boolean;
   type: 'date' | 'string' | 'number' | 'action';
+  tooltip?: string;
 }

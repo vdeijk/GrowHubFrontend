@@ -33,6 +33,7 @@ const TableWithSorting = <T,>({
             <th
               key={String(header.id)}
               onClick={() => onSort(header.id as keyof T)}
+              title={header.tooltip || ''}
             >
               <div className={styles.headerContent}>
                 {header.label}

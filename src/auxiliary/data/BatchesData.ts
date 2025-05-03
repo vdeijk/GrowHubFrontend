@@ -7,25 +7,69 @@ import { InputFieldModel } from '../interfaces/InputFieldModel';
 
 class BatchesData {
   public static tableHeaders: TableHeaderModel<YourCropItem>[] = [
-    { id: 'id', label: 'Id', sortable: true, type: 'number' },
-    { id: 'commonName', label: 'Common Name', sortable: true, type: 'string' },
-    { id: 'actions', label: 'Actions', sortable: false, type: 'action' },
-    { id: 'amount', label: 'Amount', sortable: true, type: 'number' },
-    { id: 'location', label: 'Location', sortable: true, type: 'string' },
-    { id: 'planted', label: 'Planted', sortable: true, type: 'date' },
-    { id: 'lastWatered', label: 'Watered', sortable: true, type: 'date' },
+    { id: 'id', label: 'Id', sortable: true, type: 'number', tooltip: 'test' },
+    {
+      id: 'commonName',
+      label: 'Common Name',
+      sortable: true,
+      type: 'string',
+      tooltip: 'test',
+    },
+    {
+      id: 'actions',
+      label: 'Actions',
+      sortable: false,
+      type: 'action',
+      tooltip: 'test',
+    },
+    {
+      id: 'amount',
+      label: 'Amount',
+      sortable: true,
+      type: 'number',
+      tooltip: 'test',
+    },
+    {
+      id: 'location',
+      label: 'Location',
+      sortable: true,
+      type: 'string',
+      tooltip: 'test',
+    },
+    {
+      id: 'planted',
+      label: 'Planted',
+      sortable: true,
+      type: 'date',
+      tooltip: 'test',
+    },
+    {
+      id: 'lastWatered',
+      label: 'Watered',
+      sortable: true,
+      type: 'date',
+      tooltip: 'test',
+    },
     {
       id: 'lastFertilized',
       label: 'Fertilized',
       sortable: true,
       type: 'date',
+      tooltip: 'test',
     },
-    { id: 'lastPruned', label: 'Pruned', sortable: true, type: 'date' },
+    {
+      id: 'lastPruned',
+      label: 'Pruned',
+      sortable: true,
+      type: 'date',
+      tooltip: 'test',
+    },
     {
       id: 'lastHarvested',
       label: 'Harvested',
       sortable: true,
       type: 'date',
+      tooltip: 'test',
     },
   ];
 

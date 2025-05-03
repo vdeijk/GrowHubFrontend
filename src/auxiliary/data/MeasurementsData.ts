@@ -12,30 +12,69 @@ import { InputFieldModel } from '../interfaces/InputFieldModel';
 
 class MeasurementsData {
   public static tableHeaders: TableHeaderModel<MeasurementItem>[] = [
-    { id: 'title', label: 'Title', sortable: true, type: 'string' },
-    { id: 'actions', label: 'Actions', sortable: false, type: 'action' },
-    { id: 'batchId', label: 'Batch Id', sortable: true, type: 'number' },
-    { id: 'soilPH', label: 'Soil PH', sortable: false, type: 'number' },
-    { id: 'lightLevel', label: 'Light Level', sortable: true, type: 'string' },
+    {
+      id: 'title',
+      label: 'Title',
+      sortable: true,
+      type: 'string',
+      tooltip: 'test',
+    },
+    {
+      id: 'actions',
+      label: 'Actions',
+      sortable: false,
+      type: 'action',
+      tooltip: 'test',
+    },
+    {
+      id: 'batchId',
+      label: 'Batch Id',
+      sortable: true,
+      type: 'number',
+      tooltip: 'test',
+    },
+    {
+      id: 'soilPH',
+      label: 'Soil PH',
+      sortable: false,
+      type: 'number',
+      tooltip: 'test',
+    },
+    {
+      id: 'lightLevel',
+      label: 'Light Level',
+      sortable: true,
+      type: 'string',
+      tooltip: 'test',
+    },
     {
       id: 'soilDryness',
       label: 'Soil Dryness',
       sortable: true,
       type: 'string',
+      tooltip: 'test',
     },
     {
       id: 'healthStatus',
       label: 'Health Status',
       sortable: true,
       type: 'string',
+      tooltip: 'test',
     },
     {
       id: 'growthStage',
       label: 'Growth Stage',
       sortable: true,
       type: 'string',
+      tooltip: 'test',
     },
-    { id: 'date', label: 'Date', sortable: true, type: 'date' },
+    {
+      id: 'date',
+      label: 'Date',
+      sortable: true,
+      type: 'date',
+      tooltip: 'test',
+    },
   ];
 
   public static textFields: Record<string, InputFieldModel> = {
