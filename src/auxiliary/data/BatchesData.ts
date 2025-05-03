@@ -12,6 +12,7 @@ class BatchesData {
     { id: 'actions', label: 'Actions', sortable: false, type: 'action' },
     { id: 'amount', label: 'Amount', sortable: true, type: 'number' },
     { id: 'location', label: 'Location', sortable: true, type: 'string' },
+    { id: 'planted', label: 'Planted', sortable: true, type: 'date' },
     { id: 'lastWatered', label: 'Last Watered', sortable: true, type: 'date' },
     {
       id: 'lastFertilized',

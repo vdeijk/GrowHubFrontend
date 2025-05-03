@@ -22,7 +22,7 @@ const MenuContainer: React.FC<MenuProps> = ({
         <Heading
           level={4}
           text={curPageTitle}
-          customStyles={{ marginBottom: '2rem', color: 'var(--color-white);' }}
+          customStyles={{ marginBottom: '2rem', color: '#FDFDFD' }}
         />
         <img src={profilePicture} alt="Profile" className={styles.image} />
       </div>

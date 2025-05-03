@@ -11,7 +11,6 @@
 | **fertilizationCycle** | **number** |             | [optional] [default to undefined] |
 | **harvestCycle**       | **number** |             | [optional] [default to undefined] |
 | **notes**              | **string** |             | [optional] [default to undefined] |
-| **phNotes**            | **string** |             | [optional] [default to undefined] |
 | **harvestStart**       | **string** |             | [optional] [default to undefined] |
 | **harvestEnd**         | **string** |             | [optional] [default to undefined] |
 | **pruningStart**       | **string** |             | [optional] [default to undefined] |
@@ -36,7 +35,6 @@ const instance: PlantItem = {
   fertilizationCycle,
   harvestCycle,
   notes,
-  phNotes,
   harvestStart,
   harvestEnd,
   pruningStart,
