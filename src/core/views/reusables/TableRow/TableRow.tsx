@@ -21,11 +21,32 @@ const TableRow = <T,>({ tableRowData, headers }: TableRowProps<T>) => {
     return `${day}/${month}/${year}`;
   };
 
+  const getCellColor = (
+    item: T & {
+      redColumns?: string[];
+      yellowColumns?: string[];
+      greenColumns?: string[];
+    },
+    headerId: string,
+  ): string => {
+    switch (true) {
+      case item.redColumns?.includes(headerId):
+        return 'var(--color-red)';
+      case item.yellowColumns?.includes(headerId):
+        return 'var(--color-yellow)';
+      case item.greenColumns?.includes(headerId):
+        return 'var(--color-primary)';
+      default:
+        return 'inherit';
+    }
+  };
+
   const renderCellContent = (
     headerId: keyof T,
     type?: 'date' | 'string' | 'number' | 'action',
   ) => {
     const cellValue = tableRowData[headerId];
+    const cellColor = getCellColor(tableRowData, String(headerId));
 
     switch (type) {
       case 'action':
@@ -33,13 +54,17 @@ const TableRow = <T,>({ tableRowData, headers }: TableRowProps<T>) => {
 
       case 'date':
         if (typeof cellValue === 'string') {
-          return formatDate(cellValue);
+          return (
+            <span style={{ color: cellColor }}>{formatDate(cellValue)}</span>
+          );
         }
         break;
 
       case 'string':
       case 'number':
-        return String(cellValue ?? '');
+        return (
+          <span style={{ color: cellColor }}>{String(cellValue ?? '')}</span>
+        );
 
       default:
         return '';

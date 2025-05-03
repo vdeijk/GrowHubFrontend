@@ -2,7 +2,7 @@ import { TodoItem } from '../../../../api';
 import { SearchableStore } from '../../base/BaseSearchableStore/BaseSearchableStore';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
 import { makeObservable, runInAction, action, computed } from 'mobx';
-import TaskData from '../../../../auxiliary/data/TasksData';
+import TasksData from '../../../../auxiliary/data/TasksData';
 import { PaginationService } from '../../../services/PaginationService/PaginationService';
 
 class TasksStore extends SearchableStore<TodoItem> {
@@ -11,20 +11,20 @@ class TasksStore extends SearchableStore<TodoItem> {
   public get isLoading(): boolean {
     return this.endpointService.isLoading;
   }
-  public tableHeaders = TaskData.tableHeaders;
+  public tableHeaders = TasksData.tableHeaders;
 
   constructor() {
     super(['title']);
 
-    Object.values(TaskData.textFields).forEach((textField) => {
+    Object.values(TasksData.textFields).forEach((textField) => {
       this.initTextFilter(textField);
     });
 
-    Object.values(TaskData.dropdowns).forEach((dropdown) => {
+    Object.values(TasksData.dropdowns).forEach((dropdown) => {
       this.initDropdownFilter(dropdown);
     });
 
-    TaskData.dateFields.forEach((dateField) => {
+    TasksData.dateFields.forEach((dateField) => {
       this.initDateFilter(dateField);
     });
 
@@ -41,7 +41,7 @@ class TasksStore extends SearchableStore<TodoItem> {
     if (!data) return;
 
     runInAction(() => {
-      this.items = data;
+      this.items = TasksData.getColoredTasks(data);
       this.filteredItems = this.items;
       this.paginatedItems = this.paginationService.paginateItems(
         this.filteredItems,

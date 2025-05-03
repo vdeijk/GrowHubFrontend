@@ -142,6 +142,70 @@ class MeasurementsData {
     { key: 'dateMax', label: 'Date Max', defaultValue: '' },
     { key: 'dateMin', label: 'Date Min', defaultValue: '' },
   ];
+
+  public static getColoredData(measurements: MeasurementItem[]) {
+    return measurements.map((measurement) => {
+      const redColumns: string[] = [];
+      const yellowColumns: string[] = [];
+      const greenColumns: string[] = [];
+
+      if (measurement.lightLevel) {
+        const lightLevelValues = Object.values(MeasurementItemLightLevelEnum);
+        const lightLevelIndex = lightLevelValues.indexOf(
+          measurement.lightLevel,
+        );
+
+        if (lightLevelIndex === 0) {
+          redColumns.push('lightLevel');
+        } else if (lightLevelIndex === 1) {
+          yellowColumns.push('lightLevel');
+        }
+      }
+
+      if (measurement.soilDryness) {
+        const soilDrynessValues = Object.values(MeasurementItemSoilDrynessEnum);
+        const soilDrynessIndex = soilDrynessValues.indexOf(
+          measurement.soilDryness,
+        );
+
+        if (soilDrynessIndex === 0) {
+          redColumns.push('soilDryness');
+        } else if (soilDrynessIndex === 1) {
+          yellowColumns.push('soilDryness');
+        }
+      }
+
+      if (measurement.healthStatus) {
+        const healthStatusValues = Object.values(
+          MeasurementItemHealthStatusEnum,
+        );
+        const healthStatusIndex = healthStatusValues.indexOf(
+          measurement.healthStatus,
+        );
+
+        if (healthStatusIndex === 0) {
+          redColumns.push('healthStatus');
+        } else if (healthStatusIndex === 1) {
+          yellowColumns.push('healthStatus');
+        }
+      }
+
+      if (measurement.soilPH !== undefined && measurement.soilPH !== null) {
+        if (measurement.soilPH < 6) {
+          redColumns.push('soilPH');
+        } else {
+          greenColumns.push('soilPH');
+        }
+      }
+
+      return {
+        ...measurement,
+        redColumns,
+        yellowColumns,
+        greenColumns,
+      };
+    });
+  }
 }
 
 export default MeasurementsData;

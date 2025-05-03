@@ -4,6 +4,7 @@ import { DateFieldModel } from '../interfaces/DateFieldModel';
 import { YourCropItem } from '../../api';
 import { TableHeaderModel } from '../interfaces/TableHeaderModel';
 import { InputFieldModel } from '../interfaces/InputFieldModel';
+import dayjs from 'dayjs';
 
 class BatchesData {
   public static tableHeaders: TableHeaderModel<YourCropItem>[] = [
@@ -113,6 +114,35 @@ class BatchesData {
     { key: 'lastPruned', label: 'Pruned Before', defaultValue: '' },
     { key: 'lastHarvested', label: 'Harvested Before', defaultValue: '' },
   ];
+
+  public static getColoredData(batches: YourCropItem[]) {
+    return batches.map((batch) => {
+      const redColumns: string[] = [];
+      const greenColumns: string[] = [];
+
+      // Check each date column and determine its color
+      ['lastWatered', 'lastFertilized', 'lastPruned', 'lastHarvested'].forEach(
+        (key) => {
+          const dateValue = batch[key as keyof YourCropItem] as string | null;
+
+          if (dateValue) {
+            const isPast = dayjs(dateValue).isBefore(dayjs(), 'day');
+            if (isPast) {
+              redColumns.push(key);
+            } else {
+              greenColumns.push(key);
+            }
+          }
+        },
+      );
+
+      return {
+        ...batch,
+        redColumns,
+        greenColumns,
+      };
+    });
+  }
 }
 
 export default BatchesData;

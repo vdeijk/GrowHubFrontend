@@ -46,7 +46,7 @@ class MeasurementsStore extends SearchableStore<MeasurementItem> {
     if (!data) return;
 
     runInAction(() => {
-      this.items = data;
+      this.items = MeasurementsData.getColoredData(data);
       this.filteredItems = this.items;
       this.paginatedItems = this.paginationService.paginateItems(
         this.filteredItems,

@@ -5,6 +5,7 @@ import { EndpointService } from '../../../services/EndpointService/EndpointServi
 import YourCropsData from '../../../../auxiliary/data/BatchesData';
 import EventBus from '../../../services/EventBusService/EventBusService';
 import { PaginationService } from '../../../services/PaginationService/PaginationService';
+import BatchesData from '../../../../auxiliary/data/BatchesData';
 
 class BatchesStore extends SearchableStore<YourCropItem> {
   public paginationService = new PaginationService();
@@ -48,7 +49,7 @@ class BatchesStore extends SearchableStore<YourCropItem> {
     if (!data) return;
 
     runInAction(() => {
-      this.items = data;
+      this.items = BatchesData.getColoredData(data);
       this.filteredItems = this.items;
       this.paginatedItems = this.paginationService.paginateItems(
         this.filteredItems,
