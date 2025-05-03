@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './ActionIcons.module.css';
 import { observer } from 'mobx-react-lite';
-import { FaEdit, FaTrash, FaSearch } from 'react-icons/fa';
+import { FaEdit, FaTrash, FaStickyNote } from 'react-icons/fa';
 
 interface ActionIconsProps<T extends { id?: number | undefined }> {
   item: T;
@@ -17,7 +17,7 @@ const ActionIcons = observer(
     return (
       <div className={styles.actionIcons}>
         {handlePopup && (
-          <FaSearch
+          <FaStickyNote
             className={styles.viewIcon}
             onClick={() => item.id !== undefined && handlePopup(item.id!)}
             title="View Info"

@@ -4,9 +4,9 @@
 
 .tableRow td {
   padding: 8px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--color-border);
 }
 
 .evenRow {
-  background-color: #f0f0f0; /* Light grey background for even rows */
+  background-color: var(--color-grey);
 }

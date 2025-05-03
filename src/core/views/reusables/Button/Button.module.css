@@ -3,8 +3,8 @@
   border: none;
   border-radius: var(--border-radius-small);
   border: 2px solid #ef767a;
-  background: #fdfdfd;
-  color: #4caf50;
+  background: var(--color-white);
+  color: var(--color-primary);
   cursor: pointer;
   transition: all 0.3s;
   text-transform: uppercase;
@@ -15,5 +15,5 @@
 
 .button:hover {
   background-color: #ef767a;
-  color: #fdfdfd;
+  color: var(--color-white);
 }

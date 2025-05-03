@@ -14,7 +14,7 @@ import { SearchBarProps } from '../../containers/SearchBar/Searchbar';
 import { observer } from 'mobx-react-lite';
 import popupService from '../../../services/PopupService/PopupService';
 import NotesPopup from '../../reusables/NotesPopup/NotesPopup';
-import Popup from '../../containers/Popup/Popup';
+import Popup from '../../layouts/Popup/Popup';
 import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
 
 interface MeasurementsProps {}

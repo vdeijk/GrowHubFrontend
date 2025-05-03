@@ -13,7 +13,7 @@ import Pagination from '../../reusables/Pagination/Pagination';
 import { PlantItem } from '../../../../api';
 import popupService from '../../../services/PopupService/PopupService';
 import NotesPopup from '../../reusables/NotesPopup/NotesPopup';
-import Popup from '../../containers/Popup/Popup';
+import Popup from '../../layouts/Popup/Popup';
 import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
 import SyncButton from '../../reusables/SyncButton/SyncButton';
 import { SearchBarProps } from '../../containers/SearchBar/Searchbar';

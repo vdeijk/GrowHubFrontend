@@ -5,11 +5,11 @@
   padding: var(--spacing-small);
   margin-bottom: var(--spacing-small);
   border-radius: var(--border-radius-small);
-  background-color: #f0f0f0;
+  background-color: var(--color-grey);
 }
 
 .task.completed {
-  background-color: #f0f0f0;
+  background-color: var(--color-grey);
 }
 
 .taskInfo {
@@ -25,7 +25,7 @@
 .taskCategory {
   padding: 0.5rem var(--spacing-small);
   border-radius: var(--border-radius-small);
-  color: white;
+  color: var(--color-white);
   display: inline-block;
   margin-top: var(--spacing-small);
   width: max-content;

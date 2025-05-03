@@ -12,7 +12,6 @@ interface MenuProps {
 }
 
 const MenuContainer: React.FC<MenuProps> = ({
-  userName,
   profilePicture,
   menuLinks,
   curPageTitle,
@@ -23,10 +22,9 @@ const MenuContainer: React.FC<MenuProps> = ({
         <Heading
           level={4}
           text={curPageTitle}
-          customStyles={{ marginBottom: '2rem', color: '#FDFDFD' }}
+          customStyles={{ marginBottom: '2rem', color: 'var(--color-white);' }}
         />
         <img src={profilePicture} alt="Profile" className={styles.image} />
-        {/* <span className={styles.userName}>{userName}</span> */}
       </div>
       <ul className={styles.unorderedList}>
         {menuLinks.map((menuLink, index) => (

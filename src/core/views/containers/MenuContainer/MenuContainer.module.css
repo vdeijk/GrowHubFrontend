@@ -23,7 +23,7 @@
   justify-items: start;
   margin-bottom: 4rem;
   font-size: 1.6rem;
-  color: #fdfdfd;
+  color: var(--color-white);
 }
 
 .image {

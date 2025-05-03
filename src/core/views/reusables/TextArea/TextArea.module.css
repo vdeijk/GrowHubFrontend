@@ -1,13 +1,13 @@
 .textArea {
   padding: 10px;
   margin-right: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-border);
   border-radius: var(--border-radius-small);
   width: 100%;
   font-size: 1.5rem;
   font-family: Poppins;
   height: 12rem;
-  background-color: #F0F0F0;
+  background-color: var(--color-form-field);
 }
 
 .container {

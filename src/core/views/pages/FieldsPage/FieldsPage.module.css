@@ -1,7 +1,7 @@
 .container {
   display: grid;
   grid-auto-flow: column;
-  background: #FDFDFD;
+  background: var(--color-white);
   padding: var(--spacing-medium);
   border-radius: var(--border-radius-large);
   width: 100%;
@@ -10,7 +10,6 @@
   grid-column: 1/-1;
   grid-gap: 2rem;
   grid-template-columns: 1fr 1fr;
-  
 }
 
 @media (max-width: 1024px) {

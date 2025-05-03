@@ -14,7 +14,7 @@
 .checkboxInput {
   padding: 10px;
   margin-right: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-border);
   border-radius: var(--border-radius-small);
   width: 100%;
   font-size: 1.5rem;

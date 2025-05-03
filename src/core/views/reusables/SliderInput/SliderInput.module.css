@@ -4,7 +4,7 @@
   border-radius: var(--border-radius-large);
   width: 100%;
   height: 8px;
-  background-color: #f0f0f0;
+  background-color: var(--color-grey);
 }
 
 .container {
@@ -42,7 +42,7 @@
   background: var(--color-primary);
   border-radius: 50%;
   cursor: pointer;
-  border: 2px solid #ccc;
+  border: 2px solid var(--color-border);
 }
 
 .sliderInput::-ms-thumb {
@@ -51,5 +51,5 @@
   background: var(--color-primary);
   border-radius: 50%;
   cursor: pointer;
-  border: 2px solid #ccc;
+  border: 2px solid var(--color-border);
 }

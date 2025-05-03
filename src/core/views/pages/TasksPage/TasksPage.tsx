@@ -11,7 +11,7 @@ import SearchBar from '../../containers/SearchBar/Searchbar';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import ActionIcons from '../../reusables/ActionIcons/ActionIcons';
-import Popup from '../../containers/Popup/Popup';
+import Popup from '../../layouts/Popup/Popup';
 import Pagination from '../../reusables/Pagination/Pagination';
 import NotesPopup from '../../reusables/NotesPopup/NotesPopup';
 import popupService from '../../../services/PopupService/PopupService';

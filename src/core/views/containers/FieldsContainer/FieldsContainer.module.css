@@ -4,7 +4,7 @@
   min-height: 600px;
   border-radius: var(--border-radius-large);
   padding: var(--spacing-medium);
-  background-color: #fdfdfd;
+  background-color: var(--color-white);
   box-shadow: var(--box-shadow);
   grid-area: 3 / 6 / -1 / -1;
 }

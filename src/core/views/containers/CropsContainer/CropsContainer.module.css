@@ -1,6 +1,6 @@
 .section {
   padding: var(--spacing-medium);
-  background-color: #fdfdfd;
+  background-color: var(--color-white);
   border-radius: var(--border-radius-large);
   box-shadow: var(--box-shadow);
   display: grid;

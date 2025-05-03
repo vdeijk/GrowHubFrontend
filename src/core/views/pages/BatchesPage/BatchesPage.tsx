@@ -14,7 +14,7 @@ import Pagination from '../../reusables/Pagination/Pagination';
 import { YourCropItem } from '../../../../api';
 import NotesPopup from '../../reusables/NotesPopup/NotesPopup';
 import popupService from '../../../services/PopupService/PopupService';
-import Popup from '../../containers/Popup/Popup';
+import Popup from '../../layouts/Popup/Popup';
 import batchesStore from '../../../stores/derived/BatchesStore/BatchesStore';
 import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
 

@@ -28,8 +28,8 @@
   align-content: start;
   font-size: 1.6rem;
   color: var(--text-color);
-  background-color: #f0f0f0;
-  border: 1px solid #ddd;
+  background-color: var(--color-grey);
+  border: 1px solid var(--color-border);
   border-radius: var(--border-radius-small);
   padding: 2rem;
   width: 300px;

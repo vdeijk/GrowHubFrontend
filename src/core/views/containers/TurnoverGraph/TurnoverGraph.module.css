@@ -2,7 +2,7 @@
   height: 100%;
   width: 100%;
   border: none;
-  background: #fdfdfd;
+  background: var(--color-white);
   padding: var(--spacing-medium);
   grid-area: 3 / 1 / 4 / -1;
   box-shadow: var(--box-shadow);
