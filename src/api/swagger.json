@@ -7,9 +7,7 @@
   "paths": {
     "/api/Location": {
       "get": {
-        "tags": [
-          "Location"
-        ],
+        "tags": ["Location"],
         "responses": {
           "200": {
             "description": "OK",
@@ -43,9 +41,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Location"
-        ],
+        "tags": ["Location"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -74,9 +70,7 @@
     },
     "/api/Location/{id}": {
       "get": {
-        "tags": [
-          "Location"
-        ],
+        "tags": ["Location"],
         "parameters": [
           {
             "name": "id",
@@ -112,9 +106,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Location"
-        ],
+        "tags": ["Location"],
         "parameters": [
           {
             "name": "id",
@@ -152,9 +144,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Location"
-        ],
+        "tags": ["Location"],
         "parameters": [
           {
             "name": "id",
@@ -175,9 +165,7 @@
     },
     "/api/Measurements": {
       "get": {
-        "tags": [
-          "Measurements"
-        ],
+        "tags": ["Measurements"],
         "operationId": "GetMeasurements",
         "responses": {
           "200": {
@@ -212,9 +200,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Measurements"
-        ],
+        "tags": ["Measurements"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -243,9 +229,7 @@
     },
     "/api/Measurements/{id}": {
       "get": {
-        "tags": [
-          "Measurements"
-        ],
+        "tags": ["Measurements"],
         "parameters": [
           {
             "name": "id",
@@ -281,9 +265,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Measurements"
-        ],
+        "tags": ["Measurements"],
         "parameters": [
           {
             "name": "id",
@@ -321,9 +303,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Measurements"
-        ],
+        "tags": ["Measurements"],
         "parameters": [
           {
             "name": "id",
@@ -344,9 +324,7 @@
     },
     "/api/Plant": {
       "get": {
-        "tags": [
-          "Plant"
-        ],
+        "tags": ["Plant"],
         "operationId": "GetPlants",
         "responses": {
           "200": {
@@ -381,9 +359,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Plant"
-        ],
+        "tags": ["Plant"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -412,9 +388,7 @@
     },
     "/api/Plant/{id}": {
       "get": {
-        "tags": [
-          "Plant"
-        ],
+        "tags": ["Plant"],
         "parameters": [
           {
             "name": "id",
@@ -450,9 +424,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Plant"
-        ],
+        "tags": ["Plant"],
         "parameters": [
           {
             "name": "id",
@@ -490,9 +462,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Plant"
-        ],
+        "tags": ["Plant"],
         "parameters": [
           {
             "name": "id",
@@ -513,9 +483,7 @@
     },
     "/api/Todo": {
       "get": {
-        "tags": [
-          "Todo"
-        ],
+        "tags": ["Todo"],
         "operationId": "GetTodoItems",
         "responses": {
           "200": {
@@ -550,9 +518,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Todo"
-        ],
+        "tags": ["Todo"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -581,9 +547,7 @@
     },
     "/api/Todo/{id}": {
       "get": {
-        "tags": [
-          "Todo"
-        ],
+        "tags": ["Todo"],
         "parameters": [
           {
             "name": "id",
@@ -619,9 +583,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Todo"
-        ],
+        "tags": ["Todo"],
         "parameters": [
           {
             "name": "id",
@@ -659,9 +621,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Todo"
-        ],
+        "tags": ["Todo"],
         "parameters": [
           {
             "name": "id",
@@ -682,9 +642,7 @@
     },
     "/api/Turnover": {
       "get": {
-        "tags": [
-          "Turnover"
-        ],
+        "tags": ["Turnover"],
         "operationId": "GetTurnovers",
         "responses": {
           "200": {
@@ -721,9 +679,7 @@
     },
     "/api/Weather/forecast": {
       "get": {
-        "tags": [
-          "Weather"
-        ],
+        "tags": ["Weather"],
         "parameters": [
           {
             "name": "city",
@@ -750,9 +706,7 @@
     },
     "/api/YourCrops": {
       "get": {
-        "tags": [
-          "YourCrops"
-        ],
+        "tags": ["YourCrops"],
         "operationId": "GetCrops",
         "responses": {
           "200": {
@@ -787,9 +741,7 @@
         }
       },
       "post": {
-        "tags": [
-          "YourCrops"
-        ],
+        "tags": ["YourCrops"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -818,9 +770,7 @@
     },
     "/api/YourCrops/{id}": {
       "get": {
-        "tags": [
-          "YourCrops"
-        ],
+        "tags": ["YourCrops"],
         "parameters": [
           {
             "name": "id",
@@ -856,9 +806,7 @@
         }
       },
       "put": {
-        "tags": [
-          "YourCrops"
-        ],
+        "tags": ["YourCrops"],
         "parameters": [
           {
             "name": "id",
@@ -896,9 +844,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "YourCrops"
-        ],
+        "tags": ["YourCrops"],
         "parameters": [
           {
             "name": "id",
@@ -962,13 +908,7 @@
             "format": "int32"
           },
           "soilDryness": {
-            "enum": [
-              "VeryWet",
-              "Wet",
-              "Moist",
-              "Dry",
-              "VeryDry"
-            ],
+            "enum": ["VeryWet", "Wet", "Moist", "Dry", "VeryDry"],
             "type": "string"
           },
           "soilPH": {
@@ -976,13 +916,7 @@
             "format": "float"
           },
           "healthStatus": {
-            "enum": [
-              "Poor",
-              "Fair",
-              "Good",
-              "VeryGood",
-              "Excellent"
-            ],
+            "enum": ["Poor", "Fair", "Good", "VeryGood", "Excellent"],
             "type": "string"
           },
           "growthStage": {
@@ -1198,11 +1132,7 @@
             "format": "date-time"
           },
           "priority": {
-            "enum": [
-              "High",
-              "Medium",
-              "Low"
-            ],
+            "enum": ["High", "Medium", "Low"],
             "type": "string"
           },
           "category": {

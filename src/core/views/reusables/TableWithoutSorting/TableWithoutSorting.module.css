@@ -14,7 +14,7 @@
 }
 
 .table th {
-  background-color: #4caf50;
+  background-color: var(--color-primary);
   color: var(--color-white);
 }
 

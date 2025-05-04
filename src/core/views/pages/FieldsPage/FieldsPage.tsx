@@ -91,11 +91,3 @@ const FieldsPage: React.FC = observer(() => {
 });
 
 export default FieldsPage;
-
-/*
-          {/* <FieldListContainer {...listData} /> 
-  const listData = {
-    locations: fieldsStore.locations,
-    onEdit: handleEdit,
-    onDelete: handleDelete,
-  };*/

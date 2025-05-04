@@ -15,10 +15,10 @@
 }
 
 .menuLink:hover {
-  background-color: #575757;
+  background-color: var(--color-text);
   cursor: pointer;
 }
 
 .active {
-  background-color: #575757;
+  background-color: var(--color-text);
 }

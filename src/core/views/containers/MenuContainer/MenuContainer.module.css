@@ -4,7 +4,7 @@
   left: 0;
   width: 20rem;
   height: 100%;
-  background-color: #4caf50;
+  background-color: var(--color-primary);
   padding: var(--spacing-medium);
   box-shadow: var(--box-shadow);
   z-index: 100;

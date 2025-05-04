@@ -1,20 +1,19 @@
 # MeasurementItem
 
-
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**title** | **string** |  | [optional] [default to undefined]
-**id** | **number** |  | [optional] [default to undefined]
-**batchId** | **number** |  | [optional] [default to undefined]
-**soilDryness** | **string** |  | [optional] [default to undefined]
-**soilPH** | **number** |  | [optional] [default to undefined]
-**healthStatus** | **string** |  | [optional] [default to undefined]
-**growthStage** | **string** |  | [optional] [default to undefined]
-**temperature** | **number** |  | [optional] [default to undefined]
-**notes** | **string** |  | [optional] [default to undefined]
-**date** | **string** |  | [optional] [default to undefined]
+| Name             | Type       | Description | Notes                             |
+| ---------------- | ---------- | ----------- | --------------------------------- |
+| **title**        | **string** |             | [optional] [default to undefined] |
+| **id**           | **number** |             | [optional] [default to undefined] |
+| **batchId**      | **number** |             | [optional] [default to undefined] |
+| **soilDryness**  | **string** |             | [optional] [default to undefined] |
+| **soilPH**       | **number** |             | [optional] [default to undefined] |
+| **healthStatus** | **string** |             | [optional] [default to undefined] |
+| **growthStage**  | **string** |             | [optional] [default to undefined] |
+| **temperature**  | **number** |             | [optional] [default to undefined] |
+| **notes**        | **string** |             | [optional] [default to undefined] |
+| **date**         | **string** |             | [optional] [default to undefined] |
 
 ## Example
 
@@ -22,16 +21,16 @@ Name | Type | Description | Notes
 import { MeasurementItem } from './api';
 
 const instance: MeasurementItem = {
-    title,
-    id,
-    batchId,
-    soilDryness,
-    soilPH,
-    healthStatus,
-    growthStage,
-    temperature,
-    notes,
-    date,
+  title,
+  id,
+  batchId,
+  soilDryness,
+  soilPH,
+  healthStatus,
+  growthStage,
+  temperature,
+  notes,
+  date,
 };
 ```
 

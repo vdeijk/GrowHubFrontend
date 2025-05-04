@@ -8,7 +8,7 @@
 }
 
 .cards {
-  background-color: #f9f9f9;
+  background-color: var(--color-grey);
   padding: 2rem;
   display: grid;
   grid-auto-flow: column;
@@ -46,7 +46,7 @@
 
 .cardPrice {
   font-size: 1.8rem;
-  color: #555;
+  color: var(--color-primary);
   margin-bottom: 1rem;
 }
 
@@ -61,7 +61,7 @@
 .cardFeature {
   display: list-item;
   font-size: 1.6rem;
-  color: #666;
+  color: var(--color-primary);
 }
 
 .cardButton {

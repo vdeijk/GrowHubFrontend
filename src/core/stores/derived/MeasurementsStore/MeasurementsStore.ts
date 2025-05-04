@@ -61,7 +61,7 @@ class MeasurementsStore extends SearchableStore<MeasurementItem> {
         coloredItems,
         dateKeys,
       );
-      
+
       this.filteredItems = this.items;
       this.paginatedItems = this.paginationService.paginateItems(
         this.filteredItems,

@@ -38,15 +38,3 @@
 .deleteIcon:hover {
   color: var(--color-red-hover);
 }
-
-/*
-.viewIcon {
-  color: #f0ad4e;
-  cursor: pointer;
-  font-size: 1.8rem;
-  transition: color 0.2s ease;
-}
-
-.viewIcon:hover {
-  color: #ec971f;
-}*/
