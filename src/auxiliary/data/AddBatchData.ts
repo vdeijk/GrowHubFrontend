@@ -4,9 +4,19 @@ import { InputFieldModel } from '../interfaces/InputFieldModel';
 
 class AddBatchData {
   public static textFields: Record<string, InputFieldModel> = {
-    commonName: { key: 'commonName', label: 'Title Field', defaultValue: '' },
+    commonName: {
+      key: 'commonName',
+      label: 'Title Field',
+      defaultValue: '',
+      required: true,
+    },
     notes: { key: 'notes', label: 'Notes', defaultValue: '' },
-    amount: { key: 'amount', label: 'Amount', defaultValue: '' },
+    amount: {
+      key: 'amount',
+      label: 'Amount',
+      defaultValue: '',
+      required: true,
+    },
   };
 
   public static dropdowns: Record<string, DropdownFieldModel> = {
@@ -15,6 +25,7 @@ class AddBatchData {
       label: 'Location',
       options: [],
       defaultValue: '',
+      required: false,
     },
   };
 

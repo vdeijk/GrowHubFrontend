@@ -3,9 +3,9 @@ import { PlantItem } from '../../../../api';
 import { makeObservable, runInAction, action, computed } from 'mobx';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
 import { localStorageService } from '../../../services/LocalStorageService/LocalStorageService';
-import CropsDatabaseData from '../../../../auxiliary/data/CropsData';
+import CropsData from '../../../../auxiliary/data/CropsData';
 import { PaginationService } from '../../../services/PaginationService/PaginationService';
-
+import { toJS } from 'mobx';
 class CropsStore extends SearchableStore<PlantItem> {
   private endpointService = new EndpointService('Plant');
   public paginationService = new PaginationService();
@@ -16,9 +16,15 @@ class CropsStore extends SearchableStore<PlantItem> {
   constructor() {
     super(['commonName']);
 
-    Object.values(CropsDatabaseData.textFields).forEach((textField) => {
+    Object.values(CropsData.textFields).forEach((textField) => {
       this.initTextFilter(textField);
     });
+
+    Object.values(CropsData.dropdowns).forEach((dropdown) => {
+      this.initDropdownFilter(dropdown);
+    });
+
+    console.log(toJS(this.dropdownFilters));
 
     makeObservable(this, {
       isLoading: computed,
@@ -27,7 +33,7 @@ class CropsStore extends SearchableStore<PlantItem> {
   }
 
   debouncedFilterPlants: (criteria: string) => void = () => {};
-  tableHeaders = CropsDatabaseData.tableHeaders;
+  tableHeaders = CropsData.tableHeaders;
 
   public syncData = () => {
     localStorageService.invalidateCache('cropsDatabaseItems');

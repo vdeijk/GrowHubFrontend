@@ -34,6 +34,7 @@ export abstract class BaseFormStore {
         this.inputFields[field.key] = new InputField<string | number>(
           '',
           field.label,
+          field.required,
         );
       }
     });
@@ -45,7 +46,7 @@ export abstract class BaseFormStore {
         this.dateFields[field.key] = new DateField<string>(
           '',
           field.label,
-          false,
+          field.required,
         );
       }
 
@@ -59,7 +60,7 @@ export abstract class BaseFormStore {
         this.dropdownFields[field.key] = new DropdownField(
           field.defaultValue,
           field.label,
-          false,
+          field.required,
           typeof field.options === 'function' ? field.options() : field.options,
         );
       }

@@ -4,8 +4,13 @@ import { InputFieldModel } from '../interfaces/InputFieldModel';
 
 class AddTaskData {
   public static textFields: Record<string, InputFieldModel> = {
-    titleField: { key: 'titleField', label: 'Title Field', defaultValue: '' },
-    notes: { key: 'notes', label: 'Notes', defaultValue: '' },
+    titleField: {
+      key: 'titleField',
+      label: 'Title Field',
+      defaultValue: '',
+      required: true,
+    },
+    notes: { key: 'notes', label: 'Notes', defaultValue: '', required: false },
   };
 
   public static dropdowns: Record<string, DropdownFieldModel> = {
@@ -14,23 +19,26 @@ class AddTaskData {
       label: 'Priority',
       options: [],
       defaultValue: '',
+      required: false,
     },
     category: {
       key: 'category',
       label: 'Category',
       options: [],
       defaultValue: '',
+      required: false,
     },
     todoStatus: {
       key: 'todoStatus',
       label: 'Todo Status',
       options: [],
       defaultValue: '',
+      required: true,
     },
   };
 
   public static dateFields: DateFieldModel[] = [
-    { key: 'dueDate', label: 'Due Date', defaultValue: '' },
+    { key: 'dueDate', label: 'Due Date', defaultValue: '', required: true },
   ];
 }
 

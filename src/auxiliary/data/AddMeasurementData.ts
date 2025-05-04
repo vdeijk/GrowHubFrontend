@@ -4,9 +4,19 @@ import { InputFieldModel } from '../interfaces/InputFieldModel';
 
 class AddMeasurementData {
   public static textFields: Record<string, InputFieldModel> = {
-    title: { key: 'title', label: 'Title Field', defaultValue: '' },
+    title: {
+      key: 'title',
+      label: 'Title Field',
+      defaultValue: '',
+      required: true,
+    },
     notes: { key: 'notes', label: 'Notes', defaultValue: '' },
-    soilPH: { key: 'soilPH', label: 'Soil PH', defaultValue: '' },
+    soilPH: {
+      key: 'soilPH',
+      label: 'Soil PH',
+      defaultValue: '',
+      required: false,
+    },
   };
 
   public static dropdowns: Record<string, DropdownFieldModel> = {
@@ -15,29 +25,33 @@ class AddMeasurementData {
       label: 'Soil Dryness',
       options: [],
       defaultValue: '',
+      required: false,
     },
     growthStage: {
       key: 'growthStage',
       label: 'Growth Stage',
       options: [],
       defaultValue: '',
+      required: true,
     },
     healthStatus: {
       key: 'healthStatus',
       label: 'Health Status',
       options: [],
       defaultValue: '',
+      required: true,
     },
     location: {
       key: 'location',
       label: 'Location',
       options: [],
       defaultValue: '',
+      required: false,
     },
   };
 
   public static dateFields: DateFieldModel[] = [
-    { key: 'date', label: 'Date', defaultValue: '' },
+    { key: 'date', label: 'Date', defaultValue: '', required: true },
   ];
 }
 

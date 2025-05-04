@@ -9,10 +9,10 @@ import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import { ButtonProps } from '../../../../auxiliary/interfaces/ButtonProps';
 import Dropdown from '../../reusables/Dropdown/Dropdown';
 import DateInput, { DateInputProps } from '../../reusables/DateInput/DateInput';
-import taskStore from '../../../stores/derived/TasksStore/TasksStore';
 import TextArea from '../../reusables/TextArea/TextArea';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import Divider from '../../reusables/Divider/Divider';
+import measurementsStore from '../../../stores/derived/MeasurementsStore/MeasurementsStore';
 
 interface AddMeasurementPageProps {
   isEditing?: boolean;
@@ -56,7 +56,7 @@ const AddMeasurementPage: React.FC<AddMeasurementPageProps> = observer(
     const createDropdownFieldModel = (fieldKey: string) => ({
       ...addMeasurementStore.dropdownFields[fieldKey],
       value: String(addMeasurementStore.dropdownFields[fieldKey].value),
-      options: taskStore.dropdownFilters[fieldKey]?.options || [],
+      options: measurementsStore.dropdownFilters[fieldKey]?.options || [],
       onChange: (value: string | number) =>
         addMeasurementStore.dropdownFields[fieldKey].setValue(String(value)),
     });

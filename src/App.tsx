@@ -103,7 +103,7 @@ const App: React.FC = observer(() => {
             />
             <Route
               path="/addMeasurementPage/:id"
-              element={<AddMeasurementPage isEditing={true} /> }
+              element={<AddMeasurementPage isEditing={true} />}
             />
             <Route path="/addBatchPage" element={<AddBatchPage />} />
             <Route

@@ -7,6 +7,7 @@ class AddCropData {
       key: 'commonName',
       label: 'Common Name',
       defaultValue: '',
+      required: true,
     },
     notes: { key: 'notes', label: 'Notes', defaultValue: '' },
     waterCycle: {

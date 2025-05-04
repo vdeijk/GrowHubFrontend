@@ -44,7 +44,7 @@ const AddBatchPage: React.FC<AddBatchPageProps> = observer(
 
       addBatchStore.resetForm();
 
-      navigate('/cropsPage');
+      navigate('/batchesPage');
     };
 
     const buttonContainerData: ButtonProps[] = [
