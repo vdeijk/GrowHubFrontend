@@ -63,10 +63,7 @@ const TasksPage: React.FC = observer(() => {
       actions: (
         <ActionIcons
           item={item as { id: number | undefined }}
-          handleDelete={(
-            id: number | undefined,
-            event: React.MouseEvent<SVGElement>,
-          ) => handleDelete(id, event)}
+          handleDelete={handleDelete}
           handlePaste={(
             id: number | undefined,
             event: React.MouseEvent<SVGElement>,

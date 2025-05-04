@@ -61,10 +61,7 @@ const CropsPage: React.FC = observer(() => {
       actions: (
         <ActionIcons
           item={{ ...item, id: item.id ?? undefined }}
-          handleDelete={(
-            id: number | undefined,
-            event: React.MouseEvent<SVGElement>,
-          ) => handleDelete(id, event)}
+          handleDelete={handleDelete}
           handleCopy={(
             id: number | undefined,
             event: React.MouseEvent<SVGElement>,

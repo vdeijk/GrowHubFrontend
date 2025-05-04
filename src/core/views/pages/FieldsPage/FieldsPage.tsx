@@ -35,8 +35,13 @@ const FieldsPage: React.FC = observer(() => {
     navigate(`/addFieldPage/${id}`);
   };
 
-  const handleDelete = (id: number | undefined) => {
+  const handleDelete = (
+    id: number | undefined,
+    event: React.MouseEvent<SVGElement>,
+  ) => {
     if (id === undefined) return;
+
+    event.stopPropagation();
 
     fieldsStore.deleteField(id);
   };

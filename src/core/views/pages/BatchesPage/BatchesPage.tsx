@@ -73,10 +73,7 @@ const BatchesPage: React.FC = observer(() => {
         <div className={styles.actionIcons}>
           <ActionIcons
             item={item as { id: number | undefined }}
-            handleDelete={(
-              id: number | undefined,
-              event: React.MouseEvent<SVGElement>,
-            ) => handleDelete(id, event)}
+            handleDelete={handleDelete}
             handleCopy={(
               id: number | undefined,
               event: React.MouseEvent<SVGElement>,
