@@ -25,19 +25,32 @@ const MeasurementsPage: React.FC<MeasurementsProps> = observer(() => {
   const buttonContainerData: ButtonProps[] = [
     {
       onClick: () => {
-        console.log('Add Reading');
         navigate('/addMeasurementPage');
       },
       label: 'Add Reading',
     },
   ];
 
+  const handlePaste = (
+    id: number | undefined,
+    event: React.MouseEvent<SVGElement>,
+  ) => {
+    if (id === undefined) return;
+
+    event.stopPropagation();
+  };
+
   const handleEdit = (id: number | undefined) => {
     navigate(`/addMeasurementPage/${id}`);
   };
 
-  const handleDelete = (id: number | undefined) => {
+  const handleDelete = (
+    id: number | undefined,
+    event: React.MouseEvent<SVGElement>,
+  ) => {
     if (id === undefined) return;
+
+    event.stopPropagation();
 
     measurementsStore.deleteMeasurement(id);
   };
@@ -56,8 +69,14 @@ const MeasurementsPage: React.FC<MeasurementsProps> = observer(() => {
       actions: (
         <ActionIcons
           item={item as { id: number | undefined }}
-          handleDelete={handleDelete}
-          handlePaste={(id) => console.log('Paste', id)}
+          handleDelete={(
+            id: number | undefined,
+            event: React.MouseEvent<SVGElement>,
+          ) => handleDelete(id, event)}
+          handlePaste={(
+            id: number | undefined,
+            event: React.MouseEvent<SVGElement>,
+          ) => handlePaste(id, event)}
         />
       ),
     })),

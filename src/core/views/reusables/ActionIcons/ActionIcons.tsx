@@ -5,9 +5,18 @@ import { FaTrash, FaCopy, FaPaste } from 'react-icons/fa';
 
 interface ActionIconsProps<T extends { id?: number | undefined }> {
   item: T;
-  handleDelete: (id: number | undefined) => void;
-  handleCopy?: (id: number | undefined) => void;
-  handlePaste?: (id: number | undefined) => void;
+  handleDelete: (
+    id: number | undefined,
+    event: React.MouseEvent<SVGElement>,
+  ) => void;
+  handleCopy?: (
+    id: number | undefined,
+    event: React.MouseEvent<SVGElement>,
+  ) => void;
+  handlePaste?: (
+    id: number | undefined,
+    event: React.MouseEvent<SVGElement>,
+  ) => void;
 }
 
 const ActionIcons = observer(
@@ -19,20 +28,26 @@ const ActionIcons = observer(
         {handleCopy && (
           <FaCopy
             className={styles.copyIcon}
-            onClick={() => item.id !== undefined && handleCopy(item.id)}
+            onClick={(event) =>
+              item.id !== undefined && handleCopy(item.id, event)
+            }
             title="Copy"
           />
         )}
         {handlePaste && (
           <FaPaste
             className={styles.pasteIcon}
-            onClick={() => item.id !== undefined && handlePaste(item.id)}
+            onClick={(event) =>
+              item.id !== undefined && handlePaste(item.id, event)
+            }
             title="Paste"
           />
         )}
         <FaTrash
           className={styles.deleteIcon}
-          onClick={() => item.id !== undefined && handleDelete(item.id)}
+          onClick={(event) =>
+            item.id !== undefined && handleDelete(item.id, event)
+          }
           title="Delete this row"
         />
       </div>

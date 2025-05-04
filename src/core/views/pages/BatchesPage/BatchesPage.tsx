@@ -30,10 +30,39 @@ const BatchesPage: React.FC = observer(() => {
     navigate(`/addBatchPage/${id}`);
   };
 
-  const handleDelete = (id: number | undefined) => {
+  const handleDelete = (
+    id: number | undefined,
+    event: React.MouseEvent<SVGElement>,
+  ) => {
     if (id === undefined) return;
 
+    event.stopPropagation();
+
     cropsStore.deletePlant(id);
+  };
+
+  const handleCopy = (
+    id: number | undefined,
+    event: React.MouseEvent<SVGElement>,
+  ) => {
+    if (id === undefined) return;
+
+    event.stopPropagation();
+
+    const batchToCopy = cropsStore.items.find((item) => item.id === id);
+    if (!batchToCopy) return;
+  };
+
+  const handlePaste = (
+    id: number | undefined,
+    event: React.MouseEvent<SVGElement>,
+  ) => {
+    if (id === undefined) return;
+
+    event.stopPropagation();
+
+    const targetBatch = cropsStore.items.find((item) => item.id === id);
+    if (!targetBatch) return;
   };
 
   const tableProps: TableProps<YourCropItem> = {
@@ -44,9 +73,18 @@ const BatchesPage: React.FC = observer(() => {
         <div className={styles.actionIcons}>
           <ActionIcons
             item={item as { id: number | undefined }}
-            handleDelete={handleDelete}
-            handleCopy={(id) => console.log('Copy', id)}
-            handlePaste={(id) => console.log('Paste', id)}
+            handleDelete={(
+              id: number | undefined,
+              event: React.MouseEvent<SVGElement>,
+            ) => handleDelete(id, event)}
+            handleCopy={(
+              id: number | undefined,
+              event: React.MouseEvent<SVGElement>,
+            ) => handleCopy(id, event)}
+            handlePaste={(
+              id: number | undefined,
+              event: React.MouseEvent<SVGElement>,
+            ) => handlePaste(id, event)}
           />
         </div>
       ),

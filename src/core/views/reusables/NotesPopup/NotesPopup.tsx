@@ -3,7 +3,7 @@ import popupStore from '../../../services/PopupService/PopupService';
 import { observer } from 'mobx-react-lite';
 import ButtonContainer from '../ButtonContainer/ButtonContainer';
 import TextArea from '../TextArea/TextArea';
-import { ButtonConfig } from '../ButtonContainer/ButtonContainer';
+import { ButtonProps } from '../../../../auxiliary/interfaces/ButtonProps';
 import { InputField } from '../../../../auxiliary/classes/InputField';
 import Heading from '../Heading/Heading';
 
@@ -16,9 +16,9 @@ const NotesPopup: React.FC<NotesPopupProps> = observer(
   ({ description, title }) => {
     const { closePopup } = popupStore;
 
-    const buttonConfigs: ButtonConfig[] = [
+    const buttonConfigs: ButtonProps[] = [
       {
-        clickHandler: closePopup,
+        onClick: closePopup,
         label: 'Close',
       },
     ];

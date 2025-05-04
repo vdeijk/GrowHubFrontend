@@ -8,7 +8,10 @@ export interface TableProps<T> {
   data: T[];
 }
 
-const TableWithoutSorting = <T,>({ headers, data }: TableProps<T>) => {
+const TableWithoutSorting = <T extends { id?: number | null | undefined }>({
+  headers,
+  data,
+}: TableProps<T>) => {
   return (
     <table className={styles.table}>
       <thead>
@@ -20,7 +23,11 @@ const TableWithoutSorting = <T,>({ headers, data }: TableProps<T>) => {
       </thead>
       <tbody>
         {data.map((item, index) => (
-          <TableRow key={index} tableRowData={{ ...item }} headers={headers} />
+          <TableRow
+            key={index}
+            tableRowData={{ ...item, id: item.id ?? undefined }}
+            headers={headers}
+          />
         ))}
       </tbody>
     </table>

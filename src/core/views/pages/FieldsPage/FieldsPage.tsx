@@ -68,7 +68,6 @@ const FieldsPage: React.FC = observer(() => {
         <ActionIcons
           item={item as { id: number | undefined }}
           handleDelete={handleDelete}
-          handlePaste={(id) => console.log('Paste', id)}
         />
       ),
     })),

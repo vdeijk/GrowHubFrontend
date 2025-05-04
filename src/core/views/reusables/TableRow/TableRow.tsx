@@ -1,7 +1,7 @@
 import React from 'react';
 import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
 
-interface TableRowProps<T extends { id?: number | undefined }> {
+interface TableRowProps<T extends { id?: number | null | undefined }> {
   tableRowData: T;
   headers: TableHeaderModel<T>[];
   handleEdit?: (id: number | undefined) => void;

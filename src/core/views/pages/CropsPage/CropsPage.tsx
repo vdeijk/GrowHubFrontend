@@ -30,21 +30,45 @@ const CropsPage: React.FC = observer(() => {
     navigate(`/addCropPage/${id}`);
   };
 
-  const handleDelete = (id: number | undefined) => {
+  const handleDelete = (
+    id: number | undefined,
+    event: React.MouseEvent<SVGElement>,
+  ) => {
     if (id === undefined) return;
 
+    event.stopPropagation();
+
     cropsStore.deletePlant(id);
+  };
+
+  const handleCopy = (
+    id: number | undefined,
+    event: React.MouseEvent<SVGElement>,
+  ) => {
+    if (id === undefined) return;
+
+    event.stopPropagation();
+
+    const batchToCopy = cropsStore.items.find((item) => item.id === id);
+    if (!batchToCopy) return;
   };
 
   const tableProps: TableProps<PlantItem> = {
     headers: cropsStore.tableHeaders as TableHeaderModel<PlantItem>[],
     data: cropsStore.paginatedItems.map((item) => ({
       ...item,
+      id: item.id ?? undefined,
       actions: (
         <ActionIcons
-          item={item as { id: number | undefined }}
-          handleDelete={handleDelete}
-          handleCopy={(id) => console.log('Copy', id)}
+          item={{ ...item, id: item.id ?? undefined }}
+          handleDelete={(
+            id: number | undefined,
+            event: React.MouseEvent<SVGElement>,
+          ) => handleDelete(id, event)}
+          handleCopy={(
+            id: number | undefined,
+            event: React.MouseEvent<SVGElement>,
+          ) => handleCopy(id, event)}
         />
       ),
     })),

@@ -8,7 +8,7 @@ import { DateFieldModel } from '../../../../auxiliary/interfaces/DateFieldModel'
 
 export abstract class BaseFormStore {
   dropdownFields: Record<string, DropdownField<string>> = {};
-  inputFields: Record<string, InputField<string>> = {};
+  inputFields: Record<string, InputField<string | number>> = {};
   dateFields: Record<string, DateField<string>> = {};
 
   isLoading: boolean = false;
@@ -31,7 +31,10 @@ export abstract class BaseFormStore {
   public initTextFilter = (field: InputFieldModel) => {
     runInAction(() => {
       if (!this.inputFields[field.key]) {
-        this.inputFields[field.key] = new InputField<string>('', field.label);
+        this.inputFields[field.key] = new InputField<string | number>(
+          '',
+          field.label,
+        );
       }
     });
   };

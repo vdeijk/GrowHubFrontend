@@ -26,12 +26,26 @@ const TasksPage: React.FC = observer(() => {
     },
   ];
 
+  const handlePaste = (
+    id: number | undefined,
+    event: React.MouseEvent<SVGElement>,
+  ) => {
+    if (id === undefined) return;
+
+    event.stopPropagation();
+  };
+
   const handleEdit = (id: number | undefined) => {
     navigate(`/addTaskPage/${id}`);
   };
 
-  const handleDelete = (id: number | undefined) => {
+  const handleDelete = (
+    id: number | undefined,
+    event: React.MouseEvent<SVGElement>,
+  ) => {
     if (id === undefined) return;
+
+    event.stopPropagation();
 
     taskStore.deleteTask(id);
   };
@@ -49,8 +63,14 @@ const TasksPage: React.FC = observer(() => {
       actions: (
         <ActionIcons
           item={item as { id: number | undefined }}
-          handleDelete={handleDelete}
-          handlePaste={(id) => console.log('Paste', id)}
+          handleDelete={(
+            id: number | undefined,
+            event: React.MouseEvent<SVGElement>,
+          ) => handleDelete(id, event)}
+          handlePaste={(
+            id: number | undefined,
+            event: React.MouseEvent<SVGElement>,
+          ) => handlePaste(id, event)}
         />
       ),
     })),
