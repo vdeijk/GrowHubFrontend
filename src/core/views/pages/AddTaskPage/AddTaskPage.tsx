@@ -68,7 +68,7 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
         addTaskStore.dateFields[fieldKey].setValue(value || ''),
     });
 
-    const titleProps = createTextInputFieldModel('titleField');
+    const titleProps = createTextInputFieldModel('title');
     const notesProps = createTextInputFieldModel('notes');
     const priorityProps = createDropdownFieldModel('priority');
     const dueDateProps = createDateFieldModel('dueDate');

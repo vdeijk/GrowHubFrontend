@@ -5,7 +5,7 @@ import { InputFieldModel } from '../interfaces/InputFieldModel';
 class AddTaskData {
   public static textFields: Record<string, InputFieldModel> = {
     titleField: {
-      key: 'titleField',
+      key: 'title',
       label: 'Title Field',
       defaultValue: '',
       required: true,
