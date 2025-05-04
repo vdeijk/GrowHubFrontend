@@ -29,19 +29,7 @@ class AddMeasurementStore extends BaseFormStore {
   }
 
   public addReading = async () => {
-    const data: MeasurementItem = {
-      title: this.inputFields.title.value as string,
-      notes: this.inputFields.notes.value as string,
-      soilPH: this.inputFields.soilPH.value as number,
-      soilDryness: this.dropdownFields.soilDryness
-        .value as MeasurementItemSoilDrynessEnum,
-      growthStage: this.dropdownFields.growthStage
-        .value as MeasurementItemGrowthStageEnum,
-      healthStatus: this.dropdownFields.healthStatus
-        .value as MeasurementItemHealthStatusEnum,
-    };
-
-    await this.endpointService.postData(data);
+    await this.endpointService.postData(this.prepareData());
 
     measurementsStore.fetchData();
   };
@@ -51,19 +39,7 @@ class AddMeasurementStore extends BaseFormStore {
 
     if (Number.isNaN(numberId)) return;
 
-    const data: MeasurementItem = {
-      title: this.inputFields.title.value as string,
-      notes: this.inputFields.notes.value as string,
-      soilPH: this.inputFields.soilPH.value as number,
-      soilDryness: this.dropdownFields.soilDryness
-        .value as MeasurementItemSoilDrynessEnum,
-      growthStage: this.dropdownFields.growthStage
-        .value as MeasurementItemGrowthStageEnum,
-      healthStatus: this.dropdownFields.healthStatus
-        .value as MeasurementItemHealthStatusEnum,
-    };
-
-    await this.endpointService.putData(`${id}`, data);
+    await this.endpointService.putData(`${id}`, this.prepareData());
 
     measurementsStore.fetchData();
   };
@@ -85,6 +61,20 @@ class AddMeasurementStore extends BaseFormStore {
     if (this.validateRequired()) return true;
 
     return false;
+  }
+
+  prepareData(): MeasurementItem {
+    return {
+      title: this.inputFields.title.value as string,
+      notes: this.inputFields.notes.value as string,
+      soilPH: this.inputFields.soilPH.value as number,
+      soilDryness: this.dropdownFields.soilDryness
+        .value as MeasurementItemSoilDrynessEnum,
+      growthStage: this.dropdownFields.growthStage
+        .value as MeasurementItemGrowthStageEnum,
+      healthStatus: this.dropdownFields.healthStatus
+        .value as MeasurementItemHealthStatusEnum,
+    };
   }
 }
 

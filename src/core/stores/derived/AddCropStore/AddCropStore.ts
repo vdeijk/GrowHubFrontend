@@ -23,20 +23,7 @@ class AddCropStore extends BaseFormStore {
   }
 
   public addCrop = async () => {
-    const data: PlantItem = {
-      commonName: this.inputFields.commonName.value as string,
-      notes: this.inputFields.notes.value as string,
-      waterCycle: this.inputFields.waterCycle.value as number,
-      pruningCycle: this.inputFields.pruningCycle.value as number,
-      fertilizationCycle: this.inputFields.fertilizationCycle.value as number,
-      harvestCycle: this.inputFields.harvestCycle.value as number,
-      phMin: this.inputFields.phMin.value as number,
-      phMax: this.inputFields.phMax.value as number,
-      temperatureMin: this.inputFields.temperatureMin.value as number,
-      temperatureMax: this.inputFields.temperatureMax.value as number,
-    };
-
-    await this.endpointService.postData(data);
+    await this.endpointService.postData(this.prepareData());
 
     localStorageService.invalidateCache('cropsDatabaseItems');
     cropsDatabaseStore.fetchData();
@@ -47,20 +34,7 @@ class AddCropStore extends BaseFormStore {
 
     if (Number.isNaN(numberId)) return;
 
-    const data: PlantItem = {
-      commonName: this.inputFields.commonName.value as string,
-      notes: this.inputFields.notes.value as string,
-      waterCycle: this.inputFields.waterCycle.value as number,
-      pruningCycle: this.inputFields.pruningCycle.value as number,
-      fertilizationCycle: this.inputFields.fertilizationCycle.value as number,
-      harvestCycle: this.inputFields.harvestCycle.value as number,
-      phMin: this.inputFields.phMin.value as number,
-      phMax: this.inputFields.phMax.value as number,
-      temperatureMin: this.inputFields.temperatureMin.value as number,
-      temperatureMax: this.inputFields.temperatureMax.value as number,
-    };
-
-    await this.endpointService.putData(`${id}`, data);
+    await this.endpointService.putData(`${id}`, this.prepareData());
 
     localStorageService.invalidateCache('cropsDatabaseItems');
     cropsDatabaseStore.fetchData();
@@ -83,6 +57,21 @@ class AddCropStore extends BaseFormStore {
     if (this.validateRequired()) return true;
 
     return false;
+  }
+
+  private prepareData(): PlantItem {
+    return {
+      commonName: this.inputFields.commonName.value as string,
+      notes: this.inputFields.notes.value as string,
+      waterCycle: this.inputFields.waterCycle.value as number,
+      pruningCycle: this.inputFields.pruningCycle.value as number,
+      fertilizationCycle: this.inputFields.fertilizationCycle.value as number,
+      harvestCycle: this.inputFields.harvestCycle.value as number,
+      phMin: this.inputFields.phMin.value as number,
+      phMax: this.inputFields.phMax.value as number,
+      temperatureMin: this.inputFields.temperatureMin.value as number,
+      temperatureMax: this.inputFields.temperatureMax.value as number,
+    };
   }
 }
 

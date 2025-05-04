@@ -23,16 +23,7 @@ class AddBatchStore extends BaseFormStore {
   }
 
   public addCrop = async () => {
-    const data: YourCropItem = {
-      commonName: this.inputFields.nameField.value as string,
-      location: this.dropdownFields.location.value as string,
-      lastWatered: this.dateFields.lastWatered.value as string,
-      lastFertilized: this.dateFields.lastFertilized.value as string,
-      lastPruned: this.dateFields.lastPruned.value as string,
-      lastHarvested: this.dateFields.lastHarvested.value as string,
-    };
-
-    await this.endpointService.postData(data);
+    await this.endpointService.postData(this.prepareData());
 
     localStorageService.invalidateCache('cropsDatabaseItems');
     yourCropsStore.fetchData();
@@ -43,16 +34,7 @@ class AddBatchStore extends BaseFormStore {
 
     if (Number.isNaN(numberId)) return;
 
-    const data: YourCropItem = {
-      commonName: this.inputFields.nameField.value as string,
-      location: this.dropdownFields.location.value as string,
-      lastWatered: this.dateFields.lastWatered.value as string,
-      lastFertilized: this.dateFields.lastFertilized.value as string,
-      lastPruned: this.dateFields.lastPruned.value as string,
-      lastHarvested: this.dateFields.lastHarvested.value as string,
-    };
-
-    await this.endpointService.putData(`${id}`, data);
+    await this.endpointService.putData(`${id}`, this.prepareData());
 
     yourCropsStore.fetchData();
   };
@@ -74,6 +56,17 @@ class AddBatchStore extends BaseFormStore {
     if (this.validateRequired()) return true;
 
     return false;
+  }
+
+  private prepareData(): YourCropItem {
+    return {
+      commonName: this.inputFields.nameField.value as string,
+      location: this.dropdownFields.location.value as string,
+      lastWatered: this.dateFields.lastWatered.value as string,
+      lastFertilized: this.dateFields.lastFertilized.value as string,
+      lastPruned: this.dateFields.lastPruned.value as string,
+      lastHarvested: this.dateFields.lastHarvested.value as string,
+    };
   }
 }
 

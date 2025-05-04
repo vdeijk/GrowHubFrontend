@@ -31,17 +31,7 @@ class AddTaskStore extends BaseFormStore {
   }
 
   public addTask = async () => {
-    const data: TodoItem = {
-      title: this.inputFields.titleField.value as string,
-      notes: this.inputFields.notes.value as string,
-      priority: this.dropdownFields.priority.value as TodoItemPriorityEnum,
-      category: this.dropdownFields.category.value as TodoItemCategoryEnum,
-      todoStatus: this.dropdownFields.todoStatus
-        .value as TodoItemTodoStatusEnum,
-      dueDate: this.dateFields.dueDate.value as string,
-    };
-
-    await this.endpointService.postData(data);
+    await this.endpointService.postData(this.prepareData());
 
     taskStore.fetchData();
   };
@@ -63,17 +53,7 @@ class AddTaskStore extends BaseFormStore {
     const numberId = Number(id);
     if (Number.isNaN(numberId)) return;
 
-    const data: TodoItem = {
-      title: this.inputFields.titleField.value as string,
-      notes: this.inputFields.notes.value as string,
-      priority: this.dropdownFields.priority.value as TodoItemPriorityEnum,
-      category: this.dropdownFields.category.value as TodoItemCategoryEnum,
-      todoStatus: this.dropdownFields.todoStatus
-        .value as TodoItemTodoStatusEnum,
-      dueDate: this.dateFields.dueDate.value as string,
-    };
-
-    await this.endpointService.putData(`${id}`, data);
+    await this.endpointService.putData(`${id}`, this.prepareData());
 
     taskStore.fetchData();
   };
@@ -82,6 +62,18 @@ class AddTaskStore extends BaseFormStore {
     if (this.validateRequired()) return true;
 
     return false;
+  }
+
+  private prepareData(): TodoItem {
+    return {
+      title: this.inputFields.titleField.value as string,
+      notes: this.inputFields.notes.value as string,
+      priority: this.dropdownFields.priority.value as TodoItemPriorityEnum,
+      category: this.dropdownFields.category.value as TodoItemCategoryEnum,
+      todoStatus: this.dropdownFields.todoStatus
+        .value as TodoItemTodoStatusEnum,
+      dueDate: this.dateFields.dueDate.value as string,
+    };
   }
 }
 

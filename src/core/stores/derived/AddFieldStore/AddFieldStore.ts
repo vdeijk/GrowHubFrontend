@@ -22,13 +22,7 @@ class AddFieldStore extends BaseFormStore {
       return;
     }
 
-    const data: LocationItem = {
-      name: this.inputFields.name.value as string,
-      latitude: parseFloat(this.inputFields.latitude.value as string),
-      longitude: parseFloat(this.inputFields.longitude.value as string),
-    };
-
-    await this.endpointService.postData(data);
+    await this.endpointService.postData(this.prepareData());
 
     fieldsStore.fetchData();
   };
@@ -37,14 +31,7 @@ class AddFieldStore extends BaseFormStore {
     const numberId = Number(id);
     if (Number.isNaN(numberId)) return;
 
-    const data: LocationItem = {
-      id: numberId,
-      name: this.inputFields.name.value as string,
-      latitude: parseFloat(this.inputFields.latitude.value as string),
-      longitude: parseFloat(this.inputFields.longitude.value as string),
-    };
-
-    await this.endpointService.putData(`${id}`, data);
+    await this.endpointService.putData(`${id}`, this.prepareData());
 
     fieldsStore.fetchData();
   };
@@ -83,6 +70,14 @@ class AddFieldStore extends BaseFormStore {
     }
 
     return true;
+  }
+
+  prepareData(): LocationItem {
+    return {
+      name: this.inputFields.name.value as string,
+      latitude: parseFloat(this.inputFields.latitude.value as string),
+      longitude: parseFloat(this.inputFields.longitude.value as string),
+    };
   }
 }
 
