@@ -42,22 +42,6 @@ const TasksPage: React.FC = observer(() => {
     dropdownFields: Object.values(taskStore.dropdownFilters),
   };
 
-  const handlePopup = (id: number | undefined) => {
-    if (id === undefined) return;
-
-    const task = taskStore.items.find((item) => item.id === id);
-    if (!task) return;
-
-    taskStore.textFilters.description.setValue(task.notes ?? '');
-
-    popupService.openPopup(
-      <NotesPopup
-        description={taskStore.textFilters.description}
-        title={'Task Notes'}
-      />,
-    );
-  };
-
   const tableProps: TableProps<TodoItem> = {
     headers: taskStore.tableHeaders as TableHeaderModel<TodoItem>[],
     data: taskStore.paginatedItems.map((item) => ({
@@ -65,15 +49,15 @@ const TasksPage: React.FC = observer(() => {
       actions: (
         <ActionIcons
           item={item as { id: number | undefined }}
-          handlePopup={handlePopup}
-          handleEdit={handleEdit}
           handleDelete={handleDelete}
+          handlePaste={(id) => console.log('Paste', id)}
         />
       ),
     })),
     onSort: (field) => taskStore.sortItems(field as keyof TodoItem),
     sortField: taskStore.sortField,
     sortOrder: taskStore.sortOrder,
+    handleEdit,
   };
 
   return (

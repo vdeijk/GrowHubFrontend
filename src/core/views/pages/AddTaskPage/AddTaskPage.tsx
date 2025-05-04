@@ -6,7 +6,8 @@ import styles from './AddTaskPage.module.css';
 import { observer } from 'mobx-react-lite';
 import { useParams } from 'react-router-dom';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
-import Button, { ButtonProps } from '../../reusables/Button/Button';
+import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
+import { ButtonProps } from '../../../../auxiliary/interfaces/ButtonProps';
 import Dropdown from '../../reusables/Dropdown/Dropdown';
 import DateInput, { DateInputProps } from '../../reusables/DateInput/DateInput';
 import taskStore from '../../../stores/derived/TasksStore/TasksStore';
@@ -73,11 +74,19 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
     const categoryProps = createDropdownFieldModel('category');
     const statusProps = createDropdownFieldModel('todoStatus');
 
-    const buttonProps: ButtonProps = {
-      type: 'submit',
-      label: isEditing ? 'Edit Task' : 'Add Task',
-      customStyles: { marginTop: '1rem' },
-    };
+    const buttonContainerData: ButtonProps[] = [
+      {
+        type: 'button',
+        onClick: () => navigate('/tasksPage'),
+        label: 'Back',
+      },
+      {
+        type: 'submit',
+        onClick: () => navigate('/tasksPage'),
+        label: isEditing ? 'Edit Task' : 'Add Task',
+        customStyles: { marginTop: '1rem' },
+      },
+    ];
 
     return (
       <section className={styles.section}>
@@ -85,12 +94,14 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
           <form onSubmit={handleSubmit} className={styles.form}>
             <TextInput {...titleProps} />
             <TextArea {...notesProps} />
+            <TextInput {...titleProps} />
             <Dropdown {...priorityProps} />
-            <DateInput {...dueDateProps} />
             <Dropdown {...categoryProps} />
             <Dropdown {...statusProps} />
+            <DateInput {...dueDateProps} />
             <div></div>
-            <Button {...buttonProps} />
+            <div></div>
+            <ButtonContainer buttons={buttonContainerData} />
           </form>
         </LoadingWrapper>
       </section>

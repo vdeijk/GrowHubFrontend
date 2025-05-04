@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import TextInput from '../../reusables/TextInput/TextInput';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
-import Button, { ButtonProps } from '../../reusables/Button/Button';
+import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import styles from './AddBatchPage.module.css';
 import { observer } from 'mobx-react-lite';
 import { useParams } from 'react-router-dom';
@@ -11,6 +11,7 @@ import DateInput from '../../reusables/DateInput/DateInput';
 import { DateInputProps } from '../../reusables/DateInput/DateInput';
 import { TextInputProps } from '../../reusables/TextInput/TextInput';
 import TextArea from '../../reusables/TextArea/TextArea';
+import { ButtonProps } from '../../../../auxiliary/interfaces/ButtonProps';
 
 interface AddBatchPageProps {
   isEditing?: boolean;
@@ -45,12 +46,19 @@ const AddBatchPage: React.FC<AddBatchPageProps> = observer(
       navigate('/cropsPage');
     };
 
-    const buttonProps: ButtonProps = {
-      type: 'submit',
-      onClick: () => navigate('/tasksPage'),
-      label: isEditing ? 'Edit Batch' : 'Add Batch',
-      customStyles: { marginTop: '1rem' },
-    };
+    const buttonContainerData: ButtonProps[] = [
+      {
+        type: 'button',
+        onClick: () => navigate('/batchesPage'),
+        label: 'Back',
+      },
+      {
+        type: 'submit',
+        onClick: () => navigate('/batchesPage'),
+        label: isEditing ? 'Edit Batch' : 'Add Batch',
+        customStyles: { marginTop: '1rem' },
+      },
+    ];
 
     const createTextInputFieldModel = (fieldKey: string): TextInputProps => {
       return {
@@ -100,7 +108,7 @@ const AddBatchPage: React.FC<AddBatchPageProps> = observer(
             <DateInput {...lastPrunedFieldModel} />
             <DateInput {...lastHarvestedFieldModel} />
             <div></div>
-            <Button {...buttonProps} />
+            <ButtonContainer buttons={buttonContainerData} />
           </form>
         </LoadingWrapper>
       </section>

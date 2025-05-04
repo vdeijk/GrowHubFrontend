@@ -1,13 +1,6 @@
 import React from 'react';
 import styles from './Button.module.css';
-
-export interface ButtonProps {
-  onClick?: () => void;
-  label: string;
-  className?: string;
-  type?: 'button' | 'submit' | 'reset';
-  customStyles?: React.CSSProperties;
-}
+import { ButtonProps } from '../../../../auxiliary/interfaces/ButtonProps';
 
 const Button: React.FC<ButtonProps> = (props) => {
   const { onClick, label, className, type = 'button', customStyles } = props;

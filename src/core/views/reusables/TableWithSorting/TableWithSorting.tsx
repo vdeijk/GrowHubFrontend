@@ -3,20 +3,22 @@ import styles from './TableWithSorting.module.css';
 import TableRow from '../TableRow/TableRow';
 import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
 
-export interface TableProps<T> {
+export interface TableProps<T extends { id?: number | undefined }> {
   headers: TableHeaderModel<T>[];
   onSort: (field: keyof T) => void;
   sortField: keyof T | null;
   sortOrder: 'asc' | 'desc';
   data: T[];
+  handleEdit?: (id: number | undefined) => void;
 }
 
-const TableWithSorting = <T,>({
+const TableWithSorting = <T extends { id?: number | undefined }>({
   headers,
   data,
   onSort,
   sortField,
   sortOrder,
+  handleEdit,
 }: TableProps<T>) => {
   const getSortIndicator = (field: keyof T) => {
     if (sortField === field) {
@@ -49,7 +51,12 @@ const TableWithSorting = <T,>({
       </thead>
       <tbody>
         {data.map((item, index) => (
-          <TableRow key={index} tableRowData={item} headers={headers} />
+          <TableRow
+            key={index}
+            tableRowData={item}
+            headers={headers}
+            handleEdit={handleEdit}
+          />
         ))}
       </tbody>
     </table>

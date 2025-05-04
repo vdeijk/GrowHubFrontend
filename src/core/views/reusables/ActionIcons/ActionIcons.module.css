@@ -6,25 +6,25 @@
   width: max-content;
 }
 
-.viewIcon {
+.pasteIcon {
   color: #f0ad4e;
   cursor: pointer;
   font-size: 1.8rem;
   transition: color 0.2s ease;
 }
 
-.viewIcon:hover {
+.pasteIcon:hover {
   color: #ec971f;
 }
 
-.editIcon {
+.copyIcon {
   color: #4caf50;
   cursor: pointer;
   font-size: 1.8rem;
   transition: color 0.2s ease;
 }
 
-.editIcon:hover {
+.copyIcon:hover {
   color: #45a049;
 }
 
@@ -38,3 +38,15 @@
 .deleteIcon:hover {
   color: #c9302c;
 }
+
+/*
+.viewIcon {
+  color: #f0ad4e;
+  cursor: pointer;
+  font-size: 1.8rem;
+  transition: color 0.2s ease;
+}
+
+.viewIcon:hover {
+  color: #ec971f;
+}*/

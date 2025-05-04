@@ -1,12 +1,17 @@
 import React from 'react';
 import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
 
-interface TableRowProps<T> {
+interface TableRowProps<T extends { id?: number | undefined }> {
   tableRowData: T;
   headers: TableHeaderModel<T>[];
+  handleEdit?: (id: number | undefined) => void;
 }
 
-const TableRow = <T,>({ tableRowData, headers }: TableRowProps<T>) => {
+const TableRow = <T extends { id?: number | undefined }>({
+  tableRowData,
+  headers,
+  handleEdit,
+}: TableRowProps<T>) => {
   const formatDate = (dateString: string) => {
     if (!dateString) return '';
 
@@ -83,7 +88,7 @@ const TableRow = <T,>({ tableRowData, headers }: TableRowProps<T>) => {
   };
 
   return (
-    <tr>
+    <tr onClick={() => handleEdit?.(tableRowData.id as number | undefined)}>
       {headers.map((header) => (
         <td key={String(header.id)}>
           {renderCellContent(header.id as keyof T, header.type)}

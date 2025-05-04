@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import TextInput from '../../reusables/TextInput/TextInput';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import addCropStore from '../../../stores/derived/AddCropStore/AddCropStore';
-import Button, { ButtonProps } from '../../reusables/Button/Button';
+import { ButtonProps } from '../../../../auxiliary/interfaces/ButtonProps';
 import styles from './AddCropPage.module.css';
 import { observer } from 'mobx-react-lite';
 import { useParams } from 'react-router-dom';
@@ -10,6 +10,7 @@ import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import Dropdown from '../../reusables/Dropdown/Dropdown';
 import { TextInputProps } from '../../reusables/TextInput/TextInput';
 import TextArea from '../../reusables/TextArea/TextArea';
+import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 
 interface AddCropPageProps {
   isEditing?: boolean;
@@ -44,12 +45,18 @@ const AddCropPage: React.FC<AddCropPageProps> = observer(
       navigate('/cropsDatabase');
     };
 
-    const buttonProps: ButtonProps = {
-      type: 'submit',
-      onClick: () => navigate('/tasksPage'),
-      label: isEditing ? 'Edit Crop' : 'Add Crop',
-      customStyles: { marginTop: '1rem' },
-    };
+    const buttonContainerData: ButtonProps[] = 
+      [{
+        type: 'button',
+        onClick: () => navigate('/cropsPage'),
+        label: 'Back',
+      },
+      {
+        type: 'submit',
+        onClick: () => navigate('/cropsPage'),
+        label: isEditing ? 'Edit Crop' : 'Add Crop',
+        customStyles: { marginTop: '1rem' },
+      }];
 
     const createTextInputFieldModel = (fieldKey: string): TextInputProps => {
       return {
@@ -107,7 +114,7 @@ const AddCropPage: React.FC<AddCropPageProps> = observer(
             <TextInput {...temperatureMin} />
             <TextInput {...temperatureMax} />
             <div></div>
-            <Button {...buttonProps} />
+            <ButtonContainer buttons={buttonContainerData} />
           </form>
         </LoadingWrapper>
       </section>

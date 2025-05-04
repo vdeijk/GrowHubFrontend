@@ -11,8 +11,6 @@ import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation
 import ActionIcons from '../../reusables/ActionIcons/ActionIcons';
 import Pagination from '../../reusables/Pagination/Pagination';
 import { PlantItem } from '../../../../api';
-import popupService from '../../../services/PopupService/PopupService';
-import NotesPopup from '../../reusables/NotesPopup/NotesPopup';
 import Popup from '../../layouts/Popup/Popup';
 import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
 import SyncButton from '../../reusables/SyncButton/SyncButton';
@@ -38,38 +36,22 @@ const CropsPage: React.FC = observer(() => {
     cropsStore.deletePlant(id);
   };
 
-  const handlePopup = (id: number | undefined) => {
-    if (id === undefined) return;
-
-    const task = cropsStore.items.find((item) => item.id === id);
-    if (!task) return;
-
-    cropsStore.textFilters.description.setValue(task.notes ?? '');
-
-    popupService.openPopup(
-      <NotesPopup
-        description={cropsStore.textFilters.description}
-        title={'Crop Notes'}
-      />,
-    );
-  };
-
   const tableProps: TableProps<PlantItem> = {
     headers: cropsStore.tableHeaders as TableHeaderModel<PlantItem>[],
     data: cropsStore.paginatedItems.map((item) => ({
       ...item,
       actions: (
         <ActionIcons
-          handlePopup={handlePopup}
           item={item as { id: number | undefined }}
-          handleEdit={handleEdit}
           handleDelete={handleDelete}
+          handleCopy={(id) => console.log('Copy', id)}
         />
       ),
     })),
     onSort: (field) => cropsStore.sortItems(field),
     sortField: cropsStore.sortField,
     sortOrder: cropsStore.sortOrder,
+    handleEdit,
   };
 
   const buttonContainerData = {

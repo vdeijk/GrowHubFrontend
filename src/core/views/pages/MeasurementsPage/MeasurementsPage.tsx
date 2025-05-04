@@ -12,8 +12,6 @@ import ActionIcons from '../../reusables/ActionIcons/ActionIcons';
 import SearchBar from '../../containers/SearchBar/Searchbar';
 import { SearchBarProps } from '../../containers/SearchBar/Searchbar';
 import { observer } from 'mobx-react-lite';
-import popupService from '../../../services/PopupService/PopupService';
-import NotesPopup from '../../reusables/NotesPopup/NotesPopup';
 import Popup from '../../layouts/Popup/Popup';
 import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
 
@@ -26,22 +24,6 @@ const MeasurementsPage: React.FC<MeasurementsProps> = observer(() => {
   const buttonContainerData = {
     clickHandler: () => navigate('/addMeasurementPage'),
     label: 'Add Measurement',
-  };
-
-  const handlePopup = (id: number | undefined) => {
-    if (id === undefined) return;
-
-    const task = measurementsStore.items.find((item) => item.id === id);
-    if (!task) return;
-
-    measurementsStore.textFilters.description.setValue(task.notes ?? '');
-
-    popupService.openPopup(
-      <NotesPopup
-        description={measurementsStore.textFilters.description}
-        title={'Measurement Notes'}
-      />,
-    );
   };
 
   const handleEdit = (id: number | undefined) => {
@@ -68,9 +50,8 @@ const MeasurementsPage: React.FC<MeasurementsProps> = observer(() => {
       actions: (
         <ActionIcons
           item={item as { id: number | undefined }}
-          handlePopup={handlePopup}
-          handleEdit={handleEdit}
           handleDelete={handleDelete}
+          handlePaste={(id) => console.log('Paste', id)}
         />
       ),
     })),
@@ -78,6 +59,7 @@ const MeasurementsPage: React.FC<MeasurementsProps> = observer(() => {
       measurementsStore.sortItems(field as keyof MeasurementItem),
     sortField: measurementsStore.sortField,
     sortOrder: measurementsStore.sortOrder,
+    handleEdit,
   };
 
   return (

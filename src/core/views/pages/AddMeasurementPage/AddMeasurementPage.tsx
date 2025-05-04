@@ -6,11 +6,12 @@ import styles from './AddMeasurementPage.module.css';
 import { observer } from 'mobx-react-lite';
 import { useParams } from 'react-router-dom';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
-import Button, { ButtonProps } from '../../reusables/Button/Button';
+import { ButtonProps } from '../../../../auxiliary/interfaces/ButtonProps';
 import Dropdown from '../../reusables/Dropdown/Dropdown';
 import DateInput, { DateInputProps } from '../../reusables/DateInput/DateInput';
 import taskStore from '../../../stores/derived/TasksStore/TasksStore';
 import TextArea from '../../reusables/TextArea/TextArea';
+import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 
 interface AddMeasurementPageProps {
   isEditing?: boolean;
@@ -73,11 +74,19 @@ const AddMeasurementPage: React.FC<AddMeasurementPageProps> = observer(
     const categoryProps = createDropdownFieldModel('category');
     const statusProps = createDropdownFieldModel('todoStatus');
 
-    const buttonProps: ButtonProps = {
-      type: 'submit',
-      label: isEditing ? 'Edit Task' : 'Add Task',
-      customStyles: { marginTop: '1rem' },
-    };
+    const buttonContainerData: ButtonProps[] = [
+      {
+        type: 'button',
+        onClick: () => navigate('/measurementsPage'),
+        label: 'Back',
+      },
+      {
+        type: 'submit',
+        onClick: () => navigate('/measurementsPage'),
+        label: isEditing ? 'Edit Task' : 'Add Task',
+        customStyles: { marginTop: '1rem' },
+      },
+    ];
 
     return (
       <section className={styles.section}>
@@ -90,7 +99,7 @@ const AddMeasurementPage: React.FC<AddMeasurementPageProps> = observer(
             <Dropdown {...categoryProps} />
             <Dropdown {...statusProps} />
             <div></div>
-            <Button {...buttonProps} />
+            <ButtonContainer buttons={buttonContainerData} />
           </form>
         </LoadingWrapper>
       </section>

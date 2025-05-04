@@ -12,8 +12,6 @@ import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation
 import ActionIcons from '../../reusables/ActionIcons/ActionIcons';
 import Pagination from '../../reusables/Pagination/Pagination';
 import { YourCropItem } from '../../../../api';
-import NotesPopup from '../../reusables/NotesPopup/NotesPopup';
-import popupService from '../../../services/PopupService/PopupService';
 import Popup from '../../layouts/Popup/Popup';
 import batchesStore from '../../../stores/derived/BatchesStore/BatchesStore';
 import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
@@ -38,22 +36,6 @@ const BatchesPage: React.FC = observer(() => {
     cropsStore.deletePlant(id);
   };
 
-  const handlePopup = (id: number | undefined) => {
-    if (id === undefined) return;
-
-    const task = batchesStore.items.find((item) => item.id === id);
-    if (!task) return;
-
-    batchesStore.textFilters.description.setValue(task.notes ?? '');
-
-    popupService.openPopup(
-      <NotesPopup
-        description={batchesStore.textFilters.description}
-        title={'Batch Notes'}
-      />,
-    );
-  };
-
   const tableProps: TableProps<YourCropItem> = {
     headers: batchesStore.tableHeaders as TableHeaderModel<YourCropItem>[],
     data: cropsStore.paginatedItems.map((item) => ({
@@ -62,16 +44,17 @@ const BatchesPage: React.FC = observer(() => {
         <div className={styles.actionIcons}>
           <ActionIcons
             item={item as { id: number | undefined }}
-            handlePopup={handlePopup}
-            handleEdit={handleEdit}
             handleDelete={handleDelete}
+            handleCopy={(id) => console.log('Copy', id)}
+            handlePaste={(id) => console.log('Paste', id)}
           />
         </div>
       ),
     })),
     onSort: (field: keyof YourCropItem) => cropsStore.sortItems(field),
-    sortField: cropsStore.sortField,
+    sortField: cropsStore.sortField as 'id' | null,
     sortOrder: cropsStore.sortOrder,
+    handleEdit,
   };
 
   const buttonContainerData = {
@@ -101,3 +84,21 @@ const BatchesPage: React.FC = observer(() => {
 });
 
 export default BatchesPage;
+
+/*
+
+  const handlePopup = (id: number | undefined) => {
+    if (id === undefined) return;
+
+    const task = batchesStore.items.find((item) => item.id === id);
+    if (!task) return;
+
+    batchesStore.textFilters.description.setValue(task.notes ?? '');
+
+    popupService.openPopup(
+      <NotesPopup
+        description={batchesStore.textFilters.description}
+        title={'Batch Notes'}
+      />,
+    );
+  };*/
