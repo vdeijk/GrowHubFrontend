@@ -65,7 +65,12 @@ const SearchBar: React.FC<SearchBarProps> = observer(
     return (
       <section className={styles.container}>
         {inputFields.length > 0 && inputFieldsDisplay}
+        {inputFields.length > 0 &&
+          (dropdownFields.length > 0 || dateFields.length > 0) && (
+            <hr className={styles.divider} />
+          )}
         {dropdownFields.length > 0 && dropdownFieldsDisplay}
+        {dropdownFields.length > 0 && <hr className={styles.divider} />}
         {dateFields.length > 0 && dateFieldsDisplay}
       </section>
     );
