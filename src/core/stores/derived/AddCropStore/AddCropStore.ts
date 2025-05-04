@@ -5,6 +5,7 @@ import { EndpointService } from '../../../services/EndpointService/EndpointServi
 import { runInAction } from 'mobx';
 import { localStorageService } from '../../../services/LocalStorageService/LocalStorageService';
 import AddCropData from '../../../../auxiliary/data/AddCropData';
+import { DataMappingService } from '../../../services/DataMappingService/DatamappingService';
 
 class AddCropStore extends BaseFormStore {
   private endpointService = new EndpointService('Plant');
@@ -72,27 +73,9 @@ class AddCropStore extends BaseFormStore {
     if (!data) return;
 
     runInAction(() => {
-      this.inputFields.commonName.setValue(String(data.commonName));
-      this.inputFields.notes.setValue(String(data.notes));
-      this.inputFields.waterCycle.setValue(String(data.waterCycle));
-      this.inputFields.pruningCycle.setValue(String(data.pruningCycle));
-      this.inputFields.fertilizationCycle.setValue(
-        String(data.fertilizationCycle),
-      );
-      this.inputFields.harvestCycle.setValue(String(data.harvestCycle));
-      this.inputFields.phMin.setValue(String(data.phMin));
-      this.inputFields.phMax.setValue(String(data.phMax));
-      this.inputFields.temperatureMin.setValue(String(data.temperatureMin));
-      this.inputFields.temperatureMax.setValue(String(data.temperatureMax));
-
-      this.dropdownFields.harvestStart.setValue(String(data.harvestStart));
-      this.dropdownFields.harvestEnd.setValue(String(data.harvestEnd));
-      this.dropdownFields.pruningStart.setValue(String(data.pruningStart));
-      this.dropdownFields.pruningEnd.setValue(String(data.pruningEnd));
-      this.dropdownFields.fertilizingStart.setValue(
-        String(data.fertilizingStart),
-      );
-      this.dropdownFields.fertilizingEnd.setValue(String(data.fertilizingEnd));
+      DataMappingService.mapInputFields(data, this.inputFields);
+      DataMappingService.mapDropdownFields(data, this.dropdownFields);
+      DataMappingService.mapDateFields(data, this.dateFields);
     });
   };
 

@@ -7,6 +7,7 @@ import measurementsStore from '../MeasurementsStore/MeasurementsStore';
 import { MeasurementItemSoilDrynessEnum } from '../../../../api';
 import { MeasurementItemGrowthStageEnum } from '../../../../api';
 import { MeasurementItemHealthStatusEnum } from '../../../../api';
+import { DataMappingService } from '../../../services/DataMappingService/DatamappingService';
 
 class AddMeasurementStore extends BaseFormStore {
   private endpointService = new EndpointService('Measurements');
@@ -74,13 +75,9 @@ class AddMeasurementStore extends BaseFormStore {
     if (!data) return;
 
     runInAction(() => {
-      this.inputFields.nameField.setValue(String(data.title));
-      this.inputFields.notes.setValue(String(data.notes));
-      this.inputFields.soilPH.setValue(String(data.soilPH));
-      this.dropdownFields.soilDryness.setValue(String(data.soilDryness));
-      this.dropdownFields.healthStatus.setValue(String(data.healthStatus));
-      this.dropdownFields.growthStage.setValue(String(data.growthStage));
-      this.dateFields.date.setValue(String(data.date));
+      DataMappingService.mapInputFields(data, this.inputFields);
+      DataMappingService.mapDropdownFields(data, this.dropdownFields);
+      DataMappingService.mapDateFields(data, this.dateFields);
     });
   };
 

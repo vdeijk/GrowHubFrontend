@@ -9,6 +9,7 @@ import {
   TodoItemTodoStatusEnum,
 } from '../../../../api';
 import AddTaskData from '../../../../auxiliary/data/AddTaskData';
+import { DataMappingService } from '../../../services/DataMappingService/DatamappingService';
 
 class AddTaskStore extends BaseFormStore {
   public endpointService = new EndpointService('Todo');
@@ -52,12 +53,9 @@ class AddTaskStore extends BaseFormStore {
     if (!data) return;
 
     runInAction(() => {
-      this.inputFields.titleField.setValue(data.title ?? '');
-      this.inputFields.notes.setValue(data.notes ?? '');
-      this.dropdownFields.priority.setValue(data.priority ?? '');
-      this.dropdownFields.category.setValue(data.category ?? '');
-      this.dropdownFields.todoStatus.setValue(data.todoStatus ?? '');
-      this.dateFields.dueDate.setValue(data.dueDate ?? '');
+      DataMappingService.mapInputFields(data, this.inputFields);
+      DataMappingService.mapDropdownFields(data, this.dropdownFields);
+      DataMappingService.mapDateFields(data, this.dateFields);
     });
   };
 

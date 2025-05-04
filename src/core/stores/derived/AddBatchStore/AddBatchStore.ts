@@ -5,6 +5,7 @@ import { EndpointService } from '../../../services/EndpointService/EndpointServi
 import { runInAction } from 'mobx';
 import { localStorageService } from '../../../services/LocalStorageService/LocalStorageService';
 import AddBatchData from '../../../../auxiliary/data/AddBatchData';
+import { DataMappingService } from '../../../services/DataMappingService/DatamappingService';
 
 class AddBatchStore extends BaseFormStore {
   private endpointService = new EndpointService('YourCrops');
@@ -63,14 +64,9 @@ class AddBatchStore extends BaseFormStore {
     if (!data) return;
 
     runInAction(() => {
-      this.inputFields.commonName.setValue(String(data.commonName));
-      this.inputFields.notes.setValue(String(data.notes));
-      this.inputFields.amount.setValue(String(data.amount));
-
-      this.dateFields.lastWatered.setValue(String(data.lastWatered));
-      this.dateFields.lastFertilized.setValue(String(data.lastFertilized));
-      this.dateFields.lastPruned.setValue(String(data.lastPruned));
-      this.dateFields.lastHarvested.setValue(String(data.lastHarvested));
+      DataMappingService.mapInputFields(data, this.inputFields);
+      DataMappingService.mapDropdownFields(data, this.dropdownFields);
+      DataMappingService.mapDateFields(data, this.dateFields);
     });
   };
 

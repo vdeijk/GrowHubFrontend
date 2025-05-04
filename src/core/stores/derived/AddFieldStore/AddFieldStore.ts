@@ -1,5 +1,5 @@
 import { BaseFormStore } from '../../base/BaseFormStore/BaseFormStore';
-import { InputField } from '../../../../auxiliary/classes/InputField';
+import { DataMappingService } from '../../../services/DataMappingService/DatamappingService';
 import { LocationItem } from '../../../../api';
 import fieldsStore from '../FieldsStore/FieldsStore';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
@@ -56,13 +56,7 @@ class AddFieldStore extends BaseFormStore {
     if (!data) return;
 
     runInAction(() => {
-      this.inputFields.name.setValue(data.name ?? '');
-      (this.inputFields.latitude as InputField<number>).setValue(
-        data.latitude ?? 0,
-      );
-      (this.inputFields.longitude as InputField<number>).setValue(
-        data.longitude ?? 0,
-      );
+      DataMappingService.mapInputFields(data, this.inputFields);
     });
   };
 
