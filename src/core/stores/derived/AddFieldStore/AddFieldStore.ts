@@ -54,12 +54,13 @@ class AddFieldStore extends BaseFormStore {
       await this.endpointService.getData<LocationItem>(`${id}`);
 
     if (!data) return;
+
     runInAction(() => {
-      this.inputFields.locationNameField.setValue(data.name ?? '');
-      (this.inputFields.latitudeField as InputField<number>).setValue(
+      this.inputFields.name.setValue(data.name ?? '');
+      (this.inputFields.latitude as InputField<number>).setValue(
         data.latitude ?? 0,
       );
-      (this.inputFields.longitudeField as InputField<number>).setValue(
+      (this.inputFields.longitude as InputField<number>).setValue(
         data.longitude ?? 0,
       );
     });
@@ -72,10 +73,8 @@ class AddFieldStore extends BaseFormStore {
   }
 
   public validateCoordinates(): boolean {
-    const latitude = parseFloat(this.inputFields.latitudeField.value as string);
-    const longitude = parseFloat(
-      this.inputFields.longitudeField.value as string,
-    );
+    const latitude = parseFloat(this.inputFields.latitude.value as string);
+    const longitude = parseFloat(this.inputFields.longitude.value as string);
 
     if (isNaN(latitude) || latitude < -90 || latitude > 90) {
       console.error('Invalid latitude:', latitude);

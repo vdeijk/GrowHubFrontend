@@ -11,7 +11,12 @@ const ButtonContainer: React.FC<ButtonContainerProps> = ({ buttons }) => {
   return (
     <div className={styles.buttonContainer}>
       {buttons.map((button, index) => (
-        <Button key={index} onClick={button.onClick} label={button.label} />
+        <Button
+          key={index}
+          onClick={button.onClick}
+          label={button.label}
+          type={button.type}
+        />
       ))}
     </div>
   );
