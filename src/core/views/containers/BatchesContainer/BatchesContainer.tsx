@@ -16,7 +16,7 @@ const BatchesContainer: React.FC = observer(() => {
   const buttonContainerData: ButtonProps[] = [
     {
       onClick: () => navigate('/batchesPage'),
-      label: 'View All Crops',
+      label: 'View All Bacthes',
     },
   ];
 
@@ -37,7 +37,7 @@ const BatchesContainer: React.FC = observer(() => {
     <>
       <Heading
         level={6}
-        text="Your Crops"
+        text="Your Batches"
         customStyles={{ marginBottom: '2rem' }}
       />
       <TableWithoutSorting<YourCropItem>
