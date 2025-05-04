@@ -46,9 +46,8 @@
 }
 
 .table tbody tr {
-  transition: background-color 0.2s ease; 
+  transition: background-color 0.2s ease;
 }
-
 
 .table tbody tr:nth-child(even) {
   background-color: var(--color-grey);

@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import TextInput from '../../reusables/TextInput/TextInput';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import addFieldStore from '../../../stores/derived/AddFieldStore/AddFieldStore';
-import Button, { ButtonProps } from '../../reusables/Button/Button';
+import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
+import { ButtonProps } from '../../../../auxiliary/interfaces/ButtonProps';
 import styles from './AddFieldPage.module.css';
 import { observer } from 'mobx-react-lite';
 import { useParams } from 'react-router-dom';
@@ -42,11 +43,18 @@ const AddFieldPage: React.FC<AddFieldPageProps> = observer(
       navigate('/fieldsPage');
     };
 
-    const buttonProps: ButtonProps = {
-      type: 'submit',
-      label: isEditing ? 'Edit Field' : 'Add Field',
-      customStyles: { marginTop: '1rem' },
-    };
+    const buttonContainerData: ButtonProps[] = [
+      {
+        type: 'button',
+        onClick: () => navigate('/fieldsPage'),
+        label: 'Back',
+      },
+      {
+        type: 'submit',
+        label: isEditing ? 'Edit Field' : 'Add Field',
+        customStyles: { marginTop: '1rem' },
+      },
+    ];
 
     const createTextInputFieldModel = (fieldKey: string): TextInputProps => ({
       ...addFieldStore.inputFields[fieldKey],
@@ -68,7 +76,7 @@ const AddFieldPage: React.FC<AddFieldPageProps> = observer(
           <TextInput {...latitudeFieldModel} />
           <TextInput {...longitudeFieldModel} />
           <div></div>
-          <Button {...buttonProps} />
+          <ButtonContainer buttons={buttonContainerData} />
         </form>
       </section>
     );

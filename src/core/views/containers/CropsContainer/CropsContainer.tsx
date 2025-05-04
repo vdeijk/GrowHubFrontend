@@ -8,14 +8,17 @@ import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import { observer } from 'mobx-react-lite';
 import { PlantItem } from '../../../../api';
+import { ButtonProps } from '../../../../auxiliary/interfaces/ButtonProps';
 
 const CropsContainer: React.FC = observer(() => {
   const navigate = useRouterNavigation();
 
-  const buttonContainerData = {
-    clickHandler: () => navigate('/cropsDatabase'),
-    label: 'View All Crops',
-  };
+  const buttonContainerData: ButtonProps[] = [
+    {
+      onClick: () => navigate('/cropsPage'),
+      label: 'View All Crops',
+    },
+  ];
 
   const headersWithoutActions = cropsDatabaseStore.tableHeaders
     .filter((header) => header.id !== 'actions')
@@ -44,7 +47,7 @@ const CropsContainer: React.FC = observer(() => {
           index,
         }))}
       />
-      <ButtonContainer buttons={[buttonContainerData]} />
+      <ButtonContainer buttons={buttonContainerData} />
     </>
   );
 

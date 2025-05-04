@@ -45,8 +45,8 @@ const AddCropPage: React.FC<AddCropPageProps> = observer(
       navigate('/cropsDatabase');
     };
 
-    const buttonContainerData: ButtonProps[] = 
-      [{
+    const buttonContainerData: ButtonProps[] = [
+      {
         type: 'button',
         onClick: () => navigate('/cropsPage'),
         label: 'Back',
@@ -56,7 +56,8 @@ const AddCropPage: React.FC<AddCropPageProps> = observer(
         onClick: () => navigate('/cropsPage'),
         label: isEditing ? 'Edit Crop' : 'Add Crop',
         customStyles: { marginTop: '1rem' },
-      }];
+      },
+    ];
 
     const createTextInputFieldModel = (fieldKey: string): TextInputProps => {
       return {

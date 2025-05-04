@@ -7,14 +7,17 @@ import { observer } from 'mobx-react-lite';
 import locationStore from '../../../stores/derived/FieldsStore/FieldsStore';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
+import { ButtonProps } from '../../../../auxiliary/interfaces/ButtonProps';
 
 const FieldsContainer: React.FC = observer(() => {
   const navigate = useRouterNavigation();
 
-  const buttonContainerData = {
-    clickHandler: () => navigate('/fieldsPage'),
-    label: 'View All Fields',
-  };
+  const buttonContainerData: ButtonProps[] = [
+    {
+      onClick: () => navigate('/fieldsPage'),
+      label: 'View All Fields',
+    },
+  ];
 
   const markers = locationStore.locations
     .filter(
@@ -43,7 +46,7 @@ const FieldsContainer: React.FC = observer(() => {
           customStyles={{ marginBottom: '2rem' }}
         />
         <Map {...mapData} />
-        <ButtonContainer buttons={[buttonContainerData]} />
+        <ButtonContainer buttons={buttonContainerData} />
       </LoadingWrapper>
     </section>
   );

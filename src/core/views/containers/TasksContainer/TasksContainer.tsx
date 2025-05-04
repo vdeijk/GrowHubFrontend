@@ -7,14 +7,17 @@ import Heading from '../../reusables/Heading/Heading';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
+import { ButtonProps } from '../../../../auxiliary/interfaces/ButtonProps';
 
 const TasksContainer: React.FC = observer(() => {
   const navigate = useRouterNavigation();
 
-  const buttonContainerData = {
-    clickHandler: () => navigate('/tasksPage'),
-    label: 'View All Tasks',
-  };
+  const buttonContainerData: ButtonProps[] = [
+    {
+      onClick: () => navigate('/tasksPage'),
+      label: 'View All Tasks',
+    },
+  ];
 
   return (
     <section className={styles.section}>
@@ -27,7 +30,7 @@ const TasksContainer: React.FC = observer(() => {
         {taskStore.items.slice(0, 3).map((task) => (
           <Task key={task.id} taskData={task} />
         ))}
-        <ButtonContainer buttons={[buttonContainerData]} />
+        <ButtonContainer buttons={buttonContainerData} />
       </LoadingWrapper>
     </section>
   );

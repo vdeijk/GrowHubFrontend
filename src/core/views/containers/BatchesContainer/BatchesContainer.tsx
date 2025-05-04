@@ -8,14 +8,17 @@ import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import { observer } from 'mobx-react-lite';
 import { YourCropItem } from '../../../../api';
+import { ButtonProps } from '../../../../auxiliary/interfaces/ButtonProps';
 
 const BatchesContainer: React.FC = observer(() => {
   const navigate = useRouterNavigation();
 
-  const buttonContainerData = {
-    clickHandler: () => navigate('/cropsPage'),
-    label: 'View All Crops',
-  };
+  const buttonContainerData: ButtonProps[] = [
+    {
+      onClick: () => navigate('/batchesPage'),
+      label: 'View All Crops',
+    },
+  ];
 
   const headersWithoutActions = plantsStore.tableHeaders
     .filter((header) => header.id !== 'actions')
@@ -43,7 +46,7 @@ const BatchesContainer: React.FC = observer(() => {
           ...('actions' in plant ? omit(plant, 'actions') : plant),
         }))}
       />
-      <ButtonContainer buttons={[buttonContainerData]} />
+      <ButtonContainer buttons={buttonContainerData} />
     </>
   );
 

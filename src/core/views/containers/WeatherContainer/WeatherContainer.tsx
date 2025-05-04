@@ -8,6 +8,7 @@ import Heading from '../../reusables/Heading/Heading';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
+import { ButtonProps } from '../../../../auxiliary/interfaces/ButtonProps';
 
 const WeatherContainer: React.FC = observer(() => {
   const navigate = useRouterNavigation();
@@ -19,10 +20,12 @@ const WeatherContainer: React.FC = observer(() => {
     { label: 'Wind Speed', boldSpan: `${weather?.current?.wind_kph} kph` },
   ];
 
-  const buttonContainerData = {
-    clickHandler: () => navigate('/weatherReportPage'),
-    label: 'View Full Report',
-  };
+  const buttonContainerData: ButtonProps[] = [
+    {
+      onClick: () => navigate('/weatherReportPage'),
+      label: 'View Full Report',
+    },
+  ];
 
   const children = (
     <>
@@ -48,7 +51,7 @@ const WeatherContainer: React.FC = observer(() => {
           />
         ))}
       </div>
-      <ButtonContainer buttons={[buttonContainerData]} />
+      <ButtonContainer buttons={buttonContainerData} />
     </>
   );
 
