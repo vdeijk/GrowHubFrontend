@@ -7,6 +7,7 @@ import { DateField } from '../../../../auxiliary/classes/DateField';
 import { observer } from 'mobx-react-lite';
 import Dropdown from '../../reusables/Dropdown/Dropdown';
 import { DropdownField } from '../../../../auxiliary/classes/DropdownField';
+import Divider from '../../reusables/Divider/Divider';
 
 export interface SearchBarProps {
   inputFields: InputField<string>[];
@@ -66,11 +67,9 @@ const SearchBar: React.FC<SearchBarProps> = observer(
       <section className={styles.container}>
         {inputFields.length > 0 && inputFieldsDisplay}
         {inputFields.length > 0 &&
-          (dropdownFields.length > 0 || dateFields.length > 0) && (
-            <hr className={styles.divider} />
-          )}
+          (dropdownFields.length > 0 || dateFields.length > 0) && <Divider />}
         {dropdownFields.length > 0 && dropdownFieldsDisplay}
-        {dropdownFields.length > 0 && <hr className={styles.divider} />}
+        {dropdownFields.length > 0 && <Divider />}
         {dateFields.length > 0 && dateFieldsDisplay}
       </section>
     );

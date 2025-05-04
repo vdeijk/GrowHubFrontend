@@ -12,6 +12,7 @@ import DateInput, { DateInputProps } from '../../reusables/DateInput/DateInput';
 import taskStore from '../../../stores/derived/TasksStore/TasksStore';
 import TextArea from '../../reusables/TextArea/TextArea';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
+import Divider from '../../reusables/Divider/Divider';
 
 interface AddMeasurementPageProps {
   isEditing?: boolean;
@@ -94,6 +95,7 @@ const AddMeasurementPage: React.FC<AddMeasurementPageProps> = observer(
           <form onSubmit={handleSubmit} className={styles.form}>
             <TextInput {...titleProps} />
             <TextArea {...notesProps} />
+            <Divider />
             <Dropdown {...priorityProps} />
             <DateInput {...dueDateProps} />
             <Dropdown {...categoryProps} />

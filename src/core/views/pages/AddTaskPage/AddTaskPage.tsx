@@ -12,6 +12,7 @@ import Dropdown from '../../reusables/Dropdown/Dropdown';
 import DateInput, { DateInputProps } from '../../reusables/DateInput/DateInput';
 import taskStore from '../../../stores/derived/TasksStore/TasksStore';
 import TextArea from '../../reusables/TextArea/TextArea';
+import Divider from '../../reusables/Divider/Divider';
 
 interface AddTaskPageProps {
   isEditing?: boolean;
@@ -95,11 +96,11 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
             <TextInput {...titleProps} />
             <TextArea {...notesProps} />
             <TextInput {...titleProps} />
+            <Divider />
             <Dropdown {...priorityProps} />
             <Dropdown {...categoryProps} />
             <Dropdown {...statusProps} />
             <DateInput {...dueDateProps} />
-            <div></div>
             <div></div>
             <ButtonContainer buttons={buttonContainerData} />
           </form>

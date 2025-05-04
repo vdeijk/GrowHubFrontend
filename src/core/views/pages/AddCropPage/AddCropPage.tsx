@@ -11,6 +11,7 @@ import Dropdown from '../../reusables/Dropdown/Dropdown';
 import { TextInputProps } from '../../reusables/TextInput/TextInput';
 import TextArea from '../../reusables/TextArea/TextArea';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
+import Divider from '../../reusables/Divider/Divider';
 
 interface AddCropPageProps {
   isEditing?: boolean;
@@ -104,16 +105,17 @@ const AddCropPage: React.FC<AddCropPageProps> = observer(
             <TextInput {...pruningCycle} />
             <TextInput {...fertilizationCycle} />
             <TextInput {...harvestCycle} />
+            <TextInput {...phMin} />
+            <TextInput {...phMax} />
+            <TextInput {...temperatureMin} />
+            <TextInput {...temperatureMax} />
+            <Divider />
             <Dropdown {...harvestStart} />
             <Dropdown {...harvestEnd} />
             <Dropdown {...pruningStart} />
             <Dropdown {...pruningEnd} />
             <Dropdown {...fertilizingStart} />
             <Dropdown {...fertilizingEnd} />
-            <TextInput {...phMin} />
-            <TextInput {...phMax} />
-            <TextInput {...temperatureMin} />
-            <TextInput {...temperatureMax} />
             <div></div>
             <ButtonContainer buttons={buttonContainerData} />
           </form>

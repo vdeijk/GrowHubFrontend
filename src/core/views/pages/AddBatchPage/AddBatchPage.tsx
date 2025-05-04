@@ -12,6 +12,7 @@ import { DateInputProps } from '../../reusables/DateInput/DateInput';
 import { TextInputProps } from '../../reusables/TextInput/TextInput';
 import TextArea from '../../reusables/TextArea/TextArea';
 import { ButtonProps } from '../../../../auxiliary/interfaces/ButtonProps';
+import Divider from '../../reusables/Divider/Divider';
 
 interface AddBatchPageProps {
   isEditing?: boolean;
@@ -103,6 +104,7 @@ const AddBatchPage: React.FC<AddBatchPageProps> = observer(
             <TextArea {...notesModel} />
             <div></div>
             {/* <Dropdown {...locationFieldModel} /> */}
+            <Divider />
             <DateInput {...lastWateredFieldModel} />
             <DateInput {...lastFertilizedFieldModel} />
             <DateInput {...lastPrunedFieldModel} />
