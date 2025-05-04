@@ -84,6 +84,15 @@ class AddCropStore extends BaseFormStore {
       this.inputFields.phMax.setValue(String(data.phMax));
       this.inputFields.temperatureMin.setValue(String(data.temperatureMin));
       this.inputFields.temperatureMax.setValue(String(data.temperatureMax));
+
+      this.dropdownFields.harvestStart.setValue(String(data.harvestStart));
+      this.dropdownFields.harvestEnd.setValue(String(data.harvestEnd));
+      this.dropdownFields.pruningStart.setValue(String(data.pruningStart));
+      this.dropdownFields.pruningEnd.setValue(String(data.pruningEnd));
+      this.dropdownFields.fertilizingStart.setValue(
+        String(data.fertilizingStart),
+      );
+      this.dropdownFields.fertilizingEnd.setValue(String(data.fertilizingEnd));
     });
   };
 

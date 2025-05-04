@@ -1,12 +1,15 @@
-import { YourCropItem } from '../../../../api';
+import { MeasurementItem } from '../../../../api';
 import { BaseFormStore } from '../../base/BaseFormStore/BaseFormStore';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
 import { runInAction } from 'mobx';
 import AddMeasurementData from '../../../../auxiliary/data/AddMeasurementData';
 import measurementsStore from '../MeasurementsStore/MeasurementsStore';
+import { MeasurementItemSoilDrynessEnum } from '../../../../api';
+import { MeasurementItemGrowthStageEnum } from '../../../../api';
+import { MeasurementItemHealthStatusEnum } from '../../../../api';
 
 class AddMeasurementStore extends BaseFormStore {
-  private endpointService = new EndpointService('YourCrops');
+  private endpointService = new EndpointService('Measurements');
 
   constructor() {
     super();
@@ -25,13 +28,16 @@ class AddMeasurementStore extends BaseFormStore {
   }
 
   public addReading = async () => {
-    const data: YourCropItem = {
-      commonName: this.inputFields.nameField.value as string,
-      location: this.dropdownFields.location.value as string,
-      lastWatered: this.dateFields.lastWatered.value as string,
-      lastFertilized: this.dateFields.lastFertilized.value as string,
-      lastPruned: this.dateFields.lastPruned.value as string,
-      lastHarvested: this.dateFields.lastHarvested.value as string,
+    const data: MeasurementItem = {
+      title: this.inputFields.title.value as string,
+      notes: this.inputFields.notes.value as string,
+      soilPH: this.inputFields.soilPH.value as number,
+      soilDryness: this.dropdownFields.soilDryness
+        .value as MeasurementItemSoilDrynessEnum,
+      growthStage: this.dropdownFields.growthStage
+        .value as MeasurementItemGrowthStageEnum,
+      healthStatus: this.dropdownFields.healthStatus
+        .value as MeasurementItemHealthStatusEnum,
     };
 
     await this.endpointService.postData(data);
@@ -44,13 +50,16 @@ class AddMeasurementStore extends BaseFormStore {
 
     if (Number.isNaN(numberId)) return;
 
-    const data: YourCropItem = {
-      commonName: this.inputFields.nameField.value as string,
-      location: this.dropdownFields.location.value as string,
-      lastWatered: this.dateFields.lastWatered.value as string,
-      lastFertilized: this.dateFields.lastFertilized.value as string,
-      lastPruned: this.dateFields.lastPruned.value as string,
-      lastHarvested: this.dateFields.lastHarvested.value as string,
+    const data: MeasurementItem = {
+      title: this.inputFields.title.value as string,
+      notes: this.inputFields.notes.value as string,
+      soilPH: this.inputFields.soilPH.value as number,
+      soilDryness: this.dropdownFields.soilDryness
+        .value as MeasurementItemSoilDrynessEnum,
+      growthStage: this.dropdownFields.growthStage
+        .value as MeasurementItemGrowthStageEnum,
+      healthStatus: this.dropdownFields.healthStatus
+        .value as MeasurementItemHealthStatusEnum,
     };
 
     await this.endpointService.putData(`${id}`, data);
@@ -59,18 +68,19 @@ class AddMeasurementStore extends BaseFormStore {
   };
 
   public loadReading = async (id: string) => {
-    const data: YourCropItem | undefined =
-      await this.endpointService.getData<YourCropItem>(`${id}`);
+    const data: MeasurementItem | undefined =
+      await this.endpointService.getData<MeasurementItem>(`${id}`);
 
     if (!data) return;
 
     runInAction(() => {
-      this.inputFields.nameField.setValue(String(data.commonName));
-      this.dropdownFields.location.setValue(String(data.location));
-      this.dateFields.lastWatered.setValue(String(data.lastWatered));
-      this.dateFields.lastFertilized.setValue(String(data.lastFertilized));
-      this.dateFields.lastPruned.setValue(String(data.lastPruned));
-      this.dateFields.lastHarvested.setValue(String(data.lastHarvested));
+      this.inputFields.nameField.setValue(String(data.title));
+      this.inputFields.notes.setValue(String(data.notes));
+      this.inputFields.soilPH.setValue(String(data.soilPH));
+      this.dropdownFields.soilDryness.setValue(String(data.soilDryness));
+      this.dropdownFields.healthStatus.setValue(String(data.healthStatus));
+      this.dropdownFields.growthStage.setValue(String(data.growthStage));
+      this.dateFields.date.setValue(String(data.date));
     });
   };
 

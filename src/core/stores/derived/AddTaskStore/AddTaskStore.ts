@@ -53,9 +53,9 @@ class AddTaskStore extends BaseFormStore {
 
     runInAction(() => {
       this.inputFields.titleField.setValue(data.title ?? '');
-      this.dateFields.notes.setValue(data.dueDate ?? '');
+      this.inputFields.notes.setValue(data.notes ?? '');
       this.dropdownFields.priority.setValue(data.priority ?? '');
-      this.inputFields.category.setValue(data.notes ?? '');
+      this.dropdownFields.category.setValue(data.category ?? '');
       this.dropdownFields.todoStatus.setValue(data.todoStatus ?? '');
       this.dateFields.dueDate.setValue(data.dueDate ?? '');
     });

@@ -68,9 +68,9 @@ const AddMeasurementPage: React.FC<AddMeasurementPageProps> = observer(
         addMeasurementStore.dateFields[fieldKey].setValue(value || ''),
     });
 
-    const nameProps = createTextInputFieldModel('nameField');
-    const soilPHProps = createTextInputFieldModel('soilPH');
+    const nameProps = createTextInputFieldModel('title');
     const notesProps = createTextInputFieldModel('notes');
+    const soilPHProps = createTextInputFieldModel('soilPH');
     const soilDrynessProps = createDropdownFieldModel('soilDryness');
     const growthStageProps = createDropdownFieldModel('growthStage');
     const healthStatusProps = createDropdownFieldModel('healthStatus');
@@ -103,7 +103,8 @@ const AddMeasurementPage: React.FC<AddMeasurementPageProps> = observer(
             <Dropdown {...healthStatusProps} />
             <Divider />
             <DateInput {...dateProps} />
-            <div></div> <div></div> <ButtonContainer buttons={buttonContainerData} />
+            <div></div> <div></div>{' '}
+            <ButtonContainer buttons={buttonContainerData} />
           </form>
         </LoadingWrapper>
       </section>

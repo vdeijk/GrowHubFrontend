@@ -4,15 +4,15 @@ import { InputFieldModel } from '../interfaces/InputFieldModel';
 
 class AddMeasurementData {
   public static textFields: Record<string, InputFieldModel> = {
-    titleField: { key: 'nameField', label: 'Title Field', defaultValue: '' },
+    title: { key: 'title', label: 'Title Field', defaultValue: '' },
     notes: { key: 'notes', label: 'Notes', defaultValue: '' },
     soilPH: { key: 'soilPH', label: 'Soil PH', defaultValue: '' },
   };
 
   public static dropdowns: Record<string, DropdownFieldModel> = {
-    location: {
-      key: 'location',
-      label: 'Location',
+    soilDryness: {
+      key: 'soilDryness',
+      label: 'Soil Dryness',
       options: [],
       defaultValue: '',
     },
@@ -22,15 +22,15 @@ class AddMeasurementData {
       options: [],
       defaultValue: '',
     },
-    soilDryness: {
-      key: 'soilDryness',
-      label: 'Soil Dryness',
-      options: [],
-      defaultValue: '',
-    },
     healthStatus: {
       key: 'healthStatus',
       label: 'Health Status',
+      options: [],
+      defaultValue: '',
+    },
+    location: {
+      key: 'location',
+      label: 'Location',
       options: [],
       defaultValue: '',
     },

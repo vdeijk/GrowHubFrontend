@@ -24,6 +24,11 @@ class AddBatchStore extends BaseFormStore {
   public addCrop = async () => {
     const data: YourCropItem = {
       commonName: this.inputFields.nameField.value as string,
+      location: this.dropdownFields.location.value as string,
+      lastWatered: this.dateFields.lastWatered.value as string,
+      lastFertilized: this.dateFields.lastFertilized.value as string,
+      lastPruned: this.dateFields.lastPruned.value as string,
+      lastHarvested: this.dateFields.lastHarvested.value as string,
     };
 
     await this.endpointService.postData(data);
@@ -39,6 +44,11 @@ class AddBatchStore extends BaseFormStore {
 
     const data: YourCropItem = {
       commonName: this.inputFields.nameField.value as string,
+      location: this.dropdownFields.location.value as string,
+      lastWatered: this.dateFields.lastWatered.value as string,
+      lastFertilized: this.dateFields.lastFertilized.value as string,
+      lastPruned: this.dateFields.lastPruned.value as string,
+      lastHarvested: this.dateFields.lastHarvested.value as string,
     };
 
     await this.endpointService.putData(`${id}`, data);
@@ -53,7 +63,14 @@ class AddBatchStore extends BaseFormStore {
     if (!data) return;
 
     runInAction(() => {
-      this.inputFields.nameField.setValue(String(data.commonName));
+      this.inputFields.commonName.setValue(String(data.commonName));
+      this.inputFields.notes.setValue(String(data.notes));
+      this.inputFields.amount.setValue(String(data.amount));
+
+      this.dateFields.lastWatered.setValue(String(data.lastWatered));
+      this.dateFields.lastFertilized.setValue(String(data.lastFertilized));
+      this.dateFields.lastPruned.setValue(String(data.lastPruned));
+      this.dateFields.lastHarvested.setValue(String(data.lastHarvested));
     });
   };
 
