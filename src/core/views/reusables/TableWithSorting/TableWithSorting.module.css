@@ -54,11 +54,11 @@
 }
 
 .table tbody tr:nth-child(odd):hover {
-  background-color: var(--color-background);
+  background-color: var(--color-form-field);
   cursor: pointer;
 }
 
 .table tbody tr:nth-child(even):hover {
-  background-color: var(--color-background);
+  background-color: var(--color-form-field);
   cursor: pointer;
 }

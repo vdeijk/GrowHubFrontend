@@ -4,7 +4,6 @@ import {
   MeasurementItem,
   MeasurementItemGrowthStageEnum,
   MeasurementItemHealthStatusEnum,
-  MeasurementItemLightLevelEnum,
   MeasurementItemSoilDrynessEnum,
 } from '../../api';
 import { TableHeaderModel } from '../interfaces/TableHeaderModel';
@@ -39,13 +38,6 @@ class MeasurementsData {
       sortable: true,
       type: 'number',
       tooltip: 'The soil PH during the reading',
-    },
-    {
-      id: 'lightLevel',
-      label: 'Light Level',
-      sortable: true,
-      type: 'string',
-      tooltip: 'The light level during the reading',
     },
     {
       id: 'soilDryness',
@@ -100,15 +92,6 @@ class MeasurementsData {
   };
 
   public static dropdowns: Record<string, DropdownFieldModel> = {
-    light: {
-      key: 'lightLevel',
-      label: 'Light Level',
-      options: Object.values(MeasurementItemLightLevelEnum).map((value) => ({
-        value: value,
-        label: value,
-      })),
-      defaultValue: '',
-    },
     dryness: {
       key: 'soilDryness',
       label: 'Soil Dryness',
@@ -148,19 +131,6 @@ class MeasurementsData {
       const redColumns: string[] = [];
       const yellowColumns: string[] = [];
       const greenColumns: string[] = [];
-
-      if (measurement.lightLevel) {
-        const lightLevelValues = Object.values(MeasurementItemLightLevelEnum);
-        const lightLevelIndex = lightLevelValues.indexOf(
-          measurement.lightLevel,
-        );
-
-        if (lightLevelIndex === 0) {
-          redColumns.push('lightLevel');
-        } else if (lightLevelIndex === 1) {
-          yellowColumns.push('lightLevel');
-        }
-      }
 
       if (measurement.soilDryness) {
         const soilDrynessValues = Object.values(MeasurementItemSoilDrynessEnum);

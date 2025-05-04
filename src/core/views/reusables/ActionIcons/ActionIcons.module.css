@@ -7,36 +7,36 @@
 }
 
 .pasteIcon {
-  color: #f0ad4e;
+  color: var(--color-yellow);
   cursor: pointer;
   font-size: 1.8rem;
   transition: color 0.2s ease;
 }
 
 .pasteIcon:hover {
-  color: #ec971f;
+  color: var(--color-yellow-hover);
 }
 
 .copyIcon {
-  color: #4caf50;
+  color: var(--color-primary);
   cursor: pointer;
   font-size: 1.8rem;
   transition: color 0.2s ease;
 }
 
 .copyIcon:hover {
-  color: #45a049;
+  color: var(--color-primary-hover);
 }
 
 .deleteIcon {
-  color: #d9534f;
+  color: var(--color-red);
   cursor: pointer;
   font-size: 1.8rem;
   transition: color 0.2s ease;
 }
 
 .deleteIcon:hover {
-  color: #c9302c;
+  color: var(--color-red-hover);
 }
 
 /*

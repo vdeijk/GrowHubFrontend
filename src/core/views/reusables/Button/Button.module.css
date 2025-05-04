@@ -2,7 +2,7 @@
   padding: 1.5rem 6rem;
   border: none;
   border-radius: var(--border-radius-small);
-  border: 2px solid #ef767a;
+  border: 2px solid var(--color-red);
   background: var(--color-white);
   color: var(--color-primary);
   cursor: pointer;
@@ -14,6 +14,7 @@
 }
 
 .button:hover {
-  background-color: #ef767a;
+  background-color: var(--color-red-hover);
+  border-color: var(--color-red-hover);
   color: var(--color-white);
 }

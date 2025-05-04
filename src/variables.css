@@ -1,5 +1,6 @@
 :root {
   --color-primary: #4caf50;
+  --color-primary-hover: #3e8e41;
   --color-form-field: #c8e6c9;
   --color-background: #eafbea;
   --color-grey: #f0f0f0;
@@ -8,8 +9,10 @@
   --color-border: #ddd;
   --color-text: #666;
   --color-tertiary: #197278;
-  --color-red: #d8000c;
-  --color-yellow: #f0ad4e;
+  --color-red: #ef767a;
+  --color-red-hover: #d6454a;
+  --color-yellow: #ec971f;
+   --color-yellow-hover: #d17b14;
   --color-white: #fdfdfd;
   --color-white-opacity: rgba(253, 253, 253, 0.93);
   --color-black: #222;
