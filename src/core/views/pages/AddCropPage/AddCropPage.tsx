@@ -55,7 +55,6 @@ const AddCropPage: React.FC<AddCropPageProps> = observer(
       },
       {
         type: 'submit',
-        onClick: () => navigate('/cropsPage'),
         label: isEditing ? 'Edit Crop' : 'Add Crop',
         customStyles: { marginTop: '1rem' },
       },

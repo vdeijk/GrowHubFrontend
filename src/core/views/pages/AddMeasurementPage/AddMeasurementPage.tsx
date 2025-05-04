@@ -84,7 +84,6 @@ const AddMeasurementPage: React.FC<AddMeasurementPageProps> = observer(
       },
       {
         type: 'submit',
-        onClick: () => navigate('/measurementsPage'),
         label: isEditing ? 'Edit Reading' : 'Add Reading',
         customStyles: { marginTop: '1rem' },
       },

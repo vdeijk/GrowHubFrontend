@@ -55,7 +55,6 @@ const AddBatchPage: React.FC<AddBatchPageProps> = observer(
       },
       {
         type: 'submit',
-        onClick: () => navigate('/batchesPage'),
         label: isEditing ? 'Edit Batch' : 'Add Batch',
         customStyles: { marginTop: '1rem' },
       },

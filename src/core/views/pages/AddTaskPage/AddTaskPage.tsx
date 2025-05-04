@@ -78,12 +78,11 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
     const buttonContainerData: ButtonProps[] = [
       {
         type: 'button',
-        onClick: () => navigate('/tasksPage'),
+        onClick: () => navigate('/measurementsPage'),
         label: 'Back',
       },
       {
         type: 'submit',
-        onClick: () => navigate('/tasksPage'),
         label: isEditing ? 'Edit Task' : 'Add Task',
         customStyles: { marginTop: '1rem' },
       },
