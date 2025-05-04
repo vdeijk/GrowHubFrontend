@@ -79,21 +79,22 @@ const AddCropPage: React.FC<AddCropPageProps> = observer(
     };
 
     const commonName = createTextInputFieldModel('commonName');
+    const notes = createTextInputFieldModel('notes');
     const waterCycle = createTextInputFieldModel('waterCycle');
     const pruningCycle = createTextInputFieldModel('pruningCycle');
     const fertilizationCycle = createTextInputFieldModel('fertilizationCycle');
-    const notes = createTextInputFieldModel('notes');
     const harvestCycle = createTextInputFieldModel('harvestCycle');
+    const phMin = createTextInputFieldModel('phMin');
+    const phMax = createTextInputFieldModel('phMax');
+    const temperatureMin = createTextInputFieldModel('temperatureMin');
+    const temperatureMax = createTextInputFieldModel('temperatureMax');
+
     const harvestStart = createDropdownFieldModel('harvestStart');
     const harvestEnd = createDropdownFieldModel('harvestEnd');
     const pruningStart = createDropdownFieldModel('pruningStart');
     const pruningEnd = createDropdownFieldModel('pruningEnd');
     const fertilizingStart = createDropdownFieldModel('fertilizingStart');
     const fertilizingEnd = createDropdownFieldModel('fertilizingEnd');
-    const phMin = createTextInputFieldModel('phMin');
-    const phMax = createTextInputFieldModel('phMax');
-    const temperatureMin = createTextInputFieldModel('temperatureMin');
-    const temperatureMax = createTextInputFieldModel('temperatureMax');
 
     return (
       <section className={styles.section}>
@@ -116,8 +117,7 @@ const AddCropPage: React.FC<AddCropPageProps> = observer(
             <Dropdown {...pruningEnd} />
             <Dropdown {...fertilizingStart} />
             <Dropdown {...fertilizingEnd} />
-            <div></div>
-            <ButtonContainer buttons={buttonContainerData} />
+            <div></div> <ButtonContainer buttons={buttonContainerData} />
           </form>
         </LoadingWrapper>
       </section>

@@ -32,12 +32,12 @@ class AddTaskStore extends BaseFormStore {
   public addTask = async () => {
     const data: TodoItem = {
       title: this.inputFields.titleField.value as string,
+      notes: this.inputFields.notes.value as string,
       priority: this.dropdownFields.priority.value as TodoItemPriorityEnum,
-      dueDate: this.dateFields.dueDate.value as string,
-      notes: this.inputFields.description.value as string,
       category: this.dropdownFields.category.value as TodoItemCategoryEnum,
       todoStatus: this.dropdownFields.todoStatus
         .value as TodoItemTodoStatusEnum,
+      dueDate: this.dateFields.dueDate.value as string,
     };
 
     await this.endpointService.postData(data);
@@ -53,11 +53,11 @@ class AddTaskStore extends BaseFormStore {
 
     runInAction(() => {
       this.inputFields.titleField.setValue(data.title ?? '');
-      this.dropdownFields.priorityField.setValue(data.priority ?? '');
-      this.dateFields.dueDateField.setValue(data.dueDate ?? '');
-      this.inputFields.descriptionField.setValue(data.notes ?? '');
-      this.dropdownFields.categoryField.setValue(data.category ?? '');
+      this.dateFields.notes.setValue(data.dueDate ?? '');
+      this.dropdownFields.priority.setValue(data.priority ?? '');
+      this.inputFields.category.setValue(data.notes ?? '');
       this.dropdownFields.todoStatus.setValue(data.todoStatus ?? '');
+      this.dateFields.dueDate.setValue(data.dueDate ?? '');
     });
   };
 
@@ -67,12 +67,12 @@ class AddTaskStore extends BaseFormStore {
 
     const data: TodoItem = {
       title: this.inputFields.titleField.value as string,
+      notes: this.inputFields.notes.value as string,
       priority: this.dropdownFields.priority.value as TodoItemPriorityEnum,
-      dueDate: this.dateFields.dueDate.value as string,
-      notes: this.inputFields.description.value as string,
       category: this.dropdownFields.category.value as TodoItemCategoryEnum,
       todoStatus: this.dropdownFields.todoStatus
         .value as TodoItemTodoStatusEnum,
+      dueDate: this.dateFields.dueDate.value as string,
     };
 
     await this.endpointService.putData(`${id}`, data);

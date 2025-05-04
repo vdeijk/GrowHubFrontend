@@ -23,7 +23,16 @@ class AddCropStore extends BaseFormStore {
 
   public addCrop = async () => {
     const data: PlantItem = {
-      commonName: this.inputFields.nameField.value as string,
+      commonName: this.inputFields.commonName.value as string,
+      notes: this.inputFields.notes.value as string,
+      waterCycle: this.inputFields.waterCycle.value as number,
+      pruningCycle: this.inputFields.pruningCycle.value as number,
+      fertilizationCycle: this.inputFields.fertilizationCycle.value as number,
+      harvestCycle: this.inputFields.harvestCycle.value as number,
+      phMin: this.inputFields.phMin.value as number,
+      phMax: this.inputFields.phMax.value as number,
+      temperatureMin: this.inputFields.temperatureMin.value as number,
+      temperatureMax: this.inputFields.temperatureMax.value as number,
     };
 
     await this.endpointService.postData(data);
@@ -39,6 +48,15 @@ class AddCropStore extends BaseFormStore {
 
     const data: PlantItem = {
       commonName: this.inputFields.commonName.value as string,
+      notes: this.inputFields.notes.value as string,
+      waterCycle: this.inputFields.waterCycle.value as number,
+      pruningCycle: this.inputFields.pruningCycle.value as number,
+      fertilizationCycle: this.inputFields.fertilizationCycle.value as number,
+      harvestCycle: this.inputFields.harvestCycle.value as number,
+      phMin: this.inputFields.phMin.value as number,
+      phMax: this.inputFields.phMax.value as number,
+      temperatureMin: this.inputFields.temperatureMin.value as number,
+      temperatureMax: this.inputFields.temperatureMax.value as number,
     };
 
     await this.endpointService.putData(`${id}`, data);
@@ -54,7 +72,18 @@ class AddCropStore extends BaseFormStore {
     if (!data) return;
 
     runInAction(() => {
-      this.inputFields.nameField.setValue(String(data.commonName));
+      this.inputFields.commonName.setValue(String(data.commonName));
+      this.inputFields.notes.setValue(String(data.notes));
+      this.inputFields.waterCycle.setValue(String(data.waterCycle));
+      this.inputFields.pruningCycle.setValue(String(data.pruningCycle));
+      this.inputFields.fertilizationCycle.setValue(
+        String(data.fertilizationCycle),
+      );
+      this.inputFields.harvestCycle.setValue(String(data.harvestCycle));
+      this.inputFields.phMin.setValue(String(data.phMin));
+      this.inputFields.phMax.setValue(String(data.phMax));
+      this.inputFields.temperatureMin.setValue(String(data.temperatureMin));
+      this.inputFields.temperatureMax.setValue(String(data.temperatureMax));
     });
   };
 

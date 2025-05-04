@@ -109,8 +109,7 @@ const AddBatchPage: React.FC<AddBatchPageProps> = observer(
             <DateInput {...lastFertilizedFieldModel} />
             <DateInput {...lastPrunedFieldModel} />
             <DateInput {...lastHarvestedFieldModel} />
-            <div></div>
-            <ButtonContainer buttons={buttonContainerData} />
+            <div></div> <ButtonContainer buttons={buttonContainerData} />
           </form>
         </LoadingWrapper>
       </section>

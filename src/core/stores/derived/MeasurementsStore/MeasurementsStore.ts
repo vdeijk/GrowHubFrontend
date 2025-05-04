@@ -20,10 +20,6 @@ class MeasurementsStore extends SearchableStore<MeasurementItem> {
       this.initTextFilter(textField);
     });
 
-    Object.values(MeasurementsData.inputFields).forEach((inputField) => {
-      this.initTextFilter(inputField);
-    });
-
     Object.values(MeasurementsData.dropdowns).forEach((dropdown) => {
       this.initDropdownFilter(dropdown);
     });

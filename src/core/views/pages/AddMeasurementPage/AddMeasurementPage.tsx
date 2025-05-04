@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import TextInput, { TextInputProps } from '../../reusables/TextInput/TextInput';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
-import addTaskStore from '../../../stores/derived/AddTaskStore/AddTaskStore';
+import addMeasurementStore from '../../../stores/derived/AddMeasurementStore/AddMeasurementStore';
 import styles from './AddMeasurementPage.module.css';
 import { observer } from 'mobx-react-lite';
 import { useParams } from 'react-router-dom';
@@ -25,55 +25,56 @@ const AddMeasurementPage: React.FC<AddMeasurementPageProps> = observer(
 
     useEffect(() => {
       if (isEditing && id) {
-        addTaskStore.loadTask(id);
+        addMeasurementStore.loadReading(id);
       } else {
-        addTaskStore.resetForm();
+        addMeasurementStore.resetForm();
       }
     }, [isEditing, id]);
 
     const handleSubmit = (e: React.FormEvent) => {
-      if (!addTaskStore.validateForm()) return;
+      if (!addMeasurementStore.validateForm()) return;
 
       e.preventDefault();
 
       if (isEditing && id) {
-        addTaskStore.updateTask(id);
+        addMeasurementStore.loadReading(id);
       } else {
-        addTaskStore.addTask();
+        addMeasurementStore.addReading();
       }
 
-      addTaskStore.resetForm();
+      addMeasurementStore.resetForm();
       navigate('/tasksPage');
     };
 
     const createTextInputFieldModel = (fieldKey: string): TextInputProps => ({
-      ...addTaskStore.inputFields[fieldKey],
-      value: String(addTaskStore.inputFields[fieldKey].value || ''),
+      ...addMeasurementStore.inputFields[fieldKey],
+      value: String(addMeasurementStore.inputFields[fieldKey].value || ''),
       onChange: (value: string) =>
-        addTaskStore.inputFields[fieldKey].setValue(value),
+        addMeasurementStore.inputFields[fieldKey].setValue(value),
     });
 
     const createDropdownFieldModel = (fieldKey: string) => ({
-      ...addTaskStore.dropdownFields[fieldKey],
-      value: String(addTaskStore.dropdownFields[fieldKey].value),
+      ...addMeasurementStore.dropdownFields[fieldKey],
+      value: String(addMeasurementStore.dropdownFields[fieldKey].value),
       options: taskStore.dropdownFilters[fieldKey]?.options || [],
       onChange: (value: string | number) =>
-        addTaskStore.dropdownFields[fieldKey].setValue(String(value)),
+        addMeasurementStore.dropdownFields[fieldKey].setValue(String(value)),
     });
 
     const createDateFieldModel = (fieldKey: string): DateInputProps => ({
-      ...addTaskStore.dateFields[fieldKey],
-      value: String(addTaskStore.dateFields[fieldKey].value || ''),
+      ...addMeasurementStore.dateFields[fieldKey],
+      value: String(addMeasurementStore.dateFields[fieldKey].value || ''),
       onChange: (value) =>
-        addTaskStore.dateFields[fieldKey].setValue(value || ''),
+        addMeasurementStore.dateFields[fieldKey].setValue(value || ''),
     });
 
-    const titleProps = createTextInputFieldModel('titleField');
+    const nameProps = createTextInputFieldModel('nameField');
+    const soilPHProps = createTextInputFieldModel('soilPH');
     const notesProps = createTextInputFieldModel('notes');
-    const priorityProps = createDropdownFieldModel('priority');
-    const dueDateProps = createDateFieldModel('dueDate');
-    const categoryProps = createDropdownFieldModel('category');
-    const statusProps = createDropdownFieldModel('todoStatus');
+    const soilDrynessProps = createDropdownFieldModel('soilDryness');
+    const growthStageProps = createDropdownFieldModel('growthStage');
+    const healthStatusProps = createDropdownFieldModel('healthStatus');
+    const dateProps = createDateFieldModel('date');
 
     const buttonContainerData: ButtonProps[] = [
       {
@@ -91,17 +92,18 @@ const AddMeasurementPage: React.FC<AddMeasurementPageProps> = observer(
 
     return (
       <section className={styles.section}>
-        <LoadingWrapper isLoading={addTaskStore.isLoading}>
+        <LoadingWrapper isLoading={addMeasurementStore.isLoading}>
           <form onSubmit={handleSubmit} className={styles.form}>
-            <TextInput {...titleProps} />
+            <TextInput {...nameProps} />
             <TextArea {...notesProps} />
+            <TextInput {...soilPHProps} />
             <Divider />
-            <Dropdown {...priorityProps} />
-            <DateInput {...dueDateProps} />
-            <Dropdown {...categoryProps} />
-            <Dropdown {...statusProps} />
-            <div></div>
-            <ButtonContainer buttons={buttonContainerData} />
+            <Dropdown {...soilDrynessProps} />
+            <Dropdown {...growthStageProps} />
+            <Dropdown {...healthStatusProps} />
+            <Divider />
+            <DateInput {...dateProps} />
+            <div></div> <div></div> <ButtonContainer buttons={buttonContainerData} />
           </form>
         </LoadingWrapper>
       </section>

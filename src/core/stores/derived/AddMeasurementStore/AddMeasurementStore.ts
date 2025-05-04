@@ -2,7 +2,7 @@ import { YourCropItem } from '../../../../api';
 import { BaseFormStore } from '../../base/BaseFormStore/BaseFormStore';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
 import { runInAction } from 'mobx';
-import MeasurementsData from '../../../../auxiliary/data/MeasurementsData';
+import AddMeasurementData from '../../../../auxiliary/data/AddMeasurementData';
 import measurementsStore from '../MeasurementsStore/MeasurementsStore';
 
 class AddMeasurementStore extends BaseFormStore {
@@ -11,20 +11,20 @@ class AddMeasurementStore extends BaseFormStore {
   constructor() {
     super();
 
-    Object.values(MeasurementsData.textFields).forEach((textField) => {
+    Object.values(AddMeasurementData.textFields).forEach((textField) => {
       this.initTextFilter(textField);
     });
 
-    Object.values(MeasurementsData.dropdowns).forEach((dropdown) => {
+    Object.values(AddMeasurementData.dropdowns).forEach((dropdown) => {
       this.initDropdownFilter(dropdown);
     });
 
-    MeasurementsData.dateFields.forEach((dateField) => {
+    AddMeasurementData.dateFields.forEach((dateField) => {
       this.initDateFilter(dateField);
     });
   }
 
-  public addCrop = async () => {
+  public addReading = async () => {
     const data: YourCropItem = {
       commonName: this.inputFields.nameField.value as string,
       location: this.dropdownFields.location.value as string,
@@ -39,7 +39,7 @@ class AddMeasurementStore extends BaseFormStore {
     measurementsStore.fetchData();
   };
 
-  public updateCrop = async (id: string) => {
+  public updateReading = async (id: string) => {
     const numberId = Number(id);
 
     if (Number.isNaN(numberId)) return;
@@ -58,7 +58,7 @@ class AddMeasurementStore extends BaseFormStore {
     measurementsStore.fetchData();
   };
 
-  public loadCrop = async (id: string) => {
+  public loadReading = async (id: string) => {
     const data: YourCropItem | undefined =
       await this.endpointService.getData<YourCropItem>(`${id}`);
 

@@ -95,14 +95,12 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
           <form onSubmit={handleSubmit} className={styles.form}>
             <TextInput {...titleProps} />
             <TextArea {...notesProps} />
-            <TextInput {...titleProps} />
             <Divider />
             <Dropdown {...priorityProps} />
             <Dropdown {...categoryProps} />
             <Dropdown {...statusProps} />
             <DateInput {...dueDateProps} />
-            <div></div>
-            <ButtonContainer buttons={buttonContainerData} />
+            <div></div> <ButtonContainer buttons={buttonContainerData} />
           </form>
         </LoadingWrapper>
       </section>
