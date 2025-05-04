@@ -66,7 +66,7 @@ class AddTaskStore extends BaseFormStore {
 
   private prepareData(): TodoItem {
     return {
-      title: this.inputFields.titleField.value as string,
+      title: this.inputFields.title.value as string,
       notes: this.inputFields.notes.value as string,
       priority: this.dropdownFields.priority.value as TodoItemPriorityEnum,
       category: this.dropdownFields.category.value as TodoItemCategoryEnum,

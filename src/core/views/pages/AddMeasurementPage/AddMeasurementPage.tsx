@@ -32,12 +32,14 @@ const AddMeasurementPage: React.FC<AddMeasurementPageProps> = observer(
     }, [isEditing, id]);
 
     const handleSubmit = (e: React.FormEvent) => {
+      console.log('handleSubmit 1');
       if (!addMeasurementStore.validateForm()) return;
+      console.log('handleSubmit 2');
 
       e.preventDefault();
 
       if (isEditing && id) {
-        addMeasurementStore.loadReading(id);
+        addMeasurementStore.updateReading(id);
       } else {
         addMeasurementStore.addReading();
       }

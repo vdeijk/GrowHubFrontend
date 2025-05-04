@@ -38,7 +38,6 @@ class AddMeasurementStore extends BaseFormStore {
     const numberId = Number(id);
 
     if (Number.isNaN(numberId)) return;
-
     await this.endpointService.putData(`${id}`, this.prepareData());
 
     measurementsStore.fetchData();

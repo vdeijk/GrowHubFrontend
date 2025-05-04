@@ -61,7 +61,7 @@ class AddBatchStore extends BaseFormStore {
   private prepareData(): YourCropItem {
     return {
       commonName: this.inputFields.commonName.value as string,
-      location: "test",
+      location: 'test',
       lastWatered: this.dateFields.lastWatered.value as string,
       lastFertilized: this.dateFields.lastFertilized.value as string,
       lastPruned: this.dateFields.lastPruned.value as string,
