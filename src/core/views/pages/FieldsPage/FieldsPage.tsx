@@ -3,12 +3,17 @@ import styles from './FieldsPage.module.css';
 import Map from '../../reusables/Map/Map';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import { ButtonProps } from '../../../../auxiliary/interfaces/ButtonProps';
-import FieldListContainer from '../../containers/FieldListContainer/FieldListContainer';
 import fieldsStore from '../../../stores/derived/FieldsStore/FieldsStore';
 import { observer } from 'mobx-react-lite';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import EventBus from '../../../services/EventBusService/EventBusService';
+import TableWithSorting from '../../reusables/TableWithSorting/TableWithSorting';
+import ActionIcons from '../../reusables/ActionIcons/ActionIcons';
+import { LocationItem } from '../../../../api';
+import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
+import { TableProps } from '../../reusables/TableWithSorting/TableWithSorting';
+import FieldsData from '../../../../auxiliary/data/FieldsData';
 
 const FieldsPage: React.FC = observer(() => {
   const navigate = useRouterNavigation();
@@ -24,18 +29,16 @@ const FieldsPage: React.FC = observer(() => {
     },
   ];
 
-  const handleEdit = (id: number) => {
+  const handleEdit = (id: number | undefined) => {
+    if (id === undefined) return;
+
     navigate(`/addFieldPage/${id}`);
   };
 
-  const handleDelete = (id: number) => {
-    fieldsStore.deleteField(id);
-  };
+  const handleDelete = (id: number | undefined) => {
+    if (id === undefined) return;
 
-  const listData = {
-    locations: fieldsStore.locations,
-    onEdit: handleEdit,
-    onDelete: handleDelete,
+    fieldsStore.deleteField(id);
   };
 
   const markers = fieldsStore.locations
@@ -57,6 +60,21 @@ const FieldsPage: React.FC = observer(() => {
     markers,
   };
 
+  const tableProps: TableProps<LocationItem> = {
+    headers: FieldsData.tableHeaders as TableHeaderModel<LocationItem>[],
+    data: fieldsStore.locations.map((item) => ({
+      ...item,
+      actions: (
+        <ActionIcons
+          item={item as { id: number | undefined }}
+          handleDelete={handleDelete}
+          handlePaste={(id) => console.log('Paste', id)}
+        />
+      ),
+    })),
+    handleEdit,
+  };
+
   return (
     <section className={styles.container}>
       <LoadingWrapper isLoading={fieldsStore.isLoading}>
@@ -64,7 +82,7 @@ const FieldsPage: React.FC = observer(() => {
           <Map {...mapData} />
         </div>
         <div className={styles.right}>
-          <FieldListContainer {...listData} />
+          <TableWithSorting {...tableProps} />
           <ButtonContainer buttons={buttonContainerData} />
         </div>
       </LoadingWrapper>
@@ -73,3 +91,11 @@ const FieldsPage: React.FC = observer(() => {
 });
 
 export default FieldsPage;
+
+/*
+          {/* <FieldListContainer {...listData} /> 
+  const listData = {
+    locations: fieldsStore.locations,
+    onEdit: handleEdit,
+    onDelete: handleDelete,
+  };*/

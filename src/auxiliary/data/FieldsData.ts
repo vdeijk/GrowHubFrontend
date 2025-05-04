@@ -1,5 +1,4 @@
 import { TableHeaderModel } from '../interfaces/TableHeaderModel';
-import { InputFieldModel } from '../interfaces/InputFieldModel';
 import { LocationItem } from '../../api';
 
 class FieldsData {
@@ -33,12 +32,6 @@ class FieldsData {
       tooltip: 'test',
     },
   ];
-
-  public static textFields: Record<string, InputFieldModel> = {
-    name: { key: 'name', label: 'Name', defaultValue: '' },
-    longitude: { key: 'longitude', label: 'Longitude', defaultValue: '' },
-    latitude: { key: 'latitude', label: 'Latitude', defaultValue: '' },
-  };
 }
 
 export default FieldsData;

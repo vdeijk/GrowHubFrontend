@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './CropsDatabaseContainer.module.css';
-import TableWithoutSorting from '../../reusables/TableWithoutSorting/TableWithoutSorting';
+import TableWithSorting from '../../reusables/TableWithSorting/TableWithSorting';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import cropsDatabaseStore from '../../../stores/derived/CropsStore/CropsStore';
 import Heading from '../../reusables/Heading/Heading';
@@ -40,7 +40,7 @@ const CropsContainer: React.FC = observer(() => {
         text="Crop Database"
         customStyles={{ marginBottom: '2rem' }}
       />
-      <TableWithoutSorting<PlantItem>
+      <TableWithSorting<PlantItem>
         headers={headersWithoutActions}
         data={cropsDatabaseStore.items.slice(0, 9).map((plant, index) => ({
           ...('actions' in plant ? omit(plant, 'actions') : plant),

@@ -33,7 +33,7 @@ const ActionIcons = observer(
         <FaTrash
           className={styles.deleteIcon}
           onClick={() => item.id !== undefined && handleDelete(item.id)}
-          title="Delete Plant"
+          title="Delete this row"
         />
       </div>
     );

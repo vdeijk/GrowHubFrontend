@@ -5,9 +5,9 @@ import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderMo
 
 export interface TableProps<T extends { id?: number | undefined }> {
   headers: TableHeaderModel<T>[];
-  onSort: (field: keyof T) => void;
-  sortField: keyof T | null;
-  sortOrder: 'asc' | 'desc';
+  onSort?: (field: keyof T) => void;
+  sortField?: keyof T | null;
+  sortOrder?: 'asc' | 'desc';
   data: T[];
   handleEdit?: (id: number | undefined) => void;
 }
@@ -21,6 +21,10 @@ const TableWithSorting = <T extends { id?: number | undefined }>({
   handleEdit,
 }: TableProps<T>) => {
   const getSortIndicator = (field: keyof T) => {
+    if (!onSort) {
+      return '';
+    }
+
     if (sortField === field) {
       return sortOrder === 'asc' ? '▲' : '▼';
     }
@@ -34,12 +38,16 @@ const TableWithSorting = <T extends { id?: number | undefined }>({
           {headers.map((header) => (
             <th
               key={String(header.id)}
-              onClick={() => onSort(header.id as keyof T)}
+              onClick={() =>
+                onSort &&
+                header.sortable !== false &&
+                onSort(header.id as keyof T)
+              }
               title={header.tooltip || ''}
             >
               <div className={styles.headerContent}>
                 {header.label}
-                {header.sortable !== false && (
+                {onSort && header.sortable !== false && (
                   <span className={styles.sortIndicator}>
                     {getSortIndicator(header.id as keyof T)}
                   </span>

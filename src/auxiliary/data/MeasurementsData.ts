@@ -36,7 +36,7 @@ class MeasurementsData {
     {
       id: 'soilPH',
       label: 'Soil PH',
-      sortable: false,
+      sortable: true,
       type: 'number',
       tooltip: 'The soil PH during the reading',
     },
