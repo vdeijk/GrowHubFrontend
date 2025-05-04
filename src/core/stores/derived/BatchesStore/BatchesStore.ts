@@ -2,10 +2,10 @@ import { SearchableStore } from '../../base/BaseSearchableStore/BaseSearchableSt
 import { YourCropItem } from '../../../../api';
 import { makeObservable, runInAction, action, computed } from 'mobx';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
-import YourCropsData from '../../../../auxiliary/data/BatchesData';
+import BatchesData from '../../../../auxiliary/data/BatchesData';
 import EventBus from '../../../services/EventBusService/EventBusService';
 import { PaginationService } from '../../../services/PaginationService/PaginationService';
-import BatchesData from '../../../../auxiliary/data/BatchesData';
+import TableColoringService from '../TableColoringService/TableColoringService';
 
 class BatchesStore extends SearchableStore<YourCropItem> {
   public paginationService = new PaginationService();
@@ -13,7 +13,7 @@ class BatchesStore extends SearchableStore<YourCropItem> {
     return this.endpointService.isLoading;
   }
   public debouncedFilterPlants: (criteria: string) => void = () => {};
-  public tableHeaders = YourCropsData.tableHeaders;
+  public tableHeaders = BatchesData.tableHeaders;
 
   private endpointService = new EndpointService('YourCrops');
 
@@ -21,19 +21,19 @@ class BatchesStore extends SearchableStore<YourCropItem> {
     super(['commonName']);
 
     EventBus.addEventListener('locations:updated', () => {
-      YourCropsData.updateLocationDropdownOptions();
-      this.initDropdownFilter(YourCropsData.dropdowns['location']);
+      BatchesData.updateLocationDropdownOptions();
+      this.initDropdownFilter(BatchesData.dropdowns['location']);
     });
 
-    Object.values(YourCropsData.textFields).forEach((textField) => {
+    Object.values(BatchesData.textFields).forEach((textField) => {
       this.initTextFilter(textField);
     });
 
-    Object.values(YourCropsData.dropdowns).forEach((dropdown) => {
+    Object.values(BatchesData.dropdowns).forEach((dropdown) => {
       this.initDropdownFilter(dropdown);
     });
 
-    YourCropsData.dateFields.forEach((dateField) => {
+    BatchesData.dateFields.forEach((dateField) => {
       this.initDateFilter(dateField);
     });
 
@@ -49,7 +49,13 @@ class BatchesStore extends SearchableStore<YourCropItem> {
     if (!data) return;
 
     runInAction(() => {
-      this.items = BatchesData.getColoredData(data);
+      const dateKeys = [
+        'lastWatered',
+        'lastFertilized',
+        'lastPruned',
+        'lastHarvested',
+      ] as (keyof YourCropItem)[];
+      this.items = TableColoringService.getColoredDateValues(data, dateKeys);
       this.filteredItems = this.items;
       this.paginatedItems = this.paginationService.paginateItems(
         this.filteredItems,

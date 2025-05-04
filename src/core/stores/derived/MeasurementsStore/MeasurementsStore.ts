@@ -4,6 +4,7 @@ import { makeObservable, runInAction, action, computed } from 'mobx';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
 import MeasurementsData from '../../../../auxiliary/data/MeasurementsData';
 import { PaginationService } from '../../../services/PaginationService/PaginationService';
+import TableColoringService from '../TableColoringService/TableColoringService';
 
 class MeasurementsStore extends SearchableStore<MeasurementItem> {
   private endpointService = new EndpointService('Measurements');
@@ -46,7 +47,21 @@ class MeasurementsStore extends SearchableStore<MeasurementItem> {
     if (!data) return;
 
     runInAction(() => {
-      this.items = MeasurementsData.getColoredData(data);
+      const numericalKeys: {
+        key: keyof MeasurementItem;
+        thresholds: { red: number; yellow: number };
+      }[] = [{ key: 'soilPH', thresholds: { red: 6, yellow: 7 } }];
+      const dateKeys = ['date'] as (keyof MeasurementItem)[];
+
+      let coloredItems = TableColoringService.getColoredNumericalValues(
+        data,
+        numericalKeys,
+      );
+      this.items = TableColoringService.getColoredDateValues(
+        coloredItems,
+        dateKeys,
+      );
+      
       this.filteredItems = this.items;
       this.paginatedItems = this.paginationService.paginateItems(
         this.filteredItems,

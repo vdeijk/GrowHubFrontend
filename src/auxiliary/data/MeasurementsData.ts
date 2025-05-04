@@ -125,7 +125,11 @@ class MeasurementsData {
     { key: 'dateMax', label: 'Date Max', defaultValue: '' },
     { key: 'dateMin', label: 'Date Min', defaultValue: '' },
   ];
+}
 
+export default MeasurementsData;
+
+/*
   public static getColoredData(measurements: MeasurementItem[]) {
     return measurements.map((measurement) => {
       const redColumns: string[] = [];
@@ -175,7 +179,4 @@ class MeasurementsData {
         greenColumns,
       };
     });
-  }
-}
-
-export default MeasurementsData;
+  }*/
