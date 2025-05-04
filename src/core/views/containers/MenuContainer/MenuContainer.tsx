@@ -5,13 +5,13 @@ import Heading from '../../reusables/Heading/Heading';
 import HelpButton from '../../reusables/HelpButton/HelpButton';
 import routerService from '../../../services/RouterService/RouterService';
 import profilePicture from '../../../../auxiliary/assets/cropGrowHub.jpg';
-import { useLocation } from 'react-router-dom';
+import { useLocation, matchPath } from 'react-router-dom';
 
 const MenuContainer: React.FC = () => {
   const handleHelpOpen = () => {};
   const location = useLocation();
   const activeMenuLink = routerService.menuLinks.find((menuLink) =>
-    location.pathname.includes(menuLink.path),
+    matchPath(location.pathname, menuLink.path),
   );
 
   return (
