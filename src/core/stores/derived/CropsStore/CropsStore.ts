@@ -5,7 +5,7 @@ import { EndpointService } from '../../../services/EndpointService/EndpointServi
 import { localStorageService } from '../../../services/LocalStorageService/LocalStorageService';
 import CropsData from '../../../../auxiliary/data/CropsData';
 import { PaginationService } from '../../../services/PaginationService/PaginationService';
-import { toJS } from 'mobx';
+
 class CropsStore extends SearchableStore<PlantItem> {
   private endpointService = new EndpointService('Plant');
   public paginationService = new PaginationService();
@@ -23,8 +23,6 @@ class CropsStore extends SearchableStore<PlantItem> {
     Object.values(CropsData.dropdowns).forEach((dropdown) => {
       this.initDropdownFilter(dropdown);
     });
-
-    console.log(toJS(this.dropdownFilters));
 
     makeObservable(this, {
       isLoading: computed,
