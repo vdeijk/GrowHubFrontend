@@ -13,7 +13,6 @@ import Pagination from '../../reusables/Pagination/Pagination';
 import { PlantItem } from '../../../../api';
 import Popup from '../../layouts/Popup/Popup';
 import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
-import SyncButton from '../../reusables/SyncButton/SyncButton';
 import { SearchBarProps } from '../../containers/SearchBar/Searchbar';
 
 const CropsPage: React.FC = observer(() => {
@@ -91,13 +90,7 @@ const CropsPage: React.FC = observer(() => {
           <div className={styles.tableContainer}>
             <TableWithSorting {...tableProps} />
           </div>
-          <div className={styles.buttonContainer}>
-            <SyncButton
-              onClick={cropsStore.syncData}
-              isSyncing={cropsStore.isLoading}
-            />
-            <ButtonContainer buttons={buttonContainerData} />
-          </div>
+          <ButtonContainer buttons={buttonContainerData} />
         </div>
         <Pagination
           currentPage={paginationService.currentPage}

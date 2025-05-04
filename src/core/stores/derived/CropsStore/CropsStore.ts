@@ -35,17 +35,8 @@ class CropsStore extends SearchableStore<PlantItem> {
   debouncedFilterPlants: (criteria: string) => void = () => {};
   tableHeaders = CropsData.tableHeaders;
 
-  public syncData = () => {
-    localStorageService.invalidateCache('cropsDatabaseItems');
-    this.fetchData();
-  };
-
   public fetchData = async () => {
-    const data = await localStorageService.fetchWithCache<PlantItem[]>(
-      'cropsDatabaseItems',
-      async () => (await this.endpointService.getData<PlantItem[]>()) || [],
-      7,
-    );
+    const data = await this.endpointService.getData<PlantItem[]>();
 
     if (!data) return;
 
