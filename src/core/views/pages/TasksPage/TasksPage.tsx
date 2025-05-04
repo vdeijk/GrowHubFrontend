@@ -13,18 +13,18 @@ import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation
 import ActionIcons from '../../reusables/ActionIcons/ActionIcons';
 import Popup from '../../layouts/Popup/Popup';
 import Pagination from '../../reusables/Pagination/Pagination';
-import NotesPopup from '../../reusables/NotesPopup/NotesPopup';
-import popupService from '../../../services/PopupService/PopupService';
 import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
 
 const TasksPage: React.FC = observer(() => {
   const paginationService = taskStore.paginationService;
   const navigate = useRouterNavigation();
 
-  const buttonContainerData = {
-    clickHandler: () => navigate('/addTaskPage'),
-    label: 'Add Task',
-  };
+  const buttonContainerData = [
+    {
+      onClick: () => navigate('/addTaskPage'),
+      label: 'Add Task',
+    },
+  ];
 
   const handleEdit = (id: number | undefined) => {
     navigate(`/addTaskPage/${id}`);
@@ -69,7 +69,7 @@ const TasksPage: React.FC = observer(() => {
           <div className={styles.tableContainer}>
             <TableWithSorting {...tableProps} />
           </div>
-          <ButtonContainer buttons={[buttonContainerData]} />
+          <ButtonContainer buttons={buttonContainerData} />
         </div>
         <Pagination
           currentPage={paginationService.currentPage}

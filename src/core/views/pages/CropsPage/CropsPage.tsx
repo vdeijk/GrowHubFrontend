@@ -54,10 +54,12 @@ const CropsPage: React.FC = observer(() => {
     handleEdit,
   };
 
-  const buttonContainerData = {
-    clickHandler: () => navigate('/addCropPage'),
-    label: 'Add Crop',
-  };
+  const buttonContainerData = [
+    {
+      onClick: () => navigate('/addCropPage'),
+      label: 'Add Crop',
+    },
+  ];
 
   return (
     <section className={styles.section}>
@@ -73,7 +75,7 @@ const CropsPage: React.FC = observer(() => {
               onClick={cropsStore.syncData}
               isSyncing={cropsStore.isLoading}
             />
-            <ButtonContainer buttons={[buttonContainerData]} />
+            <ButtonContainer buttons={buttonContainerData} />
           </div>
         </div>
         <Pagination

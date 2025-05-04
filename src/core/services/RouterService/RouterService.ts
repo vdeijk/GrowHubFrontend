@@ -70,14 +70,14 @@ class RouterService {
     },
     {
       path: '/addBatchPage/:id',
-      label: 'Edit Your Crop',
+      label: 'Edit Batch',
       hidden: true,
       isDynamic: true,
       tooltip: 'Edit an existing crop batch',
     },
     {
       path: '/addCropPage',
-      label: 'Add Batch',
+      label: 'Add Crop',
       hidden: true,
       isDynamic: false,
       tooltip: 'Add a new crop type',

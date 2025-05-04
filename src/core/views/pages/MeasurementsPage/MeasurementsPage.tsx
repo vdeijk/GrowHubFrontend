@@ -14,6 +14,7 @@ import { SearchBarProps } from '../../containers/SearchBar/Searchbar';
 import { observer } from 'mobx-react-lite';
 import Popup from '../../layouts/Popup/Popup';
 import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
+import { ButtonProps } from '../../../../auxiliary/interfaces/ButtonProps';
 
 interface MeasurementsProps {}
 
@@ -21,10 +22,15 @@ const MeasurementsPage: React.FC<MeasurementsProps> = observer(() => {
   const paginationService = measurementsStore.paginationService;
   const navigate = useRouterNavigation();
 
-  const buttonContainerData = {
-    clickHandler: () => navigate('/addMeasurementPage'),
-    label: 'Add Measurement',
-  };
+  const buttonContainerData: ButtonProps[] = [
+    {
+      onClick: () => {
+        console.log('Add Reading');
+        navigate('/addMeasurementPage');
+      },
+      label: 'Add Reading',
+    },
+  ];
 
   const handleEdit = (id: number | undefined) => {
     navigate(`/addMeasurementPage/${id}`);
@@ -71,7 +77,7 @@ const MeasurementsPage: React.FC<MeasurementsProps> = observer(() => {
           <div className={styles.tableContainer}>
             <TableWithSorting {...tableProps} />
           </div>
-          <ButtonContainer buttons={[buttonContainerData]} />
+          <ButtonContainer buttons={buttonContainerData} />
         </div>
         <Pagination
           currentPage={paginationService.currentPage}

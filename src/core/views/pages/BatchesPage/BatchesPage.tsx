@@ -57,10 +57,12 @@ const BatchesPage: React.FC = observer(() => {
     handleEdit,
   };
 
-  const buttonContainerData = {
-    clickHandler: () => navigate('/addBatchPage'),
-    label: 'Add Batch',
-  };
+  const buttonContainerData = [
+    {
+      onClick: () => navigate('/addBatchPage'),
+      label: 'Add Batch',
+    },
+  ];
 
   return (
     <section className={styles.section}>
@@ -71,7 +73,7 @@ const BatchesPage: React.FC = observer(() => {
           <div className={styles.tableContainer}>
             <TableWithSorting {...tableProps} />
           </div>
-          <ButtonContainer buttons={[buttonContainerData]} />
+          <ButtonContainer buttons={buttonContainerData} />
         </div>
         <Pagination
           currentPage={paginationService.currentPage}

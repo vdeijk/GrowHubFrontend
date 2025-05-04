@@ -1,9 +1,8 @@
 import React from 'react';
 import styles from './FieldsPage.module.css';
 import Map from '../../reusables/Map/Map';
-import ButtonContainer, {
-  ButtonConfig,
-} from '../../reusables/ButtonContainer/ButtonContainer';
+import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
+import { ButtonProps } from '../../../../auxiliary/interfaces/ButtonProps';
 import FieldListContainer from '../../containers/FieldListContainer/FieldListContainer';
 import fieldsStore from '../../../stores/derived/FieldsStore/FieldsStore';
 import { observer } from 'mobx-react-lite';
@@ -14,13 +13,13 @@ import EventBus from '../../../services/EventBusService/EventBusService';
 const FieldsPage: React.FC = observer(() => {
   const navigate = useRouterNavigation();
 
-  const buttonConfigs: ButtonConfig[] = [
+  const buttonContainerData: ButtonProps[] = [
     {
-      clickHandler: () => EventBus.dispatchEvent('centerMap', undefined),
+      onClick: () => EventBus.dispatchEvent('centerMap', undefined),
       label: 'Center Map',
     },
     {
-      clickHandler: () => navigate('/addFieldPage'),
+      onClick: () => navigate('/addFieldPage'),
       label: 'Add Field',
     },
   ];
@@ -66,7 +65,7 @@ const FieldsPage: React.FC = observer(() => {
         </div>
         <div className={styles.right}>
           <FieldListContainer {...listData} />
-          <ButtonContainer buttons={buttonConfigs} />
+          <ButtonContainer buttons={buttonContainerData} />
         </div>
       </LoadingWrapper>
     </section>
