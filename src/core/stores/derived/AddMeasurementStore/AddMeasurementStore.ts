@@ -38,6 +38,9 @@ class AddMeasurementStore extends BaseFormStore {
     const numberId = Number(id);
 
     if (Number.isNaN(numberId)) return;
+
+    console.log('this.prepareData()', this.prepareData());
+
     await this.endpointService.putData(`${id}`, this.prepareData());
 
     measurementsStore.fetchData();
@@ -73,6 +76,7 @@ class AddMeasurementStore extends BaseFormStore {
         .value as MeasurementItemGrowthStageEnum,
       healthStatus: this.dropdownFields.healthStatus
         .value as MeasurementItemHealthStatusEnum,
+      date: this.dateFields.date.value as string,
     };
   }
 }
