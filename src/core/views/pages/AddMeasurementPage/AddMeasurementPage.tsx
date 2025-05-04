@@ -43,7 +43,7 @@ const AddMeasurementPage: React.FC<AddMeasurementPageProps> = observer(
       }
 
       addMeasurementStore.resetForm();
-      navigate('/tasksPage');
+      navigate('/measurementsPage');
     };
 
     const createTextInputFieldModel = (fieldKey: string): TextInputProps => ({
