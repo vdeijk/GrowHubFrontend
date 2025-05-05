@@ -7,6 +7,39 @@ export class FilterService {
     makeAutoObservable(this);
   }
 
+  public static filterByGreaterThan<
+    T extends Record<string, number | undefined>,
+  >(items: T[], numberFilters: Record<keyof T, number | undefined>): T[] {
+    return items.filter((item) =>
+      (Object.keys(numberFilters) as (keyof T)[]).every((key) => {
+        const filterValue = numberFilters[key];
+        if (filterValue === undefined || filterValue < 0) return true;
+
+        const itemValue = item[key];
+        if (typeof itemValue !== 'number' || itemValue < 0) return false;
+
+        return itemValue > filterValue;
+      }),
+    );
+  }
+
+  public static filterBySmallerThan<T>(
+    items: T[],
+    numberFilters: Record<string, number | undefined>,
+  ): T[] {
+    return items.filter((item) =>
+      Object.keys(numberFilters).every((key) => {
+        const filterValue = numberFilters[key];
+        if (filterValue === undefined || filterValue < 0) return true;
+
+        const itemValue = item[key as keyof T];
+        if (typeof itemValue !== 'number' || itemValue < 0) return false;
+
+        return itemValue < filterValue;
+      }),
+    );
+  }
+
   public static filterBySearchQuery<T>(
     items: T[],
     searchQuery: string,

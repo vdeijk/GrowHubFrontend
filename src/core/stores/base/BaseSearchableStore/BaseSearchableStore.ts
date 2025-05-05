@@ -25,7 +25,8 @@ export abstract class SearchableStore<T> {
   public filteredItems: T[] = [];
   public paginatedItems: T[] = [];
   public debouncedFilterItems: () => void;
-  public textFilters: Record<string, InputField<string>> = {};
+  public stringFilters: Record<string, InputField<string>> = {};
+  public numberFilters: Record<string, InputField<string>> = {};
   public dropdownFilters: Record<string, DropdownField<string>> = {};
   public dateFilters: Record<string, DateField<string>> = {};
   public searchableFields: (keyof T)[] = [];
@@ -55,7 +56,7 @@ export abstract class SearchableStore<T> {
     });
 
     EventBus.addEventListener('searchQuery:updated', () => {
-      if (!this.textFilters.searchQuery.validateMaxLength()) {
+      if (!this.stringFilters.searchQuery.validateMaxLength()) {
         this.debouncedFilterItems();
       }
     });
@@ -72,12 +73,13 @@ export abstract class SearchableStore<T> {
       items: observable,
       filteredItems: observable,
       paginatedItems: observable,
-      textFilters: observable,
+      stringFilters: observable,
+      numberFilters: observable,
       dropdownFilters: observable,
       dateFilters: observable,
       sortField: computed,
       sortOrder: computed,
-      initTextFilter: action,
+      initStringFilter: action,
       initDropdownFilter: action,
       initDateFilter: action,
       filterItems: action,
@@ -93,10 +95,18 @@ export abstract class SearchableStore<T> {
     return this.sortService.sortOrder;
   }
 
-  public initTextFilter = (field: InputFieldModel) => {
+  public initStringFilter = (field: InputFieldModel) => {
     runInAction(() => {
-      if (!this.textFilters[field.key]) {
-        this.textFilters[field.key] = new InputField<string>('', field.label);
+      if (!this.stringFilters[field.key]) {
+        this.stringFilters[field.key] = new InputField<string>('', field.label);
+      }
+    });
+  };
+
+  public initNumberFilter = (field: InputFieldModel) => {
+    runInAction(() => {
+      if (!this.numberFilters[field.key]) {
+        this.numberFilters[field.key] = new InputField<string>('', field.label);
       }
     });
   };
@@ -143,7 +153,7 @@ export abstract class SearchableStore<T> {
   public filterItems = () => {
     let filtered = FilterService.filterBySearchQuery(
       this.items,
-      this.textFilters.searchQuery.value,
+      this.stringFilters.searchQuery.value,
       this.searchableFields,
     );
     filtered = FilterService.filterByDropdowns(filtered, this.dropdownFilters);

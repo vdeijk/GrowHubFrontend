@@ -69,7 +69,7 @@ class MeasurementsData {
     },
   ];
 
-  public static textFields: Record<string, InputFieldModel> = {
+  public static textFieldsString: Record<string, InputFieldModel> = {
     searchQuery: { key: 'searchQuery', label: 'Search', defaultValue: '' },
     descriptionField: {
       key: 'description',
@@ -78,7 +78,7 @@ class MeasurementsData {
     },
   };
 
-  public static inputFields: Record<string, InputFieldModel> = {
+  public static textFieldsNumber: Record<string, InputFieldModel> = {
     phMin: {
       key: 'phMin',
       label: 'PH Min',

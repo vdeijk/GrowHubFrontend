@@ -25,8 +25,12 @@ class BatchesStore extends SearchableStore<YourCropItem> {
       this.initDropdownFilter(BatchesData.dropdowns['location']);
     });
 
-    Object.values(BatchesData.textFields).forEach((textField) => {
-      this.initTextFilter(textField);
+    Object.values(BatchesData.textFieldsString).forEach((textField) => {
+      this.initStringFilter(textField);
+    });
+
+    Object.values(BatchesData.textFieldsNumber).forEach((textField) => {
+      this.initNumberFilter(textField);
     });
 
     Object.values(BatchesData.dropdowns).forEach((dropdown) => {

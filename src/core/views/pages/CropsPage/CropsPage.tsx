@@ -21,7 +21,7 @@ const CropsPage: React.FC = observer(() => {
   const { paginationService } = cropsStore;
 
   const searchBarProps: SearchBarProps = {
-    inputFields: Object.values(cropsStore.textFilters),
+    inputFields: Object.values(cropsStore.stringFilters),
     dateFields: Object.values(cropsStore.dateFilters),
     dropdownFields: Object.values(cropsStore.dropdownFilters),
   };

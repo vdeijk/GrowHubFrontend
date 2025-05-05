@@ -16,8 +16,12 @@ class MeasurementsStore extends SearchableStore<MeasurementItem> {
   constructor() {
     super(['title']);
 
-    Object.values(MeasurementsData.textFields).forEach((textField) => {
-      this.initTextFilter(textField);
+    Object.values(MeasurementsData.textFieldsString).forEach((textField) => {
+      this.initStringFilter(textField);
+    });
+
+    Object.values(MeasurementsData.textFieldsNumber).forEach((textField) => {
+      this.initNumberFilter(textField);
     });
 
     Object.values(MeasurementsData.dropdowns).forEach((dropdown) => {

@@ -44,7 +44,7 @@ const TasksPage: React.FC = observer(() => {
     taskStore.deleteTask,
     'Are you sure you want to delete this task?',
   );
-  
+
   const handleDelete = (
     id: number | undefined,
     event: React.MouseEvent<SVGElement>,
@@ -54,7 +54,7 @@ const TasksPage: React.FC = observer(() => {
   };
 
   const searchBarProps: SearchBarProps = {
-    inputFields: Object.values(taskStore.textFilters),
+    inputFields: Object.values(taskStore.stringFilters),
     dateFields: Object.values(taskStore.dateFilters),
     dropdownFields: Object.values(taskStore.dropdownFilters),
   };

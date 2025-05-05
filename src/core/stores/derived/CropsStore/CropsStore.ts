@@ -16,8 +16,8 @@ class CropsStore extends SearchableStore<PlantItem> {
   constructor() {
     super(['commonName']);
 
-    Object.values(CropsData.textFields).forEach((textField) => {
-      this.initTextFilter(textField);
+    Object.values(CropsData.textFieldsString).forEach((textField) => {
+      this.initStringFilter(textField);
     });
 
     makeObservable(this, {

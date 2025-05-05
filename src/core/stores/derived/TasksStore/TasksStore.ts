@@ -16,8 +16,8 @@ class TasksStore extends SearchableStore<TodoItem> {
   constructor() {
     super(['title']);
 
-    Object.values(TasksData.textFields).forEach((textField) => {
-      this.initTextFilter(textField);
+    Object.values(TasksData.textFieldsString).forEach((textField) => {
+      this.initStringFilter(textField);
     });
 
     Object.values(TasksData.dropdowns).forEach((dropdown) => {

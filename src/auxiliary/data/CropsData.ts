@@ -129,7 +129,7 @@ class CropsData {
     },
   ];
 
-  public static textFields: Record<string, InputFieldModel> = {
+  public static textFieldsString: Record<string, InputFieldModel> = {
     searchQuery: { key: 'searchQuery', label: 'Search', defaultValue: '' },
     descriptionField: {
       key: 'description',

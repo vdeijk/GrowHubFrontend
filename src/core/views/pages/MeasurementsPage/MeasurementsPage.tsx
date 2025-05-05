@@ -59,7 +59,9 @@ const MeasurementsPage: React.FC<MeasurementsProps> = observer(() => {
   };
 
   const searchBarProps: SearchBarProps = {
-    inputFields: Object.values(measurementsStore.textFilters),
+    inputFields: Object.values(measurementsStore.stringFilters).concat(
+      Object.values(measurementsStore.numberFilters),
+    ),
     dateFields: Object.values(measurementsStore.dateFilters),
     dropdownFields: Object.values(measurementsStore.dropdownFilters),
   };

@@ -22,7 +22,7 @@ const BatchesPage: React.FC = observer(() => {
   const navigate = useRouterNavigation();
 
   const searchBarProps: SearchBarProps = {
-    inputFields: Object.values(cropsStore.textFilters),
+    inputFields: Object.values(cropsStore.stringFilters),
     dateFields: Object.values(cropsStore.dateFilters),
     dropdownFields: Object.values(cropsStore.dropdownFilters),
   };

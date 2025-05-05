@@ -86,13 +86,16 @@ class BatchesData {
     },
   ];
 
-  public static textFields: Record<string, InputFieldModel> = {
+  public static textFieldsString: Record<string, InputFieldModel> = {
     searchQuery: { key: 'searchQuery', label: 'Search', defaultValue: '' },
     descriptionField: {
       key: 'description',
       label: 'Notes',
       defaultValue: '',
     },
+  };
+
+  public static textFieldsNumber: Record<string, InputFieldModel> = {
     amount: {
       key: 'amount',
       label: 'Amount',
