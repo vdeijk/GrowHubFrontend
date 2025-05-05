@@ -70,6 +70,7 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
 
     const titleProps = createTextInputFieldModel('title');
     const notesProps = createTextInputFieldModel('notes');
+    const batchIdProps = createTextInputFieldModel('batchId');
     const priorityProps = createDropdownFieldModel('priority');
     const dueDateProps = createDateFieldModel('dueDate');
     const categoryProps = createDropdownFieldModel('category');
@@ -94,6 +95,7 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
           <form onSubmit={handleSubmit} className={styles.form}>
             <TextInput {...titleProps} />
             <TextArea {...notesProps} />
+            <TextInput {...batchIdProps} />
             <Divider />
             <Dropdown {...priorityProps} />
             <Dropdown {...categoryProps} />

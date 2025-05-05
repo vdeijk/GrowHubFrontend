@@ -71,6 +71,7 @@ const AddMeasurementPage: React.FC<AddMeasurementPageProps> = observer(
     const nameProps = createTextInputFieldModel('title');
     const notesProps = createTextInputFieldModel('notes');
     const soilPHProps = createTextInputFieldModel('soilPH');
+    const batchIdProps = createTextInputFieldModel('batchId');
     const soilDrynessProps = createDropdownFieldModel('soilDryness');
     const growthStageProps = createDropdownFieldModel('growthStage');
     const healthStatusProps = createDropdownFieldModel('healthStatus');
@@ -96,6 +97,7 @@ const AddMeasurementPage: React.FC<AddMeasurementPageProps> = observer(
             <TextInput {...nameProps} />
             <TextArea {...notesProps} />
             <TextInput {...soilPHProps} />
+            <TextInput {...batchIdProps} />
             <Divider />
             <Dropdown {...soilDrynessProps} />
             <Dropdown {...growthStageProps} />

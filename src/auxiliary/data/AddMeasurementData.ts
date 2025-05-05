@@ -17,6 +17,12 @@ class AddMeasurementData {
       defaultValue: '',
       required: false,
     },
+    batchId: {
+      key: 'batchId',
+      label: 'Batch Id',
+      defaultValue: '',
+      required: false,
+    },
   };
 
   public static dropdowns: Record<string, DropdownFieldModel> = {

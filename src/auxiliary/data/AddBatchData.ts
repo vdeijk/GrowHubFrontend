@@ -17,6 +17,12 @@ class AddBatchData {
       defaultValue: '',
       required: true,
     },
+    cropId: {
+      key: 'cropId',
+      label: 'Crop Id',
+      defaultValue: '',
+      required: false,
+    },
   };
 
   public static dropdowns: Record<string, DropdownFieldModel> = {
