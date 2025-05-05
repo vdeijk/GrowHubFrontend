@@ -7,6 +7,7 @@
   font-size: 1.4rem;
   font-family: Poppins;
   background-color: var(--color-form-field);
+  transition: all 0.3s;
 }
 
 .container {
@@ -24,4 +25,10 @@
   color: var(--color-red);
   margin-left: 4px;
   font-size: 1rem;
+}
+
+.textInput:focus {
+  border-color: var(--color-primary);
+  box-shadow: var(--box-shadow);
+  outline: none;
 }

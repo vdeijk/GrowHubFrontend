@@ -26,3 +26,9 @@
   margin-left: 4px;
   font-size: 1rem;
 }
+
+.textArea:focus {
+  border-color: var(--color-primary);
+  box-shadow: var(--box-shadow);
+  outline: none;
+}
