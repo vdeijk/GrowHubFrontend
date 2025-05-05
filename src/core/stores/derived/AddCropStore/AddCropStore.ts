@@ -7,6 +7,7 @@ import { localStorageService } from '../../../services/LocalStorageService/Local
 import AddCropData from '../../../../auxiliary/data/AddCropData';
 import { DataMappingService } from '../../../services/DataMappingService/DatamappingService';
 import ValueTransformService from '../../../services/ValueTransformService/ValueTransformService';
+import { MonthEnum } from '../../../../auxiliary/enums/MonthEnum';
 
 class AddCropStore extends BaseFormStore {
   private endpointService = new EndpointService('Plant');
@@ -87,7 +88,32 @@ class AddCropStore extends BaseFormStore {
       ),
       temperatureMax: ValueTransformService.toNumberOrUndefined(
         this.inputFields.temperatureMax.value,
-      ),    };
+      ),
+      harvestStart: ValueTransformService.toEnumOrUndefined(
+        String(this.inputFields.harvestStart?.value || MonthEnum.January),
+        MonthEnum,
+      ),
+      harvestEnd: ValueTransformService.toEnumOrUndefined(
+        String(this.inputFields.harvestEnd?.value || MonthEnum.December),
+        MonthEnum,
+      ),
+      pruningStart: ValueTransformService.toEnumOrUndefined(
+        String(this.inputFields.pruningStart?.value || MonthEnum.January),
+        MonthEnum,
+      ),
+      pruningEnd: ValueTransformService.toEnumOrUndefined(
+        String(this.inputFields.pruningEnd?.value || MonthEnum.December),
+        MonthEnum,
+      ),
+      fertilizingStart: ValueTransformService.toEnumOrUndefined(
+        String(this.inputFields.fertilizingStart?.value || MonthEnum.January),
+        MonthEnum,
+      ),
+      fertilizingEnd: ValueTransformService.toEnumOrUndefined(
+        String(this.inputFields.fertilizingEnd?.value || MonthEnum.December),
+        MonthEnum,
+      ),
+    };
   }
 }
 
