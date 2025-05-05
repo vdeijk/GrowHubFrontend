@@ -1,0 +1,22 @@
+.weather {
+  width: 100%;
+  grid-column: 1/-1;
+  border-radius: var(--border-radius-large);
+  padding: var(--spacing-medium);
+  background-color: var(--color-white);
+  box-shadow: var(--box-shadow);
+  grid-area: 1 / 1 / 2 / 6;
+}
+
+.container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  align-items: center;
+}
+
+@media (max-width: 1024px) {
+  .weather {
+    grid-area: 1 / 1 / 2 / -1;
+  }
+}

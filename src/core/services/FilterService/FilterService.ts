@@ -1,10 +1,42 @@
 import { makeAutoObservable } from 'mobx';
-import { Dropdown } from '../../../auxiliary/classes/Dropdown';
+import { DropdownField } from '../../../auxiliary/classes/DropdownField';
 import { DateField } from '../../../auxiliary/classes/DateField';
 
 export class FilterService {
   constructor() {
     makeAutoObservable(this);
+  }
+
+  public static filterByGreaterThan<T>(
+    items: T[],
+    minNumber: number,
+    property: string,
+  ): T[] {
+    if (!minNumber) return items;
+
+    return items.filter((item) => {
+      // @ts-ignore
+      const itemNumber = item[property];
+      if (!itemNumber) return false;
+
+      return itemNumber >= minNumber;
+    });
+  }
+
+  public static filterBySmallerThan<T>(
+    items: T[],
+    maxNumber: number,
+    property: string,
+  ): T[] {
+    if (!maxNumber) return items;
+
+    return items.filter((item) => {
+      // @ts-ignore
+      const itemNumber = item[property];
+      if (!itemNumber) return false;
+
+      return itemNumber <= maxNumber;
+    });
   }
 
   public static filterBySearchQuery<T>(
@@ -29,7 +61,7 @@ export class FilterService {
 
   public static filterByDropdowns<T>(
     items: T[],
-    dropdownFilters: Record<string, Dropdown<string>>,
+    dropdownFilters: Record<string, DropdownField<string>>,
   ): T[] {
     return items.filter((item) =>
       Object.keys(dropdownFilters).every((key) => {
@@ -42,23 +74,35 @@ export class FilterService {
     );
   }
 
+  public static filterByStartDate<T>(
+    items: T[],
+    startDate: string,
+    property: string,
+  ): T[] {
+    if (!startDate) return items;
+
+    return items.filter((item) => {
+      // @ts-ignore
+      const itemDate = item[property];
+      if (!itemDate) return false;
+
+      return new Date(itemDate) >= new Date(startDate);
+    });
+  }
+
   public static filterByEndDate<T>(
     items: T[],
-    dateFilters: Record<string, DateField<string>>,
+    endDate: string,
+    property: string,
   ): T[] {
+    if (!endDate) return items;
+
     return items.filter((item) => {
-      return Object.keys(dateFilters).every((key) => {
-        const filterValue = dateFilters[key].value;
-        if (!filterValue) return true;
+      // @ts-ignore
+      const itemDate = item[property];
+      if (!itemDate) return false;
 
-        const itemDate = (item as any)[key];
-        if (!itemDate) return true;
-
-        const itemDateObj = new Date(itemDate);
-        const filterDateObj = new Date(filterValue);
-
-        return itemDateObj <= filterDateObj;
-      });
+      return new Date(itemDate) <= new Date(endDate);
     });
   }
 

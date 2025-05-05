@@ -1,15 +1,15 @@
 import { TodoItem } from '../../../../api';
 import { BaseFormStore } from '../../base/BaseFormStore/BaseFormStore';
-import { InputField } from '../../../../auxiliary/classes/InputField';
-import taskStore from '../TaskStore/TaskStore';
+import taskStore from '../TasksStore/TasksStore';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
 import { runInAction } from 'mobx';
-import { DateField } from '../../../../auxiliary/classes/DateField';
 import {
   TodoItemCategoryEnum,
   TodoItemPriorityEnum,
   TodoItemTodoStatusEnum,
 } from '../../../../api';
+import AddTaskData from '../../../../auxiliary/data/AddTaskData';
+import { DataMappingService } from '../../../services/DataMappingService/DatamappingService';
 
 class AddTaskStore extends BaseFormStore {
   public endpointService = new EndpointService('Todo');
@@ -17,55 +17,21 @@ class AddTaskStore extends BaseFormStore {
   constructor() {
     super();
 
-    //@ts-ignore
-    this.fields = {
-      titleField: new InputField<string>(
-        '',
-        'Title',
-        true,
-        'Enter task title',
-        30,
-      ),
-      priority: new InputField<TodoItemPriorityEnum>(
-        TodoItemPriorityEnum.Medium,
-        'Priority',
-        true,
-      ),
-      dueDate: new DateField<string>('', 'Due Date', true),
-      description: new InputField<string>(
-        '',
-        'Description',
-        false,
-        'Enter task description',
-        30,
-      ),
-      category: new InputField<TodoItemCategoryEnum>(
-        TodoItemCategoryEnum.Work,
-        'Category',
-        true,
-      ),
-      todoStatus: new InputField<TodoItemTodoStatusEnum>(
-        TodoItemTodoStatusEnum.NotStarted,
-        'Status',
-        true,
-      ),
-    } as Record<
-      string,
-      InputField<string | number | boolean> | DateField<string>
-    >;
+    Object.values(AddTaskData.textFields).forEach((textField) => {
+      this.initTextFilter(textField);
+    });
+
+    Object.values(AddTaskData.dropdowns).forEach((dropdown) => {
+      this.initDropdownFilter(dropdown);
+    });
+
+    AddTaskData.dateFields.forEach((dateField) => {
+      this.initDateFilter(dateField);
+    });
   }
 
   public addTask = async () => {
-    const data: TodoItem = {
-      title: this.fields.titleField.value as string,
-      priority: this.fields.priority.value as TodoItemPriorityEnum,
-      dueDate: this.fields.dueDate.value as string,
-      description: this.fields.description.value as string,
-      category: this.fields.category.value as TodoItemCategoryEnum,
-      todoStatus: this.fields.todoStatus.value as TodoItemTodoStatusEnum,
-    };
-
-    await this.endpointService.postData(data);
+    await this.endpointService.postData(this.prepareData());
 
     taskStore.fetchData();
   };
@@ -77,12 +43,9 @@ class AddTaskStore extends BaseFormStore {
     if (!data) return;
 
     runInAction(() => {
-      this.fields.titleField.setValue(data.title ?? '');
-      this.fields.priorityField.setValue(data.priority ?? '');
-      this.fields.dueDateField.setValue(data.dueDate ?? '');
-      this.fields.descriptionField.setValue(data.description ?? '');
-      this.fields.categoryField.setValue(data.category ?? '');
-      this.fields.todoStatus.setValue(data.todoStatus ?? '');
+      DataMappingService.mapInputFields(data, this.inputFields);
+      DataMappingService.mapDropdownFields(data, this.dropdownFields);
+      DataMappingService.mapDateFields(data, this.dateFields);
     });
   };
 
@@ -90,16 +53,7 @@ class AddTaskStore extends BaseFormStore {
     const numberId = Number(id);
     if (Number.isNaN(numberId)) return;
 
-    const data: TodoItem = {
-      title: this.fields.titleField.value as string,
-      priority: this.fields.priority.value as TodoItemPriorityEnum,
-      dueDate: this.fields.dueDate.value as string,
-      description: this.fields.description.value as string,
-      category: this.fields.category.value as TodoItemCategoryEnum,
-      todoStatus: this.fields.todoStatus.value as TodoItemTodoStatusEnum,
-    };
-
-    await this.endpointService.putData(`${id}`, data);
+    await this.endpointService.putData(`${id}`, this.prepareData());
 
     taskStore.fetchData();
   };
@@ -108,6 +62,19 @@ class AddTaskStore extends BaseFormStore {
     if (this.validateRequired()) return true;
 
     return false;
+  }
+
+  private prepareData(): TodoItem {
+    return {
+      title: this.inputFields.title.value as string,
+      notes: this.inputFields.notes.value as string,
+      batchId: Number(this.inputFields.batchId.value),
+      priority: this.dropdownFields.priority.value as TodoItemPriorityEnum,
+      category: this.dropdownFields.category.value as TodoItemCategoryEnum,
+      todoStatus: this.dropdownFields.todoStatus
+        .value as TodoItemTodoStatusEnum,
+      dueDate: this.dateFields.dueDate.value as string,
+    };
   }
 }
 

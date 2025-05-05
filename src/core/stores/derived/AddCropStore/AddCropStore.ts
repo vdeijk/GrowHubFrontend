@@ -1,22 +1,13 @@
-import {
-  PlantItem,
-  PlantItemClimateZoneEnum,
-  PlantItemFertilizerNeedsEnum,
-  PlantItemGrowthRateEnum,
-  PlantItemPlantTypeEnum,
-  PlantItemPruningEnum,
-  PlantItemSoilPHEnum,
-  PlantItemSoilTypeEnum,
-  PlantItemSunPreferenceEnum,
-  PlantItemWaterNeedsEnum,
-} from '../../../../api';
-import cropsDatabaseStore from '../CropsDatabaseStore/CropsDatabaseStore';
-import { InputField } from '../../../../auxiliary/classes/InputField';
+import { PlantItem } from '../../../../api';
+import cropsDatabaseStore from '../CropsStore/CropsStore';
 import { BaseFormStore } from '../../base/BaseFormStore/BaseFormStore';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
 import { runInAction } from 'mobx';
-import { Dropdown } from '../../../../auxiliary/classes/Dropdown';
 import { localStorageService } from '../../../services/LocalStorageService/LocalStorageService';
+import AddCropData from '../../../../auxiliary/data/AddCropData';
+import { DataMappingService } from '../../../services/DataMappingService/DatamappingService';
+import ValueTransformService from '../../../services/ValueTransformService/ValueTransformService';
+import { MonthEnum } from '../../../../auxiliary/enums/MonthEnum';
 
 class AddCropStore extends BaseFormStore {
   private endpointService = new EndpointService('Plant');
@@ -24,43 +15,17 @@ class AddCropStore extends BaseFormStore {
   constructor() {
     super();
 
-    //@ts-ignore
-    this.fields = {
-      nameField: new InputField<string>(
-        '',
-        'Common Name',
-        true,
-        'Enter common name',
-      ),
-      sunPreference: new Dropdown<string>('', 'Sun Preference', true),
-      waterNeeds: new Dropdown<string>('', 'Water Needs', true),
-      soilType: new Dropdown<string>('', 'Soil Type', true),
-      soilPH: new Dropdown<string>('', 'Soil PH', true),
-      pruning: new Dropdown<string>('', 'Pruning', true),
-      climateZone: new Dropdown<string>('', 'Climate Zone', true),
-      plantType: new Dropdown<string>('', 'Plant Type', true),
-      growthRate: new Dropdown<string>('', 'Growth Rate', true),
-      fertilizerNeeds: new Dropdown<string>('', 'fertilizer Needs', true),
-    } as Record<string, InputField<string | number | boolean>>;
+    Object.values(AddCropData.textFields).forEach((textField) => {
+      this.initTextFilter(textField);
+    });
+
+    Object.values(AddCropData.dropdownFields).forEach((dropdownField) => {
+      this.initDropdownFilter(dropdownField);
+    });
   }
 
   public addCrop = async () => {
-    const data: PlantItem = {
-      commonName: this.fields.nameField.value as string,
-      sunPreference: this.fields.sunPreference
-        .value as PlantItemSunPreferenceEnum,
-      waterNeeds: this.fields.waterNeeds.value as PlantItemWaterNeedsEnum,
-      soilType: this.fields.soilType.value as PlantItemSoilTypeEnum,
-      soilPH: this.fields.soilPH.value as PlantItemSoilPHEnum,
-      pruning: this.fields.pruning.value as PlantItemPruningEnum,
-      climateZone: this.fields.climateZone.value as PlantItemClimateZoneEnum,
-      plantType: this.fields.plantType.value as PlantItemPlantTypeEnum,
-      growthRate: this.fields.growthRate.value as PlantItemGrowthRateEnum,
-      fertilizerNeeds: this.fields.fertilizerNeeds
-        .value as PlantItemFertilizerNeedsEnum,
-    };
-
-    await this.endpointService.postData(data);
+    await this.endpointService.postData(this.prepareData());
 
     localStorageService.invalidateCache('cropsDatabaseItems');
     cropsDatabaseStore.fetchData();
@@ -71,22 +36,7 @@ class AddCropStore extends BaseFormStore {
 
     if (Number.isNaN(numberId)) return;
 
-    const data: PlantItem = {
-      commonName: this.fields.nameField.value as string,
-      sunPreference: this.fields.sunPreference
-        .value as PlantItemSunPreferenceEnum,
-      waterNeeds: this.fields.waterNeeds.value as PlantItemWaterNeedsEnum,
-      soilType: this.fields.soilType.value as PlantItemSoilTypeEnum,
-      soilPH: this.fields.soilPH.value as PlantItemSoilPHEnum,
-      pruning: this.fields.pruning.value as PlantItemPruningEnum,
-      climateZone: this.fields.climateZone.value as PlantItemClimateZoneEnum,
-      plantType: this.fields.plantType.value as PlantItemPlantTypeEnum,
-      growthRate: this.fields.growthRate.value as PlantItemGrowthRateEnum,
-      fertilizerNeeds: this.fields.fertilizerNeeds
-        .value as PlantItemFertilizerNeedsEnum,
-    };
-
-    await this.endpointService.putData(`${id}`, data);
+    await this.endpointService.putData(`${id}`, this.prepareData());
 
     localStorageService.invalidateCache('cropsDatabaseItems');
     cropsDatabaseStore.fetchData();
@@ -99,16 +49,9 @@ class AddCropStore extends BaseFormStore {
     if (!data) return;
 
     runInAction(() => {
-      this.fields.nameField.setValue(String(data.commonName));
-      this.fields.sunPreference.setValue(String(data.sunPreference));
-      this.fields.waterNeeds.setValue(String(data.waterNeeds));
-      this.fields.soilType.setValue(String(data.soilType));
-      this.fields.soilPH.setValue(String(data.soilPH));
-      this.fields.pruning.setValue(String(data.pruning));
-      this.fields.climateZone.setValue(String(data.climateZone));
-      this.fields.plantType.setValue(String(data.plantType));
-      this.fields.growthRate.setValue(String(data.growthRate));
-      this.fields.fertilizerNeeds.setValue(String(data.fertilizerNeeds));
+      DataMappingService.mapInputFields(data, this.inputFields);
+      DataMappingService.mapDropdownFields(data, this.dropdownFields);
+      DataMappingService.mapDateFields(data, this.dateFields);
     });
   };
 
@@ -117,6 +60,86 @@ class AddCropStore extends BaseFormStore {
 
     return false;
   }
+
+  private prepareData(): PlantItem {
+    return {
+      commonName: this.inputFields.commonName.value as string,
+      notes: this.inputFields.notes.value as string,
+      waterCycle: ValueTransformService.toNumberOrUndefined(
+        this.inputFields.waterCycle.value,
+      ),
+      pruningCycle: ValueTransformService.toNumberOrUndefined(
+        this.inputFields.pruningCycle.value,
+      ),
+      fertilizationCycle: ValueTransformService.toNumberOrUndefined(
+        this.inputFields.fertilizationCycle.value,
+      ),
+      harvestCycle: ValueTransformService.toNumberOrUndefined(
+        this.inputFields.harvestCycle.value,
+      ),
+      phMin: ValueTransformService.toNumberOrUndefined(
+        this.inputFields.phMin.value,
+      ),
+      phMax: ValueTransformService.toNumberOrUndefined(
+        this.inputFields.phMax.value,
+      ),
+      temperatureMin: ValueTransformService.toNumberOrUndefined(
+        this.inputFields.temperatureMin.value,
+      ),
+      temperatureMax: ValueTransformService.toNumberOrUndefined(
+        this.inputFields.temperatureMax.value,
+      ),
+      harvestStart: ValueTransformService.toEnumOrUndefined(
+        this.prepareMonthEnum(
+          this.dropdownFields.harvestStart?.value,
+          MonthEnum.January,
+        ),
+        MonthEnum,
+      ),
+      harvestEnd: ValueTransformService.toEnumOrUndefined(
+        this.prepareMonthEnum(
+          this.dropdownFields.harvestEnd?.value,
+          MonthEnum.December,
+        ),
+        MonthEnum,
+      ),
+      pruningStart: ValueTransformService.toEnumOrUndefined(
+        this.prepareMonthEnum(
+          this.dropdownFields.pruningStart?.value,
+          MonthEnum.January,
+        ),
+        MonthEnum,
+      ),
+      pruningEnd: ValueTransformService.toEnumOrUndefined(
+        this.prepareMonthEnum(
+          this.dropdownFields.pruningEnd?.value,
+          MonthEnum.December,
+        ),
+        MonthEnum,
+      ),
+      fertilizingStart: ValueTransformService.toEnumOrUndefined(
+        this.prepareMonthEnum(
+          this.dropdownFields.fertilizingStart?.value,
+          MonthEnum.January,
+        ),
+        MonthEnum,
+      ),
+      fertilizingEnd: ValueTransformService.toEnumOrUndefined(
+        this.prepareMonthEnum(
+          this.dropdownFields.fertilizingEnd?.value,
+          MonthEnum.December,
+        ),
+        MonthEnum,
+      ),
+    };
+  }
+
+  private prepareMonthEnum = (
+    value: string | number | null | undefined,
+    defaulValue: string,
+  ) => {
+    return value === undefined || value === null ? defaulValue : String(value);
+  };
 }
 
 const addCropStore = new AddCropStore();

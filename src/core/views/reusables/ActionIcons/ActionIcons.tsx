@@ -1,37 +1,56 @@
 import React from 'react';
 import styles from './ActionIcons.module.css';
 import { observer } from 'mobx-react-lite';
-import { FaEdit, FaTrash, FaSearch } from 'react-icons/fa';
+import { FaTrash } from 'react-icons/fa';
 
 interface ActionIconsProps<T extends { id?: number | undefined }> {
   item: T;
-  handleEdit: (id: number | undefined) => void;
-  handleDelete: (id: number | undefined) => void;
-  handlePopup?: (id: number | undefined) => void;
+  handleDelete: (
+    id: number | undefined,
+    event: React.MouseEvent<SVGElement>,
+  ) => void;
+  handleCopy?: (
+    id: number | undefined,
+    event: React.MouseEvent<SVGElement>,
+  ) => void;
+  handlePaste?: (
+    id: number | undefined,
+    event: React.MouseEvent<SVGElement>,
+  ) => void;
 }
 
 const ActionIcons = observer(
   <T extends { id: number | undefined }>(props: ActionIconsProps<T>) => {
-    const { item, handleEdit, handleDelete, handlePopup } = props;
+    const { item, handleDelete } = props;
+
+    //handleCopy, handlePaste
 
     return (
       <div className={styles.actionIcons}>
-        {handlePopup && (
-          <FaSearch
-            className={styles.viewIcon}
-            onClick={() => item.id !== undefined && handlePopup(item.id!)}
-            title="View Info"
+        {/* {handleCopy && (
+          <FaCopy
+            className={styles.copyIcon}
+            onClick={(event) =>
+              item.id !== undefined && handleCopy(item.id, event)
+            }
+            title="Copy"
           />
         )}
-        <FaEdit
-          className={styles.editIcon}
-          onClick={() => item.id !== undefined && handleEdit(item.id)}
-          title="Edit Plant"
-        />
+        {handlePaste && (
+          <FaPaste
+            className={styles.pasteIcon}
+            onClick={(event) =>
+              item.id !== undefined && handlePaste(item.id, event)
+            }
+            title="Paste"
+          />
+        )} */}
         <FaTrash
           className={styles.deleteIcon}
-          onClick={() => item.id !== undefined && handleDelete(item.id)}
-          title="Delete Plant"
+          onClick={(event) =>
+            item.id !== undefined && handleDelete(item.id, event)
+          }
+          title="Delete this row"
         />
       </div>
     );

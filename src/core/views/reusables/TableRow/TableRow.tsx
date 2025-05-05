@@ -1,11 +1,17 @@
 import React from 'react';
+import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
 
-interface TableRowProps<T> {
+interface TableRowProps<T extends { id?: number | null | undefined }> {
   tableRowData: T;
-  headers: { id: keyof T; label: string }[];
+  headers: TableHeaderModel<T>[];
+  handleEdit?: (id: number | undefined) => void;
 }
 
-const TableRow = <T,>({ tableRowData, headers }: TableRowProps<T>) => {
+const TableRow = <T extends { id?: number | undefined }>({
+  tableRowData,
+  headers,
+  handleEdit,
+}: TableRowProps<T>) => {
   const formatDate = (dateString: string) => {
     if (!dateString) return '';
 
@@ -20,27 +26,73 @@ const TableRow = <T,>({ tableRowData, headers }: TableRowProps<T>) => {
     return `${day}/${month}/${year}`;
   };
 
-  const renderCellContent = (headerId: keyof T) => {
+  const getCellColor = (
+    item: T & {
+      redColumns?: string[];
+      yellowColumns?: string[];
+      greenColumns?: string[];
+    },
+    headerId: string,
+  ): string => {
+    switch (true) {
+      case item.redColumns?.includes(headerId):
+        return 'var(--color-red)';
+      case item.yellowColumns?.includes(headerId):
+        return 'var(--color-yellow)';
+      case item.greenColumns?.includes(headerId):
+        return 'var(--color-primary)';
+      default:
+        return 'inherit';
+    }
+  };
+
+  const renderCellContent = (
+    headerId: keyof T,
+    type?: 'date' | 'string' | 'number' | 'action' | 'boolean',
+  ) => {
     const cellValue = tableRowData[headerId];
+    const cellColor = getCellColor(tableRowData, String(headerId));
 
-    if (React.isValidElement(cellValue)) {
-      return cellValue as React.ReactNode;
-    }
+    switch (type) {
+      case 'action':
+        return cellValue as React.ReactNode;
 
-    if (cellValue === null || cellValue === undefined) {
-      return '';
-    }
+      case 'date':
+        if (typeof cellValue === 'string') {
+          return (
+            <span style={{ color: cellColor }}>{formatDate(cellValue)}</span>
+          );
+        }
+        break;
 
-    if (headerId === 'dueDate' && typeof cellValue === 'string') {
-      return formatDate(cellValue);
+      case 'string':
+      case 'number':
+        return (
+          <span style={{ color: cellColor }}>{String(cellValue ?? '')}</span>
+        );
+
+      case 'boolean':
+        return (
+          <span
+            style={{
+              color: cellValue ? 'var(--color-primary)' : 'var(--color-red)',
+            }}
+          >
+            {cellValue ? '✔' : '✖'}
+          </span>
+        );
+
+      default:
+        return '';
     }
-    return String(cellValue ?? '');
   };
 
   return (
-    <tr>
+    <tr onClick={() => handleEdit?.(tableRowData.id as number | undefined)}>
       {headers.map((header) => (
-        <td key={String(header.id)}>{renderCellContent(header.id)}</td>
+        <td key={String(header.id)}>
+          {renderCellContent(header.id as keyof T, header.type)}
+        </td>
       ))}
     </tr>
   );

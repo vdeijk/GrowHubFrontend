@@ -1,35 +1,37 @@
 import React from 'react';
 import styles from './MenuContainer.module.css';
 import MenuLink from '../../reusables/MenuLink/MenuLink';
-import { MenuLinkData } from '../../../../auxiliary/interfaces/MenuLinkData';
 import Heading from '../../reusables/Heading/Heading';
+import HelpButton from '../../reusables/HelpButton/HelpButton';
+import routerService from '../../../services/RouterService/RouterService';
+import profilePicture from '../../../../auxiliary/assets/cropGrowHub.jpg';
+import { useLocation, matchPath } from 'react-router-dom';
 
-interface MenuProps {
-  userName: string;
-  profilePicture: string;
-  menuLinks: MenuLinkData[];
-  curPageTitle: string;
-}
+const MenuContainer: React.FC = () => {
+  const handleHelpOpen = () => {};
+  const location = useLocation();
+  const activeMenuLink = routerService.menuLinks.find((menuLink) =>
+    matchPath(location.pathname, menuLink.path),
+  );
 
-const MenuContainer: React.FC<MenuProps> = ({
-  userName,
-  profilePicture,
-  menuLinks,
-  curPageTitle,
-}) => {
   return (
     <div className={styles.container}>
       <div className={styles.profile}>
-        <Heading
-          level={4}
-          text={curPageTitle}
-          customStyles={{ marginBottom: '2rem', color: '#FDFDFD' }}
-        />
+        <div className={styles.heading}>
+          <Heading
+            level={4}
+            text={routerService.currentLabel}
+            customStyles={{ marginBottom: '2rem', color: '#FDFDFD' }}
+          />
+          <HelpButton
+            summary={activeMenuLink?.tooltip}
+            onClick={handleHelpOpen}
+          />
+        </div>
         <img src={profilePicture} alt="Profile" className={styles.image} />
-        <span className={styles.userName}>{userName}</span>
       </div>
       <ul className={styles.unorderedList}>
-        {menuLinks.map((menuLink, index) => (
+        {routerService.getVisibleLinks().map((menuLink, index) => (
           <MenuLink key={index} menuLinkData={menuLink} />
         ))}
       </ul>

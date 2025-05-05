@@ -1,0 +1,25 @@
+.container {
+  display: grid;
+  grid-gap: 2rem;
+  margin-bottom: 2rem;
+  grid-gap: var(--spacing-small);
+  background-color: var(--color-white);
+  border-radius: var(--border-radius-large);
+  box-shadow: var(--box-shadow);
+  padding: 2rem;
+}
+
+.subContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  align-items: center;
+  grid-gap: 1rem;
+}
+
+.divider {
+  border: none;
+  border-top: 2px solid var(--color-grey);
+  width: 100%;
+  justify-self: start;
+  grid-column: 1 / -1;
+}

@@ -2,7 +2,7 @@
   display: grid;
   justify-content: space-between;
   align-items: center;
-  background-color: #595959;
+  background-color: var(--color-text);
   padding: var(--spacing-small);
   width: 100%;
   height: 6rem;
@@ -15,11 +15,11 @@
 }
 
 .logo {
-  color: #fdfdfd;
+  color: var(--color-white);
 }
 
 .navbar-brand {
-  color: #fff;
+  color: var(--color-white);
   text-decoration: none;
   font-size: 1.5rem;
 }
@@ -29,7 +29,7 @@
 .logoutButton {
   background: none;
   border: none;
-  color: #fdfdfd;
+  color: var(--color-white);
   cursor: pointer;
   font-size: 1.8rem;
 }
@@ -37,7 +37,7 @@
 .userIcon:hover,
 .helpButton:hover,
 .logoutButton:hover {
-  background-color: #777;
+  background-color: var(--color-text);
 }
 
 .navbarActions {
@@ -48,7 +48,7 @@
 }
 
 .userName {
-  color: #fdfdfd;
+  color: var(--color-white);
   font-size: 1.4rem;
 }
 

@@ -4,7 +4,7 @@
   left: 0;
   width: 20rem;
   height: 100%;
-  background-color: #4caf50;
+  background-color: var(--color-primary);
   padding: var(--spacing-medium);
   box-shadow: var(--box-shadow);
   z-index: 100;
@@ -20,10 +20,10 @@
   width: 100%;
   display: grid;
   align-items: center;
-  justify-items: center;
+  justify-items: start;
   margin-bottom: 4rem;
   font-size: 1.6rem;
-  color: #fdfdfd;
+  color: var(--color-white);
 }
 
 .image {
@@ -33,4 +33,11 @@
   margin-right: var(--spacing-small);
   object-fit: cover;
   margin-bottom: var(--spacing-small);
+}
+
+.heading {
+  width: 100%;
+  justify-content: space-between;
+  display: grid;
+  grid-auto-flow: column;
 }

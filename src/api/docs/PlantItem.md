@@ -2,19 +2,25 @@
 
 ## Properties
 
-| Name                | Type       | Description | Notes                             |
-| ------------------- | ---------- | ----------- | --------------------------------- |
-| **commonName**      | **string** |             | [optional] [default to undefined] |
-| **id**              | **number** |             | [optional] [default to undefined] |
-| **sunPreference**   | **string** |             | [optional] [default to undefined] |
-| **waterNeeds**      | **string** |             | [optional] [default to undefined] |
-| **soilType**        | **string** |             | [optional] [default to undefined] |
-| **soilPH**          | **string** |             | [optional] [default to undefined] |
-| **pruning**         | **string** |             | [optional] [default to undefined] |
-| **climateZone**     | **string** |             | [optional] [default to undefined] |
-| **plantType**       | **string** |             | [optional] [default to undefined] |
-| **growthRate**      | **string** |             | [optional] [default to undefined] |
-| **fertilizerNeeds** | **string** |             | [optional] [default to undefined] |
+| Name                   | Type       | Description | Notes                             |
+| ---------------------- | ---------- | ----------- | --------------------------------- |
+| **commonName**         | **string** |             | [optional] [default to undefined] |
+| **id**                 | **number** |             | [optional] [default to undefined] |
+| **waterCycle**         | **number** |             | [optional] [default to undefined] |
+| **pruningCycle**       | **number** |             | [optional] [default to undefined] |
+| **fertilizationCycle** | **number** |             | [optional] [default to undefined] |
+| **harvestCycle**       | **number** |             | [optional] [default to undefined] |
+| **notes**              | **string** |             | [optional] [default to undefined] |
+| **harvestStart**       | **string** |             | [optional] [default to undefined] |
+| **harvestEnd**         | **string** |             | [optional] [default to undefined] |
+| **pruningStart**       | **string** |             | [optional] [default to undefined] |
+| **pruningEnd**         | **string** |             | [optional] [default to undefined] |
+| **fertilizingStart**   | **string** |             | [optional] [default to undefined] |
+| **fertilizingEnd**     | **string** |             | [optional] [default to undefined] |
+| **phMin**              | **number** |             | [optional] [default to undefined] |
+| **phMax**              | **number** |             | [optional] [default to undefined] |
+| **temperatureMin**     | **number** |             | [optional] [default to undefined] |
+| **temperatureMax**     | **number** |             | [optional] [default to undefined] |
 
 ## Example
 
@@ -24,15 +30,21 @@ import { PlantItem } from './api';
 const instance: PlantItem = {
   commonName,
   id,
-  sunPreference,
-  waterNeeds,
-  soilType,
-  soilPH,
-  pruning,
-  climateZone,
-  plantType,
-  growthRate,
-  fertilizerNeeds,
+  waterCycle,
+  pruningCycle,
+  fertilizationCycle,
+  harvestCycle,
+  notes,
+  harvestStart,
+  harvestEnd,
+  pruningStart,
+  pruningEnd,
+  fertilizingStart,
+  fertilizingEnd,
+  phMin,
+  phMax,
+  temperatureMin,
+  temperatureMax,
 };
 ```
 

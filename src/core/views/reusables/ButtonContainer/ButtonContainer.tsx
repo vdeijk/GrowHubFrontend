@@ -1,14 +1,10 @@
 import React from 'react';
 import styles from './ButtonContainer.module.css';
 import Button from '../Button/Button';
-
-export interface ButtonConfig {
-  label: string;
-  clickHandler: () => void;
-}
+import { ButtonProps } from '../../../../auxiliary/interfaces/ButtonProps';
 
 export interface ButtonContainerProps {
-  buttons: ButtonConfig[];
+  buttons: ButtonProps[];
 }
 
 const ButtonContainer: React.FC<ButtonContainerProps> = ({ buttons }) => {
@@ -17,8 +13,9 @@ const ButtonContainer: React.FC<ButtonContainerProps> = ({ buttons }) => {
       {buttons.map((button, index) => (
         <Button
           key={index}
-          onClick={button.clickHandler}
+          onClick={button.onClick}
           label={button.label}
+          type={button.type}
         />
       ))}
     </div>

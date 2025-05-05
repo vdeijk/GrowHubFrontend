@@ -1,42 +1,54 @@
 import React from 'react';
 import styles from './FieldsPage.module.css';
 import Map from '../../reusables/Map/Map';
-import ButtonContainer, {
-  ButtonConfig,
-} from '../../reusables/ButtonContainer/ButtonContainer';
-import FieldListContainer from '../../containers/FieldListContainer/FieldListContainer';
+import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
+import { ButtonProps } from '../../../../auxiliary/interfaces/ButtonProps';
 import fieldsStore from '../../../stores/derived/FieldsStore/FieldsStore';
 import { observer } from 'mobx-react-lite';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import EventBus from '../../../services/EventBusService/EventBusService';
+import TableWithSorting from '../../reusables/TableWithSorting/TableWithSorting';
+import ActionIcons from '../../reusables/ActionIcons/ActionIcons';
+import { LocationItem } from '../../../../api';
+import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
+import { TableProps } from '../../reusables/TableWithSorting/TableWithSorting';
+import FieldsData from '../../../../auxiliary/data/FieldsData';
+import { useDeleteConfirmation } from '../../../../auxiliary/hooks/useDeleteConfirmation';
+import Popup from '../../layouts/Popup/Popup';
 
 const FieldsPage: React.FC = observer(() => {
   const navigate = useRouterNavigation();
 
-  const buttonConfigs: ButtonConfig[] = [
+  const buttonContainerData: ButtonProps[] = [
     {
-      clickHandler: () => EventBus.dispatchEvent('centerMap', undefined),
+      onClick: () => EventBus.dispatchEvent('centerMap', undefined),
       label: 'Center Map',
     },
     {
-      clickHandler: () => navigate('/addFieldPage'),
+      onClick: () => navigate('/addFieldPage'),
       label: 'Add Field',
     },
   ];
 
-  const handleEdit = (id: number) => {
+  const { openDeleteConfirmation } = useDeleteConfirmation(
+    fieldsStore.deleteField,
+    'Are you sure you want to delete this field?',
+  );
+
+  const handleEdit = (id: number | undefined) => {
+    if (id === undefined) return;
+
     navigate(`/addFieldPage/${id}`);
   };
 
-  const handleDelete = (id: number) => {
-    fieldsStore.deleteField(id);
-  };
+  const handleDelete = (
+    id: number | undefined,
+    event: React.MouseEvent<SVGElement>,
+  ) => {
+    event.stopPropagation();
 
-  const listData = {
-    locations: fieldsStore.locations,
-    onEdit: handleEdit,
-    onDelete: handleDelete,
+    openDeleteConfirmation(id);
   };
 
   const markers = fieldsStore.locations
@@ -58,15 +70,30 @@ const FieldsPage: React.FC = observer(() => {
     markers,
   };
 
+  const tableProps: TableProps<LocationItem> = {
+    headers: FieldsData.tableHeaders as TableHeaderModel<LocationItem>[],
+    data: fieldsStore.locations.map((item) => ({
+      ...item,
+      actions: (
+        <ActionIcons
+          item={item as { id: number | undefined }}
+          handleDelete={handleDelete}
+        />
+      ),
+    })),
+    handleEdit,
+  };
+
   return (
     <section className={styles.container}>
+      <Popup />
       <LoadingWrapper isLoading={fieldsStore.isLoading}>
         <div className={styles.left}>
           <Map {...mapData} />
         </div>
         <div className={styles.right}>
-          <FieldListContainer {...listData} />
-          <ButtonContainer buttons={buttonConfigs} />
+          <TableWithSorting {...tableProps} />
+          <ButtonContainer buttons={buttonContainerData} />
         </div>
       </LoadingWrapper>
     </section>

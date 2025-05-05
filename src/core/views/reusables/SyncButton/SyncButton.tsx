@@ -11,7 +11,7 @@ interface SyncButtonProps {
 const SyncButton: React.FC<SyncButtonProps> = ({
   onClick,
   isSyncing = false,
-  label = 'Sync',
+  label = '',
 }) => {
   return (
     <button

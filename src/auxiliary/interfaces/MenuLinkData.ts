@@ -3,4 +3,5 @@ export interface MenuLinkData {
   label: string;
   hidden: boolean;
   isDynamic: boolean;
+  tooltip?: string;
 }

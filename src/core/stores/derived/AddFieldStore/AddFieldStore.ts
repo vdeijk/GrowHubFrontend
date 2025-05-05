@@ -1,9 +1,10 @@
 import { BaseFormStore } from '../../base/BaseFormStore/BaseFormStore';
-import { InputField } from '../../../../auxiliary/classes/InputField';
+import { DataMappingService } from '../../../services/DataMappingService/DatamappingService';
 import { LocationItem } from '../../../../api';
 import fieldsStore from '../FieldsStore/FieldsStore';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
 import { runInAction } from 'mobx';
+import AddFieldData from '../../../../auxiliary/data/AddFieldData';
 
 class AddFieldStore extends BaseFormStore {
   public endpointService = new EndpointService('Location');
@@ -11,30 +12,9 @@ class AddFieldStore extends BaseFormStore {
   constructor() {
     super();
 
-    //@ts-ignore
-    this.fields = {
-      locationNameField: new InputField<string>(
-        '',
-        'Location Name',
-        true,
-        'Enter location name',
-        30,
-      ),
-      latitudeField: new InputField<string>(
-        '0',
-        'Latitude',
-        true,
-        'Enter latitude',
-        10,
-      ),
-      longitudeField: new InputField<string>(
-        '0',
-        'Longitude',
-        true,
-        'Enter longitude',
-        10,
-      ),
-    } as Record<string, InputField<string | number | boolean>>;
+    Object.values(AddFieldData.textFields).forEach((textField) => {
+      this.initTextFilter(textField);
+    });
   }
 
   public addField = async () => {
@@ -42,13 +22,7 @@ class AddFieldStore extends BaseFormStore {
       return;
     }
 
-    const data: LocationItem = {
-      name: this.fields.locationNameField.value as string,
-      latitude: parseFloat(this.fields.latitudeField.value as string),
-      longitude: parseFloat(this.fields.longitudeField.value as string),
-    };
-
-    await this.endpointService.postData(data);
+    await this.endpointService.postData(this.prepareData());
 
     fieldsStore.fetchData();
   };
@@ -57,14 +31,7 @@ class AddFieldStore extends BaseFormStore {
     const numberId = Number(id);
     if (Number.isNaN(numberId)) return;
 
-    const data: LocationItem = {
-      id: numberId,
-      name: this.fields.locationNameField.value as string,
-      latitude: parseFloat(this.fields.latitudeField.value as string),
-      longitude: parseFloat(this.fields.longitudeField.value as string),
-    };
-
-    await this.endpointService.putData(`${id}`, data);
+    await this.endpointService.putData(`${id}`, this.prepareData());
 
     fieldsStore.fetchData();
   };
@@ -74,14 +41,9 @@ class AddFieldStore extends BaseFormStore {
       await this.endpointService.getData<LocationItem>(`${id}`);
 
     if (!data) return;
+
     runInAction(() => {
-      this.fields.locationNameField.setValue(data.name ?? '');
-      (addFieldStore.fields.latitudeField as InputField<number>).setValue(
-        data.latitude ?? 0,
-      );
-      (addFieldStore.fields.longitudeField as InputField<number>).setValue(
-        data.longitude ?? 0,
-      );
+      DataMappingService.mapInputFields(data, this.inputFields);
     });
   };
 
@@ -92,8 +54,8 @@ class AddFieldStore extends BaseFormStore {
   }
 
   public validateCoordinates(): boolean {
-    const latitude = parseFloat(this.fields.latitudeField.value as string);
-    const longitude = parseFloat(this.fields.longitudeField.value as string);
+    const latitude = parseFloat(this.inputFields.latitude.value as string);
+    const longitude = parseFloat(this.inputFields.longitude.value as string);
 
     if (isNaN(latitude) || latitude < -90 || latitude > 90) {
       console.error('Invalid latitude:', latitude);
@@ -108,6 +70,14 @@ class AddFieldStore extends BaseFormStore {
     }
 
     return true;
+  }
+
+  prepareData(): LocationItem {
+    return {
+      name: this.inputFields.name.value as string,
+      latitude: parseFloat(this.inputFields.latitude.value as string),
+      longitude: parseFloat(this.inputFields.longitude.value as string),
+    };
   }
 }
 

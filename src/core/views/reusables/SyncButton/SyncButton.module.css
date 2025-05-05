@@ -5,16 +5,14 @@
 }
 
 .syncButton {
-  height: 100%;
+  height: max-content;
   width: max-content;
-  display: grid;
-  justify-content: start;
-  align-content: space-between;
   font-size: 1.5rem;
   color: var(--color-black);
   border: none;
   border-radius: 8px;
   background: transparent;
+  align-self: end;
 }
 
 .syncIcon {
@@ -24,7 +22,7 @@
 }
 
 .syncIcon:hover {
-  color: #45a049;
+  color: var(--color-primary);
   cursor: pointer;
 }
 

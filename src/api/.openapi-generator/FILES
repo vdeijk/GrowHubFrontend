@@ -6,6 +6,8 @@ common.ts
 configuration.ts
 docs/LocationApi.md
 docs/LocationItem.md
+docs/MeasurementItem.md
+docs/MeasurementsApi.md
 docs/PlantApi.md
 docs/PlantItem.md
 docs/TodoApi.md

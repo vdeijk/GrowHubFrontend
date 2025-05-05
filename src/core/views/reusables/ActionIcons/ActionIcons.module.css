@@ -6,35 +6,35 @@
   width: max-content;
 }
 
-.viewIcon {
-  color: #f0ad4e;
+.pasteIcon {
+  color: var(--color-yellow);
   cursor: pointer;
   font-size: 1.8rem;
   transition: color 0.2s ease;
 }
 
-.viewIcon:hover {
-  color: #ec971f;
+.pasteIcon:hover {
+  color: var(--color-yellow-hover);
 }
 
-.editIcon {
-  color: #4caf50;
+.copyIcon {
+  color: var(--color-primary);
   cursor: pointer;
   font-size: 1.8rem;
   transition: color 0.2s ease;
 }
 
-.editIcon:hover {
-  color: #45a049;
+.copyIcon:hover {
+  color: var(--color-primary-hover);
 }
 
 .deleteIcon {
-  color: #d9534f;
+  color: var(--color-red);
   cursor: pointer;
   font-size: 1.8rem;
   transition: color 0.2s ease;
 }
 
 .deleteIcon:hover {
-  color: #c9302c;
+  color: var(--color-red-hover);
 }

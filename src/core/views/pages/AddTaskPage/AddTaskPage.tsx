@@ -6,10 +6,13 @@ import styles from './AddTaskPage.module.css';
 import { observer } from 'mobx-react-lite';
 import { useParams } from 'react-router-dom';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
-import Button, { ButtonProps } from '../../reusables/Button/Button';
+import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
+import { ButtonProps } from '../../../../auxiliary/interfaces/ButtonProps';
 import Dropdown from '../../reusables/Dropdown/Dropdown';
 import DateInput, { DateInputProps } from '../../reusables/DateInput/DateInput';
-import taskStore from '../../../stores/derived/TaskStore/TaskStore';
+import taskStore from '../../../stores/derived/TasksStore/TasksStore';
+import TextArea from '../../reusables/TextArea/TextArea';
+import Divider from '../../reusables/Divider/Divider';
 
 interface AddTaskPageProps {
   isEditing?: boolean;
@@ -44,51 +47,61 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
     };
 
     const createTextInputFieldModel = (fieldKey: string): TextInputProps => ({
-      ...addTaskStore.fields[fieldKey],
-      value: String(addTaskStore.fields[fieldKey].value || ''),
+      ...addTaskStore.inputFields[fieldKey],
+      value: String(addTaskStore.inputFields[fieldKey].value || ''),
       onChange: (value: string) =>
-        addTaskStore.fields[fieldKey].setValue(value),
+        addTaskStore.inputFields[fieldKey].setValue(value),
     });
 
     const createDropdownFieldModel = (fieldKey: string) => ({
-      ...addTaskStore.fields[fieldKey],
-      value: String(addTaskStore.fields[fieldKey].value),
+      ...addTaskStore.dropdownFields[fieldKey],
+      value: String(addTaskStore.dropdownFields[fieldKey].value),
       options: taskStore.dropdownFilters[fieldKey]?.options || [],
       onChange: (value: string | number) =>
-        addTaskStore.fields[fieldKey].setValue(String(value)),
+        addTaskStore.dropdownFields[fieldKey].setValue(String(value)),
     });
 
     const createDateFieldModel = (fieldKey: string): DateInputProps => ({
-      ...addTaskStore.fields[fieldKey],
-      value: String(addTaskStore.fields[fieldKey].value || ''),
-      onChange: (value) => addTaskStore.fields[fieldKey].setValue(value || ''),
+      ...addTaskStore.dateFields[fieldKey],
+      value: String(addTaskStore.dateFields[fieldKey].value || ''),
+      onChange: (value) =>
+        addTaskStore.dateFields[fieldKey].setValue(value || ''),
     });
 
-    const titleProps = createTextInputFieldModel('titleField');
+    const titleProps = createTextInputFieldModel('title');
+    const notesProps = createTextInputFieldModel('notes');
+    const batchIdProps = createTextInputFieldModel('batchId');
     const priorityProps = createDropdownFieldModel('priority');
     const dueDateProps = createDateFieldModel('dueDate');
-    const descriptionProps = createTextInputFieldModel('description');
     const categoryProps = createDropdownFieldModel('category');
     const statusProps = createDropdownFieldModel('todoStatus');
 
-    const buttonProps: ButtonProps = {
-      type: 'submit',
-      label: isEditing ? 'Edit AgriTask' : 'Add AgriTask',
-      customStyles: { marginTop: '1rem' },
-    };
+    const buttonContainerData: ButtonProps[] = [
+      {
+        type: 'button',
+        onClick: () => navigate('/measurementsPage'),
+        label: 'Back',
+      },
+      {
+        type: 'submit',
+        label: isEditing ? 'Edit Task' : 'Add Task',
+        customStyles: { marginTop: '1rem' },
+      },
+    ];
 
     return (
       <section className={styles.section}>
         <LoadingWrapper isLoading={addTaskStore.isLoading}>
           <form onSubmit={handleSubmit} className={styles.form}>
             <TextInput {...titleProps} />
+            <TextArea {...notesProps} />
+            <TextInput {...batchIdProps} />
+            <Divider />
             <Dropdown {...priorityProps} />
-            <DateInput {...dueDateProps} />
-            <TextInput {...descriptionProps} />
             <Dropdown {...categoryProps} />
             <Dropdown {...statusProps} />
-            <div></div>
-            <Button {...buttonProps} />
+            <DateInput {...dueDateProps} />
+            <div></div> <ButtonContainer buttons={buttonContainerData} />
           </form>
         </LoadingWrapper>
       </section>

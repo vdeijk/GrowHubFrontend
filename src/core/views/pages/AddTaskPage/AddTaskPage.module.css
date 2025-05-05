@@ -12,6 +12,6 @@
   height: 100%;
   border-radius: var(--border-radius-large);
   padding: var(--spacing-medium);
-  background-color: #fdfdfd;
+  background-color: var(--color-white);
   box-shadow: var(--box-shadow);
 }

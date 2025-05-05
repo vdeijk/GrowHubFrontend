@@ -5,11 +5,11 @@
   padding: var(--spacing-small);
   margin-bottom: var(--spacing-small);
   border-radius: var(--border-radius-small);
-  background-color: #f0f0f0;
+  background-color: var(--color-grey);
 }
 
 .task.completed {
-  background-color: #f0f0f0;
+  background-color: var(--color-grey);
 }
 
 .taskInfo {
@@ -25,22 +25,22 @@
 .taskCategory {
   padding: 0.5rem var(--spacing-small);
   border-radius: var(--border-radius-small);
-  color: white;
+  color: var(--color-white);
   display: inline-block;
   margin-top: var(--spacing-small);
   width: max-content;
 }
 
 .work {
-  background-color: #4caf50;
+  background-color: var(--color-primary);
 }
 
 .personal {
-  background-color: #fc9e4f;
+  background-color: var(--color-red);
 }
 
 .other {
-  background-color: #fc9e4f;
+  background-color: var(--color-yellow);
 }
 
 .taskDetails {
@@ -49,5 +49,5 @@
 }
 
 .taskDescription {
-  color: #666;
+  color: var(--color-primary);
 }

@@ -1,0 +1,15 @@
+.section {
+  padding: var(--spacing-medium);
+  background-color: var(--color-white);
+  border-radius: var(--border-radius-large);
+  box-shadow: var(--box-shadow);
+  display: grid;
+  grid-area: 4 / 1 / 5 / -1;
+}
+
+.buttonContainer {
+  width: 100%;
+  display: grid;
+  align-items: end;
+  margin-top: var(--spacing-medium);
+}

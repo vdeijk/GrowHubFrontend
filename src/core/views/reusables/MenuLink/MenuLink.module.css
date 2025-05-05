@@ -5,7 +5,7 @@
 .menuLink {
   background-color: transparent;
   border: none;
-  color: #fdfdfd;
+  color: var(--color-white);
   text-decoration: none;
   font-size: 1.5rem;
   text-transform: uppercase;
@@ -15,6 +15,10 @@
 }
 
 .menuLink:hover {
-  background-color: #575757;
+  background-color: var(--color-text);
   cursor: pointer;
+}
+
+.active {
+  background-color: var(--color-text);
 }

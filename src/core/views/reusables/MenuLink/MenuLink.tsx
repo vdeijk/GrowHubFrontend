@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './MenuLink.module.css';
 import { MenuLinkData } from '../../../../auxiliary/interfaces/MenuLinkData';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
+import { useLocation } from 'react-router-dom';
 
 interface MenuLinkProps {
   menuLinkData: MenuLinkData;
@@ -10,6 +11,9 @@ interface MenuLinkProps {
 const MenuLink: React.FC<MenuLinkProps> = ({ menuLinkData }) => {
   const { path, label } = menuLinkData;
   const navigate = useRouterNavigation();
+  const location = useLocation();
+
+  const isActive = location.pathname === path;
 
   const clickHandler = () => {
     navigate(path);
@@ -17,7 +21,10 @@ const MenuLink: React.FC<MenuLinkProps> = ({ menuLinkData }) => {
 
   return (
     <li className={styles.menuItem}>
-      <button onClick={clickHandler} className={styles.menuLink}>
+      <button
+        onClick={clickHandler}
+        className={`${styles.menuLink} ${isActive ? styles.active : ''}`}
+      >
         {label}
       </button>
     </li>
