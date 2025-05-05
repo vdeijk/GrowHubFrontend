@@ -126,7 +126,7 @@ class BatchesData {
   }
 
   public static dateFields: DateFieldModel[] = [
-    { key: 'plantedBefore', label: 'Planted Before', defaultValue: '' },
+    { key: 'planted', label: 'Planted Before', defaultValue: '' },
     { key: 'lastWatered', label: 'Watered Before', defaultValue: '' },
     { key: 'lastFertilized', label: 'Fertilized Before', defaultValue: '' },
     { key: 'lastPruned', label: 'Pruned Before', defaultValue: '' },

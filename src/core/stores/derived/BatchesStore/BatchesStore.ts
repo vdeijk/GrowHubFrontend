@@ -6,6 +6,7 @@ import BatchesData from '../../../../auxiliary/data/BatchesData';
 import EventBus from '../../../services/EventBusService/EventBusService';
 import { PaginationService } from '../../../services/PaginationService/PaginationService';
 import TableColoringService from '../TableColoringService/TableColoringService';
+import { FilterService } from '../../../services/FilterService/FilterService';
 
 class BatchesStore extends SearchableStore<YourCropItem> {
   public paginationService = new PaginationService();
@@ -65,6 +66,58 @@ class BatchesStore extends SearchableStore<YourCropItem> {
         this.filteredItems,
       );
     });
+  }
+
+  public filterItems() {
+    let filtered = FilterService.filterBySearchQuery(
+      this.items,
+      this.stringFilters.searchQuery.value,
+      this.searchableFields,
+    );
+    filtered = FilterService.filterByDropdowns(filtered, this.dropdownFilters);
+    filtered = FilterService.filterByEndDate(
+      filtered,
+      this.dateFilters['planted'].value,
+      'planted',
+    );
+    filtered = FilterService.filterByEndDate(
+      filtered,
+      this.dateFilters['lastWatered'].value,
+      'lastWatered',
+    );
+    filtered = FilterService.filterByEndDate(
+      filtered,
+      this.dateFilters['lastFertilized'].value,
+      'lastFertilized',
+    );
+    filtered = FilterService.filterByEndDate(
+      filtered,
+      this.dateFilters['lastPruned'].value,
+      'lastPruned',
+    );
+    filtered = FilterService.filterByEndDate(
+      filtered,
+      this.dateFilters['lastHarvested'].value,
+      'lastHarvested',
+    );
+
+    filtered = FilterService.filterByGreaterThan(
+      filtered,
+      Number(this.numberFilters['minAmount'].value),
+      'amount',
+    );
+    filtered = FilterService.filterBySmallerThan(
+      filtered,
+      Number(this.numberFilters['maxAmount'].value),
+      'amount',
+    );
+
+    runInAction(() => {
+      this.filteredItems = this.sortService.sortItems(filtered);
+      this.paginationService.setCurrentPage(1);
+    });
+
+    EventBus.dispatchEvent('filteredItems:updated', undefined);
   }
 
   public deletePlant = async (id: number) => {
