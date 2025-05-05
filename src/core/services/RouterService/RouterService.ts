@@ -47,6 +47,13 @@ class RouterService {
         'Use this page add, edit or delete readings of your crop batches',
     },
     {
+      path: '/producePage',
+      label: 'Produce',
+      hidden: false,
+      isDynamic: false,
+      tooltip: 'Use this page add, edit or delete produce',
+    },
+    {
       path: '/batchesPage',
       label: 'Batches',
       hidden: false,

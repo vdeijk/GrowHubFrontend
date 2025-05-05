@@ -32,6 +32,7 @@ import { useLocation } from 'react-router-dom';
 import MeasurementsPage from './core/views/pages/MeasurementsPage/MeasurementsPage';
 import measurementsStore from './core/stores/derived/MeasurementsStore/MeasurementsStore';
 import AddMeasurementPage from './core/views/pages/AddMeasurementPage/AddMeasurementPage';
+import ProducePage from './core/views/pages/ProducePage/ProducePage';
 
 const App: React.FC = observer(() => {
   const { isAuthenticated, isLoading, user } = useAuth0();
@@ -83,6 +84,7 @@ const App: React.FC = observer(() => {
             <Route path="/tasksPage" element={<TasksPage />} />
             <Route path="/fieldsPage" element={<FieldsPage />} />
             <Route path="/measurementsPage" element={<MeasurementsPage />} />
+            <Route path="/producePage" element={<ProducePage />} />
             <Route path="/batchesPage" element={<BatchesPage />} />
             <Route path="/cropsPage" element={<CropsPage />} />
             <Route path="/upgradePage" element={<UpgradePage />} />
