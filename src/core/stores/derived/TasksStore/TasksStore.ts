@@ -4,6 +4,7 @@ import { EndpointService } from '../../../services/EndpointService/EndpointServi
 import { makeObservable, runInAction, action, computed } from 'mobx';
 import TasksData from '../../../../auxiliary/data/TasksData';
 import { PaginationService } from '../../../services/PaginationService/PaginationService';
+import TableColoringService from '../TableColoringService/TableColoringService';
 
 class TasksStore extends SearchableStore<TodoItem> {
   private endpointService = new EndpointService('Todo');
@@ -39,9 +40,10 @@ class TasksStore extends SearchableStore<TodoItem> {
       await this.endpointService.getData<TodoItem[]>();
 
     if (!data) return;
+    const dateKeys = ['dueDate'] as (keyof TodoItem)[];
 
     runInAction(() => {
-      this.items = TasksData.getColoredTasks(data);
+      this.items = TableColoringService.getColoredDateValues(data, dateKeys);
       this.filteredItems = this.items;
       this.paginatedItems = this.paginationService.paginateItems(
         this.filteredItems,

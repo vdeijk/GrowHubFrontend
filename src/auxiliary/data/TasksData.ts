@@ -6,7 +6,6 @@ import { TodoItemTodoStatusEnum } from '../../api';
 import { TodoItem } from '../../api';
 import { TableHeaderModel } from '../interfaces/TableHeaderModel';
 import { InputFieldModel } from '../interfaces/InputFieldModel';
-import dayjs from 'dayjs';
 
 class TasksData {
   public static tableHeaders: TableHeaderModel<TodoItem>[] = [
@@ -111,23 +110,6 @@ class TasksData {
     { key: 'startDate', label: 'Due Before', defaultValue: '' },
     { key: 'endDate', label: 'Due After', defaultValue: '' },
   ];
-
-  public static getColoredTasks(tasks: TodoItem[]) {
-    return tasks.map((task) => {
-      const isOverdue = dayjs(task.dueDate).isBefore(dayjs(), 'day');
-      const isDueSoon = dayjs(task.dueDate).isBefore(
-        dayjs().add(3, 'day'),
-        'day',
-      );
-
-      return {
-        ...task,
-        redColumns: isOverdue ? ['dueDate'] : [],
-        yellowColumns: !isOverdue && isDueSoon ? ['dueDate'] : [],
-        greenColumns: !isOverdue && !isDueSoon ? ['dueDate'] : [],
-      };
-    });
-  }
 }
 
 export default TasksData;
