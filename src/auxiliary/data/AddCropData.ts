@@ -1,5 +1,6 @@
 import { DropdownFieldModel } from '../interfaces/DropdownFieldModel';
 import { InputFieldModel } from '../interfaces/InputFieldModel';
+import { MonthEnum } from '../enums/MonthEnum';
 
 class AddCropData {
   public static textFields: Record<string, InputFieldModel> = {
@@ -52,42 +53,52 @@ class AddCropData {
     },
   };
 
+  private static setMonthOptions = () => {
+    return [
+      { label: '', value: '' },
+      ...Object.values(MonthEnum).map((month) => ({
+        label: month,
+        value: month,
+      })),
+    ];
+  };
+
   public static dropdownFields: Record<string, DropdownFieldModel> = {
     harvestStart: {
       key: 'harvestStart',
       label: 'Harvest Start',
       defaultValue: '',
-      options: [],
+      options: AddCropData.setMonthOptions(),
     },
     harvestEnd: {
       key: 'harvestEnd',
       label: 'Harvest End',
       defaultValue: '',
-      options: [],
+      options: AddCropData.setMonthOptions(),
     },
     pruningStart: {
       key: 'pruningStart',
       label: 'Pruning Start',
       defaultValue: '',
-      options: [],
+      options: AddCropData.setMonthOptions(),
     },
     pruningEnd: {
       key: 'pruningEnd',
       label: 'Pruning End',
       defaultValue: '',
-      options: [],
+      options: AddCropData.setMonthOptions(),
     },
     fertilizingStart: {
       key: 'fertilizingStart',
       label: 'Fertilizing Start',
       defaultValue: '',
-      options: [],
+      options: AddCropData.setMonthOptions(),
     },
     fertilizingEnd: {
       key: 'fertilizingEnd',
       label: 'Fertilizing End',
       defaultValue: '',
-      options: [],
+      options: AddCropData.setMonthOptions(),
     },
   };
 }

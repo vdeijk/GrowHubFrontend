@@ -90,31 +90,56 @@ class AddCropStore extends BaseFormStore {
         this.inputFields.temperatureMax.value,
       ),
       harvestStart: ValueTransformService.toEnumOrUndefined(
-        String(this.inputFields.harvestStart?.value || MonthEnum.January),
+        this.prepareMonthEnum(
+          this.dropdownFields.harvestStart?.value,
+          MonthEnum.January,
+        ),
         MonthEnum,
       ),
       harvestEnd: ValueTransformService.toEnumOrUndefined(
-        String(this.inputFields.harvestEnd?.value || MonthEnum.December),
+        this.prepareMonthEnum(
+          this.dropdownFields.harvestEnd?.value,
+          MonthEnum.December,
+        ),
         MonthEnum,
       ),
       pruningStart: ValueTransformService.toEnumOrUndefined(
-        String(this.inputFields.pruningStart?.value || MonthEnum.January),
+        this.prepareMonthEnum(
+          this.dropdownFields.pruningStart?.value,
+          MonthEnum.January,
+        ),
         MonthEnum,
       ),
       pruningEnd: ValueTransformService.toEnumOrUndefined(
-        String(this.inputFields.pruningEnd?.value || MonthEnum.December),
+        this.prepareMonthEnum(
+          this.dropdownFields.pruningEnd?.value,
+          MonthEnum.December,
+        ),
         MonthEnum,
       ),
       fertilizingStart: ValueTransformService.toEnumOrUndefined(
-        String(this.inputFields.fertilizingStart?.value || MonthEnum.January),
+        this.prepareMonthEnum(
+          this.dropdownFields.fertilizingStart?.value,
+          MonthEnum.January,
+        ),
         MonthEnum,
       ),
       fertilizingEnd: ValueTransformService.toEnumOrUndefined(
-        String(this.inputFields.fertilizingEnd?.value || MonthEnum.December),
+        this.prepareMonthEnum(
+          this.dropdownFields.fertilizingEnd?.value,
+          MonthEnum.December,
+        ),
         MonthEnum,
       ),
     };
   }
+
+  private prepareMonthEnum = (
+    value: string | number | null | undefined,
+    defaulValue: string,
+  ) => {
+    return value === undefined || value === null ? defaulValue : String(value);
+  };
 }
 
 const addCropStore = new AddCropStore();

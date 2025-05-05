@@ -1,8 +1,6 @@
 import { PlantItem } from '../../api';
 import { TableHeaderModel } from '../interfaces/TableHeaderModel';
 import { InputFieldModel } from '../interfaces/InputFieldModel';
-import { DropdownFieldModel } from '../interfaces/DropdownFieldModel';
-import { MonthEnum } from '../enums/MonthEnum';
 
 class CropsData {
   public static tableHeaders: TableHeaderModel<PlantItem>[] = [

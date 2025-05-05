@@ -23,9 +23,11 @@ class ValueTransformService {
     value: string | undefined,
     enumType: T,
   ) {
+    console.log(value, enumType);
     if (!value) {
       return undefined;
     }
+    
     const enumValues = Object.values(enumType) as (string | number)[];
     return enumValues.includes(value) ? (value as T[keyof T]) : undefined;
   }

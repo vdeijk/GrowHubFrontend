@@ -12,7 +12,6 @@ import { TextInputProps } from '../../reusables/TextInput/TextInput';
 import TextArea from '../../reusables/TextArea/TextArea';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import Divider from '../../reusables/Divider/Divider';
-import cropsStore from '../../../stores/derived/CropsStore/CropsStore';
 
 interface AddCropPageProps {
   isEditing?: boolean;
@@ -73,7 +72,7 @@ const AddCropPage: React.FC<AddCropPageProps> = observer(
       return {
         ...addCropStore.dropdownFields[fieldKey],
         value: String(addCropStore.dropdownFields[fieldKey].value),
-        options: cropsStore.dropdownFilters[fieldKey]?.options || [],
+        options: addCropStore.dropdownFields[fieldKey]?.options || [],
         onChange: (value: string | number) =>
           addCropStore.dropdownFields[fieldKey].setValue(String(value)),
       };
