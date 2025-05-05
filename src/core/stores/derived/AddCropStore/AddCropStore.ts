@@ -6,6 +6,7 @@ import { runInAction } from 'mobx';
 import { localStorageService } from '../../../services/LocalStorageService/LocalStorageService';
 import AddCropData from '../../../../auxiliary/data/AddCropData';
 import { DataMappingService } from '../../../services/DataMappingService/DatamappingService';
+import ValueTransformService from '../../../services/ValueTransformService/ValueTransformService';
 
 class AddCropStore extends BaseFormStore {
   private endpointService = new EndpointService('Plant');
@@ -63,15 +64,30 @@ class AddCropStore extends BaseFormStore {
     return {
       commonName: this.inputFields.commonName.value as string,
       notes: this.inputFields.notes.value as string,
-      waterCycle: this.inputFields.waterCycle.value as number,
-      pruningCycle: this.inputFields.pruningCycle.value as number,
-      fertilizationCycle: this.inputFields.fertilizationCycle.value as number,
-      harvestCycle: this.inputFields.harvestCycle.value as number,
-      phMin: this.inputFields.phMin.value as number,
-      phMax: this.inputFields.phMax.value as number,
-      temperatureMin: this.inputFields.temperatureMin.value as number,
-      temperatureMax: this.inputFields.temperatureMax.value as number,
-    };
+      waterCycle: ValueTransformService.toNumberOrUndefined(
+        this.inputFields.waterCycle.value,
+      ),
+      pruningCycle: ValueTransformService.toNumberOrUndefined(
+        this.inputFields.pruningCycle.value,
+      ),
+      fertilizationCycle: ValueTransformService.toNumberOrUndefined(
+        this.inputFields.fertilizationCycle.value,
+      ),
+      harvestCycle: ValueTransformService.toNumberOrUndefined(
+        this.inputFields.harvestCycle.value,
+      ),
+      phMin: ValueTransformService.toNumberOrUndefined(
+        this.inputFields.phMin.value,
+      ),
+      phMax: ValueTransformService.toNumberOrUndefined(
+        this.inputFields.phMax.value,
+      ),
+      temperatureMin: ValueTransformService.toNumberOrUndefined(
+        this.inputFields.temperatureMin.value,
+      ),
+      temperatureMax: ValueTransformService.toNumberOrUndefined(
+        this.inputFields.temperatureMax.value,
+      ),    };
   }
 }
 

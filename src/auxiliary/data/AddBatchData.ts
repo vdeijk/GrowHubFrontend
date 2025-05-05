@@ -30,6 +30,7 @@ class AddBatchData {
   };
 
   public static dateFields: DateFieldModel[] = [
+    { key: 'planted', label: 'Planted', defaultValue: '', required: true },
     { key: 'lastWatered', label: 'Last Watered', defaultValue: '' },
     { key: 'lastFertilized', label: 'Last Fertilized', defaultValue: '' },
     { key: 'lastPruned', label: 'Last Pruned', defaultValue: '' },

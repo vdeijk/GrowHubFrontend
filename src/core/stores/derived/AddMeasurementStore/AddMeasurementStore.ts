@@ -8,6 +8,7 @@ import { MeasurementItemSoilDrynessEnum } from '../../../../api';
 import { MeasurementItemGrowthStageEnum } from '../../../../api';
 import { MeasurementItemHealthStatusEnum } from '../../../../api';
 import { DataMappingService } from '../../../services/DataMappingService/DatamappingService';
+import ValueTransformService from '../../../services/ValueTransformService/ValueTransformService';
 
 class AddMeasurementStore extends BaseFormStore {
   private endpointService = new EndpointService('Measurements');
@@ -69,7 +70,9 @@ class AddMeasurementStore extends BaseFormStore {
     return {
       title: this.inputFields.title.value as string,
       notes: this.inputFields.notes.value as string,
-      soilPH: this.inputFields.soilPH.value as number,
+      soilPH: ValueTransformService.toNumberOrUndefined(
+        this.inputFields.soilPH.value,
+      ),
       soilDryness: this.dropdownFields.soilDryness
         .value as MeasurementItemSoilDrynessEnum,
       growthStage: this.dropdownFields.growthStage

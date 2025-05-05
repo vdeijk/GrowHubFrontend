@@ -89,6 +89,7 @@ const AddBatchPage: React.FC<AddBatchPageProps> = observer(
     const notesModel = createTextInputFieldModel('notes');
     const amountModel = createTextInputFieldModel('amount');
     // const locationFieldModel = createDropdownFieldModel('location');
+    const plantedFieldModel = createDateFieldModel('planted');
     const lastWateredFieldModel = createDateFieldModel('lastWatered');
     const lastFertilizedFieldModel = createDateFieldModel('lastFertilized');
     const lastPrunedFieldModel = createDateFieldModel('lastPruned');
@@ -104,10 +105,12 @@ const AddBatchPage: React.FC<AddBatchPageProps> = observer(
             <div></div>
             {/* <Dropdown {...locationFieldModel} /> */}
             <Divider />
+            <DateInput {...plantedFieldModel} />
             <DateInput {...lastWateredFieldModel} />
             <DateInput {...lastFertilizedFieldModel} />
             <DateInput {...lastPrunedFieldModel} />
             <DateInput {...lastHarvestedFieldModel} />
+            <div></div>
             <div></div> <ButtonContainer buttons={buttonContainerData} />
           </form>
         </LoadingWrapper>

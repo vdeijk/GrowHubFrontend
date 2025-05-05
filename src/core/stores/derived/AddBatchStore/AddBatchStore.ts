@@ -6,6 +6,7 @@ import { runInAction } from 'mobx';
 import { localStorageService } from '../../../services/LocalStorageService/LocalStorageService';
 import AddBatchData from '../../../../auxiliary/data/AddBatchData';
 import { DataMappingService } from '../../../services/DataMappingService/DatamappingService';
+import ValueTransformService from '../../../services/ValueTransformService/ValueTransformService';
 
 class AddBatchStore extends BaseFormStore {
   private endpointService = new EndpointService('YourCrops');
@@ -62,10 +63,22 @@ class AddBatchStore extends BaseFormStore {
     return {
       commonName: this.inputFields.commonName.value as string,
       location: 'test',
-      lastWatered: this.dateFields.lastWatered.value as string,
-      lastFertilized: this.dateFields.lastFertilized.value as string,
-      lastPruned: this.dateFields.lastPruned.value as string,
-      lastHarvested: this.dateFields.lastHarvested.value as string,
+      amount: ValueTransformService.toNumberOrUndefined(
+        this.inputFields.amount.value,
+      ),
+      planted: this.dateFields.planted.value,
+      lastWatered: ValueTransformService.toNull(
+        this.dateFields.lastWatered.value,
+      ),
+      lastFertilized: ValueTransformService.toNull(
+        this.dateFields.lastFertilized.value,
+      ),
+      lastPruned: ValueTransformService.toNull(
+        this.dateFields.lastPruned.value,
+      ),
+      lastHarvested: ValueTransformService.toNull(
+        this.dateFields.lastHarvested.value,
+      ),
     };
   }
 }
