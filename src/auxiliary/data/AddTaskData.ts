@@ -25,14 +25,14 @@ class AddTaskData {
       label: 'Priority',
       options: [],
       defaultValue: '',
-      required: false,
+      required: true,
     },
     category: {
       key: 'category',
       label: 'Category',
       options: [],
       defaultValue: '',
-      required: false,
+      required: true,
     },
     todoStatus: {
       key: 'todoStatus',

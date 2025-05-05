@@ -31,7 +31,7 @@ class AddMeasurementData {
       label: 'Soil Dryness',
       options: [],
       defaultValue: '',
-      required: false,
+      required: true,
     },
     growthStage: {
       key: 'growthStage',

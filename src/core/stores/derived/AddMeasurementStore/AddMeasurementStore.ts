@@ -68,11 +68,14 @@ class AddMeasurementStore extends BaseFormStore {
     return {
       title: this.inputFields.title.value as string,
       notes: this.inputFields.notes.value as string,
+      batchId: Number(this.inputFields.batchId.value),
       soilPH: ValueTransformService.toNumberOrUndefined(
         this.inputFields.soilPH.value,
       ),
-      soilDryness: this.dropdownFields.soilDryness
-        .value as MeasurementItemSoilDrynessEnum,
+      soilDryness: ValueTransformService.toEnumOrUndefined(
+        this.dropdownFields.soilDryness?.value,
+        MeasurementItemSoilDrynessEnum,
+      ),
       growthStage: this.dropdownFields.growthStage
         .value as MeasurementItemGrowthStageEnum,
       healthStatus: this.dropdownFields.healthStatus

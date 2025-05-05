@@ -67,7 +67,7 @@ class AddBatchStore extends BaseFormStore {
     return {
       commonName: this.inputFields.commonName.value as string,
       location: this.dropdownFields.location.value as string,
-      cropId: this.inputFields.cropId.value as number,
+      cropId: Number(this.inputFields.cropId.value),
       amount: ValueTransformService.toNumberOrUndefined(
         this.inputFields.amount.value,
       ),
