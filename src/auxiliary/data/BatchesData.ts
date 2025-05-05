@@ -96,13 +96,17 @@ class BatchesData {
   };
 
   public static textFieldsNumber: Record<string, InputFieldModel> = {
-    amount: {
-      key: 'amount',
-      label: 'Amount',
+    phMin: {
+      key: 'maxAmount',
+      label: 'Maximum Amount',
+      defaultValue: '',
+    },
+    phMax: {
+      key: 'minAmount',
+      label: 'Minimum Amount',
       defaultValue: '',
     },
   };
-
   public static dropdowns: Record<string, DropdownFieldModel> = {
     location: {
       key: 'location',
@@ -123,7 +127,6 @@ class BatchesData {
 
   public static dateFields: DateFieldModel[] = [
     { key: 'plantedBefore', label: 'Planted Before', defaultValue: '' },
-    { key: 'plantedAfter', label: 'Planted After', defaultValue: '' },
     { key: 'lastWatered', label: 'Watered Before', defaultValue: '' },
     { key: 'lastFertilized', label: 'Fertilized Before', defaultValue: '' },
     { key: 'lastPruned', label: 'Pruned Before', defaultValue: '' },

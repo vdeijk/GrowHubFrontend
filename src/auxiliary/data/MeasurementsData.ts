@@ -122,8 +122,8 @@ class MeasurementsData {
   };
 
   public static dateFields: DateFieldModel[] = [
-    { key: 'dateMax', label: 'Read After', defaultValue: '' },
-    { key: 'dateMin', label: 'Read Before', defaultValue: '' },
+    { key: 'dateMax', label: 'Read Before', defaultValue: '' },
+    { key: 'dateMin', label: 'Read After', defaultValue: '' },
   ];
 }
 
