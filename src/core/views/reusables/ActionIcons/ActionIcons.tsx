@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './ActionIcons.module.css';
 import { observer } from 'mobx-react-lite';
-import { FaTrash, FaCopy, FaPaste } from 'react-icons/fa';
+import { FaTrash } from 'react-icons/fa';
 
 interface ActionIconsProps<T extends { id?: number | undefined }> {
   item: T;
@@ -21,11 +21,13 @@ interface ActionIconsProps<T extends { id?: number | undefined }> {
 
 const ActionIcons = observer(
   <T extends { id: number | undefined }>(props: ActionIconsProps<T>) => {
-    const { item, handleDelete, handleCopy, handlePaste } = props;
+    const { item, handleDelete } = props;
+
+    //handleCopy, handlePaste
 
     return (
       <div className={styles.actionIcons}>
-        {handleCopy && (
+        {/* {handleCopy && (
           <FaCopy
             className={styles.copyIcon}
             onClick={(event) =>
@@ -42,7 +44,7 @@ const ActionIcons = observer(
             }
             title="Paste"
           />
-        )}
+        )} */}
         <FaTrash
           className={styles.deleteIcon}
           onClick={(event) =>
