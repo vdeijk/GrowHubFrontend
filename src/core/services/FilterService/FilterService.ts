@@ -7,37 +7,36 @@ export class FilterService {
     makeAutoObservable(this);
   }
 
-  public static filterByGreaterThan<
-    T extends Record<string, number | undefined>,
-  >(items: T[], numberFilters: Record<keyof T, number | undefined>): T[] {
-    return items.filter((item) =>
-      (Object.keys(numberFilters) as (keyof T)[]).every((key) => {
-        const filterValue = numberFilters[key];
-        if (filterValue === undefined || filterValue < 0) return true;
+  public static filterByGreaterThan<T>(
+    items: T[],
+    minNumber: number,
+    property: string,
+  ): T[] {
+    if (!minNumber) return items;
 
-        const itemValue = item[key];
-        if (typeof itemValue !== 'number' || itemValue < 0) return false;
+    return items.filter((item) => {
+      // @ts-ignore
+      const itemNumber = item[property];
+      if (!itemNumber) return false;
 
-        return itemValue > filterValue;
-      }),
-    );
+      return itemNumber >= minNumber;
+    });
   }
 
   public static filterBySmallerThan<T>(
     items: T[],
-    numberFilters: Record<string, number | undefined>,
+    maxNumber: number,
+    property: string,
   ): T[] {
-    return items.filter((item) =>
-      Object.keys(numberFilters).every((key) => {
-        const filterValue = numberFilters[key];
-        if (filterValue === undefined || filterValue < 0) return true;
+    if (!maxNumber) return items;
 
-        const itemValue = item[key as keyof T];
-        if (typeof itemValue !== 'number' || itemValue < 0) return false;
+    return items.filter((item) => {
+      // @ts-ignore
+      const itemNumber = item[property];
+      if (!itemNumber) return false;
 
-        return itemValue < filterValue;
-      }),
-    );
+      return itemNumber <= maxNumber;
+    });
   }
 
   public static filterBySearchQuery<T>(
@@ -75,23 +74,35 @@ export class FilterService {
     );
   }
 
+  public static filterByStartDate<T>(
+    items: T[],
+    startDate: string,
+    property: string,
+  ): T[] {
+    if (!startDate) return items;
+
+    return items.filter((item) => {
+      // @ts-ignore
+      const itemDate = item[property];
+      if (!itemDate) return false;
+
+      return new Date(itemDate) >= new Date(startDate);
+    });
+  }
+
   public static filterByEndDate<T>(
     items: T[],
-    dateFilters: Record<string, DateField<string>>,
+    endDate: string,
+    property: string,
   ): T[] {
+    if (!endDate) return items;
+
     return items.filter((item) => {
-      return Object.keys(dateFilters).every((key) => {
-        const filterValue = dateFilters[key].value;
-        if (!filterValue) return true;
+      // @ts-ignore
+      const itemDate = item[property];
+      if (!itemDate) return false;
 
-        const itemDate = (item as any)[key];
-        if (!itemDate) return true;
-
-        const itemDateObj = new Date(itemDate);
-        const filterDateObj = new Date(filterValue);
-
-        return itemDateObj <= filterDateObj;
-      });
+      return new Date(itemDate) <= new Date(endDate);
     });
   }
 

@@ -5,6 +5,8 @@ import { EndpointService } from '../../../services/EndpointService/EndpointServi
 import MeasurementsData from '../../../../auxiliary/data/MeasurementsData';
 import { PaginationService } from '../../../services/PaginationService/PaginationService';
 import TableColoringService from '../TableColoringService/TableColoringService';
+import EventBus from '../../../services/EventBusService/EventBusService';
+import { FilterService } from '../../../services/FilterService/FilterService';
 
 class MeasurementsStore extends SearchableStore<MeasurementItem> {
   private endpointService = new EndpointService('Measurements');
@@ -74,6 +76,42 @@ class MeasurementsStore extends SearchableStore<MeasurementItem> {
 
     this.fetchData();
   };
+
+  public filterItems() {
+    let filtered = FilterService.filterBySearchQuery(
+      this.items,
+      this.stringFilters.searchQuery.value,
+      this.searchableFields,
+    );
+    filtered = FilterService.filterByDropdowns(filtered, this.dropdownFilters);
+    filtered = FilterService.filterByEndDate(
+      filtered,
+      this.dateFilters['dateMax'].value,
+      'date',
+    );
+    filtered = FilterService.filterByStartDate(
+      filtered,
+      this.dateFilters['dateMin'].value,
+      'date',
+    );
+    filtered = FilterService.filterByGreaterThan(
+      filtered,
+      Number(this.numberFilters['phMin'].value),
+      'soilPH',
+    );
+    filtered = FilterService.filterBySmallerThan(
+      filtered,
+      Number(this.numberFilters['phMax'].value),
+      'soilPH',
+    );
+
+    runInAction(() => {
+      this.filteredItems = this.sortService.sortItems(filtered);
+      this.paginationService.setCurrentPage(1);
+    });
+
+    EventBus.dispatchEvent('filteredItems:updated', undefined);
+  }
 }
 
 const measurementsStore = new MeasurementsStore();

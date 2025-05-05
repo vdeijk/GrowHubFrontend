@@ -23,7 +23,6 @@ class ValueTransformService {
     value: string | undefined,
     enumType: T,
   ) {
-    console.log(value, enumType);
     if (!value) {
       return undefined;
     }

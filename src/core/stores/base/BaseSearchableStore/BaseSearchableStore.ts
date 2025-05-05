@@ -150,15 +150,13 @@ export abstract class SearchableStore<T> {
     });
   };
 
-  public filterItems = () => {
+  public filterItems() {
     let filtered = FilterService.filterBySearchQuery(
       this.items,
       this.stringFilters.searchQuery.value,
       this.searchableFields,
     );
     filtered = FilterService.filterByDropdowns(filtered, this.dropdownFilters);
-    filtered = FilterService.filterByEndDate(filtered, this.dateFilters);
-    filtered = FilterService.filterByDateRange(filtered, this.dateFilters);
 
     runInAction(() => {
       this.filteredItems = this.sortService.sortItems(filtered);
@@ -166,7 +164,7 @@ export abstract class SearchableStore<T> {
     });
 
     EventBus.dispatchEvent('filteredItems:updated', undefined);
-  };
+  }
 
   public sortItems = (field: keyof T) => {
     this.sortService.setSortField(field);

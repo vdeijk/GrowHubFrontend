@@ -47,7 +47,7 @@ const FieldsPage: React.FC = observer(() => {
     event: React.MouseEvent<SVGElement>,
   ) => {
     event.stopPropagation();
-    console.log('delete');
+
     openDeleteConfirmation(id);
   };
 
