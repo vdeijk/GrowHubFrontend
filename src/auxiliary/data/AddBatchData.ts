@@ -25,7 +25,7 @@ class AddBatchData {
       label: 'Location',
       options: [],
       defaultValue: '',
-      required: false,
+      required: true,
     },
   };
 

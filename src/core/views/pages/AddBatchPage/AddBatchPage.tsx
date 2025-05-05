@@ -13,6 +13,8 @@ import { TextInputProps } from '../../reusables/TextInput/TextInput';
 import TextArea from '../../reusables/TextArea/TextArea';
 import { ButtonProps } from '../../../../auxiliary/interfaces/ButtonProps';
 import Divider from '../../reusables/Divider/Divider';
+import Dropdown from '../../reusables/Dropdown/Dropdown';
+import batchesStore from '../../../stores/derived/BatchesStore/BatchesStore';
 
 interface AddBatchPageProps {
   isEditing?: boolean;
@@ -69,14 +71,15 @@ const AddBatchPage: React.FC<AddBatchPageProps> = observer(
       };
     };
 
-    // const createDropdownFieldModel = (fieldKey: string) => {
-    //   return {
-    //     ...addBatchStore.dropdownFields[fieldKey],
-    //     value: String(addBatchStore.dropdownFields[fieldKey].value),
-    //     onChange: (value: string | number) =>
-    //       addBatchStore.dropdownFields[fieldKey].setValue(String(value)),
-    //   };
-    // };
+    const createDropdownFieldModel = (fieldKey: string) => {
+      return {
+        ...addBatchStore.dropdownFields[fieldKey],
+        value: String(addBatchStore.dropdownFields[fieldKey].value || ''),
+        options: batchesStore.dropdownFilters[fieldKey]?.options || [],
+        onChange: (value: string | number) =>
+          addBatchStore.dropdownFields[fieldKey].setValue(String(value)),
+      };
+    };
 
     const createDateFieldModel = (fieldKey: string): DateInputProps => ({
       ...addBatchStore.dateFields[fieldKey],
@@ -88,7 +91,7 @@ const AddBatchPage: React.FC<AddBatchPageProps> = observer(
     const commonNameModel = createTextInputFieldModel('commonName');
     const notesModel = createTextInputFieldModel('notes');
     const amountModel = createTextInputFieldModel('amount');
-    // const locationFieldModel = createDropdownFieldModel('location');
+    const locationFieldModel = createDropdownFieldModel('location');
     const plantedFieldModel = createDateFieldModel('planted');
     const lastWateredFieldModel = createDateFieldModel('lastWatered');
     const lastFertilizedFieldModel = createDateFieldModel('lastFertilized');
@@ -102,8 +105,8 @@ const AddBatchPage: React.FC<AddBatchPageProps> = observer(
             <TextInput {...commonNameModel} />
             <TextInput {...amountModel} />
             <TextArea {...notesModel} />
-            <div></div>
-            {/* <Dropdown {...locationFieldModel} /> */}
+            <Divider />
+            <Dropdown {...locationFieldModel} />
             <Divider />
             <DateInput {...plantedFieldModel} />
             <DateInput {...lastWateredFieldModel} />

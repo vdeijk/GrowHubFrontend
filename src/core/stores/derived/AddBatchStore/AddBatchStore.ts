@@ -18,6 +18,10 @@ class AddBatchStore extends BaseFormStore {
       this.initTextFilter(textField);
     });
 
+    Object.values(AddBatchData.dropdowns).forEach((dropdown) => {
+      this.initDropdownFilter(dropdown);
+    });
+
     Object.values(AddBatchData.dateFields).forEach((dateField) => {
       this.initDateFilter(dateField);
     });

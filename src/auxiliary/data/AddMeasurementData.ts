@@ -41,13 +41,6 @@ class AddMeasurementData {
       defaultValue: '',
       required: true,
     },
-    location: {
-      key: 'location',
-      label: 'Location',
-      options: [],
-      defaultValue: '',
-      required: false,
-    },
   };
 
   public static dateFields: DateFieldModel[] = [
