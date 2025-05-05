@@ -4,6 +4,7 @@ export class InputField<T> extends FormField<T> {
   placeholder?: string;
   maxLength?: number;
   error?: string | null;
+  readonly?: boolean;
 
   constructor(
     value: T,
@@ -11,10 +12,12 @@ export class InputField<T> extends FormField<T> {
     required: boolean = false,
     placeholder?: string,
     maxLength?: number,
+    readonly?: boolean,
   ) {
     super(value, label, required);
     this.placeholder = placeholder;
     this.maxLength = maxLength;
+    this.readonly = readonly;
   }
 
   public validateMaxLength = (): boolean => {

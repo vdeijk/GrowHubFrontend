@@ -94,8 +94,8 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
         <LoadingWrapper isLoading={addTaskStore.isLoading}>
           <form onSubmit={handleSubmit} className={styles.form}>
             <TextInput {...titleProps} />
-            <TextArea {...notesProps} />
             <TextInput {...batchIdProps} />
+            <TextArea {...notesProps} />
             <Divider />
             <Dropdown {...priorityProps} />
             <Dropdown {...categoryProps} />

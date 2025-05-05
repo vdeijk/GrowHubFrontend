@@ -32,3 +32,9 @@
   box-shadow: var(--box-shadow);
   outline: none;
 }
+
+.textInput[readonly] {
+  background-color: var(--color-disabled); 
+  cursor: not-allowed; 
+  color: var(--color-white);
+}

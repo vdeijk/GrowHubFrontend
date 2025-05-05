@@ -6,9 +6,10 @@ class AddMeasurementData {
   public static textFields: Record<string, InputFieldModel> = {
     title: {
       key: 'title',
-      label: 'Title Field',
+      label: 'Crop Name',
       defaultValue: '',
       required: true,
+      readonly: true,
     },
     notes: { key: 'notes', label: 'Notes', defaultValue: '' },
     soilPH: {
@@ -21,7 +22,7 @@ class AddMeasurementData {
       key: 'batchId',
       label: 'Batch Id',
       defaultValue: '',
-      required: false,
+      required: true,
     },
   };
 

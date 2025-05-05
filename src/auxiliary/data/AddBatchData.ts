@@ -6,9 +6,10 @@ class AddBatchData {
   public static textFields: Record<string, InputFieldModel> = {
     commonName: {
       key: 'commonName',
-      label: 'Title Field',
+      label: 'Crop Name',
       defaultValue: '',
       required: true,
+      readonly: true,
     },
     notes: { key: 'notes', label: 'Notes', defaultValue: '' },
     amount: {
@@ -21,7 +22,7 @@ class AddBatchData {
       key: 'cropId',
       label: 'Crop Id',
       defaultValue: '',
-      required: false,
+      required: true,
     },
   };
 

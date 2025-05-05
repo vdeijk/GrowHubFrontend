@@ -6,16 +6,17 @@ class AddTaskData {
   public static textFields: Record<string, InputFieldModel> = {
     titleField: {
       key: 'title',
-      label: 'Title Field',
+      label: 'Crop Name',
       defaultValue: '',
       required: true,
+      readonly: true,
     },
     notes: { key: 'notes', label: 'Notes', defaultValue: '', required: false },
     batchId: {
       key: 'batchId',
       label: 'Batch Id',
       defaultValue: '',
-      required: false,
+      required: true,
     },
   };
 

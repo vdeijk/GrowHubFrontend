@@ -95,9 +95,9 @@ const AddMeasurementPage: React.FC<AddMeasurementPageProps> = observer(
         <LoadingWrapper isLoading={addMeasurementStore.isLoading}>
           <form onSubmit={handleSubmit} className={styles.form}>
             <TextInput {...nameProps} />
+            <TextInput {...batchIdProps} />
             <TextArea {...notesProps} />
             <TextInput {...soilPHProps} />
-            <TextInput {...batchIdProps} />
             <Divider />
             <Dropdown {...soilDrynessProps} />
             <Dropdown {...growthStageProps} />

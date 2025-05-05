@@ -104,9 +104,9 @@ const AddBatchPage: React.FC<AddBatchPageProps> = observer(
         <LoadingWrapper isLoading={addBatchStore.isLoading}>
           <form onSubmit={handleSubmit} className={styles.form}>
             <TextInput {...commonNameModel} />
+            <TextInput {...cropIdModel} />
             <TextInput {...amountModel} />
             <TextArea {...notesModel} />
-            <TextInput {...cropIdModel} />
             <Divider />
             <Dropdown {...locationFieldModel} />
             <Divider />
