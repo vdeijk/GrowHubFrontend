@@ -14,6 +14,7 @@ import { PlantItem } from '../../../../api';
 import Popup from '../../layouts/Popup/Popup';
 import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
 import { SearchBarProps } from '../../containers/SearchBar/Searchbar';
+import { useDeleteConfirmation } from '../../../../auxiliary/hooks/useDeleteConfirmation';
 
 const CropsPage: React.FC = observer(() => {
   const navigate = useRouterNavigation();
@@ -25,6 +26,11 @@ const CropsPage: React.FC = observer(() => {
     dropdownFields: Object.values(cropsStore.dropdownFilters),
   };
 
+  const { openDeleteConfirmation } = useDeleteConfirmation(
+    cropsStore.deletePlant,
+    'Are you sure you want to delete this crop?',
+  );
+
   const handleEdit = (id: number | undefined) => {
     navigate(`/addCropPage/${id}`);
   };
@@ -33,11 +39,8 @@ const CropsPage: React.FC = observer(() => {
     id: number | undefined,
     event: React.MouseEvent<SVGElement>,
   ) => {
-    if (id === undefined) return;
-
     event.stopPropagation();
-
-    cropsStore.deletePlant(id);
+    openDeleteConfirmation(id);
   };
 
   const handleCopy = (

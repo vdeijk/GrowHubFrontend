@@ -20,10 +20,6 @@ class CropsStore extends SearchableStore<PlantItem> {
       this.initTextFilter(textField);
     });
 
-    Object.values(CropsData.dropdowns).forEach((dropdown) => {
-      this.initDropdownFilter(dropdown);
-    });
-
     makeObservable(this, {
       isLoading: computed,
       fetchData: action,

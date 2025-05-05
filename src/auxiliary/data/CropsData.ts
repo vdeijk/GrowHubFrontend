@@ -131,63 +131,6 @@ class CropsData {
     },
   ];
 
-  public static dropdowns: Record<string, DropdownFieldModel> = {
-    harvestStart: {
-      key: 'harvestStart',
-      label: 'Harvest Start',
-      options: Object.values(MonthEnum).map((value) => ({
-        value: value,
-        label: value,
-      })),
-      defaultValue: '',
-    },
-    harvestEnd: {
-      key: 'harvestEnd',
-      label: 'Harvest End',
-      options: Object.values(MonthEnum).map((value) => ({
-        value: value,
-        label: value,
-      })),
-      defaultValue: '',
-    },
-    pruningStart: {
-      key: 'pruningStart',
-      label: 'Pruning Start',
-      options: Object.values(MonthEnum).map((value) => ({
-        value: value,
-        label: value,
-      })),
-      defaultValue: '',
-    },
-    pruningEnd: {
-      key: 'pruningEnd',
-      label: 'Pruning End',
-      options: Object.values(MonthEnum).map((value) => ({
-        value: value,
-        label: value,
-      })),
-      defaultValue: '',
-    },
-    fertilizingStart: {
-      key: 'fertilizingStart',
-      label: 'Fertilizing Start',
-      options: Object.values(MonthEnum).map((value) => ({
-        value: value,
-        label: value,
-      })),
-      defaultValue: '',
-    },
-    fertilizingEnd: {
-      key: 'fertilizingEnd',
-      label: 'Fertilizing End',
-      options: Object.values(MonthEnum).map((value) => ({
-        value: value,
-        label: value,
-      })),
-      defaultValue: '',
-    },
-  };
-
   public static textFields: Record<string, InputFieldModel> = {
     searchQuery: { key: 'searchQuery', label: 'Search', defaultValue: '' },
     descriptionField: {

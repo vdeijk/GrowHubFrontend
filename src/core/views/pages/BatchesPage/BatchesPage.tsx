@@ -15,6 +15,7 @@ import { YourCropItem } from '../../../../api';
 import Popup from '../../layouts/Popup/Popup';
 import batchesStore from '../../../stores/derived/BatchesStore/BatchesStore';
 import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
+import { useDeleteConfirmation } from '../../../../auxiliary/hooks/useDeleteConfirmation';
 
 const BatchesPage: React.FC = observer(() => {
   const { paginationService } = cropsStore;
@@ -26,6 +27,11 @@ const BatchesPage: React.FC = observer(() => {
     dropdownFields: Object.values(cropsStore.dropdownFilters),
   };
 
+  const { openDeleteConfirmation } = useDeleteConfirmation(
+    batchesStore.deletePlant,
+    'Are you sure you want to delete this batch?',
+  );
+
   const handleEdit = (id: number | undefined) => {
     navigate(`/addBatchPage/${id}`);
   };
@@ -34,11 +40,8 @@ const BatchesPage: React.FC = observer(() => {
     id: number | undefined,
     event: React.MouseEvent<SVGElement>,
   ) => {
-    if (id === undefined) return;
-
     event.stopPropagation();
-
-    cropsStore.deletePlant(id);
+    openDeleteConfirmation(id);
   };
 
   const handleCopy = (

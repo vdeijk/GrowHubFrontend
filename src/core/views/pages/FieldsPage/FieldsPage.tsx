@@ -14,6 +14,8 @@ import { LocationItem } from '../../../../api';
 import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
 import { TableProps } from '../../reusables/TableWithSorting/TableWithSorting';
 import FieldsData from '../../../../auxiliary/data/FieldsData';
+import { useDeleteConfirmation } from '../../../../auxiliary/hooks/useDeleteConfirmation';
+import Popup from '../../layouts/Popup/Popup';
 
 const FieldsPage: React.FC = observer(() => {
   const navigate = useRouterNavigation();
@@ -29,6 +31,11 @@ const FieldsPage: React.FC = observer(() => {
     },
   ];
 
+  const { openDeleteConfirmation } = useDeleteConfirmation(
+    fieldsStore.deleteField,
+    'Are you sure you want to delete this field?',
+  );
+
   const handleEdit = (id: number | undefined) => {
     if (id === undefined) return;
 
@@ -39,11 +46,9 @@ const FieldsPage: React.FC = observer(() => {
     id: number | undefined,
     event: React.MouseEvent<SVGElement>,
   ) => {
-    if (id === undefined) return;
-
     event.stopPropagation();
-
-    fieldsStore.deleteField(id);
+    console.log('delete');
+    openDeleteConfirmation(id);
   };
 
   const markers = fieldsStore.locations
@@ -81,6 +86,7 @@ const FieldsPage: React.FC = observer(() => {
 
   return (
     <section className={styles.container}>
+      <Popup />
       <LoadingWrapper isLoading={fieldsStore.isLoading}>
         <div className={styles.left}>
           <Map {...mapData} />

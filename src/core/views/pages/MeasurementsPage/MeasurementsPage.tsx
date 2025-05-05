@@ -15,6 +15,7 @@ import { observer } from 'mobx-react-lite';
 import Popup from '../../layouts/Popup/Popup';
 import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
 import { ButtonProps } from '../../../../auxiliary/interfaces/ButtonProps';
+import { useDeleteConfirmation } from '../../../../auxiliary/hooks/useDeleteConfirmation';
 
 interface MeasurementsProps {}
 
@@ -30,6 +31,11 @@ const MeasurementsPage: React.FC<MeasurementsProps> = observer(() => {
       label: 'Add Reading',
     },
   ];
+
+  const { openDeleteConfirmation } = useDeleteConfirmation(
+    measurementsStore.deleteMeasurement,
+    'Are you sure you want to delete this reading?',
+  );
 
   const handlePaste = (
     id: number | undefined,
@@ -48,11 +54,8 @@ const MeasurementsPage: React.FC<MeasurementsProps> = observer(() => {
     id: number | undefined,
     event: React.MouseEvent<SVGElement>,
   ) => {
-    if (id === undefined) return;
-
     event.stopPropagation();
-
-    measurementsStore.deleteMeasurement(id);
+    openDeleteConfirmation(id);
   };
 
   const searchBarProps: SearchBarProps = {

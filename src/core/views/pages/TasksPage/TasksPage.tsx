@@ -14,6 +14,7 @@ import ActionIcons from '../../reusables/ActionIcons/ActionIcons';
 import Popup from '../../layouts/Popup/Popup';
 import Pagination from '../../reusables/Pagination/Pagination';
 import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
+import { useDeleteConfirmation } from '../../../../auxiliary/hooks/useDeleteConfirmation';
 
 const TasksPage: React.FC = observer(() => {
   const paginationService = taskStore.paginationService;
@@ -39,15 +40,17 @@ const TasksPage: React.FC = observer(() => {
     navigate(`/addTaskPage/${id}`);
   };
 
+  const { openDeleteConfirmation } = useDeleteConfirmation(
+    taskStore.deleteTask,
+    'Are you sure you want to delete this task?',
+  );
+  
   const handleDelete = (
     id: number | undefined,
     event: React.MouseEvent<SVGElement>,
   ) => {
-    if (id === undefined) return;
-
     event.stopPropagation();
-
-    taskStore.deleteTask(id);
+    openDeleteConfirmation(id);
   };
 
   const searchBarProps: SearchBarProps = {
