@@ -5,6 +5,8 @@ import { makeObservable, runInAction, action, computed } from 'mobx';
 import TasksData from '../../../../auxiliary/data/TasksData';
 import { PaginationService } from '../../../services/PaginationService/PaginationService';
 import TableColoringService from '../TableColoringService/TableColoringService';
+import { FilterService } from '../../../services/FilterService/FilterService';
+import EventBus from '../../../services/EventBusService/EventBusService';
 
 class TasksStore extends SearchableStore<TodoItem> {
   private endpointService = new EndpointService('Todo');
@@ -50,6 +52,32 @@ class TasksStore extends SearchableStore<TodoItem> {
       );
     });
   };
+
+  public filterItems() {
+    let filtered = FilterService.filterBySearchQuery(
+      this.items,
+      this.stringFilters.searchQuery.value,
+      this.searchableFields,
+    );
+    filtered = FilterService.filterByDropdowns(filtered, this.dropdownFilters);
+    filtered = FilterService.filterByEndDate(
+      filtered,
+      this.dateFilters['endDate'].value,
+      'dueDate',
+    );
+    filtered = FilterService.filterByStartDate(
+      filtered,
+      this.dateFilters['startDate'].value,
+      'dueDate',
+    );
+
+    runInAction(() => {
+      this.filteredItems = this.sortService.sortItems(filtered);
+      this.paginationService.setCurrentPage(1);
+    });
+
+    EventBus.dispatchEvent('filteredItems:updated', undefined);
+  }
 
   public deleteTask = async (id: number) => {
     await this.endpointService.deleteData(id);
