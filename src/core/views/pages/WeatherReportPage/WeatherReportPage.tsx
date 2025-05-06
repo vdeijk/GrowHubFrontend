@@ -7,11 +7,14 @@ import Heading from '../../reusables/Heading/Heading';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import Dropdown from '../../reusables/Dropdown/Dropdown';
 import fieldsStore from '../../../stores/derived/FieldsStore/FieldsStore';
+import { useTranslation } from 'react-i18next';
 
 const WeatherReportPage: React.FC = observer(() => {
+  const { t } = useTranslation();
+
   const options = fieldsStore.locations.map((location) => ({
     value: location.id?.toString() || '',
-    label: location.name || 'Unknown',
+    label: location.name || t('weatherReportPage.unknownLocation'),
   }));
   const weatherForecast = weatherStore.weatherData?.forecast.forecastday;
 
@@ -19,22 +22,26 @@ const WeatherReportPage: React.FC = observer(() => {
     <>
       <div className={styles.searchBar}>
         <Dropdown
-          label="Choose Field"
+          label={t('weatherReportPage.dropdown.label')}
           value={weatherStore.selectedLocation?.id?.toString() || ''}
           onChange={(id) => weatherStore.setLocation(String(id))}
           options={options}
-          aria-label="Choose Field"
+          aria-label={t('weatherReportPage.dropdown.ariaLabel')}
         />
       </div>
       <div className={styles.content}>
         <Heading
           level={6}
-          text={`${weatherForecast?.length}-day Weather Forecast`}
+          text={t('weatherReportPage.headings.forecastTitle', {
+            count: weatherForecast?.length || 0,
+          })}
           customStyles={{ marginBottom: '2rem' }}
         />
         <Heading
           level={4}
-          text={weatherStore.locationFullName}
+          text={t('weatherReportPage.headings.locationTitle', {
+            location: weatherStore.locationFullName,
+          })}
           customStyles={{ marginBottom: '2rem' }}
         />
         <div className={styles.forecast}>
@@ -51,25 +58,25 @@ const WeatherReportPage: React.FC = observer(() => {
               <div>
                 <TextWithBoldSpan
                   textWithBoldSpanData={{
-                    label: 'Max Temp',
+                    label: t('weatherReportPage.textWithBoldSpan.maxTemp'),
                     boldSpan: `${day.day.maxtemp_c}°C`,
                   }}
                 />
                 <TextWithBoldSpan
                   textWithBoldSpanData={{
-                    label: 'Min Temp',
+                    label: t('weatherReportPage.textWithBoldSpan.minTemp'),
                     boldSpan: `${day.day.mintemp_c}°C`,
                   }}
                 />
                 <TextWithBoldSpan
                   textWithBoldSpanData={{
-                    label: 'Rain Chance',
+                    label: t('weatherReportPage.textWithBoldSpan.rainChance'),
                     boldSpan: `${day.day.daily_chance_of_rain}%`,
                   }}
                 />
                 <TextWithBoldSpan
                   textWithBoldSpanData={{
-                    label: 'Humidity',
+                    label: t('weatherReportPage.textWithBoldSpan.humidity'),
                     boldSpan: `${day.day.avghumidity}%`,
                   }}
                 />

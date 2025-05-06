@@ -231,5 +231,97 @@
     "deleteConfirmation": {
       "message": "Are you sure you want to delete this crop?"
     }
+  },
+  "router": {
+    "menuLinks": {
+      "dashboard": {
+        "label": "Dashboard",
+        "tooltip": "Use this page to get an overview of both your farm and your crops"
+      },
+      "weather": {
+        "label": "Weather",
+        "tooltip": "Use this page to get an overview of the weather around your fields"
+      },
+      "fields": {
+        "label": "Fields",
+        "tooltip": "Use this page to add, edit, or delete your fields"
+      },
+      "tasks": {
+        "label": "Tasks",
+        "tooltip": "Use this page to add, edit, or delete farm tasks"
+      },
+      "readings": {
+        "label": "Readings",
+        "tooltip": "Use this page to add, edit, or delete readings of your crop batches"
+      },
+      "produce": {
+        "label": "Produce",
+        "tooltip": "Use this page to add, edit, or delete produce"
+      },
+      "batches": {
+        "label": "Batches",
+        "tooltip": "Use this page to add, edit, or delete your crop batches"
+      },
+      "crops": {
+        "label": "Crops",
+        "tooltip": "Use this page to add, edit, or delete your crop types"
+      },
+      "addBatch": {
+        "label": "Add Batch",
+        "tooltip": "Add a new crop batch"
+      },
+      "editBatch": {
+        "label": "Edit Batch",
+        "tooltip": "Edit an existing crop batch"
+      },
+      "addCrop": {
+        "label": "Add Crop",
+        "tooltip": "Add a new crop type"
+      },
+      "editCrop": {
+        "label": "Edit Crop",
+        "tooltip": "Edit an existing crop type"
+      },
+      "addField": {
+        "label": "Add Field",
+        "tooltip": "Add a new farm field"
+      },
+      "editField": {
+        "label": "Edit Field",
+        "tooltip": "Edit an existing farm field"
+      },
+      "addTask": {
+        "label": "Add Task",
+        "tooltip": "Add a new task"
+      },
+      "editTask": {
+        "label": "Edit Task",
+        "tooltip": "Edit an existing task"
+      },
+      "addReading": {
+        "label": "Add Reading",
+        "tooltip": "Add a new reading"
+      },
+      "editReading": {
+        "label": "Edit Reading",
+        "tooltip": "Edit an existing reading"
+      }
+    }
+  },
+  "weatherReportPage": {
+    "dropdown": {
+      "label": "Choose Field",
+      "ariaLabel": "Choose Field"
+    },
+    "headings": {
+      "forecastTitle": "{{count}}-day Weather Forecast",
+      "locationTitle": "{{location}}"
+    },
+    "textWithBoldSpan": {
+      "maxTemp": "Maximum Temperature",
+      "minTemp": "Minimum Temperature",
+      "rainChance": "Rain Chance",
+      "humidity": "Humidity"
+    }
   }
 }

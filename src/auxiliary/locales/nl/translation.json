@@ -231,5 +231,97 @@
     "deleteConfirmation": {
       "message": "Weet u zeker dat u dit gewas wilt verwijderen?"
     }
+  },
+  "router": {
+    "menuLinks": {
+      "dashboard": {
+        "label": "Dashboard",
+        "tooltip": "Gebruik deze pagina om een overzicht te krijgen van zowel uw boerderij als uw gewassen"
+      },
+      "weather": {
+        "label": "Weer",
+        "tooltip": "Gebruik deze pagina om een overzicht te krijgen van het weer rond uw velden"
+      },
+      "fields": {
+        "label": "Velden",
+        "tooltip": "Gebruik deze pagina om uw velden toe te voegen, te bewerken of te verwijderen"
+      },
+      "tasks": {
+        "label": "Taken",
+        "tooltip": "Gebruik deze pagina om boerderijtaken toe te voegen, te bewerken of te verwijderen"
+      },
+      "readings": {
+        "label": "Metingen",
+        "tooltip": "Gebruik deze pagina om metingen van uw gewaspartijen toe te voegen, te bewerken of te verwijderen"
+      },
+      "produce": {
+        "label": "Producten",
+        "tooltip": "Gebruik deze pagina om producten toe te voegen, te bewerken of te verwijderen"
+      },
+      "batches": {
+        "label": "Partijen",
+        "tooltip": "Gebruik deze pagina om uw gewaspartijen toe te voegen, te bewerken of te verwijderen"
+      },
+      "crops": {
+        "label": "Gewassen",
+        "tooltip": "Gebruik deze pagina om uw gewastypen toe te voegen, te bewerken of te verwijderen"
+      },
+      "addBatch": {
+        "label": "Partij toevoegen",
+        "tooltip": "Voeg een nieuwe gewaspartij toe"
+      },
+      "editBatch": {
+        "label": "Partij bewerken",
+        "tooltip": "Bewerk een bestaande gewaspartij"
+      },
+      "addCrop": {
+        "label": "Gewas toevoegen",
+        "tooltip": "Voeg een nieuw gewastype toe"
+      },
+      "editCrop": {
+        "label": "Gewas bewerken",
+        "tooltip": "Bewerk een bestaand gewastype"
+      },
+      "addField": {
+        "label": "Veld toevoegen",
+        "tooltip": "Voeg een nieuw veld toe"
+      },
+      "editField": {
+        "label": "Veld bewerken",
+        "tooltip": "Bewerk een bestaand veld"
+      },
+      "addTask": {
+        "label": "Taak toevoegen",
+        "tooltip": "Voeg een nieuwe taak toe"
+      },
+      "editTask": {
+        "label": "Taak bewerken",
+        "tooltip": "Bewerk een bestaande taak"
+      },
+      "addReading": {
+        "label": "Meting toevoegen",
+        "tooltip": "Voeg een nieuwe meting toe"
+      },
+      "editReading": {
+        "label": "Meting bewerken",
+        "tooltip": "Bewerk een bestaande meting"
+      }
+    }
+  },
+  "weatherReportPage": {
+    "dropdown": {
+      "label": "Kies veld",
+      "ariaLabel": "Kies veld"
+    },
+    "headings": {
+      "forecastTitle": "{{count}}-daagse weersvoorspelling",
+      "locationTitle": "{{location}}"
+    },
+    "textWithBoldSpan": {
+      "maxTemp": "Maximale temperatuur",
+      "minTemp": "Minimale temperatuur",
+      "rainChance": "Kans op regen",
+      "humidity": "Vochtigheid"
+    }
   }
 }

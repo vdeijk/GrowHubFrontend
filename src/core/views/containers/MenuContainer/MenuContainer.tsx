@@ -6,8 +6,9 @@ import HelpButton from '../../reusables/HelpButton/HelpButton';
 import routerService from '../../../services/RouterService/RouterService';
 import profilePicture from '../../../../auxiliary/assets/cropGrowHub.jpg';
 import { useLocation, matchPath } from 'react-router-dom';
+import { observer } from 'mobx-react-lite';
 
-const MenuContainer: React.FC = () => {
+const MenuContainer: React.FC = observer(() => {
   const handleHelpOpen = () => {};
   const location = useLocation();
   const activeMenuLink = routerService.menuLinks.find((menuLink) =>
@@ -37,6 +38,6 @@ const MenuContainer: React.FC = () => {
       </ul>
     </div>
   );
-};
+});
 
 export default MenuContainer;
