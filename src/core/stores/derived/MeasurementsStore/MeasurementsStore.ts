@@ -53,15 +53,10 @@ class MeasurementsStore extends SearchableStore<MeasurementItem> {
         key: keyof MeasurementItem;
         thresholds: { red: number; yellow: number };
       }[] = [{ key: 'soilPH', thresholds: { red: 6, yellow: 7 } }];
-      const dateKeys = ['date'] as (keyof MeasurementItem)[];
 
-      let coloredItems = TableColoringService.getColoredNumericalValues(
+      this.items = TableColoringService.getColoredNumericalValues(
         data,
         numericalKeys,
-      );
-      this.items = TableColoringService.getColoredDateValues(
-        coloredItems,
-        dateKeys,
       );
 
       this.filteredItems = this.items;

@@ -27,7 +27,7 @@ export class EndpointService {
 
       return response.data as T;
     } catch (error) {
-      console.error('Error fetching data:', error);
+      this.handleError('get', error);
     } finally {
       this.setIsLoading(false);
     }
@@ -92,6 +92,7 @@ export class EndpointService {
         `Axios error during ${action} at ${this.endpoint}:`,
         axiosError,
       );
+      toast.error(`Unexpected error occurred during ${action}.`);
       throw axiosError;
     } else {
       console.error(
