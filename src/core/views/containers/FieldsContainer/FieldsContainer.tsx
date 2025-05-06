@@ -17,7 +17,7 @@ const FieldsContainer: React.FC = observer(() => {
   const buttonContainerData: ButtonProps[] = [
     {
       onClick: () => navigate('/fieldsPage'),
-      label: t('fields.viewAllFields'),
+      label: t('fieldsContainer.viewAllFields'),
     },
   ];
 
@@ -44,7 +44,7 @@ const FieldsContainer: React.FC = observer(() => {
       <LoadingWrapper isLoading={locationStore.isLoading}>
         <Heading
           level={6}
-          text={t('fields.heading')}
+          text={t('fieldsContainer.heading')}
           customStyles={{ marginBottom: '2rem' }}
         />
         <Map {...mapData} />

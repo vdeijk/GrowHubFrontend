@@ -19,11 +19,11 @@ const WeatherContainer: React.FC = observer(() => {
 
   const textsWithBoldSpan: TextWithBoldSpanData[] = [
     {
-      label: t('weather.humidity'),
+      label: t('weatherContainer.humidity'),
       boldSpan: `${weather?.current?.humidity}%`,
     },
     {
-      label: t('weather.windSpeed'),
+      label: t('weatherContainer.windSpeed'),
       boldSpan: `${weather?.current?.wind_kph} kph`,
     },
   ];
@@ -31,7 +31,7 @@ const WeatherContainer: React.FC = observer(() => {
   const buttonContainerData: ButtonProps[] = [
     {
       onClick: () => navigate('/weatherReportPage'),
-      label: t('weather.viewFullReport'),
+      label: t('weatherContainer.viewFullReport'),
     },
   ];
 
@@ -39,7 +39,7 @@ const WeatherContainer: React.FC = observer(() => {
     <>
       <Heading
         level={6}
-        text={t('weather.heading')}
+        text={t('weatherContainer.heading')}
         customStyles={{ marginBottom: '2rem' }}
       ></Heading>
       <h4 className={styles.h4}>{weatherStore.locationFullName}</h4>

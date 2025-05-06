@@ -18,7 +18,7 @@ const BatchesContainer: React.FC = observer(() => {
   const buttonContainerData: ButtonProps[] = [
     {
       onClick: () => navigate('/batchesPage'),
-      label: t('batches.viewAllBatches'),
+      label: t('batchesContainer.viewAllBatches'),
     },
   ];
 
@@ -39,7 +39,7 @@ const BatchesContainer: React.FC = observer(() => {
     <>
       <Heading
         level={6}
-        text={t('batches.heading')}
+        text={t('batchesContainer.heading')}
         customStyles={{ marginBottom: '2rem' }}
       />
       <TableWithoutSorting<YourCropItem>

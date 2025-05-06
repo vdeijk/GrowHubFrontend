@@ -17,7 +17,7 @@ const TasksContainer: React.FC = observer(() => {
   const buttonContainerData: ButtonProps[] = [
     {
       onClick: () => navigate('/tasksPage'),
-      label: t('tasks.viewAllTasks'),
+      label: t('tasksContainer.viewAllTasks'),
     },
   ];
 
@@ -26,7 +26,7 @@ const TasksContainer: React.FC = observer(() => {
       <LoadingWrapper isLoading={taskStore.isLoading}>
         <Heading
           level={6}
-          text={t('tasks.heading')}
+          text={t('tasksContainer.heading')}
           customStyles={{ marginBottom: '2rem' }}
         ></Heading>
         {taskStore.items.slice(0, 3).map((task) => (

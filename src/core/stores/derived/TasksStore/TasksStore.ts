@@ -2,11 +2,12 @@ import { TodoItem } from '../../../../api';
 import { SearchableStore } from '../../base/BaseSearchableStore/BaseSearchableStore';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
 import { makeObservable, runInAction, action, computed } from 'mobx';
-import TasksData from '../../../../auxiliary/data/TasksData';
+import tasksData from '../../../../auxiliary/data/TasksData';
 import { PaginationService } from '../../../services/PaginationService/PaginationService';
 import TableColoringService from '../TableColoringService/TableColoringService';
 import { FilterService } from '../../../services/FilterService/FilterService';
 import EventBus from '../../../services/EventBusService/EventBusService';
+import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
 
 class TasksStore extends SearchableStore<TodoItem> {
   private endpointService = new EndpointService('Todo');
@@ -14,20 +15,22 @@ class TasksStore extends SearchableStore<TodoItem> {
   public get isLoading(): boolean {
     return this.endpointService.isLoading;
   }
-  public tableHeaders = TasksData.tableHeaders;
+  public get tableHeaders(): TableHeaderModel<TodoItem>[] {
+    return tasksData.tableHeaders;
+  }
 
   constructor() {
     super(['title']);
 
-    Object.values(TasksData.textFieldsString).forEach((textField) => {
+    Object.values(tasksData.textFieldsString).forEach((textField) => {
       this.initStringFilter(textField);
     });
 
-    Object.values(TasksData.dropdowns).forEach((dropdown) => {
+    Object.values(tasksData.dropdowns).forEach((dropdown) => {
       this.initDropdownFilter(dropdown);
     });
 
-    TasksData.dateFields.forEach((dateField) => {
+    tasksData.dateFields.forEach((dateField) => {
       this.initDateFilter(dateField);
     });
 
