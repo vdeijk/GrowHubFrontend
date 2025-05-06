@@ -1,0 +1,17 @@
+.iconLink {
+  font-size: 1.4rem;
+  color: var(--color-white);
+  text-decoration: none;
+  transition: color 0.2s;
+  display: grid;
+  grid-auto-flow: column;
+  align-content: center;
+  grid-gap: 1rem;
+  justify-items: start;
+  width: max-content;
+}
+
+.icon {
+  color: var(--color-primary);
+  font-size: 1.7rem;
+}

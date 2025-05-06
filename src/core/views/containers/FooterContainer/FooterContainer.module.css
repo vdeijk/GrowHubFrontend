@@ -1,10 +1,34 @@
 .footer {
   background-color: var(--color-text);
   color: var(--color-white);
-  text-align: center;
   padding: var(--spacing-small);
   width: 100%;
-  position: fixed;
-  bottom: 0;
+  height: max-content;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  justify-content: center;
+  justify-items: center;
+  gap: 2rem;
+  padding: 2rem;
   z-index: 1000;
+}
+
+.resources {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.socialIcons {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-gap: .5rem;
+}
+
+.contactText {
+  font-size: 1.5rem;
+  color: var(--color-white)
 }
