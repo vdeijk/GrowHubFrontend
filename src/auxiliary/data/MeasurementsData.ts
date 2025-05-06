@@ -134,10 +134,12 @@ class MeasurementsData {
       healthStatus: {
         key: 'healthStatus',
         label: i18next.t('measurements.dropdowns.healthStatus'),
-        options: Object.values(MeasurementItemHealthStatusEnum).map((value) => ({
-          value: value,
-          label: value,
-        })),
+        options: Object.values(MeasurementItemHealthStatusEnum).map(
+          (value) => ({
+            value: value,
+            label: value,
+          }),
+        ),
         defaultValue: '',
       },
       growthStage: {

@@ -4,11 +4,20 @@ import { toast } from 'react-toastify';
 import { matchRoutes, NavigateFunction } from 'react-router-dom';
 import { RouteObject } from 'react-router-dom';
 import i18next from 'i18next';
+import dashboard from '../../../auxiliary/assets/dashboard.jpg';
+import readings from '../../../auxiliary/assets/readings.jpg';
+import tasks from '../../../auxiliary/assets/tasks.jpg';
+import weather from '../../../auxiliary/assets/weather.jpg';
+import batches from '../../../auxiliary/assets/batches.jpg';
+import crops from '../../../auxiliary/assets/crops.jpg';
+import fields from '../../../auxiliary/assets/fields.jpg';
+import produce from '../../../auxiliary/assets/produce.jpg';
 
 class RouterService {
   public currentLabel: string = '';
   public menuLinks: MenuLinkData[] = [];
   private routeDefs: RouteObject[] = [];
+  public currentImageUrl: string = dashboard;
 
   constructor() {
     makeAutoObservable(this);
@@ -17,7 +26,7 @@ class RouterService {
 
     i18next.on('languageChanged', () => {
       this.initializeMenuLinks();
-      
+
       const path = window.location.hash.replace('#', '');
       this.currentLabel = this.getLabel(path);
     });
@@ -37,6 +46,7 @@ class RouterService {
         hidden: false,
         isDynamic: false,
         tooltip: i18next.t('router.menuLinks.dashboard.tooltip'),
+        imageUrl: dashboard,
       },
       {
         path: '/weatherReportPage',
@@ -44,6 +54,7 @@ class RouterService {
         hidden: false,
         isDynamic: false,
         tooltip: i18next.t('router.menuLinks.weather.tooltip'),
+        imageUrl: weather,
       },
       {
         path: '/fieldsPage',
@@ -51,6 +62,7 @@ class RouterService {
         hidden: false,
         isDynamic: false,
         tooltip: i18next.t('router.menuLinks.fields.tooltip'),
+        imageUrl: fields,
       },
       {
         path: '/tasksPage',
@@ -58,6 +70,7 @@ class RouterService {
         hidden: false,
         isDynamic: false,
         tooltip: i18next.t('router.menuLinks.tasks.tooltip'),
+        imageUrl: tasks,
       },
       {
         path: '/measurementsPage',
@@ -65,6 +78,7 @@ class RouterService {
         hidden: false,
         isDynamic: false,
         tooltip: i18next.t('router.menuLinks.readings.tooltip'),
+        imageUrl: readings,
       },
       {
         path: '/producePage',
@@ -72,6 +86,7 @@ class RouterService {
         hidden: false,
         isDynamic: false,
         tooltip: i18next.t('router.menuLinks.produce.tooltip'),
+        imageUrl: produce,
       },
       {
         path: '/batchesPage',
@@ -79,6 +94,7 @@ class RouterService {
         hidden: false,
         isDynamic: false,
         tooltip: i18next.t('router.menuLinks.batches.tooltip'),
+        imageUrl: batches,
       },
       {
         path: '/cropsPage',
@@ -86,6 +102,7 @@ class RouterService {
         hidden: false,
         isDynamic: false,
         tooltip: i18next.t('router.menuLinks.crops.tooltip'),
+        imageUrl: crops,
       },
       {
         path: '/addBatchPage',
@@ -93,6 +110,7 @@ class RouterService {
         hidden: true,
         isDynamic: false,
         tooltip: i18next.t('router.menuLinks.addBatch.tooltip'),
+        imageUrl: batches,
       },
       {
         path: '/addBatchPage/:id',
@@ -100,6 +118,7 @@ class RouterService {
         hidden: true,
         isDynamic: true,
         tooltip: i18next.t('router.menuLinks.editBatch.tooltip'),
+        imageUrl: batches,
       },
       {
         path: '/addCropPage',
@@ -107,6 +126,7 @@ class RouterService {
         hidden: true,
         isDynamic: false,
         tooltip: i18next.t('router.menuLinks.addCrop.tooltip'),
+        imageUrl: crops,
       },
       {
         path: '/addCropPage/:id',
@@ -114,6 +134,7 @@ class RouterService {
         hidden: true,
         isDynamic: true,
         tooltip: i18next.t('router.menuLinks.editCrop.tooltip'),
+        imageUrl: crops,
       },
       {
         path: '/addFieldPage',
@@ -121,6 +142,7 @@ class RouterService {
         hidden: true,
         isDynamic: false,
         tooltip: i18next.t('router.menuLinks.addField.tooltip'),
+        imageUrl: fields,
       },
       {
         path: '/addFieldPage/:id',
@@ -128,6 +150,7 @@ class RouterService {
         hidden: true,
         isDynamic: true,
         tooltip: i18next.t('router.menuLinks.editField.tooltip'),
+        imageUrl: fields,
       },
       {
         path: '/addTaskPage',
@@ -135,6 +158,7 @@ class RouterService {
         hidden: true,
         isDynamic: false,
         tooltip: i18next.t('router.menuLinks.addTask.tooltip'),
+        imageUrl: tasks,
       },
       {
         path: '/addTaskPage/:id',
@@ -142,6 +166,7 @@ class RouterService {
         hidden: true,
         isDynamic: false,
         tooltip: i18next.t('router.menuLinks.editTask.tooltip'),
+        imageUrl: tasks,
       },
       {
         path: '/addMeasurementPage/',
@@ -149,6 +174,7 @@ class RouterService {
         hidden: true,
         isDynamic: true,
         tooltip: i18next.t('router.menuLinks.addReading.tooltip'),
+        imageUrl: readings,
       },
       {
         path: '/addMeasurementPage/:id',
@@ -156,6 +182,7 @@ class RouterService {
         hidden: true,
         isDynamic: true,
         tooltip: i18next.t('router.menuLinks.editReading.tooltip'),
+        imageUrl: readings,
       },
     ];
 
@@ -174,6 +201,12 @@ class RouterService {
     try {
       const adjustedPath = path.replace('/growhub', '');
       this.currentLabel = this.getLabel(adjustedPath);
+
+      const matchingLink = this.menuLinks.find(
+        (link) => link.path === adjustedPath,
+      );
+      this.currentImageUrl = matchingLink?.imageUrl || dashboard;
+
       if (this.currentLabel === 'Unknown Page' && navigate) {
         navigate('/404');
       }

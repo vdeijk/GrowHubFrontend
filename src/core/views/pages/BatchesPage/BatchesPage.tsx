@@ -101,7 +101,7 @@ const BatchesPage: React.FC = observer(() => {
   const buttonContainerData = [
     {
       onClick: () => navigate('/addBatchPage'),
-      label: i18next.t('batchesPage.buttons.addBatch'), 
+      label: i18next.t('batchesPage.buttons.addBatch'),
     },
   ];
 

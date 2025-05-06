@@ -34,7 +34,7 @@
 }
 
 .textInput[readonly] {
-  background-color: var(--color-disabled); 
-  cursor: not-allowed; 
+  background-color: var(--color-disabled);
+  cursor: not-allowed;
   color: var(--color-white);
 }

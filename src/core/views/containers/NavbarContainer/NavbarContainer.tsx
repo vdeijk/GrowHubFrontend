@@ -20,7 +20,7 @@ const NavbarContainer: React.FC<NavbarProps> = ({ userName }) => {
         </a>
       </div>
       <div className={styles.navbarActions}>
-      <LanguageSwitcher />
+        <LanguageSwitcher />
         <div className={styles.userNameContainer}>
           <span className={styles.userName}>{userName}</span>
           {/* <button className={styles.userIcon}>

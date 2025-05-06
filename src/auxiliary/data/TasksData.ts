@@ -16,7 +16,7 @@ class TasksData {
   public dateFields: DateFieldModel[] = [];
 
   constructor() {
-    makeAutoObservable(this); 
+    makeAutoObservable(this);
     this.initializeTableHeaders();
     this.initializeTextFields();
     this.initializeDropdowns();

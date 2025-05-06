@@ -28,7 +28,7 @@ class TasksStore extends SearchableStore<TodoItem> {
     i18next.on('languageChanged', () => {
       this.observeFilters();
     });
-    
+
     makeObservable(this, {
       isLoading: computed,
       fetchData: action,
