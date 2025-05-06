@@ -13,6 +13,7 @@ import DateInput, { DateInputProps } from '../../reusables/DateInput/DateInput';
 import taskStore from '../../../stores/derived/TasksStore/TasksStore';
 import TextArea from '../../reusables/TextArea/TextArea';
 import Divider from '../../reusables/Divider/Divider';
+import { useTranslation } from 'react-i18next';
 
 interface AddTaskPageProps {
   isEditing?: boolean;
@@ -22,6 +23,7 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
   ({ isEditing = false }) => {
     const navigate = useRouterNavigation();
     const { id } = useParams<{ id: string }>();
+    const { t } = useTranslation();
 
     useEffect(() => {
       if (isEditing && id) {
@@ -80,11 +82,13 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
       {
         type: 'button',
         onClick: () => navigate('/measurementsPage'),
-        label: 'Back',
+        label: t('addTaskPage.buttons.back'),
       },
       {
         type: 'submit',
-        label: isEditing ? 'Edit Task' : 'Add Task',
+        label: isEditing
+          ? t('addTaskPage.buttons.editTask')
+          : t('addTaskPage.buttons.addTask'),
         customStyles: { marginTop: '1rem' },
       },
     ];
@@ -94,8 +98,8 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
         <LoadingWrapper isLoading={addTaskStore.isLoading}>
           <form onSubmit={handleSubmit} className={styles.form}>
             <TextInput {...titleProps} />
-            <TextArea {...notesProps} />
             <TextInput {...batchIdProps} />
+            <TextArea {...notesProps} />
             <Divider />
             <Dropdown {...priorityProps} />
             <Dropdown {...categoryProps} />

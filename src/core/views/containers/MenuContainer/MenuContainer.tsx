@@ -4,10 +4,10 @@ import MenuLink from '../../reusables/MenuLink/MenuLink';
 import Heading from '../../reusables/Heading/Heading';
 import HelpButton from '../../reusables/HelpButton/HelpButton';
 import routerService from '../../../services/RouterService/RouterService';
-import profilePicture from '../../../../auxiliary/assets/cropGrowHub.jpg';
 import { useLocation, matchPath } from 'react-router-dom';
+import { observer } from 'mobx-react-lite';
 
-const MenuContainer: React.FC = () => {
+const MenuContainer: React.FC = observer(() => {
   const handleHelpOpen = () => {};
   const location = useLocation();
   const activeMenuLink = routerService.menuLinks.find((menuLink) =>
@@ -28,7 +28,11 @@ const MenuContainer: React.FC = () => {
             onClick={handleHelpOpen}
           />
         </div>
-        <img src={profilePicture} alt="Profile" className={styles.image} />
+        <img
+          src={routerService.currentImageUrl}
+          alt="Profile"
+          className={styles.image}
+        />
       </div>
       <ul className={styles.unorderedList}>
         {routerService.getVisibleLinks().map((menuLink, index) => (
@@ -37,6 +41,6 @@ const MenuContainer: React.FC = () => {
       </ul>
     </div>
   );
-};
+});
 
 export default MenuContainer;

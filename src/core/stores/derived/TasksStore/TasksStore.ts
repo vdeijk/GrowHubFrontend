@@ -2,11 +2,13 @@ import { TodoItem } from '../../../../api';
 import { SearchableStore } from '../../base/BaseSearchableStore/BaseSearchableStore';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
 import { makeObservable, runInAction, action, computed } from 'mobx';
-import TasksData from '../../../../auxiliary/data/TasksData';
+import tasksData from '../../../../auxiliary/data/TasksData';
 import { PaginationService } from '../../../services/PaginationService/PaginationService';
 import TableColoringService from '../TableColoringService/TableColoringService';
 import { FilterService } from '../../../services/FilterService/FilterService';
 import EventBus from '../../../services/EventBusService/EventBusService';
+import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
+import i18next from 'i18next';
 
 class TasksStore extends SearchableStore<TodoItem> {
   private endpointService = new EndpointService('Todo');
@@ -14,27 +16,46 @@ class TasksStore extends SearchableStore<TodoItem> {
   public get isLoading(): boolean {
     return this.endpointService.isLoading;
   }
-  public tableHeaders = TasksData.tableHeaders;
+  public get tableHeaders(): TableHeaderModel<TodoItem>[] {
+    return tasksData.tableHeaders;
+  }
 
   constructor() {
     super(['title']);
 
-    Object.values(TasksData.textFieldsString).forEach((textField) => {
-      this.initStringFilter(textField);
-    });
+    this.observeFilters();
 
-    Object.values(TasksData.dropdowns).forEach((dropdown) => {
-      this.initDropdownFilter(dropdown);
-    });
-
-    TasksData.dateFields.forEach((dateField) => {
-      this.initDateFilter(dateField);
+    i18next.on('languageChanged', () => {
+      this.observeFilters();
     });
 
     makeObservable(this, {
       isLoading: computed,
       fetchData: action,
     });
+  }
+
+  private observeFilters() {
+    this.clearFilters();
+
+    Object.values(tasksData.textFieldsString).forEach((textField) => {
+      this.initStringFilter(textField);
+    });
+
+    Object.values(tasksData.dropdowns).forEach((dropdown) => {
+      this.initDropdownFilter(dropdown);
+    });
+
+    tasksData.dateFields.forEach((dateField) => {
+      this.initDateFilter(dateField);
+    });
+  }
+
+  private clearFilters() {
+    this.stringFilters = {};
+    this.numberFilters = {};
+    this.dropdownFilters = {};
+    this.dateFilters = {};
   }
 
   public fetchData = async () => {
@@ -81,6 +102,12 @@ class TasksStore extends SearchableStore<TodoItem> {
 
   public deleteTask = async (id: number) => {
     await this.endpointService.deleteData(id);
+
+    this.fetchData();
+  };
+
+  public updateTask = async (id: number, data: TodoItem) => {
+    await this.endpointService.putData(`${id}`, data);
 
     this.fetchData();
   };

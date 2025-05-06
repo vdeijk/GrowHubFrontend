@@ -9,21 +9,29 @@ import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import { ButtonProps } from '../../../../auxiliary/interfaces/ButtonProps';
+import { useTranslation } from 'react-i18next';
 
 const WeatherContainer: React.FC = observer(() => {
   const navigate = useRouterNavigation();
+  const { t } = useTranslation();
 
   const weather = weatherStore?.weatherData;
 
   const textsWithBoldSpan: TextWithBoldSpanData[] = [
-    { label: 'Humidity', boldSpan: `${weather?.current?.humidity}%` },
-    { label: 'Wind Speed', boldSpan: `${weather?.current?.wind_kph} kph` },
+    {
+      label: t('weatherContainer.humidity'),
+      boldSpan: `${weather?.current?.humidity}%`,
+    },
+    {
+      label: t('weatherContainer.windSpeed'),
+      boldSpan: `${weather?.current?.wind_kph} kph`,
+    },
   ];
 
   const buttonContainerData: ButtonProps[] = [
     {
       onClick: () => navigate('/weatherReportPage'),
-      label: 'View Full Report',
+      label: t('weatherContainer.viewFullReport'),
     },
   ];
 
@@ -31,7 +39,7 @@ const WeatherContainer: React.FC = observer(() => {
     <>
       <Heading
         level={6}
-        text="Current Weather"
+        text={t('weatherContainer.heading')}
         customStyles={{ marginBottom: '2rem' }}
       ></Heading>
       <h4 className={styles.h4}>{weatherStore.locationFullName}</h4>

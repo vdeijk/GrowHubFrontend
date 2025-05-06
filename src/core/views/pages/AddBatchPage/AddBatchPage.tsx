@@ -15,6 +15,7 @@ import { ButtonProps } from '../../../../auxiliary/interfaces/ButtonProps';
 import Divider from '../../reusables/Divider/Divider';
 import Dropdown from '../../reusables/Dropdown/Dropdown';
 import batchesStore from '../../../stores/derived/BatchesStore/BatchesStore';
+import { useTranslation } from 'react-i18next';
 
 interface AddBatchPageProps {
   isEditing?: boolean;
@@ -24,6 +25,7 @@ const AddBatchPage: React.FC<AddBatchPageProps> = observer(
   ({ isEditing = false }) => {
     const navigate = useRouterNavigation();
     const { id } = useParams<{ id: string }>();
+    const { t } = useTranslation();
 
     useEffect(() => {
       if (isEditing && id) {
@@ -37,6 +39,8 @@ const AddBatchPage: React.FC<AddBatchPageProps> = observer(
       e.preventDefault();
 
       if (!addBatchStore.validateForm()) return;
+
+      console.log('Form submitted');
 
       if (isEditing && id) {
         addBatchStore.updateCrop(id);
@@ -53,11 +57,13 @@ const AddBatchPage: React.FC<AddBatchPageProps> = observer(
       {
         type: 'button',
         onClick: () => navigate('/batchesPage'),
-        label: 'Back',
+        label: t('addBatchPage.buttons.back'),
       },
       {
         type: 'submit',
-        label: isEditing ? 'Edit Batch' : 'Add Batch',
+        label: isEditing
+          ? t('addBatchPage.buttons.editBatch')
+          : t('addBatchPage.buttons.addBatch'),
         customStyles: { marginTop: '1rem' },
       },
     ];
@@ -104,9 +110,9 @@ const AddBatchPage: React.FC<AddBatchPageProps> = observer(
         <LoadingWrapper isLoading={addBatchStore.isLoading}>
           <form onSubmit={handleSubmit} className={styles.form}>
             <TextInput {...commonNameModel} />
+            <TextInput {...cropIdModel} />
             <TextInput {...amountModel} />
             <TextArea {...notesModel} />
-            <TextInput {...cropIdModel} />
             <Divider />
             <Dropdown {...locationFieldModel} />
             <Divider />

@@ -10,12 +10,27 @@ import {
 } from '../../../../api';
 import AddTaskData from '../../../../auxiliary/data/AddTaskData';
 import { DataMappingService } from '../../../services/DataMappingService/DatamappingService';
+import i18next from 'i18next';
+import { reaction } from 'mobx';
+import DebounceService from '../../../services/DebounceService/DebounceService';
+import batchesStore from '../BatchesStore/BatchesStore';
 
 class AddTaskStore extends BaseFormStore {
   public endpointService = new EndpointService('Todo');
 
   constructor() {
     super();
+
+    this.observeFilters();
+    this.setupCropIdReaction();
+
+    i18next.on('languageChanged', () => {
+      this.observeFilters();
+    });
+  }
+
+  private observeFilters() {
+    this.clearFilters();
 
     Object.values(AddTaskData.textFields).forEach((textField) => {
       this.initTextFilter(textField);
@@ -28,6 +43,12 @@ class AddTaskStore extends BaseFormStore {
     AddTaskData.dateFields.forEach((dateField) => {
       this.initDateFilter(dateField);
     });
+  }
+
+  private clearFilters() {
+    this.dropdownFields = {};
+    this.inputFields = {};
+    this.dateFields = {};
   }
 
   public addTask = async () => {
@@ -62,6 +83,35 @@ class AddTaskStore extends BaseFormStore {
     if (this.validateRequired()) return true;
 
     return false;
+  }
+
+  private getCropNameById(cropId: number): string | undefined {
+    const batch = batchesStore.items.find((item) => item.id === cropId);
+    return batch?.commonName ?? undefined;
+  }
+
+  private setupCropIdReaction() {
+    const updateCommonName = DebounceService.debounce(() => {
+      const batchId = Number(this.inputFields.batchId.value);
+      if (Number.isNaN(batchId)) {
+        this.inputFields.title.setValue('');
+        return;
+      }
+
+      const title = this.getCropNameById(batchId);
+      if (title) {
+        this.inputFields.title.setValue(title);
+      } else {
+        this.inputFields.title.setValue('');
+      }
+    }, 300);
+
+    reaction(
+      () => this.inputFields.batchId.value,
+      () => {
+        updateCommonName();
+      },
+    );
   }
 
   private prepareData(): TodoItem {

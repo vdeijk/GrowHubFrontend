@@ -2,11 +2,13 @@ import { SearchableStore } from '../../base/BaseSearchableStore/BaseSearchableSt
 import { YourCropItem } from '../../../../api';
 import { makeObservable, runInAction, action, computed } from 'mobx';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
-import BatchesData from '../../../../auxiliary/data/BatchesData';
+import batchesData from '../../../../auxiliary/data/BatchesData';
 import EventBus from '../../../services/EventBusService/EventBusService';
 import { PaginationService } from '../../../services/PaginationService/PaginationService';
 import TableColoringService from '../TableColoringService/TableColoringService';
 import { FilterService } from '../../../services/FilterService/FilterService';
+import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
+import i18next from 'i18next';
 
 class BatchesStore extends SearchableStore<YourCropItem> {
   public paginationService = new PaginationService();
@@ -14,7 +16,9 @@ class BatchesStore extends SearchableStore<YourCropItem> {
     return this.endpointService.isLoading;
   }
   public debouncedFilterPlants: (criteria: string) => void = () => {};
-  public tableHeaders = BatchesData.tableHeaders;
+  public get tableHeaders(): TableHeaderModel<YourCropItem>[] {
+    return batchesData.tableHeaders;
+  }
 
   private endpointService = new EndpointService('YourCrops');
 
@@ -22,30 +26,48 @@ class BatchesStore extends SearchableStore<YourCropItem> {
     super(['commonName']);
 
     EventBus.addEventListener('locations:updated', () => {
-      BatchesData.updateLocationDropdownOptions();
-      this.initDropdownFilter(BatchesData.dropdowns['location']);
+      batchesData.updateLocationDropdownOptions();
+      this.initDropdownFilter(batchesData.dropdowns['location']);
     });
 
-    Object.values(BatchesData.textFieldsString).forEach((textField) => {
-      this.initStringFilter(textField);
-    });
+    this.observeFilters();
 
-    Object.values(BatchesData.textFieldsNumber).forEach((textField) => {
-      this.initNumberFilter(textField);
-    });
-
-    Object.values(BatchesData.dropdowns).forEach((dropdown) => {
-      this.initDropdownFilter(dropdown);
-    });
-
-    BatchesData.dateFields.forEach((dateField) => {
-      this.initDateFilter(dateField);
+    i18next.on('languageChanged', () => {
+      this.observeFilters();
     });
 
     makeObservable(this, {
       isLoading: computed,
       fetchData: action,
+      tableHeaders: computed,
     });
+  }
+
+  private observeFilters() {
+    this.clearFilters();
+
+    Object.values(batchesData.textFieldsString).forEach((textField) => {
+      this.initStringFilter(textField);
+    });
+
+    Object.values(batchesData.textFieldsNumber).forEach((textField) => {
+      this.initNumberFilter(textField);
+    });
+
+    Object.values(batchesData.dropdowns).forEach((dropdown) => {
+      this.initDropdownFilter(dropdown);
+    });
+
+    batchesData.dateFields.forEach((dateField) => {
+      this.initDateFilter(dateField);
+    });
+  }
+
+  private clearFilters() {
+    this.stringFilters = {};
+    this.numberFilters = {};
+    this.dropdownFilters = {};
+    this.dateFilters = {};
   }
 
   public async fetchData() {
@@ -122,6 +144,12 @@ class BatchesStore extends SearchableStore<YourCropItem> {
 
   public deletePlant = async (id: number) => {
     await this.endpointService.deleteData(id);
+
+    this.fetchData();
+  };
+
+  public updateBatch = async (id: number, data: YourCropItem) => {
+    await this.endpointService.putData(`${id}`, data);
 
     this.fetchData();
   };

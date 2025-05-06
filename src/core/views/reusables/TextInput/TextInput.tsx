@@ -10,6 +10,7 @@ export interface TextInputProps {
   required?: boolean;
   label?: string;
   error?: string | null | undefined;
+  readonly?: boolean;
 }
 
 const TextInput: React.FC<TextInputProps> = ({
@@ -19,6 +20,7 @@ const TextInput: React.FC<TextInputProps> = ({
   required = false,
   label,
   error,
+  readonly,
 }) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value;
@@ -44,6 +46,7 @@ const TextInput: React.FC<TextInputProps> = ({
         placeholder={placeholder}
         className={styles.textInput}
         aria-invalid={!!error}
+        readOnly={readonly}
         aria-describedby={error ? 'error-message' : undefined}
       />
       {error && <ErrorMessage id="error-message" message={error} />}

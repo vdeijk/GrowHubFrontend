@@ -8,123 +8,162 @@ import {
 } from '../../api';
 import { TableHeaderModel } from '../interfaces/TableHeaderModel';
 import { InputFieldModel } from '../interfaces/InputFieldModel';
+import { makeAutoObservable } from 'mobx';
+import i18next from 'i18next';
 
 class MeasurementsData {
-  public static tableHeaders: TableHeaderModel<MeasurementItem>[] = [
-    {
-      id: 'title',
-      label: 'Crop Name',
-      sortable: true,
-      type: 'string',
-      tooltip: 'The crop type of the reading',
-    },
-    {
-      id: 'batchId',
-      label: 'Batch Id',
-      sortable: true,
-      type: 'number',
-      tooltip: 'Use this identifier to link the reading to a batch',
-    },
-    {
-      id: 'actions',
-      label: 'Actions',
-      sortable: false,
-      type: 'action',
-      tooltip: 'View, edit or delete the reading',
-    },
-    {
-      id: 'soilPH',
-      label: 'Soil PH',
-      sortable: true,
-      type: 'number',
-      tooltip: 'The soil PH during the reading',
-    },
-    {
-      id: 'soilDryness',
-      label: 'Soil Dryness',
-      sortable: true,
-      type: 'string',
-      tooltip: 'The soil dryness during the reading',
-    },
-    {
-      id: 'healthStatus',
-      label: 'Health Status',
-      sortable: true,
-      type: 'string',
-      tooltip: 'The health status of the batch during the reading',
-    },
-    {
-      id: 'growthStage',
-      label: 'Growth Stage',
-      sortable: true,
-      type: 'string',
-      tooltip: 'The growth stage of the batch during the reading',
-    },
-    {
-      id: 'date',
-      label: 'Date',
-      sortable: true,
-      type: 'date',
-      tooltip: 'The date of the reading',
-    },
-  ];
+  public tableHeaders: TableHeaderModel<MeasurementItem>[] = [];
+  public dropdowns: Record<string, DropdownFieldModel> = {};
+  public dateFields: DateFieldModel[] = [];
 
-  public static textFieldsString: Record<string, InputFieldModel> = {
-    searchQuery: { key: 'searchQuery', label: 'Search', defaultValue: '' },
-    descriptionField: {
-      key: 'description',
-      label: 'Notes',
-      defaultValue: '',
-    },
-  };
+  constructor() {
+    makeAutoObservable(this);
+    this.initializeTableHeaders();
+    this.initializeDropdowns();
+    this.initializeDateFields();
 
-  public static textFieldsNumber: Record<string, InputFieldModel> = {
-    phMin: {
-      key: 'phMin',
-      label: 'PH Min',
-      defaultValue: '',
-    },
-    phMax: {
-      key: 'phMax',
-      label: 'PH Max',
-      defaultValue: '',
-    },
-  };
+    i18next.on('languageChanged', () => {
+      this.initializeTableHeaders();
+      this.initializeDropdowns();
+      this.initializeDateFields();
+    });
+  }
 
-  public static dropdowns: Record<string, DropdownFieldModel> = {
-    dryness: {
-      key: 'soilDryness',
-      label: 'Soil Dryness',
-      options: Object.values(MeasurementItemSoilDrynessEnum).map((value) => ({
-        value: value,
-        label: value,
-      })),
-      defaultValue: '',
-    },
-    healthStatus: {
-      key: 'healthStatus',
-      label: 'Health Status',
-      options: Object.values(MeasurementItemHealthStatusEnum).map((value) => ({
-        value: value,
-        label: value,
-      })),
-      defaultValue: '',
-    },
-    growthStage: {
-      key: 'growthStage',
-      label: 'Growth Stage',
-      options: Object.values(MeasurementItemGrowthStageEnum).map((value) => ({
-        value: value,
-        label: value,
-      })),
-      defaultValue: '',
-    },
-  };
+  private initializeTableHeaders() {
+    this.tableHeaders = [
+      {
+        id: 'title',
+        label: i18next.t('measurements.tableHeaders.title'),
+        sortable: true,
+        type: 'string',
+        tooltip: i18next.t('measurements.tooltips.title'),
+      },
+      {
+        id: 'batchId',
+        label: i18next.t('measurements.tableHeaders.batchId'),
+        sortable: true,
+        type: 'number',
+        tooltip: i18next.t('measurements.tooltips.batchId'),
+      },
+      {
+        id: 'actions',
+        label: i18next.t('measurements.tableHeaders.actions'),
+        sortable: false,
+        type: 'action',
+        tooltip: i18next.t('measurements.tooltips.actions'),
+      },
+      {
+        id: 'soilPH',
+        label: i18next.t('measurements.tableHeaders.soilPH'),
+        sortable: true,
+        type: 'number',
+        tooltip: i18next.t('measurements.tooltips.soilPH'),
+      },
+      {
+        id: 'soilDryness',
+        label: i18next.t('measurements.tableHeaders.soilDryness'),
+        sortable: true,
+        type: 'string',
+        tooltip: i18next.t('measurements.tooltips.soilDryness'),
+      },
+      {
+        id: 'healthStatus',
+        label: i18next.t('measurements.tableHeaders.healthStatus'),
+        sortable: true,
+        type: 'string',
+        tooltip: i18next.t('measurements.tooltips.healthStatus'),
+      },
+      {
+        id: 'growthStage',
+        label: i18next.t('measurements.tableHeaders.growthStage'),
+        sortable: true,
+        type: 'string',
+        tooltip: i18next.t('measurements.tooltips.growthStage'),
+      },
+      {
+        id: 'date',
+        label: i18next.t('measurements.tableHeaders.date'),
+        sortable: true,
+        type: 'date',
+        tooltip: i18next.t('measurements.tooltips.date'),
+      },
+    ];
+  }
 
-  public static dateFields: DateFieldModel[] = [
-    { key: 'dateMax', label: 'Read Before', defaultValue: '' },
-    { key: 'dateMin', label: 'Read After', defaultValue: '' },
-  ];
+  public get textFieldsString(): Record<string, InputFieldModel> {
+    return {
+      searchQuery: {
+        key: 'searchQuery',
+        label: i18next.t('measurements.textFields.searchQuery'),
+        defaultValue: '',
+      },
+    };
+  }
+
+  public get textFieldsNumber(): Record<string, InputFieldModel> {
+    return {
+      phMin: {
+        key: 'phMin',
+        label: i18next.t('measurements.textFields.phMin'),
+        defaultValue: '',
+      },
+      phMax: {
+        key: 'phMax',
+        label: i18next.t('measurements.textFields.phMax'),
+        defaultValue: '',
+      },
+    };
+  }
+
+  private initializeDropdowns() {
+    this.dropdowns = {
+      dryness: {
+        key: 'soilDryness',
+        label: i18next.t('measurements.dropdowns.soilDryness'),
+        options: Object.values(MeasurementItemSoilDrynessEnum).map((value) => ({
+          value: value,
+          label: value,
+        })),
+        defaultValue: '',
+      },
+      healthStatus: {
+        key: 'healthStatus',
+        label: i18next.t('measurements.dropdowns.healthStatus'),
+        options: Object.values(MeasurementItemHealthStatusEnum).map(
+          (value) => ({
+            value: value,
+            label: value,
+          }),
+        ),
+        defaultValue: '',
+      },
+      growthStage: {
+        key: 'growthStage',
+        label: i18next.t('measurements.dropdowns.growthStage'),
+        options: Object.values(MeasurementItemGrowthStageEnum).map((value) => ({
+          value: value,
+          label: value,
+        })),
+        defaultValue: '',
+      },
+    };
+  }
+
+  private initializeDateFields() {
+    this.dateFields = [
+      {
+        key: 'dateMax',
+        label: i18next.t('measurements.dateFields.dateMax'),
+        defaultValue: '',
+      },
+      {
+        key: 'dateMin',
+        label: i18next.t('measurements.dateFields.dateMin'),
+        defaultValue: '',
+      },
+    ];
+  }
 }
 
-export default MeasurementsData;
+const measurementsData = new MeasurementsData();
+export default measurementsData;

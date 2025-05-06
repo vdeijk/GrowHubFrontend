@@ -3,4 +3,5 @@ export interface InputFieldModel {
   label: string;
   defaultValue: string;
   required?: boolean;
+  readonly?: boolean;
 }

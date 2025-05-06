@@ -4,10 +4,11 @@ import { BaseFormStore } from '../../base/BaseFormStore/BaseFormStore';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
 import { runInAction } from 'mobx';
 import { localStorageService } from '../../../services/LocalStorageService/LocalStorageService';
-import AddCropData from '../../../../auxiliary/data/AddCropData';
 import { DataMappingService } from '../../../services/DataMappingService/DatamappingService';
 import ValueTransformService from '../../../services/ValueTransformService/ValueTransformService';
 import { MonthEnum } from '../../../../auxiliary/enums/MonthEnum';
+import addCropData from '../../../../auxiliary/data/AddCropData';
+import i18next from 'i18next';
 
 class AddCropStore extends BaseFormStore {
   private endpointService = new EndpointService('Plant');
@@ -15,13 +16,29 @@ class AddCropStore extends BaseFormStore {
   constructor() {
     super();
 
-    Object.values(AddCropData.textFields).forEach((textField) => {
+    this.observeFilters();
+
+    i18next.on('languageChanged', () => {
+      this.observeFilters();
+    });
+  }
+
+  private observeFilters() {
+    this.clearFilters();
+
+    Object.values(addCropData.textFields).forEach((textField) => {
       this.initTextFilter(textField);
     });
 
-    Object.values(AddCropData.dropdownFields).forEach((dropdownField) => {
+    Object.values(addCropData.dropdownFields).forEach((dropdownField) => {
       this.initDropdownFilter(dropdownField);
     });
+  }
+
+  private clearFilters() {
+    this.dropdownFields = {};
+    this.inputFields = {};
+    this.dateFields = {};
   }
 
   public addCrop = async () => {

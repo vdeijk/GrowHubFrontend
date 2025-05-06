@@ -15,6 +15,8 @@ import Popup from '../../layouts/Popup/Popup';
 import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
 import { SearchBarProps } from '../../containers/SearchBar/Searchbar';
 import { useDeleteConfirmation } from '../../../../auxiliary/hooks/useDeleteConfirmation';
+import i18next from 'i18next';
+import copyPasteStore from '../../../stores/derived/CopyPasteStore/CopyPasteStore';
 
 const CropsPage: React.FC = observer(() => {
   const navigate = useRouterNavigation();
@@ -28,7 +30,7 @@ const CropsPage: React.FC = observer(() => {
 
   const { openDeleteConfirmation } = useDeleteConfirmation(
     cropsStore.deletePlant,
-    'Are you sure you want to delete this crop?',
+    i18next.t('cropsPage.deleteConfirmation.message'),
   );
 
   const handleEdit = (id: number | undefined) => {
@@ -51,8 +53,11 @@ const CropsPage: React.FC = observer(() => {
 
     event.stopPropagation();
 
-    const batchToCopy = cropsStore.items.find((item) => item.id === id);
-    if (!batchToCopy) return;
+    const cropToCopy = cropsStore.items.find((item) => item.id === id);
+
+    if (!cropToCopy) return;
+
+    copyPasteStore.copyItem('Crop', id, cropToCopy.commonName ?? '');
   };
 
   const tableProps: TableProps<PlantItem> = {
@@ -80,7 +85,7 @@ const CropsPage: React.FC = observer(() => {
   const buttonContainerData = [
     {
       onClick: () => navigate('/addCropPage'),
-      label: 'Add Crop',
+      label: i18next.t('cropsPage.buttons.addCrop'),
     },
   ];
 

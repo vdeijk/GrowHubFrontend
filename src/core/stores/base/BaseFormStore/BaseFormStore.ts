@@ -32,9 +32,12 @@ export abstract class BaseFormStore {
     runInAction(() => {
       if (!this.inputFields[field.key]) {
         this.inputFields[field.key] = new InputField<string | number>(
-          '',
+          field.defaultValue,
           field.label,
           field.required,
+          '',
+          30,
+          field.readonly,
         );
       }
     });

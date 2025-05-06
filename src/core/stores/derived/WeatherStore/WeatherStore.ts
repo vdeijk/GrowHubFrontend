@@ -5,6 +5,7 @@ import { LocationItem } from '../../../../api';
 import FormatService from '../../../services/FormatService/FormatService';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
 import { Weather } from '../../../../auxiliary/interfaces/Weather';
+import i18next from 'i18next';
 
 class WeatherStore {
   private endpointService = new EndpointService('Weather/forecast');
@@ -15,6 +16,10 @@ class WeatherStore {
 
   constructor() {
     makeAutoObservable(this);
+
+    i18next.on('languageChanged', () => {
+      this.updateLocationFullName();
+    });
   }
 
   public async fetchData() {
@@ -82,10 +87,20 @@ class WeatherStore {
     return `${latitude},${longitude}`;
   }
 
+  private updateLocationFullName() {
+    if (this.weatherData) {
+      const { name, region, country } = this.weatherData.location;
+      this.locationFullName = `${name}, ${region}, ${country}`;
+    } else {
+      this.locationFullName = i18next.t('weatherReportPage.unknownLocation');
+    }
+  }
+
   get selectedLocationName(): string {
     return this.selectedLocation
-      ? (this.selectedLocation.name ?? 'Unknown Location')
-      : 'Unknown Location';
+      ? (this.selectedLocation.name ??
+          i18next.t('weatherReportPage.unknownLocation'))
+      : i18next.t('weatherReportPage.unknownLocation');
   }
 }
 

@@ -3,12 +3,13 @@ import styles from './MenuLink.module.css';
 import { MenuLinkData } from '../../../../auxiliary/interfaces/MenuLinkData';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import { useLocation } from 'react-router-dom';
+import { observer } from 'mobx-react-lite';
 
 interface MenuLinkProps {
   menuLinkData: MenuLinkData;
 }
 
-const MenuLink: React.FC<MenuLinkProps> = ({ menuLinkData }) => {
+const MenuLink: React.FC<MenuLinkProps> = observer(({ menuLinkData }) => {
   const { path, label } = menuLinkData;
   const navigate = useRouterNavigation();
   const location = useLocation();
@@ -29,6 +30,6 @@ const MenuLink: React.FC<MenuLinkProps> = ({ menuLinkData }) => {
       </button>
     </li>
   );
-};
+});
 
 export default MenuLink;

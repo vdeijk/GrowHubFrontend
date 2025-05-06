@@ -1,3 +1,5 @@
+import { makeAutoObservable } from 'mobx';
+import i18next from 'i18next';
 import fieldsStore from '../../core/stores/derived/FieldsStore/FieldsStore';
 import { DropdownFieldModel } from '../interfaces/DropdownFieldModel';
 import { DateFieldModel } from '../interfaces/DateFieldModel';
@@ -6,117 +8,176 @@ import { TableHeaderModel } from '../interfaces/TableHeaderModel';
 import { InputFieldModel } from '../interfaces/InputFieldModel';
 
 class BatchesData {
-  public static tableHeaders: TableHeaderModel<YourCropItem>[] = [
-    {
-      id: 'id',
-      label: 'Id',
-      sortable: true,
-      type: 'number',
-      tooltip: 'Use this identifier to link the batch to a reading or task',
-    },
-    {
-      id: 'commonName',
-      label: 'Crop Name',
-      sortable: true,
-      type: 'string',
-      tooltip: 'The common name of the batch',
-    },
-    {
-      id: 'cropId',
-      label: 'Crop Id',
-      sortable: true,
-      type: 'string',
-      tooltip: 'Use this identifier to link the batch to a crop type',
-    },
-    {
-      id: 'actions',
-      label: 'Actions',
-      sortable: false,
-      type: 'action',
-      tooltip: 'View, edit or delete the batch',
-    },
-    {
-      id: 'amount',
-      label: 'Amount',
-      sortable: true,
-      type: 'number',
-      tooltip: 'How many plants are in this batch',
-    },
-    {
-      id: 'location',
-      label: 'Location',
-      sortable: true,
-      type: 'string',
-      tooltip: 'The field where the batch is located',
-    },
-    {
-      id: 'planted',
-      label: 'Planted',
-      sortable: true,
-      type: 'date',
-      tooltip: 'The date when the batch was planted',
-    },
-    {
-      id: 'lastWatered',
-      label: 'Watered',
-      sortable: true,
-      type: 'date',
-      tooltip: 'The date when the batch was last watered',
-    },
-    {
-      id: 'lastFertilized',
-      label: 'Fertilized',
-      sortable: true,
-      type: 'date',
-      tooltip: 'The date when the batch was last fertilized',
-    },
-    {
-      id: 'lastPruned',
-      label: 'Pruned',
-      sortable: true,
-      type: 'date',
-      tooltip: 'The date when the batch was last pruned',
-    },
-    {
-      id: 'lastHarvested',
-      label: 'Harvested',
-      sortable: true,
-      type: 'date',
-      tooltip: 'The date when the batch was last harvested',
-    },
-  ];
+  public tableHeaders: TableHeaderModel<YourCropItem>[] = [];
+  public textFieldsString: Record<string, InputFieldModel> = {};
+  public textFieldsNumber: Record<string, InputFieldModel> = {};
+  public dropdowns: Record<string, DropdownFieldModel> = {};
+  public dateFields: DateFieldModel[] = [];
 
-  public static textFieldsString: Record<string, InputFieldModel> = {
-    searchQuery: { key: 'searchQuery', label: 'Search', defaultValue: '' },
-    descriptionField: {
-      key: 'description',
-      label: 'Notes',
-      defaultValue: '',
-    },
-  };
+  constructor() {
+    makeAutoObservable(this);
+    this.initializeTableHeaders();
+    this.initializeTextFields();
+    this.initializeDropdowns();
+    this.initializeDateFields();
 
-  public static textFieldsNumber: Record<string, InputFieldModel> = {
-    phMin: {
-      key: 'maxAmount',
-      label: 'Maximum Amount',
-      defaultValue: '',
-    },
-    phMax: {
-      key: 'minAmount',
-      label: 'Minimum Amount',
-      defaultValue: '',
-    },
-  };
-  public static dropdowns: Record<string, DropdownFieldModel> = {
-    location: {
-      key: 'location',
-      label: 'Location',
-      options: [],
-      defaultValue: '',
-    },
-  };
+    i18next.on('languageChanged', () => {
+      this.initializeTableHeaders();
+      this.initializeTextFields();
+      this.initializeDropdowns();
+      this.initializeDateFields();
+    });
+  }
+  private initializeTableHeaders() {
+    this.tableHeaders = [
+      {
+        id: 'id',
+        label: i18next.t('batches.tableHeaders.id'),
+        sortable: true,
+        type: 'number',
+        tooltip: i18next.t('batches.tooltips.id'),
+      },
+      {
+        id: 'commonName',
+        label: i18next.t('batches.tableHeaders.commonName'),
+        sortable: true,
+        type: 'string',
+        tooltip: i18next.t('batches.tooltips.commonName'),
+      },
+      {
+        id: 'cropId',
+        label: i18next.t('batches.tableHeaders.cropId'),
+        sortable: true,
+        type: 'string',
+        tooltip: i18next.t('batches.tooltips.cropId'),
+      },
+      {
+        id: 'actions',
+        label: i18next.t('batches.tableHeaders.actions'),
+        sortable: false,
+        type: 'action',
+        tooltip: i18next.t('batches.tooltips.actions'),
+      },
+      {
+        id: 'amount',
+        label: i18next.t('batches.tableHeaders.amount'),
+        sortable: true,
+        type: 'number',
+        tooltip: i18next.t('batches.tooltips.amount'),
+      },
+      {
+        id: 'location',
+        label: i18next.t('batches.tableHeaders.location'),
+        sortable: true,
+        type: 'string',
+        tooltip: i18next.t('batches.tooltips.location'),
+      },
+      {
+        id: 'planted',
+        label: i18next.t('batches.tableHeaders.planted'),
+        sortable: true,
+        type: 'date',
+        tooltip: i18next.t('batches.tooltips.planted'),
+      },
+      {
+        id: 'lastWatered',
+        label: i18next.t('batches.tableHeaders.lastWatered'),
+        sortable: true,
+        type: 'date',
+        tooltip: i18next.t('batches.tooltips.lastWatered'),
+      },
+      {
+        id: 'lastFertilized',
+        label: i18next.t('batches.tableHeaders.lastFertilized'),
+        sortable: true,
+        type: 'date',
+        tooltip: i18next.t('batches.tooltips.lastFertilized'),
+      },
+      {
+        id: 'lastPruned',
+        label: i18next.t('batches.tableHeaders.lastPruned'),
+        sortable: true,
+        type: 'date',
+        tooltip: i18next.t('batches.tooltips.lastPruned'),
+      },
+      {
+        id: 'lastHarvested',
+        label: i18next.t('batches.tableHeaders.lastHarvested'),
+        sortable: true,
+        type: 'date',
+        tooltip: i18next.t('batches.tooltips.lastHarvested'),
+      },
+    ];
+  }
 
-  public static updateLocationDropdownOptions() {
+  private initializeTextFields() {
+    this.textFieldsString = {
+      searchQuery: {
+        key: 'searchQuery',
+        label: i18next.t('batches.textFields.searchQuery'),
+        defaultValue: '',
+      },
+    };
+
+    this.textFieldsNumber = {
+      phMin: {
+        key: 'maxAmount',
+        label: i18next.t('batches.textFields.phMin'),
+        defaultValue: '',
+      },
+      phMax: {
+        key: 'minAmount',
+        label: i18next.t('batches.textFields.phMax'),
+        defaultValue: '',
+      },
+    };
+  }
+
+  private initializeDropdowns() {
+    this.dropdowns = {
+      location: {
+        key: 'location',
+        label: i18next.t('batches.dropdowns.location'),
+        options: fieldsStore.getLocations().map((field) => ({
+          value: field.name ?? '',
+          label: field.name ?? '',
+        })),
+        defaultValue: '',
+      },
+    };
+  }
+
+  private initializeDateFields() {
+    this.dateFields = [
+      {
+        key: 'planted',
+        label: i18next.t('batches.dateFields.planted'),
+        defaultValue: '',
+      },
+      {
+        key: 'lastWatered',
+        label: i18next.t('batches.dateFields.lastWatered'),
+        defaultValue: '',
+      },
+      {
+        key: 'lastFertilized',
+        label: i18next.t('batches.dateFields.lastFertilized'),
+        defaultValue: '',
+      },
+      {
+        key: 'lastPruned',
+        label: i18next.t('batches.dateFields.lastPruned'),
+        defaultValue: '',
+      },
+      {
+        key: 'lastHarvested',
+        label: i18next.t('batches.dateFields.lastHarvested'),
+        defaultValue: '',
+      },
+    ];
+  }
+
+  public updateLocationDropdownOptions() {
     this.dropdowns['location'].options = fieldsStore
       .getLocations()
       .map((field) => ({
@@ -124,14 +185,7 @@ class BatchesData {
         label: field.name ?? '',
       }));
   }
-
-  public static dateFields: DateFieldModel[] = [
-    { key: 'planted', label: 'Planted Before', defaultValue: '' },
-    { key: 'lastWatered', label: 'Watered Before', defaultValue: '' },
-    { key: 'lastFertilized', label: 'Fertilized Before', defaultValue: '' },
-    { key: 'lastPruned', label: 'Pruned Before', defaultValue: '' },
-    { key: 'lastHarvested', label: 'Harvested Before', defaultValue: '' },
-  ];
 }
 
-export default BatchesData;
+const batchesData = new BatchesData();
+export default batchesData;

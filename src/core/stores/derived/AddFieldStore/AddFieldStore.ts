@@ -4,7 +4,8 @@ import { LocationItem } from '../../../../api';
 import fieldsStore from '../FieldsStore/FieldsStore';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
 import { runInAction } from 'mobx';
-import AddFieldData from '../../../../auxiliary/data/AddFieldData';
+import i18next from 'i18next';
+import addFieldData from '../../../../auxiliary/data/AddFieldData';
 
 class AddFieldStore extends BaseFormStore {
   public endpointService = new EndpointService('Location');
@@ -12,9 +13,25 @@ class AddFieldStore extends BaseFormStore {
   constructor() {
     super();
 
-    Object.values(AddFieldData.textFields).forEach((textField) => {
+    this.observeFilters();
+
+    i18next.on('languageChanged', () => {
+      this.observeFilters();
+    });
+  }
+
+  private observeFilters() {
+    this.clearFilters();
+
+    Object.values(addFieldData.textFields).forEach((textField) => {
       this.initTextFilter(textField);
     });
+  }
+
+  private clearFilters() {
+    this.dropdownFields = {};
+    this.inputFields = {};
+    this.dateFields = {};
   }
 
   public addField = async () => {

@@ -3,158 +3,193 @@ import { MenuLinkData } from '../../../auxiliary/interfaces/MenuLinkData';
 import { toast } from 'react-toastify';
 import { matchRoutes, NavigateFunction } from 'react-router-dom';
 import { RouteObject } from 'react-router-dom';
+import i18next from 'i18next';
+import dashboard from '../../../auxiliary/assets/dashboard.jpg';
+import readings from '../../../auxiliary/assets/readings.jpg';
+import tasks from '../../../auxiliary/assets/tasks.jpg';
+import weather from '../../../auxiliary/assets/weather.jpg';
+import batches from '../../../auxiliary/assets/batches.jpg';
+import crops from '../../../auxiliary/assets/crops.jpg';
+import fields from '../../../auxiliary/assets/fields.jpg';
+import produce from '../../../auxiliary/assets/produce.jpg';
 
 class RouterService {
-  currentLabel: string = '';
-  menuLinks: MenuLinkData[] = [
-    {
-      path: '/',
-      label: 'Dashboard',
-      hidden: false,
-      isDynamic: false,
-      tooltip:
-        'Use this page to get an overview of both your farm and your crops',
-    },
-
-    {
-      path: '/weatherReportPage',
-      label: 'Weather',
-      hidden: false,
-      isDynamic: false,
-      tooltip:
-        'Use this page to get an overview of the weather around your fields',
-    },
-    {
-      path: '/fieldsPage',
-      label: 'Fields',
-      hidden: false,
-      isDynamic: false,
-      tooltip: 'Use this page add, edit or delete your fields',
-    },
-    {
-      path: '/tasksPage',
-      label: 'Tasks',
-      hidden: false,
-      isDynamic: false,
-      tooltip: 'Use this page add, edit or delete farm tasks',
-    },
-    {
-      path: '/measurementsPage',
-      label: 'Readings',
-      hidden: false,
-      isDynamic: false,
-      tooltip:
-        'Use this page add, edit or delete readings of your crop batches',
-    },
-    {
-      path: '/producePage',
-      label: 'Produce',
-      hidden: false,
-      isDynamic: false,
-      tooltip: 'Use this page add, edit or delete produce',
-    },
-    {
-      path: '/batchesPage',
-      label: 'Batches',
-      hidden: false,
-      isDynamic: false,
-      tooltip: 'Use this page add, edit or delete your crop batches',
-    },
-    {
-      path: '/cropsPage',
-      label: 'Crops',
-      hidden: false,
-      isDynamic: false,
-      tooltip: 'Use this page add, edit or delete your crop types',
-    },
-    // { path: '/upgrade', label: 'Upgrade', hidden: false, isDynamic: false },
-    {
-      path: '/addBatchPage',
-      label: 'Add Batch',
-      hidden: true,
-      isDynamic: false,
-      tooltip: 'Add a new crop batch',
-    },
-    {
-      path: '/addBatchPage/:id',
-      label: 'Edit Batch',
-      hidden: true,
-      isDynamic: true,
-      tooltip: 'Edit an existing crop batch',
-    },
-    {
-      path: '/addCropPage',
-      label: 'Add Crop',
-      hidden: true,
-      isDynamic: false,
-      tooltip: 'Add a new crop type',
-    },
-    {
-      path: '/addCropPage/:id',
-      label: 'Edit Crop',
-      hidden: true,
-      isDynamic: true,
-      tooltip: 'Edit an existing crop type',
-    },
-    {
-      path: '/addFieldPage',
-      label: 'Add Field',
-      hidden: true,
-      isDynamic: false,
-      tooltip: 'Add a new farm field',
-    },
-    {
-      path: '/addFieldPage/:id',
-      label: 'Edit Field',
-      hidden: true,
-      isDynamic: true,
-      tooltip: 'Edit an existing farm field',
-    },
-    {
-      path: '/addTaskPage',
-      label: 'Add Task',
-      hidden: true,
-      isDynamic: false,
-      tooltip: 'Add a new task',
-    },
-    {
-      path: '/addTaskPage/:id',
-      label: 'Edit Task',
-      hidden: true,
-      isDynamic: false,
-      tooltip: 'Edit an existing task',
-    },
-    {
-      path: '/addMeasurementPage/',
-      label: 'Add Reading',
-      hidden: true,
-      isDynamic: true,
-      tooltip: 'Add a new reading',
-    },
-    {
-      path: '/addMeasurementPage/:id',
-      label: 'Edit Reading',
-      hidden: true,
-      isDynamic: true,
-      tooltip: 'Edit an existing reading',
-    },
-  ];
-
+  public currentLabel: string = '';
+  public menuLinks: MenuLinkData[] = [];
   private routeDefs: RouteObject[] = [];
+  public currentImageUrl: string = dashboard;
 
   constructor() {
     makeAutoObservable(this);
 
-    this.routeDefs = this.menuLinks.map((link) => ({
-      path: link.path,
-      handle: { label: link.label },
-    }));
+    this.initializeMenuLinks();
+
+    i18next.on('languageChanged', () => {
+      this.initializeMenuLinks();
+
+      const path = window.location.hash.replace('#', '');
+      this.currentLabel = this.getLabel(path);
+    });
 
     window.addEventListener('popstate', this.handlePopState);
   }
 
   destroy() {
     window.removeEventListener('popstate', this.handlePopState);
+  }
+
+  private initializeMenuLinks() {
+    this.menuLinks = [
+      {
+        path: '/',
+        label: i18next.t('router.menuLinks.dashboard.label'),
+        hidden: false,
+        isDynamic: false,
+        tooltip: i18next.t('router.menuLinks.dashboard.tooltip'),
+        imageUrl: dashboard,
+      },
+      {
+        path: '/weatherReportPage',
+        label: i18next.t('router.menuLinks.weather.label'),
+        hidden: false,
+        isDynamic: false,
+        tooltip: i18next.t('router.menuLinks.weather.tooltip'),
+        imageUrl: weather,
+      },
+      {
+        path: '/fieldsPage',
+        label: i18next.t('router.menuLinks.fields.label'),
+        hidden: false,
+        isDynamic: false,
+        tooltip: i18next.t('router.menuLinks.fields.tooltip'),
+        imageUrl: fields,
+      },
+      {
+        path: '/tasksPage',
+        label: i18next.t('router.menuLinks.tasks.label'),
+        hidden: false,
+        isDynamic: false,
+        tooltip: i18next.t('router.menuLinks.tasks.tooltip'),
+        imageUrl: tasks,
+      },
+      {
+        path: '/measurementsPage',
+        label: i18next.t('router.menuLinks.readings.label'),
+        hidden: false,
+        isDynamic: false,
+        tooltip: i18next.t('router.menuLinks.readings.tooltip'),
+        imageUrl: readings,
+      },
+      {
+        path: '/producePage',
+        label: i18next.t('router.menuLinks.produce.label'),
+        hidden: false,
+        isDynamic: false,
+        tooltip: i18next.t('router.menuLinks.produce.tooltip'),
+        imageUrl: produce,
+      },
+      {
+        path: '/batchesPage',
+        label: i18next.t('router.menuLinks.batches.label'),
+        hidden: false,
+        isDynamic: false,
+        tooltip: i18next.t('router.menuLinks.batches.tooltip'),
+        imageUrl: batches,
+      },
+      {
+        path: '/cropsPage',
+        label: i18next.t('router.menuLinks.crops.label'),
+        hidden: false,
+        isDynamic: false,
+        tooltip: i18next.t('router.menuLinks.crops.tooltip'),
+        imageUrl: crops,
+      },
+      {
+        path: '/addBatchPage',
+        label: i18next.t('router.menuLinks.addBatch.label'),
+        hidden: true,
+        isDynamic: false,
+        tooltip: i18next.t('router.menuLinks.addBatch.tooltip'),
+        imageUrl: batches,
+      },
+      {
+        path: '/addBatchPage/:id',
+        label: i18next.t('router.menuLinks.editBatch.label'),
+        hidden: true,
+        isDynamic: true,
+        tooltip: i18next.t('router.menuLinks.editBatch.tooltip'),
+        imageUrl: batches,
+      },
+      {
+        path: '/addCropPage',
+        label: i18next.t('router.menuLinks.addCrop.label'),
+        hidden: true,
+        isDynamic: false,
+        tooltip: i18next.t('router.menuLinks.addCrop.tooltip'),
+        imageUrl: crops,
+      },
+      {
+        path: '/addCropPage/:id',
+        label: i18next.t('router.menuLinks.editCrop.label'),
+        hidden: true,
+        isDynamic: true,
+        tooltip: i18next.t('router.menuLinks.editCrop.tooltip'),
+        imageUrl: crops,
+      },
+      {
+        path: '/addFieldPage',
+        label: i18next.t('router.menuLinks.addField.label'),
+        hidden: true,
+        isDynamic: false,
+        tooltip: i18next.t('router.menuLinks.addField.tooltip'),
+        imageUrl: fields,
+      },
+      {
+        path: '/addFieldPage/:id',
+        label: i18next.t('router.menuLinks.editField.label'),
+        hidden: true,
+        isDynamic: true,
+        tooltip: i18next.t('router.menuLinks.editField.tooltip'),
+        imageUrl: fields,
+      },
+      {
+        path: '/addTaskPage',
+        label: i18next.t('router.menuLinks.addTask.label'),
+        hidden: true,
+        isDynamic: false,
+        tooltip: i18next.t('router.menuLinks.addTask.tooltip'),
+        imageUrl: tasks,
+      },
+      {
+        path: '/addTaskPage/:id',
+        label: i18next.t('router.menuLinks.editTask.label'),
+        hidden: true,
+        isDynamic: false,
+        tooltip: i18next.t('router.menuLinks.editTask.tooltip'),
+        imageUrl: tasks,
+      },
+      {
+        path: '/addMeasurementPage/',
+        label: i18next.t('router.menuLinks.addReading.label'),
+        hidden: true,
+        isDynamic: true,
+        tooltip: i18next.t('router.menuLinks.addReading.tooltip'),
+        imageUrl: readings,
+      },
+      {
+        path: '/addMeasurementPage/:id',
+        label: i18next.t('router.menuLinks.editReading.label'),
+        hidden: true,
+        isDynamic: true,
+        tooltip: i18next.t('router.menuLinks.editReading.tooltip'),
+        imageUrl: readings,
+      },
+    ];
+
+    this.routeDefs = this.menuLinks.map((link) => ({
+      path: link.path,
+      handle: { label: link.label },
+    }));
   }
 
   private handlePopState = () => {
@@ -166,11 +201,17 @@ class RouterService {
     try {
       const adjustedPath = path.replace('/growhub', '');
       this.currentLabel = this.getLabel(adjustedPath);
+
+      const matchingLink = this.menuLinks.find(
+        (link) => link.path === adjustedPath,
+      );
+      this.currentImageUrl = matchingLink?.imageUrl || dashboard;
+
       if (this.currentLabel === 'Unknown Page' && navigate) {
         navigate('/404');
       }
     } catch {
-      toast.error('An unexpected error occurred. Redirecting to 404...');
+      toast.error(i18next.t('routerService.error.unexpected'));
       if (navigate) navigate('/404');
     }
   };

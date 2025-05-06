@@ -1,47 +1,92 @@
 import { DateFieldModel } from '../interfaces/DateFieldModel';
 import { DropdownFieldModel } from '../interfaces/DropdownFieldModel';
 import { InputFieldModel } from '../interfaces/InputFieldModel';
+import { makeAutoObservable } from 'mobx';
+import i18next from 'i18next';
 
 class AddBatchData {
-  public static textFields: Record<string, InputFieldModel> = {
-    commonName: {
-      key: 'commonName',
-      label: 'Title Field',
-      defaultValue: '',
-      required: true,
-    },
-    notes: { key: 'notes', label: 'Notes', defaultValue: '' },
-    amount: {
-      key: 'amount',
-      label: 'Amount',
-      defaultValue: '',
-      required: true,
-    },
-    cropId: {
-      key: 'cropId',
-      label: 'Crop Id',
-      defaultValue: '',
-      required: false,
-    },
-  };
+  public textFields: Record<string, InputFieldModel> = {};
+  public dropdowns: Record<string, DropdownFieldModel> = {};
+  public dateFields: DateFieldModel[] = [];
 
-  public static dropdowns: Record<string, DropdownFieldModel> = {
-    location: {
-      key: 'location',
-      label: 'Location',
-      options: [],
-      defaultValue: '',
-      required: true,
-    },
-  };
+  constructor() {
+    makeAutoObservable(this);
 
-  public static dateFields: DateFieldModel[] = [
-    { key: 'planted', label: 'Planted', defaultValue: '', required: true },
-    { key: 'lastWatered', label: 'Last Watered', defaultValue: '' },
-    { key: 'lastFertilized', label: 'Last Fertilized', defaultValue: '' },
-    { key: 'lastPruned', label: 'Last Pruned', defaultValue: '' },
-    { key: 'lastHarvested', label: 'Last Harvested', defaultValue: '' },
-  ];
+    this.initializeFields();
+
+    i18next.on('languageChanged', () => {
+      this.initializeFields();
+    });
+  }
+
+  private initializeFields() {
+    this.textFields = {
+      commonName: {
+        key: 'commonName',
+        label: i18next.t('addBatchData.textFields.commonName'),
+        defaultValue: '',
+        required: true,
+        readonly: true,
+      },
+      notes: {
+        key: 'notes',
+        label: i18next.t('addBatchData.textFields.notes'),
+        defaultValue: '',
+      },
+      amount: {
+        key: 'amount',
+        label: i18next.t('addBatchData.textFields.amount'),
+        defaultValue: '',
+        required: true,
+      },
+      cropId: {
+        key: 'cropId',
+        label: i18next.t('addBatchData.textFields.cropId'),
+        defaultValue: '',
+        required: true,
+      },
+    };
+
+    this.dropdowns = {
+      location: {
+        key: 'location',
+        label: i18next.t('addBatchData.dropdowns.location'),
+        options: [],
+        defaultValue: '',
+        required: true,
+      },
+    };
+
+    this.dateFields = [
+      {
+        key: 'planted',
+        label: i18next.t('addBatchData.dateFields.planted'),
+        defaultValue: '',
+        required: true,
+      },
+      {
+        key: 'lastWatered',
+        label: i18next.t('addBatchData.dateFields.lastWatered'),
+        defaultValue: '',
+      },
+      {
+        key: 'lastFertilized',
+        label: i18next.t('addBatchData.dateFields.lastFertilized'),
+        defaultValue: '',
+      },
+      {
+        key: 'lastPruned',
+        label: i18next.t('addBatchData.dateFields.lastPruned'),
+        defaultValue: '',
+      },
+      {
+        key: 'lastHarvested',
+        label: i18next.t('addBatchData.dateFields.lastHarvested'),
+        defaultValue: '',
+      },
+    ];
+  }
 }
 
-export default AddBatchData;
+const addBatchData = new AddBatchData();
+export default addBatchData;

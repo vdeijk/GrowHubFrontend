@@ -2,11 +2,13 @@ import { SearchableStore } from '../../base/BaseSearchableStore/BaseSearchableSt
 import { MeasurementItem } from '../../../../api';
 import { makeObservable, runInAction, action, computed } from 'mobx';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
-import MeasurementsData from '../../../../auxiliary/data/MeasurementsData';
 import { PaginationService } from '../../../services/PaginationService/PaginationService';
 import TableColoringService from '../TableColoringService/TableColoringService';
 import EventBus from '../../../services/EventBusService/EventBusService';
 import { FilterService } from '../../../services/FilterService/FilterService';
+import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
+import measurementsData from '../../../../auxiliary/data/MeasurementsData';
+import i18next from 'i18next';
 
 class MeasurementsStore extends SearchableStore<MeasurementItem> {
   private endpointService = new EndpointService('Measurements');
@@ -14,24 +16,17 @@ class MeasurementsStore extends SearchableStore<MeasurementItem> {
   public get isLoading(): boolean {
     return this.endpointService.isLoading;
   }
+  public get tableHeaders(): TableHeaderModel<MeasurementItem>[] {
+    return measurementsData.tableHeaders;
+  }
 
   constructor() {
     super(['title']);
 
-    Object.values(MeasurementsData.textFieldsString).forEach((textField) => {
-      this.initStringFilter(textField);
-    });
+    this.observeFilters();
 
-    Object.values(MeasurementsData.textFieldsNumber).forEach((textField) => {
-      this.initNumberFilter(textField);
-    });
-
-    Object.values(MeasurementsData.dropdowns).forEach((dropdown) => {
-      this.initDropdownFilter(dropdown);
-    });
-
-    MeasurementsData.dateFields.forEach((dateField) => {
-      this.initDateFilter(dateField);
+    i18next.on('languageChanged', () => {
+      this.observeFilters();
     });
 
     makeObservable(this, {
@@ -40,8 +35,34 @@ class MeasurementsStore extends SearchableStore<MeasurementItem> {
     });
   }
 
+  private observeFilters() {
+    this.clearFilters();
+
+    Object.values(measurementsData.textFieldsString).forEach((textField) => {
+      this.initStringFilter(textField);
+    });
+
+    Object.values(measurementsData.textFieldsNumber).forEach((textField) => {
+      this.initNumberFilter(textField);
+    });
+
+    Object.values(measurementsData.dropdowns).forEach((dropdown) => {
+      this.initDropdownFilter(dropdown);
+    });
+
+    measurementsData.dateFields.forEach((dateField) => {
+      this.initDateFilter(dateField);
+    });
+  }
+
+  private clearFilters() {
+    this.stringFilters = {};
+    this.numberFilters = {};
+    this.dropdownFilters = {};
+    this.dateFilters = {};
+  }
+
   debouncedFilterMeasurements: (criteria: string) => void = () => {};
-  tableHeaders = MeasurementsData.tableHeaders;
 
   public fetchData = async () => {
     const data = await this.endpointService.getData<MeasurementItem[]>();
@@ -53,15 +74,10 @@ class MeasurementsStore extends SearchableStore<MeasurementItem> {
         key: keyof MeasurementItem;
         thresholds: { red: number; yellow: number };
       }[] = [{ key: 'soilPH', thresholds: { red: 6, yellow: 7 } }];
-      const dateKeys = ['date'] as (keyof MeasurementItem)[];
 
-      let coloredItems = TableColoringService.getColoredNumericalValues(
+      this.items = TableColoringService.getColoredNumericalValues(
         data,
         numericalKeys,
-      );
-      this.items = TableColoringService.getColoredDateValues(
-        coloredItems,
-        dateKeys,
       );
 
       this.filteredItems = this.items;
@@ -112,6 +128,12 @@ class MeasurementsStore extends SearchableStore<MeasurementItem> {
 
     EventBus.dispatchEvent('filteredItems:updated', undefined);
   }
+
+  public updateReading = async (id: number, data: MeasurementItem) => {
+    await this.endpointService.putData(`${id}`, data);
+
+    this.fetchData();
+  };
 }
 
 const measurementsStore = new MeasurementsStore();

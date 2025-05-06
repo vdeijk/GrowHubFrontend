@@ -16,6 +16,8 @@ import Popup from '../../layouts/Popup/Popup';
 import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
 import { ButtonProps } from '../../../../auxiliary/interfaces/ButtonProps';
 import { useDeleteConfirmation } from '../../../../auxiliary/hooks/useDeleteConfirmation';
+import i18next from 'i18next';
+import copyPasteStore from '../../../stores/derived/CopyPasteStore/CopyPasteStore';
 
 interface MeasurementsProps {}
 
@@ -28,13 +30,13 @@ const MeasurementsPage: React.FC<MeasurementsProps> = observer(() => {
       onClick: () => {
         navigate('/addMeasurementPage');
       },
-      label: 'Add Reading',
+      label: i18next.t('measurementsPage.buttons.addReading'),
     },
   ];
 
   const { openDeleteConfirmation } = useDeleteConfirmation(
     measurementsStore.deleteMeasurement,
-    'Are you sure you want to delete this reading?',
+    i18next.t('measurementsPage.deleteConfirmation.message'),
   );
 
   const handlePaste = (
@@ -44,6 +46,8 @@ const MeasurementsPage: React.FC<MeasurementsProps> = observer(() => {
     if (id === undefined) return;
 
     event.stopPropagation();
+
+    copyPasteStore.pasteBatchIntoReading(id);
   };
 
   const handleEdit = (id: number | undefined) => {

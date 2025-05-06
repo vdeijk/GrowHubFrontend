@@ -9,14 +9,16 @@ import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import { observer } from 'mobx-react-lite';
 import { YourCropItem } from '../../../../api';
 import { ButtonProps } from '../../../../auxiliary/interfaces/ButtonProps';
+import { useTranslation } from 'react-i18next';
 
 const BatchesContainer: React.FC = observer(() => {
   const navigate = useRouterNavigation();
+  const { t } = useTranslation();
 
   const buttonContainerData: ButtonProps[] = [
     {
       onClick: () => navigate('/batchesPage'),
-      label: 'View All Bacthes',
+      label: t('batchesContainer.viewAllBatches'),
     },
   ];
 
@@ -37,7 +39,7 @@ const BatchesContainer: React.FC = observer(() => {
     <>
       <Heading
         level={6}
-        text="Your Batches"
+        text={t('batchesContainer.heading')}
         customStyles={{ marginBottom: '2rem' }}
       />
       <TableWithoutSorting<YourCropItem>
