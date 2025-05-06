@@ -4,7 +4,6 @@ import { toast } from 'react-toastify';
 import tasksStore from '../TasksStore/TasksStore';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
 import measurementsStore from '../MeasurementsStore/MeasurementsStore';
-import cropsStore from '../CropsStore/CropsStore';
 import batchesStore from '../BatchesStore/BatchesStore';
 
 class CopyPasteStore {

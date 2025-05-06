@@ -40,6 +40,8 @@ const AddBatchPage: React.FC<AddBatchPageProps> = observer(
 
       if (!addBatchStore.validateForm()) return;
 
+      console.log('Form submitted');
+
       if (isEditing && id) {
         addBatchStore.updateCrop(id);
       } else {

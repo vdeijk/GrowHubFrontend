@@ -8,6 +8,9 @@ import AddBatchData from '../../../../auxiliary/data/AddBatchData';
 import { DataMappingService } from '../../../services/DataMappingService/DatamappingService';
 import ValueTransformService from '../../../services/ValueTransformService/ValueTransformService';
 import i18next from 'i18next';
+import cropsStore from '../CropsStore/CropsStore';
+import DebounceService from '../../../services/DebounceService/DebounceService';
+import { reaction } from 'mobx';
 
 class AddBatchStore extends BaseFormStore {
   private endpointService = new EndpointService('YourCrops');
@@ -16,6 +19,7 @@ class AddBatchStore extends BaseFormStore {
     super();
 
     this.observeFilters();
+    this.setupCropIdReaction();
 
     i18next.on('languageChanged', () => {
       this.observeFilters();
@@ -75,14 +79,52 @@ class AddBatchStore extends BaseFormStore {
   };
 
   public validateForm() {
-    if (this.validateRequired()) return true;
+    if (
+      this.validateRequired() &&
+      this.getCropNameById(Number(this.inputFields.cropId.value))
+    )
+      return true;
 
     return false;
   }
 
-  private prepareData(): YourCropItem {
+  private getCropNameById(cropId: number): string | undefined {
+    const crop = cropsStore.items.find((item) => item.id === cropId);
+    return crop?.commonName ?? undefined;
+  }
+
+
+  private setupCropIdReaction() {
+    const updateCommonName = DebounceService.debounce(() => {
+      const cropId = Number(this.inputFields.cropId.value);
+      if (Number.isNaN(cropId)) {
+        this.inputFields.commonName.setValue(''); 
+        return;
+      }
+
+      const commonName = this.getCropNameById(cropId);
+      if (commonName) {
+        this.inputFields.commonName.setValue(commonName); 
+      } else {
+        this.inputFields.commonName.setValue(''); 
+      }
+    }, 300); 
+
+    reaction(
+      () => this.inputFields.cropId.value,
+      () => {
+        updateCommonName();
+      }
+    );
+  }
+
+  private prepareData() {
+    const commonName = this.getCropNameById(
+      Number(this.inputFields.cropId.value),
+    );
+
     return {
-      commonName: this.inputFields.commonName.value as string,
+      commonName,
       location: this.dropdownFields.location.value as string,
       cropId: Number(this.inputFields.cropId.value),
       amount: ValueTransformService.toNumberOrUndefined(
