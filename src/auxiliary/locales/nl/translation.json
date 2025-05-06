@@ -1,0 +1,8 @@
+{
+  "weather": {
+    "humidity": "Vochtigheid",
+    "windSpeed": "Windsnelheid",
+    "currentWeather": "Huidig Weer",
+    "viewFullReport": "Volledig Rapport Bekijken"
+  }
+}

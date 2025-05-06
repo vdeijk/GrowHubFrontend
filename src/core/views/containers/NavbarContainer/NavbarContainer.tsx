@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import styles from './NavbarContainer.module.css';
 import { useAuth0 } from '@auth0/auth0-react';
+import LanguageSwitcher from '../../reusables/LanguageSwitcher/LanguageSwitcher';
 
 interface NavbarProps {
   userName: string;
@@ -20,6 +21,7 @@ const NavbarContainer: React.FC<NavbarProps> = ({ userName }) => {
       </div>
       <div className={styles.navbarActions}>
         <div className={styles.userNameContainer}>
+          <LanguageSwitcher />
           <span className={styles.userName}>{userName}</span>
           {/* <button className={styles.userIcon}>
             <FontAwesomeIcon icon={faUser} />

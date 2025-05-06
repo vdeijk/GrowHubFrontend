@@ -5,6 +5,7 @@ import './variables.css';
 import App from './App';
 import { HashRouter } from 'react-router-dom';
 import { Auth0Provider } from '@auth0/auth0-react';
+import './i18n';
 
 const basename = import.meta.env.VITE_BASENAME || '/';
 

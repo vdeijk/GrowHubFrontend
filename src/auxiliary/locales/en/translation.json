@@ -1,0 +1,8 @@
+{
+  "weather": {
+    "humidity": "Humidity",
+    "windSpeed": "Wind Speed",
+    "currentWeather": "Current Weather",
+    "viewFullReport": "View Full Report"
+  }
+}
