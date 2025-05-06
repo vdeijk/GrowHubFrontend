@@ -92,8 +92,8 @@
       "todoStatus": "Status"
     },
     "dateFields": {
-      "endDate": "End Date",
-      "startDate": "Start Date"
+      "endDate": "Due Before",
+      "startDate": "Due After"
     }
   },
   "measurements": {
@@ -129,8 +129,8 @@
       "growthStage": "Growth Stage"
     },
     "dateFields": {
-      "dateMax": "Maximum Date",
-      "dateMin": "Minimum Date"
+      "dateMax": "Read Before",
+      "dateMin": "Read After"
     }
   },
   "crops": {
@@ -407,6 +407,14 @@
       "October": "October",
       "November": "November",
       "December": "December"
+    }
+  },
+  "addFieldData": {
+    "textFields": {
+      "name": "Field Name",
+      "notes": "Notes",
+      "latitude": "Latitude",
+      "longitude": "Longitude"
     }
   }
 }

@@ -97,11 +97,6 @@ class MeasurementsData {
         label: i18next.t('measurements.textFields.searchQuery'),
         defaultValue: '',
       },
-      descriptionField: {
-        key: 'description',
-        label: i18next.t('measurements.textFields.descriptionField'),
-        defaultValue: '',
-      },
     };
   }
 

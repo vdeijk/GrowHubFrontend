@@ -92,8 +92,8 @@
       "todoStatus": "Status"
     },
     "dateFields": {
-      "endDate": "Einddatum",
-      "startDate": "Startdatum"
+      "endDate": "Vervallen Voor",
+      "startDate": "Vervallen na"
     }
   },
   "measurements": {
@@ -129,8 +129,8 @@
       "growthStage": "Groei Stadium"
     },
     "dateFields": {
-      "dateMax": "Maximale Datum",
-      "dateMin": "Minimale Datum"
+      "dateMax": "Gemeten Voor",
+      "dateMin": "Gemeten Na"
     }
   },
   "crops": {
@@ -407,6 +407,14 @@
       "October": "Oktober",
       "November": "November",
       "December": "December"
+    }
+  },
+  "addFieldData": {
+    "textFields": {
+      "name": "Veldnaam",
+      "notes": "Notities",
+      "latitude": "Breedtegraad",
+      "longitude": "Lengtegraad"
     }
   }
 }

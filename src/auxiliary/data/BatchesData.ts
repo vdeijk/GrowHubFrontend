@@ -117,11 +117,6 @@ class BatchesData {
         label: i18next.t('batches.textFields.searchQuery'),
         defaultValue: '',
       },
-      descriptionField: {
-        key: 'description',
-        label: i18next.t('batches.textFields.descriptionField'),
-        defaultValue: '',
-      },
     };
 
     this.textFieldsNumber = {

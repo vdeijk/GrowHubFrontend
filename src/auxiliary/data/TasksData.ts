@@ -97,11 +97,6 @@ class TasksData {
         label: i18next.t('tasks.textFields.searchQuery'),
         defaultValue: '',
       },
-      descriptionField: {
-        key: 'description',
-        label: i18next.t('tasks.textFields.descriptionField'),
-        defaultValue: '',
-      },
     };
   }
 
