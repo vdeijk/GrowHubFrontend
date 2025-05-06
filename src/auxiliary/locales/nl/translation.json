@@ -39,7 +39,7 @@
       "amount": "Hoeveel planten zitten er in deze partij",
       "location": "Het veld waar de partij zich bevindt",
       "planted": "De datum waarop de partij is geplant",
-      "lastWatered": "De datum waarop de partij voor het laatst is gegoten",
+      "lastWatered": "De datum waarop de partij voor het laatst is bewaterd",
       "lastFertilized": "De datum waarop de partij voor het laatst is bemest",
       "lastPruned": "De datum waarop de partij voor het laatst is gesnoeid",
       "lastHarvested": "De datum waarop de partij voor het laatst is geoogst"
@@ -55,7 +55,7 @@
     },
     "dateFields": {
       "planted": "Geplant Voor",
-      "lastWatered": "Gegoten Voor",
+      "lastWatered": "Bewaterd Voor",
       "lastFertilized": "Bemest Voor",
       "lastPruned": "Gesnoeid Voor",
       "lastHarvested": "Geoogst Voor"
@@ -136,7 +136,7 @@
   "crops": {
     "tableHeaders": {
       "id": "ID",
-      "commonName": "Gewone Naam",
+      "commonName": "Gewasnaam",
       "actions": "Acties",
       "waterCycle": "Watercyclus",
       "pruningCycle": "Snoeicyclus",
@@ -179,7 +179,7 @@
   },
   "fields": {
     "tableHeaders": {
-      "name": "Titel",
+      "name": "Veldnaam",
       "actions": "Acties",
       "longitude": "Lengtegraad",
       "latitude": "Breedtegraad"
@@ -218,7 +218,7 @@
   },
   "batchesPage": {
     "buttons": {
-      "addBatch": "Batch toevoegen"
+      "addBatch": "Partij toevoegen"
     },
     "deleteConfirmation": {
       "message": "Weet u zeker dat u deze batch wilt verwijderen?"
@@ -255,8 +255,8 @@
         "tooltip": "Gebruik deze pagina om metingen van uw gewaspartijen toe te voegen, te bewerken of te verwijderen"
       },
       "produce": {
-        "label": "Producten",
-        "tooltip": "Gebruik deze pagina om producten toe te voegen, te bewerken of te verwijderen"
+        "label": "Oogsten",
+        "tooltip": "Gebruik deze pagina om oogsten toe te voegen, te bewerken of te verwijderen"
       },
       "batches": {
         "label": "Partijen",
