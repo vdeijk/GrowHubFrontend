@@ -62,9 +62,9 @@ class CopyPasteStore {
   public pasteCropIntoBatches = async (id: number) => {
     if (this.handleErrors('Crop')) return;
 
-    const index = cropsStore.items.findIndex((item) => item.id === id);
+    const index = batchesStore.items.findIndex((item) => item.id === id);
     if (index === -1) {
-      toast.error('Measurement not found');
+      toast.error('Crop not found');
       return;
     }
 
