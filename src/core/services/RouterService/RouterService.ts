@@ -211,7 +211,7 @@ class RouterService {
         navigate('/404');
       }
     } catch {
-      toast.error('An unexpected error occurred. Redirecting to 404...');
+      toast.error(i18next.t('routerService.error.unexpected'));
       if (navigate) navigate('/404');
     }
   };

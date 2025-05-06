@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './ConfirmationContent.module.css';
 import ButtonContainer from '../ButtonContainer/ButtonContainer';
 import { ButtonProps } from '../../../../auxiliary/interfaces/ButtonProps';
+import i18next from 'i18next';
 
 interface ConfirmationContentProps {
   message: string;
@@ -18,12 +19,12 @@ const ConfirmationContent: React.FC<ConfirmationContentProps> = ({
     {
       type: 'button',
       onClick: () => onCancel(),
-      label: 'Back',
+      label: i18next.t('confirmationContent.buttons.back'),
     },
     {
       type: 'button',
       onClick: () => onConfirm(),
-      label: 'Confirm',
+      label: i18next.t('confirmationContent.buttons.confirm'),
     },
   ];
 

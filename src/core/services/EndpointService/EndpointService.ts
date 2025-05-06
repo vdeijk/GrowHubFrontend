@@ -2,6 +2,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { AxiosError } from 'axios';
 import { makeObservable, observable, runInAction } from 'mobx';
+import i18next from 'i18next';
 
 export class EndpointService {
   private BASE_URL = import.meta.env.VITE_BASE_URL;
@@ -39,7 +40,7 @@ export class EndpointService {
     try {
       const response = await axios.post(`${this.url}`, data);
 
-      toast.success('Data addded successfully!');
+      toast.success(i18next.t('endpointService.success.add'));
 
       return response.data as T;
     } catch (error) {
@@ -55,7 +56,7 @@ export class EndpointService {
     try {
       const response = await axios.put(`${this.url}${id}`, data);
 
-      toast.success('Data updated successfully!');
+      toast.success(i18next.t('endpointService.success.update'));
 
       return response.data as T;
     } catch (error) {
@@ -71,7 +72,7 @@ export class EndpointService {
     try {
       await axios.delete(`${this.url}${id}`);
 
-      toast.success('Data deleted successfully!');
+      toast.success(i18next.t('endpointService.success.delete'));
     } catch (error) {
       this.handleError('delete', error);
     } finally {
@@ -92,14 +93,14 @@ export class EndpointService {
         `Axios error during ${action} at ${this.endpoint}:`,
         axiosError,
       );
-      toast.error(`Unexpected error occurred during ${action}.`);
+      toast.error(i18next.t('endpointService.error.unexpected', { action }));
       throw axiosError;
     } else {
       console.error(
         `Non-Axios error during ${action} at ${this.endpoint}:`,
         error,
       );
-      toast.error(`Unexpected error occurred during ${action}.`);
+      toast.error(i18next.t('endpointService.error.unexpected', { action }));
       throw error;
     }
   }

@@ -457,5 +457,41 @@
       "addCrop": "Add Crop",
       "editCrop": "Edit Crop"
     }
+  },
+  "endpointService": {
+    "success": {
+      "add": "Data added successfully!",
+      "update": "Data updated successfully!",
+      "delete": "Data deleted successfully!"
+    },
+    "error": {
+      "unexpected": "Unexpected error occurred during {{action}}."
+    }
+  },
+  "copyPasteStore": {
+    "success": {
+      "copy": "Copied {{type}}: {{name}}",
+      "pasteBatchIntoTask": "Pasted Batch: {{name}} into Task",
+      "pasteBatchIntoReading": "Pasted Batch: {{name}} into Measurement",
+      "pasteCropIntoBatches": "Pasted Crop: {{name}} into Batch"
+    },
+    "error": {
+      "noItemToPaste": "No item to paste",
+      "invalidPaste": "Cannot paste {{type}} here",
+      "taskNotFound": "Task not found",
+      "measurementNotFound": "Measurement not found",
+      "cropNotFound": "Crop not found"
+    }
+  },
+  "routerService": {
+    "error": {
+      "unexpected": "An unexpected error occurred. Redirecting to 404..."
+    }
+  },
+  "confirmationContent": {
+    "buttons": {
+      "back": "Back",
+      "confirm": "Confirm"
+    }
   }
 }

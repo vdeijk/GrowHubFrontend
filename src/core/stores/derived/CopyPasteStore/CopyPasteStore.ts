@@ -5,6 +5,7 @@ import tasksStore from '../TasksStore/TasksStore';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
 import measurementsStore from '../MeasurementsStore/MeasurementsStore';
 import batchesStore from '../BatchesStore/BatchesStore';
+import i18next from 'i18next';
 
 class CopyPasteStore {
   public copiedItem: CopyPasteModel | null = null;
@@ -17,7 +18,7 @@ class CopyPasteStore {
   public copyItem = (type: 'Batch' | 'Crop', id: number, name: string) => {
     this.copiedItem = { type, data: { id, name } };
 
-    toast.success(`Copied ${type}: ${name}`);
+    toast.success(i18next.t('copyPasteStore.success.copy', { type, name }));
   };
 
   public pasteBatchIntoTask = async (id: number) => {
@@ -25,7 +26,7 @@ class CopyPasteStore {
 
     const taskIndex = tasksStore.items.findIndex((item) => item.id === id);
     if (taskIndex === -1) {
-      toast.error('Task not found');
+      toast.error(i18next.t('copyPasteStore.error.taskNotFound'));
       return;
     }
 
@@ -45,7 +46,7 @@ class CopyPasteStore {
       (item) => item.id === id,
     );
     if (taskIndex === -1) {
-      toast.error('Measurement not found');
+      toast.error(i18next.t('copyPasteStore.error.measurementNotFound'));
       return;
     }
 
@@ -63,7 +64,7 @@ class CopyPasteStore {
 
     const index = batchesStore.items.findIndex((item) => item.id === id);
     if (index === -1) {
-      toast.error('Crop not found');
+      toast.error(i18next.t('copyPasteStore.error.cropNotFound'));
       return;
     }
 
@@ -78,12 +79,16 @@ class CopyPasteStore {
 
   private handleErrors = (type: 'Batch' | 'Crop') => {
     if (!this.copiedItem) {
-      toast.error('No item to paste');
+      toast.error(i18next.t('copyPasteStore.error.noItemToPaste'));
       return true;
     }
 
     if (this.copiedItem.type !== type) {
-      toast.error(`Cannot paste ${this.copiedItem.type} here`);
+      toast.error(
+        i18next.t('copyPasteStore.error.invalidPaste', {
+          type: this.copiedItem.type,
+        }),
+      );
       return true;
     }
 

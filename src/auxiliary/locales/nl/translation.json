@@ -457,5 +457,41 @@
       "addCrop": "Gewas Toevoegen",
       "editCrop": "Gewas Bewerken"
     }
+  },
+  "endpointService": {
+    "success": {
+      "add": "Gegevens succesvol toegevoegd!",
+      "update": "Gegevens succesvol bijgewerkt!",
+      "delete": "Gegevens succesvol verwijderd!"
+    },
+    "error": {
+      "unexpected": "Er is een onverwachte fout opgetreden tijdens {{action}}."
+    }
+  },
+  "copyPasteStore": {
+    "success": {
+      "copy": "Gekopieerd {{type}}: {{name}}",
+      "pasteBatchIntoTask": "Batch: {{name}} geplakt in Taak",
+      "pasteBatchIntoReading": "Batch: {{name}} geplakt in Meting",
+      "pasteCropIntoBatches": "Gewas: {{name}} geplakt in Batch"
+    },
+    "error": {
+      "noItemToPaste": "Geen item om te plakken",
+      "invalidPaste": "Kan {{type}} hier niet plakken",
+      "taskNotFound": "Taak niet gevonden",
+      "measurementNotFound": "Meting niet gevonden",
+      "cropNotFound": "Gewas niet gevonden"
+    }
+  },
+  "routerService": {
+    "error": {
+      "unexpected": "Er is een onverwachte fout opgetreden. Doorverwijzen naar 404..."
+    }
+  },
+  "confirmationContent": {
+    "buttons": {
+      "back": "Terug",
+      "confirm": "Bevestigen"
+    }
   }
 }
