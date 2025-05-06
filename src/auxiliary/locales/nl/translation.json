@@ -207,5 +207,29 @@
     "deleteConfirmation": {
       "message": "Weet u zeker dat u deze taak wilt verwijderen?"
     }
+  },
+  "measurementsPage": {
+    "buttons": {
+      "addReading": "Meting toevoegen"
+    },
+    "deleteConfirmation": {
+      "message": "Weet u zeker dat u deze meting wilt verwijderen?"
+    }
+  },
+  "batchesPage": {
+    "buttons": {
+      "addBatch": "Batch toevoegen"
+    },
+    "deleteConfirmation": {
+      "message": "Weet u zeker dat u deze batch wilt verwijderen?"
+    }
+  },
+  "cropsPage": {
+    "buttons": {
+      "addCrop": "Gewas toevoegen"
+    },
+    "deleteConfirmation": {
+      "message": "Weet u zeker dat u dit gewas wilt verwijderen?"
+    }
   }
 }

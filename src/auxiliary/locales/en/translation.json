@@ -207,5 +207,29 @@
     "deleteConfirmation": {
       "message": "Are you sure you want to delete this task?"
     }
+  },
+  "measurementsPage": {
+    "buttons": {
+      "addReading": "Add Reading"
+    },
+    "deleteConfirmation": {
+      "message": "Are you sure you want to delete this reading?"
+    }
+  },
+  "batchesPage": {
+    "buttons": {
+      "addBatch": "Add Batch"
+    },
+    "deleteConfirmation": {
+      "message": "Are you sure you want to delete this batch?"
+    }
+  },
+  "cropsPage": {
+    "buttons": {
+      "addCrop": "Add Crop"
+    },
+    "deleteConfirmation": {
+      "message": "Are you sure you want to delete this crop?"
+    }
   }
 }

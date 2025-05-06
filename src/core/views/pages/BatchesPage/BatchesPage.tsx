@@ -16,6 +16,7 @@ import Popup from '../../layouts/Popup/Popup';
 import batchesStore from '../../../stores/derived/BatchesStore/BatchesStore';
 import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
 import { useDeleteConfirmation } from '../../../../auxiliary/hooks/useDeleteConfirmation';
+import i18next from 'i18next';
 
 const BatchesPage: React.FC = observer(() => {
   const { paginationService } = cropsStore;
@@ -31,7 +32,7 @@ const BatchesPage: React.FC = observer(() => {
 
   const { openDeleteConfirmation } = useDeleteConfirmation(
     batchesStore.deletePlant,
-    'Are you sure you want to delete this batch?',
+    i18next.t('batchesPage.deleteConfirmation.message'),
   );
 
   const handleEdit = (id: number | undefined) => {
@@ -100,7 +101,7 @@ const BatchesPage: React.FC = observer(() => {
   const buttonContainerData = [
     {
       onClick: () => navigate('/addBatchPage'),
-      label: 'Add Batch',
+      label: i18next.t('batchesPage.buttons.addBatch'), 
     },
   ];
 
