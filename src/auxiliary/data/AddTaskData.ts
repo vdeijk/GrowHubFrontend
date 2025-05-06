@@ -1,52 +1,81 @@
 import { DateFieldModel } from '../interfaces/DateFieldModel';
 import { DropdownFieldModel } from '../interfaces/DropdownFieldModel';
 import { InputFieldModel } from '../interfaces/InputFieldModel';
+import { makeAutoObservable } from 'mobx';
+import i18next from 'i18next';
 
 class AddTaskData {
-  public static textFields: Record<string, InputFieldModel> = {
-    titleField: {
-      key: 'title',
-      label: 'Crop Name',
-      defaultValue: '',
-      required: true,
-      readonly: true,
-    },
-    notes: { key: 'notes', label: 'Notes', defaultValue: '', required: false },
-    batchId: {
-      key: 'batchId',
-      label: 'Batch Id',
-      defaultValue: '',
-      required: true,
-    },
-  };
+  public textFields: Record<string, InputFieldModel> = {};
+  public dropdowns: Record<string, DropdownFieldModel> = {};
+  public dateFields: DateFieldModel[] = [];
 
-  public static dropdowns: Record<string, DropdownFieldModel> = {
-    priority: {
-      key: 'priority',
-      label: 'Priority',
-      options: [],
-      defaultValue: '',
-      required: true,
-    },
-    category: {
-      key: 'category',
-      label: 'Category',
-      options: [],
-      defaultValue: '',
-      required: true,
-    },
-    todoStatus: {
-      key: 'todoStatus',
-      label: 'Todo Status',
-      options: [],
-      defaultValue: '',
-      required: true,
-    },
-  };
+  constructor() {
+    makeAutoObservable(this);
 
-  public static dateFields: DateFieldModel[] = [
-    { key: 'dueDate', label: 'Due Date', defaultValue: '', required: true },
-  ];
+    this.initializeFields();
+
+    i18next.on('languageChanged', () => {
+      this.initializeFields();
+    });
+  }
+
+  private initializeFields() {
+    this.textFields = {
+      titleField: {
+        key: 'title',
+        label: i18next.t('addTaskData.textFields.titleField'), // Translated label
+        defaultValue: '',
+        required: true,
+        readonly: true,
+      },
+      notes: {
+        key: 'notes',
+        label: i18next.t('addTaskData.textFields.notes'), // Translated label
+        defaultValue: '',
+        required: false,
+      },
+      batchId: {
+        key: 'batchId',
+        label: i18next.t('addTaskData.textFields.batchId'), // Translated label
+        defaultValue: '',
+        required: true,
+      },
+    };
+
+    this.dropdowns = {
+      priority: {
+        key: 'priority',
+        label: i18next.t('addTaskData.dropdowns.priority'), // Translated label
+        options: [],
+        defaultValue: '',
+        required: true,
+      },
+      category: {
+        key: 'category',
+        label: i18next.t('addTaskData.dropdowns.category'), // Translated label
+        options: [],
+        defaultValue: '',
+        required: true,
+      },
+      todoStatus: {
+        key: 'todoStatus',
+        label: i18next.t('addTaskData.dropdowns.todoStatus'), // Translated label
+        options: [],
+        defaultValue: '',
+        required: true,
+      },
+    };
+
+    this.dateFields = [
+      {
+        key: 'dueDate',
+        label: i18next.t('addTaskData.dateFields.dueDate'), // Translated label
+        defaultValue: '',
+        required: true,
+      },
+    ];
+  }
 }
 
-export default AddTaskData;
+const addTaskData = new AddTaskData();
+export default addTaskData;

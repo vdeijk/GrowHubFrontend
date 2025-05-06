@@ -10,12 +10,23 @@ import {
 } from '../../../../api';
 import AddTaskData from '../../../../auxiliary/data/AddTaskData';
 import { DataMappingService } from '../../../services/DataMappingService/DatamappingService';
+import i18next from 'i18next';
 
 class AddTaskStore extends BaseFormStore {
   public endpointService = new EndpointService('Todo');
 
   constructor() {
     super();
+
+    this.observeFilters();
+
+    i18next.on('languageChanged', () => {
+      this.observeFilters();
+    });
+  }
+
+  private observeFilters() {
+    this.clearFilters();
 
     Object.values(AddTaskData.textFields).forEach((textField) => {
       this.initTextFilter(textField);
@@ -28,6 +39,12 @@ class AddTaskStore extends BaseFormStore {
     AddTaskData.dateFields.forEach((dateField) => {
       this.initDateFilter(dateField);
     });
+  }
+
+  private clearFilters() {
+    this.dropdownFields = {};
+    this.inputFields = {};
+    this.dateFields = {};
   }
 
   public addTask = async () => {

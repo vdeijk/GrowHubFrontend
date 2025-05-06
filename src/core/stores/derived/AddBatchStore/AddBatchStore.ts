@@ -7,12 +7,23 @@ import { localStorageService } from '../../../services/LocalStorageService/Local
 import AddBatchData from '../../../../auxiliary/data/AddBatchData';
 import { DataMappingService } from '../../../services/DataMappingService/DatamappingService';
 import ValueTransformService from '../../../services/ValueTransformService/ValueTransformService';
+import i18next from 'i18next';
 
 class AddBatchStore extends BaseFormStore {
   private endpointService = new EndpointService('YourCrops');
 
   constructor() {
     super();
+
+    this.observeFilters();
+
+    i18next.on('languageChanged', () => {
+      this.observeFilters();
+    });
+  }
+
+  private observeFilters() {
+    this.clearFilters();
 
     Object.values(AddBatchData.textFields).forEach((textField) => {
       this.initTextFilter(textField);
@@ -25,6 +36,12 @@ class AddBatchStore extends BaseFormStore {
     Object.values(AddBatchData.dateFields).forEach((dateField) => {
       this.initDateFilter(dateField);
     });
+  }
+
+  private clearFilters() {
+    this.dropdownFields = {};
+    this.inputFields = {};
+    this.dateFields = {};
   }
 
   public addCrop = async () => {

@@ -2,13 +2,14 @@ import { MeasurementItem } from '../../../../api';
 import { BaseFormStore } from '../../base/BaseFormStore/BaseFormStore';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
 import { runInAction } from 'mobx';
-import AddMeasurementData from '../../../../auxiliary/data/AddMeasurementData';
+import addMeasurementData from '../../../../auxiliary/data/AddMeasurementData';
 import measurementsStore from '../MeasurementsStore/MeasurementsStore';
 import { MeasurementItemSoilDrynessEnum } from '../../../../api';
 import { MeasurementItemGrowthStageEnum } from '../../../../api';
 import { MeasurementItemHealthStatusEnum } from '../../../../api';
 import { DataMappingService } from '../../../services/DataMappingService/DatamappingService';
 import ValueTransformService from '../../../services/ValueTransformService/ValueTransformService';
+import i18next from 'i18next';
 
 class AddMeasurementStore extends BaseFormStore {
   private endpointService = new EndpointService('Measurements');
@@ -16,17 +17,33 @@ class AddMeasurementStore extends BaseFormStore {
   constructor() {
     super();
 
-    Object.values(AddMeasurementData.textFields).forEach((textField) => {
+    this.observeFilters();
+
+    i18next.on('languageChanged', () => {
+      this.observeFilters();
+    });
+  }
+
+  private observeFilters() {
+    this.clearFilters();
+
+    Object.values(addMeasurementData.textFields).forEach((textField) => {
       this.initTextFilter(textField);
     });
 
-    Object.values(AddMeasurementData.dropdowns).forEach((dropdown) => {
+    Object.values(addMeasurementData.dropdowns).forEach((dropdown) => {
       this.initDropdownFilter(dropdown);
     });
 
-    AddMeasurementData.dateFields.forEach((dateField) => {
+    addMeasurementData.dateFields.forEach((dateField) => {
       this.initDateFilter(dateField);
     });
+  }
+
+  private clearFilters() {
+    this.dropdownFields = {};
+    this.inputFields = {};
+    this.dateFields = {};
   }
 
   public addReading = async () => {

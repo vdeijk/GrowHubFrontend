@@ -323,5 +323,90 @@
       "rainChance": "Kans op regen",
       "humidity": "Vochtigheid"
     }
+  },
+  "addMeasurementData": {
+    "textFields": {
+      "title": "Gewasnaam",
+      "notes": "Notities",
+      "soilPH": "Bodem PH",
+      "batchId": "Batch ID"
+    },
+    "dropdowns": {
+      "soilDryness": "Bodem Droogte",
+      "growthStage": "Groei Stadium",
+      "healthStatus": "Gezondheidsstatus"
+    },
+    "dateFields": {
+      "date": "Datum"
+    }
+  },
+  "addTaskData": {
+    "textFields": {
+      "titleField": "Taaktitel",
+      "notes": "Notities",
+      "batchId": "Batch ID"
+    },
+    "dropdowns": {
+      "priority": "Prioriteit",
+      "category": "Categorie",
+      "todoStatus": "Todo Status"
+    },
+    "dateFields": {
+      "dueDate": "Vervaldatum"
+    }
+  },
+  "addBatchData": {
+    "textFields": {
+      "commonName": "Gewasnaam",
+      "notes": "Notities",
+      "amount": "Hoeveelheid",
+      "cropId": "Gewas ID"
+    },
+    "dropdowns": {
+      "location": "Locatie"
+    },
+    "dateFields": {
+      "planted": "Geplant",
+      "lastWatered": "Laatst Bewaterd",
+      "lastFertilized": "Laatst Bemest",
+      "lastPruned": "Laatst Gesnoeid",
+      "lastHarvested": "Laatst Geoogst"
+    }
+  },
+  "addCropData": {
+    "textFields": {
+      "commonName": "Gewasnaam",
+      "notes": "Notities",
+      "waterCycle": "Watercyclus",
+      "pruningCycle": "Snoeicyclus",
+      "fertilizationCycle": "Bemestingscyclus",
+      "harvestCycle": "Oogstcyclus",
+      "phMin": "PH Min",
+      "phMax": "PH Max",
+      "temperatureMin": "Minimale Temperatuur",
+      "temperatureMax": "Maximale Temperatuur"
+    },
+    "dropdownFields": {
+      "harvestStart": "Oogst Start",
+      "harvestEnd": "Oogst Einde",
+      "pruningStart": "Snoei Start",
+      "pruningEnd": "Snoei Einde",
+      "fertilizingStart": "Bemesting Start",
+      "fertilizingEnd": "Bemesting Einde"
+    },
+    "months": {
+      "January": "Januari",
+      "February": "Februari",
+      "March": "Maart",
+      "April": "April",
+      "May": "Mei",
+      "June": "Juni",
+      "July": "Juli",
+      "August": "Augustus",
+      "September": "September",
+      "October": "Oktober",
+      "November": "November",
+      "December": "December"
+    }
   }
 }

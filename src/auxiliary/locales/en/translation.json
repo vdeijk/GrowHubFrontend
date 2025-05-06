@@ -323,5 +323,90 @@
       "rainChance": "Rain Chance",
       "humidity": "Humidity"
     }
+  },
+  "addMeasurementData": {
+    "textFields": {
+      "title": "Crop Name",
+      "notes": "Notes",
+      "soilPH": "Soil PH",
+      "batchId": "Batch ID"
+    },
+    "dropdowns": {
+      "soilDryness": "Soil Dryness",
+      "growthStage": "Growth Stage",
+      "healthStatus": "Health Status"
+    },
+    "dateFields": {
+      "date": "Date"
+    }
+  },
+  "addTaskData": {
+    "textFields": {
+      "titleField": "Task Title",
+      "notes": "Notes",
+      "batchId": "Batch ID"
+    },
+    "dropdowns": {
+      "priority": "Priority",
+      "category": "Category",
+      "todoStatus": "Todo Status"
+    },
+    "dateFields": {
+      "dueDate": "Due Date"
+    }
+  },
+  "addBatchData": {
+    "textFields": {
+      "commonName": "Crop Name",
+      "notes": "Notes",
+      "amount": "Amount",
+      "cropId": "Crop ID"
+    },
+    "dropdowns": {
+      "location": "Location"
+    },
+    "dateFields": {
+      "planted": "Planted",
+      "lastWatered": "Last Watered",
+      "lastFertilized": "Last Fertilized",
+      "lastPruned": "Last Pruned",
+      "lastHarvested": "Last Harvested"
+    }
+  },
+  "addCropData": {
+    "textFields": {
+      "commonName": "Common Name",
+      "notes": "Notes",
+      "waterCycle": "Water Cycle",
+      "pruningCycle": "Pruning Cycle",
+      "fertilizationCycle": "Fertilization Cycle",
+      "harvestCycle": "Harvest Cycle",
+      "phMin": "PH Min",
+      "phMax": "PH Max",
+      "temperatureMin": "Temperature Min",
+      "temperatureMax": "Temperature Max"
+    },
+    "dropdownFields": {
+      "harvestStart": "Harvest Start",
+      "harvestEnd": "Harvest End",
+      "pruningStart": "Pruning Start",
+      "pruningEnd": "Pruning End",
+      "fertilizingStart": "Fertilizing Start",
+      "fertilizingEnd": "Fertilizing End"
+    },
+    "months": {
+      "January": "January",
+      "February": "February",
+      "March": "March",
+      "April": "April",
+      "May": "May",
+      "June": "June",
+      "July": "July",
+      "August": "August",
+      "September": "September",
+      "October": "October",
+      "November": "November",
+      "December": "December"
+    }
   }
 }
