@@ -2,7 +2,19 @@
   "weather": {
     "humidity": "Humidity",
     "windSpeed": "Wind Speed",
-    "currentWeather": "Current Weather",
+    "heading": "Current Weather",
     "viewFullReport": "View Full Report"
+  },
+  "fields": {
+    "heading": "Your Fields",
+    "viewAllFields": "View All Fields"
+  },
+  "batches": {
+    "heading": "Your Batches",
+    "viewAllBatches": "View All Batches"
+  },
+  "tasks": {
+    "heading": "Your Tasks",
+    "viewAllTasks": "View All Tasks"
   }
 }

@@ -8,14 +8,16 @@ import locationStore from '../../../stores/derived/FieldsStore/FieldsStore';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import { ButtonProps } from '../../../../auxiliary/interfaces/ButtonProps';
+import { useTranslation } from 'react-i18next';
 
 const FieldsContainer: React.FC = observer(() => {
   const navigate = useRouterNavigation();
+  const { t } = useTranslation();
 
   const buttonContainerData: ButtonProps[] = [
     {
       onClick: () => navigate('/fieldsPage'),
-      label: 'View All Fields',
+      label: t('fields.viewAllFields'),
     },
   ];
 
@@ -42,7 +44,7 @@ const FieldsContainer: React.FC = observer(() => {
       <LoadingWrapper isLoading={locationStore.isLoading}>
         <Heading
           level={6}
-          text="Your Fields"
+          text={t('fields.heading')}
           customStyles={{ marginBottom: '2rem' }}
         />
         <Map {...mapData} />

@@ -2,7 +2,19 @@
   "weather": {
     "humidity": "Vochtigheid",
     "windSpeed": "Windsnelheid",
-    "currentWeather": "Huidig Weer",
+    "heading": "Huidig Weer",
     "viewFullReport": "Volledig Rapport Bekijken"
+  },
+  "fields": {
+    "heading": "Uw Velden",
+    "viewAllFields": "Bekijk Alle Velden"
+  },
+  "batches": {
+    "heading": "Uw Partijen",
+    "viewAllBatches": "Bekijk Alle Partijen"
+  },
+  "tasks": {
+    "heading": "Uw Taken",
+    "viewAllTasks": "Bekijk Alle Taken"
   }
 }

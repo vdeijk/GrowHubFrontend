@@ -31,7 +31,7 @@ const WeatherContainer: React.FC = observer(() => {
   const buttonContainerData: ButtonProps[] = [
     {
       onClick: () => navigate('/weatherReportPage'),
-      label: 'View Full Report',
+      label: t('weather.viewFullReport'),
     },
   ];
 
@@ -39,7 +39,7 @@ const WeatherContainer: React.FC = observer(() => {
     <>
       <Heading
         level={6}
-        text="Current Weather"
+        text={t('weather.heading')}
         customStyles={{ marginBottom: '2rem' }}
       ></Heading>
       <h4 className={styles.h4}>{weatherStore.locationFullName}</h4>

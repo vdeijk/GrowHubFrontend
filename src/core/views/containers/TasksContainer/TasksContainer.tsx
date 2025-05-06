@@ -8,14 +8,16 @@ import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import { ButtonProps } from '../../../../auxiliary/interfaces/ButtonProps';
+import { useTranslation } from 'react-i18next';
 
 const TasksContainer: React.FC = observer(() => {
   const navigate = useRouterNavigation();
+  const { t } = useTranslation();
 
   const buttonContainerData: ButtonProps[] = [
     {
       onClick: () => navigate('/tasksPage'),
-      label: 'View All Tasks',
+      label: t('tasks.viewAllTasks'),
     },
   ];
 
@@ -24,7 +26,7 @@ const TasksContainer: React.FC = observer(() => {
       <LoadingWrapper isLoading={taskStore.isLoading}>
         <Heading
           level={6}
-          text="Your Tasks"
+          text={t('tasks.heading')}
           customStyles={{ marginBottom: '2rem' }}
         ></Heading>
         {taskStore.items.slice(0, 3).map((task) => (
