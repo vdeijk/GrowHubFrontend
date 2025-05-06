@@ -381,8 +381,8 @@
       "pruningCycle": "Snoeicyclus",
       "fertilizationCycle": "Bemestingscyclus",
       "harvestCycle": "Oogstcyclus",
-      "phMin": "PH Min",
-      "phMax": "PH Max",
+      "phMin": "Minimale PH Waarde",
+      "phMax": "Maximale PH Waarde",
       "temperatureMin": "Minimale Temperatuur",
       "temperatureMax": "Maximale Temperatuur"
     },
@@ -415,6 +415,47 @@
       "notes": "Notities",
       "latitude": "Breedtegraad",
       "longitude": "Lengtegraad"
+    }
+  },
+  "addFieldPage": {
+    "fields": {
+      "name": "Veldnaam",
+      "notes": "Notities",
+      "latitude": "Breedtegraad",
+      "longitude": "Lengtegraad"
+    },
+    "buttons": {
+      "back": "Terug",
+      "addField": "Veld Toevoegen",
+      "editField": "Veld Bewerken"
+    }
+  },
+  "addTaskPage": {
+    "buttons": {
+      "back": "Terug",
+      "addTask": "Taak Toevoegen",
+      "editTask": "Taak Bewerken"
+    }
+  },
+  "addMeasurementPage": {
+    "buttons": {
+      "back": "Terug",
+      "addReading": "Meting Toevoegen",
+      "editReading": "Meting Bewerken"
+    }
+  },
+  "addBatchPage": {
+    "buttons": {
+      "back": "Terug",
+      "addBatch": "Batch Toevoegen",
+      "editBatch": "Batch Bewerken"
+    }
+  },
+  "addCropPage": {
+    "buttons": {
+      "back": "Terug",
+      "addCrop": "Gewas Toevoegen",
+      "editCrop": "Gewas Bewerken"
     }
   }
 }

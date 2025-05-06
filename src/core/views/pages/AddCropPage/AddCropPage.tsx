@@ -12,6 +12,7 @@ import { TextInputProps } from '../../reusables/TextInput/TextInput';
 import TextArea from '../../reusables/TextArea/TextArea';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import Divider from '../../reusables/Divider/Divider';
+import { useTranslation } from 'react-i18next';
 
 interface AddCropPageProps {
   isEditing?: boolean;
@@ -21,6 +22,7 @@ const AddCropPage: React.FC<AddCropPageProps> = observer(
   ({ isEditing = false }) => {
     const navigate = useRouterNavigation();
     const { id } = useParams<{ id: string }>();
+    const { t } = useTranslation();
 
     useEffect(() => {
       if (isEditing && id) {
@@ -50,11 +52,13 @@ const AddCropPage: React.FC<AddCropPageProps> = observer(
       {
         type: 'button',
         onClick: () => navigate('/cropsPage'),
-        label: 'Back',
+        label: t('addCropPage.buttons.back'),
       },
       {
         type: 'submit',
-        label: isEditing ? 'Edit Crop' : 'Add Crop',
+        label: isEditing
+          ? t('addCropPage.buttons.editCrop')
+          : t('addCropPage.buttons.addCrop'),
         customStyles: { marginTop: '1rem' },
       },
     ];

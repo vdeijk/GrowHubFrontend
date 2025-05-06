@@ -25,7 +25,7 @@ class AddFieldData {
       },
       notes: {
         key: 'notes',
-        label: i18next.t('addFieldData.textFields.notes'), // Translated label
+        label: i18next.t('addFieldData.textFields.notes'),
         defaultValue: '',
         required: false,
       },

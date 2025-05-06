@@ -381,8 +381,8 @@
       "pruningCycle": "Pruning Cycle",
       "fertilizationCycle": "Fertilization Cycle",
       "harvestCycle": "Harvest Cycle",
-      "phMin": "PH Min",
-      "phMax": "PH Max",
+      "phMin": "Minium PH",
+      "phMax": "Maximum PH",
       "temperatureMin": "Temperature Min",
       "temperatureMax": "Temperature Max"
     },
@@ -415,6 +415,47 @@
       "notes": "Notes",
       "latitude": "Latitude",
       "longitude": "Longitude"
+    }
+  },
+  "addFieldPage": {
+    "fields": {
+      "name": "Field Name",
+      "notes": "Notes",
+      "latitude": "Latitude",
+      "longitude": "Longitude"
+    },
+    "buttons": {
+      "back": "Back",
+      "addField": "Add Field",
+      "editField": "Edit Field"
+    }
+  },
+  "addTaskPage": {
+    "buttons": {
+      "back": "Back",
+      "addTask": "Add Task",
+      "editTask": "Edit Task"
+    }
+  },
+  "addMeasurementPage": {
+    "buttons": {
+      "back": "Back",
+      "addReading": "Add Reading",
+      "editReading": "Edit Reading"
+    }
+  },
+  "addBatchPage": {
+    "buttons": {
+      "back": "Back",
+      "addBatch": "Add Batch",
+      "editBatch": "Edit Batch"
+    }
+  },
+  "addCropPage": {
+    "buttons": {
+      "back": "Back",
+      "addCrop": "Add Crop",
+      "editCrop": "Edit Crop"
     }
   }
 }

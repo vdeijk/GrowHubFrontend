@@ -13,6 +13,7 @@ import TextArea from '../../reusables/TextArea/TextArea';
 import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import Divider from '../../reusables/Divider/Divider';
 import measurementsStore from '../../../stores/derived/MeasurementsStore/MeasurementsStore';
+import { useTranslation } from 'react-i18next';
 
 interface AddMeasurementPageProps {
   isEditing?: boolean;
@@ -22,6 +23,7 @@ const AddMeasurementPage: React.FC<AddMeasurementPageProps> = observer(
   ({ isEditing = false }) => {
     const navigate = useRouterNavigation();
     const { id } = useParams<{ id: string }>();
+    const { t } = useTranslation();
 
     useEffect(() => {
       if (isEditing && id) {
@@ -81,11 +83,13 @@ const AddMeasurementPage: React.FC<AddMeasurementPageProps> = observer(
       {
         type: 'button',
         onClick: () => navigate('/measurementsPage'),
-        label: 'Back',
+        label: t('addMeasurementPage.buttons.back'),
       },
       {
         type: 'submit',
-        label: isEditing ? 'Edit Reading' : 'Add Reading',
+        label: isEditing
+          ? t('addMeasurementPage.buttons.editReading')
+          : t('addMeasurementPage.buttons.addReading'),
         customStyles: { marginTop: '1rem' },
       },
     ];

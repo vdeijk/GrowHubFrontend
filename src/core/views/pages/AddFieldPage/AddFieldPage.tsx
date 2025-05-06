@@ -9,6 +9,7 @@ import { observer } from 'mobx-react-lite';
 import { useParams } from 'react-router-dom';
 import { TextInputProps } from '../../reusables/TextInput/TextInput';
 import TextArea from '../../reusables/TextArea/TextArea';
+import { useTranslation } from 'react-i18next';
 
 interface AddFieldPageProps {
   isEditing?: boolean;
@@ -18,6 +19,7 @@ const AddFieldPage: React.FC<AddFieldPageProps> = observer(
   ({ isEditing = false }) => {
     const navigate = useRouterNavigation();
     const { id } = useParams<{ id: string }>();
+    const { t } = useTranslation();
 
     useEffect(() => {
       if (isEditing && id) {
@@ -47,11 +49,13 @@ const AddFieldPage: React.FC<AddFieldPageProps> = observer(
       {
         type: 'button',
         onClick: () => navigate('/fieldsPage'),
-        label: 'Back',
+        label: t('addFieldPage.buttons.back'),
       },
       {
         type: 'submit',
-        label: isEditing ? 'Edit Field' : 'Add Field',
+        label: isEditing
+          ? t('addFieldPage.buttons.editField')
+          : t('addFieldPage.buttons.addField'),
         customStyles: { marginTop: '1rem' },
       },
     ];
@@ -71,10 +75,18 @@ const AddFieldPage: React.FC<AddFieldPageProps> = observer(
     return (
       <section className={styles.section}>
         <form onSubmit={handleSubmit} className={styles.form}>
-          <TextInput {...locationNameFieldModel} />
-          <TextArea {...notesFieldModel} />
-          <TextInput {...latitudeFieldModel} />
-          <TextInput {...longitudeFieldModel} />
+          <TextInput
+            {...locationNameFieldModel}
+          />
+          <TextArea
+            {...notesFieldModel}
+          />
+          <TextInput
+            {...latitudeFieldModel}
+          />
+          <TextInput
+            {...longitudeFieldModel}
+          />
           <div></div> <ButtonContainer buttons={buttonContainerData} />
         </form>
       </section>
