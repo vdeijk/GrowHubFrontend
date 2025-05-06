@@ -128,6 +128,12 @@ class MeasurementsStore extends SearchableStore<MeasurementItem> {
 
     EventBus.dispatchEvent('filteredItems:updated', undefined);
   }
+
+  public updateReading = async (id: number, data: MeasurementItem) => {
+    await this.endpointService.putData(`${id}`, data);
+
+    this.fetchData();
+  };
 }
 
 const measurementsStore = new MeasurementsStore();

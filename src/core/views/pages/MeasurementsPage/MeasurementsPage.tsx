@@ -17,6 +17,7 @@ import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderMo
 import { ButtonProps } from '../../../../auxiliary/interfaces/ButtonProps';
 import { useDeleteConfirmation } from '../../../../auxiliary/hooks/useDeleteConfirmation';
 import i18next from 'i18next';
+import copyPasteStore from '../../../stores/derived/CopyPasteStore/CopyPasteStore';
 
 interface MeasurementsProps {}
 
@@ -45,6 +46,8 @@ const MeasurementsPage: React.FC<MeasurementsProps> = observer(() => {
     if (id === undefined) return;
 
     event.stopPropagation();
+
+    copyPasteStore.pasteBatchIntoReading(id);
   };
 
   const handleEdit = (id: number | undefined) => {

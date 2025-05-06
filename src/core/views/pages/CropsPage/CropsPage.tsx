@@ -16,6 +16,7 @@ import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderMo
 import { SearchBarProps } from '../../containers/SearchBar/Searchbar';
 import { useDeleteConfirmation } from '../../../../auxiliary/hooks/useDeleteConfirmation';
 import i18next from 'i18next';
+import copyPasteStore from '../../../stores/derived/CopyPasteStore/CopyPasteStore';
 
 const CropsPage: React.FC = observer(() => {
   const navigate = useRouterNavigation();
@@ -52,8 +53,11 @@ const CropsPage: React.FC = observer(() => {
 
     event.stopPropagation();
 
-    const batchToCopy = cropsStore.items.find((item) => item.id === id);
-    if (!batchToCopy) return;
+    const cropToCopy = cropsStore.items.find((item) => item.id === id);
+
+    if (!cropToCopy) return;
+
+    copyPasteStore.copyItem('Crop', id, cropToCopy.commonName ?? '');
   };
 
   const tableProps: TableProps<PlantItem> = {

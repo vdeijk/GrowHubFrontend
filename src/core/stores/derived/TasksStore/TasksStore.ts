@@ -105,6 +105,12 @@ class TasksStore extends SearchableStore<TodoItem> {
 
     this.fetchData();
   };
+
+  public updateTask = async (id: number, data: TodoItem) => {
+    await this.endpointService.putData(`${id}`, data);
+
+    this.fetchData();
+  };
 }
 
 const tasksStore = new TasksStore();

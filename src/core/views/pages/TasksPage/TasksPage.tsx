@@ -16,6 +16,7 @@ import Pagination from '../../reusables/Pagination/Pagination';
 import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
 import { useDeleteConfirmation } from '../../../../auxiliary/hooks/useDeleteConfirmation';
 import i18next from 'i18next';
+import copyPasteStore from '../../../stores/derived/CopyPasteStore/CopyPasteStore';
 
 const TasksPage: React.FC = observer(() => {
   const paginationService = taskStore.paginationService;
@@ -35,6 +36,8 @@ const TasksPage: React.FC = observer(() => {
     if (id === undefined) return;
 
     event.stopPropagation();
+
+    copyPasteStore.pasteBatchIntoTask(id);
   };
 
   const handleEdit = (id: number | undefined) => {

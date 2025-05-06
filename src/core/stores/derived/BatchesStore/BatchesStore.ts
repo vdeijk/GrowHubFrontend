@@ -147,6 +147,12 @@ class BatchesStore extends SearchableStore<YourCropItem> {
 
     this.fetchData();
   };
+
+  public updateBatch = async (id: number, data: YourCropItem) => {
+    await this.endpointService.putData(`${id}`, data);
+
+    this.fetchData();
+  };
 }
 
 const batchesStore = new BatchesStore();

@@ -75,18 +75,10 @@ const AddFieldPage: React.FC<AddFieldPageProps> = observer(
     return (
       <section className={styles.section}>
         <form onSubmit={handleSubmit} className={styles.form}>
-          <TextInput
-            {...locationNameFieldModel}
-          />
-          <TextArea
-            {...notesFieldModel}
-          />
-          <TextInput
-            {...latitudeFieldModel}
-          />
-          <TextInput
-            {...longitudeFieldModel}
-          />
+          <TextInput {...locationNameFieldModel} />
+          <TextArea {...notesFieldModel} />
+          <TextInput {...latitudeFieldModel} />
+          <TextInput {...longitudeFieldModel} />
           <div></div> <ButtonContainer buttons={buttonContainerData} />
         </form>
       </section>
