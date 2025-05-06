@@ -15,6 +15,7 @@ import Popup from '../../layouts/Popup/Popup';
 import Pagination from '../../reusables/Pagination/Pagination';
 import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
 import { useDeleteConfirmation } from '../../../../auxiliary/hooks/useDeleteConfirmation';
+import i18next from 'i18next';
 
 const TasksPage: React.FC = observer(() => {
   const paginationService = taskStore.paginationService;
@@ -23,7 +24,7 @@ const TasksPage: React.FC = observer(() => {
   const buttonContainerData = [
     {
       onClick: () => navigate('/addTaskPage'),
-      label: 'Add Task',
+      label: i18next.t('tasksPage.buttons.addTask'),
     },
   ];
 
@@ -42,7 +43,7 @@ const TasksPage: React.FC = observer(() => {
 
   const { openDeleteConfirmation } = useDeleteConfirmation(
     taskStore.deleteTask,
-    'Are you sure you want to delete this task?',
+    i18next.t('tasksPage.deleteConfirmation.message'),
   );
 
   const handleDelete = (

@@ -8,6 +8,7 @@ import TableColoringService from '../TableColoringService/TableColoringService';
 import { FilterService } from '../../../services/FilterService/FilterService';
 import EventBus from '../../../services/EventBusService/EventBusService';
 import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
+import i18next from 'i18next';
 
 class TasksStore extends SearchableStore<TodoItem> {
   private endpointService = new EndpointService('Todo');
@@ -22,6 +23,21 @@ class TasksStore extends SearchableStore<TodoItem> {
   constructor() {
     super(['title']);
 
+    this.observeFilters();
+
+    i18next.on('languageChanged', () => {
+      this.observeFilters();
+    });
+    
+    makeObservable(this, {
+      isLoading: computed,
+      fetchData: action,
+    });
+  }
+
+  private observeFilters() {
+    this.clearFilters();
+
     Object.values(tasksData.textFieldsString).forEach((textField) => {
       this.initStringFilter(textField);
     });
@@ -33,11 +49,13 @@ class TasksStore extends SearchableStore<TodoItem> {
     tasksData.dateFields.forEach((dateField) => {
       this.initDateFilter(dateField);
     });
+  }
 
-    makeObservable(this, {
-      isLoading: computed,
-      fetchData: action,
-    });
+  private clearFilters() {
+    this.stringFilters = {};
+    this.numberFilters = {};
+    this.dropdownFilters = {};
+    this.dateFilters = {};
   }
 
   public fetchData = async () => {

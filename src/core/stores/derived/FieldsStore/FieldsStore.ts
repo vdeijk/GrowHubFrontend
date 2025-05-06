@@ -3,12 +3,17 @@ import weatherStore from '../WeatherStore/WeatherStore';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
 import { LocationItem } from '../../../../api';
 import EventBus from '../../../services/EventBusService/EventBusService';
+import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
+import FieldsData from '../../../../auxiliary/data/FieldsData';
 
 class FieldsStore {
   private endpointService = new EndpointService('Location');
   public locations: LocationItem[] = [];
   public get isLoading(): boolean {
     return this.endpointService.isLoading;
+  }
+  public get tableHeaders(): TableHeaderModel<LocationItem>[] {
+    return FieldsData.tableHeaders;
   }
 
   constructor() {

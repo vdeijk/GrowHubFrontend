@@ -16,7 +16,6 @@ class MeasurementsStore extends SearchableStore<MeasurementItem> {
   public get isLoading(): boolean {
     return this.endpointService.isLoading;
   }
-
   public get tableHeaders(): TableHeaderModel<MeasurementItem>[] {
     return measurementsData.tableHeaders;
   }

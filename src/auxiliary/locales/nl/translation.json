@@ -132,5 +132,80 @@
       "dateMax": "Maximale Datum",
       "dateMin": "Minimale Datum"
     }
+  },
+  "crops": {
+    "tableHeaders": {
+      "id": "ID",
+      "commonName": "Gewone Naam",
+      "actions": "Acties",
+      "waterCycle": "Watercyclus",
+      "pruningCycle": "Snoeicyclus",
+      "fertilizationCycle": "Bemestingscyclus",
+      "harvestCycle": "Oogstcyclus",
+      "phMin": "Minimale pH",
+      "phMax": "Maximale pH",
+      "temperatureMin": "Minimale Temperatuur",
+      "temperatureMax": "Maximale Temperatuur",
+      "harvestStart": "Oogst Start",
+      "harvestEnd": "Oogst Einde",
+      "pruningStart": "Snoeien Start",
+      "pruningEnd": "Snoeien Einde",
+      "fertilizingStart": "Bemesten Start",
+      "fertilizingEnd": "Bemesten Einde"
+    },
+    "tooltips": {
+      "id": "De unieke identificatie voor het gewas",
+      "commonName": "De gewone naam van het gewas",
+      "actions": "Voer acties uit zoals bewerken of verwijderen",
+      "waterCycle": "Het aantal dagen tussen watercycli",
+      "pruningCycle": "Het aantal dagen tussen snoeicycli",
+      "fertilizationCycle": "Het aantal dagen tussen bemestingscycli",
+      "harvestCycle": "Het aantal dagen tussen oogstcycli",
+      "phMin": "Het minimale pH-niveau geschikt voor het gewas",
+      "phMax": "Het maximale pH-niveau geschikt voor het gewas",
+      "temperatureMin": "De minimale temperatuur geschikt voor het gewas",
+      "temperatureMax": "De maximale temperatuur geschikt voor het gewas",
+      "harvestStart": "Het begin van de oogstperiode",
+      "harvestEnd": "Het einde van de oogstperiode",
+      "pruningStart": "Het begin van de snoeiperiode",
+      "pruningEnd": "Het einde van de snoeiperiode",
+      "fertilizingStart": "Het begin van de bemestingsperiode",
+      "fertilizingEnd": "Het einde van de bemestingsperiode"
+    },
+    "textFields": {
+      "searchQuery": "Zoeken",
+      "descriptionField": "Beschrijving"
+    }
+  },
+  "fields": {
+    "tableHeaders": {
+      "name": "Titel",
+      "actions": "Acties",
+      "longitude": "Lengtegraad",
+      "latitude": "Breedtegraad"
+    },
+    "tooltips": {
+      "name": "De naam van het veld",
+      "actions": "Voer acties uit zoals bewerken of verwijderen",
+      "longitude": "De lengtegraad van het veld",
+      "latitude": "De breedtegraad van het veld"
+    }
+  },
+  "fieldsPage": {
+    "buttons": {
+      "centerMap": "Kaart centreren",
+      "addField": "Veld toevoegen"
+    },
+    "deleteConfirmation": {
+      "message": "Weet u zeker dat u dit veld wilt verwijderen?"
+    }
+  },
+  "tasksPage": {
+    "buttons": {
+      "addTask": "Taak toevoegen"
+    },
+    "deleteConfirmation": {
+      "message": "Weet u zeker dat u deze taak wilt verwijderen?"
+    }
   }
 }

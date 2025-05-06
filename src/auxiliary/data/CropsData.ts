@@ -1,142 +1,158 @@
 import { PlantItem } from '../../api';
 import { TableHeaderModel } from '../interfaces/TableHeaderModel';
 import { InputFieldModel } from '../interfaces/InputFieldModel';
+import i18next from 'i18next';
+import { makeAutoObservable } from 'mobx';
 
 class CropsData {
-  public static tableHeaders: TableHeaderModel<PlantItem>[] = [
-    {
-      id: 'id',
-      label: 'ID',
-      sortable: true,
-      type: 'number',
-      tooltip: 'Use this identifier to link the crop to a batch',
-    },
-    {
-      id: 'commonName',
-      label: 'Crop Name',
-      sortable: true,
-      type: 'string',
-      tooltip: 'The common name of the crop',
-    },
-    {
-      id: 'actions',
-      label: 'Actions',
-      sortable: false,
-      type: 'action',
-      tooltip: 'View, edit or delete the crop',
-    },
-    {
-      id: 'waterCycle',
-      label: 'Watering',
-      sortable: true,
-      type: 'number',
-      tooltip: 'How often this plant should be watered (in days during season)',
-    },
-    {
-      id: 'pruningCycle',
-      label: 'Pruning',
-      sortable: true,
-      type: 'number',
-      tooltip: 'How often this plant should be pruned (in days during season)',
-    },
-    {
-      id: 'fertilizationCycle',
-      label: 'Fertilizing',
-      sortable: true,
-      type: 'number',
-      tooltip:
-        'How often this plant should be fertilized (in days during season)',
-    },
-    {
-      id: 'harvestCycle',
-      label: 'Harvesting',
-      sortable: true,
-      type: 'number',
-      tooltip:
-        'How often this plant should be harvested (in days during season)',
-    },
-    {
-      id: 'phMin',
-      label: 'PH Min',
-      sortable: true,
-      type: 'number',
-      tooltip:
-        'The minimum pH level of the soil this crop should be planted in',
-    },
-    {
-      id: 'phMax',
-      label: 'PH Max',
-      sortable: true,
-      type: 'number',
-      tooltip:
-        'The maximum pH level of the soil this crop should be planted in',
-    },
-    {
-      id: 'temperatureMin',
-      label: 'Temp Min',
-      sortable: true,
-      type: 'number',
-      tooltip: 'The minimum temperature this crop can withstand',
-    },
-    {
-      id: 'temperatureMax',
-      label: 'Temp Max',
-      sortable: true,
-      type: 'number',
-      tooltip: 'The maxmimum temperature this crop can withstand',
-    },
-    {
-      id: 'harvestStart',
-      label: 'Harvest Start',
-      sortable: true,
-      type: 'string',
-      tooltip: 'Start date of the harvest season',
-    },
-    {
-      id: 'harvestEnd',
-      label: 'Harvest End',
-      sortable: true,
-      type: 'string',
-      tooltip: 'End date of the harvest season',
-    },
-    {
-      id: 'pruningStart',
-      label: 'Pruning Start',
-      sortable: true,
-      type: 'string',
-      tooltip: 'Start date of the pruning season',
-    },
-    {
-      id: 'pruningEnd',
-      label: 'Pruning End',
-      sortable: true,
-      type: 'string',
-      tooltip: 'End date of the pruning season',
-    },
-    {
-      id: 'fertilizingStart',
-      label: 'Fertilizing Start',
-      sortable: true,
-      type: 'string',
-      tooltip: 'Start date of the fertilizing season',
-    },
-    {
-      id: 'fertilizingEnd',
-      label: 'Fertilizing End',
-      sortable: true,
-      type: 'string',
-      tooltip: 'End date of the fertilizing season',
-    },
-  ];
+  public tableHeaders: TableHeaderModel<PlantItem>[] = [];
+  public textFieldsString: Record<string, InputFieldModel> = {};
 
-  public static textFieldsString: Record<string, InputFieldModel> = {
-    searchQuery: { key: 'searchQuery', label: 'Search', defaultValue: '' },
-    descriptionField: {
-      key: 'description',
-      label: 'Notes',
-      defaultValue: '',
-    },
-  };
+  constructor() {
+    makeAutoObservable(this);
+    this.initializeTableHeaders();
+    this.initializeTextFields();
+
+    i18next.on('languageChanged', () => {
+      this.initializeTableHeaders();
+      this.initializeTextFields();
+    });
+  }
+
+  private initializeTableHeaders() {
+    this.tableHeaders = [
+      {
+        id: 'id',
+        label: i18next.t('crops.tableHeaders.id'),
+        sortable: true,
+        type: 'number',
+        tooltip: i18next.t('crops.tooltips.id'),
+      },
+      {
+        id: 'commonName',
+        label: i18next.t('crops.tableHeaders.commonName'),
+        sortable: true,
+        type: 'string',
+        tooltip: i18next.t('crops.tooltips.commonName'),
+      },
+      {
+        id: 'actions',
+        label: i18next.t('crops.tableHeaders.actions'),
+        sortable: false,
+        type: 'action',
+        tooltip: i18next.t('crops.tooltips.actions'),
+      },
+      {
+        id: 'waterCycle',
+        label: i18next.t('crops.tableHeaders.waterCycle'),
+        sortable: true,
+        type: 'number',
+        tooltip: i18next.t('crops.tooltips.waterCycle'),
+      },
+      {
+        id: 'pruningCycle',
+        label: i18next.t('crops.tableHeaders.pruningCycle'),
+        sortable: true,
+        type: 'number',
+        tooltip: i18next.t('crops.tooltips.pruningCycle'),
+      },
+      {
+        id: 'fertilizationCycle',
+        label: i18next.t('crops.tableHeaders.fertilizationCycle'),
+        sortable: true,
+        type: 'number',
+        tooltip: i18next.t('crops.tooltips.fertilizationCycle'),
+      },
+      {
+        id: 'harvestCycle',
+        label: i18next.t('crops.tableHeaders.harvestCycle'),
+        sortable: true,
+        type: 'number',
+        tooltip: i18next.t('crops.tooltips.harvestCycle'),
+      },
+      {
+        id: 'phMin',
+        label: i18next.t('crops.tableHeaders.phMin'),
+        sortable: true,
+        type: 'number',
+        tooltip: i18next.t('crops.tooltips.phMin'),
+      },
+      {
+        id: 'phMax',
+        label: i18next.t('crops.tableHeaders.phMax'),
+        sortable: true,
+        type: 'number',
+        tooltip: i18next.t('crops.tooltips.phMax'),
+      },
+      {
+        id: 'temperatureMin',
+        label: i18next.t('crops.tableHeaders.temperatureMin'),
+        sortable: true,
+        type: 'number',
+        tooltip: i18next.t('crops.tooltips.temperatureMin'),
+      },
+      {
+        id: 'temperatureMax',
+        label: i18next.t('crops.tableHeaders.temperatureMax'),
+        sortable: true,
+        type: 'number',
+        tooltip: i18next.t('crops.tooltips.temperatureMax'),
+      },
+      {
+        id: 'harvestStart',
+        label: i18next.t('crops.tableHeaders.harvestStart'),
+        sortable: true,
+        type: 'string',
+        tooltip: i18next.t('crops.tooltips.harvestStart'),
+      },
+      {
+        id: 'harvestEnd',
+        label: i18next.t('crops.tableHeaders.harvestEnd'),
+        sortable: true,
+        type: 'string',
+        tooltip: i18next.t('crops.tooltips.harvestEnd'),
+      },
+      {
+        id: 'pruningStart',
+        label: i18next.t('crops.tableHeaders.pruningStart'),
+        sortable: true,
+        type: 'string',
+        tooltip: i18next.t('crops.tooltips.pruningStart'),
+      },
+      {
+        id: 'pruningEnd',
+        label: i18next.t('crops.tableHeaders.pruningEnd'),
+        sortable: true,
+        type: 'string',
+        tooltip: i18next.t('crops.tooltips.pruningEnd'),
+      },
+      {
+        id: 'fertilizingStart',
+        label: i18next.t('crops.tableHeaders.fertilizingStart'),
+        sortable: true,
+        type: 'string',
+        tooltip: i18next.t('crops.tooltips.fertilizingStart'),
+      },
+      {
+        id: 'fertilizingEnd',
+        label: i18next.t('crops.tableHeaders.fertilizingEnd'),
+        sortable: true,
+        type: 'string',
+        tooltip: i18next.t('crops.tooltips.fertilizingEnd'),
+      },
+    ];
+  }
+
+  private initializeTextFields() {
+    this.textFieldsString = {
+      searchQuery: {
+        key: 'searchQuery',
+        label: i18next.t('crops.textFields.searchQuery'),
+        defaultValue: '',
+      },
+    };
+  }
 }
 
-export default CropsData;
+const cropsData = new CropsData();
+export default cropsData;

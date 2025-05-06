@@ -8,6 +8,7 @@ import { PaginationService } from '../../../services/PaginationService/Paginatio
 import TableColoringService from '../TableColoringService/TableColoringService';
 import { FilterService } from '../../../services/FilterService/FilterService';
 import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
+import i18next from 'i18next';
 
 class BatchesStore extends SearchableStore<YourCropItem> {
   public paginationService = new PaginationService();
@@ -29,6 +30,22 @@ class BatchesStore extends SearchableStore<YourCropItem> {
       this.initDropdownFilter(batchesData.dropdowns['location']);
     });
 
+    this.observeFilters();
+
+    i18next.on('languageChanged', () => {
+      this.observeFilters();
+    });
+
+    makeObservable(this, {
+      isLoading: computed,
+      fetchData: action,
+      tableHeaders: computed,
+    });
+  }
+
+  private observeFilters() {
+    this.clearFilters();
+
     Object.values(batchesData.textFieldsString).forEach((textField) => {
       this.initStringFilter(textField);
     });
@@ -44,12 +61,13 @@ class BatchesStore extends SearchableStore<YourCropItem> {
     batchesData.dateFields.forEach((dateField) => {
       this.initDateFilter(dateField);
     });
+  }
 
-    makeObservable(this, {
-      isLoading: computed,
-      fetchData: action,
-      tableHeaders: computed,
-    });
+  private clearFilters() {
+    this.stringFilters = {};
+    this.numberFilters = {};
+    this.dropdownFilters = {};
+    this.dateFilters = {};
   }
 
   public async fetchData() {

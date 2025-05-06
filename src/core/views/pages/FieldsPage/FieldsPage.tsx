@@ -16,6 +16,7 @@ import { TableProps } from '../../reusables/TableWithSorting/TableWithSorting';
 import FieldsData from '../../../../auxiliary/data/FieldsData';
 import { useDeleteConfirmation } from '../../../../auxiliary/hooks/useDeleteConfirmation';
 import Popup from '../../layouts/Popup/Popup';
+import i18next from 'i18next';
 
 const FieldsPage: React.FC = observer(() => {
   const navigate = useRouterNavigation();
@@ -23,17 +24,17 @@ const FieldsPage: React.FC = observer(() => {
   const buttonContainerData: ButtonProps[] = [
     {
       onClick: () => EventBus.dispatchEvent('centerMap', undefined),
-      label: 'Center Map',
+      label: i18next.t('fieldsPage.buttons.centerMap'),
     },
     {
       onClick: () => navigate('/addFieldPage'),
-      label: 'Add Field',
+      label: i18next.t('fieldsPage.buttons.addField'),
     },
   ];
 
   const { openDeleteConfirmation } = useDeleteConfirmation(
     fieldsStore.deleteField,
-    'Are you sure you want to delete this field?',
+    i18next.t('fieldsPage.deleteConfirmation.message'),
   );
 
   const handleEdit = (id: number | undefined) => {

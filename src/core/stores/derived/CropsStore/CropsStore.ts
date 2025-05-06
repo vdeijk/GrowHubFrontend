@@ -3,8 +3,10 @@ import { PlantItem } from '../../../../api';
 import { makeObservable, runInAction, action, computed } from 'mobx';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
 import { localStorageService } from '../../../services/LocalStorageService/LocalStorageService';
-import CropsData from '../../../../auxiliary/data/CropsData';
+import cropsData from '../../../../auxiliary/data/CropsData';
 import { PaginationService } from '../../../services/PaginationService/PaginationService';
+import i18next from 'i18next';
+import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
 
 class CropsStore extends SearchableStore<PlantItem> {
   private endpointService = new EndpointService('Plant');
@@ -12,12 +14,17 @@ class CropsStore extends SearchableStore<PlantItem> {
   public get isLoading(): boolean {
     return this.endpointService.isLoading;
   }
+  public get tableHeaders(): TableHeaderModel<PlantItem>[] {
+    return cropsData.tableHeaders;
+  }
 
   constructor() {
     super(['commonName']);
 
-    Object.values(CropsData.textFieldsString).forEach((textField) => {
-      this.initStringFilter(textField);
+    this.observeFilters();
+
+    i18next.on('languageChanged', () => {
+      this.observeFilters();
     });
 
     makeObservable(this, {
@@ -26,8 +33,19 @@ class CropsStore extends SearchableStore<PlantItem> {
     });
   }
 
+  private observeFilters() {
+    this.clearFilters();
+
+    Object.values(cropsData.textFieldsString).forEach((textField) => {
+      this.initStringFilter(textField);
+    });
+  }
+
+  private clearFilters() {
+    this.stringFilters = {};
+  }
+
   debouncedFilterPlants: (criteria: string) => void = () => {};
-  tableHeaders = CropsData.tableHeaders;
 
   public fetchData = async () => {
     const data = await this.endpointService.getData<PlantItem[]>();

@@ -11,10 +11,6 @@ import { InputFieldModel } from '../interfaces/InputFieldModel';
 import { makeAutoObservable } from 'mobx';
 import i18next from 'i18next';
 
-/*
-  public textFieldsString: Record<string, InputFieldModel> = {};
-  public textFieldsNumber: Record<string, InputFieldModel> = {};*/
-
 class MeasurementsData {
   public tableHeaders: TableHeaderModel<MeasurementItem>[] = [];
   public dropdowns: Record<string, DropdownFieldModel> = {};
@@ -34,7 +30,6 @@ class MeasurementsData {
   }
 
   private initializeTableHeaders() {
-    console.log('Initializing table headers');
     this.tableHeaders = [
       {
         id: 'title',
