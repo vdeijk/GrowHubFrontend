@@ -93,28 +93,27 @@ class AddBatchStore extends BaseFormStore {
     return crop?.commonName ?? undefined;
   }
 
-
   private setupCropIdReaction() {
     const updateCommonName = DebounceService.debounce(() => {
       const cropId = Number(this.inputFields.cropId.value);
       if (Number.isNaN(cropId)) {
-        this.inputFields.commonName.setValue(''); 
+        this.inputFields.commonName.setValue('');
         return;
       }
 
       const commonName = this.getCropNameById(cropId);
       if (commonName) {
-        this.inputFields.commonName.setValue(commonName); 
+        this.inputFields.commonName.setValue(commonName);
       } else {
-        this.inputFields.commonName.setValue(''); 
+        this.inputFields.commonName.setValue('');
       }
-    }, 300); 
+    }, 300);
 
     reaction(
       () => this.inputFields.cropId.value,
       () => {
         updateCommonName();
-      }
+      },
     );
   }
 

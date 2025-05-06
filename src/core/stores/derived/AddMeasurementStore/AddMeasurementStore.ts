@@ -10,6 +10,9 @@ import { MeasurementItemHealthStatusEnum } from '../../../../api';
 import { DataMappingService } from '../../../services/DataMappingService/DatamappingService';
 import ValueTransformService from '../../../services/ValueTransformService/ValueTransformService';
 import i18next from 'i18next';
+import { reaction } from 'mobx';
+import DebounceService from '../../../services/DebounceService/DebounceService';
+import batchesStore from '../BatchesStore/BatchesStore';
 
 class AddMeasurementStore extends BaseFormStore {
   private endpointService = new EndpointService('Measurements');
@@ -18,6 +21,7 @@ class AddMeasurementStore extends BaseFormStore {
     super();
 
     this.observeFilters();
+    this.setupCropIdReaction();
 
     i18next.on('languageChanged', () => {
       this.observeFilters();
@@ -81,7 +85,36 @@ class AddMeasurementStore extends BaseFormStore {
     return false;
   }
 
-  prepareData(): MeasurementItem {
+  private getCropNameById(cropId: number): string | undefined {
+    const batch = batchesStore.items.find((item) => item.id === cropId);
+    return batch?.commonName ?? undefined;
+  }
+
+  private setupCropIdReaction() {
+    const updateCommonName = DebounceService.debounce(() => {
+      const batchId = Number(this.inputFields.batchId.value);
+      if (Number.isNaN(batchId)) {
+        this.inputFields.title.setValue('');
+        return;
+      }
+
+      const title = this.getCropNameById(batchId);
+      if (title) {
+        this.inputFields.title.setValue(title);
+      } else {
+        this.inputFields.title.setValue('');
+      }
+    }, 300);
+
+    reaction(
+      () => this.inputFields.batchId.value,
+      () => {
+        updateCommonName();
+      },
+    );
+  }
+
+  private prepareData(): MeasurementItem {
     return {
       title: this.inputFields.title.value as string,
       notes: this.inputFields.notes.value as string,
