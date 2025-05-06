@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './LanguageButton.module.css';
 
 interface LanguageButtonProps {
-  languageCode: string;
   label: string;
   isActive: boolean;
   onClick: () => void;
@@ -10,15 +9,19 @@ interface LanguageButtonProps {
 }
 
 const LanguageButton: React.FC<LanguageButtonProps> = ({
-  languageCode,
   label,
   isActive,
   onClick,
   icon,
 }) => {
   return (
-    <button onClick={onClick} disabled={isActive} className={styles.button}>
-      {icon} {label}
+    <button
+      onClick={onClick}
+      disabled={isActive}
+      className={`${styles.button} ${isActive ? styles.active : ''}`}
+    >
+      <span className={styles.icon}>{icon}</span>
+      <span className={styles.label}>{label}</span>
     </button>
   );
 };

@@ -4,6 +4,7 @@ import localeStore from '../../../stores/derived/LocaleStore/LocaleStore';
 import { FaGlobe } from 'react-icons/fa';
 import styles from './LanguageSwitcher.module.css';
 import LanguageButton from '../LanguageButton/LanguageButtont';
+import Flag from 'react-world-flags';
 
 const LanguageSwitcher: React.FC = observer(() => {
   const { currentLanguage, changeLanguage } = localeStore;
@@ -12,26 +13,16 @@ const LanguageSwitcher: React.FC = observer(() => {
     <div className={styles.container}>
       <FaGlobe size={20} title="Language" className={styles.iconGlobe} />
       <LanguageButton
-        languageCode="en"
-        label="English"
+        label="EN"
         isActive={currentLanguage === 'en'}
         onClick={() => changeLanguage('en')}
-        icon={
-          <span role="img" aria-label="USA Flag">
-            🇺🇸
-          </span>
-        }
+        icon={<Flag code="US" className={styles.flagIcon} />}
       />
       <LanguageButton
-        languageCode="nl"
-        label="Nederlands"
+        label="NL"
         isActive={currentLanguage === 'nl'}
         onClick={() => changeLanguage('nl')}
-        icon={
-          <span role="img" aria-label="Netherlands Flag">
-            🇳🇱
-          </span>
-        }
+        icon={<Flag code="NL" className={styles.flagIcon} />}
       />
     </div>
   );

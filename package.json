@@ -35,6 +35,7 @@
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.4.0",
     "react-toastify": "^11.0.5",
+    "react-world-flags": "^1.6.0",
     "vite-plugin-singlefile": "^2.2.0",
     "vite-plugin-ssr": "^0.4.142"
   },
