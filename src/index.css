@@ -1,5 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
+@font-face {
+  font-family: 'Migra-Extrabold';
+  src: url('auxiliary/assets/Migra/Migra-Extrabold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Migra-D';
+  src: url('auxiliary/assets/Migra/Migra-Regular.woff2') format('woff2');
+}
+
+
+@font-face {
+  font-family: 'PPWoodland-Bold';
+  src: url('auxiliary/assets/Woodland/PPWoodland-Bold.woff2') format('woff2');
+}
+
+
+@font-face {
+  font-family: 'PPWoodland-Heavy';
+  src: url('auxiliary/assets/Woodland/PPWoodland-Heavy.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'PPWoodland-Regular';
+  src: url('auxiliary/assets/Woodland/PPWoodland-Regular.woff2') format('woff2');
+}
+
 *,
 *::before,
 *::after {

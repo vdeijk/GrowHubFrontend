@@ -17,8 +17,6 @@ class MenuService {
 
   toggleMenu = () => {
     this.isMenuOpen = !this.isMenuOpen;
-
-    console.log('Menu toggled:', this.isMenuOpen);
   };
 }
 
