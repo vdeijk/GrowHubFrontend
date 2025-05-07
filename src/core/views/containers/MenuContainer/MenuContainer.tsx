@@ -6,6 +6,7 @@ import HelpButton from '../../reusables/HelpButton/HelpButton';
 import routerService from '../../../services/RouterService/RouterService';
 import { useLocation, matchPath } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
+import menuService from '../../../services/MenuService/MenuService';
 
 const MenuContainer: React.FC = observer(() => {
   const handleHelpOpen = () => {};
@@ -15,7 +16,11 @@ const MenuContainer: React.FC = observer(() => {
   );
 
   return (
-    <div className={styles.container}>
+    <div
+      className={`${styles.container} ${
+        menuService.isMenuOpen ? styles.open : styles.closed
+      }`}
+    >
       <div className={styles.profile}>
         <div className={styles.heading}>
           <Heading

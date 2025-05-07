@@ -10,7 +10,7 @@ const FooterContainer: React.FC = () => {
     <footer className={styles.footer}>
       <div className={styles.footerCol}>
         <Heading
-          level={6}
+          level={5}
           text="Follow"
           customStyles={{ color: 'var(--color-white)', marginBottom: '1rem' }}
         />
@@ -30,7 +30,7 @@ const FooterContainer: React.FC = () => {
 
       <div className={styles.footerCol}>
         <Heading
-          level={6}
+          level={5}
           text="Contact"
           customStyles={{ color: 'var(--color-white)', marginBottom: '1rem' }}
         />
@@ -45,7 +45,7 @@ const FooterContainer: React.FC = () => {
 
       <div className={styles.resources}>
         <Heading
-          level={6}
+          level={5}
           text="Resources"
           customStyles={{ color: 'var(--color-white)', marginBottom: '1rem' }}
         />

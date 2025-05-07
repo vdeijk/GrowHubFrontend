@@ -1,0 +1,22 @@
+.hamburgerButton {
+  background: none;
+  border: none;
+  color: var(--color-white);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.hamburgerButton:focus {
+  outline: none;
+}
+
+.hamburgerButton:hover {
+  transform: scale(1.1);
+}
+
+.icon {
+  font-size: 2.4rem;
+}

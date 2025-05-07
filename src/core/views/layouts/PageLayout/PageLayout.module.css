@@ -1,5 +1,5 @@
 .layout {
-  padding: 9rem 4rem 6rem 24rem;
+  padding: 7rem 2rem 2rem 22rem;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-gap: var(--spacing-medium);
@@ -9,4 +9,9 @@
   background: var(--color-background);
   align-content: start;
   justify-content: start;
+  transition: padding-left 0.2s ease;
+}
+
+.layout.menuClosed {
+  padding-left: 3rem; 
 }

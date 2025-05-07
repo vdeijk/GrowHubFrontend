@@ -4,6 +4,8 @@ import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import styles from './NavbarContainer.module.css';
 import { useAuth0 } from '@auth0/auth0-react';
 import LanguageSwitcher from '../../reusables/LanguageSwitcher/LanguageSwitcher';
+import HamburgerIcon from '../../reusables/HamburgerIcon/HamburgerIcon';
+import menuService from '../../../services/MenuService/MenuService';
 
 interface NavbarProps {
   userName: string;
@@ -14,7 +16,8 @@ const NavbarContainer: React.FC<NavbarProps> = ({ userName }) => {
 
   return (
     <nav className={styles.container}>
-      <div>
+      <div className={styles.leftContainer}>
+        <HamburgerIcon onClick={menuService.toggleMenu} />
         <a href="/" className={styles.logo}>
           GrowHub
         </a>
@@ -23,13 +26,7 @@ const NavbarContainer: React.FC<NavbarProps> = ({ userName }) => {
         <LanguageSwitcher />
         <div className={styles.userNameContainer}>
           <span className={styles.userName}>{userName}</span>
-          {/* <button className={styles.userIcon}>
-            <FontAwesomeIcon icon={faUser} />
-          </button> */}
         </div>
-        {/* <button className={styles.helpButton}>
-          <FontAwesomeIcon icon={faQuestionCircle} />
-        </button> */}
         <button
           className={styles.logoutButton}
           onClick={() =>

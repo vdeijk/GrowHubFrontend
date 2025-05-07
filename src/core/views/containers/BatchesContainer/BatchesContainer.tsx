@@ -41,13 +41,15 @@ const BatchesContainer: React.FC = observer(() => {
         level={6}
         text={t('batchesContainer.heading')}
         customStyles={{ marginBottom: '2rem' }}
-      />
-      <TableWithoutSorting<YourCropItem>
-        headers={headersWithoutActions}
-        data={plantsStore.items.slice(0, 9).map((plant) => ({
-          ...('actions' in plant ? omit(plant, 'actions') : plant),
-        }))}
-      />
+      />{' '}
+      <div className={styles.tableContainer}>
+        <TableWithoutSorting<YourCropItem>
+          headers={headersWithoutActions}
+          data={plantsStore.items.slice(0, 9).map((plant) => ({
+            ...('actions' in plant ? omit(plant, 'actions') : plant),
+          }))}
+        />{' '}
+      </div>
       <ButtonContainer buttons={buttonContainerData} />
     </>
   );

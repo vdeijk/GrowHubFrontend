@@ -1,6 +1,6 @@
 .container {
   position: fixed;
-  top: 6rem;
+  top: 5rem;
   left: 0;
   width: 20rem;
   height: 100%;
@@ -8,6 +8,15 @@
   padding: var(--spacing-medium);
   box-shadow: var(--box-shadow);
   z-index: 100;
+  transition: all 0.2s ease; 
+}
+
+.container.open {
+  left: 0;
+}
+
+.container.closed {
+  left: -19rem;
 }
 
 .unorderedList {

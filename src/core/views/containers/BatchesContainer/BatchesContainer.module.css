@@ -13,3 +13,8 @@
   align-items: end;
   margin-top: var(--spacing-medium);
 }
+
+.tableContainer {
+  width: 100%;
+  overflow-x: auto;
+}
