@@ -5,4 +5,12 @@
   grid-gap: 2rem;
   align-items: end;
   margin-top: var(--spacing-medium);
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .buttonContainer {
+    grid-auto-flow: row;
+    justify-content: center;
+  }
 }

@@ -108,8 +108,10 @@ const AddMeasurementPage: React.FC<AddMeasurementPageProps> = observer(
             <Dropdown {...healthStatusProps} />
             <Divider />
             <DateInput {...dateProps} />
-            <div></div> <div></div>{' '}
-            <ButtonContainer buttons={buttonContainerData} />
+            <ButtonContainer
+              customStyles={{ gridColumn: '1 / -1' }}
+              buttons={buttonContainerData}
+            />
           </form>
         </LoadingWrapper>
       </section>

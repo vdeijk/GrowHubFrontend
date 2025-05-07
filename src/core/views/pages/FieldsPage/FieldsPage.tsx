@@ -93,7 +93,9 @@ const FieldsPage: React.FC = observer(() => {
           <Map {...mapData} />
         </div>
         <div className={styles.right}>
-          <TableWithSorting {...tableProps} />
+          <div className={styles.tableContainer}>
+            <TableWithSorting {...tableProps} />
+          </div>
           <ButtonContainer buttons={buttonContainerData} />
         </div>
       </LoadingWrapper>

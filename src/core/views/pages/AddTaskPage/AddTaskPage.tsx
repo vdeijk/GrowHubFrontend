@@ -105,7 +105,10 @@ const AddTaskPage: React.FC<AddTaskPageProps> = observer(
             <Dropdown {...categoryProps} />
             <Dropdown {...statusProps} />
             <DateInput {...dueDateProps} />
-            <div></div> <ButtonContainer buttons={buttonContainerData} />
+            <ButtonContainer
+              customStyles={{ gridColumn: '1 / -1' }}
+              buttons={buttonContainerData}
+            />
           </form>
         </LoadingWrapper>
       </section>

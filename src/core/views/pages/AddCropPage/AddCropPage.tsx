@@ -121,7 +121,10 @@ const AddCropPage: React.FC<AddCropPageProps> = observer(
             <Dropdown {...pruningEnd} />
             <Dropdown {...fertilizingStart} />
             <Dropdown {...fertilizingEnd} />
-            <div></div> <ButtonContainer buttons={buttonContainerData} />
+            <ButtonContainer
+              customStyles={{ gridColumn: '1 / -1' }}
+              buttons={buttonContainerData}
+            />
           </form>
         </LoadingWrapper>
       </section>

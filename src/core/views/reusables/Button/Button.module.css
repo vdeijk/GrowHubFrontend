@@ -9,8 +9,8 @@
   transition: all 0.3s;
   text-transform: uppercase;
   font-weight: bold;
-  width: max-content;
   justify-self: end;
+  width: 100%;
 }
 
 .button:hover {

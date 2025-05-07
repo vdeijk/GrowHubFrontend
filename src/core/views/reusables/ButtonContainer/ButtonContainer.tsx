@@ -5,11 +5,15 @@ import { ButtonProps } from '../../../../auxiliary/interfaces/ButtonProps';
 
 export interface ButtonContainerProps {
   buttons: ButtonProps[];
+  customStyles?: React.CSSProperties;
 }
 
-const ButtonContainer: React.FC<ButtonContainerProps> = ({ buttons }) => {
+const ButtonContainer: React.FC<ButtonContainerProps> = ({
+  buttons,
+  customStyles,
+}) => {
   return (
-    <div className={styles.buttonContainer}>
+    <div className={styles.buttonContainer} style={customStyles}>
       {buttons.map((button, index) => (
         <Button
           key={index}

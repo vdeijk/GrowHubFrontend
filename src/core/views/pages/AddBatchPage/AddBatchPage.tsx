@@ -40,8 +40,6 @@ const AddBatchPage: React.FC<AddBatchPageProps> = observer(
 
       if (!addBatchStore.validateForm()) return;
 
-      console.log('Form submitted');
-
       if (isEditing && id) {
         addBatchStore.updateCrop(id);
       } else {
@@ -121,8 +119,10 @@ const AddBatchPage: React.FC<AddBatchPageProps> = observer(
             <DateInput {...lastFertilizedFieldModel} />
             <DateInput {...lastPrunedFieldModel} />
             <DateInput {...lastHarvestedFieldModel} />
-            <div></div>
-            <div></div> <ButtonContainer buttons={buttonContainerData} />
+            <ButtonContainer
+              customStyles={{ gridColumn: '1 / -1' }}
+              buttons={buttonContainerData}
+            />
           </form>
         </LoadingWrapper>
       </section>

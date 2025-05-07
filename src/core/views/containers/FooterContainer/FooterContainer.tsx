@@ -35,7 +35,7 @@ const FooterContainer: React.FC = () => {
           customStyles={{ color: 'var(--color-white)', marginBottom: '1rem' }}
         />
         <p className={styles.contactText}>Name: Rick van der Eijk </p>
-        <p className={styles.contactText}>Phone: +31)628258357 </p>
+        <p className={styles.contactText}>Phone: (+31)628258357 </p>
         <p className={styles.contactText}>Email: rickvdeijk@gmail.com </p>
         <br></br>
         <p className={styles.contactText}>

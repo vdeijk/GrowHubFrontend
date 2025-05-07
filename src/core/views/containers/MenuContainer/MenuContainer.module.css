@@ -8,7 +8,7 @@
   padding: var(--spacing-medium);
   box-shadow: var(--box-shadow);
   z-index: 100;
-  transition: all 0.2s ease; 
+  transition: all 0.2s ease;
 }
 
 .container.open {
@@ -49,4 +49,18 @@
   justify-content: space-between;
   display: grid;
   grid-auto-flow: column;
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+  }
+
+  .container.open {
+    left: 0;
+  }
+
+  .container.closed {
+    left: -100%;
+  }
 }
