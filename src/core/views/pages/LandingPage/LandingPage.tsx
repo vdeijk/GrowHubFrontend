@@ -14,13 +14,8 @@ const LandingPage: React.FC = () => {
         <div className={styles.headers}>
           <Heading
             level={1}
-            text="🌱 GrowHub"
+            text="GrowHub"
             customStyles={{ marginBottom: '2rem' }}
-          />
-          <Heading
-            level={2}
-            text="Your Smart Farming Companion"
-            customStyles={{ marginBottom: '3rem' }}
           />
         </div>
         <div className={styles.content}>
@@ -34,6 +29,7 @@ const LandingPage: React.FC = () => {
         </div>
 
         <Button
+          customStyles={{ justifySelf: 'center' }}
           onClick={() =>
             loginWithRedirect({
               authorizationParams: {

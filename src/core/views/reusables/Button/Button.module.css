@@ -10,11 +10,17 @@
   text-transform: uppercase;
   font-weight: bold;
   justify-self: end;
-  width: 100%;
+  width: max-content;
 }
 
 .button:hover {
   background-color: var(--color-red-hover);
   border-color: var(--color-red-hover);
   color: var(--color-white);
+}
+
+@media (max-width: 768px) {
+  .button {
+    width: 100%;
+  }
 }
