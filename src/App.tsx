@@ -73,7 +73,13 @@ const App: React.FC = observer(() => {
 
   return (
     <main className="appContainer">
-      <ToastContainer style={{ zIndex: 9999 }} />
+      <ToastContainer
+        style={{
+          zIndex: 9999,
+          fontSize: '1.6rem',
+          fontFamily: 'Poppins, sans-serif',
+        }}
+      />
       <NavbarContainer userName={user?.name || ''} />
       <MenuContainer />
       <PageLayout>
