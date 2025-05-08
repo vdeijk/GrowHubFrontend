@@ -11,6 +11,7 @@
   font-weight: bold;
   justify-self: end;
   width: max-content;
+  background-color: var(--color-white);
 }
 
 .button:hover {
