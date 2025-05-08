@@ -3,7 +3,6 @@
   color: var(--color-white);
   padding: var(--spacing-small);
   width: 100%;
-  height: max-content;
   position: relative;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -11,7 +10,12 @@
   justify-items: center;
   gap: 2rem;
   padding: 2rem 2rem 2rem 22rem;
-  transition: padding-left 0.2s ease;
+  transition:
+    padding 0.2s ease,
+    height 0.2s ease,
+    max-height 0.2s ease;
+  min-height: max-content;
+  overflow: hidden;
 }
 
 .resources {
@@ -35,4 +39,8 @@
 
 .menuClosed {
   padding-left: 3rem;
+}
+
+.footer > * {
+  transition: all 0.2s ease;
 }
