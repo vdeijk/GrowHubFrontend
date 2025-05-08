@@ -62,8 +62,8 @@
     },
     "placeholders": {
       "searchQuery": "Voer zoekopdracht in",
-      "phMin": "Voer minimale pH in",
-      "phMax": "Voer maximale pH in",
+      "phMin": "Voer minimaal aantal gewassen in",
+      "phMax": "Voer maximaal aantal gewassen in",
       "location": "Selecteer een locatie"
     }
   },

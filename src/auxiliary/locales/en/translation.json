@@ -62,8 +62,8 @@
     },
     "placeholders": {
       "searchQuery": "Enter search query",
-      "phMin": "Enter minimum pH",
-      "phMax": "Enter maximum pH",
+      "phMin": "Enter minimum crop amount",
+      "phMax": "Enter maximum crop amount",
       "location": "Select a location",
       "planted": "Select planting date",
       "lastWatered": "Select last watering date",
