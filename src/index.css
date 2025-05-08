@@ -25,6 +25,12 @@
   src: url('auxiliary/assets/Woodland/PPWoodland-Regular.woff2') format('woff2');
 }
 
+
+@font-face {
+  font-family: 'PPWoodland-Ultralight';
+  src: url('auxiliary/assets/Woodland/PPWoodland-Ultralight.woff2') format('woff2');
+}
+
 *,
 *::before,
 *::after {
@@ -64,8 +70,8 @@ h6 {
 }
 
 h1 {
-  font-family: 'PPWoodland-Regular', sans-serif !important;
-  font-size: 9rem !important;
+  font-size: 9rem;
+  font-family: 'PPWoodland-Regular', sans-serif;
 }
 
 h2 {

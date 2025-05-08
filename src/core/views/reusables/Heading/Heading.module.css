@@ -4,7 +4,6 @@
 .h4,
 .h5,
 .h6 {
-  font-family: 'Poppins', sans-serif;
   color: var(--color-text);
   width: max-content;
   line-height: 1;

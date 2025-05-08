@@ -6,7 +6,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .hamburgerButton:focus {
@@ -15,6 +15,7 @@
 
 .hamburgerButton:hover {
   transform: scale(1.1);
+  color: var(--color-primary);
 }
 
 .icon {
