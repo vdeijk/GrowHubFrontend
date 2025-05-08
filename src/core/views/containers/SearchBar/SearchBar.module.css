@@ -11,7 +11,7 @@
 
 .subContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(25rem, .5fr));
   width: 100%;
   align-items: center;
   grid-gap: 1rem;

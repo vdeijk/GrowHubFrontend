@@ -4,10 +4,16 @@ import Heading from '../../reusables/Heading/Heading';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import SocialIcon from '../../reusables/SocialIcon/SocialIcon';
 import FooterLink from '../../reusables/FooterLink/FooterLink';
+import menuService from '../../../services/MenuService/MenuService';
+import { observer } from 'mobx-react-lite';
 
-const FooterContainer: React.FC = () => {
+const FooterContainer: React.FC = observer(() => {
   return (
-    <footer className={styles.footer}>
+    <footer
+      className={`${styles.footer} ${
+        menuService.isMenuOpen ? '' : styles.menuClosed
+      }`}
+    >
       <div className={styles.footerCol}>
         <Heading
           level={5}
@@ -58,6 +64,6 @@ const FooterContainer: React.FC = () => {
       </div>
     </footer>
   );
-};
+});
 
 export default FooterContainer;

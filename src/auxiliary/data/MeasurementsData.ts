@@ -96,6 +96,7 @@ class MeasurementsData {
         key: 'searchQuery',
         label: i18next.t('measurements.textFields.searchQuery'),
         defaultValue: '',
+        placeholder: i18next.t('measurements.placeholders.searchQuery'),
       },
     };
   }
@@ -106,11 +107,13 @@ class MeasurementsData {
         key: 'phMin',
         label: i18next.t('measurements.textFields.phMin'),
         defaultValue: '',
+        placeholder: i18next.t('measurements.placeholders.phMin'),
       },
       phMax: {
         key: 'phMax',
         label: i18next.t('measurements.textFields.phMax'),
         defaultValue: '',
+        placeholder: i18next.t('measurements.placeholders.phMax'),
       },
     };
   }

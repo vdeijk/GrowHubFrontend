@@ -7,6 +7,8 @@
   font-size: 1.4rem;
   font-family: Poppins;
   background-color: var(--color-form-field);
+  box-shadow: var(--box-shadow-light);
+  color: var(--color-text);
 }
 
 .container {

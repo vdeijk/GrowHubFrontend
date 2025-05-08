@@ -59,6 +59,12 @@
       "lastFertilized": "Bemest Voor",
       "lastPruned": "Gesnoeid Voor",
       "lastHarvested": "Geoogst Voor"
+    },
+    "placeholders": {
+      "searchQuery": "Voer zoekopdracht in",
+      "phMin": "Voer minimale pH in",
+      "phMax": "Voer maximale pH in",
+      "location": "Selecteer een locatie"
     }
   },
   "tasks": {
@@ -94,6 +100,9 @@
     "dateFields": {
       "endDate": "Vervallen Voor",
       "startDate": "Vervallen na"
+    },
+    "placeholders": {
+      "searchQuery": "Voer zoekopdracht in"
     }
   },
   "measurements": {
@@ -131,6 +140,11 @@
     "dateFields": {
       "dateMax": "Gemeten Voor",
       "dateMin": "Gemeten Na"
+    },
+    "placeholders": {
+      "searchQuery": "Voer zoekopdracht in",
+      "phMin": "Voer minimale pH in",
+      "phMax": "Voer maximale pH in"
     }
   },
   "crops": {
@@ -175,6 +189,9 @@
     "textFields": {
       "searchQuery": "Zoeken",
       "descriptionField": "Beschrijving"
+    },
+    "placeholders": {
+      "searchQuery": "Voer zoekodopracht in"
     }
   },
   "fields": {

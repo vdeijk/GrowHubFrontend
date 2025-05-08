@@ -149,6 +149,7 @@ class CropsData {
         key: 'searchQuery',
         label: i18next.t('crops.textFields.searchQuery'),
         defaultValue: '',
+        placeholder: i18next.t('crops.placeholders.searchQuery'),
       },
     };
   }

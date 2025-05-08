@@ -8,6 +8,7 @@
   font-family: Poppins;
   background-color: var(--color-form-field);
   transition: all 0.3s;
+  box-shadow: var(--box-shadow-light);
 }
 
 .container {

@@ -1,12 +1,14 @@
 .textInput {
   padding: 1rem;
-  margin-right: 10px;
+  margin-right: 1rem;
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius-small);
   width: 100%;
   background-color: var(--color-form-field);
   font-family: Poppins;
   font-size: 1.4rem;
+  box-shadow: var(--box-shadow-light);
+  color: var(--color-text);
 }
 
 .container {
@@ -24,4 +26,10 @@
   color: var(--color-red);
   margin-left: 4px;
   font-size: 1rem;
+}
+
+.textInput:focus {
+  border-color: var(--color-primary);
+  box-shadow: var(--box-shadow);
+  outline: none;
 }

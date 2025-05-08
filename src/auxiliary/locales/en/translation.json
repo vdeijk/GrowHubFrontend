@@ -59,6 +59,17 @@
       "lastFertilized": "Fertilized Before",
       "lastPruned": "Pruned Before",
       "lastHarvested": "Harvested Before"
+    },
+    "placeholders": {
+      "searchQuery": "Enter search query",
+      "phMin": "Enter minimum pH",
+      "phMax": "Enter maximum pH",
+      "location": "Select a location",
+      "planted": "Select planting date",
+      "lastWatered": "Select last watering date",
+      "lastFertilized": "Select last fertilizing date",
+      "lastPruned": "Select last pruning date",
+      "lastHarvested": "Select last harvesting date"
     }
   },
   "tasks": {
@@ -94,6 +105,9 @@
     "dateFields": {
       "endDate": "Due Before",
       "startDate": "Due After"
+    },
+    "placeholders": {
+      "searchQuery": "Enter search query"
     }
   },
   "measurements": {
@@ -131,6 +145,11 @@
     "dateFields": {
       "dateMax": "Read Before",
       "dateMin": "Read After"
+    },
+    "placeholders": {
+      "searchQuery": "Enter search query",
+      "phMin": "Enter minimum pH",
+      "phMax": "Enter maximum pH"
     }
   },
   "crops": {
@@ -175,6 +194,9 @@
     "textFields": {
       "searchQuery": "Search",
       "descriptionField": "Description"
+    },
+    "placeholders": {
+      "searchQuery": "Enter search query"
     }
   },
   "fields": {

@@ -116,6 +116,7 @@ class BatchesData {
         key: 'searchQuery',
         label: i18next.t('batches.textFields.searchQuery'),
         defaultValue: '',
+        placeholder: i18next.t('batches.placeholders.searchQuery'), 
       },
     };
 
@@ -124,11 +125,13 @@ class BatchesData {
         key: 'maxAmount',
         label: i18next.t('batches.textFields.phMin'),
         defaultValue: '',
+        placeholder: i18next.t('batches.placeholders.phMin'),
       },
       phMax: {
         key: 'minAmount',
         label: i18next.t('batches.textFields.phMax'),
         defaultValue: '',
+        placeholder: i18next.t('batches.placeholders.phMax'),
       },
     };
   }
@@ -142,7 +145,7 @@ class BatchesData {
           value: field.name ?? '',
           label: field.name ?? '',
         })),
-        defaultValue: '',
+        defaultValue: i18next.t('batches.placeholders.location'),
       },
     };
   }
@@ -158,6 +161,7 @@ class BatchesData {
         key: 'lastWatered',
         label: i18next.t('batches.dateFields.lastWatered'),
         defaultValue: '',
+        
       },
       {
         key: 'lastFertilized',

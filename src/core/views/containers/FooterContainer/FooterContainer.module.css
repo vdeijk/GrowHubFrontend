@@ -10,8 +10,8 @@
   justify-content: center;
   justify-items: center;
   gap: 2rem;
-  padding: 2rem;
-  z-index: 1000;
+  padding: 2rem 2rem 2rem 22rem;
+  transition: padding-left 0.2s ease;
 }
 
 .resources {
@@ -31,4 +31,8 @@
 .contactText {
   font-size: 1.5rem;
   color: var(--color-white);
+}
+
+.menuClosed {
+  padding-left: 3rem;
 }

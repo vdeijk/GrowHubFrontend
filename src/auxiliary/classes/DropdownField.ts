@@ -17,8 +17,9 @@ export class DropdownField<T> extends FormField<T> {
 
   public generateDropdownOptions(
     options: DropdownOption[],
-    allLabel: string = '',
+    placeholderLabel: string = '',
   ): void {
-    this.options = [{ value: '', label: allLabel }, ...options];
+    const placeholder = placeholderLabel || `Select ${this.label}`;
+    this.options = [{ value: '', label: placeholder }, ...options];
   }
 }

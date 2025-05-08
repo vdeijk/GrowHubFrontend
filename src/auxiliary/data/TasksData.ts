@@ -96,6 +96,7 @@ class TasksData {
         key: 'searchQuery',
         label: i18next.t('tasks.textFields.searchQuery'),
         defaultValue: '',
+        placeholder: i18next.t('tasks.placeholders.searchQuery'),
       },
     };
   }

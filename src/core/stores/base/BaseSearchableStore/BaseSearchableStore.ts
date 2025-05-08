@@ -16,6 +16,7 @@ import { DropdownFieldModel } from '../../../../auxiliary/interfaces/DropdownFie
 import DebounceService from '../../../services/DebounceService/DebounceService';
 import { PaginationService } from '../../../services/PaginationService/PaginationService';
 import { InputFieldModel } from '../../../../auxiliary/interfaces/InputFieldModel';
+import { toJS } from 'mobx';
 
 export abstract class SearchableStore<T> {
   public paginationService = new PaginationService();
@@ -98,7 +99,12 @@ export abstract class SearchableStore<T> {
   public initStringFilter = (field: InputFieldModel) => {
     runInAction(() => {
       if (!this.stringFilters[field.key]) {
-        this.stringFilters[field.key] = new InputField<string>('', field.label);
+        this.stringFilters[field.key] = new InputField<string>(
+          '',
+          field.label,
+          field.required,
+          field.placeholder,
+        );
       }
     });
   };
@@ -106,7 +112,12 @@ export abstract class SearchableStore<T> {
   public initNumberFilter = (field: InputFieldModel) => {
     runInAction(() => {
       if (!this.numberFilters[field.key]) {
-        this.numberFilters[field.key] = new InputField<string>('', field.label);
+        this.numberFilters[field.key] = new InputField<string>(
+          '',
+          field.label,
+          field.required,
+          field.placeholder,
+        );
       }
     });
   };
@@ -146,7 +157,10 @@ export abstract class SearchableStore<T> {
         return;
       }
 
-      this.dropdownFilters[field.key].generateDropdownOptions(resolvedOptions);
+      this.dropdownFilters[field.key].generateDropdownOptions(
+        resolvedOptions,
+        field.defaultValue,
+      );
     });
   };
 
