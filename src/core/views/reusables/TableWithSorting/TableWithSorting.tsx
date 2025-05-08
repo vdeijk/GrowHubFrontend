@@ -2,6 +2,8 @@ import React from 'react';
 import styles from './TableWithSorting.module.css';
 import TableRow from '../TableRow/TableRow';
 import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
+import Heading from '../Heading/Heading';
+import { observer } from 'mobx-react-lite';
 
 export interface TableProps<T> {
   headers: TableHeaderModel<T>[];
@@ -12,63 +14,73 @@ export interface TableProps<T> {
   handleEdit?: (id: number | undefined) => void;
 }
 
-const TableWithSorting = <T extends { id?: number | null | undefined }>({
-  headers,
-  data,
-  onSort,
-  sortField,
-  sortOrder,
-  handleEdit,
-}: TableProps<T>) => {
-  const getSortIndicator = (field: keyof T) => {
-    if (!onSort) {
-      return '';
+const TableWithSorting = observer(
+  <T extends { id?: number | null | undefined }>({
+    headers,
+    data,
+    onSort,
+    sortField,
+    sortOrder,
+    handleEdit,
+  }: TableProps<T>) => {
+    const getSortIndicator = (field: keyof T) => {
+      if (!onSort) {
+        return '';
+      }
+
+      if (sortField === field) {
+        return sortOrder === 'asc' ? '▲' : '▼';
+      }
+      return '⇅';
+    };
+
+    if (data.length === 0) {
+      return (
+        <div className={styles.emptyState}>
+          <Heading level={5} text={'No data available'} />
+        </div>
+      );
     }
 
-    if (sortField === field) {
-      return sortOrder === 'asc' ? '▲' : '▼';
-    }
-    return '⇅';
-  };
-
-  return (
-    <table className={styles.table}>
-      <thead>
-        <tr>
-          {headers.map((header) => (
-            <th
-              key={String(header.id)}
-              onClick={() =>
-                onSort &&
-                header.sortable !== false &&
-                onSort(header.id as keyof T)
-              }
-              title={header.tooltip || ''}
-            >
-              <div className={styles.headerContent}>
-                {header.label}
-                {onSort && header.sortable !== false && (
-                  <span className={styles.sortIndicator}>
-                    {getSortIndicator(header.id as keyof T)}
-                  </span>
-                )}
-              </div>
-            </th>
+    return (
+      <table className={styles.table}>
+        <thead>
+          <tr>
+            {headers.map((header) => (
+              <th
+                key={String(header.id)}
+                onClick={() =>
+                  onSort &&
+                  header.sortable !== false &&
+                  onSort(header.id as keyof T)
+                }
+                title={header.tooltip || ''}
+              >
+                <div className={styles.headerContent}>
+                  {header.label}
+                  {onSort && header.sortable !== false && (
+                    <span className={styles.sortIndicator}>
+                      {getSortIndicator(header.id as keyof T)}
+                    </span>
+                  )}
+                </div>
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((item, index) => (
+            <TableRow
+              key={index}
+              tableRowData={{ ...item, id: item.id ?? undefined }}
+              headers={headers}
+              handleEdit={handleEdit}
+            />
           ))}
-        </tr>
-      </thead>
-      <tbody>
-        {data.map((item, index) => (
-          <TableRow
-            key={index}
-            tableRowData={{ ...item, id: item.id ?? undefined }}
-            headers={headers}
-            handleEdit={handleEdit}
-          />
-        ))}
-      </tbody>
-    </table>
-  );
-};
+        </tbody>
+      </table>
+    );
+  },
+);
 
 export default TableWithSorting;
