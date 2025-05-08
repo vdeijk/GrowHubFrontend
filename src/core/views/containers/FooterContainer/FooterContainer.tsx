@@ -6,8 +6,11 @@ import SocialIcon from '../../reusables/SocialIcon/SocialIcon';
 import FooterLink from '../../reusables/FooterLink/FooterLink';
 import menuService from '../../../services/MenuService/MenuService';
 import { observer } from 'mobx-react-lite';
+import { useTranslation } from 'react-i18next';
 
 const FooterContainer: React.FC = observer(() => {
+  const { t } = useTranslation();
+
   return (
     <footer
       className={`${styles.footer} ${
@@ -17,7 +20,7 @@ const FooterContainer: React.FC = observer(() => {
       <div className={styles.footerCol}>
         <Heading
           level={5}
-          text="Follow"
+          text={t('footer.headings.follow')}
           customStyles={{ color: 'var(--color-white)', marginBottom: '1rem' }}
         />
         <ul className={styles.socialIcons}>
@@ -37,28 +40,32 @@ const FooterContainer: React.FC = observer(() => {
       <div className={styles.footerCol}>
         <Heading
           level={5}
-          text="Contact"
+          text={t('footer.headings.contact')}
           customStyles={{ color: 'var(--color-white)', marginBottom: '1rem' }}
         />
-        <p className={styles.contactText}>Name: Rick van der Eijk </p>
-        <p className={styles.contactText}>Phone: (+31)628258357 </p>
-        <p className={styles.contactText}>Email: rickvdeijk@gmail.com </p>
-        <br></br>
         <p className={styles.contactText}>
-          Available for freelance work, customizations, or full-time roles.{' '}
+          {t('footer.contact.name')}: Rick van der Eijk: Rick van der Eijk{' '}
         </p>
+        <p className={styles.contactText}>
+          {t('footer.contact.phone')}: (+31)628258357{' '}
+        </p>
+        <p className={styles.contactText}>
+          {t('footer.contact.email')}: rickvdeijk@gmail.com{' '}
+        </p>
+        <br></br>
+        <p className={styles.contactText}>{t('footer.contact.availability')}</p>
       </div>
 
       <div className={styles.resources}>
         <Heading
           level={5}
-          text="Resources"
+          text={t('footer.headings.resources')}
           customStyles={{ color: 'var(--color-white)', marginBottom: '1rem' }}
         />
         <ul className={styles.resources}>
           <FooterLink
             link="https://vdeijk.github.io/growhubDocs/"
-            label="Documentation"
+            label={t('footer.resources.documentation')}
           />
         </ul>
       </div>

@@ -19,27 +19,31 @@ class AddFieldData {
     this.textFields = {
       name: {
         key: 'name',
-        label: i18next.t('addFieldData.textFields.name'), // Translated label
+        label: i18next.t('addFieldData.textFields.name'), 
         defaultValue: '',
         required: true,
+        placeholder: i18next.t('addFieldData.placeholders.name'),
       },
       notes: {
         key: 'notes',
         label: i18next.t('addFieldData.textFields.notes'),
         defaultValue: '',
         required: false,
+        placeholder: i18next.t('addFieldData.placeholders.notes'),
       },
       latitude: {
         key: 'latitude',
         label: i18next.t('addFieldData.textFields.latitude'),
         defaultValue: '',
         required: true,
+        placeholder: i18next.t('addFieldData.placeholders.latitude'),
       },
       longitude: {
         key: 'longitude',
         label: i18next.t('addFieldData.textFields.longitude'),
         defaultValue: '',
         required: true,
+        placeholder: i18next.t('addFieldData.placeholders.longitude'),
       },
     };
   }

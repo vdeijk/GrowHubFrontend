@@ -19,54 +19,39 @@ class AddMeasurementData {
     });
   }
 
-  public static textFields: Record<string, InputFieldModel> = {
-    title: {
-      key: 'title',
-      label: 'Crop Name',
-      defaultValue: '',
-      required: true,
-      readonly: true,
-    },
-    notes: { key: 'notes', label: 'Notes', defaultValue: '' },
-    soilPH: {
-      key: 'soilPH',
-      label: 'Soil PH',
-      defaultValue: '',
-      required: false,
-    },
-    batchId: {
-      key: 'batchId',
-      label: 'Batch Id',
-      defaultValue: '',
-      required: true,
-    },
-  };
-
   private initializeFields() {
     this.textFields = {
       title: {
         key: 'title',
-        label: i18next.t('addMeasurementData.textFields.title'), // Translated label
+        label: i18next.t('addMeasurementData.textFields.title'),
         defaultValue: '',
         required: true,
         readonly: true,
+        placeholder: i18next.t('addMeasurementData.placeholders.title'),
       },
       notes: {
         key: 'notes',
-        label: i18next.t('addMeasurementData.textFields.notes'), // Translated label
+        label: i18next.t('addMeasurementData.textFields.notes'),
         defaultValue: '',
+        required: false,
+        readonly: false,
+        placeholder: i18next.t('addMeasurementData.placeholders.notes'),
       },
       soilPH: {
         key: 'soilPH',
-        label: i18next.t('addMeasurementData.textFields.soilPH'), // Translated label
+        label: i18next.t('addMeasurementData.textFields.soilPH'),
         defaultValue: '',
         required: false,
+        readonly: false,
+        placeholder: i18next.t('addMeasurementData.placeholders.soilPH'),
       },
       batchId: {
         key: 'batchId',
-        label: i18next.t('addMeasurementData.textFields.batchId'), // Translated label
+        label: i18next.t('addMeasurementData.textFields.batchId'),
         defaultValue: '',
         required: true,
+        readonly: false,
+        placeholder: i18next.t('addMeasurementData.placeholders.batchId'),
       },
     };
 

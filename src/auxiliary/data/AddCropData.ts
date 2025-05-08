@@ -35,51 +35,61 @@ class AddCropData {
         label: i18next.t('addCropData.textFields.commonName'),
         defaultValue: '',
         required: true,
+        placeholder: i18next.t('addCropData.placeholders.commonName'),
       },
       notes: {
         key: 'notes',
         label: i18next.t('addCropData.textFields.notes'),
         defaultValue: '',
+        placeholder: i18next.t('addCropData.placeholders.notes'),
       },
       waterCycle: {
         key: 'waterCycle',
         label: i18next.t('addCropData.textFields.waterCycle'),
         defaultValue: '',
+        placeholder: i18next.t('addCropData.placeholders.waterCycle'),
       },
       pruningCycle: {
         key: 'pruningCycle',
         label: i18next.t('addCropData.textFields.pruningCycle'),
         defaultValue: '',
+        placeholder: i18next.t('addCropData.placeholders.pruningCycle'),
       },
       fertilizationCycle: {
         key: 'fertilizationCycle',
         label: i18next.t('addCropData.textFields.fertilizationCycle'),
         defaultValue: '',
+        placeholder: i18next.t('addCropData.placeholders.fertilizationCycle'),
       },
       harvestCycle: {
         key: 'harvestCycle',
         label: i18next.t('addCropData.textFields.harvestCycle'),
         defaultValue: '',
+        placeholder: i18next.t('addCropData.placeholders.harvestCycle'),
       },
       phMin: {
         key: 'phMin',
         label: i18next.t('addCropData.textFields.phMin'),
         defaultValue: '',
+        placeholder: i18next.t('addCropData.placeholders.phMin'),
       },
       phMax: {
         key: 'phMax',
         label: i18next.t('addCropData.textFields.phMax'),
         defaultValue: '',
+        placeholder: i18next.t('addCropData.placeholders.phMax'),
       },
       temperatureMin: {
         key: 'temperatureMin',
         label: i18next.t('addCropData.textFields.temperatureMin'),
         defaultValue: '',
+        placeholder: i18next.t('addCropData.placeholders.temperatureMin'),
       },
       temperatureMax: {
         key: 'temperatureMax',
         label: i18next.t('addCropData.textFields.temperatureMax'),
         defaultValue: '',
+        placeholder: i18next.t('addCropData.placeholders.temperatureMax'),
       },
     };
 

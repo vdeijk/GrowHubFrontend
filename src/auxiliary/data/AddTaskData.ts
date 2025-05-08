@@ -23,43 +23,46 @@ class AddTaskData {
     this.textFields = {
       titleField: {
         key: 'title',
-        label: i18next.t('addTaskData.textFields.titleField'), // Translated label
+        label: i18next.t('addTaskData.textFields.titleField'),
         defaultValue: '',
         required: true,
         readonly: true,
+        placeholder: i18next.t('addTaskData.placeholders.titleField'),
       },
       notes: {
         key: 'notes',
-        label: i18next.t('addTaskData.textFields.notes'), // Translated label
+        label: i18next.t('addTaskData.textFields.notes'),
         defaultValue: '',
         required: false,
+        placeholder: i18next.t('addTaskData.placeholders.notes'),
       },
       batchId: {
         key: 'batchId',
-        label: i18next.t('addTaskData.textFields.batchId'), // Translated label
+        label: i18next.t('addTaskData.textFields.batchId'),
         defaultValue: '',
         required: true,
+        placeholder: i18next.t('addTaskData.placeholders.batchId'),
       },
     };
 
     this.dropdowns = {
       priority: {
         key: 'priority',
-        label: i18next.t('addTaskData.dropdowns.priority'), // Translated label
+        label: i18next.t('addTaskData.dropdowns.priority'),
         options: [],
         defaultValue: '',
         required: true,
       },
       category: {
         key: 'category',
-        label: i18next.t('addTaskData.dropdowns.category'), // Translated label
+        label: i18next.t('addTaskData.dropdowns.category'),
         options: [],
         defaultValue: '',
         required: true,
       },
       todoStatus: {
         key: 'todoStatus',
-        label: i18next.t('addTaskData.dropdowns.todoStatus'), // Translated label
+        label: i18next.t('addTaskData.dropdowns.todoStatus'),
         options: [],
         defaultValue: '',
         required: true,
@@ -69,7 +72,7 @@ class AddTaskData {
     this.dateFields = [
       {
         key: 'dueDate',
-        label: i18next.t('addTaskData.dateFields.dueDate'), // Translated label
+        label: i18next.t('addTaskData.dateFields.dueDate'),
         defaultValue: '',
         required: true,
       },

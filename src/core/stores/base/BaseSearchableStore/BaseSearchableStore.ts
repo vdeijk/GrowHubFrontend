@@ -16,7 +16,6 @@ import { DropdownFieldModel } from '../../../../auxiliary/interfaces/DropdownFie
 import DebounceService from '../../../services/DebounceService/DebounceService';
 import { PaginationService } from '../../../services/PaginationService/PaginationService';
 import { InputFieldModel } from '../../../../auxiliary/interfaces/InputFieldModel';
-import { toJS } from 'mobx';
 
 export abstract class SearchableStore<T> {
   public paginationService = new PaginationService();

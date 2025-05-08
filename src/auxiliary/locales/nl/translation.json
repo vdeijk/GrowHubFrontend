@@ -355,6 +355,12 @@
     },
     "dateFields": {
       "date": "Datum"
+    },
+    "placeholders": {
+      "title": "Voer naam van meting in",
+      "notes": "Voer aanvullende notities in (optioneel)",
+      "soilPH": "Voer pH-waarde van de grond in (bijv. 6.5)",
+      "batchId": "Voer batch-ID in"
     }
   },
   "addTaskData": {
@@ -370,6 +376,11 @@
     },
     "dateFields": {
       "dueDate": "Vervaldatum"
+    },
+    "placeholders": {
+      "titleField": "Voer taaknaam in",
+      "notes": "Voer aanvullende notities in (optioneel)",
+      "batchId": "Voer batch-ID in"
     }
   },
   "addBatchData": {
@@ -388,6 +399,12 @@
       "lastFertilized": "Laatst Bemest",
       "lastPruned": "Laatst Gesnoeid",
       "lastHarvested": "Laatst Geoogst"
+    },
+    "placeholders": {
+      "commonName": "Gewas naam",
+      "notes": "Voer aanvullende notities in (optioneel)",
+      "amount": "Voer aantal planten in",
+      "cropId": "Voer gewas-ID in"
     }
   },
   "addCropData": {
@@ -424,6 +441,18 @@
       "October": "Oktober",
       "November": "November",
       "December": "December"
+    },
+    "placeholders": {
+      "commonName": "Voer gewas naam in",
+      "notes": "Voer aanvullende notities in (optioneel)",
+      "waterCycle": "Voer watercyclus in dagen in",
+      "pruningCycle": "Voer snoeicyclus in dagen in",
+      "fertilizationCycle": "Voer bemestingscyclus in dagen in",
+      "harvestCycle": "Voer oogstcyclus in dagen in",
+      "phMin": "Voer minimale pH-waarde in (bijv. 5.5)",
+      "phMax": "Voer maximale pH-waarde in (bijv. 7.0)",
+      "temperatureMin": "Voer minimale temperatuur in °C in",
+      "temperatureMax": "Voer maximale temperatuur in °C in"
     }
   },
   "addFieldData": {
@@ -432,6 +461,12 @@
       "notes": "Notities",
       "latitude": "Breedtegraad",
       "longitude": "Lengtegraad"
+    },
+    "placeholders": {
+      "name": "Voer veldnaam in",
+      "notes": "Voer aanvullende notities in (optioneel)",
+      "latitude": "Voer breedtegraad in (bijv. 52.3676)",
+      "longitude": "Voer lengtegraad in (bijv. 4.9041)"
     }
   },
   "addFieldPage": {
@@ -509,6 +544,26 @@
     "buttons": {
       "back": "Terug",
       "confirm": "Bevestigen"
+    }
+  },
+  "footer": {
+    "headings": {
+      "follow": "Volgen",
+      "contact": "Contact",
+      "resources": "Bronnen"
+    },
+    "social": {
+      "github": "GitHub",
+      "linkedin": "LinkedIn"
+    },
+    "contact": {
+      "name": "Naam",
+      "phone": "Telefoon",
+      "email": "E-mail",
+      "availability": "Beschikbaar voor freelance werk, aanpassingen of fulltime functies."
+    },
+    "resources": {
+      "documentation": "Documentatie"
     }
   }
 }

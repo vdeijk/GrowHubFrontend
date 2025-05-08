@@ -360,6 +360,12 @@
     },
     "dateFields": {
       "date": "Date"
+    },
+    "placeholders": {
+      "title": "Enter measurement title",
+      "notes": "Enter additional notes (optional)",
+      "soilPH": "Enter soil pH value (e.g. 6.5)",
+      "batchId": "Enter batch ID"
     }
   },
   "addTaskData": {
@@ -375,6 +381,11 @@
     },
     "dateFields": {
       "dueDate": "Due Date"
+    },
+    "placeholders": {
+      "titleField": "Enter task title",
+      "notes": "Enter additional notes (optional)",
+      "batchId": "Enter batch ID"
     }
   },
   "addBatchData": {
@@ -393,6 +404,12 @@
       "lastFertilized": "Last Fertilized",
       "lastPruned": "Last Pruned",
       "lastHarvested": "Last Harvested"
+    },
+    "placeholders": {
+      "commonName": "Crop name",
+      "notes": "Enter additional notes (optional)",
+      "amount": "Enter number of plants",
+      "cropId": "Enter crop ID"
     }
   },
   "addCropData": {
@@ -429,6 +446,18 @@
       "October": "October",
       "November": "November",
       "December": "December"
+    },
+    "placeholders": {
+      "commonName": "Enter crop name",
+      "notes": "Enter additional notes (optional)",
+      "waterCycle": "Enter watering cycle in days",
+      "pruningCycle": "Enter pruning cycle in days",
+      "fertilizationCycle": "Enter fertilization cycle in days",
+      "harvestCycle": "Enter harvest cycle in days",
+      "phMin": "Enter minimum pH value (e.g. 5.5)",
+      "phMax": "Enter maximum pH value (e.g. 7.0)",
+      "temperatureMin": "Enter minimum temperature in °C",
+      "temperatureMax": "Enter maximum temperature in °C"
     }
   },
   "addFieldData": {
@@ -437,6 +466,12 @@
       "notes": "Notes",
       "latitude": "Latitude",
       "longitude": "Longitude"
+    },
+    "placeholders": {
+      "name": "Enter field name",
+      "notes": "Enter additional notes (optional)",
+      "latitude": "Enter latitude (e.g. 52.3676)",
+      "longitude": "Enter longitude (e.g. 4.9041)"
     }
   },
   "addFieldPage": {
@@ -514,6 +549,26 @@
     "buttons": {
       "back": "Back",
       "confirm": "Confirm"
+    }
+  },
+  "footer": {
+    "headings": {
+      "follow": "Follow",
+      "contact": "Contact",
+      "resources": "Resources"
+    },
+    "social": {
+      "github": "GitHub",
+      "linkedin": "LinkedIn"
+    },
+    "contact": {
+      "name": "Name",
+      "phone": "Phone",
+      "email": "Email",
+      "availability": "Available for freelance work, customizations, or full-time roles."
+    },
+    "resources": {
+      "documentation": "Documentation"
     }
   }
 }

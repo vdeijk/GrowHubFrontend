@@ -35,7 +35,7 @@ export abstract class BaseFormStore {
           field.defaultValue,
           field.label,
           field.required,
-          '',
+          field.placeholder,
           30,
           field.readonly,
         );
@@ -67,6 +67,21 @@ export abstract class BaseFormStore {
           typeof field.options === 'function' ? field.options() : field.options,
         );
       }
+
+      const resolvedOptions =
+        typeof field.options === 'function' ? field.options() : field.options;
+
+      if (!resolvedOptions || !Array.isArray(resolvedOptions)) {
+        console.error(
+          `Dropdown options for key "${field.key}" are invalid or undefined.`,
+        );
+        return;
+      }
+
+      this.dropdownFields[field.key].generateDropdownOptions(
+        resolvedOptions,
+        field.defaultValue,
+      );
     });
   };
 

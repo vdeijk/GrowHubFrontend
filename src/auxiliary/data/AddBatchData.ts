@@ -27,23 +27,31 @@ class AddBatchData {
         defaultValue: '',
         required: true,
         readonly: true,
+        placeholder: i18next.t('addBatchData.placeholders.commonName'),
       },
       notes: {
         key: 'notes',
         label: i18next.t('addBatchData.textFields.notes'),
         defaultValue: '',
+        required: false,
+        readonly: false,
+        placeholder: i18next.t('addBatchData.placeholders.notes'),
       },
       amount: {
         key: 'amount',
         label: i18next.t('addBatchData.textFields.amount'),
         defaultValue: '',
         required: true,
+        readonly: false,
+        placeholder: i18next.t('addBatchData.placeholders.amount'),
       },
       cropId: {
         key: 'cropId',
         label: i18next.t('addBatchData.textFields.cropId'),
         defaultValue: '',
         required: true,
+        readonly: false,
+        placeholder: i18next.t('addBatchData.placeholders.cropId'),
       },
     };
 
