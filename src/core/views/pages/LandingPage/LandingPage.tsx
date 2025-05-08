@@ -4,6 +4,8 @@ import { useAuth0 } from '@auth0/auth0-react';
 import Heading from '../../reusables/Heading/Heading';
 import styles from './LandingPage.module.css';
 import Button from '../../reusables/Button/Button';
+import { faEnvelope, faKey } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const LandingPage: React.FC = () => {
   const { loginWithRedirect } = useAuth0();
@@ -21,11 +23,21 @@ const LandingPage: React.FC = () => {
         <div className={styles.content}>
           <Heading
             level={6}
-            text="Demo Credentials:"
+            text="Demo Credentials (or use your own):"
             customStyles={{ marginBottom: '1rem' }}
           />
-          <p>📧 Email: demo@example.com</p>
-          <p>🔑 Password: DemoPassword123!</p>
+          <div className={styles.credentials}>
+            <FontAwesomeIcon icon={faEnvelope} className={styles.icon} />
+            <p className={styles.text}>
+              <span className={styles.bold}>Email:&nbsp;</span>
+              demo@example.com
+            </p>
+            <FontAwesomeIcon icon={faKey} className={styles.icon} />
+            <p className={styles.text}>
+              <span className={styles.bold}>Password:&nbsp;</span>
+              DemoPassword123!
+            </p>
+          </div>
         </div>
 
         <Button

@@ -45,5 +45,25 @@
   display: grid;
   justify-content: center;
   justify-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
+}
+
+.icon {
+  color: var(--color-primary);
+  font-size: 1.8rem;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.credentials {
+  display: grid;
+  grid-column-gap: var(--spacing-small);
+  width: max-content;
+  grid-template-columns: max-content 1fr;
+  align-items: center;
+}
+
+.text {
 }
