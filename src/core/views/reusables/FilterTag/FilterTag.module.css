@@ -45,15 +45,15 @@
 }
 
 .date {
-  border-left: 3px solid var(--color-blue);
+  border-left: 3px solid var(--color-red);
 }
 
 .dropdown {
-  border-left: 3px solid var(--color-green);
+  border-left: 3px solid var(--color-yellow);
 }
 
 .label {
-  margin-right: 0.8rem;
+  margin-right: 1rem;
 }
 
 .removeButton {

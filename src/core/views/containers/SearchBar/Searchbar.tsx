@@ -40,8 +40,6 @@ const SearchBar: React.FC<SearchBarProps> = observer(
         field: InputField<string> | DateField<string> | DropdownField<string>,
       ) =>
         searchStore.clearFilter(field, inputFields, dateFields, dropdownFields),
-      clearAllFilters: () =>
-        searchStore.clearAllFilters(inputFields, dateFields, dropdownFields),
       formatDate: searchStore.formatDate,
       isAnimatingLastTag: searchStore.isAnimatingLastTag,
     };

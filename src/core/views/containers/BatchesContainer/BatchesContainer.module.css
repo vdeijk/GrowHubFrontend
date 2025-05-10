@@ -5,6 +5,7 @@
   box-shadow: var(--box-shadow);
   display: grid;
   grid-area: 3 / 1 / 4 / -1;
+  height: max-content;
 }
 
 .buttonContainer {

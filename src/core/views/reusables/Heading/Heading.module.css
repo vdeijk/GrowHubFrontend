@@ -7,7 +7,6 @@
   color: var(--color-text);
   width: max-content;
   line-height: 1;
-
   word-wrap: break-word;
   overflow-wrap: break-word;
 }

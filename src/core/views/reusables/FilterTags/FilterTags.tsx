@@ -5,8 +5,6 @@ import FilterTag from '../FilterTag/FilterTag';
 import { InputField } from '../../../../auxiliary/classes/InputField';
 import { DateField } from '../../../../auxiliary/classes/DateField';
 import { DropdownField } from '../../../../auxiliary/classes/DropdownField';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 interface FilterTagsProps {
   activeFiltersCount: number;
@@ -16,7 +14,6 @@ interface FilterTagsProps {
   clearFilter: (
     field: InputField<string> | DateField<string> | DropdownField<string>,
   ) => void;
-  clearAllFilters: () => void;
   formatDate: (dateString: string) => string;
   isAnimatingLastTag: boolean;
 }
@@ -28,7 +25,6 @@ const FilterTags: React.FC<FilterTagsProps> = observer((props) => {
     dateFields,
     dropdownFields,
     clearFilter,
-    clearAllFilters,
     formatDate,
   } = props;
 
@@ -75,16 +71,6 @@ const FilterTags: React.FC<FilterTagsProps> = observer((props) => {
                 onRemove={() => clearFilter(field)}
               />
             ))}
-
-          {activeFiltersCount > 1 && (
-            <button
-              className={styles.clearAllButton}
-              onClick={clearAllFilters}
-              aria-label="Clear all filters"
-            >
-              Clear all <FontAwesomeIcon icon={faTimes} />
-            </button>
-          )}
         </>
       )}
     </div>
