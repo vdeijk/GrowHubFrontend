@@ -1,0 +1,28 @@
+.subContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 0.5fr));
+  width: 100%;
+  align-items: center;
+  grid-gap: 1rem;
+}
+
+.searchContent {
+  width: 100%;
+  max-height: 1000px;
+  overflow: hidden;
+  transition:
+    max-height 0.5s ease-in-out,
+    opacity 0.3s ease-in-out;
+  display: grid;
+  grid-gap: var(--spacing-small);
+}
+
+.searchContent.collapsed {
+  max-height: 0;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  overflow: hidden;
+}

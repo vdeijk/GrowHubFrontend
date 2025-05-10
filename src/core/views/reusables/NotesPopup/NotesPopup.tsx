@@ -25,11 +25,9 @@ const NotesPopup: React.FC<NotesPopupProps> = observer(
 
     return (
       <>
-        <Heading
-          level={2}
-          text={title}
-          customStyles={{ marginBottom: '2rem' }}
-        />
+        <Heading level={2} customStyles={{ marginBottom: '2rem' }}>
+          {title}
+        </Heading>
         <TextArea
           value={description.value}
           onChange={description.setValue}

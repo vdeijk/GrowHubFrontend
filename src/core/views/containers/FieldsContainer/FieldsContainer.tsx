@@ -42,11 +42,9 @@ const FieldsContainer: React.FC = observer(() => {
   return (
     <section className={styles.container}>
       <LoadingWrapper isLoading={locationStore.isLoading}>
-        <Heading
-          level={6}
-          text={t('fieldsContainer.heading')}
-          customStyles={{ marginBottom: '2rem' }}
-        />
+        <Heading level={6} customStyles={{ marginBottom: '2rem' }}>
+          {t('fieldsContainer.heading')}
+        </Heading>
         <Map {...mapData} />
         <ButtonContainer buttons={buttonContainerData} />
       </LoadingWrapper>

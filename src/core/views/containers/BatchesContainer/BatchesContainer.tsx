@@ -37,11 +37,9 @@ const BatchesContainer: React.FC = observer(() => {
 
   const children = (
     <>
-      <Heading
-        level={6}
-        text={t('batchesContainer.heading')}
-        customStyles={{ marginBottom: '2rem' }}
-      />{' '}
+      <Heading level={6} customStyles={{ marginBottom: '2rem' }}>
+        {t('batchesContainer.heading')}
+      </Heading>
       <div className={styles.tableContainer}>
         <TableWithoutSorting<YourCropItem>
           headers={headersWithoutActions}

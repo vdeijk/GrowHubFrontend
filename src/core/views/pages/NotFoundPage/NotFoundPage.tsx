@@ -13,7 +13,9 @@ const NotFoundPage: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      <Heading level={6} text="404" customStyles={{ marginBottom: '2rem' }} />
+      <Heading level={6} customStyles={{ marginBottom: '2rem' }}>
+        404
+      </Heading>
       <p className={styles.message}>
         The page you are looking for does not exist or has been moved.
       </p>

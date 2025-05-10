@@ -30,20 +30,16 @@ const WeatherReportPage: React.FC = observer(() => {
         />
       </div>
       <div className={styles.content}>
-        <Heading
-          level={6}
-          text={t('weatherReportPage.headings.forecastTitle', {
+        <Heading level={6} customStyles={{ marginBottom: '2rem' }}>
+          {t('weatherReportPage.headings.forecastTitle', {
             count: weatherForecast?.length || 0,
           })}
-          customStyles={{ marginBottom: '2rem' }}
-        />
-        <Heading
-          level={4}
-          text={t('weatherReportPage.headings.locationTitle', {
+        </Heading>
+        <Heading level={4} customStyles={{ marginBottom: '2rem' }}>
+          {t('weatherReportPage.headings.locationTitle', {
             location: weatherStore.locationFullName,
           })}
-          customStyles={{ marginBottom: '2rem' }}
-        />
+        </Heading>
         <div className={styles.forecast}>
           {/* @ts-ignore */}
           {weatherForecast?.map((day, index) => (

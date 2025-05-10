@@ -11,7 +11,7 @@ const UpgradePage: React.FC = observer(() => {
       <div className={styles.cards}>
         {upgradeStore.plans.map((plan, index) => (
           <div key={index} className={styles.card}>
-            <Heading level={2} text={plan.title}></Heading>
+            <Heading level={2}>{plan.title}</Heading>
             <p className={styles.cardPrice}>{plan.price}</p>
             <ul className={styles.cardFeatures}>
               {plan.features.map((feature, idx) => (

@@ -25,10 +25,10 @@
   src: url('auxiliary/assets/Woodland/PPWoodland-Regular.woff2') format('woff2');
 }
 
-
 @font-face {
   font-family: 'PPWoodland-Ultralight';
-  src: url('auxiliary/assets/Woodland/PPWoodland-Ultralight.woff2') format('woff2');
+  src: url('auxiliary/assets/Woodland/PPWoodland-Ultralight.woff2')
+    format('woff2');
 }
 
 *,

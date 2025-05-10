@@ -25,9 +25,10 @@ const MenuContainer: React.FC = observer(() => {
         <div className={styles.heading}>
           <Heading
             level={4}
-            text={routerService.currentLabel}
             customStyles={{ marginBottom: '2rem', color: '#FDFDFD' }}
-          />
+          >
+            {routerService.currentLabel}
+          </Heading>
           <HelpButton
             summary={activeMenuLink?.tooltip}
             onClick={handleHelpOpen}

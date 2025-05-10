@@ -20,9 +20,10 @@ const FooterContainer: React.FC = observer(() => {
       <div className={styles.footerCol}>
         <Heading
           level={5}
-          text={t('footer.headings.follow')}
           customStyles={{ color: 'var(--color-white)', marginBottom: '1rem' }}
-        />
+        >
+          {t('footer.headings.follow')}
+        </Heading>
         <ul className={styles.socialIcons}>
           <SocialIcon
             link="https://github.com/vdeijk"
@@ -40,9 +41,10 @@ const FooterContainer: React.FC = observer(() => {
       <div className={styles.footerCol}>
         <Heading
           level={5}
-          text={t('footer.headings.contact')}
           customStyles={{ color: 'var(--color-white)', marginBottom: '1rem' }}
-        />
+        >
+          {t('footer.headings.contact')}
+        </Heading>
         <p className={styles.contactText}>
           {t('footer.contact.name')}: Rick van der Eijk: Rick van der Eijk{' '}
         </p>
@@ -59,9 +61,10 @@ const FooterContainer: React.FC = observer(() => {
       <div className={styles.resources}>
         <Heading
           level={5}
-          text={t('footer.headings.resources')}
           customStyles={{ color: 'var(--color-white)', marginBottom: '1rem' }}
-        />
+        >
+          {t('footer.headings.resources')}
+        </Heading>
         <ul className={styles.resources}>
           <FooterLink
             link="https://vdeijk.github.io/growhubDocs/"

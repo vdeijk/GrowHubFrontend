@@ -14,18 +14,14 @@ const LandingPage: React.FC = () => {
     <div className={styles.page}>
       <div className={styles.container}>
         <div className={styles.headers}>
-          <Heading
-            level={1}
-            text="GrowHub"
-            customStyles={{ marginBottom: '2rem' }}
-          />
+          <Heading level={1} customStyles={{ marginBottom: '2rem' }}>
+            GrowHub
+          </Heading>
         </div>
         <div className={styles.content}>
-          <Heading
-            level={6}
-            text="Demo Credentials (or use your own):"
-            customStyles={{ marginBottom: '1rem' }}
-          />
+          <Heading level={6} customStyles={{ marginBottom: '1rem' }}>
+            Demo Credentials (or use your own):
+          </Heading>
           <div className={styles.credentials}>
             <FontAwesomeIcon icon={faEnvelope} className={styles.icon} />
             <p className={styles.text}>

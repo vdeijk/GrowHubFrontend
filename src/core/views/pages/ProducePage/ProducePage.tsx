@@ -10,7 +10,7 @@ interface AddMeasurementPageProps {
 const ProducePage: React.FC<AddMeasurementPageProps> = observer(() => {
   return (
     <section className={styles.section}>
-      <Heading level={2} text="Coming soon" />
+      <Heading level={2}>Coming soon...</Heading>
     </section>
   );
 });

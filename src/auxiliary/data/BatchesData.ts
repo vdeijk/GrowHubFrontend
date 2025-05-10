@@ -116,22 +116,22 @@ class BatchesData {
         key: 'searchQuery',
         label: i18next.t('batches.textFields.searchQuery'),
         defaultValue: '',
-        placeholder: i18next.t('batches.placeholders.searchQuery'), 
+        placeholder: i18next.t('batches.placeholders.searchQuery'),
       },
     };
 
     this.textFieldsNumber = {
       phMin: {
-        key: 'maxAmount',
-        label: i18next.t('batches.textFields.phMin'),
-        defaultValue: '',
-        placeholder: i18next.t('batches.placeholders.phMin'),
-      },
-      phMax: {
         key: 'minAmount',
         label: i18next.t('batches.textFields.phMax'),
         defaultValue: '',
         placeholder: i18next.t('batches.placeholders.phMax'),
+      },
+      phMax: {
+        key: 'maxAmount',
+        label: i18next.t('batches.textFields.phMin'),
+        defaultValue: '',
+        placeholder: i18next.t('batches.placeholders.phMin'),
       },
     };
   }
@@ -141,11 +141,8 @@ class BatchesData {
       location: {
         key: 'location',
         label: i18next.t('batches.dropdowns.location'),
-        options: fieldsStore.getLocations().map((field) => ({
-          value: field.name ?? '',
-          label: field.name ?? '',
-        })),
-        defaultValue: i18next.t('batches.placeholders.location'),
+        options: () => [],
+        defaultValue: '',
       },
     };
   }
@@ -161,7 +158,6 @@ class BatchesData {
         key: 'lastWatered',
         label: i18next.t('batches.dateFields.lastWatered'),
         defaultValue: '',
-        
       },
       {
         key: 'lastFertilized',
@@ -190,6 +186,17 @@ class BatchesData {
       }));
   }
 }
+
+/*
+      priority: {
+        key: 'priority',
+        label: i18next.t('tasks.dropdowns.priority'),
+        options: Object.values(TodoItemPriorityEnum).map((value) => ({
+          value: value,
+          label: value,
+        })),
+        defaultValue: '',
+      },*/
 
 const batchesData = new BatchesData();
 export default batchesData;

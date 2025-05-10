@@ -27,6 +27,11 @@ class BatchesStore extends SearchableStore<YourCropItem> {
 
     EventBus.addEventListener('locations:updated', () => {
       batchesData.updateLocationDropdownOptions();
+
+      runInAction(() => {
+        delete this.dropdownFilters['location'];
+      });
+
       this.initDropdownFilter(batchesData.dropdowns['location']);
     });
 

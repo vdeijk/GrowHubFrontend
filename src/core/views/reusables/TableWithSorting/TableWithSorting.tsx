@@ -37,7 +37,7 @@ const TableWithSorting = observer(
     if (data.length === 0) {
       return (
         <div className={styles.emptyState}>
-          <Heading level={5} text={'No data available'} />
+          <Heading level={5}>{'No data available'}</Heading>
         </div>
       );
     }

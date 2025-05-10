@@ -37,11 +37,9 @@ const WeatherContainer: React.FC = observer(() => {
 
   const children = (
     <>
-      <Heading
-        level={6}
-        text={t('weatherContainer.heading')}
-        customStyles={{ marginBottom: '2rem' }}
-      ></Heading>
+      <Heading level={6} customStyles={{ marginBottom: '2rem' }}>
+        {t('weatherContainer.heading')}
+      </Heading>
       <h4 className={styles.h4}>{weatherStore.locationFullName}</h4>
       <div className={styles.container}>
         <img

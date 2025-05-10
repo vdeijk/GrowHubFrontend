@@ -69,6 +69,10 @@ export abstract class SearchableStore<T> {
       this.filterItems();
     });
 
+    EventBus.addEventListener('filters:changed', () => {
+      this.filterItems();
+    });
+
     makeObservable(this, {
       items: observable,
       filteredItems: observable,
@@ -139,26 +143,20 @@ export abstract class SearchableStore<T> {
     runInAction(() => {
       if (!this.dropdownFilters[field.key]) {
         this.dropdownFilters[field.key] = new DropdownField(
-          field.defaultValue,
+          '',
           field.label,
           false,
           typeof field.options === 'function' ? field.options() : field.options,
+          field.placeholderText,
         );
       }
 
       const resolvedOptions =
         typeof field.options === 'function' ? field.options() : field.options;
 
-      if (!resolvedOptions || !Array.isArray(resolvedOptions)) {
-        console.error(
-          `Dropdown options for key "${field.key}" are invalid or undefined.`,
-        );
-        return;
-      }
-
       this.dropdownFilters[field.key].generateDropdownOptions(
         resolvedOptions,
-        field.defaultValue,
+        field.placeholderText,
       );
     });
   };

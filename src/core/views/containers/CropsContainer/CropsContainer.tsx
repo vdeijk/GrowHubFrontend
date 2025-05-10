@@ -35,11 +35,9 @@ const CropsContainer: React.FC = observer(() => {
 
   const children = (
     <>
-      <Heading
-        level={6}
-        text="Crop Database"
-        customStyles={{ marginBottom: '2rem' }}
-      />
+      <Heading level={6} customStyles={{ marginBottom: '2rem' }}>
+        Crop Database
+      </Heading>
       <TableWithSorting<PlantItem>
         headers={headersWithoutActions}
         data={cropsDatabaseStore.items.slice(0, 9).map((plant, index) => ({

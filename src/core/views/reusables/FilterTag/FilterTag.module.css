@@ -1,0 +1,74 @@
+.tag {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  background-color: var(--color-white);
+  border-radius: 2rem;
+  font-size: 1.4rem;
+  padding: 1rem 2rem;
+  width: max-content;
+  box-shadow: var(--box-shadow-light);
+
+  animation: fadeIn 0.3s ease-in-out;
+  transform-origin: left center;
+  transition: all 0.3s ease;
+  max-width: 300px;
+  opacity: 1;
+  overflow: hidden;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.8);
+    width: 0;
+  }
+}
+
+.text {
+  border-left: 3px solid var(--color-primary);
+}
+
+.date {
+  border-left: 3px solid var(--color-blue);
+}
+
+.dropdown {
+  border-left: 3px solid var(--color-green);
+}
+
+.label {
+  margin-right: 0.8rem;
+}
+
+.removeButton {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-red);
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.removeButton:hover {
+  color: var(--color-red-hover);
+  transform: scale(1.1);
+}

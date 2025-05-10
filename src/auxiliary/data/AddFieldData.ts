@@ -19,7 +19,7 @@ class AddFieldData {
     this.textFields = {
       name: {
         key: 'name',
-        label: i18next.t('addFieldData.textFields.name'), 
+        label: i18next.t('addFieldData.textFields.name'),
         defaultValue: '',
         required: true,
         placeholder: i18next.t('addFieldData.placeholders.name'),

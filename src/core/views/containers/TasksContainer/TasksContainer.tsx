@@ -24,11 +24,9 @@ const TasksContainer: React.FC = observer(() => {
   return (
     <section className={styles.section}>
       <LoadingWrapper isLoading={taskStore.isLoading}>
-        <Heading
-          level={6}
-          text={t('tasksContainer.heading')}
-          customStyles={{ marginBottom: '2rem' }}
-        ></Heading>
+        <Heading level={6} customStyles={{ marginBottom: '2rem' }}>
+          {t('tasksContainer.heading')}
+        </Heading>
         {taskStore.items.slice(0, 3).map((task) => (
           <Task key={task.id} taskData={task} />
         ))}
