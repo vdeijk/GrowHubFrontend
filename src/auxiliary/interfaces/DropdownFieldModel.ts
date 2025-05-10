@@ -6,5 +6,5 @@ export interface DropdownFieldModel {
   options: DropdownOption[] | (() => DropdownOption[]);
   defaultValue: string;
   required?: boolean;
-  placeholderText?: string; 
+  placeholderText?: string;
 }
