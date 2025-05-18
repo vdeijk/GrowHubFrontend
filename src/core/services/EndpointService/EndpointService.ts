@@ -66,7 +66,7 @@ export class EndpointService {
     }
   };
 
-  public deleteData = async (id: number) => {
+  public deleteData = async (id: string) => {
     this.setIsLoading(true);
 
     try {

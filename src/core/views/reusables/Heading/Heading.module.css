@@ -15,3 +15,9 @@
   font-weight: normal;
   text-transform: uppercase;
 }
+
+@media (max-width: 576px) {
+  .h1 {
+    font-size: 6rem;
+  }
+}

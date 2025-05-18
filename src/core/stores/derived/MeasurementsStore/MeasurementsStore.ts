@@ -1,5 +1,5 @@
 import { SearchableStore } from '../../base/BaseSearchableStore/BaseSearchableStore';
-import { MeasurementItem } from '../../../../api';
+import { ReadingItem } from '../../../../api';
 import { makeObservable, runInAction, action, computed } from 'mobx';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
 import { PaginationService } from '../../../services/PaginationService/PaginationService';
@@ -10,13 +10,13 @@ import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderMo
 import measurementsData from '../../../../auxiliary/data/MeasurementsData';
 import i18next from 'i18next';
 
-class MeasurementsStore extends SearchableStore<MeasurementItem> {
-  private endpointService = new EndpointService('Measurements');
+class MeasurementsStore extends SearchableStore<ReadingItem> {
+  private endpointService = new EndpointService('Reading');
   public paginationService = new PaginationService();
   public get isLoading(): boolean {
     return this.endpointService.isLoading;
   }
-  public get tableHeaders(): TableHeaderModel<MeasurementItem>[] {
+  public get tableHeaders(): TableHeaderModel<ReadingItem>[] {
     return measurementsData.tableHeaders;
   }
 
@@ -65,13 +65,13 @@ class MeasurementsStore extends SearchableStore<MeasurementItem> {
   debouncedFilterMeasurements: (criteria: string) => void = () => {};
 
   public fetchData = async () => {
-    const data = await this.endpointService.getData<MeasurementItem[]>();
+    const data = await this.endpointService.getData<ReadingItem[]>();
 
     if (!data) return;
 
     runInAction(() => {
       const numericalKeys: {
-        key: keyof MeasurementItem;
+        key: keyof ReadingItem;
         thresholds: { red: number; yellow: number };
       }[] = [{ key: 'soilPH', thresholds: { red: 6, yellow: 7 } }];
 
@@ -87,7 +87,7 @@ class MeasurementsStore extends SearchableStore<MeasurementItem> {
     });
   };
 
-  public deleteMeasurement = async (id: number) => {
+  public deleteMeasurement = async (id: string) => {
     await this.endpointService.deleteData(id);
 
     this.fetchData();
@@ -129,7 +129,7 @@ class MeasurementsStore extends SearchableStore<MeasurementItem> {
     EventBus.dispatchEvent('filteredItems:updated', undefined);
   }
 
-  public updateReading = async (id: number, data: MeasurementItem) => {
+  public updateReading = async (id: string, data: ReadingItem) => {
     await this.endpointService.putData(`${id}`, data);
 
     this.fetchData();

@@ -1,30 +1,30 @@
-# TodoApi
+# BatchApi
 
 All URIs are relative to _http://localhost_
 
-| Method                                  | HTTP request              | Description |
-| --------------------------------------- | ------------------------- | ----------- |
-| [**apiTodoIdDelete**](#apitodoiddelete) | **DELETE** /api/Todo/{id} |             |
-| [**apiTodoIdGet**](#apitodoidget)       | **GET** /api/Todo/{id}    |             |
-| [**apiTodoIdPut**](#apitodoidput)       | **PUT** /api/Todo/{id}    |             |
-| [**apiTodoPost**](#apitodopost)         | **POST** /api/Todo        |             |
-| [**getAllTodos**](#getalltodos)         | **GET** /api/Todo         |             |
+| Method                                    | HTTP request               | Description |
+| ----------------------------------------- | -------------------------- | ----------- |
+| [**apiBatchIdDelete**](#apibatchiddelete) | **DELETE** /api/Batch/{id} |             |
+| [**apiBatchIdGet**](#apibatchidget)       | **GET** /api/Batch/{id}    |             |
+| [**apiBatchIdPut**](#apibatchidput)       | **PUT** /api/Batch/{id}    |             |
+| [**apiBatchPost**](#apibatchpost)         | **POST** /api/Batch        |             |
+| [**getBatches**](#getbatches)             | **GET** /api/Batch         |             |
 
-# **apiTodoIdDelete**
+# **apiBatchIdDelete**
 
-> apiTodoIdDelete()
+> apiBatchIdDelete()
 
 ### Example
 
 ```typescript
-import { TodoApi, Configuration } from './api';
+import { BatchApi, Configuration } from './api';
 
 const configuration = new Configuration();
-const apiInstance = new TodoApi(configuration);
+const apiInstance = new BatchApi(configuration);
 
 let id: string; // (default to undefined)
 
-const { status, data } = await apiInstance.apiTodoIdDelete(id);
+const { status, data } = await apiInstance.apiBatchIdDelete(id);
 ```
 
 ### Parameters
@@ -54,21 +54,21 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **apiTodoIdGet**
+# **apiBatchIdGet**
 
-> TodoItem apiTodoIdGet()
+> BatchItem apiBatchIdGet()
 
 ### Example
 
 ```typescript
-import { TodoApi, Configuration } from './api';
+import { BatchApi, Configuration } from './api';
 
 const configuration = new Configuration();
-const apiInstance = new TodoApi(configuration);
+const apiInstance = new BatchApi(configuration);
 
 let id: string; // (default to undefined)
 
-const { status, data } = await apiInstance.apiTodoIdGet(id);
+const { status, data } = await apiInstance.apiBatchIdGet(id);
 ```
 
 ### Parameters
@@ -79,7 +79,7 @@ const { status, data } = await apiInstance.apiTodoIdGet(id);
 
 ### Return type
 
-**TodoItem**
+**BatchItem**
 
 ### Authorization
 
@@ -98,30 +98,30 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **apiTodoIdPut**
+# **apiBatchIdPut**
 
-> apiTodoIdPut()
+> apiBatchIdPut()
 
 ### Example
 
 ```typescript
-import { TodoApi, Configuration, TodoItem } from './api';
+import { BatchApi, Configuration, BatchItem } from './api';
 
 const configuration = new Configuration();
-const apiInstance = new TodoApi(configuration);
+const apiInstance = new BatchApi(configuration);
 
 let id: string; // (default to undefined)
-let todoItem: TodoItem; // (optional)
+let batchItem: BatchItem; // (optional)
 
-const { status, data } = await apiInstance.apiTodoIdPut(id, todoItem);
+const { status, data } = await apiInstance.apiBatchIdPut(id, batchItem);
 ```
 
 ### Parameters
 
-| Name         | Type         | Description | Notes                 |
-| ------------ | ------------ | ----------- | --------------------- |
-| **todoItem** | **TodoItem** |             |                       |
-| **id**       | [**string**] |             | defaults to undefined |
+| Name          | Type          | Description | Notes                 |
+| ------------- | ------------- | ----------- | --------------------- |
+| **batchItem** | **BatchItem** |             |                       |
+| **id**        | [**string**]  |             | defaults to undefined |
 
 ### Return type
 
@@ -144,28 +144,28 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **apiTodoPost**
+# **apiBatchPost**
 
-> apiTodoPost()
+> apiBatchPost()
 
 ### Example
 
 ```typescript
-import { TodoApi, Configuration, TodoItem } from './api';
+import { BatchApi, Configuration, BatchItem } from './api';
 
 const configuration = new Configuration();
-const apiInstance = new TodoApi(configuration);
+const apiInstance = new BatchApi(configuration);
 
-let todoItem: TodoItem; // (optional)
+let batchItem: BatchItem; // (optional)
 
-const { status, data } = await apiInstance.apiTodoPost(todoItem);
+const { status, data } = await apiInstance.apiBatchPost(batchItem);
 ```
 
 ### Parameters
 
-| Name         | Type         | Description | Notes |
-| ------------ | ------------ | ----------- | ----- |
-| **todoItem** | **TodoItem** |             |       |
+| Name          | Type          | Description | Notes |
+| ------------- | ------------- | ----------- | ----- |
+| **batchItem** | **BatchItem** |             |       |
 
 ### Return type
 
@@ -188,19 +188,19 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getAllTodos**
+# **getBatches**
 
-> Array<TodoItem> getAllTodos()
+> Array<BatchItem> getBatches()
 
 ### Example
 
 ```typescript
-import { TodoApi, Configuration } from './api';
+import { BatchApi, Configuration } from './api';
 
 const configuration = new Configuration();
-const apiInstance = new TodoApi(configuration);
+const apiInstance = new BatchApi(configuration);
 
-const { status, data } = await apiInstance.getAllTodos();
+const { status, data } = await apiInstance.getBatches();
 ```
 
 ### Parameters
@@ -209,7 +209,7 @@ This endpoint does not have any parameters.
 
 ### Return type
 
-**Array<TodoItem>**
+**Array<BatchItem>**
 
 ### Authorization
 

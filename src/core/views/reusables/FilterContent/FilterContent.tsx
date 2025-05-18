@@ -18,62 +18,105 @@ export interface FilterContentProps {
 
 const FilterContent: React.FC<FilterContentProps> = observer(
   ({ inputFields, dateFields, dropdownFields, isCollapsed = false }) => {
-    const inputFieldsDisplay = (
-      <div className={styles.subContainer}>
-        {inputFields
-          .filter((field) => field.label.toLowerCase() !== 'notes')
-          .map((field, index) => (
+    const searchField = inputFields.find(
+      (field) =>
+        field.label.toLowerCase() === 'search' ||
+        field.placeholder?.toLowerCase().includes('search'),
+    );
+
+    const otherInputFields = inputFields.filter(
+      (field) => field !== searchField && field.label.toLowerCase() !== 'notes',
+    );
+
+    const sections = [
+      {
+        content: searchField && (
+          <div className={styles.subContainer}>
             <TextInput
-              key={`input-${index}`}
-              label={field.label}
-              value={field.value}
-              onChange={field.setValue}
-              placeholder={field.placeholder}
-              aria-label={field.label}
+              label={searchField.label}
+              value={searchField.value}
+              onChange={searchField.setValue}
+              placeholder={searchField.placeholder}
+              aria-label={searchField.label}
             />
-          ))}
-      </div>
-    );
+          </div>
+        ),
+        alwaysShow: true,
+      },
+      {
+        content: otherInputFields.length > 0 && (
+          <div className={styles.subContainer}>
+            {otherInputFields.map((field, index) => (
+              <TextInput
+                key={`input-${index}`}
+                label={field.label}
+                value={field.value}
+                onChange={field.setValue}
+                placeholder={field.placeholder}
+                aria-label={field.label}
+              />
+            ))}
+          </div>
+        ),
+      },
+      {
+        content: dropdownFields.length > 0 && (
+          <div className={styles.subContainer}>
+            {dropdownFields.map((field, index) => (
+              <Dropdown
+                key={`dropdown-${index}`}
+                value={field.value}
+                onChange={(value) => field.setValue(String(value))}
+                options={field.options}
+                aria-label={field.label}
+                label={field.label}
+              />
+            ))}
+          </div>
+        ),
+      },
+      {
+        content: dateFields.length > 0 && (
+          <div className={styles.subContainer}>
+            {dateFields.map((field, index) => (
+              <DateInput
+                key={`date-${index}`}
+                value={field.value}
+                onChange={(date) => field.setValue(date || '')}
+                label={field.label}
+                aria-label={field.label}
+              />
+            ))}
+          </div>
+        ),
+      },
+    ];
 
-    const dateFieldsDisplay = (
-      <div className={styles.subContainer}>
-        {dateFields.map((field, index) => (
-          <DateInput
-            key={`date-${index}`}
-            value={field.value}
-            onChange={(date) => field.setValue(date || '')}
-            label={field.label}
-            aria-label={field.label}
-          />
-        ))}
-      </div>
-    );
-
-    const dropdownFieldsDisplay = (
-      <div className={styles.subContainer}>
-        {dropdownFields.map((field, index) => (
-          <Dropdown
-            key={`dropdown-${index}`}
-            value={field.value}
-            onChange={(value) => field.setValue(String(value))}
-            options={field.options}
-            aria-label={field.label}
-            label={field.label}
-          />
-        ))}
-      </div>
+    const visibleSections = sections.filter(
+      (section) => section.content && (section.alwaysShow || !isCollapsed),
     );
 
     return (
-      <div
-        className={`${styles.searchContent} ${isCollapsed ? styles.collapsed : ''}`}
-      >
-        {inputFields.length > 0 && inputFieldsDisplay}
-        {inputFields.length > 0 &&
-          (dropdownFields.length > 0 || dateFields.length > 0) && <Divider />}
-        {dropdownFields.length > 0 && dropdownFieldsDisplay}
-        {dropdownFields.length > 0 && <Divider />}
-        {dateFields.length > 0 && dateFieldsDisplay}
+      <div className={`${styles.searchContent}`}>
+        {isCollapsed && visibleSections.length > 0 && <Divider />}
+
+        {sections.map((section, index) => {
+          if (!section.content) return null;
+          if (isCollapsed && !section.alwaysShow) return null;
+
+          const visibleSectionIndex = visibleSections.findIndex(
+            (s) => s === section,
+          );
+
+          const needsDivider = visibleSectionIndex > 0 && !isCollapsed;
+
+          return (
+            <React.Fragment key={index}>
+              {needsDivider && <Divider />}
+              {section.content}
+            </React.Fragment>
+          );
+        })}
       </div>
     );
   },

@@ -30,7 +30,7 @@ const TasksPage: React.FC = observer(() => {
   ];
 
   const handlePaste = (
-    id: number | undefined,
+    id: string | undefined,
     event: React.MouseEvent<SVGElement>,
   ) => {
     if (id === undefined) return;
@@ -40,7 +40,7 @@ const TasksPage: React.FC = observer(() => {
     copyPasteStore.pasteBatchIntoTask(id);
   };
 
-  const handleEdit = (id: number | undefined) => {
+  const handleEdit = (id: string | undefined) => {
     navigate(`/addTaskPage/${id}`);
   };
 
@@ -50,7 +50,7 @@ const TasksPage: React.FC = observer(() => {
   );
 
   const handleDelete = (
-    id: number | undefined,
+    id: string | undefined,
     event: React.MouseEvent<SVGElement>,
   ) => {
     event.stopPropagation();
@@ -69,10 +69,10 @@ const TasksPage: React.FC = observer(() => {
       ...item,
       actions: (
         <ActionIcons
-          item={item as { id: number | undefined }}
+          item={item as { id: string | undefined }}
           handleDelete={handleDelete}
           handlePaste={(
-            id: number | undefined,
+            id: string | undefined,
             event: React.MouseEvent<SVGElement>,
           ) => handlePaste(id, event)}
         />

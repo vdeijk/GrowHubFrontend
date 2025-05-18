@@ -11,7 +11,7 @@ export interface TableProps<T> {
 }
 
 const TableWithoutSorting = observer(
-  <T extends { id?: number | null | undefined }>({
+  <T extends { id?: string | null | undefined }>({
     headers,
     data,
   }: TableProps<T>) => {

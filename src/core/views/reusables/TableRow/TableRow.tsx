@@ -1,13 +1,13 @@
 import React from 'react';
 import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
 
-interface TableRowProps<T extends { id?: number | null | undefined }> {
+interface TableRowProps<T extends { id?: string | number | null | undefined }> {
   tableRowData: T;
   headers: TableHeaderModel<T>[];
-  handleEdit?: (id: number | undefined) => void;
+  handleEdit?: (id: string | undefined) => void;
 }
 
-const TableRow = <T extends { id?: number | undefined }>({
+const TableRow = <T extends { id?: string | undefined }>({
   tableRowData,
   headers,
   handleEdit,
@@ -88,7 +88,7 @@ const TableRow = <T extends { id?: number | undefined }>({
   };
 
   return (
-    <tr onClick={() => handleEdit?.(tableRowData.id as number | undefined)}>
+    <tr onClick={() => handleEdit?.(tableRowData.id as string | undefined)}>
       {headers.map((header) => (
         <td key={String(header.id)}>
           {renderCellContent(header.id as keyof T, header.type)}

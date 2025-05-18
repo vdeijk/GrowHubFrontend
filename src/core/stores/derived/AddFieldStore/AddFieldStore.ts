@@ -1,6 +1,6 @@
 import { BaseFormStore } from '../../base/BaseFormStore/BaseFormStore';
 import { DataMappingService } from '../../../services/DataMappingService/DatamappingService';
-import { LocationItem } from '../../../../api';
+import { FieldItem } from '../../../../api';
 import fieldsStore from '../FieldsStore/FieldsStore';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
 import { runInAction } from 'mobx';
@@ -8,7 +8,7 @@ import i18next from 'i18next';
 import addFieldData from '../../../../auxiliary/data/AddFieldData';
 
 class AddFieldStore extends BaseFormStore {
-  public endpointService = new EndpointService('Location');
+  private endpointService = new EndpointService('Field');
 
   constructor() {
     super();
@@ -54,8 +54,8 @@ class AddFieldStore extends BaseFormStore {
   };
 
   public loadField = async (id: string) => {
-    const data: LocationItem | undefined =
-      await this.endpointService.getData<LocationItem>(`${id}`);
+    const data: FieldItem | undefined =
+      await this.endpointService.getData<FieldItem>(`${id}`);
 
     if (!data) return;
 
@@ -89,7 +89,7 @@ class AddFieldStore extends BaseFormStore {
     return true;
   }
 
-  prepareData(): LocationItem {
+  prepareData(): FieldItem {
     return {
       name: this.inputFields.name.value as string,
       latitude: parseFloat(this.inputFields.latitude.value as string),

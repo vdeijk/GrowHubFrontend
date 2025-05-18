@@ -3,24 +3,24 @@ import styles from './ActionIcons.module.css';
 import { observer } from 'mobx-react-lite';
 import { FaTrash, FaCopy, FaPaste } from 'react-icons/fa';
 
-interface ActionIconsProps<T extends { id?: number | undefined }> {
+interface ActionIconsProps<T extends { id?: string | undefined }> {
   item: T;
   handleDelete: (
-    id: number | undefined,
+    id: string | undefined,
     event: React.MouseEvent<SVGElement>,
   ) => void;
   handleCopy?: (
-    id: number | undefined,
+    id: string | undefined,
     event: React.MouseEvent<SVGElement>,
   ) => void;
   handlePaste?: (
-    id: number | undefined,
+    id: string | undefined,
     event: React.MouseEvent<SVGElement>,
   ) => void;
 }
 
 const ActionIcons = observer(
-  <T extends { id: number | undefined }>(props: ActionIconsProps<T>) => {
+  <T extends { id: string | undefined }>(props: ActionIconsProps<T>) => {
     const { item, handleDelete, handleCopy, handlePaste } = props;
 
     return (

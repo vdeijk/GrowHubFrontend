@@ -85,18 +85,14 @@ class AddTaskStore extends BaseFormStore {
     return false;
   }
 
-  private getCropNameById(cropId: number): string | undefined {
+  private getCropNameById(cropId: string): string | undefined {
     const batch = batchesStore.items.find((item) => item.id === cropId);
     return batch?.commonName ?? undefined;
   }
 
   private setupCropIdReaction() {
     const updateCommonName = DebounceService.debounce(() => {
-      const batchId = Number(this.inputFields.batchId.value);
-      if (Number.isNaN(batchId)) {
-        this.inputFields.title.setValue('');
-        return;
-      }
+      const batchId = String(this.inputFields.batchId.value);
 
       const title = this.getCropNameById(batchId);
       if (title) {
@@ -118,7 +114,7 @@ class AddTaskStore extends BaseFormStore {
     return {
       title: this.inputFields.title.value as string,
       notes: this.inputFields.notes.value as string,
-      batchId: Number(this.inputFields.batchId.value),
+      batchId: String(this.inputFields.batchId.value),
       priority: this.dropdownFields.priority.value as TodoItemPriorityEnum,
       category: this.dropdownFields.category.value as TodoItemCategoryEnum,
       todoStatus: this.dropdownFields.todoStatus

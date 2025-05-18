@@ -7,7 +7,7 @@ import Heading from '../../reusables/Heading/Heading';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import { observer } from 'mobx-react-lite';
-import { YourCropItem } from '../../../../api';
+import { BatchItem } from '../../../../api';
 import { ButtonProps } from '../../../../auxiliary/interfaces/ButtonProps';
 import { useTranslation } from 'react-i18next';
 
@@ -26,7 +26,7 @@ const BatchesContainer: React.FC = observer(() => {
     .filter((header) => header.id !== 'actions')
     .map((header) => ({
       ...header,
-      id: header.id as keyof YourCropItem,
+      id: header.id as keyof BatchItem,
     }));
 
   const omit = <T, K extends keyof T>(obj: T, key: K): Omit<T, K> => {
@@ -41,7 +41,7 @@ const BatchesContainer: React.FC = observer(() => {
         {t('batchesContainer.heading')}
       </Heading>
       <div className={styles.tableContainer}>
-        <TableWithoutSorting<YourCropItem>
+        <TableWithoutSorting<BatchItem>
           headers={headersWithoutActions}
           data={plantsStore.items.slice(0, 9).map((plant) => ({
             ...('actions' in plant ? omit(plant, 'actions') : plant),

@@ -1,10 +1,10 @@
 import { TableHeaderModel } from '../interfaces/TableHeaderModel';
-import { LocationItem } from '../../api';
+import { FieldItem } from '../../api';
 import { makeAutoObservable } from 'mobx';
 import i18next from 'i18next';
 
 class FieldsData {
-  public tableHeaders: TableHeaderModel<LocationItem>[] = [];
+  public tableHeaders: TableHeaderModel<FieldItem>[] = [];
 
   constructor() {
     makeAutoObservable(this);

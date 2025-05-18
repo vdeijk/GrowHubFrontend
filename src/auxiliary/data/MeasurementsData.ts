@@ -1,10 +1,10 @@
 import { DropdownFieldModel } from '../interfaces/DropdownFieldModel';
 import { DateFieldModel } from '../interfaces/DateFieldModel';
 import {
-  MeasurementItem,
-  MeasurementItemGrowthStageEnum,
-  MeasurementItemHealthStatusEnum,
-  MeasurementItemSoilDrynessEnum,
+  ReadingItem,
+  ReadingItemGrowthStageEnum,
+  ReadingItemHealthStatusEnum,
+  ReadingItemSoilDrynessEnum,
 } from '../../api';
 import { TableHeaderModel } from '../interfaces/TableHeaderModel';
 import { InputFieldModel } from '../interfaces/InputFieldModel';
@@ -12,7 +12,7 @@ import { makeAutoObservable } from 'mobx';
 import i18next from 'i18next';
 
 class MeasurementsData {
-  public tableHeaders: TableHeaderModel<MeasurementItem>[] = [];
+  public tableHeaders: TableHeaderModel<ReadingItem>[] = [];
   public dropdowns: Record<string, DropdownFieldModel> = {};
   public dateFields: DateFieldModel[] = [];
 
@@ -123,7 +123,7 @@ class MeasurementsData {
       dryness: {
         key: 'soilDryness',
         label: i18next.t('measurements.dropdowns.soilDryness'),
-        options: Object.values(MeasurementItemSoilDrynessEnum).map((value) => ({
+        options: Object.values(ReadingItemSoilDrynessEnum).map((value) => ({
           value: value,
           label: value,
         })),
@@ -132,18 +132,16 @@ class MeasurementsData {
       healthStatus: {
         key: 'healthStatus',
         label: i18next.t('measurements.dropdowns.healthStatus'),
-        options: Object.values(MeasurementItemHealthStatusEnum).map(
-          (value) => ({
-            value: value,
-            label: value,
-          }),
-        ),
+        options: Object.values(ReadingItemHealthStatusEnum).map((value) => ({
+          value: value,
+          label: value,
+        })),
         defaultValue: '',
       },
       growthStage: {
         key: 'growthStage',
         label: i18next.t('measurements.dropdowns.growthStage'),
-        options: Object.values(MeasurementItemGrowthStageEnum).map((value) => ({
+        options: Object.values(ReadingItemGrowthStageEnum).map((value) => ({
           value: value,
           label: value,
         })),

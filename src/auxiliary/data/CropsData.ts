@@ -1,11 +1,11 @@
-import { PlantItem } from '../../api';
+import { CropItem } from '../../api';
 import { TableHeaderModel } from '../interfaces/TableHeaderModel';
 import { InputFieldModel } from '../interfaces/InputFieldModel';
 import i18next from 'i18next';
 import { makeAutoObservable } from 'mobx';
 
 class CropsData {
-  public tableHeaders: TableHeaderModel<PlantItem>[] = [];
+  public tableHeaders: TableHeaderModel<CropItem>[] = [];
   public textFieldsString: Record<string, InputFieldModel> = {};
 
   constructor() {

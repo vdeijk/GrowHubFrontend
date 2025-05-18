@@ -1,12 +1,12 @@
-import { MeasurementItem } from '../../../../api';
+import { ReadingItem } from '../../../../api';
 import { BaseFormStore } from '../../base/BaseFormStore/BaseFormStore';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
 import { runInAction } from 'mobx';
 import addMeasurementData from '../../../../auxiliary/data/AddMeasurementData';
 import measurementsStore from '../MeasurementsStore/MeasurementsStore';
-import { MeasurementItemSoilDrynessEnum } from '../../../../api';
-import { MeasurementItemGrowthStageEnum } from '../../../../api';
-import { MeasurementItemHealthStatusEnum } from '../../../../api';
+import { ReadingItemSoilDrynessEnum } from '../../../../api';
+import { ReadingItemGrowthStageEnum } from '../../../../api';
+import { ReadingItemHealthStatusEnum } from '../../../../api';
 import { DataMappingService } from '../../../services/DataMappingService/DatamappingService';
 import ValueTransformService from '../../../services/ValueTransformService/ValueTransformService';
 import i18next from 'i18next';
@@ -15,7 +15,7 @@ import DebounceService from '../../../services/DebounceService/DebounceService';
 import batchesStore from '../BatchesStore/BatchesStore';
 
 class AddMeasurementStore extends BaseFormStore {
-  private endpointService = new EndpointService('Measurements');
+  private endpointService = new EndpointService('Reading');
 
   constructor() {
     super();
@@ -67,8 +67,8 @@ class AddMeasurementStore extends BaseFormStore {
   };
 
   public loadReading = async (id: string) => {
-    const data: MeasurementItem | undefined =
-      await this.endpointService.getData<MeasurementItem>(`${id}`);
+    const data: ReadingItem | undefined =
+      await this.endpointService.getData<ReadingItem>(`${id}`);
 
     if (!data) return;
 
@@ -85,18 +85,14 @@ class AddMeasurementStore extends BaseFormStore {
     return false;
   }
 
-  private getCropNameById(cropId: number): string | undefined {
+  private getCropNameById(cropId: string): string | undefined {
     const batch = batchesStore.items.find((item) => item.id === cropId);
     return batch?.commonName ?? undefined;
   }
 
   private setupCropIdReaction() {
     const updateCommonName = DebounceService.debounce(() => {
-      const batchId = Number(this.inputFields.batchId.value);
-      if (Number.isNaN(batchId)) {
-        this.inputFields.title.setValue('');
-        return;
-      }
+      const batchId = String(this.inputFields.batchId.value);
 
       const title = this.getCropNameById(batchId);
       if (title) {
@@ -114,22 +110,22 @@ class AddMeasurementStore extends BaseFormStore {
     );
   }
 
-  private prepareData(): MeasurementItem {
+  private prepareData(): ReadingItem {
     return {
       title: this.inputFields.title.value as string,
       notes: this.inputFields.notes.value as string,
-      batchId: Number(this.inputFields.batchId.value),
+      batchId: String(this.inputFields.batchId.value),
       soilPH: ValueTransformService.toNumberOrUndefined(
         this.inputFields.soilPH.value,
       ),
       soilDryness: ValueTransformService.toEnumOrUndefined(
         this.dropdownFields.soilDryness?.value,
-        MeasurementItemSoilDrynessEnum,
+        ReadingItemSoilDrynessEnum,
       ),
       growthStage: this.dropdownFields.growthStage
-        .value as MeasurementItemGrowthStageEnum,
+        .value as ReadingItemGrowthStageEnum,
       healthStatus: this.dropdownFields.healthStatus
-        .value as MeasurementItemHealthStatusEnum,
+        .value as ReadingItemHealthStatusEnum,
       date: this.dateFields.date.value as string,
     };
   }

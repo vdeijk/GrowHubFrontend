@@ -5,18 +5,27 @@ class MenuService {
 
   constructor() {
     makeAutoObservable(this);
+
+    this.checkScreenWidth();
+
+    window.addEventListener('resize', this.checkScreenWidth);
   }
 
-  openMenu = () => {
+  public openMenu = () => {
     this.isMenuOpen = true;
   };
 
-  closeMenu = () => {
+  public closeMenu = () => {
     this.isMenuOpen = false;
   };
 
-  toggleMenu = () => {
+  public toggleMenu = () => {
     this.isMenuOpen = !this.isMenuOpen;
+  };
+
+  public checkScreenWidth = () => {
+    const isMobile = window.innerWidth < 768;
+    this.isMenuOpen = !isMobile;
   };
 }
 

@@ -1,30 +1,30 @@
-# TodoApi
+# FieldApi
 
 All URIs are relative to _http://localhost_
 
-| Method                                  | HTTP request              | Description |
-| --------------------------------------- | ------------------------- | ----------- |
-| [**apiTodoIdDelete**](#apitodoiddelete) | **DELETE** /api/Todo/{id} |             |
-| [**apiTodoIdGet**](#apitodoidget)       | **GET** /api/Todo/{id}    |             |
-| [**apiTodoIdPut**](#apitodoidput)       | **PUT** /api/Todo/{id}    |             |
-| [**apiTodoPost**](#apitodopost)         | **POST** /api/Todo        |             |
-| [**getAllTodos**](#getalltodos)         | **GET** /api/Todo         |             |
+| Method                                    | HTTP request               | Description |
+| ----------------------------------------- | -------------------------- | ----------- |
+| [**apiFieldIdDelete**](#apifieldiddelete) | **DELETE** /api/Field/{id} |             |
+| [**apiFieldIdGet**](#apifieldidget)       | **GET** /api/Field/{id}    |             |
+| [**apiFieldIdPut**](#apifieldidput)       | **PUT** /api/Field/{id}    |             |
+| [**apiFieldPost**](#apifieldpost)         | **POST** /api/Field        |             |
+| [**getFields**](#getfields)               | **GET** /api/Field         |             |
 
-# **apiTodoIdDelete**
+# **apiFieldIdDelete**
 
-> apiTodoIdDelete()
+> apiFieldIdDelete()
 
 ### Example
 
 ```typescript
-import { TodoApi, Configuration } from './api';
+import { FieldApi, Configuration } from './api';
 
 const configuration = new Configuration();
-const apiInstance = new TodoApi(configuration);
+const apiInstance = new FieldApi(configuration);
 
 let id: string; // (default to undefined)
 
-const { status, data } = await apiInstance.apiTodoIdDelete(id);
+const { status, data } = await apiInstance.apiFieldIdDelete(id);
 ```
 
 ### Parameters
@@ -54,21 +54,21 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **apiTodoIdGet**
+# **apiFieldIdGet**
 
-> TodoItem apiTodoIdGet()
+> FieldItem apiFieldIdGet()
 
 ### Example
 
 ```typescript
-import { TodoApi, Configuration } from './api';
+import { FieldApi, Configuration } from './api';
 
 const configuration = new Configuration();
-const apiInstance = new TodoApi(configuration);
+const apiInstance = new FieldApi(configuration);
 
 let id: string; // (default to undefined)
 
-const { status, data } = await apiInstance.apiTodoIdGet(id);
+const { status, data } = await apiInstance.apiFieldIdGet(id);
 ```
 
 ### Parameters
@@ -79,7 +79,7 @@ const { status, data } = await apiInstance.apiTodoIdGet(id);
 
 ### Return type
 
-**TodoItem**
+**FieldItem**
 
 ### Authorization
 
@@ -98,30 +98,30 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **apiTodoIdPut**
+# **apiFieldIdPut**
 
-> apiTodoIdPut()
+> apiFieldIdPut()
 
 ### Example
 
 ```typescript
-import { TodoApi, Configuration, TodoItem } from './api';
+import { FieldApi, Configuration, FieldItem } from './api';
 
 const configuration = new Configuration();
-const apiInstance = new TodoApi(configuration);
+const apiInstance = new FieldApi(configuration);
 
 let id: string; // (default to undefined)
-let todoItem: TodoItem; // (optional)
+let fieldItem: FieldItem; // (optional)
 
-const { status, data } = await apiInstance.apiTodoIdPut(id, todoItem);
+const { status, data } = await apiInstance.apiFieldIdPut(id, fieldItem);
 ```
 
 ### Parameters
 
-| Name         | Type         | Description | Notes                 |
-| ------------ | ------------ | ----------- | --------------------- |
-| **todoItem** | **TodoItem** |             |                       |
-| **id**       | [**string**] |             | defaults to undefined |
+| Name          | Type          | Description | Notes                 |
+| ------------- | ------------- | ----------- | --------------------- |
+| **fieldItem** | **FieldItem** |             |                       |
+| **id**        | [**string**]  |             | defaults to undefined |
 
 ### Return type
 
@@ -144,28 +144,28 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **apiTodoPost**
+# **apiFieldPost**
 
-> apiTodoPost()
+> apiFieldPost()
 
 ### Example
 
 ```typescript
-import { TodoApi, Configuration, TodoItem } from './api';
+import { FieldApi, Configuration, FieldItem } from './api';
 
 const configuration = new Configuration();
-const apiInstance = new TodoApi(configuration);
+const apiInstance = new FieldApi(configuration);
 
-let todoItem: TodoItem; // (optional)
+let fieldItem: FieldItem; // (optional)
 
-const { status, data } = await apiInstance.apiTodoPost(todoItem);
+const { status, data } = await apiInstance.apiFieldPost(fieldItem);
 ```
 
 ### Parameters
 
-| Name         | Type         | Description | Notes |
-| ------------ | ------------ | ----------- | ----- |
-| **todoItem** | **TodoItem** |             |       |
+| Name          | Type          | Description | Notes |
+| ------------- | ------------- | ----------- | ----- |
+| **fieldItem** | **FieldItem** |             |       |
 
 ### Return type
 
@@ -188,19 +188,19 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getAllTodos**
+# **getFields**
 
-> Array<TodoItem> getAllTodos()
+> Array<FieldItem> getFields()
 
 ### Example
 
 ```typescript
-import { TodoApi, Configuration } from './api';
+import { FieldApi, Configuration } from './api';
 
 const configuration = new Configuration();
-const apiInstance = new TodoApi(configuration);
+const apiInstance = new FieldApi(configuration);
 
-const { status, data } = await apiInstance.getAllTodos();
+const { status, data } = await apiInstance.getFields();
 ```
 
 ### Parameters
@@ -209,7 +209,7 @@ This endpoint does not have any parameters.
 
 ### Return type
 
-**Array<TodoItem>**
+**Array<FieldItem>**
 
 ### Authorization
 

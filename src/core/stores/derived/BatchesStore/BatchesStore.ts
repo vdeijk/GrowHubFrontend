@@ -1,5 +1,5 @@
 import { SearchableStore } from '../../base/BaseSearchableStore/BaseSearchableStore';
-import { YourCropItem } from '../../../../api';
+import { BatchItem } from '../../../../api';
 import { makeObservable, runInAction, action, computed } from 'mobx';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
 import batchesData from '../../../../auxiliary/data/BatchesData';
@@ -10,17 +10,17 @@ import { FilterService } from '../../../services/FilterService/FilterService';
 import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
 import i18next from 'i18next';
 
-class BatchesStore extends SearchableStore<YourCropItem> {
+class BatchesStore extends SearchableStore<BatchItem> {
   public paginationService = new PaginationService();
   public get isLoading(): boolean {
     return this.endpointService.isLoading;
   }
   public debouncedFilterPlants: (criteria: string) => void = () => {};
-  public get tableHeaders(): TableHeaderModel<YourCropItem>[] {
+  public get tableHeaders(): TableHeaderModel<BatchItem>[] {
     return batchesData.tableHeaders;
   }
 
-  private endpointService = new EndpointService('YourCrops');
+  private endpointService = new EndpointService('Batch');
 
   constructor() {
     super(['commonName']);
@@ -76,8 +76,8 @@ class BatchesStore extends SearchableStore<YourCropItem> {
   }
 
   public async fetchData() {
-    const data: YourCropItem[] | undefined =
-      await this.endpointService.getData<YourCropItem[]>();
+    const data: BatchItem[] | undefined =
+      await this.endpointService.getData<BatchItem[]>();
     if (!data) return;
 
     runInAction(() => {
@@ -86,7 +86,7 @@ class BatchesStore extends SearchableStore<YourCropItem> {
         'lastFertilized',
         'lastPruned',
         'lastHarvested',
-      ] as (keyof YourCropItem)[];
+      ] as (keyof BatchItem)[];
       this.items = TableColoringService.getColoredDateValues(data, dateKeys);
       this.filteredItems = this.items;
       this.paginatedItems = this.paginationService.paginateItems(
@@ -147,13 +147,13 @@ class BatchesStore extends SearchableStore<YourCropItem> {
     EventBus.dispatchEvent('filteredItems:updated', undefined);
   }
 
-  public deletePlant = async (id: number) => {
+  public deletePlant = async (id: string) => {
     await this.endpointService.deleteData(id);
 
     this.fetchData();
   };
 
-  public updateBatch = async (id: number, data: YourCropItem) => {
+  public updateBatch = async (id: string, data: BatchItem) => {
     await this.endpointService.putData(`${id}`, data);
 
     this.fetchData();

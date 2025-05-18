@@ -19,3 +19,9 @@
   width: 100%;
   overflow-x: auto;
 }
+
+@media (max-width: 1024px) {
+  .section {
+    grid-area: 4 / 1 / 5 / -1;
+  }
+}

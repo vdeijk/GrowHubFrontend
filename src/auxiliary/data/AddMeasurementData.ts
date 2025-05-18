@@ -25,7 +25,7 @@ class AddMeasurementData {
         key: 'title',
         label: i18next.t('addMeasurementData.textFields.title'),
         defaultValue: '',
-        required: true,
+        required: false,
         readonly: true,
         placeholder: i18next.t('addMeasurementData.placeholders.title'),
       },
@@ -49,7 +49,7 @@ class AddMeasurementData {
         key: 'batchId',
         label: i18next.t('addMeasurementData.textFields.batchId'),
         defaultValue: '',
-        required: true,
+        required: false,
         readonly: false,
         placeholder: i18next.t('addMeasurementData.placeholders.batchId'),
       },
@@ -58,21 +58,21 @@ class AddMeasurementData {
     this.dropdowns = {
       soilDryness: {
         key: 'soilDryness',
-        label: i18next.t('addMeasurementData.dropdowns.soilDryness'), // Translated label
+        label: i18next.t('addMeasurementData.dropdowns.soilDryness'),
         options: [],
         defaultValue: '',
         required: true,
       },
       growthStage: {
         key: 'growthStage',
-        label: i18next.t('addMeasurementData.dropdowns.growthStage'), // Translated label
+        label: i18next.t('addMeasurementData.dropdowns.growthStage'),
         options: [],
         defaultValue: '',
         required: true,
       },
       healthStatus: {
         key: 'healthStatus',
-        label: i18next.t('addMeasurementData.dropdowns.healthStatus'), // Translated label
+        label: i18next.t('addMeasurementData.dropdowns.healthStatus'),
         options: [],
         defaultValue: '',
         required: true,

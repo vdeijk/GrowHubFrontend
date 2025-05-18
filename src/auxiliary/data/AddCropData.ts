@@ -20,7 +20,6 @@ class AddCropData {
 
   private setMonthOptions = () => {
     return [
-      { label: '', value: '' },
       ...Object.values(MonthEnum).map((month) => ({
         label: month,
         value: month,

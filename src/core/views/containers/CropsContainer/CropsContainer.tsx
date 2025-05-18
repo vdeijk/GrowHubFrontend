@@ -7,7 +7,7 @@ import Heading from '../../reusables/Heading/Heading';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import { observer } from 'mobx-react-lite';
-import { PlantItem } from '../../../../api';
+import { CropItem } from '../../../../api';
 import { ButtonProps } from '../../../../auxiliary/interfaces/ButtonProps';
 
 const CropsContainer: React.FC = observer(() => {
@@ -24,7 +24,7 @@ const CropsContainer: React.FC = observer(() => {
     .filter((header) => header.id !== 'actions')
     .map((header) => ({
       ...header,
-      id: header.id as keyof PlantItem,
+      id: header.id as keyof CropItem,
     }));
 
   const omit = <T, K extends keyof T>(obj: T, key: K): Omit<T, K> => {
@@ -38,7 +38,7 @@ const CropsContainer: React.FC = observer(() => {
       <Heading level={6} customStyles={{ marginBottom: '2rem' }}>
         Crop Database
       </Heading>
-      <TableWithSorting<PlantItem>
+      <TableWithSorting<CropItem>
         headers={headersWithoutActions}
         data={cropsDatabaseStore.items.slice(0, 9).map((plant, index) => ({
           ...('actions' in plant ? omit(plant, 'actions') : plant),

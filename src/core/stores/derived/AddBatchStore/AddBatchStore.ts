@@ -1,4 +1,4 @@
-import { YourCropItem } from '../../../../api';
+import { BatchItem } from '../../../../api';
 import yourCropsStore from '../BatchesStore/BatchesStore';
 import { BaseFormStore } from '../../base/BaseFormStore/BaseFormStore';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
@@ -13,7 +13,7 @@ import DebounceService from '../../../services/DebounceService/DebounceService';
 import { reaction } from 'mobx';
 
 class AddBatchStore extends BaseFormStore {
-  private endpointService = new EndpointService('YourCrops');
+  private endpointService = new EndpointService('Batch');
 
   constructor() {
     super();
@@ -66,8 +66,8 @@ class AddBatchStore extends BaseFormStore {
   };
 
   public loadCrop = async (id: string) => {
-    const data: YourCropItem | undefined =
-      await this.endpointService.getData<YourCropItem>(`${id}`);
+    const data: BatchItem | undefined =
+      await this.endpointService.getData<BatchItem>(`${id}`);
 
     if (!data) return;
 
@@ -81,21 +81,21 @@ class AddBatchStore extends BaseFormStore {
   public validateForm() {
     if (
       this.validateRequired() &&
-      this.getCropNameById(Number(this.inputFields.cropId.value))
+      this.getCropNameById(String(this.inputFields.cropId.value))
     )
       return true;
 
     return false;
   }
 
-  private getCropNameById(cropId: number): string | undefined {
+  private getCropNameById(cropId: string): string | undefined {
     const crop = cropsStore.items.find((item) => item.id === cropId);
     return crop?.commonName ?? undefined;
   }
 
   private setupCropIdReaction() {
     const updateCommonName = DebounceService.debounce(() => {
-      const cropId = Number(this.inputFields.cropId.value);
+      const cropId = String(this.inputFields.cropId.value);
       if (Number.isNaN(cropId)) {
         this.inputFields.commonName.setValue('');
         return;
@@ -119,7 +119,7 @@ class AddBatchStore extends BaseFormStore {
 
   private prepareData() {
     const commonName = this.getCropNameById(
-      Number(this.inputFields.cropId.value),
+      String(this.inputFields.cropId.value),
     );
 
     return {

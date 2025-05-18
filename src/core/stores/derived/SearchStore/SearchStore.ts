@@ -64,18 +64,6 @@ class SearchStore {
     });
   };
 
-  clearAllFilters = (
-    inputFields: InputField<string>[],
-    dateFields: DateField<string>[],
-    dropdownFields: DropdownField<string>[],
-  ): void => {
-    requestAnimationFrame(() => {
-      inputFields.forEach((field) => field.setValue(''));
-      dateFields.forEach((field) => field.setValue(''));
-      dropdownFields.forEach((field) => field.setValue(''));
-    });
-  };
-
   formatDate = (dateString: string): string => {
     if (!dateString) return '';
     const date = new Date(dateString);

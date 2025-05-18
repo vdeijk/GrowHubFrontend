@@ -3,12 +3,12 @@ import i18next from 'i18next';
 import fieldsStore from '../../core/stores/derived/FieldsStore/FieldsStore';
 import { DropdownFieldModel } from '../interfaces/DropdownFieldModel';
 import { DateFieldModel } from '../interfaces/DateFieldModel';
-import { YourCropItem } from '../../api';
+import { BatchItem } from '../../api';
 import { TableHeaderModel } from '../interfaces/TableHeaderModel';
 import { InputFieldModel } from '../interfaces/InputFieldModel';
 
 class BatchesData {
-  public tableHeaders: TableHeaderModel<YourCropItem>[] = [];
+  public tableHeaders: TableHeaderModel<BatchItem>[] = [];
   public textFieldsString: Record<string, InputFieldModel> = {};
   public textFieldsNumber: Record<string, InputFieldModel> = {};
   public dropdowns: Record<string, DropdownFieldModel> = {};

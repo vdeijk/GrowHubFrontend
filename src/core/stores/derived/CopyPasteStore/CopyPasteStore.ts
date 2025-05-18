@@ -15,13 +15,13 @@ class CopyPasteStore {
     makeAutoObservable(this);
   }
 
-  public copyItem = (type: 'Batch' | 'Crop', id: number, name: string) => {
+  public copyItem = (type: 'Batch' | 'Crop', id: string, name: string) => {
     this.copiedItem = { type, data: { id, name } };
 
     toast.success(i18next.t('copyPasteStore.success.copy', { type, name }));
   };
 
-  public pasteBatchIntoTask = async (id: number) => {
+  public pasteBatchIntoTask = async (id: string) => {
     if (this.handleErrors('Batch')) return;
 
     const taskIndex = tasksStore.items.findIndex((item) => item.id === id);
@@ -39,7 +39,7 @@ class CopyPasteStore {
     tasksStore.updateTask(id, newData);
   };
 
-  public pasteBatchIntoReading = async (id: number) => {
+  public pasteBatchIntoReading = async (id: string) => {
     if (this.handleErrors('Batch')) return;
 
     const taskIndex = measurementsStore.items.findIndex(
@@ -59,7 +59,7 @@ class CopyPasteStore {
     measurementsStore.updateReading(id, newData);
   };
 
-  public pasteCropIntoBatches = async (id: number) => {
+  public pasteCropIntoBatches = async (id: string) => {
     if (this.handleErrors('Crop')) return;
 
     const index = batchesStore.items.findIndex((item) => item.id === id);

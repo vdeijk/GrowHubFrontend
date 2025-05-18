@@ -45,7 +45,7 @@ const LandingPage: React.FC = () => {
               },
             })
           }
-          label=" Log in to Demo"
+          label="Log in to Demo"
           type="button"
         />
       </div>

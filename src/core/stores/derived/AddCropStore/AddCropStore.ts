@@ -1,4 +1,4 @@
-import { PlantItem } from '../../../../api';
+import { CropItem } from '../../../../api';
 import cropsDatabaseStore from '../CropsStore/CropsStore';
 import { BaseFormStore } from '../../base/BaseFormStore/BaseFormStore';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
@@ -11,7 +11,7 @@ import addCropData from '../../../../auxiliary/data/AddCropData';
 import i18next from 'i18next';
 
 class AddCropStore extends BaseFormStore {
-  private endpointService = new EndpointService('Plant');
+  private endpointService = new EndpointService('Crop');
 
   constructor() {
     super();
@@ -60,8 +60,8 @@ class AddCropStore extends BaseFormStore {
   };
 
   public loadCrop = async (id: string) => {
-    const data: PlantItem | undefined =
-      await this.endpointService.getData<PlantItem>(`${id}`);
+    const data: CropItem | undefined =
+      await this.endpointService.getData<CropItem>(`${id}`);
 
     if (!data) return;
 
@@ -78,7 +78,7 @@ class AddCropStore extends BaseFormStore {
     return false;
   }
 
-  private prepareData(): PlantItem {
+  private prepareData(): CropItem {
     return {
       commonName: this.inputFields.commonName.value as string,
       notes: this.inputFields.notes.value as string,

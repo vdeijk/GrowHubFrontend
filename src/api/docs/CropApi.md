@@ -1,30 +1,30 @@
-# TodoApi
+# CropApi
 
 All URIs are relative to _http://localhost_
 
 | Method                                  | HTTP request              | Description |
 | --------------------------------------- | ------------------------- | ----------- |
-| [**apiTodoIdDelete**](#apitodoiddelete) | **DELETE** /api/Todo/{id} |             |
-| [**apiTodoIdGet**](#apitodoidget)       | **GET** /api/Todo/{id}    |             |
-| [**apiTodoIdPut**](#apitodoidput)       | **PUT** /api/Todo/{id}    |             |
-| [**apiTodoPost**](#apitodopost)         | **POST** /api/Todo        |             |
-| [**getAllTodos**](#getalltodos)         | **GET** /api/Todo         |             |
+| [**apiCropIdDelete**](#apicropiddelete) | **DELETE** /api/Crop/{id} |             |
+| [**apiCropIdGet**](#apicropidget)       | **GET** /api/Crop/{id}    |             |
+| [**apiCropIdPut**](#apicropidput)       | **PUT** /api/Crop/{id}    |             |
+| [**apiCropPost**](#apicroppost)         | **POST** /api/Crop        |             |
+| [**getCrops**](#getcrops)               | **GET** /api/Crop         |             |
 
-# **apiTodoIdDelete**
+# **apiCropIdDelete**
 
-> apiTodoIdDelete()
+> apiCropIdDelete()
 
 ### Example
 
 ```typescript
-import { TodoApi, Configuration } from './api';
+import { CropApi, Configuration } from './api';
 
 const configuration = new Configuration();
-const apiInstance = new TodoApi(configuration);
+const apiInstance = new CropApi(configuration);
 
 let id: string; // (default to undefined)
 
-const { status, data } = await apiInstance.apiTodoIdDelete(id);
+const { status, data } = await apiInstance.apiCropIdDelete(id);
 ```
 
 ### Parameters
@@ -54,21 +54,21 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **apiTodoIdGet**
+# **apiCropIdGet**
 
-> TodoItem apiTodoIdGet()
+> CropItem apiCropIdGet()
 
 ### Example
 
 ```typescript
-import { TodoApi, Configuration } from './api';
+import { CropApi, Configuration } from './api';
 
 const configuration = new Configuration();
-const apiInstance = new TodoApi(configuration);
+const apiInstance = new CropApi(configuration);
 
 let id: string; // (default to undefined)
 
-const { status, data } = await apiInstance.apiTodoIdGet(id);
+const { status, data } = await apiInstance.apiCropIdGet(id);
 ```
 
 ### Parameters
@@ -79,7 +79,7 @@ const { status, data } = await apiInstance.apiTodoIdGet(id);
 
 ### Return type
 
-**TodoItem**
+**CropItem**
 
 ### Authorization
 
@@ -98,29 +98,29 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **apiTodoIdPut**
+# **apiCropIdPut**
 
-> apiTodoIdPut()
+> apiCropIdPut()
 
 ### Example
 
 ```typescript
-import { TodoApi, Configuration, TodoItem } from './api';
+import { CropApi, Configuration, CropItem } from './api';
 
 const configuration = new Configuration();
-const apiInstance = new TodoApi(configuration);
+const apiInstance = new CropApi(configuration);
 
 let id: string; // (default to undefined)
-let todoItem: TodoItem; // (optional)
+let cropItem: CropItem; // (optional)
 
-const { status, data } = await apiInstance.apiTodoIdPut(id, todoItem);
+const { status, data } = await apiInstance.apiCropIdPut(id, cropItem);
 ```
 
 ### Parameters
 
 | Name         | Type         | Description | Notes                 |
 | ------------ | ------------ | ----------- | --------------------- |
-| **todoItem** | **TodoItem** |             |                       |
+| **cropItem** | **CropItem** |             |                       |
 | **id**       | [**string**] |             | defaults to undefined |
 
 ### Return type
@@ -144,28 +144,28 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **apiTodoPost**
+# **apiCropPost**
 
-> apiTodoPost()
+> apiCropPost()
 
 ### Example
 
 ```typescript
-import { TodoApi, Configuration, TodoItem } from './api';
+import { CropApi, Configuration, CropItem } from './api';
 
 const configuration = new Configuration();
-const apiInstance = new TodoApi(configuration);
+const apiInstance = new CropApi(configuration);
 
-let todoItem: TodoItem; // (optional)
+let cropItem: CropItem; // (optional)
 
-const { status, data } = await apiInstance.apiTodoPost(todoItem);
+const { status, data } = await apiInstance.apiCropPost(cropItem);
 ```
 
 ### Parameters
 
 | Name         | Type         | Description | Notes |
 | ------------ | ------------ | ----------- | ----- |
-| **todoItem** | **TodoItem** |             |       |
+| **cropItem** | **CropItem** |             |       |
 
 ### Return type
 
@@ -188,19 +188,19 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **getAllTodos**
+# **getCrops**
 
-> Array<TodoItem> getAllTodos()
+> Array<CropItem> getCrops()
 
 ### Example
 
 ```typescript
-import { TodoApi, Configuration } from './api';
+import { CropApi, Configuration } from './api';
 
 const configuration = new Configuration();
-const apiInstance = new TodoApi(configuration);
+const apiInstance = new CropApi(configuration);
 
-const { status, data } = await apiInstance.getAllTodos();
+const { status, data } = await apiInstance.getCrops();
 ```
 
 ### Parameters
@@ -209,7 +209,7 @@ This endpoint does not have any parameters.
 
 ### Return type
 
-**Array<TodoItem>**
+**Array<CropItem>**
 
 ### Authorization
 

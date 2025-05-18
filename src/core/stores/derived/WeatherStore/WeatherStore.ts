@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 import { runInAction } from 'mobx';
 import fieldsStore from '../FieldsStore/FieldsStore';
-import { LocationItem } from '../../../../api';
+import { FieldItem } from '../../../../api';
 import FormatService from '../../../services/FormatService/FormatService';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
 import { Weather } from '../../../../auxiliary/interfaces/Weather';
@@ -11,7 +11,7 @@ class WeatherStore {
   private endpointService = new EndpointService('Weather/forecast');
   weatherData: Weather | null = null;
   isLoading = false;
-  selectedLocation: LocationItem | null | undefined = null;
+  selectedLocation: FieldItem | null | undefined = null;
   locationFullName: string = '';
 
   constructor() {
@@ -56,7 +56,7 @@ class WeatherStore {
   }
 
   public setLocation(id: string) {
-    const location = fieldsStore.locations.find((loc) => loc.id === Number(id));
+    const location = fieldsStore.locations.find((loc) => loc.id === String(id));
     if (location) {
       this.selectedLocation = location;
 

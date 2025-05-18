@@ -100,13 +100,13 @@ class TasksStore extends SearchableStore<TodoItem> {
     EventBus.dispatchEvent('filteredItems:updated', undefined);
   }
 
-  public deleteTask = async (id: number) => {
+  public deleteTask = async (id: string) => {
     await this.endpointService.deleteData(id);
 
     this.fetchData();
   };
 
-  public updateTask = async (id: number, data: TodoItem) => {
+  public updateTask = async (id: string, data: TodoItem) => {
     await this.endpointService.putData(`${id}`, data);
 
     this.fetchData();

@@ -10,7 +10,7 @@ import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import ActionIcons from '../../reusables/ActionIcons/ActionIcons';
 import Pagination from '../../reusables/Pagination/Pagination';
-import { YourCropItem } from '../../../../api';
+import { BatchItem } from '../../../../api';
 import Popup from '../../layouts/Popup/Popup';
 import batchesStore from '../../../stores/derived/BatchesStore/BatchesStore';
 import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
@@ -35,12 +35,12 @@ const BatchesPage: React.FC = observer(() => {
     i18next.t('batchesPage.deleteConfirmation.message'),
   );
 
-  const handleEdit = (id: number | undefined) => {
+  const handleEdit = (id: string | undefined) => {
     navigate(`/addBatchPage/${id}`);
   };
 
   const handleDelete = (
-    id: number | undefined,
+    id: string | undefined,
     event: React.MouseEvent<SVGElement>,
   ) => {
     event.stopPropagation();
@@ -48,7 +48,7 @@ const BatchesPage: React.FC = observer(() => {
   };
 
   const handleCopy = (
-    id: number | undefined,
+    id: string | undefined,
     event: React.MouseEvent<SVGElement>,
   ) => {
     if (id === undefined) return;
@@ -63,7 +63,7 @@ const BatchesPage: React.FC = observer(() => {
   };
 
   const handlePaste = (
-    id: number | undefined,
+    id: string | undefined,
     event: React.MouseEvent<SVGElement>,
   ) => {
     if (id === undefined) return;
@@ -73,28 +73,28 @@ const BatchesPage: React.FC = observer(() => {
     copyPasteStore.pasteCropIntoBatches(id);
   };
 
-  const tableProps: TableProps<YourCropItem> = {
-    headers: batchesStore.tableHeaders as TableHeaderModel<YourCropItem>[],
+  const tableProps: TableProps<BatchItem> = {
+    headers: batchesStore.tableHeaders as TableHeaderModel<BatchItem>[],
     data: batchesStore.paginatedItems.map((item) => ({
       ...item,
       actions: (
         <div className={styles.actionIcons}>
           <ActionIcons
-            item={item as { id: number | undefined }}
+            item={item as { id: string | undefined }}
             handleDelete={handleDelete}
             handleCopy={(
-              id: number | undefined,
+              id: string | undefined,
               event: React.MouseEvent<SVGElement>,
             ) => handleCopy(id, event)}
             handlePaste={(
-              id: number | undefined,
+              id: string | undefined,
               event: React.MouseEvent<SVGElement>,
             ) => handlePaste(id, event)}
           />
         </div>
       ),
     })),
-    onSort: (field: keyof YourCropItem) => batchesStore.sortItems(field),
+    onSort: (field: keyof BatchItem) => batchesStore.sortItems(field),
     sortField: batchesStore.sortField as 'id' | null,
     sortOrder: batchesStore.sortOrder,
     handleEdit,
@@ -129,21 +129,3 @@ const BatchesPage: React.FC = observer(() => {
 });
 
 export default BatchesPage;
-
-/*
-
-  const handlePopup = (id: number | undefined) => {
-    if (id === undefined) return;
-
-    const task = batchesStore.items.find((item) => item.id === id);
-    if (!task) return;
-
-    batchesStore.textFilters.description.setValue(task.notes ?? '');
-
-    popupService.openPopup(
-      <NotesPopup
-        description={batchesStore.textFilters.description}
-        title={'Batch Notes'}
-      />,
-    );
-  };*/

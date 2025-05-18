@@ -10,7 +10,7 @@ import LoadingWrapper from '../../reusables/LoadingWrapper/LoadingWrapper';
 import EventBus from '../../../services/EventBusService/EventBusService';
 import TableWithSorting from '../../reusables/TableWithSorting/TableWithSorting';
 import ActionIcons from '../../reusables/ActionIcons/ActionIcons';
-import { LocationItem } from '../../../../api';
+import { FieldItem } from '../../../../api';
 import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
 import { TableProps } from '../../reusables/TableWithSorting/TableWithSorting';
 import FieldsData from '../../../../auxiliary/data/FieldsData';
@@ -37,14 +37,14 @@ const FieldsPage: React.FC = observer(() => {
     i18next.t('fieldsPage.deleteConfirmation.message'),
   );
 
-  const handleEdit = (id: number | undefined) => {
+  const handleEdit = (id: string | undefined) => {
     if (id === undefined) return;
 
     navigate(`/addFieldPage/${id}`);
   };
 
   const handleDelete = (
-    id: number | undefined,
+    id: string | undefined,
     event: React.MouseEvent<SVGElement>,
   ) => {
     event.stopPropagation();
@@ -71,13 +71,13 @@ const FieldsPage: React.FC = observer(() => {
     markers,
   };
 
-  const tableProps: TableProps<LocationItem> = {
-    headers: FieldsData.tableHeaders as TableHeaderModel<LocationItem>[],
+  const tableProps: TableProps<FieldItem> = {
+    headers: FieldsData.tableHeaders as TableHeaderModel<FieldItem>[],
     data: fieldsStore.locations.map((item) => ({
       ...item,
       actions: (
         <ActionIcons
-          item={item as { id: number | undefined }}
+          item={item as { id: string | undefined }}
           handleDelete={handleDelete}
         />
       ),

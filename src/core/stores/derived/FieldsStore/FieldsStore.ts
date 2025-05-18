@@ -1,18 +1,18 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import weatherStore from '../WeatherStore/WeatherStore';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
-import { LocationItem } from '../../../../api';
+import { FieldItem } from '../../../../api';
 import EventBus from '../../../services/EventBusService/EventBusService';
 import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
 import FieldsData from '../../../../auxiliary/data/FieldsData';
 
 class FieldsStore {
-  private endpointService = new EndpointService('Location');
-  public locations: LocationItem[] = [];
+  private endpointService = new EndpointService('Field');
+  public locations: FieldItem[] = [];
   public get isLoading(): boolean {
     return this.endpointService.isLoading;
   }
-  public get tableHeaders(): TableHeaderModel<LocationItem>[] {
+  public get tableHeaders(): TableHeaderModel<FieldItem>[] {
     return FieldsData.tableHeaders;
   }
 
@@ -23,8 +23,8 @@ class FieldsStore {
   }
 
   public async fetchData() {
-    const data: LocationItem[] | undefined =
-      await this.endpointService.getData<LocationItem[]>();
+    const data: FieldItem[] | undefined =
+      await this.endpointService.getData<FieldItem[]>();
 
     if (!data) return;
 
@@ -38,7 +38,7 @@ class FieldsStore {
     EventBus.dispatchEvent('locations:updated', undefined);
   }
 
-  public deleteField = async (id: number) => {
+  public deleteField = async (id: string) => {
     await this.endpointService.deleteData(id);
 
     this.fetchData();
@@ -46,7 +46,7 @@ class FieldsStore {
     weatherStore.fetchData();
   };
 
-  public getLocations(): LocationItem[] {
+  public getLocations(): FieldItem[] {
     return this.locations;
   }
 }

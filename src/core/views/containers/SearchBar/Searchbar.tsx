@@ -62,7 +62,6 @@ const SearchBar: React.FC<SearchBarProps> = observer(
           <>
             <Divider color="primary" />
             <FilterTags {...filterTagsModel} />
-            <Divider color="primary" />
           </>
         )}
       </section>

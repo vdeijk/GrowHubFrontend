@@ -10,7 +10,7 @@ import ButtonContainer from '../../reusables/ButtonContainer/ButtonContainer';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import ActionIcons from '../../reusables/ActionIcons/ActionIcons';
 import Pagination from '../../reusables/Pagination/Pagination';
-import { PlantItem } from '../../../../api';
+import { CropItem } from '../../../../api';
 import Popup from '../../layouts/Popup/Popup';
 import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
 import { SearchBarProps } from '../../containers/SearchBar/Searchbar';
@@ -33,12 +33,12 @@ const CropsPage: React.FC = observer(() => {
     i18next.t('cropsPage.deleteConfirmation.message'),
   );
 
-  const handleEdit = (id: number | undefined) => {
+  const handleEdit = (id: string | undefined) => {
     navigate(`/addCropPage/${id}`);
   };
 
   const handleDelete = (
-    id: number | undefined,
+    id: string | undefined,
     event: React.MouseEvent<SVGElement>,
   ) => {
     event.stopPropagation();
@@ -46,7 +46,7 @@ const CropsPage: React.FC = observer(() => {
   };
 
   const handleCopy = (
-    id: number | undefined,
+    id: string | undefined,
     event: React.MouseEvent<SVGElement>,
   ) => {
     if (id === undefined) return;
@@ -60,8 +60,8 @@ const CropsPage: React.FC = observer(() => {
     copyPasteStore.copyItem('Crop', id, cropToCopy.commonName ?? '');
   };
 
-  const tableProps: TableProps<PlantItem> = {
-    headers: cropsStore.tableHeaders as TableHeaderModel<PlantItem>[],
+  const tableProps: TableProps<CropItem> = {
+    headers: cropsStore.tableHeaders as TableHeaderModel<CropItem>[],
     data: cropsStore.paginatedItems.map((item) => ({
       ...item,
       id: item.id ?? undefined,
@@ -70,7 +70,7 @@ const CropsPage: React.FC = observer(() => {
           item={{ ...item, id: item.id ?? undefined }}
           handleDelete={handleDelete}
           handleCopy={(
-            id: number | undefined,
+            id: string | undefined,
             event: React.MouseEvent<SVGElement>,
           ) => handleCopy(id, event)}
         />

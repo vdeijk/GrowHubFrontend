@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './MenuContainer.module.css';
 import MenuLink from '../../reusables/MenuLink/MenuLink';
 import Heading from '../../reusables/Heading/Heading';
@@ -14,6 +14,10 @@ const MenuContainer: React.FC = observer(() => {
   const activeMenuLink = routerService.menuLinks.find((menuLink) =>
     matchPath(location.pathname, menuLink.path),
   );
+
+  useEffect(() => {
+    menuService.checkScreenWidth();
+  }, [location.pathname]);
 
   return (
     <div

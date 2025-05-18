@@ -1,5 +1,5 @@
 import { SearchableStore } from '../../base/BaseSearchableStore/BaseSearchableStore';
-import { PlantItem } from '../../../../api';
+import { CropItem } from '../../../../api';
 import { makeObservable, runInAction, action, computed } from 'mobx';
 import { EndpointService } from '../../../services/EndpointService/EndpointService';
 import { localStorageService } from '../../../services/LocalStorageService/LocalStorageService';
@@ -8,13 +8,13 @@ import { PaginationService } from '../../../services/PaginationService/Paginatio
 import i18next from 'i18next';
 import { TableHeaderModel } from '../../../../auxiliary/interfaces/TableHeaderModel';
 
-class CropsStore extends SearchableStore<PlantItem> {
-  private endpointService = new EndpointService('Plant');
+class CropsStore extends SearchableStore<CropItem> {
+  private endpointService = new EndpointService('Crop');
   public paginationService = new PaginationService();
   public get isLoading(): boolean {
     return this.endpointService.isLoading;
   }
-  public get tableHeaders(): TableHeaderModel<PlantItem>[] {
+  public get tableHeaders(): TableHeaderModel<CropItem>[] {
     return cropsData.tableHeaders;
   }
 
@@ -48,7 +48,7 @@ class CropsStore extends SearchableStore<PlantItem> {
   debouncedFilterPlants: (criteria: string) => void = () => {};
 
   public fetchData = async () => {
-    const data = await this.endpointService.getData<PlantItem[]>();
+    const data = await this.endpointService.getData<CropItem[]>();
 
     if (!data) return;
 
@@ -61,7 +61,7 @@ class CropsStore extends SearchableStore<PlantItem> {
     });
   };
 
-  public deletePlant = async (id: number) => {
+  public deletePlant = async (id: string) => {
     await this.endpointService.deleteData(id);
 
     localStorageService.invalidateCache('cropsDatabaseItems');

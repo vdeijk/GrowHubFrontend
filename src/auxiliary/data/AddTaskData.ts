@@ -25,7 +25,7 @@ class AddTaskData {
         key: 'title',
         label: i18next.t('addTaskData.textFields.titleField'),
         defaultValue: '',
-        required: true,
+        required: false,
         readonly: true,
         placeholder: i18next.t('addTaskData.placeholders.titleField'),
       },
@@ -40,7 +40,7 @@ class AddTaskData {
         key: 'batchId',
         label: i18next.t('addTaskData.textFields.batchId'),
         defaultValue: '',
-        required: true,
+        required: false,
         placeholder: i18next.t('addTaskData.placeholders.batchId'),
       },
     };

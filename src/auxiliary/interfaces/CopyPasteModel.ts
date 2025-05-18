@@ -1,7 +1,7 @@
 export interface CopyPasteModel {
   type: 'Batch' | 'Crop';
   data: {
-    id: number;
+    id: string;
     name: string;
   };
 }

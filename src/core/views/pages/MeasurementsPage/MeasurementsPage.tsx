@@ -7,7 +7,7 @@ import TableWithSorting from '../../reusables/TableWithSorting/TableWithSorting'
 import Pagination from '../../reusables/Pagination/Pagination';
 import useRouterNavigation from '../../../../auxiliary/hooks/useRouterNavigation';
 import { TableProps } from '../../reusables/TableWithSorting/TableWithSorting';
-import { MeasurementItem } from '../../../../api';
+import { ReadingItem } from '../../../../api';
 import ActionIcons from '../../reusables/ActionIcons/ActionIcons';
 import SearchBar from '../../containers/SearchBar/Searchbar';
 import { SearchBarProps } from '../../containers/SearchBar/Searchbar';
@@ -40,7 +40,7 @@ const MeasurementsPage: React.FC<MeasurementsProps> = observer(() => {
   );
 
   const handlePaste = (
-    id: number | undefined,
+    id: string | undefined,
     event: React.MouseEvent<SVGElement>,
   ) => {
     if (id === undefined) return;
@@ -50,12 +50,12 @@ const MeasurementsPage: React.FC<MeasurementsProps> = observer(() => {
     copyPasteStore.pasteBatchIntoReading(id);
   };
 
-  const handleEdit = (id: number | undefined) => {
+  const handleEdit = (id: string | undefined) => {
     navigate(`/addMeasurementPage/${id}`);
   };
 
   const handleDelete = (
-    id: number | undefined,
+    id: string | undefined,
     event: React.MouseEvent<SVGElement>,
   ) => {
     event.stopPropagation();
@@ -70,24 +70,22 @@ const MeasurementsPage: React.FC<MeasurementsProps> = observer(() => {
     dropdownFields: Object.values(measurementsStore.dropdownFilters),
   };
 
-  const tableProps: TableProps<MeasurementItem> = {
-    headers:
-      measurementsStore.tableHeaders as TableHeaderModel<MeasurementItem>[],
+  const tableProps: TableProps<ReadingItem> = {
+    headers: measurementsStore.tableHeaders as TableHeaderModel<ReadingItem>[],
     data: measurementsStore.paginatedItems.map((item) => ({
       ...item,
       actions: (
         <ActionIcons
-          item={item as { id: number | undefined }}
+          item={item as { id: string | undefined }}
           handleDelete={handleDelete}
           handlePaste={(
-            id: number | undefined,
+            id: string | undefined,
             event: React.MouseEvent<SVGElement>,
           ) => handlePaste(id, event)}
         />
       ),
     })),
-    onSort: (field) =>
-      measurementsStore.sortItems(field as keyof MeasurementItem),
+    onSort: (field) => measurementsStore.sortItems(field as keyof ReadingItem),
     sortField: measurementsStore.sortField,
     sortOrder: measurementsStore.sortOrder,
     handleEdit,

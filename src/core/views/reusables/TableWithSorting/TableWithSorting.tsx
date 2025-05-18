@@ -11,11 +11,11 @@ export interface TableProps<T> {
   onSort?: (field: keyof T) => void;
   sortField?: keyof T | null;
   sortOrder?: 'asc' | 'desc';
-  handleEdit?: (id: number | undefined) => void;
+  handleEdit?: (id: string | undefined) => void;
 }
 
 const TableWithSorting = observer(
-  <T extends { id?: number | null | undefined }>({
+  <T extends { id?: number | string | null | undefined }>({
     headers,
     data,
     onSort,
@@ -72,7 +72,13 @@ const TableWithSorting = observer(
           {data.map((item, index) => (
             <TableRow
               key={index}
-              tableRowData={{ ...item, id: item.id ?? undefined }}
+              tableRowData={{
+                ...item,
+                id:
+                  item.id !== null && item.id !== undefined
+                    ? String(item.id)
+                    : undefined,
+              }}
               headers={headers}
               handleEdit={handleEdit}
             />
